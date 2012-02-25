@@ -1,0 +1,33 @@
+package ch.ralscha.javaplayground.hazelcast;
+
+import java.util.List;
+import java.util.Map;
+
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+
+public class UseTheCache {
+
+	private HazelcastInstance haz;
+
+	public UseTheCache() {
+		haz = Hazelcast.getDefaultInstance();
+	}
+
+	public void readList() {
+		List<ObjectToCache> list = haz.getList("testlist");
+		System.out.println("List has " + list.size() + " items.");
+	}
+
+	public void readMap() {
+		Map<Integer, ObjectToCache> map = haz.getMap("testmap");
+		System.out.println("Map has " + map.size() + " items.");
+
+	}
+
+	public static void main(String[] args) {
+		UseTheCache use = new UseTheCache();
+		use.readList();
+		use.readMap();
+	}
+}
