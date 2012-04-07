@@ -79,6 +79,7 @@
 				<version>2.0-beta-1</version>
 				<configuration>
 					<path>/</path>
+					<contextFile>${basedir}/src/main/config/tomcat.xml</contextFile>
 					<port>8080</port>
 				</configuration>
 			</plugin>

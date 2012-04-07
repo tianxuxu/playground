@@ -2,7 +2,6 @@ package ch.ralscha.upload.web;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.google.common.io.ByteStreams;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UploadController {
@@ -36,32 +34,16 @@ public class UploadController {
 			//chunk not on the server, upload it
 			response.setStatus(404);
 		}
-
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public void processUpload(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber", required = false) Integer chunkNumber,
-			@RequestParam(value = "resumableChunkSize", required = false) Long chunkSize,
-			@RequestParam(value = "resumableTotalSize", required = false) Long totalSize,
-			@RequestParam(value = "resumableIdentifier", required = false) String identifier,
-			@RequestParam(value = "resumableFilename", required = false) String fileName,
-			@RequestParam(value = "file", required = false) Part file) throws IOException, ServletException {
-
-		Enumeration<String> e = request.getParameterNames();
-		while (e.hasMoreElements()) {
-			System.out.println(e.nextElement());
-		}
-
-		//start workaround for Jetty
-		if (fileName == null) {
-			chunkNumber = Integer.valueOf(getPartString(request, "resumableChunkNumber"));
-			chunkSize = Long.valueOf(getPartString(request, "resumableChunkSize"));
-			totalSize = Long.valueOf(getPartString(request, "resumableTotalSize"));
-			identifier = getPartString(request, "resumableIdentifier");
-			fileName = getPartString(request, "resumableFilename");
-		}
-		//end workaround
+			@RequestParam(value = "resumableChunkNumber") Integer chunkNumber,
+			@RequestParam(value = "resumableChunkSize") Long chunkSize,
+			@RequestParam(value = "resumableTotalSize") Long totalSize,
+			@RequestParam(value = "resumableIdentifier") String identifier,
+			@RequestParam(value = "resumableFilename") String fileName, @RequestParam(value = "file") MultipartFile file)
+			throws IOException {
 
 		if (!fileManager.isSupported(fileName)) {
 			//cancel the whole upload
@@ -69,11 +51,8 @@ public class UploadController {
 			return;
 		}
 
-		Part part = request.getPart("file");
-		if (part != null) {
-			try (InputStream is = part.getInputStream()) {
-				fileManager.storeChunk(identifier, chunkNumber, is);
-			}
+		try (InputStream is = file.getInputStream()) {
+			fileManager.storeChunk(identifier, chunkNumber, is);
 		}
 
 		if (fileManager.allChunksUploaded(identifier, chunkSize, totalSize)) {
@@ -82,10 +61,6 @@ public class UploadController {
 
 		response.setStatus(200);
 
-	}
-
-	private String getPartString(HttpServletRequest request, String name) throws IOException, ServletException {
-		return new String(ByteStreams.toByteArray(request.getPart(name).getInputStream()));
 	}
 
 	@RequestMapping(value = "/simpleUpload", method = RequestMethod.POST)

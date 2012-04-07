@@ -11,9 +11,9 @@ import java.nio.file.StandardCopyOption;
 
 public class FileManager {
 
-	private String dataDirectory;
+	private final String dataDirectory;
 
-	public FileManager(String dataDirectory) {
+	public FileManager(final String dataDirectory) {
 		this.dataDirectory = dataDirectory;
 		Path dataDir = Paths.get(dataDirectory);
 
@@ -24,7 +24,8 @@ public class FileManager {
 		}
 	}
 
-	public boolean chunkExists(String identifier, Integer chunkNumber, Long chunkSize) throws IOException {
+	public boolean chunkExists(final String identifier, final Integer chunkNumber, final Long chunkSize)
+			throws IOException {
 		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		if (Files.exists(chunkFile)) {
 			long size = (Long) Files.getAttribute(chunkFile, "basic:size");
@@ -33,11 +34,12 @@ public class FileManager {
 		return false;
 	}
 
-	public boolean isSupported(String resumableFilename) {
+	public boolean isSupported(final String resumableFilename) {
 		return true;
 	}
 
-	public void storeChunk(String identifier, Integer chunkNumber, InputStream inputStream) throws IOException {
+	public void storeChunk(final String identifier, final Integer chunkNumber, final InputStream inputStream)
+			throws IOException {
 		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
@@ -47,9 +49,9 @@ public class FileManager {
 		Files.copy(inputStream, chunkFile, StandardCopyOption.REPLACE_EXISTING);
 	}
 
-	public boolean allChunksUploaded(String identifier, Long chunkSize, Long totalSize) {
+	public boolean allChunksUploaded(final String identifier, final Long chunkSize, final Long totalSize) {
 
-		long noOfChunks = totalSize / chunkSize + 1l;
+		long noOfChunks = totalSize / chunkSize;
 
 		for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
 			if (!Files.exists(Paths.get(dataDirectory, identifier, String.valueOf(chunkNo)))) {
@@ -60,9 +62,9 @@ public class FileManager {
 
 	}
 
-	public void mergeAndDeleteChunks(String fileName, String identifier, Long chunkSize, Long totalSize)
-			throws IOException {
-		long noOfChunks = totalSize / chunkSize + 1l;
+	public void mergeAndDeleteChunks(final String fileName, final String identifier, final Long chunkSize,
+			final Long totalSize) throws IOException {
+		long noOfChunks = totalSize / chunkSize;
 
 		Path newFilePath = Paths.get(dataDirectory, fileName);
 		if (Files.exists(newFilePath)) {

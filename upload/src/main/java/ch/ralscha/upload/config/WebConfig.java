@@ -1,8 +1,11 @@
 package ch.ralscha.upload.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,6 +17,9 @@ import ch.ralscha.upload.web.FileManager;
 @ComponentScan(basePackages = { "ch.ralscha.upload.web" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+	@Value("#{environment.uploadDirectory ?: 'c:/temp'}")
+	private String uploadDirectory;
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -21,11 +27,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public FileManager fileManager() {
-		return new FileManager("c:/upload");
+		return new FileManager(uploadDirectory);
 	}
 
-	//	@Bean
-	//	public MultipartResolver multipartResolver() {
-	//		return new StandardServletMultipartResolver();
-	//	}
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
+	}
 }
