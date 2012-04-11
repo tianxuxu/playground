@@ -46,8 +46,8 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.mongodb</groupId>
-    		<artifactId>mongo-java-driver</artifactId>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
 			<version>2.7.3</version>
 		</dependency>
 
@@ -134,9 +134,9 @@
 							<processor>org.springframework.data.mongodb.repository.MongoAnnotationProcessor</processor>
 						</configuration>
 					</execution>
-				</executions>		
+				</executions>
 			</plugin>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -172,12 +172,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12</version>
 			</plugin>
-		
-		
+
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

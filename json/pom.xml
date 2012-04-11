@@ -10,7 +10,6 @@
 		<maven>3.0.0</maven>
 	</prerequisites>
 
-
 	<properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<slf4j.version>1.6.4</slf4j.version>
@@ -42,7 +41,7 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.4</version>
+			<version>1.9.6</version>
 		</dependency>
 
 		<!-- <dependency> <groupId>org.javalite</groupId> <artifactId>activejdbc</artifactId> <version>1.2-SNAPSHOT</version> <exclusions> <exclusion> 
@@ -68,7 +67,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -84,8 +83,8 @@
 					<path>/</path>
 					<port>8080</port>
 				</configuration>
-			</plugin>		
-		
+			</plugin>
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>

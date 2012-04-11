@@ -1,21 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.ralscha.playground</groupId>
-  <artifactId>lucene</artifactId>
-  <version>0.0.1</version>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ch.ralscha.playground</groupId>
+	<artifactId>lucene</artifactId>
+	<version>0.0.1</version>
+
 	<prerequisites>
 		<maven>3.0.0</maven>
-	</prerequisites>  
-  
-  <dependencies>
-  	<dependency>
-  		<groupId>org.apache.lucene</groupId>
-  		<artifactId>lucene-core</artifactId>
-  		<version>3.5.0</version>
-  	</dependency>
-  </dependencies>
-  
+	</prerequisites>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -27,7 +28,7 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -62,8 +63,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.4</version>
-			</plugin>			
+			</plugin>
 		</plugins>
-	</build>  
-  
+	</build>
+
 </project>

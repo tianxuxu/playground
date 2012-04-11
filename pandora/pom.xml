@@ -1,10 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.ralscha</groupId>
-  <artifactId>pandora</artifactId>
-  <version>0.0.1</version>
-  <packaging>war</packaging>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ch.ralscha</groupId>
+	<artifactId>pandora</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+
 	<properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<hibernatevalidator.version>4.2.0.Final</hibernatevalidator.version>
@@ -118,7 +123,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -209,6 +214,6 @@
 
 		</plugins>
 
-	</build>  
-  
+	</build>
+
 </project>

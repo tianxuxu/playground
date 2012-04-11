@@ -138,3 +138,17 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\ws-tomcat
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\jmx
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\eventbus
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..

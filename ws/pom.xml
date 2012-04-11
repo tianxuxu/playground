@@ -14,7 +14,7 @@
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<logback.version>1.0.1</logback.version>
-		<jetty.version>8.1.1.v20120215</jetty.version>
+		<jetty.version>8.1.2.v20120308</jetty.version>
 		<cxf.version>2.5.2</cxf.version>
 	</properties>
 
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

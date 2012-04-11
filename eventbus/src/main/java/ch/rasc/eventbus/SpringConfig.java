@@ -9,11 +9,11 @@ import com.google.common.eventbus.EventBus;
 @Configuration
 @ComponentScan(basePackages = { "ch.rasc.eventbus" })
 public class SpringConfig {
-	
+
 	@Bean
 	public EventBus eventBus() {
 		EventBus eventBus = new EventBus();
 		return eventBus;
 	}
-		
+
 }

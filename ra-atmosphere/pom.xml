@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.4</version>
+			<version>1.9.6</version>
 		</dependency>
 
 		<dependency>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -87,7 +87,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.1.v20120215</version>
+				<version>8.1.2.v20120308</version>
 			</plugin>
 
 			<plugin>

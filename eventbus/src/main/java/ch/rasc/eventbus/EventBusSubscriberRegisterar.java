@@ -12,29 +12,29 @@ import com.google.common.eventbus.Subscribe;
 
 @Service
 public class EventBusSubscriberRegisterar implements BeanPostProcessor {
-	
+
 	private EventBus eventBus;
-	
+
 	@Autowired
 	public EventBusSubscriberRegisterar(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
-	
+
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		return bean; 
+		return bean;
 	}
 
 	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {		
-		
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+
 		for (Method method : bean.getClass().getMethods()) {
 			if (method.getAnnotation(Subscribe.class) != null) {
 				eventBus.register(bean);
 				break;
 			}
 		}
-		
+
 		return bean;
 	}
 }

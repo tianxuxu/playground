@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.ralscha.playground</groupId>
-    <artifactId>ra-cometd</artifactId>
-    <version>1.0</version>
-    <packaging>war</packaging>
+	<groupId>ch.ralscha.playground</groupId>
+	<artifactId>ra-cometd</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
 
 	<prerequisites>
 		<maven>3.0.0</maven>
 	</prerequisites>
 
-    <dependencies>
-
-
-        <dependency>
-            <groupId>org.cometd.java</groupId>
-            <artifactId>cometd-java-server</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.cometd.java</groupId>
-            <artifactId>cometd-java-annotations</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ovea</groupId>
-            <artifactId>ovea-cometd-contrib</artifactId>
-            <version>1.8.ga</version>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-server</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cometd.java</groupId>
+			<artifactId>cometd-java-annotations</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ovea</groupId>
+			<artifactId>ovea-cometd-contrib</artifactId>
+			<version>1.8.ga</version>
+		</dependency>
 
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 			<scope>provided</scope>
 		</dependency>
-				
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.4</version>
-		</dependency>		
-    </dependencies>
+			<version>1.9.6</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -67,7 +65,7 @@
 					<port>8080</port>
 				</configuration>
 			</plugin>
-						
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -102,7 +100,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 </project>
