@@ -1,4 +1,4 @@
-package ch.rasc.eventbus;
+package ch.rasc.eventbus.guava;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -14,6 +14,7 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;

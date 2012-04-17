@@ -1,4 +1,4 @@
-package ch.rasc.eventbus;
+package ch.rasc.eventbus.guava;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -11,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.StandardWatchEventKinds;
 
 import org.springframework.stereotype.Component;
+
 
 import com.google.common.eventbus.Subscribe;
 
@@ -31,9 +32,9 @@ public class Tailer {
 		for (PathEvent event : pathEvents.getEvents()) {
 			if (path.endsWith(event.getEventTarget())) {
 				if (event.getType() == StandardWatchEventKinds.ENTRY_DELETE) {
-					System.out.println("entry deleted");
+					System.out.println("TAIL: entry deleted");
 				} else if (event.getType() == StandardWatchEventKinds.ENTRY_MODIFY) {
-					System.out.println("modified");
+					System.out.println("TAIL: modified");
 					try {
 						printTail();
 					} catch (IOException e) {
