@@ -43,7 +43,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements CachingConfigu
 				.expireAfterWrite(10, TimeUnit.MINUTES).build();
 
 		Cache<Object, Optional<Object>> maxSizeCache = CacheBuilder.newBuilder()
-				.maximumSize(10000).build();
+				.maximumSize(10).build();
 		
 		cacheManager.setCaches(Arrays.asList(
 				new GuavaCache("tenMinutesCache", tenMinutesCache),

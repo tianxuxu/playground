@@ -10,7 +10,7 @@ public class EventListener implements ApplicationListener<AppEvent> {
 
 	@Override
 	public void onApplicationEvent(AppEvent event) {
-		System.out.println(new Date() + ":" + event.getMessage());
+		System.out.println(new Date() + ": " + event.getMessage());
 	}
 
 }

@@ -9,7 +9,6 @@ public class StartTomcat {
 
 	public static void main(String[] args) {
 		EmbeddedTomcat.create()
-			.addInitializer(SpringServletContainerInitializer.class, MyWebAppInitializer.class)
 			.startAndWait();
 	
 	}
