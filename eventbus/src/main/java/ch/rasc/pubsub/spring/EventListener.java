@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.spring;
+package ch.rasc.pubsub.spring;
 
 import java.util.Date;
 

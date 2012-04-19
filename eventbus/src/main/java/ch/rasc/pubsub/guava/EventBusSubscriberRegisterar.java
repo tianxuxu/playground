@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.guava;
+package ch.rasc.pubsub.guava;
 
 import java.lang.reflect.Method;
 

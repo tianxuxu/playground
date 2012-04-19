@@ -1,1 +1,1 @@
-mvn exec:java -Dexec.mainClass="ch.rasc.eventbus.guava.Main"  
+mvn exec:java -Dexec.mainClass="ch.rasc.pubsub.tail.Main"  

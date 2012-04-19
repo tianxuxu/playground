@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.hazelcast;
+package ch.rasc.pubsub.hazelcast;
 
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.ITopic;

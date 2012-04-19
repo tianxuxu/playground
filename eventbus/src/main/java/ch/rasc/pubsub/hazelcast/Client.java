@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.hazelcast;
+package ch.rasc.pubsub.hazelcast;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

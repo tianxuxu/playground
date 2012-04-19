@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.hazelcast;
+package ch.rasc.pubsub.hazelcast;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,17 @@
+package ch.rasc.pubsub.guava;
+
+import java.util.Date;
+
+public class TimeEvent {
+	private Date time;
+
+	public TimeEvent(Date time) {
+		this.time = time;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+	
+	
+}
