@@ -1,4 +1,4 @@
-package ch.rasc.eventbus;
+package ch.rasc.pubsub;
 
 import java.io.IOException;
 import java.io.InputStream;

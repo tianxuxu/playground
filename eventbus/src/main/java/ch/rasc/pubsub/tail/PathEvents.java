@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.guava;
+package ch.rasc.pubsub.tail;
 
 import java.nio.file.Path;
 

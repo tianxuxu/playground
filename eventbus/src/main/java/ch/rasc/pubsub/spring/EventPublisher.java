@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.spring;
+package ch.rasc.pubsub.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

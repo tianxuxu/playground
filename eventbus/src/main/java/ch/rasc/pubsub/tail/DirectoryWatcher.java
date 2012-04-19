@@ -1,4 +1,4 @@
-package ch.rasc.eventbus.guava;
+package ch.rasc.pubsub.tail;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
