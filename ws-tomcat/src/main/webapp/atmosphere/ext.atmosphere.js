@@ -985,6 +985,16 @@ Ext.define('Ext.ux.Atmosphere', {
                         try {
                             _response.status = ajaxRequest.status;
                             _response.headers = Ext.ux.Atmosphere.parseHeaders(ajaxRequest.getAllResponseHeaders());
+
+                            // HOTFIX for firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=608735
+                            if (_request.headers) {
+                                  Ext.iterate(_request.headers, function(name) {
+                                      var v = ajaxRequest.getResponseHeader(name);
+                                      if (v) {
+                                          _response.headers[name] = v;
+                                      }
+                                  });
+                            }
                         } catch(e) {
                             _response.status = 404;
                         }
