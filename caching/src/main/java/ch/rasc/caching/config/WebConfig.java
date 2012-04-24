@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import ch.rasc.caching.GuavaCache;
+import ch.rasc.caching.guava.GuavaCache;
 
 import com.google.common.base.Optional;
 import com.google.common.cache.Cache;
