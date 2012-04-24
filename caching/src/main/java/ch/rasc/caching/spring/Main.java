@@ -29,6 +29,32 @@ public class Main {
 
 		result = calculator.factorial(69);
 		System.out.println("69! = " + result);
+		System.out.println();
+		
+		result = calculator.factorial(69, "sr");
+		System.out.println("69! = " + result);
+		System.out.println();
+		
+		result = calculator.factorial(69, "mr");
+		System.out.println("69! = " + result);
+		System.out.println();
+
+		result = calculator.factorial(2, "mr");
+		System.out.println("2! = " + result);
+		System.out.println();
+
+		
+		result = calculator.factorialWithACondition(2);
+		System.out.println("2! = " + result);
+		System.out.println();
+
+		result = calculator.factorialWithACondition(2);
+		System.out.println("2! = " + result);
+		System.out.println();
+
+		result = calculator.factorialWithACondition(69);
+		System.out.println("69! = " + result);
+		System.out.println();
 
 	}
 

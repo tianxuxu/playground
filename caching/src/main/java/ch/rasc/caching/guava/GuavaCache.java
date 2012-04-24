@@ -1,4 +1,4 @@
-package ch.rasc.caching;
+package ch.rasc.caching.guava;
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
@@ -27,7 +27,7 @@ public class GuavaCache implements Cache {
 	@Override
 	public ValueWrapper get(Object key) {
 		Optional<Object> value = this.store.getIfPresent(key);
-		return (value != null ? new SimpleValueWrapper(value.get()) : null);
+		return (value != null ? new SimpleValueWrapper(value.orNull()) : null);
 	}
 
 	@Override
