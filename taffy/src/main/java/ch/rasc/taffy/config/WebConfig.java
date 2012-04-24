@@ -1,4 +1,4 @@
-package ch.ralscha.springplayground.taffy.config;
+package ch.rasc.taffy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "ch.ralscha.springplayground.taffy" })
+@ComponentScan(basePackages = { "ch.rasc.taffy" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override

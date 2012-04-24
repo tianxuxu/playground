@@ -1,4 +1,4 @@
-package ch.ralscha.springplayground.taffy.controller;
+package ch.rasc.taffy.controller;
 
 import java.util.List;
 
@@ -15,9 +15,19 @@ public class TestController {
 	@Autowired
 	private Twitter twitter;
 
+	@Autowired
+	private DataService dataService;
+
 	@RequestMapping("/getPublicTimeline")
 	@ResponseBody
 	public List<Tweet> returnSomeTweets() {
 		return twitter.timelineOperations().getPublicTimeline();
 	}
+
+	@RequestMapping("/getUsers")
+	@ResponseBody
+	public List<User> getUsers() {
+		return dataService.getUsers();
+	}
+
 }
