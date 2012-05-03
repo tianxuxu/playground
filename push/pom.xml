@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.rasc</groupId>
-	<artifactId>ws-tomcat</artifactId>
+	<artifactId>push</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 
@@ -11,7 +11,7 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.version>3.2.0.BUILD-SNAPSHOT</spring.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<logback.version>1.0.2</logback.version>
 
@@ -71,28 +71,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-twitter</artifactId>
-			<version>1.0.2.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>jstl-impl</artifactId>
-			<version>1.2</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jsp-api</artifactId>
-					<groupId>javax.servlet.jsp</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
 			<version>0.0.7</version>
@@ -100,6 +78,21 @@
 		</dependency>
 
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Maven Central Compatible Spring Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>
+
+		<repository>
+			<id>org.springframework.maven.snapshot</id>
+			<name>Maven Central Compatible Spring Snapshot Repository</name>
+			<url>http://maven.springframework.org/snapshot</url>
+		</repository>
+	</repositories>
+
 
 	<build>
 		<plugins>
@@ -115,6 +108,7 @@
 
 		</plugins>
 	</build>
+
 
 
 </project>
