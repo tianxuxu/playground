@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb;
+package ch.rasc.springmongodb;
 
 public class Person {
 	private String id;

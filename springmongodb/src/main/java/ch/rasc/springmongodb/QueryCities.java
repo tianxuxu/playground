@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb;
+package ch.rasc.springmongodb;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.data.mongodb.core.query.Query;
 
-import ch.ralscha.springmongodb.domain.City;
+import ch.rasc.springmongodb.domain.City;
 
 public class QueryCities {
 

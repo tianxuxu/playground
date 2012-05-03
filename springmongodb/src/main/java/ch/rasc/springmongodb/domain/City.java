@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb.domain;
+package ch.rasc.springmongodb.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.Point;

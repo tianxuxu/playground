@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb;
+package ch.rasc.springmongodb;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.geo.Point;
 import org.springframework.util.StringUtils;
 
-import ch.ralscha.springmongodb.domain.City;
+import ch.rasc.springmongodb.domain.City;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;

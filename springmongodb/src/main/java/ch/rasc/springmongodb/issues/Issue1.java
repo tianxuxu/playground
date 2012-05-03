@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb.issues;
+package ch.rasc.springmongodb.issues;
 
 import java.util.List;
 import java.util.Map;
@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import ch.ralscha.springmongodb.AppConfig;
-import ch.ralscha.springmongodb.domain.User;
+import ch.rasc.springmongodb.AppConfig;
+import ch.rasc.springmongodb.domain.User;
 
 import com.google.common.collect.Maps;
 

@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb;
+package ch.rasc.springmongodb;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -34,7 +34,7 @@ public class AppConfig extends AbstractMongoConfiguration {
 
 	@Override
 	public String getMappingBasePackage() {
-		return "ch.ralscha.springmongodb.domain";
+		return "ch.rasc.springmongodb.domain";
 	}
 
 }

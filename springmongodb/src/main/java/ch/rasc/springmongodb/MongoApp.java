@@ -1,4 +1,4 @@
-package ch.ralscha.springmongodb;
+package ch.rasc.springmongodb;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
