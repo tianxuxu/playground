@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ch.rasc.taffy.config.MyConf;
+
 @Controller
 public class TestController {
 
@@ -18,10 +20,14 @@ public class TestController {
 	@Autowired
 	private DataService dataService;
 
+	@Autowired
+	private MyConf myConf;
+	
 	@RequestMapping("/getPublicTimeline")
 	@ResponseBody
 	public List<Tweet> returnSomeTweets() {
-		return twitter.timelineOperations().getPublicTimeline();
+		System.out.println(myConf.getEnv());
+		return twitter.timelineOperations().getPublicTimeline();		
 	}
 
 	@RequestMapping("/getUsers")
