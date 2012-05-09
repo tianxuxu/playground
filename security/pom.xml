@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ch.ralscha.playground</groupId>
+	<groupId>ch.rasc.playground</groupId>
 	<artifactId>security</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
@@ -15,7 +15,7 @@
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<spring.security.version>3.1.0.RELEASE</spring.security.version>
 		<slf4j.version>1.6.4</slf4j.version>
-		<logback.version>1.0.2</logback.version>
+		<logback.version>1.0.3</logback.version>
 		<aspectj.version>1.6.12</aspectj.version>
 	</properties>
 

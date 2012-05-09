@@ -9,7 +9,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>ch.ralscha.upload.config</param-value>
+		<param-value>ch.rasc.upload.config</param-value>
 	</context-param>
 
 	<listener>

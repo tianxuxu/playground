@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.atmosphere.cpr.AtmosphereHandler;
 import org.atmosphere.cpr.AtmosphereResource;
@@ -14,7 +13,7 @@ import org.atmosphere.cpr.DefaultBroadcaster;
 /**
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
-public final class ChatHandler implements AtmosphereHandler<HttpServletRequest, HttpServletResponse> {
+public final class ChatHandler implements AtmosphereHandler {
 
 	@Override
 	public void destroy() {
@@ -22,7 +21,7 @@ public final class ChatHandler implements AtmosphereHandler<HttpServletRequest, 
 	}
 
 	@Override
-	public void onRequest(AtmosphereResource<HttpServletRequest, HttpServletResponse> resource) throws IOException {
+	public void onRequest(AtmosphereResource resource) throws IOException {
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);
 		broadcaster.setScope(Broadcaster.SCOPE.APPLICATION);
@@ -45,7 +44,7 @@ public final class ChatHandler implements AtmosphereHandler<HttpServletRequest, 
 	}
 
 	@Override
-	public void onStateChange(AtmosphereResourceEvent<HttpServletRequest, HttpServletResponse> event)
+	public void onStateChange(AtmosphereResourceEvent event)
 			throws IOException {
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);
@@ -68,7 +67,7 @@ public final class ChatHandler implements AtmosphereHandler<HttpServletRequest, 
 		}
 	}
 
-	private void close(AtmosphereResource<HttpServletRequest, HttpServletResponse> resource) {
+	private void close(AtmosphereResource resource) {
 		resource.resume();
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);

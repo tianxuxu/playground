@@ -1,4 +1,4 @@
-package ch.ralscha.springplayground.json.config;
+package ch.rasc.springplayground.json.config;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ComponentScan(basePackages = { "ch.ralscha.springplayground.json.web" })
+@ComponentScan(basePackages = { "ch.rasc.springplayground.json.web" })
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 

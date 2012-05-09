@@ -27,7 +27,7 @@
   <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
   
-  <context:component-scan base-package="ch.ralscha.wsdemo"/>
+  <context:component-scan base-package="ch.rasc.wsdemo"/>
   
   <jaxws:endpoint id="calc" bus="calculator" address="/Calculator" />
   <jaxws:endpoint id="helloWorld" bus="helloWorldImpl" address="/HelloWorld" />

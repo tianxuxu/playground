@@ -1,4 +1,4 @@
-package ch.ralscha.springplayground.json.model;
+package ch.rasc.springplayground.json.model;
 
 import org.javalite.activejdbc.Model;
 

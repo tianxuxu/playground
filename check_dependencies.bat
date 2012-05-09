@@ -1,9 +1,24 @@
+cd D:\ws\playground\caching
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\cors
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\csvimport
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\equalsverifier
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\eventbus
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -23,7 +38,17 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\jettyembed
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\jpa
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\jmx
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -43,7 +68,17 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\maptrack
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\mongodb
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\push
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -63,10 +98,10 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\ra-cometdcall mvn versions:display-dependency-updates
+cd D:\ws\playground\ra-cometdcall 
+mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
-
 
 cd D:\ws\playground\ra-jetty-comet
 call mvn versions:display-dependency-updates
@@ -143,12 +178,5 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\jmx
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
 
-cd D:\ws\playground\eventbus
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
+

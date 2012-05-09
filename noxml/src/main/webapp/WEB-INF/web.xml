@@ -9,11 +9,11 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>ch.ralscha.noxml.config</param-value>
+		<param-value>ch.rasc.noxml.config</param-value>
 	</context-param>
 
 	<listener>
-	    <listener-class>ch.ralscha.noxml.config.SetupLog</listener-class>
+	    <listener-class>ch.rasc.noxml.config.SetupLog</listener-class>
 	</listener>
 
 	<listener>

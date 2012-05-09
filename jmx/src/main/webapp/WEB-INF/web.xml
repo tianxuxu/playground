@@ -10,7 +10,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>ch.ralscha.playground.jmx.config</param-value>
+		<param-value>ch.rasc.playground.jmx.config</param-value>
 	</context-param>
 
 	<listener>

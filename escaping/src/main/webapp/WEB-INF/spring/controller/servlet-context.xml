@@ -8,7 +8,7 @@
 
 	<mvc:annotation-driven />
 	
-	<context:component-scan base-package="ch.ralscha.springplayground" use-default-filters="false">
+	<context:component-scan base-package="ch.rasc.springplayground" use-default-filters="false">
 	  <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 

@@ -8,7 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
           
-			<class>ch.ralscha.model.Person</class>
+			<class>ch.rasc.model.Person</class>
 			<exclude-unlisted-classes>true</exclude-unlisted-classes>    
             
             

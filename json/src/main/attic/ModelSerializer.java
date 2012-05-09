@@ -1,4 +1,4 @@
-package ch.ralscha.springplayground.json.config;
+package ch.rasc.springplayground.json.config;
 
 import java.io.IOException;
 
