@@ -11,11 +11,16 @@ public class City {
 
 	@Id
 	private String id;
+
 	private String country;
+
 	private String asciiCityName;
+
 	@Indexed
 	private String cityName;
+
 	private String region;
+
 	private Integer population;
 
 	@GeoSpatialIndexed

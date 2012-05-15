@@ -8,18 +8,19 @@ import ch.ralscha.embeddedtc.EmbeddedTomcat;
 public class StartTomcat {
 
 	public static void main(String[] args) {
-		
-   	    Handler fh = new ConsoleHandler();
-	    fh.setLevel(Level.FINE);
 
-//	    Logger logger = Logger.getLogger("org.apache.catalina.util.LifecycleBase");
-//	    logger.setLevel(Level.FINE);
-//	    logger.addHandler (fh);
+		Handler fh = new ConsoleHandler();
+		fh.setLevel(Level.FINE);
 
-	    Logger logger = Logger.getLogger("org.apache");
-	    logger.setLevel(Level.SEVERE);
-	    logger.addHandler (fh);  
-		
+		// Logger logger =
+		// Logger.getLogger("org.apache.catalina.util.LifecycleBase");
+		// logger.setLevel(Level.FINE);
+		// logger.addHandler (fh);
+
+		Logger logger = Logger.getLogger("org.apache");
+		logger.setLevel(Level.SEVERE);
+		logger.addHandler(fh);
+
 		EmbeddedTomcat.create().startAndWait();
 	}
 }

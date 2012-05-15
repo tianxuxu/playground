@@ -22,119 +22,132 @@ import java.util.Date;
  */
 public class TwitterMessage {
 
-    private Long id;
-    private Date createdAt;
-    private String text;
-    private String fromUser;
-    private String profileImageUrl;
+	private Long id;
 
-    /** Default constructor. */
-    public TwitterMessage() {
-        super();
-    }
+	private Date createdAt;
 
-    /** Constructor to initialize all fields available. */
-    public TwitterMessage(Long id, Date createdAt, String text, String fromUser,
-            String profileImageUrl) {
-        super();
-        this.id = id;
-        this.createdAt = createdAt;
-        this.text = text;
-        this.fromUser = fromUser;
-        this.profileImageUrl = profileImageUrl;
-    }
+	private String text;
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	private String fromUser;
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	private String profileImageUrl;
 
-    public String getText() {
-        return text;
-    }
+	/** Default constructor. */
+	public TwitterMessage() {
+		super();
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	/** Constructor to initialize all fields available. */
+	public TwitterMessage(Long id, Date createdAt, String text, String fromUser, String profileImageUrl) {
+		super();
+		this.id = id;
+		this.createdAt = createdAt;
+		this.text = text;
+		this.fromUser = fromUser;
+		this.profileImageUrl = profileImageUrl;
+	}
 
-    public String getFromUser() {
-        return fromUser;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setFromUser(String fromUser) {
-        this.fromUser = fromUser;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getFromUser() {
+		return fromUser;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setFromUser(String fromUser) {
+		this.fromUser = fromUser;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((createdAt == null) ? 0 : createdAt.hashCode());
-        result = prime * result
-                + ((fromUser == null) ? 0 : fromUser.hashCode());
-        result = prime * result
-                + ((profileImageUrl == null) ? 0 : profileImageUrl.hashCode());
-        result = prime * result + ((text == null) ? 0 : text.hashCode());
-        return result;
-    }
+	public String getProfileImageUrl() {
+		return profileImageUrl;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        TwitterMessage other = (TwitterMessage) obj;
-        if (createdAt == null) {
-            if (other.createdAt != null)
-                return false;
-        } else if (!createdAt.equals(other.createdAt))
-            return false;
-        if (fromUser == null) {
-            if (other.fromUser != null)
-                return false;
-        } else if (!fromUser.equals(other.fromUser))
-            return false;
-        if (profileImageUrl == null) {
-            if (other.profileImageUrl != null)
-                return false;
-        } else if (!profileImageUrl.equals(other.profileImageUrl))
-            return false;
-        if (text == null) {
-            if (other.text != null)
-                return false;
-        } else if (!text.equals(other.text))
-            return false;
-        return true;
-    }
+	public void setProfileImageUrl(String profileImageUrl) {
+		this.profileImageUrl = profileImageUrl;
+	}
 
-    @Override
-    public String toString() {
-        return "Tweet [createdAt=" + createdAt + ", text=" + text
-                + ", fromUser=" + fromUser + ", profileImageUrl="
-                + profileImageUrl + "]";
-    }
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((fromUser == null) ? 0 : fromUser.hashCode());
+		result = prime * result + ((profileImageUrl == null) ? 0 : profileImageUrl.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		TwitterMessage other = (TwitterMessage) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null) {
+				return false;
+			}
+		}
+		else if (!createdAt.equals(other.createdAt)) {
+			return false;
+		}
+		if (fromUser == null) {
+			if (other.fromUser != null) {
+				return false;
+			}
+		}
+		else if (!fromUser.equals(other.fromUser)) {
+			return false;
+		}
+		if (profileImageUrl == null) {
+			if (other.profileImageUrl != null) {
+				return false;
+			}
+		}
+		else if (!profileImageUrl.equals(other.profileImageUrl)) {
+			return false;
+		}
+		if (text == null) {
+			if (other.text != null) {
+				return false;
+			}
+		}
+		else if (!text.equals(other.text)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Tweet [createdAt=" + createdAt + ", text=" + text + ", fromUser=" + fromUser + ", profileImageUrl=" + profileImageUrl + "]";
+	}
 
 }

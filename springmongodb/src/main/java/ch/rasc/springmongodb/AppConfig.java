@@ -11,20 +11,20 @@ public class AppConfig extends AbstractMongoConfiguration {
 	@Override
 	public Mongo mongo() throws Exception {
 
-		//		MongoOptions options = new MongoOptions();
-		//		options.connectionsPerHost = 8;
-		//		options.threadsAllowedToBlockForConnectionMultiplier = 4;
-		//		options.connectTimeout = 1000;
-		//		options.maxWaitTime = 1500;
-		//		options.autoConnectRetry = true;
-		//		options.socketKeepAlive = true;
-		//		options.socketTimeout = 1500;
-		//		options.slaveOk = true;
-		//		options.w = 1;
-		//		options.wtimeout = 0;
-		//		options.fsync = false;
+		// MongoOptions options = new MongoOptions();
+		// options.connectionsPerHost = 8;
+		// options.threadsAllowedToBlockForConnectionMultiplier = 4;
+		// options.connectTimeout = 1000;
+		// options.maxWaitTime = 1500;
+		// options.autoConnectRetry = true;
+		// options.socketKeepAlive = true;
+		// options.socketTimeout = 1500;
+		// options.slaveOk = true;
+		// options.w = 1;
+		// options.wtimeout = 0;
+		// options.fsync = false;
 
-		return new Mongo("localhost"/*, options*/);
+		return new Mongo("localhost"/* , options */);
 	}
 
 	@Override

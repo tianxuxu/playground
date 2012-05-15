@@ -24,7 +24,7 @@ public class Publisher {
 	public void publishSpecialMsgEvent(String message, String user) {
 		eventBus.post(new SpecialMsgEvent(message, user));
 	}
-	
+
 	public void publishTimeEvent() {
 		eventBus.post(new TimeEvent(new Date()));
 	}

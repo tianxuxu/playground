@@ -31,23 +31,21 @@ import com.hillert.atmosphere.MeteorArgumentResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.hillert.atmosphere")
 public class WebAppConfiguration extends WebMvcConfigurerAdapter {
-    
+
 	/*
-    @Bean
-    public BroadcasterFactory broadcasterFactory() {
-        return BroadcasterFactory.getDefault();
-    }
-    */
-	
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new AtmosphereResourceArgumentResolver());
-        argumentResolvers.add(new MeteorArgumentResolver());
-    }
+	 * @Bean public BroadcasterFactory broadcasterFactory() { return
+	 * BroadcasterFactory.getDefault(); }
+	 */
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new AtmosphereResourceArgumentResolver());
+		argumentResolvers.add(new MeteorArgumentResolver());
+	}
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
-    
+
 }

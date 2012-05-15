@@ -29,12 +29,17 @@ public class Snake {
 	private static final int DEFAULT_LENGTH = 5;
 
 	private final int id;
+
 	private final WsOutbound outbound;
 
 	private Direction direction;
+
 	private int length = DEFAULT_LENGTH;
+
 	private Location head;
+
 	private Deque<Location> tail = new ArrayDeque<Location>();
+
 	private String hexColor;
 
 	public Snake(int id, WsOutbound outbound) {
@@ -56,7 +61,8 @@ public class Snake {
 		try {
 			CharBuffer response = CharBuffer.wrap("{'type': 'dead'}");
 			outbound.writeTextMessage(response);
-		} catch (IOException ioe) {
+		}
+		catch (IOException ioe) {
 			// Ignore
 		}
 	}
@@ -66,7 +72,8 @@ public class Snake {
 		try {
 			CharBuffer response = CharBuffer.wrap("{'type': 'kill'}");
 			outbound.writeTextMessage(response);
-		} catch (IOException ioe) {
+		}
+		catch (IOException ioe) {
 			// Ignore
 		}
 	}

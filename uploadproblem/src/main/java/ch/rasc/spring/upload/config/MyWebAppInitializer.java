@@ -12,7 +12,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-public class MyWebAppInitializer implements WebApplicationInitializer{
+public class MyWebAppInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) {
@@ -35,13 +35,14 @@ public class MyWebAppInitializer implements WebApplicationInitializer{
 		}
 
 		/*
-		// Create the dispatcher servlet's Spring application context
-		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-		dispatcherContext.register(DispatcherConfig.class);
-		// Register and map the dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
-		*/
+		 * // Create the dispatcher servlet's Spring application context
+		 * AnnotationConfigWebApplicationContext dispatcherContext = new
+		 * AnnotationConfigWebApplicationContext();
+		 * dispatcherContext.register(DispatcherConfig.class); // Register and
+		 * map the dispatcher servlet ServletRegistration.Dynamic dispatcher =
+		 * container.addServlet("dispatcher", new
+		 * DispatcherServlet(dispatcherContext));
+		 * dispatcher.setLoadOnStartup(1); dispatcher.addMapping("/");
+		 */
 	}
 }

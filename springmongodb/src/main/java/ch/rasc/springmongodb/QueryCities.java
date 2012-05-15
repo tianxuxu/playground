@@ -32,8 +32,7 @@ public class QueryCities {
 
 		GeoResults<City> geoResults = mongoOps.geoNear(query, City.class);
 		for (GeoResult<City> geoResult : geoResults) {
-			System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent().getCityName(), geoResult.getDistance()
-					.getNormalizedValue());
+			System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent().getCityName(), geoResult.getDistance().getNormalizedValue());
 		}
 
 		System.out.println("-------------------------");
@@ -64,10 +63,11 @@ public class QueryCities {
 			System.out.println(c.getCityName());
 		}
 
-		//		GridFS gridFs = new GridFS(mongoOps.getDb(), "myBucket");
-		//		GridFSInputFile input = gridFs.createFile(new File("D:/_download/spring-social-1.0.0.RELEASE.zip"));		
-		//		input.setFilename("theFile");
-		//		input.save();
+		// GridFS gridFs = new GridFS(mongoOps.getDb(), "myBucket");
+		// GridFSInputFile input = gridFs.createFile(new
+		// File("D:/_download/spring-social-1.0.0.RELEASE.zip"));
+		// input.setFilename("theFile");
+		// input.save();
 	}
 
 }

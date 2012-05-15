@@ -21,7 +21,9 @@ public final class ReverseAjaxServlet extends HttpServlet {
 	final Queue<Continuation> continuations = new ConcurrentLinkedQueue<Continuation>();
 
 	final ObjectMapper mapper = new ObjectMapper();
+
 	final Random random = new Random();
+
 	private final Thread generator = new Thread("Event generator") {
 		@Override
 		public void run() {
@@ -36,9 +38,11 @@ public final class ReverseAjaxServlet extends HttpServlet {
 						peer.setContentType("application/json");
 						continuation.complete();
 					}
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					throw new RuntimeException(e.getMessage(), e);
 				}
 			}

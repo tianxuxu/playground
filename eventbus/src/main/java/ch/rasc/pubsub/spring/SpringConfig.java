@@ -18,5 +18,5 @@ public class SpringConfig {
 		multicaster.setTaskExecutor(Executors.newFixedThreadPool(10));
 		return multicaster;
 	}
-	
+
 }

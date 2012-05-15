@@ -26,7 +26,8 @@ public class Insert {
 			createOptions.append("capped", true);
 			createOptions.append("size", 1000);
 			collection = db.createCollection("log", createOptions);
-		} else {
+		}
+		else {
 			collection = db.getCollection("log");
 		}
 
@@ -61,7 +62,7 @@ public class Insert {
 		WriteResult wr = collection.remove(query);
 		System.out.println(wr.getError());
 
-		//collection.drop();
+		// collection.drop();
 		mongo.close();
 	}
 }

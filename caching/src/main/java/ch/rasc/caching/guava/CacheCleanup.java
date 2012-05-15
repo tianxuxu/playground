@@ -20,7 +20,7 @@ public class CacheCleanup {
 	CacheManager cacheManager;
 
 	@PreDestroy
-	public void shutdown() {		
+	public void shutdown() {
 		scheduler.shutdown();
 	}
 

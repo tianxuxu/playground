@@ -41,6 +41,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 	private static final String GUEST_PREFIX = "Guest";
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
+
 	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<ChatMessageInbound>();
 
 	@Override
@@ -56,7 +57,6 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 			this.nickname = GUEST_PREFIX + id;
 		}
 
-		
 		@Override
 		protected void onOpen(WsOutbound outbound) {
 			connections.add(this);
@@ -88,7 +88,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 				try {
 					CharBuffer buffer = CharBuffer.wrap(message);
 					connection.getWsOutbound().writeTextMessage(buffer);
-				} catch (IOException ignore) {
+				}
+				catch (IOException ignore) {
 					// Ignore
 				}
 			}

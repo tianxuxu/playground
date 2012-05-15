@@ -13,7 +13,9 @@ import com.glines.socketio.server.SocketIOOutbound;
 class Endpoint implements SocketIOInbound {
 
 	private final ChatServlet servlet;
+
 	private final String user;
+
 	private final HttpServletRequest request;
 
 	private SocketIOOutbound outbound;
@@ -43,7 +45,8 @@ class Endpoint implements SocketIOInbound {
 	public void onMessage(int messageType, String message) {
 		if ("/disconnect".equals(message)) {
 			outbound.close();
-		} else {
+		}
+		else {
 			servlet.broadcast("[" + user + "] " + message);
 		}
 	}
@@ -53,7 +56,8 @@ class Endpoint implements SocketIOInbound {
 			if (outbound != null && outbound.getConnectionState() == ConnectionState.CONNECTED) {
 				outbound.sendMessage(data);
 			}
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			outbound.close();
 		}
 	}

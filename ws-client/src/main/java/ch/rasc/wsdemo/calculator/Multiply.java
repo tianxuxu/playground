@@ -5,9 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * <p>Java class for multiply complex type.
+ * <p>
+ * Java class for multiply complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="multiply">
@@ -29,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Multiply {
 
 	protected int arg0;
+
 	protected int arg1;
 
 	/**

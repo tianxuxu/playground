@@ -12,7 +12,8 @@ public class JettyNoLock {
 		try {
 			ServerSocket srv = new ServerSocket(port);
 			srv.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
 			return;
 		}
@@ -21,7 +22,8 @@ public class JettyNoLock {
 		context.setDefaultsDescriptor("./src/main/config/webdefault.xml");
 
 		Server server = new Server(port);
-		//((SelectChannelConnector) server.getConnectors()[0]).setReuseAddress(false);
+		// ((SelectChannelConnector)
+		// server.getConnectors()[0]).setReuseAddress(false);
 		server.setHandler(context);
 		server.start();
 	}

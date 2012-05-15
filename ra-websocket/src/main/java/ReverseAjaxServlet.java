@@ -28,13 +28,17 @@ public final class ReverseAjaxServlet extends WebSocketServlet {
 				try {
 					Thread.sleep(random.nextInt(5000));
 					endpoints.broadcast(mapper.writeValueAsString(new String[] { "At " + new Date() }));
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
-				} catch (JsonGenerationException e) {
+				}
+				catch (JsonGenerationException e) {
 					e.printStackTrace();
-				} catch (JsonMappingException e) {
+				}
+				catch (JsonMappingException e) {
 					e.printStackTrace();
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					e.printStackTrace();
 				}
 			}

@@ -5,6 +5,7 @@ import java.nio.file.WatchEvent;
 
 public class PathEvent {
 	private final Path eventTarget;
+
 	private final WatchEvent.Kind<?> type;
 
 	PathEvent(Path eventTarget, WatchEvent.Kind<?> type) {

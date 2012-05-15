@@ -51,7 +51,8 @@ public class TestController {
 				System.out.printf("     %s->%s\n", header, part.getHeader(header));
 			}
 
-			//Test if getHeader is case insensitive according to servlet 3.0 spec
+			// Test if getHeader is case insensitive according to servlet 3.0
+			// spec
 			boolean isGetHeaderCaseInsensitive = true;
 			for (String header : part.getHeaderNames()) {
 				String h1 = part.getHeader(header);
@@ -65,7 +66,8 @@ public class TestController {
 			System.out.println();
 			if (!isGetHeaderCaseInsensitive) {
 				System.out.println("   part.getHeader is NOT case insensitive");
-			} else {
+			}
+			else {
 				System.out.println("   part.getHeader IS case insensitive");
 			}
 

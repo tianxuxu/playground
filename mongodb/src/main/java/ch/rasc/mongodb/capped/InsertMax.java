@@ -50,9 +50,9 @@ public class InsertMax {
 		System.out.println("Anzahl Bytes: " + stats.get("size"));
 		System.out.println("Durchschnitt Bytes pro Dokument : " + stats.get("avgObjSize"));
 
-		//		for (String key : stats.keySet()) {
-		//			System.out.printf("%s = %s\n", key, stats.get(key));
-		//		}
+		// for (String key : stats.keySet()) {
+		// System.out.printf("%s = %s\n", key, stats.get(key));
+		// }
 
 		mongo.close();
 	}

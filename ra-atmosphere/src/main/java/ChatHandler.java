@@ -17,13 +17,12 @@ public final class ChatHandler implements AtmosphereHandler {
 
 	@Override
 	public void destroy() {
-		//nothing here
+		// nothing here
 	}
 
 	@Override
 	public void onRequest(AtmosphereResource resource) throws IOException {
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
-				ChatHandler.class.getName(), true);
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
 		broadcaster.setScope(Broadcaster.SCOPE.APPLICATION);
 		resource.setBroadcaster(broadcaster);
 		HttpServletRequest req = resource.getRequest();
@@ -31,12 +30,14 @@ public final class ChatHandler implements AtmosphereHandler {
 		if (user != null) {
 			if ("GET".equals(req.getMethod())) {
 				resource.suspend(-1, false);
-			} else if ("POST".equals(req.getMethod())) {
+			}
+			else if ("POST".equals(req.getMethod())) {
 				String cmd = req.getParameter("cmd");
 				String message = req.getParameter("message");
 				if ("disconnect".equals(cmd)) {
 					close(resource);
-				} else if (message != null && message.trim().length() > 0) {
+				}
+				else if (message != null && message.trim().length() > 0) {
 					broadcaster.broadcast("[" + user + "] " + message);
 				}
 			}
@@ -44,10 +45,8 @@ public final class ChatHandler implements AtmosphereHandler {
 	}
 
 	@Override
-	public void onStateChange(AtmosphereResourceEvent event)
-			throws IOException {
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
-				ChatHandler.class.getName(), true);
+	public void onStateChange(AtmosphereResourceEvent event) throws IOException {
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
 		// Client closed the connection.
 		if (event.isCancelled()) {
 			close(event.getResource());
@@ -60,7 +59,8 @@ public final class ChatHandler implements AtmosphereHandler {
 				writer.write(message);
 				writer.flush();
 			}
-		} finally {
+		}
+		finally {
 			if (!event.isResumedOnTimeout()) {
 				event.getResource().resume();
 			}
@@ -69,8 +69,7 @@ public final class ChatHandler implements AtmosphereHandler {
 
 	private void close(AtmosphereResource resource) {
 		resource.resume();
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
-				ChatHandler.class.getName(), true);
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
 		String user = (String) resource.getRequest().getSession().getAttribute("user");
 		broadcaster.broadcast(user + " disconnected");
 	}

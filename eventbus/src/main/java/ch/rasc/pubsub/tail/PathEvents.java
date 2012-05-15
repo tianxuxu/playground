@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 public class PathEvents {
 
 	private final ImmutableList<PathEvent> pathEvents;
+
 	private final Path watchedDirectory;
 
 	public PathEvents(Path watchedDirectory, ImmutableList<PathEvent> events) {

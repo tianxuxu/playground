@@ -12,6 +12,5 @@ public class TimeEvent {
 	public Date getTime() {
 		return time;
 	}
-	
-	
+
 }

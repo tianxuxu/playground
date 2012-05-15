@@ -2,6 +2,7 @@ package ch.rasc.springplayground.equalsverifier;
 
 public final class Point {
 	private int x;
+
 	private int y;
 
 	public Point(int x, int y) {

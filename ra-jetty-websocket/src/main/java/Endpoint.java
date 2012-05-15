@@ -8,6 +8,7 @@ import org.eclipse.jetty.websocket.WebSocket.OnTextMessage;
 class Endpoint implements OnTextMessage {
 
 	private final Endpoints endpoints;
+
 	private final String user;
 
 	private Connection connection;
@@ -28,7 +29,8 @@ class Endpoint implements OnTextMessage {
 		if ("/disconnect".equals(data)) {
 			endpoints.broadcast(user + " disconnected !");
 			connection.disconnect();
-		} else {
+		}
+		else {
 			endpoints.broadcast("[" + user + "] " + data);
 		}
 	}
@@ -44,7 +46,8 @@ class Endpoint implements OnTextMessage {
 			if (connection != null && connection.isOpen()) {
 				connection.sendMessage(data);
 			}
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			connection.disconnect();
 		}
 	}

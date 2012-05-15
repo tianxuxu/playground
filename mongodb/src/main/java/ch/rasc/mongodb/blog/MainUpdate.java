@@ -23,7 +23,7 @@ public class MainUpdate {
 		BasicDBObject update = new BasicDBObject();
 		update.append("$set", new BasicDBObject("lastLogin", new Date()));
 
-		//collection.update(updateQuery, update);
+		// collection.update(updateQuery, update);
 		collection.update(updateQuery, update, false, true);
 
 		update = new BasicDBObject();
@@ -37,7 +37,7 @@ public class MainUpdate {
 		update = new BasicDBObject();
 		update.append("$set", new BasicDBObject("country", "US"));
 
-		//		DBObject user = collection.findAndModify(updateQuery, update);
+		// DBObject user = collection.findAndModify(updateQuery, update);
 		DBObject user = collection.findAndModify(updateQuery, null, null, false, update, true, false);
 		System.out.println(user);
 

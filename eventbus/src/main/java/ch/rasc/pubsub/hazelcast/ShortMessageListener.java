@@ -10,7 +10,7 @@ public class ShortMessageListener implements MessageListener<ShortMessageEvent> 
 
 	@PostConstruct
 	public void register() {
-		Hazelcast.<ShortMessageEvent>getTopic("my_topic").addMessageListener(this);
+		Hazelcast.<ShortMessageEvent> getTopic("my_topic").addMessageListener(this);
 	}
 
 	@Override

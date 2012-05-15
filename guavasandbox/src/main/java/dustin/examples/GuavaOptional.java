@@ -37,13 +37,13 @@ public class GuavaOptional {
 
 	/**
 	 * Provide the name of the capital of the provided state. This method uses
-	 * Guava's Optional.fromNullable(T) to ensure that a non-null Optional instance
-	 * is always returned with a non-null contained reference or without a
-	 * contained reference.
+	 * Guava's Optional.fromNullable(T) to ensure that a non-null Optional
+	 * instance is always returned with a non-null contained reference or
+	 * without a contained reference.
 	 * 
 	 * @param stateName State whose capital is desired.
-	 * @return Instance of Optional possibly containing the capital corresponding
-	 *    to provided the state name, if available.
+	 * @return Instance of Optional possibly containing the capital
+	 * corresponding to provided the state name, if available.
 	 */
 	public Optional<String> getStateCapital(final String stateName) {
 		return Optional.fromNullable(stateCapitals.get(stateName));
@@ -55,13 +55,14 @@ public class GuavaOptional {
 	 * @param dividend Dividend used in division.
 	 * @param divisor Divisor used in division.
 	 * @return Optional wrapper potentially containing Quotient from dividing
-	 *    dividend by divisor.
+	 * dividend by divisor.
 	 */
 	public Optional<BigDecimal> getQuotient(final BigDecimal dividend, final BigDecimal divisor) {
 		BigDecimal quotient;
 		try {
 			quotient = dividend.divide(divisor);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			String exStr = Throwables.getStackTraceAsString(ex);
 			System.out.println(exStr);
 

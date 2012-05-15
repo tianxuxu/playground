@@ -21,7 +21,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 public final class PiggybackServlet extends HttpServlet {
 
 	final Random random = new Random();
+
 	final BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
+
 	private final ObjectMapper mapper = new ObjectMapper();
 
 	private final Thread generator = new Thread("Event generator") {
@@ -30,7 +32,8 @@ public final class PiggybackServlet extends HttpServlet {
 			while (!Thread.currentThread().isInterrupted()) {
 				try {
 					Thread.sleep(random.nextInt(5000));
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
 				messages.offer("At " + new Date());

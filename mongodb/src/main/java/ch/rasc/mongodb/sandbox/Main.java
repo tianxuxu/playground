@@ -33,10 +33,10 @@ public class Main {
 		mongo.setWriteConcern(WriteConcern.SAFE);
 
 		DB db = mongo.getDB("testdbs");
-		//db.setWriteConcern(WriteConcern.SAFE);
+		// db.setWriteConcern(WriteConcern.SAFE);
 
 		DBCollection collection = db.getCollection("testcollection");
-		//collection.setWriteConcern(WriteConcern.SAFE);
+		// collection.setWriteConcern(WriteConcern.SAFE);
 
 		collection.drop();
 
@@ -44,12 +44,13 @@ public class Main {
 
 		for (Map<String, Object> row : userData) {
 
-			//replace string with a date
+			// replace string with a date
 			String dateOfBirth = (String) row.get("dob");
 
 			try {
 				row.put("dob", df.parse(dateOfBirth));
-			} catch (ParseException e) {
+			}
+			catch (ParseException e) {
 				e.printStackTrace();
 			}
 
@@ -63,11 +64,13 @@ public class Main {
 			System.out.println(dbo);
 		}
 
-		DBObject query = (DBObject) JSON.parse("{'username': 'johnd'}"); //new BasicDBObject("username", "johnd");
+		DBObject query = (DBObject) JSON.parse("{'username': 'johnd'}"); // new
+																			// BasicDBObject("username",
+																			// "johnd");
 		BasicDBObject keys = new BasicDBObject("username", 1);
 		keys.append("password", 1);
-		//1 = nur diese keys zurückliefern
-		//0 = alle keys bis auf diese zurückliefern
+		// 1 = nur diese keys zurückliefern
+		// 0 = alle keys bis auf diese zurückliefern
 
 		cursor = collection.find(query, keys);
 		while (cursor.hasNext()) {

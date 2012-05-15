@@ -25,8 +25,11 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class AsyncDispatcherServlet extends DispatcherServlet {
 
 	private ExecutorService exececutor;
+
 	private static final int NUM_ASYNC_TASKS = 15;
+
 	private static final long TIME_OUT = 10 * 1000;
+
 	final Logger log = LoggerFactory.getLogger(AsyncDispatcherServlet.class);
 
 	public AsyncDispatcherServlet() {
@@ -56,14 +59,15 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 					log.debug("Dispatching request " + request);
 					AsyncDispatcherServlet.super.doDispatch(request, response);
 					log.debug("doDispatch returned from processing request " + request);
-					ac.complete();					
-				} catch (Exception ex) {
+					ac.complete();
+				}
+				catch (Exception ex) {
 					log.error("Error in async request", ex);
 				}
 				return null;
 			}
 		});
-		
+
 		ac.addListener(new AsyncDispatcherServletListener(task));
 		exececutor.execute(task);
 	}
@@ -104,14 +108,18 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 			try {
 				future.cancel(true);
 				HttpServletResponse response = (HttpServletResponse) event.getAsyncContext().getResponse();
-				//HttpServletRequest request = (HttpServletRequest) event.getAsyncContext().getRequest();
-				//request.getRequestDispatcher("/app/error.htm").forward(request, response);
+				// HttpServletRequest request = (HttpServletRequest)
+				// event.getAsyncContext().getRequest();
+				// request.getRequestDispatcher("/app/error.htm").forward(request,
+				// response);
 				writer = response.getWriter();
 				writer.print(message);
 				writer.flush();
-			} catch (Exception ex) {
+			}
+			catch (Exception ex) {
 				log.error("handleTimeoutOrError", ex);
-			} finally {
+			}
+			finally {
 				event.getAsyncContext().complete();
 				if (writer != null) {
 					writer.close();

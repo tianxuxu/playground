@@ -18,7 +18,7 @@ public class WorkingInitService {
 	private EntityManager entityManager;
 
 	@Autowired
-	//@Qualifier("readWriteTransactionTemplate")
+	// @Qualifier("readWriteTransactionTemplate")
 	private TransactionTemplate readWriteTransactionTemplate;
 
 	@PostConstruct
@@ -33,7 +33,7 @@ public class WorkingInitService {
 		String result = readWriteTransactionTemplate.execute(new TransactionCallback<String>() {
 			@Override
 			public String doInTransaction(TransactionStatus status) {
-				//do some db operation
+				// do some db operation
 				return "theResult";
 			}
 		});

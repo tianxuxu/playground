@@ -9,5 +9,5 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan(basePackages = { "ch.rasc.cors" })
 public class WebConfig extends WebMvcConfigurerAdapter {
-	//nothing here
+	// nothing here
 }

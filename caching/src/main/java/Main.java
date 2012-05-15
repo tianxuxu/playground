@@ -7,14 +7,13 @@ import com.google.common.cache.CacheBuilder;
 public class Main {
 
 	public static void main(String[] args) {
-		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder().maximumSize(10000)
-				.expireAfterWrite(10, TimeUnit.MINUTES).build();
+		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder().maximumSize(10000).expireAfterWrite(10, TimeUnit.MINUTES).build();
 
 		cache.put("one", Optional.of("1"));
-		cache.put("two", Optional.<String>absent());
+		cache.put("two", Optional.<String> absent());
 		cache.put("three", Optional.of("3"));
 		cache.put("four", Optional.of("4"));
-		
+
 		System.out.println(cache.getIfPresent("one"));
 		System.out.println(cache.getIfPresent("six"));
 	}

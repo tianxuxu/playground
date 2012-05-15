@@ -16,12 +16,12 @@ public class MainDelete {
 		Mongo mongo = new Mongo("localhost");
 
 		DB db = mongo.getDB("testdb");
-		//db.setWriteConcern(WriteConcern.SAFE);
+		// db.setWriteConcern(WriteConcern.SAFE);
 
-		//db.dropDatabase();
+		// db.dropDatabase();
 
 		DBCollection collection = db.getCollection("users");
-		//collection.drop();
+		// collection.drop();
 
 		BasicDBObject deleteCriteria = new BasicDBObject();
 		deleteCriteria.append("enabled", false);

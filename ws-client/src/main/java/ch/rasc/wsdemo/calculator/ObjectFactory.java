@@ -6,33 +6,38 @@ import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the ch.rasc.wsdemo.calculator package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
- * provided in this class.
+ * This object contains factory methods for each Java content interface and Java
+ * element interface generated in the ch.rasc.wsdemo.calculator package.
+ * <p>
+ * An ObjectFactory allows you to programatically construct new instances of the
+ * Java representation for XML content. The Java representation of XML content
+ * can consist of schema derived interfaces and classes representing the binding
+ * of schema type definitions, element declarations and model groups. Factory
+ * methods for each of these are provided in this class.
  * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
 	private final static QName _Subtract_QNAME = new QName("http://wsdemo.ralscha.ch/", "subtract");
+
 	private final static QName _AddResponse_QNAME = new QName("http://wsdemo.ralscha.ch/", "addResponse");
+
 	private final static QName _MultiplyResponse_QNAME = new QName("http://wsdemo.ralscha.ch/", "multiplyResponse");
+
 	private final static QName _Divide_QNAME = new QName("http://wsdemo.ralscha.ch/", "divide");
+
 	private final static QName _Multiply_QNAME = new QName("http://wsdemo.ralscha.ch/", "multiply");
+
 	private final static QName _Add_QNAME = new QName("http://wsdemo.ralscha.ch/", "add");
+
 	private final static QName _DivideResponse_QNAME = new QName("http://wsdemo.ralscha.ch/", "divideResponse");
+
 	private final static QName _SubtractResponse_QNAME = new QName("http://wsdemo.ralscha.ch/", "subtractResponse");
 
 	/**
-	 * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ch.rasc.wsdemo.calculator
+	 * Create a new ObjectFactory that can be used to create new instances of
+	 * schema derived classes for package: ch.rasc.wsdemo.calculator
 	 * 
 	 */
 	public ObjectFactory() {
@@ -103,7 +108,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link Subtract }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link Subtract }
+	 * {@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "subtract")
@@ -112,7 +118,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }
+	 * {@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "addResponse")
@@ -121,7 +128,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link MultiplyResponse }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}
+	 * {@link MultiplyResponse }{@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "multiplyResponse")
@@ -130,7 +138,7 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link Divide }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link Divide }{@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "divide")
@@ -139,7 +147,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link Multiply }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link Multiply }
+	 * {@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "multiply")
@@ -148,7 +157,7 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "add")
@@ -157,7 +166,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link DivideResponse }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link DivideResponse }
+	 * {@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "divideResponse")
@@ -166,7 +176,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link SubtractResponse }{@code >}}
+	 * Create an instance of {@link JAXBElement }{@code <}
+	 * {@link SubtractResponse }{@code >}
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "subtractResponse")

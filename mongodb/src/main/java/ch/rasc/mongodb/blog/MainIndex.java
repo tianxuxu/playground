@@ -21,7 +21,7 @@ public class MainIndex {
 
 		BasicDBObject index = new BasicDBObject("username", 1);
 		collection.ensureIndex(index);
-		//collection.dropIndex(index);
+		// collection.dropIndex(index);
 
 		BasicDBObject query = new BasicDBObject();
 		query.append("username", "johnd");

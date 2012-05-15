@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ModelObject {
 	private String name;
+
 	private List<Field> fields;
 
 	public ModelObject(String name) {

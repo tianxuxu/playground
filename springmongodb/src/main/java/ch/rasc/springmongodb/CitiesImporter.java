@@ -32,7 +32,8 @@ public class CitiesImporter {
 		if (mongoOps.collectionExists(City.class)) {
 			System.out.println("DROP");
 			mongoOps.dropCollection(City.class);
-		} else {
+		}
+		else {
 			System.out.println("NO DROP");
 		}
 

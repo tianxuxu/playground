@@ -5,6 +5,7 @@ import com.google.code.morphia.annotations.Entity;
 @Entity(noClassnameStored = true)
 public class Word3 {
 	private String word;
+
 	private int count;
 
 	public String getWord() {

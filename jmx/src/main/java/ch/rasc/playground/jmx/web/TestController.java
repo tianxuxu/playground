@@ -31,7 +31,7 @@ public class TestController {
 		MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		Set<ObjectInstance> instances = mbeanServer.queryMBeans(null, null);
 		for (ObjectInstance oi : instances) {
-			//System.out.println(oi);
+			// System.out.println(oi);
 			MBeanInfo info = mbeanServer.getMBeanInfo(oi.getObjectName());
 			System.out.println(info);
 		}

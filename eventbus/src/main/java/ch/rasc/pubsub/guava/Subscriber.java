@@ -20,7 +20,8 @@ public class Subscriber {
 		System.out.println("SpecialMsgEvent: " + event.getMessage() + " User: " + event.getUser());
 		try {
 			TimeUnit.SECONDS.sleep(5);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}

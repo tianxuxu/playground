@@ -6,9 +6,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * <p>Java class for sayHiResponse complex type.
+ * <p>
+ * Java class for sayHiResponse complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="sayHiResponse">
@@ -34,10 +37,8 @@ public class SayHiResponse {
 	/**
 	 * Gets the value of the return property.
 	 * 
-	 * @return
-	 *     possible object is
-	 *     {@link String }
-	 *     
+	 * @return possible object is {@link String }
+	 * 
 	 */
 	public String getReturn() {
 		return _return;
@@ -46,10 +47,8 @@ public class SayHiResponse {
 	/**
 	 * Sets the value of the return property.
 	 * 
-	 * @param value
-	 *     allowed object is
-	 *     {@link String }
-	 *     
+	 * @param value allowed object is {@link String }
+	 * 
 	 */
 	public void setReturn(String value) {
 		this._return = value;

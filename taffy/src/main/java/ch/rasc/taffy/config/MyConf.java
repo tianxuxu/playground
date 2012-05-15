@@ -13,6 +13,5 @@ public class MyConf {
 	public void setEnv(String env) {
 		this.env = env;
 	}
-	
-	
+
 }

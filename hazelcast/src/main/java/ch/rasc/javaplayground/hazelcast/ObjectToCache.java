@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 public class ObjectToCache implements Serializable {
 	private static final long serialVersionUID = -4702483501497968870L;
+
 	private String objectName;
+
 	private String objectValue;
+
 	private Integer objectID;
 
 	public ObjectToCache() {
@@ -45,8 +48,7 @@ public class ObjectToCache implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ObjectToCache [objectID=" + objectID + ", objectName=" + objectName + ", objectValue=" + objectValue
-				+ "]";
+		return "ObjectToCache [objectID=" + objectID + ", objectName=" + objectName + ", objectValue=" + objectValue + "]";
 	}
 
 }

@@ -13,7 +13,7 @@ public class Main {
 		System.out.println("output: " + calculator.doSomething("1"));
 		System.out.println("output: " + calculator.doSomething(null));
 		System.out.println("output: " + calculator.doSomething(null));
-		
+
 		for (int i = 0; i < 20; i++) {
 			System.out.println("Calling with : " + i);
 			calculator.factorialMaxCache(i);
@@ -33,8 +33,9 @@ public class Main {
 		try {
 			System.out.println("Waiting 70 seconds");
 			TimeUnit.SECONDS.sleep(70);
-		} catch (InterruptedException e) {
-			//do nothing
+		}
+		catch (InterruptedException e) {
+			// do nothing
 		}
 		System.out.println("3rd call");
 		calculator.factorialTimedCache(10);

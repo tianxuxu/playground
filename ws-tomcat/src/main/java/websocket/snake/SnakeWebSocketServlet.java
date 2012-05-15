@@ -48,7 +48,9 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	private static final Log log = LogFactory.getLog(SnakeWebSocketServlet.class);
 
 	public static final int PLAYFIELD_WIDTH = 640;
+
 	public static final int PLAYFIELD_HEIGHT = 480;
+
 	public static final int GRID_SIZE = 10;
 
 	private static final long TICK_DELAY = 100;
@@ -58,7 +60,9 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	private final Timer gameTimer = new Timer(SnakeWebSocketServlet.class.getSimpleName() + " Timer");
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
+
 	private final ConcurrentHashMap<Integer, Snake> snakes = new ConcurrentHashMap<Integer, Snake>();
+
 	private final ConcurrentHashMap<Integer, SnakeMessageInbound> connections = new ConcurrentHashMap<Integer, SnakeMessageInbound>();
 
 	@Override
@@ -70,7 +74,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			public void run() {
 				try {
 					tick();
-				} catch (RuntimeException e) {
+				}
+				catch (RuntimeException e) {
 					log.error("Caught to prevent timer from shutting down", e);
 				}
 			}
@@ -95,7 +100,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			try {
 				CharBuffer buffer = CharBuffer.wrap(message);
 				connection.getWsOutbound().writeTextMessage(buffer);
-			} catch (IOException ignore) {
+			}
+			catch (IOException ignore) {
 				// Ignore
 			}
 		}
@@ -148,6 +154,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	private final class SnakeMessageInbound extends MessageInbound {
 
 		private final int id;
+
 		private Snake snake;
 
 		private SnakeMessageInbound(int id) {
@@ -189,11 +196,14 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			String message = charBuffer.toString();
 			if ("west".equals(message)) {
 				snake.setDirection(Direction.WEST);
-			} else if ("north".equals(message)) {
+			}
+			else if ("north".equals(message)) {
 				snake.setDirection(Direction.NORTH);
-			} else if ("east".equals(message)) {
+			}
+			else if ("east".equals(message)) {
 				snake.setDirection(Direction.EAST);
-			} else if ("south".equals(message)) {
+			}
+			else if ("south".equals(message)) {
 				snake.setDirection(Direction.SOUTH);
 			}
 		}

@@ -19,7 +19,7 @@ public class TextEmailWithAttachment {
 		email.setMsg("The swiss flag");
 
 		EmailAttachment attachment = new EmailAttachment();
-		//attachment.setURL(TextEmailWithAttachment.class.getResource("/commons-logo.png"));
+		// attachment.setURL(TextEmailWithAttachment.class.getResource("/commons-logo.png"));
 		attachment.setURL(new URL("http://www.flags.net/images/largeflags/SWIT0001.GIF"));
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		attachment.setDescription("Swiss Flag");

@@ -2,6 +2,7 @@ package ch.rasc.springplayground.equalsverifier;
 
 public class Customer {
 	private int id;
+
 	private String name;
 
 	public Customer(int id, String name) {
@@ -45,7 +46,8 @@ public class Customer {
 			if (other.name != null) {
 				return false;
 			}
-		} else if (!name.equals(other.name)) {
+		}
+		else if (!name.equals(other.name)) {
 			return false;
 		}
 		return true;

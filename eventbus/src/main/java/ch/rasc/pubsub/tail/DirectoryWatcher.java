@@ -15,7 +15,6 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
 
@@ -23,7 +22,9 @@ import com.google.common.eventbus.EventBus;
 public class DirectoryWatcher {
 
 	EventBus eventBus;
+
 	WatchService watchService;
+
 	volatile boolean watching;
 
 	@Autowired
@@ -32,7 +33,8 @@ public class DirectoryWatcher {
 		this.eventBus = eventBus;
 		try {
 			this.watchService = FileSystems.getDefault().newWatchService();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -57,7 +59,8 @@ public class DirectoryWatcher {
 							watchKey.reset();
 							eventBus.post(new PathEvents((Path) watchKey.watchable(), pathEventsBuilder.build()));
 						}
-					} catch (final InterruptedException e) {
+					}
+					catch (final InterruptedException e) {
 						watching = false;
 					}
 				}
@@ -82,7 +85,8 @@ public class DirectoryWatcher {
 				start();
 			}
 
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

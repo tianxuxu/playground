@@ -1,7 +1,6 @@
 package com.hillert.atmosphere;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -31,25 +30,24 @@ public class HomeController {
 	@ResponseBody
 	public void websockets(final Meteor m) {
 
-		//    	for (Broadcaster br : BroadcasterFactory.getDefault().lookupAll()) {
-		//			System.out.println(br);
-		//		}
+		// for (Broadcaster br : BroadcasterFactory.getDefault().lookupAll()) {
+		// System.out.println(br);
+		// }
 
 		final Broadcaster b = BroadcasterFactory.getDefault().lookup("/*");
 		m.setBroadcaster(b);
 		m.suspend(-1);
 
-
-		//        final HttpServletRequest  req = event.getRequest();
-		//        final HttpServletResponse res = event.getResponse();
+		// final HttpServletRequest req = event.getRequest();
+		// final HttpServletResponse res = event.getResponse();
 
 		final ObjectMapper mapper = new ObjectMapper();
 
-		//        event.suspend();
+		// event.suspend();
 		//
-		//        final Broadcaster bc = event.getBroadcaster();
+		// final Broadcaster bc = event.getBroadcaster();
 		//
-		
+
 		b.scheduleFixedBroadcast(new Callable<String>() {
 
 			private long sinceId = 0;
@@ -66,8 +64,8 @@ public class HomeController {
 				List<TwitterMessage> twitterMessages = new ArrayList<TwitterMessage>();
 
 				for (Tweet tweet : results.getTweets()) {
-					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet
-							.getFromUser(), tweet.getProfileImageUrl()));
+					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet.getFromUser(), tweet
+							.getProfileImageUrl()));
 				}
 
 				String s = mapper.writeValueAsString(twitterMessages);
@@ -76,7 +74,7 @@ public class HomeController {
 
 		}, 10, TimeUnit.SECONDS);
 
-		//bc.delayBroadcast("Underlying Response now suspended");
+		// bc.delayBroadcast("Underlying Response now suspended");
 
 	}
 

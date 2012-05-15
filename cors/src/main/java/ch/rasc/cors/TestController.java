@@ -18,8 +18,8 @@ public class TestController {
 	public void handleCorsPreFlight(HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST");
-		response.addHeader("Access-Control-Allow-Headers", "Content-Type");		
-		response.addHeader("Access-Control-Max-Age", "86400"); //seconds
+		response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+		response.addHeader("Access-Control-Max-Age", "86400"); // seconds
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST)

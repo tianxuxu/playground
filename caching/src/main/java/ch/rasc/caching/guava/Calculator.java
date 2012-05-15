@@ -25,7 +25,7 @@ public class Calculator {
 		System.out.println("inside doSomething");
 		return u;
 	}
-	
+
 	private BigInteger doCalculation(long n) {
 		BigInteger ret = BigInteger.ONE;
 		for (int i = 1; i <= n; ++i) {

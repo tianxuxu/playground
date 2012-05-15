@@ -24,6 +24,7 @@ import com.google.common.collect.Ordering;
 public class PropertyOrdering<T> extends Ordering<T> {
 
 	private Expression readPropertyExpression;
+
 	EvaluationContext context = new StandardEvaluationContext();
 
 	public PropertyOrdering(Expression readPropertyExpression) {

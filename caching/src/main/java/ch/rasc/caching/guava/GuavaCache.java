@@ -1,4 +1,5 @@
 package ch.rasc.caching.guava;
+
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
@@ -7,6 +8,7 @@ import com.google.common.base.Optional;
 public class GuavaCache implements Cache {
 
 	private final String name;
+
 	private final com.google.common.cache.Cache<Object, Optional<Object>> store;
 
 	public GuavaCache(String name, com.google.common.cache.Cache<Object, Optional<Object>> store) {

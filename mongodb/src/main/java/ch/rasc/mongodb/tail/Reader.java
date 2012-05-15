@@ -23,7 +23,8 @@ public class Reader {
 			createOptions.append("capped", true);
 			createOptions.append("size", 100000);
 			collection = db.createCollection("log", createOptions);
-		} else {
+		}
+		else {
 			collection = db.getCollection("log");
 		}
 

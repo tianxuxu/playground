@@ -22,8 +22,7 @@ public class Bench {
 		Random random = new Random();
 
 		for (int i = 0; i < 100000; i++) {
-			users.add(new User(RandomStringUtils.random(20, true, false), RandomStringUtils.random(20, true, true),
-					random.nextInt(99) + 1));
+			users.add(new User(RandomStringUtils.random(20, true, false), RandomStringUtils.random(20, true, true), random.nextInt(99) + 1));
 		}
 
 		Stopwatch stopWatch = new Stopwatch();

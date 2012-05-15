@@ -21,7 +21,7 @@ public class ConvertToCapped {
 			db.getCollection("log").drop();
 		}
 
-		//non capped
+		// non capped
 		collection = db.getCollection("log");
 
 		for (int j = 0; j < 10000; j++) {

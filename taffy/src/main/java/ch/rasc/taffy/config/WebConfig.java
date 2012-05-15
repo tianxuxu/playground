@@ -1,6 +1,5 @@
 package ch.rasc.taffy.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,10 +25,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public Twitter twitter() {
 		return new TwitterTemplate();
 	}
-	
-//	@Autowired
-//	public void setup(MyConf myConf) {
-//		myConf.setEnv("from javaconf");
-//	}
+
+	// @Autowired
+	// public void setup(MyConf myConf) {
+	// myConf.setEnv("from javaconf");
+	// }
 
 }

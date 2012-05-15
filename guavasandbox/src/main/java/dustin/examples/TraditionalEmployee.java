@@ -2,8 +2,8 @@ package dustin.examples;
 
 /**
  * Simple employee class using NetBeans-generated 'common' methods
- * implementations that are typical of many such implementations created
- * without Guava or other library.
+ * implementations that are typical of many such implementations created without
+ * Guava or other library.
  * 
  * @author Dustin
  */
@@ -13,8 +13,11 @@ public class TraditionalEmployee {
 	};
 
 	private final String lastName;
+
 	private final String firstName;
+
 	private final String employerName;
+
 	private final Gender gender;
 
 	/**
@@ -25,8 +28,7 @@ public class TraditionalEmployee {
 	 * @param newEmployerName The employer name my instance will have.
 	 * @param newGender The gender of my instance.
 	 */
-	public TraditionalEmployee(final String newLastName, final String newFirstName, final String newEmployerName,
-			final Gender newGender) {
+	public TraditionalEmployee(final String newLastName, final String newFirstName, final String newEmployerName, final Gender newGender) {
 		this.lastName = newLastName;
 		this.firstName = newFirstName;
 		this.employerName = newEmployerName;
@@ -50,11 +52,12 @@ public class TraditionalEmployee {
 	}
 
 	/**
-	 * NetBeans-generated method that compares provided object to me for equality.
+	 * NetBeans-generated method that compares provided object to me for
+	 * equality.
 	 * 
 	 * @param obj Object to be compared to me for equality.
 	 * @return {@code true} if provided object is considered equal to me or
-	 *    {@code false} if provided object is not considered equal to me.
+	 * {@code false} if provided object is not considered equal to me.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -81,7 +84,8 @@ public class TraditionalEmployee {
 	}
 
 	/**
-	 * NetBeans-generated method that provides hash code of this employee instance.
+	 * NetBeans-generated method that provides hash code of this employee
+	 * instance.
 	 * 
 	 * @return My hash code.
 	 */
@@ -103,7 +107,7 @@ public class TraditionalEmployee {
 	 */
 	@Override
 	public String toString() {
-		return "TraditionalEmployee{" + "lastName=" + lastName + ", firstName=" + firstName + ", employerName="
-				+ employerName + ", gender=" + gender + '}';
+		return "TraditionalEmployee{" + "lastName=" + lastName + ", firstName=" + firstName + ", employerName=" + employerName
+				+ ", gender=" + gender + '}';
 	}
 }

@@ -16,7 +16,7 @@ public class MainInsert {
 
 	public static void main(String[] args) throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("localhost");
-		//Mongo mongo = new Mongo("localhost", 10000);
+		// Mongo mongo = new Mongo("localhost", 10000);
 
 		DB db = mongo.getDB("testdb");
 		db.setWriteConcern(WriteConcern.SAFE);
@@ -24,9 +24,9 @@ public class MainInsert {
 		DBCollection collection = db.getCollection("users");
 		collection.setWriteConcern(WriteConcern.SAFE);
 
-		//		Map<String,Object> userm = new HashMap<String,Object>();
-		//		userm.put("username", "johnd");
-		//		DBObject user = new BasicDBObject(userm);		
+		// Map<String,Object> userm = new HashMap<String,Object>();
+		// userm.put("username", "johnd");
+		// DBObject user = new BasicDBObject(userm);
 
 		BasicDBObject user = new BasicDBObject("username", "johnd");
 		user.append("_id", 1);
@@ -39,15 +39,15 @@ public class MainInsert {
 
 		System.out.println(user);
 		WriteResult wr = collection.insert(user);
-		//collection.insert(user, WriteConcern.SAFE);
+		// collection.insert(user, WriteConcern.SAFE);
 		CommandResult lastError = wr.getLastError();
 		System.out.println(lastError);
-		//System.out.println(user);
+		// System.out.println(user);
 		System.out.println(wr);
 
-		//		List<DBObject> users = new ArrayList<DBObject>();
-		//		users.add(user);
-		//		collection.insert(users);		
+		// List<DBObject> users = new ArrayList<DBObject>();
+		// users.add(user);
+		// collection.insert(users);
 
 		user = new BasicDBObject("username", "francol");
 		user.append("firstName", "Franco");

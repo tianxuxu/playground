@@ -55,35 +55,40 @@ public class GuavaPreconditionsDemo {
 		printHeader("Preconditions.checkNotNull");
 		try {
 			me.testForNonNullArgument(null);
-		} catch (NullPointerException npe) {
+		}
+		catch (NullPointerException npe) {
 			npe.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkArgument");
 		try {
 			me.testDivisorNotZero(0);
-		} catch (IllegalArgumentException illArgEx) {
+		}
+		catch (IllegalArgumentException illArgEx) {
 			illArgEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkElementIndex");
 		try {
 			me.testArrayElement(new String[] { "Dustin", "Java" }, 3);
-		} catch (IndexOutOfBoundsException ioobEx) {
+		}
+		catch (IndexOutOfBoundsException ioobEx) {
 			ioobEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkPositionIndex");
 		try {
 			me.testArrayPosition(new String[] { "Dustin", "Java" }, 3);
-		} catch (IndexOutOfBoundsException ioobEx) {
+		}
+		catch (IndexOutOfBoundsException ioobEx) {
 			ioobEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkState");
 		try {
 			me.testState();
-		} catch (IllegalStateException illStateEx) {
+		}
+		catch (IllegalStateException illStateEx) {
 			illStateEx.printStackTrace();
 		}
 	}

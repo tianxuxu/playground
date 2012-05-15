@@ -20,7 +20,7 @@ public class Main {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class);
-		//ctx.scan("ch.rasc.config");  
+		// ctx.scan("ch.rasc.config");
 		ctx.refresh();
 
 		System.out.println(ctx);

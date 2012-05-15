@@ -8,7 +8,7 @@ import com.google.code.morphia.annotations.Indexed;
 import com.google.code.morphia.utils.IndexDirection;
 
 @Entity(noClassnameStored = true)
-//@Indexes({ @Index("startIpNum,endIpNum") })
+// @Indexes({ @Index("startIpNum,endIpNum") })
 public class Geolite {
 
 	@Id
@@ -16,14 +16,23 @@ public class Geolite {
 
 	@Indexed(unique = true, value = IndexDirection.DESC)
 	private long startIpNum;
+
 	private long endIpNum;
+
 	private String country;
+
 	private String region;
+
 	private String city;
+
 	private String postalCode;
+
 	private double latitude;
+
 	private double longitude;
+
 	private String metroCode;
+
 	private String areaCode;
 
 	public long getStartIpNum() {
@@ -116,9 +125,9 @@ public class Geolite {
 
 	@Override
 	public String toString() {
-		return "Geolite [id=" + id + ", startIpNum=" + startIpNum + ", endIpNum=" + endIpNum + ", country=" + country
-				+ ", region=" + region + ", city=" + city + ", postalCode=" + postalCode + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", metroCode=" + metroCode + ", areaCode=" + areaCode + "]";
+		return "Geolite [id=" + id + ", startIpNum=" + startIpNum + ", endIpNum=" + endIpNum + ", country=" + country + ", region="
+				+ region + ", city=" + city + ", postalCode=" + postalCode + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", metroCode=" + metroCode + ", areaCode=" + areaCode + "]";
 	}
 
 }

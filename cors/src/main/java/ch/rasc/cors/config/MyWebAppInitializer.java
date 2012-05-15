@@ -18,20 +18,17 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
 		container.addListener(new ContextLoaderListener(rootContext));
 
-		final DispatcherServlet dispatcherServlet = new DispatcherServlet(
-				new GenericWebApplicationContext());
-		
+		final DispatcherServlet dispatcherServlet = new DispatcherServlet(new GenericWebApplicationContext());
+
 		dispatcherServlet.setDispatchOptionsRequest(true);
-		/*		
-		 * <init-param>
-      <param-name>dispatchOptionsRequest</param-name>
-      <param-value>true</param-value>
-    </init-param> 
+		/*
+		 * <init-param> <param-name>dispatchOptionsRequest</param-name>
+		 * <param-value>true</param-value> </init-param>
 		 */
-		
+
 		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
 		dispatcher.setLoadOnStartup(1);
-		
+
 		dispatcher.addMapping("/action/*");
 	}
 }

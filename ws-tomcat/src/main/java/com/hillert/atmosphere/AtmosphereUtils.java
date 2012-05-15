@@ -7,13 +7,12 @@ import org.atmosphere.cpr.Meteor;
 
 public final class AtmosphereUtils {
 
+	public static AtmosphereResource getAtmosphereResource(HttpServletRequest request) {
+		return getMeteor(request).getAtmosphereResource();
+	}
 
-    public static AtmosphereResource getAtmosphereResource(HttpServletRequest request) {
-        return getMeteor(request).getAtmosphereResource();
-    }
-
-    public static Meteor getMeteor(HttpServletRequest request) {
-        return Meteor.build(request);
-    }
+	public static Meteor getMeteor(HttpServletRequest request) {
+		return Meteor.build(request);
+	}
 
 }

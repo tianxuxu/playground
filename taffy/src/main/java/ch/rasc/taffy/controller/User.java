@@ -6,25 +6,31 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class User {
-	
+
 	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat.forPattern("dd/MM/yyyy");
-	
+
 	private int id;
+
 	private String name;
+
 	private String surname;
+
 	private String email;
+
 	private LocalDate birthday;
+
 	private String city;
+
 	private String country;
 
 	public User(String[] line) {
 		this.id = Integer.valueOf(line[0]);
 		this.name = line[1];
 		this.surname = line[2];
-		this.email =  line[3];
+		this.email = line[3];
 		this.birthday = LocalDate.parse(line[4], BIRTHDAY_FORMATTER);
 		this.city = line[5];
-		this.country = line[6];		
+		this.country = line[6];
 	}
 
 	public int getId() {
@@ -43,7 +49,7 @@ public class User {
 		return email;
 	}
 
-	@JsonSerialize(using=BirthdaySerializer.class)
+	@JsonSerialize(using = BirthdaySerializer.class)
 	public LocalDate getBirthday() {
 		return birthday;
 	}

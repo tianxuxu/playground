@@ -46,7 +46,7 @@ public class GuavaCollections2 {
 	}
 
 	/**
-	 * Demonstrate Guava's Collections2.filter method. Filter String beginning 
+	 * Demonstrate Guava's Collections2.filter method. Filter String beginning
 	 * with letter 'J'.
 	 */
 	public static void demonstrateFilter() {
@@ -66,8 +66,7 @@ public class GuavaCollections2 {
 		printHeader("Collections2.transform(Collection,Function): Uppercase");
 		final Set<String> strings = buildSetStrings();
 		out.println("\nOriginal Strings (pre-transform):\n\t" + strings);
-		final Collection<String> transformedStrings = Collections2.transform(strings,
-				new UpperCaseFunction<String, String>());
+		final Collection<String> transformedStrings = Collections2.transform(strings, new UpperCaseFunction<String, String>());
 		out.println("\nTransformed Strings:\n\t" + transformedStrings);
 		out.println("\nOriginal Strings (post-transform):\n\t" + strings);
 	}
@@ -86,7 +85,7 @@ public class GuavaCollections2 {
 	/**
 	 * Main function for demonstrating Guava's Collections2 class.
 	 * 
-	 * @param arguments 
+	 * @param arguments
 	 */
 	public static void main(final String[] arguments) {
 		demonstrateFilter();

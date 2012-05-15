@@ -20,14 +20,16 @@ public class StopWatchDemo {
 		for (int count = 0; count < numberOfTimesToDoNothing; count++) {
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
-			} catch (InterruptedException interruptEx) {
+			}
+			catch (InterruptedException interruptEx) {
 				LOGGER.log(Level.INFO, "Don't interrupt me when I'm trying to sleep!", interruptEx);
 			}
 		}
 	}
 
 	/**
-	 * Print statistics on Stopwatch-reported times for provided number of loops.
+	 * Print statistics on Stopwatch-reported times for provided number of
+	 * loops.
 	 * 
 	 * @param numberLoops Number of loops executed.
 	 * @param stopwatch Stopwatch instance with time used statistics.
@@ -35,7 +37,8 @@ public class StopWatchDemo {
 	public static void printElapsedTime(final int numberLoops, final Stopwatch stopwatch) {
 		if (stopwatch.isRunning()) {
 			out.println("WARNING! Your stopwatch is still running!");
-		} else // stopwatch not running
+		}
+		else // stopwatch not running
 		{
 			out.println(numberLoops + " loops required: ");
 			out.println("\t" + stopwatch.toString(6));

@@ -34,37 +34,40 @@ public class MorphiaTextImporter implements TextImporter {
 		for (int i = 0; i < words.size() - 3; i++) {
 			String w1 = words.get(i);
 			String w2 = words.get(i + 1);
-			//String w3 = words.get(i + 2);
+			// String w3 = words.get(i + 2);
 
 			// Upsert base document. If exists increment count, otherwise insert
-			// document      
+			// document
 			Query<Word12> query = datastore.createQuery(Word12.class);
 			query.field("word1").equal(w1);
 			query.field("word2").equal(w2);
 			UpdateOperations<Word12> op = datastore.createUpdateOperations(Word12.class).inc("count");
 			datastore.update(query, op, true);
 
-			//      // update count in embedded document
-			//      query = new BasicDBObject();
-			//      query.append("word1", w1);
-			//      query.append("word2", w2);
-			//      query.append("word3.word", w3);
-			//      update = new BasicDBObject("$inc", new BasicDBObject("word3.$.count", 1));
+			// // update count in embedded document
+			// query = new BasicDBObject();
+			// query.append("word1", w1);
+			// query.append("word2", w2);
+			// query.append("word3.word", w3);
+			// update = new BasicDBObject("$inc", new
+			// BasicDBObject("word3.$.count", 1));
 			//
-			//      WriteResult result = collection.update(query, update, false, false);
-			//      if (result.getN() == 0) {
+			// WriteResult result = collection.update(query, update, false,
+			// false);
+			// if (result.getN() == 0) {
 			//
-			//        // add embedded word3 document to the array
-			//        query = new BasicDBObject();
-			//        query.append("word1", w1);
-			//        query.append("word2", w2);
+			// // add embedded word3 document to the array
+			// query = new BasicDBObject();
+			// query.append("word1", w1);
+			// query.append("word2", w2);
 			//
-			//        BasicDBObject word3 = new BasicDBObject();
-			//        word3.append("word", w3);
-			//        word3.append("count", 1);
+			// BasicDBObject word3 = new BasicDBObject();
+			// word3.append("word", w3);
+			// word3.append("count", 1);
 			//
-			//        collection.update(query, new BasicDBObject("$push", new BasicDBObject("word3", word3)));
-			//      }
+			// collection.update(query, new BasicDBObject("$push", new
+			// BasicDBObject("word3", word3)));
+			// }
 
 		}
 

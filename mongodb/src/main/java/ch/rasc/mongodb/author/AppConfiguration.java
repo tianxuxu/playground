@@ -20,15 +20,15 @@ import com.mongodb.WriteConcern;
 @Configuration
 public class AppConfiguration {
 
-	//Documents: 258'552 43.9 MB
+	// Documents: 258'552 43.9 MB
 
 	@Bean(destroyMethod = "close")
 	public Mongo mongo() throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("localhost");
-		//mongo.setWriteConcern(WriteConcern.NONE); //184 sec
-		//mongo.setWriteConcern(WriteConcern.NORMAL); //184 sec
-		mongo.setWriteConcern(WriteConcern.SAFE); //279 sec
-		//mongo.setWriteConcern(WriteConcern.FSYNC_SAFE);
+		// mongo.setWriteConcern(WriteConcern.NONE); //184 sec
+		// mongo.setWriteConcern(WriteConcern.NORMAL); //184 sec
+		mongo.setWriteConcern(WriteConcern.SAFE); // 279 sec
+		// mongo.setWriteConcern(WriteConcern.FSYNC_SAFE);
 
 		return mongo;
 	}
@@ -56,13 +56,13 @@ public class AppConfiguration {
 	@Bean
 	public Author author() {
 		return new RawAuthor();
-		//return new MorphiaAuthor();
+		// return new MorphiaAuthor();
 	}
 
 	@Bean
 	public TextImporter textImporter() {
 		return new RawTextImporter();
-		//return new MorphiaTextImporter();
+		// return new MorphiaTextImporter();
 	}
 
 }

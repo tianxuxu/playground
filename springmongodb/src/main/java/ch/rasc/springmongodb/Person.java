@@ -2,7 +2,9 @@ package ch.rasc.springmongodb;
 
 public class Person {
 	private String id;
+
 	private String name;
+
 	private int age;
 
 	public Person(String name, int age) {

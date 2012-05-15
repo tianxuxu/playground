@@ -5,9 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * <p>Java class for subtract complex type.
+ * <p>
+ * Java class for subtract complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="subtract">
@@ -29,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Subtract {
 
 	protected int arg0;
+
 	protected int arg1;
 
 	/**

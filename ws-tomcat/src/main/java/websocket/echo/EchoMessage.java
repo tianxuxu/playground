@@ -29,7 +29,9 @@ import org.apache.catalina.websocket.WebSocketServlet;
 public class EchoMessage extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;
+
 	private volatile int byteBufSize;
+
 	private volatile int charBufSize;
 
 	@Override
@@ -44,8 +46,9 @@ public class EchoMessage extends WebSocketServlet {
 		int result = defaultValue;
 		try {
 			result = Integer.parseInt(val);
-		} catch (Exception x) {
-			//nothing here
+		}
+		catch (Exception x) {
+			// nothing here
 		}
 		return result;
 	}

@@ -13,20 +13,20 @@ public class FindIp {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.geolite");
 		Datastore datastore = ctx.getBean(Datastore.class);
 
-		//long myIp = 16777216l * 188 + 65536l * 61 + 256l * 140l + 26;
-		long firstIp = 16777217; //first document
-		long lastIp = 3758095359l; //last document
+		// long myIp = 16777216l * 188 + 65536l * 61 + 256l * 140l + 26;
+		long firstIp = 16777217; // first document
+		long lastIp = 3758095359l; // last document
 		long testIp = 1275328930;
 
-		//first document
+		// first document
 		System.out.print("First document: ");
 		find(datastore, firstIp);
 
-		//last document
+		// last document
 		System.out.print("Last document: ");
 		find(datastore, lastIp);
 
-		//test document
+		// test document
 		System.out.print("Test document: ");
 		find(datastore, testIp);
 

@@ -10,7 +10,8 @@ public class Main {
 			Model m = field.getAnnotation(Model.class);
 			if (m != null) {
 				System.out.println(m.value());
-			} else {
+			}
+			else {
 				System.out.println("no annotation");
 			}
 		}

@@ -15,7 +15,7 @@ public class MainSelect {
 
 	public static void main(String[] args) throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("localhost");
-		//Mongo mongo = new Mongo("localhost", 10000);
+		// Mongo mongo = new Mongo("localhost", 10000);
 
 		DB db = mongo.getDB("testdb");
 

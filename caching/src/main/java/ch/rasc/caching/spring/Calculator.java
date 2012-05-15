@@ -40,11 +40,11 @@ public class Calculator {
 
 	@CacheEvict(value = { "calculator", "anotherCache" }, allEntries = true)
 	public void clearCache() {
-		//nothing here
+		// nothing here
 	}
 
 	@CacheEvict(value = "calculator", key = "#n")
 	public void clearCache(long n) {
-		//nothing here
+		// nothing here
 	}
 }

@@ -30,10 +30,10 @@ public class Main3 {
 		dbObj.append("age", 40);
 		collection.save(dbObj);
 
-		//		DBCursor cursor = collection.find();
-		//		while(cursor.hasNext()) {
-		//			System.out.println(cursor.next());
-		//		}
+		// DBCursor cursor = collection.find();
+		// while(cursor.hasNext()) {
+		// System.out.println(cursor.next());
+		// }
 
 		BasicDBObject query = new BasicDBObject("last_name", "smith");
 		BasicDBObject update = new BasicDBObject("$set", new BasicDBObject("city", "Chicago"));
@@ -49,32 +49,32 @@ public class Main3 {
 		mongo.close();
 	}
 
-	//	private static void simpleFile() throws MongoException, IOException {
-	//		
+	// private static void simpleFile() throws MongoException, IOException {
 	//
-	//		
 	//
-	//		long start = System.currentTimeMillis();
-	//		for (int i = 0; i < 100000; i++) {
-	//			BasicDBObject dbObj = new BasicDBObject("myKey", "aValue");
-	//			collection.insert(dbObj);
-	//		}
-	//		CommandResult cr = db.getLastError(WriteConcern.FSYNC_SAFE);
-	//		System.out.println(cr);
-	//		
-	//		BasicDBObject sync = new BasicDBObject("fsync", 1);
-	//		cr = mongo.getDB("admin").command(sync);
-	//		System.out.println(cr);
-	//		sync = new BasicDBObject("fsync", 1).append("async", true);
-	//		cr = mongo.getDB("admin").command(sync);
-	//		System.out.println(cr);
-	//		Double success = (Double)cr.get("ok");
-	//		System.out.println(success);
-	//		
-	//		long duration = System.currentTimeMillis() - start;
-	//		System.out.println(duration + " ms");
 	//
-	//		
-	//	}
+	//
+	// long start = System.currentTimeMillis();
+	// for (int i = 0; i < 100000; i++) {
+	// BasicDBObject dbObj = new BasicDBObject("myKey", "aValue");
+	// collection.insert(dbObj);
+	// }
+	// CommandResult cr = db.getLastError(WriteConcern.FSYNC_SAFE);
+	// System.out.println(cr);
+	//
+	// BasicDBObject sync = new BasicDBObject("fsync", 1);
+	// cr = mongo.getDB("admin").command(sync);
+	// System.out.println(cr);
+	// sync = new BasicDBObject("fsync", 1).append("async", true);
+	// cr = mongo.getDB("admin").command(sync);
+	// System.out.println(cr);
+	// Double success = (Double)cr.get("ok");
+	// System.out.println(success);
+	//
+	// long duration = System.currentTimeMillis() - start;
+	// System.out.println(duration + " ms");
+	//
+	//
+	// }
 
 }

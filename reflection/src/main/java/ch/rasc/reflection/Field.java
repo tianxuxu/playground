@@ -2,6 +2,7 @@ package ch.rasc.reflection;
 
 public class Field {
 	private String name;
+
 	private String type;
 
 	public Field(String name, String type) {

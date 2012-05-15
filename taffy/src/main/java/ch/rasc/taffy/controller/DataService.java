@@ -25,9 +25,8 @@ public class DataService {
 	public void readData() throws IOException {
 
 		Path tempFile = Files.createTempFile("random", "zip");
-		Files.copy(DataService.class.getResourceAsStream("/randomdata.zip"), tempFile,
-				StandardCopyOption.REPLACE_EXISTING);
-		
+		Files.copy(DataService.class.getResourceAsStream("/randomdata.zip"), tempFile, StandardCopyOption.REPLACE_EXISTING);
+
 		ImmutableList.Builder<User> listBuilder = ImmutableList.builder();
 
 		try (FileSystem zipFs = FileSystems.newFileSystem(tempFile, null)) {
@@ -38,7 +37,7 @@ public class DataService {
 			while ((line = reader.readNext()) != null) {
 				listBuilder.add(new User(line));
 			}
-			reader.close();			
+			reader.close();
 		}
 		Files.delete(tempFile);
 

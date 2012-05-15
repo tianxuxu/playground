@@ -27,27 +27,27 @@ public class Generator {
 		sb.append(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(configObject).replace("\"", "'"));
 
 		sb.append(");");
-		//		
-		//		
-		//		
-		//		sb.append("\n");
-		//		sb.append("\textend: 'Ext.data.Model',\n");
-		//		sb.append("\tfields: [\n");
-		//		
-		//		int fieldsSize = model.getFields().size();
-		//		for (int i = 0; i < fieldsSize; i++) {
-		//			Field field = model.getFields().get(i);
-		//			sb.append("\t\t{name: '").append(field.getName()).append("',  type: '").append(field.getType()).append("'}");
-		//			
-		//			if (i+1 < fieldsSize) {
-		//				sb.append(",");
-		//			}
-		//			sb.append("\n");
-		//			
-		//		}
-		//		
-		//		sb.append("\t]\n");
-		//		sb.append("});\n");
+		//
+		//
+		//
+		// sb.append("\n");
+		// sb.append("\textend: 'Ext.data.Model',\n");
+		// sb.append("\tfields: [\n");
+		//
+		// int fieldsSize = model.getFields().size();
+		// for (int i = 0; i < fieldsSize; i++) {
+		// Field field = model.getFields().get(i);
+		// sb.append("\t\t{name: '").append(field.getName()).append("',  type: '").append(field.getType()).append("'}");
+		//
+		// if (i+1 < fieldsSize) {
+		// sb.append(",");
+		// }
+		// sb.append("\n");
+		//
+		// }
+		//
+		// sb.append("\t]\n");
+		// sb.append("});\n");
 
 		return sb.toString();
 

@@ -15,8 +15,8 @@ public class SpringConfig {
 
 	@Bean
 	public EventBus eventBus() {
-//		EventBus eventBus = new EventBus();
-//		return eventBus;
+		// EventBus eventBus = new EventBus();
+		// return eventBus;
 
 		AsyncEventBus asyncEventBus = new AsyncEventBus(Executors.newFixedThreadPool(10));
 		return asyncEventBus;
