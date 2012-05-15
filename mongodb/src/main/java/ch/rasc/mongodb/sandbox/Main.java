@@ -49,8 +49,7 @@ public class Main {
 
 			try {
 				row.put("dob", df.parse(dateOfBirth));
-			}
-			catch (ParseException e) {
+			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 

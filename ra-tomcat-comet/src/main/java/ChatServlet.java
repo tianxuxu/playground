@@ -35,15 +35,13 @@ public final class ChatServlet extends HttpServlet implements CometProcessor {
 			if ("GET".equals(request.getMethod())) {
 				evt.setTimeout(Integer.MAX_VALUE);
 				events.offer(evt);
-			}
-			else {
+			} else {
 				String message = request.getParameter("message");
 				if ("/disconnect".equals(message)) {
 					broadcast(user + " disconnected");
 					request.getSession().removeAttribute("user");
 					events.remove(evt);
-				}
-				else if (message != null) {
+				} else if (message != null) {
 					broadcast("[" + user + "]" + message);
 				}
 				evt.close();

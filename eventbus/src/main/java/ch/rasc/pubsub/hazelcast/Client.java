@@ -23,8 +23,7 @@ public class Client {
 			ctx.getBean(ShortMessageSender.class).send("msg:" + i + ":" + new Date());
 			try {
 				TimeUnit.SECONDS.sleep(10);
-			}
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

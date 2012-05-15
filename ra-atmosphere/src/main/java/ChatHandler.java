@@ -30,14 +30,12 @@ public final class ChatHandler implements AtmosphereHandler {
 		if (user != null) {
 			if ("GET".equals(req.getMethod())) {
 				resource.suspend(-1, false);
-			}
-			else if ("POST".equals(req.getMethod())) {
+			} else if ("POST".equals(req.getMethod())) {
 				String cmd = req.getParameter("cmd");
 				String message = req.getParameter("message");
 				if ("disconnect".equals(cmd)) {
 					close(resource);
-				}
-				else if (message != null && message.trim().length() > 0) {
+				} else if (message != null && message.trim().length() > 0) {
 					broadcaster.broadcast("[" + user + "] " + message);
 				}
 			}
@@ -59,8 +57,7 @@ public final class ChatHandler implements AtmosphereHandler {
 				writer.write(message);
 				writer.flush();
 			}
-		}
-		finally {
+		} finally {
 			if (!event.isResumedOnTimeout()) {
 				event.getResource().resume();
 			}

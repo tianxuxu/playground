@@ -74,8 +74,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			public void run() {
 				try {
 					tick();
-				}
-				catch (RuntimeException e) {
+				} catch (RuntimeException e) {
 					log.error("Caught to prevent timer from shutting down", e);
 				}
 			}
@@ -100,8 +99,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			try {
 				CharBuffer buffer = CharBuffer.wrap(message);
 				connection.getWsOutbound().writeTextMessage(buffer);
-			}
-			catch (IOException ignore) {
+			} catch (IOException ignore) {
 				// Ignore
 			}
 		}
@@ -196,14 +194,11 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			String message = charBuffer.toString();
 			if ("west".equals(message)) {
 				snake.setDirection(Direction.WEST);
-			}
-			else if ("north".equals(message)) {
+			} else if ("north".equals(message)) {
 				snake.setDirection(Direction.NORTH);
-			}
-			else if ("east".equals(message)) {
+			} else if ("east".equals(message)) {
 				snake.setDirection(Direction.EAST);
-			}
-			else if ("south".equals(message)) {
+			} else if ("south".equals(message)) {
 				snake.setDirection(Direction.SOUTH);
 			}
 		}

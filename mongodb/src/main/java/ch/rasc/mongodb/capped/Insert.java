@@ -26,8 +26,7 @@ public class Insert {
 			createOptions.append("capped", true);
 			createOptions.append("size", 1000);
 			collection = db.createCollection("log", createOptions);
-		}
-		else {
+		} else {
 			collection = db.getCollection("log");
 		}
 

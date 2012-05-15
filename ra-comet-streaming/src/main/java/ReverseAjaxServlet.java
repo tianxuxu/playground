@@ -41,11 +41,9 @@ public final class ReverseAjaxServlet extends HttpServlet {
 						peer.getOutputStream().println("--" + boundary);
 						peer.flushBuffer();
 					}
-				}
-				catch (InterruptedException e) {
+				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					throw new RuntimeException(e.getMessage(), e);
 				}
 			}

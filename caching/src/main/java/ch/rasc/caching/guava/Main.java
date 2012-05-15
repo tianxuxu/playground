@@ -33,8 +33,7 @@ public class Main {
 		try {
 			System.out.println("Waiting 70 seconds");
 			TimeUnit.SECONDS.sleep(70);
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			// do nothing
 		}
 		System.out.println("3rd call");

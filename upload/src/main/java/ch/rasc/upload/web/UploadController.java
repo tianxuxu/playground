@@ -29,8 +29,7 @@ public class UploadController {
 		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
 			// do not upload chunk again
 			response.setStatus(200);
-		}
-		else {
+		} else {
 			// chunk not on the server, upload it
 			response.setStatus(404);
 		}

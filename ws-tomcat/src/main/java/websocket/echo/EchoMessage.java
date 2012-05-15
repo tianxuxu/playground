@@ -46,8 +46,7 @@ public class EchoMessage extends WebSocketServlet {
 		int result = defaultValue;
 		try {
 			result = Integer.parseInt(val);
-		}
-		catch (Exception x) {
+		} catch (Exception x) {
 			// nothing here
 		}
 		return result;

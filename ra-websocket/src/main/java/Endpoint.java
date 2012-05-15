@@ -30,14 +30,11 @@ class Endpoint implements OnTextMessage {
 		this.connection = conn;
 		try {
 			send(mapper.writeValueAsString(new String[] { "ClientID = " + clientId }));
-		}
-		catch (JsonGenerationException e) {
+		} catch (JsonGenerationException e) {
 			e.printStackTrace();
-		}
-		catch (JsonMappingException e) {
+		} catch (JsonMappingException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		endpoints.offer(this);
@@ -48,8 +45,7 @@ class Endpoint implements OnTextMessage {
 			if (connection != null && connection.isOpen()) {
 				connection.sendMessage(data);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			connection.disconnect();
 		}
 	}
@@ -66,14 +62,11 @@ class Endpoint implements OnTextMessage {
 		System.out.println("onMessage");
 		try {
 			endpoints.broadcast(mapper.writeValueAsString(new String[] { "From " + clientId + " : " + data }));
-		}
-		catch (JsonGenerationException e) {
+		} catch (JsonGenerationException e) {
 			e.printStackTrace();
-		}
-		catch (JsonMappingException e) {
+		} catch (JsonMappingException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

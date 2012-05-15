@@ -33,8 +33,7 @@ public class DirectoryWatcher {
 		this.eventBus = eventBus;
 		try {
 			this.watchService = FileSystems.getDefault().newWatchService();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -59,8 +58,7 @@ public class DirectoryWatcher {
 							watchKey.reset();
 							eventBus.post(new PathEvents((Path) watchKey.watchable(), pathEventsBuilder.build()));
 						}
-					}
-					catch (final InterruptedException e) {
+					} catch (final InterruptedException e) {
 						watching = false;
 					}
 				}
@@ -85,8 +83,7 @@ public class DirectoryWatcher {
 				start();
 			}
 
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

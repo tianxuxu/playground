@@ -20,11 +20,9 @@ public final class LoginServlet extends HttpServlet {
 		String user = req.getParameter("user");
 		if (user == null && existingUser == null) {
 			resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		}
-		else if (existingUser != null && !existingUser.equals(user)) {
+		} else if (existingUser != null && !existingUser.equals(user)) {
 			resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		}
-		else if (user != null && existingUser == null) {
+		} else if (user != null && existingUser == null) {
 			session.setAttribute("user", user);
 			BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true)
 					.broadcast(user + " connected !");

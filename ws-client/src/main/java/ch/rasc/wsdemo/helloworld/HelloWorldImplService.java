@@ -28,8 +28,7 @@ public class HelloWorldImplService extends Service {
 			URL baseUrl;
 			baseUrl = ch.rasc.wsdemo.helloworld.HelloWorldImplService.class.getResource(".");
 			url = new URL(baseUrl, "http://localhost:8080/cxf/HelloWorld?wsdl");
-		}
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/cxf/HelloWorld?wsdl', retrying as a local file");
 			logger.warning(e.getMessage());
 		}

@@ -88,8 +88,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 				try {
 					CharBuffer buffer = CharBuffer.wrap(message);
 					connection.getWsOutbound().writeTextMessage(buffer);
-				}
-				catch (IOException ignore) {
+				} catch (IOException ignore) {
 					// Ignore
 				}
 			}

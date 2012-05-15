@@ -45,8 +45,7 @@ class Endpoint implements SocketIOInbound {
 	public void onMessage(int messageType, String message) {
 		if ("/disconnect".equals(message)) {
 			outbound.close();
-		}
-		else {
+		} else {
 			servlet.broadcast("[" + user + "] " + message);
 		}
 	}
@@ -56,8 +55,7 @@ class Endpoint implements SocketIOInbound {
 			if (outbound != null && outbound.getConnectionState() == ConnectionState.CONNECTED) {
 				outbound.sendMessage(data);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			outbound.close();
 		}
 	}

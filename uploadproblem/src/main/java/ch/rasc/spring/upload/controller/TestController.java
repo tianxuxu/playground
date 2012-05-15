@@ -66,8 +66,7 @@ public class TestController {
 			System.out.println();
 			if (!isGetHeaderCaseInsensitive) {
 				System.out.println("   part.getHeader is NOT case insensitive");
-			}
-			else {
+			} else {
 				System.out.println("   part.getHeader IS case insensitive");
 			}
 

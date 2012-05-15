@@ -32,8 +32,7 @@ public final class PiggybackServlet extends HttpServlet {
 			while (!Thread.currentThread().isInterrupted()) {
 				try {
 					Thread.sleep(random.nextInt(5000));
-				}
-				catch (InterruptedException e) {
+				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
 				messages.offer("At " + new Date());

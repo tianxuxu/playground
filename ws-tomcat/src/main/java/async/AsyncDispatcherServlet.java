@@ -60,8 +60,7 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 					AsyncDispatcherServlet.super.doDispatch(request, response);
 					log.debug("doDispatch returned from processing request " + request);
 					ac.complete();
-				}
-				catch (Exception ex) {
+				} catch (Exception ex) {
 					log.error("Error in async request", ex);
 				}
 				return null;
@@ -115,11 +114,9 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 				writer = response.getWriter();
 				writer.print(message);
 				writer.flush();
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				log.error("handleTimeoutOrError", ex);
-			}
-			finally {
+			} finally {
 				event.getAsyncContext().complete();
 				if (writer != null) {
 					writer.close();

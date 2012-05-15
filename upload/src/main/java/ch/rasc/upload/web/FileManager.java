@@ -19,8 +19,7 @@ public class FileManager {
 
 		try {
 			Files.createDirectories(dataDir);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -42,8 +41,7 @@ public class FileManager {
 		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Files.copy(inputStream, chunkFile, StandardCopyOption.REPLACE_EXISTING);

@@ -61,8 +61,7 @@ public class Snake {
 		try {
 			CharBuffer response = CharBuffer.wrap("{'type': 'dead'}");
 			outbound.writeTextMessage(response);
-		}
-		catch (IOException ioe) {
+		} catch (IOException ioe) {
 			// Ignore
 		}
 	}
@@ -72,8 +71,7 @@ public class Snake {
 		try {
 			CharBuffer response = CharBuffer.wrap("{'type': 'kill'}");
 			outbound.writeTextMessage(response);
-		}
-		catch (IOException ioe) {
+		} catch (IOException ioe) {
 			// Ignore
 		}
 	}

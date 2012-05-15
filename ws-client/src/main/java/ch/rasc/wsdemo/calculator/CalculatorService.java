@@ -28,8 +28,7 @@ public class CalculatorService extends Service {
 			URL baseUrl;
 			baseUrl = ch.rasc.wsdemo.calculator.CalculatorService.class.getResource(".");
 			url = new URL(baseUrl, "http://localhost:8080/cxf/Calculator?wsdl");
-		}
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/cxf/Calculator?wsdl', retrying as a local file");
 			logger.warning(e.getMessage());
 		}

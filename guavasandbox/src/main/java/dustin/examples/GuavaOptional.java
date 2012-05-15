@@ -61,8 +61,7 @@ public class GuavaOptional {
 		BigDecimal quotient;
 		try {
 			quotient = dividend.divide(divisor);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			String exStr = Throwables.getStackTraceAsString(ex);
 			System.out.println(exStr);
 
