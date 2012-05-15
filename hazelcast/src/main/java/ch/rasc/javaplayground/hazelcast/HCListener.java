@@ -22,14 +22,16 @@ public class HCListener implements InstanceListener {
 	@Override
 	public void instanceCreated(InstanceEvent event) {
 		Instance instance = event.getInstance();
-		System.out.println("Created instance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType() + "]");
+		System.out
+				.println("Created instance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType() + "]");
 
 	}
 
 	@Override
 	public void instanceDestroyed(InstanceEvent event) {
 		Instance instance = event.getInstance();
-		System.out.println("Destroyed isntance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType() + "]");
+		System.out.println("Destroyed isntance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType()
+				+ "]");
 
 	}
 }

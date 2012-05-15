@@ -143,7 +143,8 @@ public class TwitterMessage {
 
 	@Override
 	public String toString() {
-		return "Tweet [createdAt=" + createdAt + ", text=" + text + ", fromUser=" + fromUser + ", profileImageUrl=" + profileImageUrl + "]";
+		return "Tweet [createdAt=" + createdAt + ", text=" + text + ", fromUser=" + fromUser + ", profileImageUrl="
+				+ profileImageUrl + "]";
 	}
 
 }

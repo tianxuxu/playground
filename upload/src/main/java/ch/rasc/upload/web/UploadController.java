@@ -23,8 +23,9 @@ public class UploadController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public void chunkExists(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("resumableChunkNumber") Integer chunkNumber, @RequestParam("resumableChunkSize") Long chunkSize,
-			@RequestParam("resumableIdentifier") String identifier, @RequestParam("resumableFilename") String filename) throws IOException {
+			@RequestParam("resumableChunkNumber") Integer chunkNumber,
+			@RequestParam("resumableChunkSize") Long chunkSize, @RequestParam("resumableIdentifier") String identifier,
+			@RequestParam("resumableFilename") String filename) throws IOException {
 
 		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
 			// do not upload chunk again
@@ -37,8 +38,10 @@ public class UploadController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public void processUpload(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber") Integer chunkNumber, @RequestParam(value = "resumableChunkSize") Long chunkSize,
-			@RequestParam(value = "resumableTotalSize") Long totalSize, @RequestParam(value = "resumableIdentifier") String identifier,
+			@RequestParam(value = "resumableChunkNumber") Integer chunkNumber,
+			@RequestParam(value = "resumableChunkSize") Long chunkSize,
+			@RequestParam(value = "resumableTotalSize") Long totalSize,
+			@RequestParam(value = "resumableIdentifier") String identifier,
 			@RequestParam(value = "resumableFilename") String fileName, @RequestParam(value = "file") MultipartFile file)
 			throws IOException {
 

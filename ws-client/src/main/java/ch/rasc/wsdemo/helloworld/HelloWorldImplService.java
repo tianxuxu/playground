@@ -20,7 +20,8 @@ public class HelloWorldImplService extends Service {
 
 	private final static URL HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
 
-	private final static Logger logger = Logger.getLogger(ch.rasc.wsdemo.helloworld.HelloWorldImplService.class.getName());
+	private final static Logger logger = Logger.getLogger(ch.rasc.wsdemo.helloworld.HelloWorldImplService.class
+			.getName());
 
 	static {
 		URL url = null;
@@ -61,7 +62,8 @@ public class HelloWorldImplService extends Service {
 	 */
 	@WebEndpoint(name = "HelloWorldImplPort")
 	public HelloWorldImpl getHelloWorldImplPort(WebServiceFeature... features) {
-		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "HelloWorldImplPort"), HelloWorldImpl.class, features);
+		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "HelloWorldImplPort"), HelloWorldImpl.class,
+				features);
 	}
 
 }

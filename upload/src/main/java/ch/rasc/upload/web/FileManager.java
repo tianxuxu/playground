@@ -24,7 +24,8 @@ public class FileManager {
 		}
 	}
 
-	public boolean chunkExists(final String identifier, final Integer chunkNumber, final Long chunkSize) throws IOException {
+	public boolean chunkExists(final String identifier, final Integer chunkNumber, final Long chunkSize)
+			throws IOException {
 		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		if (Files.exists(chunkFile)) {
 			long size = (Long) Files.getAttribute(chunkFile, "basic:size");
@@ -37,7 +38,8 @@ public class FileManager {
 		return true;
 	}
 
-	public void storeChunk(final String identifier, final Integer chunkNumber, final InputStream inputStream) throws IOException {
+	public void storeChunk(final String identifier, final Integer chunkNumber, final InputStream inputStream)
+			throws IOException {
 		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
@@ -60,8 +62,8 @@ public class FileManager {
 
 	}
 
-	public void mergeAndDeleteChunks(final String fileName, final String identifier, final Long chunkSize, final Long totalSize)
-			throws IOException {
+	public void mergeAndDeleteChunks(final String fileName, final String identifier, final Long chunkSize,
+			final Long totalSize) throws IOException {
 		long noOfChunks = totalSize / chunkSize;
 
 		Path newFilePath = Paths.get(dataDirectory, fileName);

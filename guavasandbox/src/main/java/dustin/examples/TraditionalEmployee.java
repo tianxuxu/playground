@@ -28,7 +28,8 @@ public class TraditionalEmployee {
 	 * @param newEmployerName The employer name my instance will have.
 	 * @param newGender The gender of my instance.
 	 */
-	public TraditionalEmployee(final String newLastName, final String newFirstName, final String newEmployerName, final Gender newGender) {
+	public TraditionalEmployee(final String newLastName, final String newFirstName, final String newEmployerName,
+			final Gender newGender) {
 		this.lastName = newLastName;
 		this.firstName = newFirstName;
 		this.employerName = newEmployerName;
@@ -107,7 +108,7 @@ public class TraditionalEmployee {
 	 */
 	@Override
 	public String toString() {
-		return "TraditionalEmployee{" + "lastName=" + lastName + ", firstName=" + firstName + ", employerName=" + employerName
-				+ ", gender=" + gender + '}';
+		return "TraditionalEmployee{" + "lastName=" + lastName + ", firstName=" + firstName + ", employerName="
+				+ employerName + ", gender=" + gender + '}';
 	}
 }

@@ -22,7 +22,8 @@ public class QueryTheCache {
 
 		IMap map = Hazelcast.getMap("testmap");
 		EntryObject e = new PredicateBuilder().getEntryObject();
-		Predicate predicate = e.get("objectName").in("example: 1", "example: 2", "example: 3").and(e.get("objectID").lessThan(4));
+		Predicate predicate = e.get("objectName").in("example: 1", "example: 2", "example: 3")
+				.and(e.get("objectID").lessThan(4));
 		Set<ObjectToCache> objects = (Set<ObjectToCache>) map.values(predicate);
 		for (ObjectToCache o : objects) {
 			System.out.println("Map Query Result :" + o);

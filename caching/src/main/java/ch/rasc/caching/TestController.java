@@ -23,8 +23,9 @@ public class TestController {
 	public List<String> getSomething() {
 		System.out.println("inside getSomething");
 		return Lists.newArrayList(testService.getData("one"), testService.getData("two"), testService.getData("three"),
-				testService.getData("four"), testService.getData("five"), testService.getData("six"), testService.getData("seven"),
-				testService.getData("eight"), testService.getData("nine"), testService.getData("ten"), testService.getData("eleven"));
+				testService.getData("four"), testService.getData("five"), testService.getData("six"),
+				testService.getData("seven"), testService.getData("eight"), testService.getData("nine"),
+				testService.getData("ten"), testService.getData("eleven"));
 	}
 
 	@RequestMapping(value = "/cacheEvict", produces = "application/json")

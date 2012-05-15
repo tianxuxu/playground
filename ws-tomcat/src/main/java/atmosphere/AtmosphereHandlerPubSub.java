@@ -55,7 +55,8 @@ public class AtmosphereHandlerPubSub extends AbstractReflectorAtmosphereHandler 
 			Broadcaster b = lookupBroadcaster(req.getPathInfo());
 			r.setBroadcaster(b);
 
-			if (req.getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT).equalsIgnoreCase(HeaderConfig.LONG_POLLING_TRANSPORT)) {
+			if (req.getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT)
+					.equalsIgnoreCase(HeaderConfig.LONG_POLLING_TRANSPORT)) {
 				req.setAttribute(ApplicationConfig.RESUME_ON_BROADCAST, Boolean.TRUE);
 				r.suspend(-1, false);
 			} else {

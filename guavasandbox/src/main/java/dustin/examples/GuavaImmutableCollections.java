@@ -110,7 +110,8 @@ public class GuavaImmutableCollections {
 		originalStringsMapping.put("D", "Dustin");
 		originalStringsMapping.put("G", "Guava");
 		originalStringsMapping.put("J", "Java");
-		final ImmutableMap<String, String> strings = ImmutableMap.<String, String> builder().putAll(originalStringsMapping).build();
+		final ImmutableMap<String, String> strings = ImmutableMap.<String, String> builder()
+				.putAll(originalStringsMapping).build();
 		out.println("Immutable Map of Strings: " + strings);
 		originalStringsMapping.remove("D");
 		out.println("Original Map of Strings: " + originalStringsMapping);
@@ -139,20 +140,23 @@ public class GuavaImmutableCollections {
 	public void demoGuavaBuilders() {
 		printHeader("Guava's Builders");
 
-		final ImmutableMap<String, String> languageStrings = ImmutableMap.<String, String> builder().put("C", "C++").put("F", "Fortran")
-				.put("G", "Groovy").put("J", "Java").put("P", "Pascal").put("R", "Ruby").put("S", "Scala").build();
+		final ImmutableMap<String, String> languageStrings = ImmutableMap.<String, String> builder().put("C", "C++")
+				.put("F", "Fortran").put("G", "Groovy").put("J", "Java").put("P", "Pascal").put("R", "Ruby")
+				.put("S", "Scala").build();
 		out.println("Languages Map: " + languageStrings);
 
-		final ImmutableSet<String> states = ImmutableSet.<String> builder().add("Arizona").add("Colorado").add("Wyoming").build();
+		final ImmutableSet<String> states = ImmutableSet.<String> builder().add("Arizona").add("Colorado")
+				.add("Wyoming").build();
 		out.println("States: " + states);
 
-		final ImmutableList<String> cities = ImmutableList.<String> builder().add("Boston").add("Colorado Springs").add("Denver")
-				.add("Fort Collins").add("Salt Lake City").add("San Francisco").add("Toledo").build();
+		final ImmutableList<String> cities = ImmutableList.<String> builder().add("Boston").add("Colorado Springs")
+				.add("Denver").add("Fort Collins").add("Salt Lake City").add("San Francisco").add("Toledo").build();
 		out.println("Cities: " + cities);
 
-		final ImmutableMultimap<String, String> multimapLanguages = ImmutableMultimap.<String, String> builder().put("C", "C")
-				.put("C", "C++").put("C", "C#").put("F", "Fortran").put("G", "Groovy").put("J", "Java").put("P", "Pascal").put("P", "Perl")
-				.put("P", "PHP").put("P", "Python").put("R", "Ruby").put("S", "Scala").build();
+		final ImmutableMultimap<String, String> multimapLanguages = ImmutableMultimap.<String, String> builder()
+				.put("C", "C").put("C", "C++").put("C", "C#").put("F", "Fortran").put("G", "Groovy").put("J", "Java")
+				.put("P", "Pascal").put("P", "Perl").put("P", "PHP").put("P", "Python").put("R", "Ruby")
+				.put("S", "Scala").build();
 		out.println("Languages: " + multimapLanguages);
 	}
 

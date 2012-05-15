@@ -32,7 +32,8 @@ public class QueryCities {
 
 		GeoResults<City> geoResults = mongoOps.geoNear(query, City.class);
 		for (GeoResult<City> geoResult : geoResults) {
-			System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent().getCityName(), geoResult.getDistance().getNormalizedValue());
+			System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent().getCityName(), geoResult.getDistance()
+					.getNormalizedValue());
 		}
 
 		System.out.println("-------------------------");

@@ -24,9 +24,12 @@ public class JettyWithJndi {
 		context.setDefaultsDescriptor("./src/main/config/webdefault.xml");
 
 		context.setConfigurations(new Configuration[] { new org.eclipse.jetty.webapp.WebInfConfiguration(),
-				new org.eclipse.jetty.webapp.WebXmlConfiguration(), new org.eclipse.jetty.webapp.MetaInfConfiguration(),
-				new org.eclipse.jetty.webapp.FragmentConfiguration(), new org.eclipse.jetty.plus.webapp.EnvConfiguration(),
-				new org.eclipse.jetty.plus.webapp.PlusConfiguration(), new org.eclipse.jetty.webapp.JettyWebXmlConfiguration() });
+				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
+				new org.eclipse.jetty.webapp.MetaInfConfiguration(),
+				new org.eclipse.jetty.webapp.FragmentConfiguration(),
+				new org.eclipse.jetty.plus.webapp.EnvConfiguration(),
+				new org.eclipse.jetty.plus.webapp.PlusConfiguration(),
+				new org.eclipse.jetty.webapp.JettyWebXmlConfiguration() });
 
 		context.addBean(new EnvEntry("aSimpleEntry", "theValue"));
 

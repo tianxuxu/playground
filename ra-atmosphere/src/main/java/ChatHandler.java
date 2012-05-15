@@ -22,7 +22,8 @@ public final class ChatHandler implements AtmosphereHandler {
 
 	@Override
 	public void onRequest(AtmosphereResource resource) throws IOException {
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
+				ChatHandler.class.getName(), true);
 		broadcaster.setScope(Broadcaster.SCOPE.APPLICATION);
 		resource.setBroadcaster(broadcaster);
 		HttpServletRequest req = resource.getRequest();
@@ -44,7 +45,8 @@ public final class ChatHandler implements AtmosphereHandler {
 
 	@Override
 	public void onStateChange(AtmosphereResourceEvent event) throws IOException {
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
+				ChatHandler.class.getName(), true);
 		// Client closed the connection.
 		if (event.isCancelled()) {
 			close(event.getResource());
@@ -66,7 +68,8 @@ public final class ChatHandler implements AtmosphereHandler {
 
 	private void close(AtmosphereResource resource) {
 		resource.resume();
-		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class, ChatHandler.class.getName(), true);
+		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
+				ChatHandler.class.getName(), true);
 		String user = (String) resource.getRequest().getSession().getAttribute("user");
 		broadcaster.broadcast(user + " disconnected");
 	}

@@ -7,7 +7,8 @@ import com.google.common.cache.CacheBuilder;
 public class Main {
 
 	public static void main(String[] args) {
-		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder().maximumSize(10000).expireAfterWrite(10, TimeUnit.MINUTES).build();
+		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder().maximumSize(10000)
+				.expireAfterWrite(10, TimeUnit.MINUTES).build();
 
 		cache.put("one", Optional.of("1"));
 		cache.put("two", Optional.<String> absent());

@@ -125,9 +125,9 @@ public class Geolite {
 
 	@Override
 	public String toString() {
-		return "Geolite [id=" + id + ", startIpNum=" + startIpNum + ", endIpNum=" + endIpNum + ", country=" + country + ", region="
-				+ region + ", city=" + city + ", postalCode=" + postalCode + ", latitude=" + latitude + ", longitude=" + longitude
-				+ ", metroCode=" + metroCode + ", areaCode=" + areaCode + "]";
+		return "Geolite [id=" + id + ", startIpNum=" + startIpNum + ", endIpNum=" + endIpNum + ", country=" + country
+				+ ", region=" + region + ", city=" + city + ", postalCode=" + postalCode + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", metroCode=" + metroCode + ", areaCode=" + areaCode + "]";
 	}
 
 }

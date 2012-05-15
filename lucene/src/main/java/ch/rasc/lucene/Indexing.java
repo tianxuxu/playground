@@ -24,7 +24,8 @@ public class Indexing {
 
 	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
 		Directory directory = new RAMDirectory();
-		IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_34, new WhitespaceAnalyzer(Version.LUCENE_34)));
+		IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_34,
+				new WhitespaceAnalyzer(Version.LUCENE_34)));
 
 		String[] ids = { "1", "2" };
 		String[] unindexed = { "Netherlands", "Italy" };

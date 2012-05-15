@@ -66,7 +66,8 @@ public class GuavaCollections2 {
 		printHeader("Collections2.transform(Collection,Function): Uppercase");
 		final Set<String> strings = buildSetStrings();
 		out.println("\nOriginal Strings (pre-transform):\n\t" + strings);
-		final Collection<String> transformedStrings = Collections2.transform(strings, new UpperCaseFunction<String, String>());
+		final Collection<String> transformedStrings = Collections2.transform(strings,
+				new UpperCaseFunction<String, String>());
 		out.println("\nTransformed Strings:\n\t" + transformedStrings);
 		out.println("\nOriginal Strings (post-transform):\n\t" + strings);
 	}

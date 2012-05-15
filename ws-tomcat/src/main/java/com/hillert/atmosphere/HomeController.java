@@ -64,8 +64,8 @@ public class HomeController {
 				List<TwitterMessage> twitterMessages = new ArrayList<TwitterMessage>();
 
 				for (Tweet tweet : results.getTweets()) {
-					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet.getFromUser(), tweet
-							.getProfileImageUrl()));
+					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet
+							.getFromUser(), tweet.getProfileImageUrl()));
 				}
 
 				String s = mapper.writeValueAsString(twitterMessages);

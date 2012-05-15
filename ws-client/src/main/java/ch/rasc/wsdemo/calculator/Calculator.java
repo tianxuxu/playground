@@ -27,7 +27,8 @@ public interface Calculator {
 	@WebResult(targetNamespace = "")
 	@RequestWrapper(localName = "add", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.Add")
 	@ResponseWrapper(localName = "addResponse", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.AddResponse")
-	public int add(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(name = "arg1", targetNamespace = "") int arg1);
+	public int add(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 	/**
 	 * 
@@ -39,7 +40,8 @@ public interface Calculator {
 	@WebResult(targetNamespace = "")
 	@RequestWrapper(localName = "multiply", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.Multiply")
 	@ResponseWrapper(localName = "multiplyResponse", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.MultiplyResponse")
-	public int multiply(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(name = "arg1", targetNamespace = "") int arg1);
+	public int multiply(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 	/**
 	 * 
@@ -51,7 +53,8 @@ public interface Calculator {
 	@WebResult(targetNamespace = "")
 	@RequestWrapper(localName = "divide", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.Divide")
 	@ResponseWrapper(localName = "divideResponse", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.DivideResponse")
-	public int divide(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(name = "arg1", targetNamespace = "") int arg1);
+	public int divide(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 	/**
 	 * 
@@ -63,6 +66,7 @@ public interface Calculator {
 	@WebResult(targetNamespace = "")
 	@RequestWrapper(localName = "subtract", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.Subtract")
 	@ResponseWrapper(localName = "subtractResponse", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.calculator.SubtractResponse")
-	public int subtract(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(name = "arg1", targetNamespace = "") int arg1);
+	public int subtract(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 }
