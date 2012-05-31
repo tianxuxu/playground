@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 
 
 public class Main {
@@ -22,7 +22,8 @@ public class Main {
 		System.out.println("69! = " + result);
 		
 		TimeUnit.MINUTES.sleep(1);
-		Hazelcast.getDefaultInstance().getLifecycleService().shutdown();
+		
+		ctx.getBean(HazelcastInstance.class).getLifecycleService().shutdown();
 	}
 
 }
