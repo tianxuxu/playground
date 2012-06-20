@@ -1,12 +1,11 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,8 +40,7 @@ public class StartTomcat {
 		tomcat.setBaseDir(".");
 		File currentDir = new File(".");
 		Context ctx = tomcat.addWebapp("/", currentDir.getAbsolutePath() + "/src/main/webapp");
-		FileDirContext fd = new FileDirContext();
-		ctx.setResources(fd);
+		ctx.setResources(new FileDirContext());
 
 		List<Artifact> includeOnlyArtifact = new ArrayList<Artifact>();
 		includeOnlyArtifact.add(new Artifact("resources", "demo"));
@@ -50,14 +48,7 @@ public class StartTomcat {
 		List<File> resourceUrls = findResourceUrls(includeOnlyArtifact);
 
 		for (File resFile : resourceUrls) {
-			//			ctx.addResourceJarUrl(url);
-			ZipFile zipFile = new ZipFile(resFile);
-			//JarURLConnection conn = (JarURLConnection) url.openConnection();
-			//JarFile jarFile = conn.getJarFile();   
-			ZipEntry entry = zipFile.getEntry("/");
-			ZipDirContext zipDirContext = new ZipDirContext(zipFile, new ZipDirContext.Entry("/", entry));
-			zipDirContext.loadEntries();
-			fd.addAltDirContext(zipDirContext);
+			ctx.addResourceJarUrl(new URL("jar:" + resFile.toURI() + "!/"));
 		}
 
 		tomcat.start();
@@ -159,6 +150,7 @@ public class StartTomcat {
 
 	private static class Artifact {
 		private String groupId;
+
 		private String artifact;
 
 		public Artifact(String groupId, String artifact) {
