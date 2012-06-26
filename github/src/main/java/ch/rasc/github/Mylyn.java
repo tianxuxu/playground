@@ -27,6 +27,7 @@ public class Mylyn {
 				System.out.println("fetching : " + repo.getName());
 				Collection<TrackingRefUpdate> updates = Git.open(repoDir.toFile()).fetch().call()
 						.getTrackingRefUpdates();
+				
 				for (TrackingRefUpdate update : updates) {
 					System.out.println(update.getResult());
 				}
