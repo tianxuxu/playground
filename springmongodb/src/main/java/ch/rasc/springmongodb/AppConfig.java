@@ -29,7 +29,7 @@ public class AppConfig extends AbstractMongoConfiguration {
 
 	@Override
 	public String getDatabaseName() {
-		return "database";
+		return "linkedin";
 	}
 
 	@Override

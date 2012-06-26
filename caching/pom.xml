@@ -12,8 +12,8 @@
 
 	<properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
-		<slf4j.version>1.6.4</slf4j.version>
-		<logback.version>1.0.4</logback.version>
+		<slf4j.version>1.6.6</slf4j.version>
+		<logback.version>1.0.6</logback.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
 	</properties>
@@ -89,7 +89,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>0.0.8</version>
+			<version>0.0.9</version>
 			<scope>provided</scope>
 		</dependency>
 

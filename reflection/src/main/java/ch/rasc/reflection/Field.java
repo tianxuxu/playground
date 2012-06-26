@@ -1,11 +1,11 @@
 package ch.rasc.reflection;
 
 public class Field {
-	private String name;
+	private final String name;
 
-	private String type;
+	private final String type;
 
-	public Field(String name, String type) {
+	public Field(final String name, final String type) {
 		this.name = name;
 		this.type = type;
 	}
