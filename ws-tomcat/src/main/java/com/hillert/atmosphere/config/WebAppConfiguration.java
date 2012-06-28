@@ -38,13 +38,13 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter {
 	 */
 
 	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(new AtmosphereResourceArgumentResolver());
 		argumentResolvers.add(new MeteorArgumentResolver());
 	}
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 

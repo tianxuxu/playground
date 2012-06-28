@@ -22,7 +22,7 @@ import org.apache.lucene.util.Version;
 
 public class Indexing {
 
-	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
+	public static void main(final String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
 		Directory directory = new RAMDirectory();
 		IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_34,
 				new WhitespaceAnalyzer(Version.LUCENE_34)));

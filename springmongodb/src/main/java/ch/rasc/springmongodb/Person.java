@@ -3,11 +3,11 @@ package ch.rasc.springmongodb;
 public class Person {
 	private String id;
 
-	private String name;
+	private final String name;
 
-	private int age;
+	private final int age;
 
-	public Person(String name, int age) {
+	public Person(final String name, final int age) {
 		this.name = name;
 		this.age = age;
 	}

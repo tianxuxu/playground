@@ -23,7 +23,7 @@ public class ReadCsv3 {
 	}
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		new ReadCsv3();
 	}
 

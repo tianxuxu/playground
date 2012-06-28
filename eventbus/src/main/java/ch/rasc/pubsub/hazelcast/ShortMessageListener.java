@@ -14,7 +14,7 @@ public class ShortMessageListener implements MessageListener<ShortMessageEvent> 
 	}
 
 	@Override
-	public void onMessage(Message<ShortMessageEvent> message) {
+	public void onMessage(final Message<ShortMessageEvent> message) {
 		System.out.println(message.getMessageObject().getMsg());
 	}
 

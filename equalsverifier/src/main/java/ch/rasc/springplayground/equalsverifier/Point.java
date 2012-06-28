@@ -1,11 +1,11 @@
 package ch.rasc.springplayground.equalsverifier;
 
 public final class Point {
-	private int x;
+	private final int x;
 
-	private int y;
+	private final int y;
 
-	public Point(int x, int y) {
+	public Point(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -19,7 +19,7 @@ public final class Point {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		return true;
 	}
 

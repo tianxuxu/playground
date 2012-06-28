@@ -26,7 +26,7 @@ public final class ChatServlet extends HttpServlet implements CometProcessor {
 	}
 
 	@Override
-	public void event(CometEvent evt) throws IOException, ServletException {
+	public void event(final CometEvent evt) throws IOException, ServletException {
 
 		HttpServletRequest request = evt.getHttpServletRequest();
 		String user = (String) request.getSession().getAttribute("user");
@@ -50,7 +50,7 @@ public final class ChatServlet extends HttpServlet implements CometProcessor {
 		}
 	}
 
-	void broadcast(String message) throws IOException {
+	void broadcast(final String message) throws IOException {
 		Queue<CometEvent> q = new LinkedList<CometEvent>();
 		events.drainTo(q);
 		while (!q.isEmpty()) {

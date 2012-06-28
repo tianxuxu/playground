@@ -4,9 +4,9 @@ import org.springframework.context.ApplicationEvent;
 
 public class AppEvent extends ApplicationEvent {
 
-	private String message;
+	private final String message;
 
-	public AppEvent(Object source, String message) {
+	public AppEvent(final Object source, final String message) {
 		super(source);
 		this.message = message;
 	}

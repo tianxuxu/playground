@@ -17,20 +17,20 @@ import com.google.common.eventbus.Subscribe;
 @Component
 public class Tailer {
 
-	private Path path;
+	private final Path path;
 
 	private long position;
 
-	private ByteBuffer buffer = ByteBuffer.allocate(128);
+	private final ByteBuffer buffer = ByteBuffer.allocate(128);
 
-	private String encoding = System.getProperty("file.encoding");
+	private final String encoding = System.getProperty("file.encoding");
 
 	public Tailer() {
 		path = Paths.get("c:/temp/t.txt");
 	}
 
 	@Subscribe
-	public void handleWatchEvent(PathEvents pathEvents) {
+	public void handleWatchEvent(final PathEvents pathEvents) {
 		for (PathEvent event : pathEvents.getEvents()) {
 			if (path.endsWith(event.getEventTarget())) {
 				if (event.getType() == StandardWatchEventKinds.ENTRY_DELETE) {

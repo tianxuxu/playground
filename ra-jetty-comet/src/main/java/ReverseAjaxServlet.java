@@ -58,7 +58,8 @@ public final class ReverseAjaxServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		Continuation continuation = ContinuationSupport.getContinuation(req);
 		// optionally set a timeout to avoid suspending requests for too long
 		continuation.setTimeout(0);

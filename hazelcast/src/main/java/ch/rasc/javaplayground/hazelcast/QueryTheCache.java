@@ -11,7 +11,7 @@ import com.hazelcast.query.PredicateBuilder;
 
 public class QueryTheCache {
 
-	private HazelcastInstance haz;
+	private final HazelcastInstance haz;
 
 	public QueryTheCache() {
 		haz = Hazelcast.getDefaultInstance();
@@ -30,7 +30,7 @@ public class QueryTheCache {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		QueryTheCache use = new QueryTheCache();
 		use.queryMap();
 	}

@@ -21,7 +21,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	private String uploadDirectory;
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 

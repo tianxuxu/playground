@@ -9,21 +9,21 @@ public class User {
 
 	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-	private int id;
+	private final int id;
 
-	private String name;
+	private final String name;
 
-	private String surname;
+	private final String surname;
 
-	private String email;
+	private final String email;
 
-	private LocalDate birthday;
+	private final LocalDate birthday;
 
-	private String city;
+	private final String city;
 
-	private String country;
+	private final String country;
 
-	public User(String[] line) {
+	public User(final String[] line) {
 		this.id = Integer.valueOf(line[0]);
 		this.name = line[1];
 		this.surname = line[2];

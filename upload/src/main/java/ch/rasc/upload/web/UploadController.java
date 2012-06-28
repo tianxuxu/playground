@@ -22,10 +22,11 @@ public class UploadController {
 	private FileManager fileManager;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void chunkExists(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("resumableChunkNumber") Integer chunkNumber,
-			@RequestParam("resumableChunkSize") Long chunkSize, @RequestParam("resumableIdentifier") String identifier,
-			@RequestParam("resumableFilename") String filename) throws IOException {
+	public void chunkExists(final HttpServletRequest request, final HttpServletResponse response,
+			@RequestParam("resumableChunkNumber") final Integer chunkNumber,
+			@RequestParam("resumableChunkSize") final Long chunkSize,
+			@RequestParam("resumableIdentifier") final String identifier,
+			@RequestParam("resumableFilename") final String filename) throws IOException {
 
 		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
 			// do not upload chunk again
@@ -37,13 +38,13 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void processUpload(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber") Integer chunkNumber,
-			@RequestParam(value = "resumableChunkSize") Long chunkSize,
-			@RequestParam(value = "resumableTotalSize") Long totalSize,
-			@RequestParam(value = "resumableIdentifier") String identifier,
-			@RequestParam(value = "resumableFilename") String fileName, @RequestParam(value = "file") MultipartFile file)
-			throws IOException {
+	public void processUpload(final HttpServletRequest request, final HttpServletResponse response,
+			@RequestParam(value = "resumableChunkNumber") final Integer chunkNumber,
+			@RequestParam(value = "resumableChunkSize") final Long chunkSize,
+			@RequestParam(value = "resumableTotalSize") final Long totalSize,
+			@RequestParam(value = "resumableIdentifier") final String identifier,
+			@RequestParam(value = "resumableFilename") final String fileName,
+			@RequestParam(value = "file") final MultipartFile file) throws IOException {
 
 		if (!fileManager.isSupported(fileName)) {
 			// cancel the whole upload
@@ -64,7 +65,7 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/simpleUpload", method = RequestMethod.POST)
-	public String processUpload(HttpServletRequest request) throws IOException, ServletException {
+	public String processUpload(final HttpServletRequest request) throws IOException, ServletException {
 
 		for (Part part : request.getParts()) {
 
@@ -82,7 +83,7 @@ public class UploadController {
 
 	}
 
-	private String getFileName(Part part) {
+	private String getFileName(final Part part) {
 		String partHeader = part.getHeader("content-disposition");
 
 		for (String cd : partHeader.split(";")) {

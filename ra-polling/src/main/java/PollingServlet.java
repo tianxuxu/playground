@@ -49,7 +49,8 @@ public final class PollingServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		List<String> locmessages = new LinkedList<String>();
 		this.messages.drainTo(locmessages);
 		resp.setStatus(HttpServletResponse.SC_OK);

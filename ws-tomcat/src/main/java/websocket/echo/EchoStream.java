@@ -30,14 +30,14 @@ public class EchoStream extends WebSocketServlet {
 
 	@SuppressWarnings("synthetic-access")
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol) {
+	protected StreamInbound createWebSocketInbound(final String subProtocol) {
 		return new EchoStreamInbound();
 	}
 
 	private static final class EchoStreamInbound extends StreamInbound {
 
 		@Override
-		protected void onBinaryData(InputStream is) throws IOException {
+		protected void onBinaryData(final InputStream is) throws IOException {
 			// Simply echo the data to back to the client.
 			WsOutbound outbound = getWsOutbound();
 
@@ -51,7 +51,7 @@ public class EchoStream extends WebSocketServlet {
 		}
 
 		@Override
-		protected void onTextData(Reader r) throws IOException {
+		protected void onTextData(final Reader r) throws IOException {
 			// Simply echo the data to back to the client.
 			WsOutbound outbound = getWsOutbound();
 

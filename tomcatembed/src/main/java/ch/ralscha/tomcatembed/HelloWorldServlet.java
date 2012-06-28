@@ -13,13 +13,14 @@ public class HelloWorldServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+			IOException {
+
 		OutputStream out = response.getOutputStream();
-		
+
 		String html = "<html><title>Hello World</title><body><h1>Hello World</h1></body></html>";
 		out.write(html.getBytes());
-		
+
 		out.close();
 	}
 

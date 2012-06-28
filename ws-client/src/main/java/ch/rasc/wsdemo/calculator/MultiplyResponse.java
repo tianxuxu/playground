@@ -46,7 +46,7 @@ public class MultiplyResponse {
 	 * Sets the value of the return property.
 	 * 
 	 */
-	public void setReturn(int value) {
+	public void setReturn(final int value) {
 		this._return = value;
 	}
 

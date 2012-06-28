@@ -57,7 +57,8 @@ public final class ReverseAjaxServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		AsyncContext asyncContext = req.startAsync();
 		asyncContext.setTimeout(0);
 		asyncContexts.offer(asyncContext);

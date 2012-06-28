@@ -8,7 +8,7 @@ import com.hazelcast.core.HazelcastInstance;
 
 public class AddThingsToCache {
 
-	private HazelcastInstance haz;
+	private final HazelcastInstance haz;
 
 	public AddThingsToCache() {
 		haz = Hazelcast.getDefaultInstance();
@@ -28,7 +28,7 @@ public class AddThingsToCache {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		AddThingsToCache adder = new AddThingsToCache();
 		adder.addListData();
 		adder.addMapData();

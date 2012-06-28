@@ -1,11 +1,11 @@
 package ch.rasc.springplayground.equalsverifier;
 
 public class Customer {
-	private int id;
+	private final int id;
 
-	private String name;
+	private final String name;
 
-	public Customer(int id, String name) {
+	public Customer(final int id, final String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -28,7 +28,7 @@ public class Customer {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}

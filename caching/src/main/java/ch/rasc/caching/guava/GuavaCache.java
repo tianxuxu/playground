@@ -11,7 +11,7 @@ public class GuavaCache implements Cache {
 
 	private final com.google.common.cache.Cache<Object, Optional<Object>> store;
 
-	public GuavaCache(String name, com.google.common.cache.Cache<Object, Optional<Object>> store) {
+	public GuavaCache(final String name, final com.google.common.cache.Cache<Object, Optional<Object>> store) {
 		this.name = name;
 		this.store = store;
 	}
@@ -27,18 +27,18 @@ public class GuavaCache implements Cache {
 	}
 
 	@Override
-	public ValueWrapper get(Object key) {
+	public ValueWrapper get(final Object key) {
 		Optional<Object> value = this.store.getIfPresent(key);
 		return (value != null ? new SimpleValueWrapper(value.orNull()) : null);
 	}
 
 	@Override
-	public void put(Object key, Object value) {
+	public void put(final Object key, final Object value) {
 		this.store.put(key, Optional.fromNullable(value));
 	}
 
 	@Override
-	public void evict(Object key) {
+	public void evict(final Object key) {
 		this.store.invalidate(key);
 	}
 

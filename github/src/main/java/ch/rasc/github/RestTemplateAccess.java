@@ -1,17 +1,14 @@
 package ch.rasc.github;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
 
 @Service
 public class RestTemplateAccess {
 
 	private static final String GITHUB_REPOS_URI = "https://api.github.com/users/{user}/repos";
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		RestTemplate restTemplate = new RestTemplate();
 

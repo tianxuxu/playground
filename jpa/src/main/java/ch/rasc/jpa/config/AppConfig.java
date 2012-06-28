@@ -23,7 +23,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public PlatformTransactionManager txManager(EntityManagerFactory entityManagerFactory) {
+	public PlatformTransactionManager txManager(final EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
 

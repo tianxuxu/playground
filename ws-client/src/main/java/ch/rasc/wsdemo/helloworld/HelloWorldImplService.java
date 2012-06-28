@@ -36,7 +36,7 @@ public class HelloWorldImplService extends Service {
 		HELLOWORLDIMPLSERVICE_WSDL_LOCATION = url;
 	}
 
-	public HelloWorldImplService(URL wsdlLocation, QName serviceName) {
+	public HelloWorldImplService(final URL wsdlLocation, final QName serviceName) {
 		super(wsdlLocation, serviceName);
 	}
 
@@ -56,12 +56,12 @@ public class HelloWorldImplService extends Service {
 	/**
 	 * 
 	 * @param features A list of {@link javax.xml.ws.WebServiceFeature} to
-	 * configure on the proxy. Supported features not in the
-	 * <code>features</code> parameter will have their default values.
+	 *        configure on the proxy. Supported features not in the
+	 *        <code>features</code> parameter will have their default values.
 	 * @return returns HelloWorldImpl
 	 */
 	@WebEndpoint(name = "HelloWorldImplPort")
-	public HelloWorldImpl getHelloWorldImplPort(WebServiceFeature... features) {
+	public HelloWorldImpl getHelloWorldImplPort(final WebServiceFeature... features) {
 		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "HelloWorldImplPort"), HelloWorldImpl.class,
 				features);
 	}

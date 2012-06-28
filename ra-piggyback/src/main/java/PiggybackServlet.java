@@ -51,7 +51,8 @@ public final class PiggybackServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		System.out.println("FORM POSTED !");
 		List<String> locmessages = new LinkedList<String>();
 		this.messages.drainTo(locmessages);
@@ -67,7 +68,8 @@ public final class PiggybackServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		List<String> locmessages = new LinkedList<String>();
 		this.messages.drainTo(locmessages);
 		resp.setStatus(HttpServletResponse.SC_OK);

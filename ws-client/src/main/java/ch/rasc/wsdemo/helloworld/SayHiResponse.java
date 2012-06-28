@@ -50,7 +50,7 @@ public class SayHiResponse {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setReturn(String value) {
+	public void setReturn(final String value) {
 		this._return = value;
 	}
 

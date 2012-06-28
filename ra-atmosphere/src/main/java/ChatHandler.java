@@ -21,7 +21,7 @@ public final class ChatHandler implements AtmosphereHandler {
 	}
 
 	@Override
-	public void onRequest(AtmosphereResource resource) throws IOException {
+	public void onRequest(final AtmosphereResource resource) throws IOException {
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);
 		broadcaster.setScope(Broadcaster.SCOPE.APPLICATION);
@@ -44,7 +44,7 @@ public final class ChatHandler implements AtmosphereHandler {
 	}
 
 	@Override
-	public void onStateChange(AtmosphereResourceEvent event) throws IOException {
+	public void onStateChange(final AtmosphereResourceEvent event) throws IOException {
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);
 		// Client closed the connection.
@@ -66,7 +66,7 @@ public final class ChatHandler implements AtmosphereHandler {
 		}
 	}
 
-	private void close(AtmosphereResource resource) {
+	private void close(final AtmosphereResource resource) {
 		resource.resume();
 		Broadcaster broadcaster = BroadcasterFactory.getDefault().lookup(DefaultBroadcaster.class,
 				ChatHandler.class.getName(), true);

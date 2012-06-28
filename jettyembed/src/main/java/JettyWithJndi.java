@@ -8,7 +8,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.h2.jdbcx.JdbcDataSource;
 
 public class JettyWithJndi {
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 
 		int port = 8080;
 

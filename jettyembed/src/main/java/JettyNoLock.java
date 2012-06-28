@@ -5,7 +5,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class JettyNoLock {
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 
 		int port = 8080;
 

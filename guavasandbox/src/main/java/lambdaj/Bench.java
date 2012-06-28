@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 
 public class Bench {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		List<User> users = Lists.newArrayList();
 		Random random = new Random();

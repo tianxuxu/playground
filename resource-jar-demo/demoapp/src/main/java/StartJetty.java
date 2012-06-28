@@ -23,7 +23,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class StartJetty {
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 		int port = 8080;
 
@@ -38,8 +38,8 @@ public class StartJetty {
 		WebAppContext context = new WebAppContext("./src/main/webapp", "/");
 		context.setDefaultsDescriptor("./src/main/config/webdefault.xml");
 
-		//		List<Artifact> includeOnlyArtifact = new ArrayList<Artifact>();
-		//		includeOnlyArtifact.add(new Artifact("resources", "demo"));
+		// List<Artifact> includeOnlyArtifact = new ArrayList<Artifact>();
+		// includeOnlyArtifact.add(new Artifact("resources", "demo"));
 
 		context.setConfigurations(new Configuration[] { new MavenWebInfConfiguration(),
 				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
@@ -56,29 +56,30 @@ public class StartJetty {
 	}
 
 	private static class Artifact {
-		private String groupId;
-		private String artifact;
+		private final String groupId;
+
+		private final String artifact;
 
 		@SuppressWarnings("unused")
-		public Artifact(String groupId, String artifact) {
+		public Artifact(final String groupId, final String artifact) {
 			this.groupId = groupId;
 			this.artifact = artifact;
 		}
 
-		public boolean is(String group, String arti) {
+		public boolean is(final String group, final String arti) {
 			return this.groupId.equals(group) && this.artifact.equals(arti);
 		}
 	}
 
 	private static class MavenWebInfConfiguration extends WebInfConfiguration {
 
-		private List<File> jars;
+		private final List<File> jars;
 
 		public MavenWebInfConfiguration() throws ParserConfigurationException, SAXException, IOException {
 			this(null);
 		}
 
-		public MavenWebInfConfiguration(List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
+		public MavenWebInfConfiguration(final List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
 				SAXException, IOException {
 			File homeDir = new File(System.getProperty("user.home"));
 
@@ -134,7 +135,8 @@ public class StartJetty {
 			}
 		}
 
-		private boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId, String artifactId) {
+		private boolean isIncluded(final List<Artifact> includeOnlyArtifacts, final String groupId,
+				final String artifactId) {
 			if (includeOnlyArtifacts != null) {
 				for (Artifact artifact : includeOnlyArtifacts) {
 					if (artifact.is(groupId, artifactId)) {
@@ -147,14 +149,14 @@ public class StartJetty {
 			return true;
 		}
 
-		private String stripWhitespace(String orig) {
+		private String stripWhitespace(final String orig) {
 			if (orig != null) {
 				return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
 			}
 			return orig;
 		}
 
-		private String resolveProperty(String orig, Map<String, String> properties) {
+		private String resolveProperty(final String orig, final Map<String, String> properties) {
 			String property = properties.get(orig);
 			if (property != null) {
 				return property;
@@ -163,7 +165,7 @@ public class StartJetty {
 		}
 
 		@Override
-		protected List<Resource> findJars(WebAppContext context) throws Exception {
+		protected List<Resource> findJars(final WebAppContext context) throws Exception {
 			List<Resource> resources = super.findJars(context);
 
 			for (File jar : jars) {

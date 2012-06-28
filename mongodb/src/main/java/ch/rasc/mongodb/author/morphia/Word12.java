@@ -32,7 +32,7 @@ public class Word12 {
 		return word1;
 	}
 
-	public void setWord1(String word1) {
+	public void setWord1(final String word1) {
 		this.word1 = word1;
 	}
 
@@ -40,7 +40,7 @@ public class Word12 {
 		return word2;
 	}
 
-	public void setWord2(String word2) {
+	public void setWord2(final String word2) {
 		this.word2 = word2;
 	}
 
@@ -48,7 +48,7 @@ public class Word12 {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(final int count) {
 		this.count = count;
 	}
 
@@ -56,7 +56,7 @@ public class Word12 {
 		return word3;
 	}
 
-	public void setWord3(List<Word3> word3) {
+	public void setWord3(final List<Word3> word3) {
 		this.word3 = word3;
 	}
 

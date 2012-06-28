@@ -23,12 +23,12 @@ public class RawTextImporter implements TextImporter {
 	private TextExtractor extractor;
 
 	@Override
-	public void doImport(String fileName) {
+	public void doImport(final String fileName) {
 		doImport(new File(fileName));
 	}
 
 	@Override
-	public void doImport(File file) {
+	public void doImport(final File file) {
 
 		List<String> words = extractor.extractWords(file);
 

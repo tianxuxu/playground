@@ -45,7 +45,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<ChatMessageInbound>();
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol) {
+	protected StreamInbound createWebSocketInbound(final String subProtocol) {
 		return new ChatMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -53,37 +53,37 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
 		private final String nickname;
 
-		ChatMessageInbound(int id) {
+		ChatMessageInbound(final int id) {
 			this.nickname = GUEST_PREFIX + id;
 		}
 
 		@Override
-		protected void onOpen(WsOutbound outbound) {
+		protected void onOpen(final WsOutbound outbound) {
 			connections.add(this);
 			String message = String.format("* %s %s", nickname, "has joined.");
 			broadcast(message);
 		}
 
 		@Override
-		protected void onClose(int status) {
+		protected void onClose(final int status) {
 			connections.remove(this);
 			String message = String.format("* %s %s", nickname, "has disconnected.");
 			broadcast(message);
 		}
 
 		@Override
-		protected void onBinaryMessage(ByteBuffer message) throws IOException {
+		protected void onBinaryMessage(final ByteBuffer message) throws IOException {
 			throw new UnsupportedOperationException("Binary message not supported.");
 		}
 
 		@Override
-		protected void onTextMessage(CharBuffer message) throws IOException {
+		protected void onTextMessage(final CharBuffer message) throws IOException {
 			// Never trust the client
 			String filteredMessage = String.format("%s: %s", nickname, HTMLFilter.filter(message.toString()));
 			broadcast(filteredMessage);
 		}
 
-		private void broadcast(String message) {
+		private void broadcast(final String message) {
 			for (ChatMessageInbound connection : connections) {
 				try {
 					CharBuffer buffer = CharBuffer.wrap(message);

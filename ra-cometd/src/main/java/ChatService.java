@@ -25,13 +25,13 @@ public final class ChatService {
 	void init() {
 		server.addListener(new BayeuxServer.SessionListener() {
 			@Override
-			public void sessionAdded(ServerSession session) {
+			public void sessionAdded(final ServerSession session) {
 				session.setAttribute("user", server.getContext().getHttpSessionAttribute("user"));
 				server.getChannel("/chatroom").publish(session, "connected !", null);
 			}
 
 			@Override
-			public void sessionRemoved(ServerSession session, boolean timedout) {
+			public void sessionRemoved(final ServerSession session, final boolean timedout) {
 				server.getChannel("/chatroom").publish(session, "disconnected !", null);
 				session.removeAttribute("user");
 			}
@@ -39,22 +39,23 @@ public final class ChatService {
 	}
 
 	@Configure("/**")
-	void any(ConfigurableServerChannel channel) {
+	void any(final ConfigurableServerChannel channel) {
 		channel.addAuthorizer(GrantAuthorizer.GRANT_NONE);
 	}
 
 	@Configure("/chatroom")
-	void configure(ConfigurableServerChannel channel) {
+	void configure(final ConfigurableServerChannel channel) {
 		channel.addAuthorizer(new Authorizer() {
 			@Override
-			public Result authorize(Operation operation, ChannelId channel, ServerSession session, ServerMessage message) {
+			public Result authorize(final Operation operation, final ChannelId channel, final ServerSession session,
+					final ServerMessage message) {
 				return session.getAttribute("user") != null ? Result.grant() : Result.deny("no user in session");
 			}
 		});
 	}
 
 	@Listener("/chatroom")
-	void appendUser(ServerSession remote, ServerMessage.Mutable message) {
+	void appendUser(final ServerSession remote, final ServerMessage.Mutable message) {
 		message.setData("[" + remote.getAttribute("user") + "] " + message.getData());
 	}
 

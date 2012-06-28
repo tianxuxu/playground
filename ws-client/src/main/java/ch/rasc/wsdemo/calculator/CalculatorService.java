@@ -35,7 +35,7 @@ public class CalculatorService extends Service {
 		CALCULATORSERVICE_WSDL_LOCATION = url;
 	}
 
-	public CalculatorService(URL wsdlLocation, QName serviceName) {
+	public CalculatorService(final URL wsdlLocation, final QName serviceName) {
 		super(wsdlLocation, serviceName);
 	}
 
@@ -55,12 +55,12 @@ public class CalculatorService extends Service {
 	/**
 	 * 
 	 * @param features A list of {@link javax.xml.ws.WebServiceFeature} to
-	 * configure on the proxy. Supported features not in the
-	 * <code>features</code> parameter will have their default values.
+	 *        configure on the proxy. Supported features not in the
+	 *        <code>features</code> parameter will have their default values.
 	 * @return returns Calculator
 	 */
 	@WebEndpoint(name = "CalculatorPort")
-	public Calculator getCalculatorPort(WebServiceFeature... features) {
+	public Calculator getCalculatorPort(final WebServiceFeature... features) {
 		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "CalculatorPort"), Calculator.class, features);
 	}
 

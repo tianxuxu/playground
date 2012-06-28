@@ -58,10 +58,10 @@ public class GuavaEmployee {
 	 * 
 	 * @param obj Object to be compared to me for equality.
 	 * @return {@code true} if provided object is considered equal to me or
-	 * {@code false} if provided object is not considered equal to me.
+	 *         {@code false} if provided object is not considered equal to me.
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}

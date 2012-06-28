@@ -15,7 +15,7 @@ public class Calculator {
 	}
 
 	@Cacheable("calculator")
-	public BigInteger factorial(long n) {
+	public BigInteger factorial(final long n) {
 		System.out.println("calling factorial method with parameter: " + n);
 
 		BigInteger ret = BigInteger.ONE;
@@ -27,13 +27,13 @@ public class Calculator {
 	}
 
 	@Cacheable(value = "calculator", key = "#p0")
-	public BigInteger factorial(long n, String user) {
+	public BigInteger factorial(final long n, final String user) {
 		System.out.println("calling factorial method with parameter: " + n + " and user: " + user);
 		return factorial(n);
 	}
 
 	@Cacheable(value = "calculator", condition = "#n > 10")
-	public BigInteger factorialWithACondition(long n) {
+	public BigInteger factorialWithACondition(final long n) {
 		System.out.println("calling condition factorial method with parameter: " + n);
 		return factorial(n);
 	}
@@ -44,7 +44,7 @@ public class Calculator {
 	}
 
 	@CacheEvict(value = "calculator", key = "#n")
-	public void clearCache(long n) {
+	public void clearCache(final long n) {
 		// nothing here
 	}
 }

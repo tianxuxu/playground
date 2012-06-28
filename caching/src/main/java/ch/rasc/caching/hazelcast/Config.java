@@ -23,7 +23,7 @@ public class Config {
 
 	@Bean
 	public HazelcastInstance hazelcastInstance() {
-		//return Hazelcast.getDefaultInstance();
+		// return Hazelcast.getDefaultInstance();
 
 		com.hazelcast.config.Config hazelcastConfig = new com.hazelcast.config.Config();
 		GroupConfig groupConfig = new GroupConfig();
@@ -31,21 +31,21 @@ public class Config {
 		groupConfig.setPassword("password");
 		hazelcastConfig.setGroupConfig(groupConfig);
 
-		NetworkConfig networkConfig = new NetworkConfig();		
+		NetworkConfig networkConfig = new NetworkConfig();
 		Join join = new Join();
-		
+
 		MulticastConfig multicastConfig = new MulticastConfig();
-		multicastConfig.setEnabled(false);		
+		multicastConfig.setEnabled(false);
 		join.setMulticastConfig(multicastConfig);
-		
+
 		TcpIpConfig tcpIpConfig = new TcpIpConfig();
 		tcpIpConfig.setEnabled(true);
 		tcpIpConfig.setMembers(Lists.newArrayList("192.168.20.153", "192.168.20.150"));
 		join.setTcpIpConfig(tcpIpConfig);
-		
+
 		networkConfig.setJoin(join);
 		hazelcastConfig.setNetworkConfig(networkConfig);
-		
+
 		return FactoryImpl.newHazelcastInstanceProxy(hazelcastConfig);
 	}
 

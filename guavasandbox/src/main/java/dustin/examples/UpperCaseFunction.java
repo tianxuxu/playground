@@ -10,7 +10,7 @@ import com.google.common.base.Function;
  */
 public class UpperCaseFunction<F, T> implements Function<F, T> {
 	@Override
-	public Object apply(Object f) {
+	public Object apply(final Object f) {
 		return f.toString().toUpperCase();
 	}
 }

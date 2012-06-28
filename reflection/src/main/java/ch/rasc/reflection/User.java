@@ -1,12 +1,12 @@
 package ch.rasc.reflection;
 
 public class User {
-	private int id = 1;
-	
+	private final int id = 1;
+
 	public String email = "sr@ess.ch";
-	
+
 	public static String userName = "userName";
-	
+
 	private static String testName = "testName";
 
 	@Model("test")
@@ -16,8 +16,6 @@ public class User {
 		System.out.println("CALLED getId()");
 		return id;
 	}
-
-
 
 	// public User(int id, String name) {
 	// this.id = id;

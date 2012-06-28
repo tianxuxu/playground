@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 @Named
 public class TextExtractor {
 
-	public List<String> extractWords(File file) {
+	public List<String> extractWords(final File file) {
 		String text = extractText(file);
 		List<String> words = new ArrayList<String>();
 
@@ -32,7 +32,7 @@ public class TextExtractor {
 		return words;
 	}
 
-	private String extractText(File file) {
+	private String extractText(final File file) {
 		Reader reader = null;
 		try {
 			reader = new ParsingReader(file);

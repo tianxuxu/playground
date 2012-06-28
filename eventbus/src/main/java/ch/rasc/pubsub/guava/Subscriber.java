@@ -11,12 +11,12 @@ import com.google.common.eventbus.Subscribe;
 public class Subscriber {
 
 	@Subscribe
-	public void handleMsgEvent(MsgEvent event) {
+	public void handleMsgEvent(final MsgEvent event) {
 		System.out.println("MsgEvent: " + event.getMessage());
 	}
 
 	@Subscribe
-	public void handleSpecialMsgEvent(SpecialMsgEvent event) {
+	public void handleSpecialMsgEvent(final SpecialMsgEvent event) {
 		System.out.println("SpecialMsgEvent: " + event.getMessage() + " User: " + event.getUser());
 		try {
 			TimeUnit.SECONDS.sleep(5);
@@ -26,7 +26,7 @@ public class Subscriber {
 	}
 
 	@Subscribe
-	public void handleDeadEvents(DeadEvent deadEvent) {
+	public void handleDeadEvents(final DeadEvent deadEvent) {
 		System.out.print("Event without a subscriber: ");
 		System.out.println(deadEvent.getEvent());
 	}

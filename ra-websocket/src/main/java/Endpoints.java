@@ -9,17 +9,17 @@ import org.eclipse.jetty.websocket.WebSocket;
 final class Endpoints {
 	private final Queue<Endpoint> endpoints = new ConcurrentLinkedQueue<Endpoint>();
 
-	void broadcast(String data) {
+	void broadcast(final String data) {
 		for (Endpoint endpoint : endpoints) {
 			endpoint.send(data);
 		}
 	}
 
-	void offer(Endpoint endpoint) {
+	void offer(final Endpoint endpoint) {
 		endpoints.offer(endpoint);
 	}
 
-	void remove(Endpoint endpoint) {
+	void remove(final Endpoint endpoint) {
 		endpoints.remove(endpoint);
 	}
 

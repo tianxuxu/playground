@@ -8,7 +8,7 @@ import org.apache.catalina.startup.Tomcat;
 
 public class Simple {
 
-	public static void main(String[] args) throws ServletException, LifecycleException {
+	public static void main(final String[] args) throws ServletException, LifecycleException {
 
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);
@@ -19,7 +19,7 @@ public class Simple {
 		Tomcat.addServlet(ctx, "helloWorldServlet", "ch.ralscha.tomcatembed.HelloWorldServlet");
 
 		ctx.addServletMapping("/helloworld", "helloWorldServlet");
-		
+
 		tomcat.start();
 		tomcat.getServer().await();
 

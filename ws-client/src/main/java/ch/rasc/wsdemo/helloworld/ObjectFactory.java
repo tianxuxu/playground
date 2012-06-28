@@ -53,7 +53,7 @@ public class ObjectFactory {
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHiResponse")
-	public JAXBElement<SayHiResponse> createSayHiResponse(SayHiResponse value) {
+	public JAXBElement<SayHiResponse> createSayHiResponse(final SayHiResponse value) {
 		return new JAXBElement<SayHiResponse>(_SayHiResponse_QNAME, SayHiResponse.class, null, value);
 	}
 
@@ -62,7 +62,7 @@ public class ObjectFactory {
 	 * 
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHi")
-	public JAXBElement<SayHi> createSayHi(SayHi value) {
+	public JAXBElement<SayHi> createSayHi(final SayHi value) {
 		return new JAXBElement<SayHi>(_SayHi_QNAME, SayHi.class, null, value);
 	}
 

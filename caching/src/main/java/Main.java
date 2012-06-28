@@ -6,7 +6,7 @@ import com.google.common.cache.CacheBuilder;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder().maximumSize(10000)
 				.expireAfterWrite(10, TimeUnit.MINUTES).build();
 

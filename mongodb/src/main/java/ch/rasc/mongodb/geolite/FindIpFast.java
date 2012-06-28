@@ -8,7 +8,7 @@ import com.google.code.morphia.query.Query;
 
 public class FindIpFast {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.geolite");
 		Datastore datastore = ctx.getBean(Datastore.class);
@@ -34,7 +34,7 @@ public class FindIpFast {
 
 	}
 
-	private static void findFast(Datastore datastore, long ip) {
+	private static void findFast(final Datastore datastore, final long ip) {
 		Query<Geolite> q = datastore.createQuery(Geolite.class);
 		q.field("startIpNum").lessThanOrEq(ip);
 		q.order("-startIpNum");

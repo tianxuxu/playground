@@ -54,27 +54,27 @@ public class City {
 		return id;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(final String country) {
 		this.country = country;
 	}
 
-	public void setAsciiCityName(String asciiCityName) {
+	public void setAsciiCityName(final String asciiCityName) {
 		this.asciiCityName = asciiCityName;
 	}
 
-	public void setCityName(String cityName) {
+	public void setCityName(final String cityName) {
 		this.cityName = cityName;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(final String region) {
 		this.region = region;
 	}
 
-	public void setPopulation(Integer population) {
+	public void setPopulation(final Integer population) {
 		this.population = population;
 	}
 
-	public void setLocation(Point location) {
+	public void setLocation(final Point location) {
 		this.location = location;
 	}
 

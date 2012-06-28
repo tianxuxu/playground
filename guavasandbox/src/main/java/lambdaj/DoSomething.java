@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 
 public class DoSomething {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Stopwatch stopWatch = new Stopwatch();
 
 		List<User> users = Lists

@@ -19,14 +19,14 @@ public class MorphiaAuthor implements Author {
 	@Inject
 	private DBCollection collection;
 
-	private Random random;
+	private final Random random;
 
 	public MorphiaAuthor() {
 		random = new Random();
 	}
 
 	@Override
-	public String writeText(int maxWords) {
+	public String writeText(final int maxWords) {
 
 		int skip = (int) (Math.random() * Math.min(100, collection.count()));
 		DBCursor cursor = collection.find().skip(skip);
@@ -62,7 +62,7 @@ public class MorphiaAuthor implements Author {
 
 	}
 
-	private String getNext(String w1, String w2) {
+	private String getNext(final String w1, final String w2) {
 		BasicDBObject query = new BasicDBObject();
 		query.append("word1", w1);
 		query.append("word2", w2);

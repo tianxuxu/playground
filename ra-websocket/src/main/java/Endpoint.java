@@ -14,18 +14,18 @@ class Endpoint implements OnTextMessage {
 
 	private Connection connection;
 
-	private Endpoints endpoints;
+	private final Endpoints endpoints;
 
-	private int clientId = clientCounter++;
+	private final int clientId = clientCounter++;
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
-	Endpoint(Endpoints endpoints) {
+	Endpoint(final Endpoints endpoints) {
 		this.endpoints = endpoints;
 	}
 
 	@Override
-	public void onOpen(Connection conn) {
+	public void onOpen(final Connection conn) {
 		System.out.println("onOpen");
 		this.connection = conn;
 		try {
@@ -40,7 +40,7 @@ class Endpoint implements OnTextMessage {
 		endpoints.offer(this);
 	}
 
-	public void send(String data) {
+	public void send(final String data) {
 		try {
 			if (connection != null && connection.isOpen()) {
 				connection.sendMessage(data);
@@ -51,14 +51,14 @@ class Endpoint implements OnTextMessage {
 	}
 
 	@Override
-	public void onClose(int closeCode, String message) {
+	public void onClose(final int closeCode, final String message) {
 		System.out.println("onClose");
 		endpoints.remove(this);
 		connection = null;
 	}
 
 	@Override
-	public void onMessage(String data) {
+	public void onMessage(final String data) {
 		System.out.println("onMessage");
 		try {
 			endpoints.broadcast(mapper.writeValueAsString(new String[] { "From " + clientId + " : " + data }));

@@ -29,7 +29,7 @@ import com.google.common.cache.CacheBuilder;
 public class WebConfig extends WebMvcConfigurerAdapter implements CachingConfigurer {
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 

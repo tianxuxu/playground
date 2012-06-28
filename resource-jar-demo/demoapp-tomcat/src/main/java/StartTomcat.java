@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class StartTomcat {
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 		int port = 8080;
 
@@ -60,7 +60,7 @@ public class StartTomcat {
 
 	}
 
-	private static List<File> findResourceUrls(List<Artifact> includeOnlyArtifacts)
+	private static List<File> findResourceUrls(final List<Artifact> includeOnlyArtifacts)
 			throws ParserConfigurationException, SAXException, IOException {
 
 		File homeDir = new File(System.getProperty("user.home"));
@@ -120,7 +120,8 @@ public class StartTomcat {
 		return jars;
 	}
 
-	private static boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId, String artifactId) {
+	private static boolean isIncluded(final List<Artifact> includeOnlyArtifacts, final String groupId,
+			final String artifactId) {
 		if (includeOnlyArtifacts != null) {
 			for (Artifact artifact : includeOnlyArtifacts) {
 				if (artifact.is(groupId, artifactId)) {
@@ -133,14 +134,14 @@ public class StartTomcat {
 		return true;
 	}
 
-	private static String stripWhitespace(String orig) {
+	private static String stripWhitespace(final String orig) {
 		if (orig != null) {
 			return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
 		}
 		return orig;
 	}
 
-	private static String resolveProperty(String orig, Map<String, String> properties) {
+	private static String resolveProperty(final String orig, final Map<String, String> properties) {
 		String property = properties.get(orig);
 		if (property != null) {
 			return property;
@@ -149,16 +150,16 @@ public class StartTomcat {
 	}
 
 	private static class Artifact {
-		private String groupId;
+		private final String groupId;
 
-		private String artifact;
+		private final String artifact;
 
-		public Artifact(String groupId, String artifact) {
+		public Artifact(final String groupId, final String artifact) {
 			this.groupId = groupId;
 			this.artifact = artifact;
 		}
 
-		public boolean is(String group, String arti) {
+		public boolean is(final String group, final String arti) {
 			return this.groupId.equals(group) && this.artifact.equals(arti);
 		}
 	}

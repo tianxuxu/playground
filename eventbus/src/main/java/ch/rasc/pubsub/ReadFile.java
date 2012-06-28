@@ -11,7 +11,7 @@ import java.nio.file.StandardOpenOption;
 
 public class ReadFile {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		Path path = Paths.get("C:/temp", "t.txt");
 		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(path, StandardOpenOption.READ)) {
 			ByteBuffer buffer = ByteBuffer.allocate(128);

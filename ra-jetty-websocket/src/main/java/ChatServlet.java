@@ -10,7 +10,7 @@ public final class ChatServlet extends WebSocketServlet {
 	private final Endpoints endpoints = new Endpoints();
 
 	@Override
-	public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
+	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
 		return endpoints.newEndpoint(request.getParameter("user"));
 	}
 }

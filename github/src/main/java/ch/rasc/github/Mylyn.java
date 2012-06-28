@@ -11,7 +11,7 @@ import org.eclipse.jgit.transport.TrackingRefUpdate;
 
 public class Mylyn {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 
 		Path backupDir = Paths.get("github_backup");
 		Files.createDirectories(backupDir);
@@ -27,7 +27,7 @@ public class Mylyn {
 				System.out.println("fetching : " + repo.getName());
 				Collection<TrackingRefUpdate> updates = Git.open(repoDir.toFile()).fetch().call()
 						.getTrackingRefUpdates();
-				
+
 				for (TrackingRefUpdate update : updates) {
 					System.out.println(update.getResult());
 				}

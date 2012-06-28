@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class TestService {
 
 	@Cacheable("maxSizeCache")
-	public String getData(String param) {
+	public String getData(final String param) {
 		System.out.println("inside getData() : " + param);
 		return param.toUpperCase();
 	}

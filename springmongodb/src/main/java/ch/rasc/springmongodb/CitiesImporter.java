@@ -21,7 +21,7 @@ import com.google.common.io.LineProcessor;
 
 public class CitiesImporter {
 
-	public static void main(String[] args) throws IOException, URISyntaxException {
+	public static void main(final String[] args) throws IOException, URISyntaxException {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class);
@@ -40,7 +40,7 @@ public class CitiesImporter {
 
 		Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
 			@Override
-			public boolean processLine(String line) throws IOException {
+			public boolean processLine(final String line) throws IOException {
 				if (!line.startsWith("Country,City")) {
 					List<String> splittedItems = Lists.newArrayList(Splitter.on(",").split(line));
 					if (splittedItems.size() == 7) {

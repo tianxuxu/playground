@@ -9,7 +9,7 @@ import org.apache.commons.mail.MultiPartEmail;
 
 public class TextEmailWithAttachment {
 
-	public static void main(String[] args) throws EmailException, MalformedURLException {
+	public static void main(final String[] args) throws EmailException, MalformedURLException {
 
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("localhost");

@@ -1,13 +1,13 @@
 package lambdaj;
 
 public class User {
-	private String userName;
+	private final String userName;
 
-	private String email;
+	private final String email;
 
-	private int age;
+	private final int age;
 
-	public User(String userName, String email, int age) {
+	public User(final String userName, final String email, final int age) {
 		this.userName = userName;
 		this.email = email;
 		this.age = age;

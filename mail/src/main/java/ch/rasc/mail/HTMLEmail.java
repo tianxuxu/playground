@@ -8,7 +8,7 @@ import org.apache.commons.mail.HtmlEmail;
 
 public class HTMLEmail {
 
-	public static void main(String[] args) throws EmailException, MalformedURLException {
+	public static void main(final String[] args) throws EmailException, MalformedURLException {
 
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName("localhost");

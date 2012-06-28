@@ -14,7 +14,8 @@ import org.atmosphere.cpr.DefaultBroadcaster;
  */
 public final class LoginServlet extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 		HttpSession session = req.getSession();
 		String existingUser = (String) session.getAttribute("user");
 		String user = req.getParameter("user");

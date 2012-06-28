@@ -54,7 +54,7 @@ public final class ReverseAjaxServlet extends WebSocketServlet {
 	}
 
 	@Override
-	public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
+	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
 		return endpoints.newEndpoint();
 	}
 

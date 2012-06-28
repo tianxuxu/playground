@@ -7,7 +7,7 @@ import ch.rasc.wsdemo.helloworld.HelloWorldImplService;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		// <JDK_HOME>\bin\wsimport.exe -s main\java -Xnocompile -p
 		// ch.rasc.wsdemo.calculator http://localhost:8080/cxf/Calculator?wsdl

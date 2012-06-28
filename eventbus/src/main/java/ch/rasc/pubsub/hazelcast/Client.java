@@ -16,7 +16,7 @@ public class Client {
 		return new ShortMessageSender();
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(Client.class);
 
 		for (int i = 0; i < 10; i++) {

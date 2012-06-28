@@ -13,19 +13,19 @@ class Endpoint implements OnTextMessage {
 
 	private Connection connection;
 
-	Endpoint(Endpoints endpoints, String user) {
+	Endpoint(final Endpoints endpoints, final String user) {
 		this.endpoints = endpoints;
 		this.user = user;
 	}
 
 	@Override
-	public void onOpen(Connection conn) {
+	public void onOpen(final Connection conn) {
 		this.connection = conn;
 		endpoints.broadcast(user + " connected !");
 	}
 
 	@Override
-	public void onMessage(String data) {
+	public void onMessage(final String data) {
 		if ("/disconnect".equals(data)) {
 			endpoints.broadcast(user + " disconnected !");
 			connection.disconnect();
@@ -35,12 +35,12 @@ class Endpoint implements OnTextMessage {
 	}
 
 	@Override
-	public void onClose(int closeCode, String message) {
+	public void onClose(final int closeCode, final String message) {
 		endpoints.remove(this);
 		connection = null;
 	}
 
-	public void send(String data) {
+	public void send(final String data) {
 		try {
 			if (connection != null && connection.isOpen()) {
 				connection.sendMessage(data);

@@ -43,7 +43,7 @@ public class GuavaOptional {
 	 * 
 	 * @param stateName State whose capital is desired.
 	 * @return Instance of Optional possibly containing the capital
-	 * corresponding to provided the state name, if available.
+	 *         corresponding to provided the state name, if available.
 	 */
 	public Optional<String> getStateCapital(final String stateName) {
 		return Optional.fromNullable(stateCapitals.get(stateName));
@@ -55,7 +55,7 @@ public class GuavaOptional {
 	 * @param dividend Dividend used in division.
 	 * @param divisor Divisor used in division.
 	 * @return Optional wrapper potentially containing Quotient from dividing
-	 * dividend by divisor.
+	 *         dividend by divisor.
 	 */
 	public Optional<BigDecimal> getQuotient(final BigDecimal dividend, final BigDecimal divisor) {
 		BigDecimal quotient;

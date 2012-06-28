@@ -17,15 +17,15 @@ public class JsonRecord {
 		return result;
 	}
 
-	public void setResult(List<String> result) {
+	public void setResult(final List<String> result) {
 		this.result = result;
 	}
 
 	private final static class CollectionSerializer extends JsonSerializer<List<String>> {
 
 		@Override
-		public void serialize(List<String> value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-				JsonProcessingException {
+		public void serialize(final List<String> value, final JsonGenerator jgen, final SerializerProvider provider)
+				throws IOException, JsonProcessingException {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");

@@ -37,7 +37,7 @@ import org.atmosphere.websocket.WebSocketEventListenerAdapter;
 public class MeteorPubSub extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
 		// Create a Meteor
 		Meteor m = Meteor.build(req);
 
@@ -60,7 +60,7 @@ public class MeteorPubSub extends HttpServlet {
 	}
 
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void doPost(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
 		Broadcaster b = lookupBroadcaster(req.getPathInfo());
 
 		String message = req.getReader().readLine();
@@ -70,7 +70,7 @@ public class MeteorPubSub extends HttpServlet {
 		}
 	}
 
-	Broadcaster lookupBroadcaster(String pathInfo) {
+	Broadcaster lookupBroadcaster(final String pathInfo) {
 		String[] decodedPath = pathInfo.split("/");
 		Broadcaster b = BroadcasterFactory.getDefault().lookup(decodedPath[decodedPath.length - 1], true);
 		return b;

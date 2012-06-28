@@ -24,7 +24,7 @@ public class ReadCsv4 {
 	}
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		new ReadCsv4();
 	}
 

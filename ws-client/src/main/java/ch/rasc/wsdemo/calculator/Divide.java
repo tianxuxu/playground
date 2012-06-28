@@ -47,7 +47,7 @@ public class Divide {
 	 * Sets the value of the arg0 property.
 	 * 
 	 */
-	public void setArg0(int value) {
+	public void setArg0(final int value) {
 		this.arg0 = value;
 	}
 
@@ -63,7 +63,7 @@ public class Divide {
 	 * Sets the value of the arg1 property.
 	 * 
 	 */
-	public void setArg1(int value) {
+	public void setArg1(final int value) {
 		this.arg1 = value;
 	}
 

@@ -26,10 +26,10 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
-	public String uploadTest(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "oneFile", required = false) Part oneFile,
-			@RequestParam(value = "oneFile", required = false) MultipartFile oneMultipartFile,
-			@RequestParam(value = "multipleFiles", required = false) List<MultipartFile> multipleMultipartFiles)
+	public String uploadTest(final HttpServletRequest request, final HttpServletResponse response,
+			@RequestParam(value = "oneFile", required = false) final Part oneFile,
+			@RequestParam(value = "oneFile", required = false) final MultipartFile oneMultipartFile,
+			@RequestParam(value = "multipleFiles", required = false) final List<MultipartFile> multipleMultipartFiles)
 			throws IllegalStateException, IOException, ServletException {
 
 		Enumeration<String> e = request.getParameterNames();
@@ -100,7 +100,7 @@ public class TestController {
 		return "redirect:index.html";
 	}
 
-	private String getFileName(Part part) {
+	private String getFileName(final Part part) {
 		String partHeader = part.getHeader("content-disposition");
 
 		for (String cd : partHeader.split(";")) {

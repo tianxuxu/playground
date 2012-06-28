@@ -35,7 +35,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -43,7 +43,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -51,7 +51,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
@@ -59,7 +59,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return addresses;
 	}
 
-	public void setAddresses(Set<Address> addresses) {
+	public void setAddresses(final Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 

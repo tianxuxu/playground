@@ -19,7 +19,7 @@ import com.mongodb.DBObject;
 @Named
 public class RawAuthor implements Author {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author");
 
 		RawAuthor author = ctx.getBean("author", RawAuthor.class);
@@ -29,14 +29,14 @@ public class RawAuthor implements Author {
 	@Inject
 	private DBCollection collection;
 
-	private Random random;
+	private final Random random;
 
 	public RawAuthor() {
 		random = new Random();
 	}
 
 	@Override
-	public String writeText(int maxWords) {
+	public String writeText(final int maxWords) {
 
 		int skip = (int) (Math.random() * Math.min(100, collection.count()));
 		DBCursor cursor = collection.find().skip(skip);
@@ -71,7 +71,7 @@ public class RawAuthor implements Author {
 		return sb.toString();
 	}
 
-	private String getNext(String w1, String w2) {
+	private String getNext(final String w1, final String w2) {
 		BasicDBObject query = new BasicDBObject();
 		query.append("word1", w1);
 		query.append("word2", w2);

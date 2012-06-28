@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventPublisher {
 
-	private ApplicationEventPublisher publisher;
+	private final ApplicationEventPublisher publisher;
 
 	@Autowired
-	public EventPublisher(ApplicationEventPublisher publisher) {
+	public EventPublisher(final ApplicationEventPublisher publisher) {
 		this.publisher = publisher;
 	}
 
-	public void publishEvent(String message) {
+	public void publishEvent(final String message) {
 		publisher.publishEvent(new AppEvent(this, message));
 	}
 

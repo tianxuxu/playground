@@ -37,7 +37,7 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 	}
 
 	@Override
-	public void init(ServletConfig config) throws ServletException {
+	public void init(final ServletConfig config) throws ServletException {
 		super.init(config);
 		exececutor = Executors.newFixedThreadPool(NUM_ASYNC_TASKS);
 	}
@@ -73,36 +73,36 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 
 	private class AsyncDispatcherServletListener implements AsyncListener {
 
-		private FutureTask<?> future;
+		private final FutureTask<?> future;
 
-		public AsyncDispatcherServletListener(FutureTask<?> future) {
+		public AsyncDispatcherServletListener(final FutureTask<?> future) {
 			this.future = future;
 		}
 
 		@Override
-		public void onTimeout(AsyncEvent event) throws IOException {
+		public void onTimeout(final AsyncEvent event) throws IOException {
 			log.warn("Async request did not complete timeout occured");
 			handleTimeoutOrError(event, "Request timed out");
 		}
 
 		@Override
-		public void onComplete(AsyncEvent event) throws IOException {
+		public void onComplete(final AsyncEvent event) throws IOException {
 			log.debug("Completed async request");
 		}
 
 		@Override
-		public void onError(AsyncEvent event) throws IOException {
+		public void onError(final AsyncEvent event) throws IOException {
 			String error = (event.getThrowable() == null ? "UNKNOWN ERROR" : event.getThrowable().getMessage());
 			log.error("Error in async request " + error);
 			handleTimeoutOrError(event, "Error processing " + error);
 		}
 
 		@Override
-		public void onStartAsync(AsyncEvent event) throws IOException {
+		public void onStartAsync(final AsyncEvent event) throws IOException {
 			log.debug("Async Event started..");
 		}
 
-		private void handleTimeoutOrError(AsyncEvent event, String message) {
+		private void handleTimeoutOrError(final AsyncEvent event, final String message) {
 			PrintWriter writer = null;
 			try {
 				future.cancel(true);

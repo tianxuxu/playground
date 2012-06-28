@@ -10,9 +10,9 @@ public class User {
 	@Id
 	private ObjectId id;
 
-	private String userName;
+	private final String userName;
 
-	public User(String userName) {
+	public User(final String userName) {
 		this.userName = userName;
 	}
 

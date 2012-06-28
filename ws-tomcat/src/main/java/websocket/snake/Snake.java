@@ -38,11 +38,11 @@ public class Snake {
 
 	private Location head;
 
-	private Deque<Location> tail = new ArrayDeque<Location>();
+	private final Deque<Location> tail = new ArrayDeque<Location>();
 
-	private String hexColor;
+	private final String hexColor;
 
-	public Snake(int id, WsOutbound outbound) {
+	public Snake(final int id, final WsOutbound outbound) {
 		this.id = id;
 		this.outbound = outbound;
 		this.hexColor = SnakeWebSocketServlet.getRandomHexColor();
@@ -76,7 +76,7 @@ public class Snake {
 		}
 	}
 
-	public synchronized void update(Collection<Snake> snakes) {
+	public synchronized void update(final Collection<Snake> snakes) {
 		Location nextLocation = head.getAdjacentLocation(direction);
 		if (nextLocation.x >= SnakeWebSocketServlet.PLAYFIELD_WIDTH) {
 			nextLocation.x = 0;
@@ -101,7 +101,7 @@ public class Snake {
 		handleCollisions(snakes);
 	}
 
-	private void handleCollisions(Collection<Snake> snakes) {
+	private void handleCollisions(final Collection<Snake> snakes) {
 		for (Snake snake : snakes) {
 			boolean headCollision = id != snake.id && snake.getHead().equals(head);
 			boolean tailCollision = snake.getTail().contains(head);
@@ -122,7 +122,7 @@ public class Snake {
 		return tail;
 	}
 
-	public synchronized void setDirection(Direction direction) {
+	public synchronized void setDirection(final Direction direction) {
 		this.direction = direction;
 	}
 

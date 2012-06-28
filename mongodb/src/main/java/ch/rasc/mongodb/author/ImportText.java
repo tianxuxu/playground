@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ImportText {
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author");
 
 		TextImporter importer = ctx.getBean("textImporter", TextImporter.class);

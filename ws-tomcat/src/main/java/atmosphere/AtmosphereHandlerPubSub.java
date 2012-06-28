@@ -39,7 +39,7 @@ import org.atmosphere.websocket.WebSocketEventListenerAdapter;
 public class AtmosphereHandlerPubSub extends AbstractReflectorAtmosphereHandler {
 
 	@Override
-	public void onRequest(AtmosphereResource r) throws IOException {
+	public void onRequest(final AtmosphereResource r) throws IOException {
 
 		AtmosphereRequest req = r.getRequest();
 		AtmosphereResponse res = r.getResponse();
@@ -83,7 +83,7 @@ public class AtmosphereHandlerPubSub extends AbstractReflectorAtmosphereHandler 
 	 * @param pathInfo
 	 * @return the {@link Broadcaster} based on the request's path info.
 	 */
-	Broadcaster lookupBroadcaster(String pathInfo) {
+	Broadcaster lookupBroadcaster(final String pathInfo) {
 		String[] decodedPath = pathInfo.split("/");
 		Broadcaster b = BroadcasterFactory.getDefault().lookup(decodedPath[decodedPath.length - 1], true);
 		return b;

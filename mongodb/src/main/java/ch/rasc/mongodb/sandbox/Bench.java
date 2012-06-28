@@ -12,7 +12,7 @@ import com.mongodb.WriteConcern;
 
 public class Bench {
 
-	public static void main(String[] args) throws MongoException, IOException {
+	public static void main(final String[] args) throws MongoException, IOException {
 		Bench.simpleFile();
 	}
 

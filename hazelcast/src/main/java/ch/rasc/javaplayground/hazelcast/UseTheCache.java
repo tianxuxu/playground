@@ -8,7 +8,7 @@ import com.hazelcast.core.HazelcastInstance;
 
 public class UseTheCache {
 
-	private HazelcastInstance haz;
+	private final HazelcastInstance haz;
 
 	public UseTheCache() {
 		haz = Hazelcast.getDefaultInstance();
@@ -25,7 +25,7 @@ public class UseTheCache {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		UseTheCache use = new UseTheCache();
 		use.readList();
 		use.readMap();

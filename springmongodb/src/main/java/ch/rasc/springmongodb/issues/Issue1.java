@@ -16,7 +16,7 @@ import com.google.common.collect.Maps;
 
 public class Issue1 {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class);
 		ctx.refresh();

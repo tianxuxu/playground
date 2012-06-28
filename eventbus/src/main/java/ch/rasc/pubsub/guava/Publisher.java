@@ -10,18 +10,18 @@ import com.google.common.eventbus.EventBus;
 @Service
 public class Publisher {
 
-	private EventBus eventBus;
+	private final EventBus eventBus;
 
 	@Autowired
-	public Publisher(EventBus eventBus) {
+	public Publisher(final EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
 
-	public void publishMsgEvent(String message) {
+	public void publishMsgEvent(final String message) {
 		eventBus.post(new MsgEvent(message));
 	}
 
-	public void publishSpecialMsgEvent(String message, String user) {
+	public void publishSpecialMsgEvent(final String message, final String user) {
 		eventBus.post(new SpecialMsgEvent(message, user));
 	}
 

@@ -6,7 +6,7 @@ public class ShortMessageEvent implements Serializable {
 
 	private String msg;
 
-	public ShortMessageEvent(String msg) {
+	public ShortMessageEvent(final String msg) {
 		this.msg = msg;
 	}
 
@@ -14,7 +14,7 @@ public class ShortMessageEvent implements Serializable {
 		return msg;
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(final String msg) {
 		this.msg = msg;
 	}
 

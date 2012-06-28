@@ -8,7 +8,7 @@ public class PathEvent {
 
 	private final WatchEvent.Kind<?> type;
 
-	PathEvent(Path eventTarget, WatchEvent.Kind<?> type) {
+	PathEvent(final Path eventTarget, final WatchEvent.Kind<?> type) {
 		this.eventTarget = eventTarget;
 		this.type = type;
 	}

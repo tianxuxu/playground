@@ -28,7 +28,7 @@ public class DirectoryWatcher {
 	volatile boolean watching;
 
 	@Autowired
-	public DirectoryWatcher(EventBus eventBus) {
+	public DirectoryWatcher(final EventBus eventBus) {
 		this.watching = false;
 		this.eventBus = eventBus;
 		try {
@@ -73,7 +73,7 @@ public class DirectoryWatcher {
 		watching = false;
 	}
 
-	public void startWatch(Path path) {
+	public void startWatch(final Path path) {
 		try {
 			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
 					StandardWatchEventKinds.ENTRY_MODIFY);

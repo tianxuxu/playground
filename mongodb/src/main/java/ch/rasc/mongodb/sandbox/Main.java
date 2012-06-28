@@ -23,7 +23,8 @@ import com.mongodb.util.JSON;
 
 public class Main {
 
-	public static void main(String[] args) throws MongoException, JsonParseException, JsonMappingException, IOException {
+	public static void main(final String[] args) throws MongoException, JsonParseException, JsonMappingException,
+			IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		@SuppressWarnings("unchecked")

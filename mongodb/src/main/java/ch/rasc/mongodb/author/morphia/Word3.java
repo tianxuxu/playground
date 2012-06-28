@@ -12,7 +12,7 @@ public class Word3 {
 		return word;
 	}
 
-	public void setWord(String word) {
+	public void setWord(final String word) {
 		this.word = word;
 	}
 
@@ -20,7 +20,7 @@ public class Word3 {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(final int count) {
 		this.count = count;
 	}
 
