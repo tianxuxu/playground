@@ -6,11 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Repo {
 	public String name;
 
-	public String url;
-
-	@Override
-	public String toString() {
-		return "Repo [name=" + name + ", url=" + url + "]";
-	}
+	public String git_url;
 
 }
