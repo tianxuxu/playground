@@ -17,7 +17,6 @@ public class RestTemplateObject {
 			System.out.println("Name: " + repo.name);
 			System.out.println("URL: " + repo.git_url);
 			System.out.println();
-
 		}
 	}
 

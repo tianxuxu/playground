@@ -10,13 +10,18 @@ import org.eclipse.jgit.api.Git;
 
 public class Backup {
 
-	public static void main(final String[] args) throws Exception {
+	public static void main(final String... args) throws Exception {
 
-		Path backupDir = Paths.get("github_backup");
+		if (args.length != 2) {
+			System.out.println("Backup <github_user> <backup_directory>");
+			return;
+		}
+				
+		Path backupDir = Paths.get(args[1]);
 		Files.createDirectories(backupDir);
 
 		RepositoryService service = new RepositoryService();
-		for (Repository repo : service.getRepositories("ralscha")) {
+		for (Repository repo : service.getRepositories(args[0])) {
 
 			Path repoDir = backupDir.resolve(repo.getName());
 			Files.createDirectories(repoDir);
