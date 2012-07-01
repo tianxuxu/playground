@@ -25,14 +25,14 @@ public class WorkingInitService {
 	public void init() {
 		readWriteTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override
-			protected void doInTransactionWithoutResult(final TransactionStatus status) {
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				doDbStuff();
 			}
 		});
 
 		String result = readWriteTransactionTemplate.execute(new TransactionCallback<String>() {
 			@Override
-			public String doInTransaction(final TransactionStatus status) {
+			public String doInTransaction(TransactionStatus status) {
 				// do some db operation
 				return "theResult";
 			}

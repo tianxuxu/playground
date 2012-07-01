@@ -11,7 +11,7 @@ import com.google.code.morphia.query.UpdateOperations;
 
 public class Sandbox {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author");
 
 		Datastore datastore = ctx.getBean("datastore", Datastore.class);

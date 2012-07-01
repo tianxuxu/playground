@@ -8,12 +8,11 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.h2.jdbcx.JdbcDataSource;
 
 public class JettyWithJndi {
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		int port = 8080;
 
-		try {
-			ServerSocket srv = new ServerSocket(port);
+		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
 		} catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");

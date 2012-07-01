@@ -10,7 +10,7 @@ public class PathEvents {
 
 	private final Path watchedDirectory;
 
-	public PathEvents(final Path watchedDirectory, final ImmutableList<PathEvent> events) {
+	public PathEvents(Path watchedDirectory, ImmutableList<PathEvent> events) {
 		this.watchedDirectory = watchedDirectory;
 		this.pathEvents = events;
 	}

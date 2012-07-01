@@ -9,9 +9,9 @@ import org.eclipse.jgit.api.errors.TransportException;
 
 public class Clone {
 
-
 	public static void main(String[] args) throws InvalidRemoteException, TransportException, GitAPIException {
-		Git.cloneRepository().setBare(true).setURI("git://github.com/SpringSource/spring-framework.git").setDirectory(new File("springframework")).call();
+		Git.cloneRepository().setBare(true).setURI("git://github.com/SpringSource/spring-framework.git")
+				.setDirectory(new File("springframework")).call();
 	}
 
 }

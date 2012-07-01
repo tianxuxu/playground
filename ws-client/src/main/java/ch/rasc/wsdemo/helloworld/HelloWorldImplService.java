@@ -36,7 +36,7 @@ public class HelloWorldImplService extends Service {
 		HELLOWORLDIMPLSERVICE_WSDL_LOCATION = url;
 	}
 
-	public HelloWorldImplService(final URL wsdlLocation, final QName serviceName) {
+	public HelloWorldImplService(URL wsdlLocation, QName serviceName) {
 		super(wsdlLocation, serviceName);
 	}
 
@@ -61,7 +61,7 @@ public class HelloWorldImplService extends Service {
 	 * @return returns HelloWorldImpl
 	 */
 	@WebEndpoint(name = "HelloWorldImplPort")
-	public HelloWorldImpl getHelloWorldImplPort(final WebServiceFeature... features) {
+	public HelloWorldImpl getHelloWorldImplPort(WebServiceFeature... features) {
 		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "HelloWorldImplPort"), HelloWorldImpl.class,
 				features);
 	}

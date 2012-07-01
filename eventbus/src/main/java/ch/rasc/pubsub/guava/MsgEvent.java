@@ -3,7 +3,7 @@ package ch.rasc.pubsub.guava;
 public class MsgEvent {
 	private final String message;
 
-	public MsgEvent(final String message) {
+	public MsgEvent(String message) {
 		this.message = message;
 	}
 

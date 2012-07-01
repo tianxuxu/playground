@@ -15,8 +15,8 @@ public class BirthdaySerializer extends JsonSerializer<LocalDate> {
 	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat.forPattern("MM-dd-yyyy");
 
 	@Override
-	public void serialize(final LocalDate value, final JsonGenerator jgen, final SerializerProvider provider)
-			throws IOException, JsonProcessingException {
+	public void serialize(LocalDate value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+			JsonProcessingException {
 		jgen.writeString(BIRTHDAY_FORMATTER.print(value));
 	}
 }

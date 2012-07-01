@@ -28,7 +28,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/websockets", method = RequestMethod.GET)
 	@ResponseBody
-	public void websockets(final Meteor m) {
+	public void websockets(Meteor m) {
 
 		// for (Broadcaster br : BroadcasterFactory.getDefault().lookupAll()) {
 		// System.out.println(br);
@@ -61,7 +61,7 @@ public class HomeController {
 
 				sinceId = results.getMaxId();
 
-				List<TwitterMessage> twitterMessages = new ArrayList<TwitterMessage>();
+				List<TwitterMessage> twitterMessages = new ArrayList<>();
 
 				for (Tweet tweet : results.getTweets()) {
 					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet

@@ -30,7 +30,7 @@ public class Tailer {
 	}
 
 	@Subscribe
-	public void handleWatchEvent(final PathEvents pathEvents) {
+	public void handleWatchEvent(PathEvents pathEvents) {
 		for (PathEvent event : pathEvents.getEvents()) {
 			if (path.endsWith(event.getEventTarget())) {
 				if (event.getType() == StandardWatchEventKinds.ENTRY_DELETE) {

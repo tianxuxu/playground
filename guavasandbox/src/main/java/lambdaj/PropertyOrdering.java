@@ -27,13 +27,13 @@ public class PropertyOrdering<T> extends Ordering<T> {
 
 	EvaluationContext context = new StandardEvaluationContext();
 
-	public PropertyOrdering(final Expression readPropertyExpression) {
+	public PropertyOrdering(Expression readPropertyExpression) {
 		this.readPropertyExpression = readPropertyExpression;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int compare(final T o1, final T o2) {
+	public int compare(T o1, T o2) {
 		Object value1 = readPropertyExpression.getValue(context, o1);
 		Object value2 = readPropertyExpression.getValue(context, o2);
 		return ((Comparable<Object>) value1).compareTo(value2);

@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 public class TestController {
 
 	@RequestMapping(value = "/users", method = RequestMethod.OPTIONS)
-	public void handleCorsPreFlight(final HttpServletResponse response) {
+	public void handleCorsPreFlight(HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST");
 		response.addHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -24,7 +24,7 @@ public class TestController {
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> getUsers(final HttpServletResponse response) {
+	public List<User> getUsers(HttpServletResponse response) {
 
 		response.addHeader("Access-Control-Allow-Origin", "*");
 

@@ -10,11 +10,11 @@ public class EventPublisher {
 	private final ApplicationEventPublisher publisher;
 
 	@Autowired
-	public EventPublisher(final ApplicationEventPublisher publisher) {
+	public EventPublisher(ApplicationEventPublisher publisher) {
 		this.publisher = publisher;
 	}
 
-	public void publishEvent(final String message) {
+	public void publishEvent(String message) {
 		publisher.publishEvent(new AppEvent(this, message));
 	}
 

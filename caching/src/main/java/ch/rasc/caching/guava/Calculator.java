@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 public class Calculator {
 
 	@Cacheable("oneMinuteCache")
-	public BigInteger factorialTimedCache(final long n) {
+	public BigInteger factorialTimedCache(long n) {
 		System.out.println("  inside factorial method parameter: " + n);
 		return doCalculation(n);
 	}
 
 	@Cacheable("maxSizeCache")
-	public BigInteger factorialMaxCache(final long n) {
+	public BigInteger factorialMaxCache(long n) {
 		System.out.println("  inside factorial method parameter: " + n);
 		return doCalculation(n);
 	}
 
 	@Cacheable("maxSizeCache")
-	public String doSomething(final String u) {
+	public String doSomething(String u) {
 		System.out.println("inside doSomething");
 		return u;
 	}
 
-	private BigInteger doCalculation(final long n) {
+	private static BigInteger doCalculation(long n) {
 		BigInteger ret = BigInteger.ONE;
 		for (int i = 1; i <= n; ++i) {
 			ret = ret.multiply(BigInteger.valueOf(i));

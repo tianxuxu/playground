@@ -10,7 +10,7 @@ package dustin.examples;
 public class TraditionalEmployee {
 	public enum Gender {
 		FEMALE, MALE
-	};
+	}
 
 	private final String lastName;
 
@@ -28,8 +28,7 @@ public class TraditionalEmployee {
 	 * @param newEmployerName The employer name my instance will have.
 	 * @param newGender The gender of my instance.
 	 */
-	public TraditionalEmployee(final String newLastName, final String newFirstName, final String newEmployerName,
-			final Gender newGender) {
+	public TraditionalEmployee(String newLastName, String newFirstName, String newEmployerName, final Gender newGender) {
 		this.lastName = newLastName;
 		this.firstName = newFirstName;
 		this.employerName = newEmployerName;
@@ -61,7 +60,7 @@ public class TraditionalEmployee {
 	 *         {@code false} if provided object is not considered equal to me.
 	 */
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
 		}

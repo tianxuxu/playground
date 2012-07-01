@@ -22,12 +22,12 @@ public class Location {
 
 	public int y;
 
-	public Location(final int x, final int y) {
+	public Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public Location getAdjacentLocation(final Direction direction) {
+	public Location getAdjacentLocation(Direction direction) {
 		switch (direction) {
 		case NORTH:
 			return new Location(x, y - SnakeWebSocketServlet.GRID_SIZE);
@@ -45,7 +45,7 @@ public class Location {
 	}
 
 	@Override
-	public boolean equals(final Object o) {
+	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
 		}

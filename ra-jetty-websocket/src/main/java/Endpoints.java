@@ -7,19 +7,19 @@ import org.eclipse.jetty.websocket.WebSocket;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 final class Endpoints {
-	private final Map<String, Endpoint> endpoints = new ConcurrentHashMap<String, Endpoint>();
+	private final Map<String, Endpoint> endpoints = new ConcurrentHashMap<>();
 
-	void broadcast(final String data) {
+	void broadcast(String data) {
 		for (Endpoint endpoint : endpoints.values()) {
 			endpoint.send(data);
 		}
 	}
 
-	void remove(final Endpoint endpoint) {
+	void remove(Endpoint endpoint) {
 		endpoints.remove(endpoint.user());
 	}
 
-	public synchronized WebSocket newEndpoint(final String user) {
+	public synchronized WebSocket newEndpoint(String user) {
 		if (user == null || user.trim().length() == 0) {
 			throw new IllegalStateException("Empty user");
 		}

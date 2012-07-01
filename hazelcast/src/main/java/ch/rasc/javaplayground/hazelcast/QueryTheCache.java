@@ -11,18 +11,18 @@ import com.hazelcast.query.PredicateBuilder;
 
 public class QueryTheCache {
 
+	@SuppressWarnings("unused")
 	private final HazelcastInstance haz;
 
 	public QueryTheCache() {
 		haz = Hazelcast.getDefaultInstance();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void queryMap() {
 
-		IMap map = Hazelcast.getMap("testmap");
+		IMap<Predicate<?, ?>, ObjectToCache> map = Hazelcast.getMap("testmap");
 		EntryObject e = new PredicateBuilder().getEntryObject();
-		Predicate predicate = e.get("objectName").in("example: 1", "example: 2", "example: 3")
+		Predicate<?, ?> predicate = e.get("objectName").in("example: 1", "example: 2", "example: 3")
 				.and(e.get("objectID").lessThan(4));
 		Set<ObjectToCache> objects = (Set<ObjectToCache>) map.values(predicate);
 		for (ObjectToCache o : objects) {
@@ -30,7 +30,7 @@ public class QueryTheCache {
 		}
 	}
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		QueryTheCache use = new QueryTheCache();
 		use.queryMap();
 	}

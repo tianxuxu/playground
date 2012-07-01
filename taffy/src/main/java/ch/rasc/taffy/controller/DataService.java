@@ -1,6 +1,7 @@
 package ch.rasc.taffy.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 
 @Service
@@ -32,13 +32,13 @@ public class DataService {
 
 		try (FileSystem zipFs = FileSystems.newFileSystem(tempFile, null)) {
 			Path dataPath = zipFs.getPath("/randomdata.csv");
-			CSVReader reader = new CSVReader(Files.newBufferedReader(dataPath, Charsets.ISO_8859_1), ';');
-			reader.readNext();
-			String[] line;
-			while ((line = reader.readNext()) != null) {
-				listBuilder.add(new User(line));
+			try (CSVReader reader = new CSVReader(Files.newBufferedReader(dataPath, StandardCharsets.ISO_8859_1), ';')) {
+				reader.readNext();
+				String[] line;
+				while ((line = reader.readNext()) != null) {
+					listBuilder.add(new User(line));
+				}
 			}
-			reader.close();
 		}
 		Files.delete(tempFile);
 

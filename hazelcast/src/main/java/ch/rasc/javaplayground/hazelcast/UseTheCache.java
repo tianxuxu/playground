@@ -25,7 +25,7 @@ public class UseTheCache {
 
 	}
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		UseTheCache use = new UseTheCache();
 		use.readList();
 		use.readMap();

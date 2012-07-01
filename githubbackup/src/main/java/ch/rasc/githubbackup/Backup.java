@@ -1,6 +1,5 @@
 package ch.rasc.githubbackup;
 
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,13 +10,13 @@ import org.eclipse.jgit.api.Git;
 
 public class Backup {
 
-	public static void main(final String... args) throws Exception {
+	public static void main(String... args) throws Exception {
 
 		if (args.length != 2) {
 			System.out.println("java -jar githubbackup.jar <github_user> <backup_directory>");
 			return;
 		}
-				
+
 		Path backupDir = Paths.get(args[1]);
 		Files.createDirectories(backupDir);
 

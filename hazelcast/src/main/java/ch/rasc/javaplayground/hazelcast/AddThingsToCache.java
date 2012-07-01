@@ -28,7 +28,7 @@ public class AddThingsToCache {
 		}
 	}
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		AddThingsToCache adder = new AddThingsToCache();
 		adder.addListData();
 		adder.addMapData();

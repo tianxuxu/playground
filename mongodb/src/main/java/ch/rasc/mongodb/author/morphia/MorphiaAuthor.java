@@ -26,7 +26,7 @@ public class MorphiaAuthor implements Author {
 	}
 
 	@Override
-	public String writeText(final int maxWords) {
+	public String writeText(int maxWords) {
 
 		int skip = (int) (Math.random() * Math.min(100, collection.count()));
 		DBCursor cursor = collection.find().skip(skip);
@@ -62,7 +62,7 @@ public class MorphiaAuthor implements Author {
 
 	}
 
-	private String getNext(final String w1, final String w2) {
+	private String getNext(String w1, String w2) {
 		BasicDBObject query = new BasicDBObject();
 		query.append("word1", w1);
 		query.append("word2", w2);

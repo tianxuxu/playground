@@ -6,7 +6,7 @@ import com.hazelcast.core.HazelcastInstance;
 
 public class SimpleSender {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		ClientConfig clientConfig = new ClientConfig();
 		clientConfig.addAddress("localhost");

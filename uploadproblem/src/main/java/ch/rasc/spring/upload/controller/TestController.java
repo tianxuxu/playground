@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
-	public String uploadTest(final HttpServletRequest request, final HttpServletResponse response,
+	public String uploadTest(HttpServletRequest request,
 			@RequestParam(value = "oneFile", required = false) final Part oneFile,
 			@RequestParam(value = "oneFile", required = false) final MultipartFile oneMultipartFile,
 			@RequestParam(value = "multipleFiles", required = false) final List<MultipartFile> multipleMultipartFiles)
@@ -100,7 +99,7 @@ public class TestController {
 		return "redirect:index.html";
 	}
 
-	private String getFileName(final Part part) {
+	private static String getFileName(Part part) {
 		String partHeader = part.getHeader("content-disposition");
 
 		for (String cd : partHeader.split(";")) {

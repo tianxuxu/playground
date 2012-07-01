@@ -9,8 +9,9 @@ import com.google.common.base.Function;
  * @author Dustin
  */
 public class UpperCaseFunction<F, T> implements Function<F, T> {
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object apply(final Object f) {
+	public Object apply(Object f) {
 		return f.toString().toUpperCase();
 	}
 }

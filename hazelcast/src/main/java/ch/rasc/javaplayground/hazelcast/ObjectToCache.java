@@ -15,7 +15,7 @@ public class ObjectToCache implements Serializable {
 
 	}
 
-	public ObjectToCache(final String objectName, final String objectValue, final Integer objectID) {
+	public ObjectToCache(String objectName, String objectValue, Integer objectID) {
 		super();
 		this.objectName = objectName;
 		this.objectValue = objectValue;
@@ -26,7 +26,7 @@ public class ObjectToCache implements Serializable {
 		return objectName;
 	}
 
-	public final void setObjectName(final String objectName) {
+	public final void setObjectName(String objectName) {
 		this.objectName = objectName;
 	}
 
@@ -34,7 +34,7 @@ public class ObjectToCache implements Serializable {
 		return objectValue;
 	}
 
-	public final void setObjectValue(final String objectValue) {
+	public final void setObjectValue(String objectValue) {
 		this.objectValue = objectValue;
 	}
 
@@ -42,7 +42,7 @@ public class ObjectToCache implements Serializable {
 		return objectID;
 	}
 
-	public final void setObjectID(final Integer objectID) {
+	public final void setObjectID(Integer objectID) {
 		this.objectID = objectID;
 	}
 

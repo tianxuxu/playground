@@ -48,7 +48,7 @@ public class SayHi {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setArg0(final String value) {
+	public void setArg0(String value) {
 		this.arg0 = value;
 	}
 

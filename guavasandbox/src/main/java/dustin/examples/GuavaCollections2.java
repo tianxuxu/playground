@@ -22,7 +22,7 @@ public class GuavaCollections2 {
 	 * @return Set of strings representing some programming languages.
 	 */
 	private static Set<String> buildSetStrings() {
-		final Set<String> strings = new HashSet<String>();
+		final Set<String> strings = new HashSet<>();
 		strings.add("Java");
 		strings.add("Groovy");
 		strings.add("Jython");
@@ -77,7 +77,7 @@ public class GuavaCollections2 {
 	 * 
 	 * @param headerText Text to be included in separation header.
 	 */
-	private static void printHeader(final String headerText) {
+	private static void printHeader(String headerText) {
 		out.println("\n==========================================================");
 		out.println("== " + headerText);
 		out.println("==========================================================");
@@ -88,7 +88,7 @@ public class GuavaCollections2 {
 	 * 
 	 * @param arguments
 	 */
-	public static void main(final String[] arguments) {
+	public static void main(String[] arguments) {
 		demonstrateFilter();
 		demonstrateTransform();
 	}

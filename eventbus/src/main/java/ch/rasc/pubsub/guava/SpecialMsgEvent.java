@@ -4,7 +4,7 @@ public class SpecialMsgEvent extends MsgEvent {
 
 	private final String user;
 
-	public SpecialMsgEvent(final String message, final String user) {
+	public SpecialMsgEvent(String message, String user) {
 		super(message);
 		this.user = user;
 	}

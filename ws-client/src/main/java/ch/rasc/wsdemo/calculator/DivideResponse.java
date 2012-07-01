@@ -46,7 +46,7 @@ public class DivideResponse {
 	 * Sets the value of the return property.
 	 * 
 	 */
-	public void setReturn(final int value) {
+	public void setReturn(int value) {
 		this._return = value;
 	}
 

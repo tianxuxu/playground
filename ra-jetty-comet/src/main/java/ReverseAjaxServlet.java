@@ -18,7 +18,9 @@ import org.eclipse.jetty.continuation.ContinuationSupport;
  */
 public final class ReverseAjaxServlet extends HttpServlet {
 
-	final Queue<Continuation> continuations = new ConcurrentLinkedQueue<Continuation>();
+	private static final long serialVersionUID = 1L;
+
+	final Queue<Continuation> continuations = new ConcurrentLinkedQueue<>();
 
 	final ObjectMapper mapper = new ObjectMapper();
 
@@ -58,8 +60,7 @@ public final class ReverseAjaxServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Continuation continuation = ContinuationSupport.getContinuation(req);
 		// optionally set a timeout to avoid suspending requests for too long
 		continuation.setTimeout(0);

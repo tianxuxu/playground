@@ -38,8 +38,7 @@ public class TwitterMessage {
 	}
 
 	/** Constructor to initialize all fields available. */
-	public TwitterMessage(final Long id, final Date createdAt, final String text, final String fromUser,
-			final String profileImageUrl) {
+	public TwitterMessage(Long id, Date createdAt, String text, String fromUser, final String profileImageUrl) {
 		super();
 		this.id = id;
 		this.createdAt = createdAt;
@@ -52,7 +51,7 @@ public class TwitterMessage {
 		return createdAt;
 	}
 
-	public void setCreatedAt(final Date createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -60,7 +59,7 @@ public class TwitterMessage {
 		return text;
 	}
 
-	public void setText(final String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 
@@ -68,7 +67,7 @@ public class TwitterMessage {
 		return fromUser;
 	}
 
-	public void setFromUser(final String fromUser) {
+	public void setFromUser(String fromUser) {
 		this.fromUser = fromUser;
 	}
 
@@ -76,7 +75,7 @@ public class TwitterMessage {
 		return profileImageUrl;
 	}
 
-	public void setProfileImageUrl(final String profileImageUrl) {
+	public void setProfileImageUrl(String profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
 	}
 
@@ -84,7 +83,7 @@ public class TwitterMessage {
 		return id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -100,7 +99,7 @@ public class TwitterMessage {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}

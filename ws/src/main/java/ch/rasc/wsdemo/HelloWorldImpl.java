@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloWorldImpl {
 
-	public String sayHi(final String text) {
+	public String sayHi(String text) {
 		System.out.println("sayHi called");
 		return "A message from the server: Hello " + text;
 	}
 
 	@WebMethod(exclude = true)
-	public String notVisible(final String dummy) {
+	public String notVisible(String dummy) {
 		return dummy;
 	}
 }

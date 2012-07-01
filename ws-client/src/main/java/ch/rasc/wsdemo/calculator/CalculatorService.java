@@ -35,7 +35,7 @@ public class CalculatorService extends Service {
 		CALCULATORSERVICE_WSDL_LOCATION = url;
 	}
 
-	public CalculatorService(final URL wsdlLocation, final QName serviceName) {
+	public CalculatorService(URL wsdlLocation, QName serviceName) {
 		super(wsdlLocation, serviceName);
 	}
 
@@ -60,7 +60,7 @@ public class CalculatorService extends Service {
 	 * @return returns Calculator
 	 */
 	@WebEndpoint(name = "CalculatorPort")
-	public Calculator getCalculatorPort(final WebServiceFeature... features) {
+	public Calculator getCalculatorPort(WebServiceFeature... features) {
 		return super.getPort(new QName("http://wsdemo.ralscha.ch/", "CalculatorPort"), Calculator.class, features);
 	}
 

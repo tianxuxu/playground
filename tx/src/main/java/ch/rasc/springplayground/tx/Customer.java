@@ -29,13 +29,13 @@ public class Customer extends AbstractPersistable<Long> {
 	private String email;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", orphanRemoval = true)
-	private Set<Address> addresses = new HashSet<Address>();
+	private Set<Address> addresses = new HashSet<>();
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -43,7 +43,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return firstName;
 	}
 
-	public void setFirstName(final String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -51,7 +51,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return email;
 	}
 
-	public void setEmail(final String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -59,7 +59,7 @@ public class Customer extends AbstractPersistable<Long> {
 		return addresses;
 	}
 
-	public void setAddresses(final Set<Address> addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 

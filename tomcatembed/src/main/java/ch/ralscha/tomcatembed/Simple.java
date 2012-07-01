@@ -8,7 +8,7 @@ import org.apache.catalina.startup.Tomcat;
 
 public class Simple {
 
-	public static void main(final String[] args) throws ServletException, LifecycleException {
+	public static void main(String[] args) throws ServletException, LifecycleException {
 
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);

@@ -10,7 +10,7 @@ public class MyConf {
 		return env;
 	}
 
-	public void setEnv(final String env) {
+	public void setEnv(String env) {
 		this.env = env;
 	}
 

@@ -39,7 +39,7 @@ public class Geolite {
 		return startIpNum;
 	}
 
-	public void setStartIpNum(final long startIpNum) {
+	public void setStartIpNum(long startIpNum) {
 		this.startIpNum = startIpNum;
 	}
 
@@ -47,7 +47,7 @@ public class Geolite {
 		return endIpNum;
 	}
 
-	public void setEndIpNum(final long endIpNum) {
+	public void setEndIpNum(long endIpNum) {
 		this.endIpNum = endIpNum;
 	}
 
@@ -55,7 +55,7 @@ public class Geolite {
 		return country;
 	}
 
-	public void setCountry(final String country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -63,7 +63,7 @@ public class Geolite {
 		return region;
 	}
 
-	public void setRegion(final String region) {
+	public void setRegion(String region) {
 		this.region = region;
 	}
 
@@ -71,7 +71,7 @@ public class Geolite {
 		return city;
 	}
 
-	public void setCity(final String city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
@@ -79,7 +79,7 @@ public class Geolite {
 		return postalCode;
 	}
 
-	public void setPostalCode(final String postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -87,7 +87,7 @@ public class Geolite {
 		return latitude;
 	}
 
-	public void setLatitude(final double latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -95,7 +95,7 @@ public class Geolite {
 		return longitude;
 	}
 
-	public void setLongitude(final double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -103,7 +103,7 @@ public class Geolite {
 		return metroCode;
 	}
 
-	public void setMetroCode(final String metroCode) {
+	public void setMetroCode(String metroCode) {
 		this.metroCode = metroCode;
 	}
 
@@ -111,7 +111,7 @@ public class Geolite {
 		return areaCode;
 	}
 
-	public void setAreaCode(final String areaCode) {
+	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
 
@@ -119,7 +119,7 @@ public class Geolite {
 		return id;
 	}
 
-	public void setId(final ObjectId id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

@@ -41,7 +41,7 @@ public class EchoMessage extends WebSocketServlet {
 		charBufSize = getInitParameterIntValue("charBufferMaxSize", 2097152);
 	}
 
-	public int getInitParameterIntValue(final String name, final int defaultValue) {
+	public int getInitParameterIntValue(String name, int defaultValue) {
 		String val = this.getInitParameter(name);
 		int result = defaultValue;
 		try {
@@ -53,25 +53,25 @@ public class EchoMessage extends WebSocketServlet {
 	}
 
 	@Override
-	protected StreamInbound createWebSocketInbound(final String subProtocol) {
+	protected StreamInbound createWebSocketInbound(String subProtocol) {
 		return new EchoMessageInbound(byteBufSize, charBufSize);
 	}
 
 	private static final class EchoMessageInbound extends MessageInbound {
 
-		public EchoMessageInbound(final int byteBufferMaxSize, final int charBufferMaxSize) {
+		public EchoMessageInbound(int byteBufferMaxSize, int charBufferMaxSize) {
 			super();
 			setByteBufferMaxSize(byteBufferMaxSize);
 			setCharBufferMaxSize(charBufferMaxSize);
 		}
 
 		@Override
-		protected void onBinaryMessage(final ByteBuffer message) throws IOException {
+		protected void onBinaryMessage(ByteBuffer message) throws IOException {
 			getWsOutbound().writeBinaryMessage(message);
 		}
 
 		@Override
-		protected void onTextMessage(final CharBuffer message) throws IOException {
+		protected void onTextMessage(CharBuffer message) throws IOException {
 			getWsOutbound().writeTextMessage(message);
 		}
 	}

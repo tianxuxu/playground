@@ -17,7 +17,9 @@ import org.apache.catalina.comet.CometProcessor;
  */
 public final class ChatServlet extends HttpServlet implements CometProcessor {
 
-	private final BlockingQueue<CometEvent> events = new LinkedBlockingQueue<CometEvent>();
+	private static final long serialVersionUID = 1L;
+
+	private final BlockingQueue<CometEvent> events = new LinkedBlockingQueue<>();
 
 	@Override
 	public void init() throws ServletException {
@@ -26,7 +28,7 @@ public final class ChatServlet extends HttpServlet implements CometProcessor {
 	}
 
 	@Override
-	public void event(final CometEvent evt) throws IOException, ServletException {
+	public void event(CometEvent evt) throws IOException, ServletException {
 
 		HttpServletRequest request = evt.getHttpServletRequest();
 		String user = (String) request.getSession().getAttribute("user");
@@ -46,12 +48,21 @@ public final class ChatServlet extends HttpServlet implements CometProcessor {
 				}
 				evt.close();
 			}
+			break;
 		}
+		case END:
+			break;
+		case ERROR:
+			break;
+		case READ:
+			break;
+		default:
+			break;
 		}
 	}
 
-	void broadcast(final String message) throws IOException {
-		Queue<CometEvent> q = new LinkedList<CometEvent>();
+	void broadcast(String message) throws IOException {
+		Queue<CometEvent> q = new LinkedList<>();
 		events.drainTo(q);
 		while (!q.isEmpty()) {
 			CometEvent event = q.poll();

@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailWithJavax {
 
-	public static void main(final String[] args) throws MessagingException {
+	public static void main(String[] args) throws MessagingException {
 
 		Properties sessionProperties = new Properties();
 		sessionProperties.put("mail.smtp.host", "localhost");

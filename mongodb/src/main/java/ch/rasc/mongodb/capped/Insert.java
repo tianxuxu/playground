@@ -14,7 +14,7 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 public class Insert {
-	public static void main(final String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 
 		Mongo mongo = new Mongo("localhost");
 

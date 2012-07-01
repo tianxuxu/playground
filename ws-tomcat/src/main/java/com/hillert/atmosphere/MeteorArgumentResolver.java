@@ -11,13 +11,13 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class MeteorArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
-	public boolean supportsParameter(final MethodParameter parameter) {
+	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.getParameterType().isAssignableFrom(Meteor.class);
 	}
 
 	@Override
-	public Object resolveArgument(final MethodParameter parameter, final ModelAndViewContainer mavContainer,
-			final NativeWebRequest webRequest, final WebDataBinderFactory binderFactory) throws Exception {
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+			final NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		return AtmosphereUtils.getMeteor(webRequest.getNativeRequest(HttpServletRequest.class));
 	}
 }

@@ -5,7 +5,7 @@ public class Field {
 
 	private final String type;
 
-	public Field(final String name, final String type) {
+	public Field(String name, String type) {
 		this.name = name;
 		this.type = type;
 	}

@@ -8,7 +8,7 @@ import com.hazelcast.core.Hazelcast;
 
 public class QueueOffer {
 
-	public static void main(final String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException {
 
 		Config cfg = new Config();
 		cfg.setPort(5900);

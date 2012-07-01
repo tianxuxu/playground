@@ -20,19 +20,22 @@ public class GuavaPreconditionsDemo {
 	 * 
 	 * @param parameter Parameter that is checked for null-ness.
 	 */
-	public void testForNonNullArgument(final String parameter) {
+	public void testForNonNullArgument(String parameter) {
+		@SuppressWarnings("unused")
 		final String localParameter = checkNotNull(parameter, "Provided parameter is unacceptably null.");
 	}
 
-	public void testDivisorNotZero(final int divisor) {
+	public void testDivisorNotZero(int divisor) {
 		checkArgument(divisor != 0, "Zero divisor not allowed.");
 	}
 
-	public void testArrayElement(final String[] strArray, final int indexNumber) {
+	public void testArrayElement(String[] strArray, int indexNumber) {
+		@SuppressWarnings("unused")
 		final int index = checkElementIndex(indexNumber, strArray.length, "String array index number");
 	}
 
-	public void testArrayPosition(final String[] strArray, final int indexNumber) {
+	public void testArrayPosition(String[] strArray, int indexNumber) {
+		@SuppressWarnings("unused")
 		final int index = checkPositionIndex(indexNumber, strArray.length, "String array index number");
 	}
 
@@ -40,7 +43,7 @@ public class GuavaPreconditionsDemo {
 		checkState(this.initialized, "Cannot perform action because not initialized.");
 	}
 
-	public static void printHeader(final String newHeaderText) {
+	public static void printHeader(String newHeaderText) {
 		err.println("\n==========================================================");
 		err.println("== " + newHeaderText);
 		err.println("==========================================================");
@@ -49,7 +52,7 @@ public class GuavaPreconditionsDemo {
 	/**
 	 * Main function for executing demonstrations of Guava's Preconditions.
 	 */
-	public static void main(final String[] arguments) {
+	public static void main(String[] arguments) {
 		final GuavaPreconditionsDemo me = new GuavaPreconditionsDemo();
 
 		printHeader("Preconditions.checkNotNull");

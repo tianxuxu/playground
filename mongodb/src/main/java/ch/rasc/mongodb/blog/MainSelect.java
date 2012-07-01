@@ -13,7 +13,7 @@ import com.mongodb.MongoException;
 
 public class MainSelect {
 
-	public static void main(final String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("localhost");
 		// Mongo mongo = new Mongo("localhost", 10000);
 

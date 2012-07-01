@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public class MongoApp {
 	private static final Logger log = LoggerFactory.getLogger(MongoApp.class);
 
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class);

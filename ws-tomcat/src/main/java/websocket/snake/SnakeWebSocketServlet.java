@@ -61,9 +61,9 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
 
-	private final ConcurrentHashMap<Integer, Snake> snakes = new ConcurrentHashMap<Integer, Snake>();
+	private final ConcurrentHashMap<Integer, Snake> snakes = new ConcurrentHashMap<>();
 
-	private final ConcurrentHashMap<Integer, SnakeMessageInbound> connections = new ConcurrentHashMap<Integer, SnakeMessageInbound>();
+	private final ConcurrentHashMap<Integer, SnakeMessageInbound> connections = new ConcurrentHashMap<>();
 
 	@Override
 	public void init() throws ServletException {
@@ -94,7 +94,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		broadcast(String.format("{'type': 'update', 'data' : [%s]}", sb.toString()));
 	}
 
-	private void broadcast(final String message) {
+	private void broadcast(String message) {
 		for (SnakeMessageInbound connection : getConnections()) {
 			try {
 				CharBuffer buffer = CharBuffer.wrap(message);
@@ -129,10 +129,10 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	}
 
 	private static int roundByGridSize(int value) {
-		value = value + (SnakeWebSocketServlet.GRID_SIZE / 2);
-		value = value / SnakeWebSocketServlet.GRID_SIZE;
-		value = value * SnakeWebSocketServlet.GRID_SIZE;
-		return value;
+		int result = value + (SnakeWebSocketServlet.GRID_SIZE / 2);
+		result = result / SnakeWebSocketServlet.GRID_SIZE;
+		result = result * SnakeWebSocketServlet.GRID_SIZE;
+		return result;
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	@SuppressWarnings("synthetic-access")
 	@Override
-	protected StreamInbound createWebSocketInbound(final String subProtocol) {
+	protected StreamInbound createWebSocketInbound(String subProtocol) {
 		return new SnakeMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -155,20 +155,20 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 		private Snake snake;
 
-		private SnakeMessageInbound(final int id) {
+		private SnakeMessageInbound(int id) {
 			this.id = id;
 		}
 
 		@SuppressWarnings("synthetic-access")
 		@Override
-		protected void onOpen(final WsOutbound outbound) {
+		protected void onOpen(WsOutbound outbound) {
 			this.snake = new Snake(id, outbound);
 			snakes.put(Integer.valueOf(id), snake);
 			connections.put(Integer.valueOf(id), this);
 			StringBuilder sb = new StringBuilder();
 			for (Iterator<Snake> iterator = getSnakes().iterator(); iterator.hasNext();) {
-				Snake snake = iterator.next();
-				sb.append(String.format("{id: %d, color: '%s'}", Integer.valueOf(snake.getId()), snake.getHexColor()));
+				Snake _snake = iterator.next();
+				sb.append(String.format("{id: %d, color: '%s'}", Integer.valueOf(_snake.getId()), _snake.getHexColor()));
 				if (iterator.hasNext()) {
 					sb.append(',');
 				}
@@ -178,19 +178,19 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 		@SuppressWarnings("synthetic-access")
 		@Override
-		protected void onClose(final int status) {
+		protected void onClose(int status) {
 			connections.remove(Integer.valueOf(id));
 			snakes.remove(Integer.valueOf(id));
 			broadcast(String.format("{'type': 'leave', 'id': %d}", Integer.valueOf(id)));
 		}
 
 		@Override
-		protected void onBinaryMessage(final ByteBuffer message) throws IOException {
+		protected void onBinaryMessage(ByteBuffer message) throws IOException {
 			throw new UnsupportedOperationException("Binary message not supported.");
 		}
 
 		@Override
-		protected void onTextMessage(final CharBuffer charBuffer) throws IOException {
+		protected void onTextMessage(CharBuffer charBuffer) throws IOException {
 			String message = charBuffer.toString();
 			if ("west".equals(message)) {
 				snake.setDirection(Direction.WEST);

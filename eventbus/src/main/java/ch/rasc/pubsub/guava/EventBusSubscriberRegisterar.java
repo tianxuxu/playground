@@ -16,17 +16,17 @@ public class EventBusSubscriberRegisterar implements BeanPostProcessor {
 	private final EventBus eventBus;
 
 	@Autowired
-	public EventBusSubscriberRegisterar(final EventBus eventBus) {
+	public EventBusSubscriberRegisterar(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
 
 	@Override
-	public Object postProcessBeforeInitialization(final Object bean, final String beanName) throws BeansException {
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
 
 	@Override
-	public Object postProcessAfterInitialization(final Object bean, final String beanName) throws BeansException {
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 
 		for (Method method : bean.getClass().getMethods()) {
 			if (method.getAnnotation(Subscribe.class) != null) {

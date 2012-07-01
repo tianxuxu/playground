@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 
 public class Main2 {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		// List<String> records = Lists.newArrayList();
 		// records.add("{\"name\": \"johnd\"}");
 		// records.add("{\"name\": \"bill\"}");

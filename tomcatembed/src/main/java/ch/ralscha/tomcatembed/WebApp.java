@@ -7,7 +7,7 @@ import org.apache.catalina.startup.Tomcat;
 
 public class WebApp {
 
-	public static void main(final String[] args) throws LifecycleException, ServletException {
+	public static void main(String[] args) throws LifecycleException, ServletException {
 
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);

@@ -30,7 +30,7 @@ public class Employee {
 		return employeeId;
 	}
 
-	public void setEmployeeId(final long employeeId) {
+	public void setEmployeeId(long employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -38,7 +38,7 @@ public class Employee {
 		return employeeName;
 	}
 
-	public void setEmployeeName(final String employeeName) {
+	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
 
@@ -46,7 +46,7 @@ public class Employee {
 		return employeeSurname;
 	}
 
-	public void setEmployeeSurname(final String employeeSurname) {
+	public void setEmployeeSurname(String employeeSurname) {
 		this.employeeSurname = employeeSurname;
 	}
 
@@ -54,7 +54,7 @@ public class Employee {
 		return job;
 	}
 
-	public void setJob(final String job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
 }

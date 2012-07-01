@@ -8,24 +8,24 @@ import javax.jws.WebService;
 @Named
 public class Calculator {
 
-	public int add(final int a, final int b) {
+	public int add(int a, int b) {
 		return a + b;
 	}
 
-	public int subtract(final int a, final int b) {
+	public int subtract(int a, int b) {
 		return a - b;
 	}
 
-	public int multiply(final int a, final int b) {
+	public int multiply(int a, int b) {
 		return a * b;
 	}
 
-	public int divide(final int a, final int b) {
+	public int divide(int a, int b) {
 		return a / b;
 	}
 
 	@WebMethod(exclude = true)
-	public int modulo(final int a, final int b) {
+	public int modulo(int a, int b) {
 		return a % b;
 	}
 }

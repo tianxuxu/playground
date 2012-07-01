@@ -20,21 +20,21 @@ class Endpoint implements SocketIOInbound {
 
 	private SocketIOOutbound outbound;
 
-	Endpoint(final ChatServlet servlet, final String user, final HttpServletRequest request) {
+	Endpoint(ChatServlet servlet, String user, HttpServletRequest request) {
 		this.request = request;
 		this.servlet = servlet;
 		this.user = user;
 	}
 
 	@Override
-	public void onConnect(final SocketIOOutbound outbound) {
-		this.outbound = outbound;
+	public void onConnect(SocketIOOutbound socketIOOutbound) {
+		this.outbound = socketIOOutbound;
 		servlet.add(this);
 		servlet.broadcast(user + " connected");
 	}
 
 	@Override
-	public void onDisconnect(final DisconnectReason reason, final String errorMessage) {
+	public void onDisconnect(DisconnectReason reason, String errorMessage) {
 		outbound = null;
 		request.getSession().removeAttribute("user");
 		servlet.remove(this);
@@ -42,7 +42,7 @@ class Endpoint implements SocketIOInbound {
 	}
 
 	@Override
-	public void onMessage(final int messageType, final String message) {
+	public void onMessage(int messageType, String message) {
 		if ("/disconnect".equals(message)) {
 			outbound.close();
 		} else {
@@ -50,7 +50,7 @@ class Endpoint implements SocketIOInbound {
 		}
 	}
 
-	void send(final String data) {
+	void send(String data) {
 		try {
 			if (outbound != null && outbound.getConnectionState() == ConnectionState.CONNECTED) {
 				outbound.sendMessage(data);

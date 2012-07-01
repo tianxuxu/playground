@@ -22,7 +22,7 @@ public class GeoliteImporter {
 		// D:\_download\GeoLiteCity_20101101\GeoLiteCity-Blocks.csv
 		// D:\_download\GeoLiteCity_20101101\GeoLiteCity-Location.csv
 
-		Map<Integer, Geolite> locationMap = new HashMap<Integer, Geolite>();
+		Map<Integer, Geolite> locationMap = new HashMap<>();
 
 		CSVReader reader = new CSVReader(
 				new FileReader("D:\\_download\\GeoLiteCity_20101101\\GeoLiteCity-Location.csv"));

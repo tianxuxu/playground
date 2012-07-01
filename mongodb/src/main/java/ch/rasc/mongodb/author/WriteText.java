@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class WriteText {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author");
 

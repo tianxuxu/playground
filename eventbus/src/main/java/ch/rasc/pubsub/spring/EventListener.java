@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class EventListener implements ApplicationListener<AppEvent> {
 
 	@Override
-	public void onApplicationEvent(final AppEvent event) {
+	public void onApplicationEvent(AppEvent event) {
 		System.out.println("1st: " + new Date() + ": " + event.getMessage());
 		try {
 			TimeUnit.SECONDS.sleep(5);

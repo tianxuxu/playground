@@ -15,7 +15,7 @@ import com.mongodb.MongoException;
 
 public class Main3 {
 
-	public static void main(final String[] args) throws MongoException, IOException {
+	public static void main(String[] args) throws MongoException, IOException {
 		Mongo mongo = new Mongo("localhost");
 		DB db = mongo.getDB("tutorial");
 

@@ -9,12 +9,12 @@ public class ModelObject {
 
 	private final List<Field> fields;
 
-	public ModelObject(final String name) {
+	public ModelObject(String name) {
 		this.name = name;
-		this.fields = new ArrayList<Field>();
+		this.fields = new ArrayList<>();
 	}
 
-	public void addField(final Field field) {
+	public void addField(Field field) {
 		fields.add(field);
 	}
 

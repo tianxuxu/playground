@@ -11,11 +11,10 @@ public class RestTemplateMap {
 
 	private static final String GITHUB_REPOS_URI = "https://api.github.com/users/{user}/repos";
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> repos = restTemplate.getForObject(GITHUB_REPOS_URI, List.class, "ralscha");
 
 		for (Map<String, Object> repo : repos) {

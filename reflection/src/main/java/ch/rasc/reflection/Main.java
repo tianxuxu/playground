@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class Main {
-	public static void main(final String... args) throws Exception {
+	public static void main(String... args) throws Exception {
 		Field[] fields = User.class.getDeclaredFields();
 		for (Field field : fields) {
 			if (!Modifier.isStatic(field.getModifiers())) {

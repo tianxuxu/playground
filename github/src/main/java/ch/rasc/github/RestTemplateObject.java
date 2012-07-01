@@ -8,7 +8,7 @@ public class RestTemplateObject {
 
 	private static final String GITHUB_REPOS_URI = "https://api.github.com/users/{user}/repos";
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		RestTemplate restTemplate = new RestTemplate();
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class Calculator {
 
 	@Cacheable("calculator")
-	public BigInteger factorial(final long n) {
+	public BigInteger factorial(long n) {
 		System.out.println("calling factorial method with parameter: " + n);
 
 		BigInteger ret = BigInteger.ONE;

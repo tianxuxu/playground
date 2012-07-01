@@ -11,22 +11,21 @@ import com.google.common.collect.ImmutableList;
 public class ReadCsv2 {
 
 	public ReadCsv2() throws IOException {
-		InputStream is = getClass().getResourceAsStream("/test2.csv");
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		try (InputStream is = getClass().getResourceAsStream("/test2.csv");
+				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
-		String line;
-		while ((line = br.readLine()) != null) {
-			Iterable<String> splittedLine = Splitter.on(",").trimResults(CharMatcher.is('"')).split(line);
-			List<String> fields = ImmutableList.copyOf(splittedLine);
-			System.out.printf("%3d %-15s %s\n", Integer.valueOf(fields.get(2)), fields.get(0), fields.get(1));
+			String line;
+			while ((line = br.readLine()) != null) {
+				Iterable<String> splittedLine = Splitter.on(",").trimResults(CharMatcher.is('"')).split(line);
+				List<String> fields = ImmutableList.copyOf(splittedLine);
+				System.out.printf("%3d %-15s %s\n", Integer.valueOf(fields.get(2)), fields.get(0), fields.get(1));
+			}
 		}
 
-		br.close();
-		is.close();
 	}
 
 	@SuppressWarnings("unused")
-	public static void main(final String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		new ReadCsv2();
 	}
 

@@ -10,7 +10,7 @@ import com.hazelcast.core.HazelcastInstance;
 
 public class Main {
 
-	public static void main(final String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 		Calculator calculator = ctx.getBean(Calculator.class);
 

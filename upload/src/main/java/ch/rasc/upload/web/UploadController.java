@@ -22,11 +22,11 @@ public class UploadController {
 	private FileManager fileManager;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void chunkExists(final HttpServletRequest request, final HttpServletResponse response,
+	public void chunkExists(@SuppressWarnings("unused") HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("resumableChunkNumber") final Integer chunkNumber,
 			@RequestParam("resumableChunkSize") final Long chunkSize,
 			@RequestParam("resumableIdentifier") final String identifier,
-			@RequestParam("resumableFilename") final String filename) throws IOException {
+			@SuppressWarnings("unused") @RequestParam("resumableFilename") final String filename) throws IOException {
 
 		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
 			// do not upload chunk again
@@ -38,7 +38,7 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void processUpload(final HttpServletRequest request, final HttpServletResponse response,
+	public void processUpload(@SuppressWarnings("unused") HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "resumableChunkNumber") final Integer chunkNumber,
 			@RequestParam(value = "resumableChunkSize") final Long chunkSize,
 			@RequestParam(value = "resumableTotalSize") final Long totalSize,
@@ -65,7 +65,7 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/simpleUpload", method = RequestMethod.POST)
-	public String processUpload(final HttpServletRequest request) throws IOException, ServletException {
+	public String processUpload(HttpServletRequest request) throws IOException, ServletException {
 
 		for (Part part : request.getParts()) {
 
@@ -83,7 +83,7 @@ public class UploadController {
 
 	}
 
-	private String getFileName(final Part part) {
+	private static String getFileName(Part part) {
 		String partHeader = part.getHeader("content-disposition");
 
 		for (String cd : partHeader.split(";")) {

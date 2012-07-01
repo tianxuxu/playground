@@ -16,7 +16,7 @@ import com.google.common.base.Stopwatch;
 public class StopWatchDemo {
 	private final static Logger LOGGER = Logger.getLogger(StopWatchDemo.class.getCanonicalName());
 
-	public static void doSomethingJustToBeDoingIt(final int numberOfTimesToDoNothing) {
+	public static void doSomethingJustToBeDoingIt(int numberOfTimesToDoNothing) {
 		for (int count = 0; count < numberOfTimesToDoNothing; count++) {
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
@@ -33,7 +33,7 @@ public class StopWatchDemo {
 	 * @param numberLoops Number of loops executed.
 	 * @param stopwatch Stopwatch instance with time used statistics.
 	 */
-	public static void printElapsedTime(final int numberLoops, final Stopwatch stopwatch) {
+	public static void printElapsedTime(int numberLoops, Stopwatch stopwatch) {
 		if (stopwatch.isRunning()) {
 			out.println("WARNING! Your stopwatch is still running!");
 		} else // stopwatch not running
@@ -48,7 +48,7 @@ public class StopWatchDemo {
 		}
 	}
 
-	public static void main(final String[] arguments) {
+	public static void main(String[] arguments) {
 		final Stopwatch stopwatch = new Stopwatch();
 
 		int numberTimes = 5;

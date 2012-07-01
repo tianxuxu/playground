@@ -29,7 +29,7 @@ public class GuavaEmployee {
 	 * @param newEmployerName The employer name my instance will have.
 	 * @param newGender The gender of my instance.
 	 */
-	public GuavaEmployee(final String newLastName, final String newFirstName, final String newEmployerName,
+	public GuavaEmployee(String newLastName, String newFirstName, String newEmployerName,
 			final TraditionalEmployee.Gender newGender) {
 		this.lastName = newLastName;
 		this.firstName = newFirstName;
@@ -61,7 +61,7 @@ public class GuavaEmployee {
 	 *         {@code false} if provided object is not considered equal to me.
 	 */
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
 		}

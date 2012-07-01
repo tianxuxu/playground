@@ -19,7 +19,7 @@ import ch.rasc.springmongodb.domain.City;
 
 public class QueryCities {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class);

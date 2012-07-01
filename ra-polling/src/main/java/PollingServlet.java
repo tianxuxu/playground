@@ -18,9 +18,11 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public final class PollingServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	final Random random = new Random();
 
-	final BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
+	final BlockingQueue<String> messages = new LinkedBlockingQueue<>();
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
@@ -49,9 +51,8 @@ public final class PollingServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
-		List<String> locmessages = new LinkedList<String>();
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<String> locmessages = new LinkedList<>();
 		this.messages.drainTo(locmessages);
 		resp.setStatus(HttpServletResponse.SC_OK);
 		resp.setContentType("application/json");

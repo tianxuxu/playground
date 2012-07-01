@@ -13,9 +13,11 @@ import org.atmosphere.cpr.DefaultBroadcaster;
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 public final class LoginServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
 	@Override
-	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String existingUser = (String) session.getAttribute("user");
 		String user = req.getParameter("user");

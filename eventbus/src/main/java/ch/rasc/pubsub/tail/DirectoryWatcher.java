@@ -28,7 +28,7 @@ public class DirectoryWatcher {
 	volatile boolean watching;
 
 	@Autowired
-	public DirectoryWatcher(final EventBus eventBus) {
+	public DirectoryWatcher(EventBus eventBus) {
 		this.watching = false;
 		this.eventBus = eventBus;
 		try {
@@ -51,14 +51,14 @@ public class DirectoryWatcher {
 							final List<WatchEvent<?>> events = watchKey.pollEvents();
 
 							ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList.builder();
-							for (final WatchEvent<?> event : events) {
+							for (WatchEvent<?> event : events) {
 								pathEventsBuilder.add(new PathEvent((Path) event.context(), event.kind()));
 							}
 
 							watchKey.reset();
 							eventBus.post(new PathEvents((Path) watchKey.watchable(), pathEventsBuilder.build()));
 						}
-					} catch (final InterruptedException e) {
+					} catch (InterruptedException e) {
 						watching = false;
 					}
 				}
@@ -73,7 +73,7 @@ public class DirectoryWatcher {
 		watching = false;
 	}
 
-	public void startWatch(final Path path) {
+	public void startWatch(Path path) {
 		try {
 			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
 					StandardWatchEventKinds.ENTRY_MODIFY);

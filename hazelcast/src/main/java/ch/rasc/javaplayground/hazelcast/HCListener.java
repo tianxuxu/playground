@@ -9,7 +9,7 @@ import com.hazelcast.core.InstanceListener;
 
 public class HCListener implements InstanceListener {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		HCListener main = new HCListener();
 		Hazelcast.addInstanceListener(main);
 		Collection<Instance> instances = Hazelcast.getInstances();
@@ -20,7 +20,7 @@ public class HCListener implements InstanceListener {
 	}
 
 	@Override
-	public void instanceCreated(final InstanceEvent event) {
+	public void instanceCreated(InstanceEvent event) {
 		Instance instance = event.getInstance();
 		System.out
 				.println("Created instance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType() + "]");
@@ -28,7 +28,7 @@ public class HCListener implements InstanceListener {
 	}
 
 	@Override
-	public void instanceDestroyed(final InstanceEvent event) {
+	public void instanceDestroyed(InstanceEvent event) {
 		Instance instance = event.getInstance();
 		System.out.println("Destroyed isntance ID: [" + instance.getId() + "] Type: [" + instance.getInstanceType()
 				+ "]");

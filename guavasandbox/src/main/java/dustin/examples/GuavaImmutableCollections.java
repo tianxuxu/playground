@@ -27,7 +27,7 @@ public class GuavaImmutableCollections {
 	 * @return Sample set of Strings.
 	 */
 	public Set<String> buildUnderlyingSampleSet() {
-		final Set<String> strings = new HashSet<String>();
+		final Set<String> strings = new HashSet<>();
 		strings.add("Dustin");
 		strings.add("Java");
 		strings.add("College Football");
@@ -40,7 +40,7 @@ public class GuavaImmutableCollections {
 	 * @return Sample list of Strings.
 	 */
 	public List<String> buildUnderlyingSampleList() {
-		final List<String> gStrings = new ArrayList<String>();
+		final List<String> gStrings = new ArrayList<>();
 		gStrings.add("Guava");
 		gStrings.add("Groovy");
 		gStrings.add("Grails");
@@ -106,7 +106,7 @@ public class GuavaImmutableCollections {
 	 */
 	public void demoGuavaImmutableMap() {
 		printHeader("Guava's ImmutableMap");
-		final Map<String, String> originalStringsMapping = new HashMap<String, String>();
+		final Map<String, String> originalStringsMapping = new HashMap<>();
 		originalStringsMapping.put("D", "Dustin");
 		originalStringsMapping.put("G", "Guava");
 		originalStringsMapping.put("J", "Java");
@@ -123,7 +123,7 @@ public class GuavaImmutableCollections {
 	 */
 	public void demoJdkUnmodifiableMap() {
 		printHeader("JDK unmodifiableMap");
-		final Map<String, String> originalStringsMapping = new HashMap<String, String>();
+		final Map<String, String> originalStringsMapping = new HashMap<>();
 		originalStringsMapping.put("D", "Dustin");
 		originalStringsMapping.put("G", "Guava");
 		originalStringsMapping.put("J", "Java");
@@ -166,7 +166,7 @@ public class GuavaImmutableCollections {
 	 * 
 	 * @param headerText Text to be used in separation header.
 	 */
-	public static void printHeader(final String headerText) {
+	public static void printHeader(String headerText) {
 		out.println("\n========================================================");
 		out.println("== " + headerText);
 		out.println("========================================================");
@@ -177,7 +177,7 @@ public class GuavaImmutableCollections {
 	 * 
 	 * @param arguments Command-line arguments; none expected.
 	 */
-	public static void main(final String[] arguments) {
+	public static void main(String[] arguments) {
 		final GuavaImmutableCollections me = new GuavaImmutableCollections();
 
 		// Compare JDK UnmodifiableSet to Guava's ImmutableSet

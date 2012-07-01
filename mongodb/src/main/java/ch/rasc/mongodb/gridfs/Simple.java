@@ -13,7 +13,7 @@ import com.mongodb.MongoException;
 
 public class Simple {
 
-	public static void main(final String[] args) throws MongoException, IOException {
+	public static void main(String[] args) throws MongoException, IOException {
 		Simple.simpleFile();
 	}
 

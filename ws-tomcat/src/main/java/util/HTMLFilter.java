@@ -33,7 +33,7 @@ public final class HTMLFilter {
 	 * 
 	 * @param message The message string to be filtered
 	 */
-	public static String filter(final String message) {
+	public static String filter(String message) {
 
 		if (message == null) {
 			return (null);

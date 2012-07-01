@@ -7,7 +7,7 @@ import ch.ralscha.embeddedtc.EmbeddedTomcat;
 
 public class StartTomcat {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		Handler fh = new ConsoleHandler();
 		fh.setLevel(Level.FINE);

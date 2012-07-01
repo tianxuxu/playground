@@ -20,9 +20,11 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public final class PiggybackServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	final Random random = new Random();
 
-	final BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
+	final BlockingQueue<String> messages = new LinkedBlockingQueue<>();
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
@@ -51,15 +53,14 @@ public final class PiggybackServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("FORM POSTED !");
-		List<String> locmessages = new LinkedList<String>();
+		List<String> locmessages = new LinkedList<>();
 		this.messages.drainTo(locmessages);
 		resp.setStatus(HttpServletResponse.SC_OK);
 		resp.setContentType("application/json");
 
-		Map<String, Object> piggy = new HashMap<String, Object>();
+		Map<String, Object> piggy = new HashMap<>();
 		piggy.put("events", locmessages);
 		piggy.put("formValid", true);
 		resp.getWriter().write(mapper.writeValueAsString(piggy));
@@ -68,9 +69,8 @@ public final class PiggybackServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
-		List<String> locmessages = new LinkedList<String>();
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<String> locmessages = new LinkedList<>();
 		this.messages.drainTo(locmessages);
 		resp.setStatus(HttpServletResponse.SC_OK);
 		resp.setContentType("application/json");

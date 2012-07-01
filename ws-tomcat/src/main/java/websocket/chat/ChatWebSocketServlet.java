@@ -42,10 +42,10 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
 
-	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<ChatMessageInbound>();
+	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<>();
 
 	@Override
-	protected StreamInbound createWebSocketInbound(final String subProtocol) {
+	protected StreamInbound createWebSocketInbound(String subProtocol) {
 		return new ChatMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -53,37 +53,37 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
 		private final String nickname;
 
-		ChatMessageInbound(final int id) {
+		ChatMessageInbound(int id) {
 			this.nickname = GUEST_PREFIX + id;
 		}
 
 		@Override
-		protected void onOpen(final WsOutbound outbound) {
+		protected void onOpen(WsOutbound outbound) {
 			connections.add(this);
 			String message = String.format("* %s %s", nickname, "has joined.");
 			broadcast(message);
 		}
 
 		@Override
-		protected void onClose(final int status) {
+		protected void onClose(int status) {
 			connections.remove(this);
 			String message = String.format("* %s %s", nickname, "has disconnected.");
 			broadcast(message);
 		}
 
 		@Override
-		protected void onBinaryMessage(final ByteBuffer message) throws IOException {
+		protected void onBinaryMessage(ByteBuffer message) throws IOException {
 			throw new UnsupportedOperationException("Binary message not supported.");
 		}
 
 		@Override
-		protected void onTextMessage(final CharBuffer message) throws IOException {
+		protected void onTextMessage(CharBuffer message) throws IOException {
 			// Never trust the client
 			String filteredMessage = String.format("%s: %s", nickname, HTMLFilter.filter(message.toString()));
 			broadcast(filteredMessage);
 		}
 
-		private void broadcast(final String message) {
+		private void broadcast(String message) {
 			for (ChatMessageInbound connection : connections) {
 				try {
 					CharBuffer buffer = CharBuffer.wrap(message);

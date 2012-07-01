@@ -13,15 +13,15 @@ public class Publisher {
 	private final EventBus eventBus;
 
 	@Autowired
-	public Publisher(final EventBus eventBus) {
+	public Publisher(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
 
-	public void publishMsgEvent(final String message) {
+	public void publishMsgEvent(String message) {
 		eventBus.post(new MsgEvent(message));
 	}
 
-	public void publishSpecialMsgEvent(final String message, final String user) {
+	public void publishSpecialMsgEvent(String message, String user) {
 		eventBus.post(new SpecialMsgEvent(message, user));
 	}
 

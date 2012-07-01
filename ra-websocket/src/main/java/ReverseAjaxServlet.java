@@ -16,6 +16,8 @@ import org.eclipse.jetty.websocket.WebSocketServlet;
  */
 public final class ReverseAjaxServlet extends WebSocketServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	final Endpoints endpoints = new Endpoints();
 
 	private final Thread generator = new Thread("Event generator") {
@@ -54,7 +56,7 @@ public final class ReverseAjaxServlet extends WebSocketServlet {
 	}
 
 	@Override
-	public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
+	public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
 		return endpoints.newEndpoint();
 	}
 

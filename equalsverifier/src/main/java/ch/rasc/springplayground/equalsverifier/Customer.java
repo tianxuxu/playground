@@ -5,7 +5,7 @@ public class Customer {
 
 	private final String name;
 
-	public Customer(final int id, final String name) {
+	public Customer(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -28,7 +28,7 @@ public class Customer {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}

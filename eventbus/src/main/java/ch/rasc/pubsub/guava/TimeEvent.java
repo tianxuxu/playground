@@ -5,7 +5,7 @@ import java.util.Date;
 public class TimeEvent {
 	private final Date time;
 
-	public TimeEvent(final Date time) {
+	public TimeEvent(Date time) {
 		this.time = time;
 	}
 

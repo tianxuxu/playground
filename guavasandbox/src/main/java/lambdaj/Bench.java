@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 
 public class Bench {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		List<User> users = Lists.newArrayList();
 		Random random = new Random();
@@ -55,7 +55,7 @@ public class Bench {
 		System.out.println("Java sort reverse: " + stopWatch.elapsedMillis());
 
 		SpelExpressionParser parser = new SpelExpressionParser();
-		PropertyOrdering<User> ordering = new PropertyOrdering<User>(parser.parseExpression("age"));
+		PropertyOrdering<User> ordering = new PropertyOrdering<>(parser.parseExpression("age"));
 		stopWatch.reset();
 		stopWatch.start();
 		sorted = ordering.sortedCopy(users);

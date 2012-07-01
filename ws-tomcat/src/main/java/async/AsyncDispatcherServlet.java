@@ -24,6 +24,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 @WebServlet(urlPatterns = { "/async/*" }, asyncSupported = true, name = "async")
 public class AsyncDispatcherServlet extends DispatcherServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	private ExecutorService exececutor;
 
 	private static final int NUM_ASYNC_TASKS = 15;
@@ -37,7 +39,7 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 	}
 
 	@Override
-	public void init(final ServletConfig config) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		exececutor = Executors.newFixedThreadPool(NUM_ASYNC_TASKS);
 	}
@@ -52,7 +54,8 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 	protected void doDispatch(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
 		final AsyncContext ac = request.startAsync(request, response);
 		ac.setTimeout(TIME_OUT);
-		FutureTask<Void> task = new FutureTask<Void>(new Callable<Void>() {
+		FutureTask<Void> task = new FutureTask<>(new Callable<Void>() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 			public Void call() throws Exception {
 				try {
@@ -75,34 +78,35 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 
 		private final FutureTask<?> future;
 
-		public AsyncDispatcherServletListener(final FutureTask<?> future) {
+		public AsyncDispatcherServletListener(FutureTask<?> future) {
 			this.future = future;
 		}
 
 		@Override
-		public void onTimeout(final AsyncEvent event) throws IOException {
+		public void onTimeout(AsyncEvent event) throws IOException {
 			log.warn("Async request did not complete timeout occured");
 			handleTimeoutOrError(event, "Request timed out");
 		}
 
 		@Override
-		public void onComplete(final AsyncEvent event) throws IOException {
+		public void onComplete(AsyncEvent event) throws IOException {
 			log.debug("Completed async request");
 		}
 
 		@Override
-		public void onError(final AsyncEvent event) throws IOException {
+		public void onError(AsyncEvent event) throws IOException {
 			String error = (event.getThrowable() == null ? "UNKNOWN ERROR" : event.getThrowable().getMessage());
 			log.error("Error in async request " + error);
 			handleTimeoutOrError(event, "Error processing " + error);
 		}
 
 		@Override
-		public void onStartAsync(final AsyncEvent event) throws IOException {
+		public void onStartAsync(AsyncEvent event) throws IOException {
 			log.debug("Async Event started..");
 		}
 
-		private void handleTimeoutOrError(final AsyncEvent event, final String message) {
+		private void handleTimeoutOrError(AsyncEvent event, String message) {
+			@SuppressWarnings("resource")
 			PrintWriter writer = null;
 			try {
 				future.cancel(true);

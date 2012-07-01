@@ -17,7 +17,9 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public final class ReverseAjaxServlet extends HttpServlet {
 
-	final Queue<AsyncContext> asyncContexts = new ConcurrentLinkedQueue<AsyncContext>();
+	private static final long serialVersionUID = 1L;
+
+	final Queue<AsyncContext> asyncContexts = new ConcurrentLinkedQueue<>();
 
 	final ObjectMapper mapper = new ObjectMapper();
 
@@ -57,8 +59,7 @@ public final class ReverseAjaxServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		AsyncContext asyncContext = req.startAsync();
 		asyncContext.setTimeout(0);
 		asyncContexts.offer(asyncContext);

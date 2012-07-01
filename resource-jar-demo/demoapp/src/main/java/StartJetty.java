@@ -23,12 +23,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class StartJetty {
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 		int port = 8080;
 
-		try {
-			ServerSocket srv = new ServerSocket(port);
+		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
 		} catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
@@ -61,12 +60,12 @@ public class StartJetty {
 		private final String artifact;
 
 		@SuppressWarnings("unused")
-		public Artifact(final String groupId, final String artifact) {
+		public Artifact(String groupId, String artifact) {
 			this.groupId = groupId;
 			this.artifact = artifact;
 		}
 
-		public boolean is(final String group, final String arti) {
+		public boolean is(String group, String arti) {
 			return this.groupId.equals(group) && this.artifact.equals(arti);
 		}
 	}
@@ -79,17 +78,17 @@ public class StartJetty {
 			this(null);
 		}
 
-		public MavenWebInfConfiguration(final List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
+		public MavenWebInfConfiguration(List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
 				SAXException, IOException {
 			File homeDir = new File(System.getProperty("user.home"));
 
-			jars = new ArrayList<File>();
+			jars = new ArrayList<>();
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(new File("./pom.xml"));
 
-			Map<String, String> properties = new HashMap<String, String>();
+			Map<String, String> properties = new HashMap<>();
 			NodeList propertiesNodeList = doc.getElementsByTagName("properties");
 			if (propertiesNodeList != null && propertiesNodeList.item(0) != null) {
 				NodeList propertiesChildren = propertiesNodeList.item(0).getChildNodes();
@@ -135,8 +134,7 @@ public class StartJetty {
 			}
 		}
 
-		private boolean isIncluded(final List<Artifact> includeOnlyArtifacts, final String groupId,
-				final String artifactId) {
+		private static boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId, final String artifactId) {
 			if (includeOnlyArtifacts != null) {
 				for (Artifact artifact : includeOnlyArtifacts) {
 					if (artifact.is(groupId, artifactId)) {
@@ -149,14 +147,14 @@ public class StartJetty {
 			return true;
 		}
 
-		private String stripWhitespace(final String orig) {
+		private static String stripWhitespace(String orig) {
 			if (orig != null) {
 				return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
 			}
 			return orig;
 		}
 
-		private String resolveProperty(final String orig, final Map<String, String> properties) {
+		private static String resolveProperty(String orig, Map<String, String> properties) {
 			String property = properties.get(orig);
 			if (property != null) {
 				return property;
@@ -165,7 +163,7 @@ public class StartJetty {
 		}
 
 		@Override
-		protected List<Resource> findJars(final WebAppContext context) throws Exception {
+		protected List<Resource> findJars(WebAppContext context) throws Exception {
 			List<Resource> resources = super.findJars(context);
 
 			for (File jar : jars) {
