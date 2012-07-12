@@ -3,7 +3,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ch.ralscha.embeddedtc.EmbeddedTomcat;
+import ch.rasc.embeddedtc.EmbeddedTomcat;
 
 public class StartTomcat {
 
