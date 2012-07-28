@@ -43,13 +43,13 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.7</version>
+			<version>1.9.8</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.atmosphere</groupId>
 			<artifactId>atmosphere-runtime</artifactId>
-			<version>0.9.4</version>
+			<version>1.0.0.beta5</version>
 		</dependency>
 
 		<dependency>
