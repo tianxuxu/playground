@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.atmosphere.config.service.MeteorService;
 import org.atmosphere.cpr.ApplicationConfig;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
@@ -34,6 +35,7 @@ import org.atmosphere.websocket.WebSocketEventListenerAdapter;
  * 
  * @author Jeanfrancois Arcand
  */
+@MeteorService
 public class MeteorPubSub extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

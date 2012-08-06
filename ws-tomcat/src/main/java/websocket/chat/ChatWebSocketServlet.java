@@ -23,6 +23,8 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
@@ -45,7 +47,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<>();
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+            HttpServletRequest request) {
 		return new ChatMessageInbound(connectionIds.incrementAndGet());
 	}
 
