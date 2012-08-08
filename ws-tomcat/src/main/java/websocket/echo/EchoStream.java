@@ -20,24 +20,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
+@WebServlet(urlPatterns="/websocket/echoStream")
 public class EchoStream extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("synthetic-access")
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol,
-            HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
 		return new EchoStreamInbound();
 	}
 
-	private static final class EchoStreamInbound extends StreamInbound {
+	static final class EchoStreamInbound extends StreamInbound {
 
 		@Override
 		protected void onBinaryData(InputStream is) throws IOException {

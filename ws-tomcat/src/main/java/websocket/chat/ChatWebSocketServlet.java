@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.websocket.MessageInbound;
@@ -35,7 +36,7 @@ import util.HTMLFilter;
 /**
  * Example web socket servlet for chat.
  */
-@SuppressWarnings("synthetic-access")
+@WebServlet(urlPatterns="/websocket/chat")
 public class ChatWebSocketServlet extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -44,11 +45,10 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
 
-	private final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<>();
+	final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<>();
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol,
-            HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
 		return new ChatMessageInbound(connectionIds.incrementAndGet());
 	}
 

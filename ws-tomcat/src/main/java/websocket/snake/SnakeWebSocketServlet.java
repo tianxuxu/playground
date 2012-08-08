@@ -30,6 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.websocket.MessageInbound;
@@ -42,11 +43,12 @@ import org.apache.juli.logging.LogFactory;
 /**
  * Example web socket servlet for simple multiplayer snake.
  */
+@WebServlet(urlPatterns="/websocket/snake")
 public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Log log = LogFactory.getLog(SnakeWebSocketServlet.class);
+	static final Log log = LogFactory.getLog(SnakeWebSocketServlet.class);
 
 	public static final int PLAYFIELD_WIDTH = 640;
 
@@ -62,15 +64,14 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
 
-	private final ConcurrentHashMap<Integer, Snake> snakes = new ConcurrentHashMap<>();
+	final ConcurrentHashMap<Integer, Snake> snakes = new ConcurrentHashMap<>();
 
-	private final ConcurrentHashMap<Integer, SnakeMessageInbound> connections = new ConcurrentHashMap<>();
+	final ConcurrentHashMap<Integer, SnakeMessageInbound> connections = new ConcurrentHashMap<>();
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		gameTimer.scheduleAtFixedRate(new TimerTask() {
-			@SuppressWarnings("synthetic-access")
 			@Override
 			public void run() {
 				try {
@@ -82,7 +83,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		}, TICK_DELAY, TICK_DELAY);
 	}
 
-	private void tick() {
+	void tick() {
 		StringBuilder sb = new StringBuilder();
 		for (Iterator<Snake> iterator = getSnakes().iterator(); iterator.hasNext();) {
 			Snake snake = iterator.next();
@@ -95,7 +96,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		broadcast(String.format("{'type': 'update', 'data' : [%s]}", sb.toString()));
 	}
 
-	private void broadcast(String message) {
+	void broadcast(String message) {
 		for (SnakeMessageInbound connection : getConnections()) {
 			try {
 				CharBuffer buffer = CharBuffer.wrap(message);
@@ -110,7 +111,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		return Collections.unmodifiableCollection(connections.values());
 	}
 
-	private Collection<Snake> getSnakes() {
+	Collection<Snake> getSnakes() {
 		return Collections.unmodifiableCollection(snakes.values());
 	}
 
@@ -130,10 +131,10 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	}
 
 	private static int roundByGridSize(int value) {
-		int result = value + (SnakeWebSocketServlet.GRID_SIZE / 2);
-		result = result / SnakeWebSocketServlet.GRID_SIZE;
-		result = result * SnakeWebSocketServlet.GRID_SIZE;
-		return result;
+		int v = value + (SnakeWebSocketServlet.GRID_SIZE / 2);
+		v = v / SnakeWebSocketServlet.GRID_SIZE;
+		v = v * SnakeWebSocketServlet.GRID_SIZE;
+		return v;
 	}
 
 	@Override
@@ -144,10 +145,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol,
-            HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
 		return new SnakeMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -157,11 +156,10 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 		private Snake snake;
 
-		private SnakeMessageInbound(int id) {
+		SnakeMessageInbound(int id) {
 			this.id = id;
 		}
 
-		@SuppressWarnings("synthetic-access")
 		@Override
 		protected void onOpen(WsOutbound outbound) {
 			this.snake = new Snake(id, outbound);
@@ -178,7 +176,6 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			broadcast(String.format("{'type': 'join','data':[%s]}", sb.toString()));
 		}
 
-		@SuppressWarnings("synthetic-access")
 		@Override
 		protected void onClose(int status) {
 			connections.remove(Integer.valueOf(id));

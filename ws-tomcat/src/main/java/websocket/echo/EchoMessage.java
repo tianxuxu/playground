@@ -21,12 +21,14 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 
+@WebServlet(urlPatterns="/websocket/echoMessage")
 public class EchoMessage extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -44,18 +46,22 @@ public class EchoMessage extends WebSocketServlet {
 
 	public int getInitParameterIntValue(String name, int defaultValue) {
 		String val = this.getInitParameter(name);
-		int result = defaultValue;
-		try {
-			result = Integer.parseInt(val);
-		} catch (Exception x) {
-			// nothing here
+		int result;
+		if (null != val) {
+			try {
+				result = Integer.parseInt(val);
+			} catch (Exception x) {
+				result = defaultValue;
+			}
+		} else {
+			result = defaultValue;
 		}
+
 		return result;
 	}
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol,
-            HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
 		return new EchoMessageInbound(byteBufSize, charBufSize);
 	}
 
