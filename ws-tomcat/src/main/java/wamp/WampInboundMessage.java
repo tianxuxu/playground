@@ -7,6 +7,6 @@ public abstract class WampInboundMessage extends WampMessage {
 		super(type);
 	}
 
-	public abstract Object[] serialize();
+	public abstract void deserialize(Object[] message);
 
 }

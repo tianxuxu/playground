@@ -14,6 +14,7 @@ import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WsOutbound;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import wamp.in.WampCallMessage;
 import wamp.out.WampWelcomeMessage;
 
 @WebServlet(urlPatterns = "/wamp")
@@ -35,7 +36,6 @@ public class WampServlet extends FixedWebSocketServlet {
 
 	@Override
 	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
-		System.out.println("sub:" + subProtocol);
 		return new WampMessageInbound(request.getSession().getId());
 	}
 
@@ -49,7 +49,6 @@ public class WampServlet extends FixedWebSocketServlet {
 
 		@Override
 		protected void onOpen(WsOutbound outbound) {
-			System.out.println("onOpen");
 			try {
 				WampWelcomeMessage msg = new WampWelcomeMessage(sessionId);
 				String m = objectMapper.writeValueAsString(msg.serialize());
@@ -80,6 +79,9 @@ public class WampServlet extends FixedWebSocketServlet {
 				break;
 			case 2:
 				//CALL
+				WampCallMessage callMessage = new WampCallMessage();
+				callMessage.deserialize(msgs);
+				System.out.println(callMessage.getProcURI());
 				break;
 			case 5:
 				//SUBSCRIBE
@@ -92,10 +94,6 @@ public class WampServlet extends FixedWebSocketServlet {
 				break;
 			}
 
-			for (Object msg : msgs) {
-				System.out.println(msg);
-			}
-			System.out.println(message);
 			getWsOutbound().writeTextMessage(message);
 		}
 	}

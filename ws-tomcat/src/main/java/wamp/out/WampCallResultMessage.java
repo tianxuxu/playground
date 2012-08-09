@@ -1,16 +1,16 @@
 package wamp.out;
 
 import wamp.MessageType;
-import wamp.WampInboundMessage;
+import wamp.WampOutboundMessage;
 
-public class WampCallResultMessage extends WampInboundMessage {
+public class WampCallResultMessage extends WampOutboundMessage {
 
 	private final String callId;
 
 	private final Object result;
 
 	public WampCallResultMessage(String callId, Object result) {
-		super(MessageType.CALL);
+		super(MessageType.CALLRESULT);
 		this.callId = callId;
 		this.result = result;
 	}

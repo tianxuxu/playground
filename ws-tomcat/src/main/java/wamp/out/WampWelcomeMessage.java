@@ -1,9 +1,9 @@
 package wamp.out;
 
 import wamp.MessageType;
-import wamp.WampInboundMessage;
+import wamp.WampOutboundMessage;
 
-public class WampWelcomeMessage extends WampInboundMessage {
+public class WampWelcomeMessage extends WampOutboundMessage {
 
 	private final String sessionId;
 	private final int protocolVersion = 1;

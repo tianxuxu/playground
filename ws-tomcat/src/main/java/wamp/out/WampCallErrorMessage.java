@@ -3,9 +3,9 @@ package wamp.out;
 
 
 import wamp.MessageType;
-import wamp.WampInboundMessage;
+import wamp.WampOutboundMessage;
 
-public class WampCallErrorMessage extends WampInboundMessage {
+public class WampCallErrorMessage extends WampOutboundMessage {
 
 	private final String callId;
 
