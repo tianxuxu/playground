@@ -1,6 +1,6 @@
 function initialize() {
-	var url = 'twittersse';
-	eventSource = new EventSource(url);
+
+	eventSource = new EventSource('twittersse');
 
 	eventSource.onmessage = function(event) {
 		var feeds = event.data.toString();
