@@ -1,0 +1,64 @@
+package ch.rasc.sse.twitter;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.twitter.api.Tweet;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableList;
+
+@Controller
+public class TwitterController {
+
+	private ObjectMapper mapper = new ObjectMapper();
+	
+	@Autowired
+	private TwitterReader twitterReader;
+	
+	@RequestMapping(value = "/twittersse", method = RequestMethod.GET, produces = "text/event-stream")
+	@ResponseBody
+	public String getTweets(@RequestHeader(value="Last-Event-ID", required=false) String lastEventId) throws JsonGenerationException, JsonMappingException, IOException {
+		
+		System.out.println("Last Event Id: " + lastEventId);
+		long lastId = 0;
+		if (StringUtils.hasText(lastEventId)) {
+			lastId = Long.valueOf(lastEventId);
+		}
+		
+		ImmutableList<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);
+		for (Tweet tweet : tweets) {
+			if (lastId < tweet.getId()) {
+				lastId = tweet.getId();
+			}
+		}
+		
+		String resultJson = mapper.writeValueAsString(tweets);
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("id:");
+		sb.append(lastId);
+		sb.append("\n");
+		
+		sb.append("data:");
+		sb.append(resultJson);
+		sb.append("\n");
+			
+		sb.append("retry:6000");
+		sb.append("\n\n");
+		
+		System.out.println(sb.toString());
+		
+		return sb.toString();
+		
+	}
+	
+}

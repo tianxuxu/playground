@@ -1,4 +1,4 @@
-package ch.rasc.eventsource;
+package ch.rasc.sse.simple;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;

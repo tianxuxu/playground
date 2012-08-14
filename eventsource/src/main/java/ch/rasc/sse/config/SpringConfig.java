@@ -1,21 +1,21 @@
-package ch.rasc.eventsource.config;
+package ch.rasc.sse.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "ch.rasc.eventsource" })
+@EnableScheduling
+@ComponentScan(basePackages = { "ch.rasc.sse" })
 public class SpringConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
-	
-	
 	
 }
