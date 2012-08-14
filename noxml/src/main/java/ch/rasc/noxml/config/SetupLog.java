@@ -25,7 +25,7 @@ public class SetupLog implements ServletContextListener {
 		encoder.setPattern("%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n");
 		encoder.start();
 
-		ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<ILoggingEvent>();
+		ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
 		consoleAppender.setContext(lc);
 		consoleAppender.setEncoder(encoder);
 		consoleAppender.start();
