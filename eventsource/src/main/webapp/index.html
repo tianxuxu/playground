@@ -41,12 +41,37 @@ Ext.onReady(function() {
 	function startPolling() {
 		panel.down('#stopButton').enable();
 		panel.down('#startButton').disable();
-		source = new EventSource('date');
+		//source = new EventSource('date');
+		//source = new EventSource('http://localhost:8080/simpleservlet?userid=11');
+		//source = new EventSource('simpleservlet');
+		//source = new EventSource('simplestreaming');
+		source = new EventSource('simplelong');
 		source.addEventListener('message', function(e) {
+			console.log('>>'+e.data+'<<');
+			//console.log(e.lastEventId);
+			
+			//var o = JSON.parse(e.data);
+			//console.log(o);
 			panel.update({
 				data: e.data
 			});
 		}, false);
+		
+		source.addEventListener('add', function(e) {
+			console.log('add: ' + e.data);
+		}, false);
+		
+		source.addEventListener('remove', function(e) {
+			console.log('remove: ' + e.data);
+		}, false);		
+		
+		source.addEventListener('open', function(e) {
+			//console.log('open', e);
+		}, false);
+		
+		source.addEventListener('error', function(e) {
+			//console.log('error', e);
+		}, false);		
 	}
 	
 	function stopPolling() {

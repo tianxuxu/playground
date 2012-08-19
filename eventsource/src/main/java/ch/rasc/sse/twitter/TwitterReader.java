@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
@@ -45,9 +44,9 @@ public class TwitterReader {
 		return builder.build();
 	}
 
-	@Scheduled(initialDelay = 5000, fixedDelay = 10000)
+	// @Scheduled(initialDelay = 5000, fixedDelay = 10000)
 	public void readTwitterFeed() {
-		
+
 		SearchResults results = template.searchOperations().search("java", 1, 50, lastReceivedId, 0);
 		List<Tweet> newTweets = Lists.newLinkedList();
 		long maxId = 0;
@@ -60,7 +59,7 @@ public class TwitterReader {
 			}
 		}
 		lastReceivedId = maxId;
-		
+
 		if (!newTweets.isEmpty()) {
 			System.out.printf("Got %d new tweets\n", newTweets.size());
 			writeLock.lock();
