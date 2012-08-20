@@ -23,6 +23,8 @@ public class SimpleServlet extends HttpServlet {
 		System.out.println("Last-Event-ID: " + request.getHeader("Last-Event-ID"));
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		response.setStatus(200);
+		
 
 		PrintWriter out = response.getWriter();
 
