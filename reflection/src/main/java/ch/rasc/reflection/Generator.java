@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class Generator {
 
-	public String generateJs(ModelObject model) throws JsonGenerationException, JsonMappingException, IOException {
+	public String generateJs(ModelBean model) throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);

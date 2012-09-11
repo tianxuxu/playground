@@ -6,4 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Model {
 	String value();
+	
+	String idProperty() default "id";
 }

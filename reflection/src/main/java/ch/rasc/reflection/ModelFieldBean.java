@@ -1,11 +1,11 @@
 package ch.rasc.reflection;
 
-public class Field {
+public class ModelFieldBean {
 	private final String name;
 
 	private final String type;
 
-	public Field(String name, String type) {
+	public ModelFieldBean(String name, String type) {
 		this.name = name;
 		this.type = type;
 	}

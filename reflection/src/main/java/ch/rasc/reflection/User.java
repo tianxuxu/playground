@@ -1,20 +1,15 @@
 package ch.rasc.reflection;
 
-public class User {
-	private final int id = 1;
+public class User extends Base {
 
-	public String email = "sr@ess.ch";
-
-	public static String userName = "userName";
-
-	private static String testName = "testName";
-
-	@Model("test")
 	private String name;
 
-	public int getId() {
-		System.out.println("CALLED getId()");
-		return id;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	// public User(int id, String name) {
