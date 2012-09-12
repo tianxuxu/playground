@@ -1,15 +1,15 @@
 package ch.rasc.reflection;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModelBean {
-	private final String name;
+	private String name;
 
 	private String idProperty;
 
-	private final List<ModelFieldBean> fields;
+	private Map<String, ModelFieldBean> fields = new LinkedHashMap<>();
 
 	private boolean pageing;
 
@@ -21,17 +21,12 @@ public class ModelBean {
 
 	private String destroyMethod;
 
-	public ModelBean(String name) {
-		this.name = name;
-		this.fields = new ArrayList<>();
-	}
-
-	public void addField(ModelFieldBean field) {
-		fields.add(field);
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getIdProperty() {
@@ -42,8 +37,26 @@ public class ModelBean {
 		this.idProperty = idProperty;
 	}
 
-	public List<ModelFieldBean> getFields() {
-		return Collections.unmodifiableList(fields);
+	public Map<String, ModelFieldBean> getFields() {
+		return fields;
+	}
+
+	public void setFields(Map<String, ModelFieldBean> fields) {
+		this.fields = fields;
+	}
+
+	public void addFields(List<ModelFieldBean> modelFields) {
+		for (ModelFieldBean bean : modelFields) {
+			fields.put(bean.getName(), bean);
+		}		
+	}
+	
+	public ModelFieldBean getField(String fieldName) {
+		return fields.get(fieldName);
+	}
+
+	public void addField(ModelFieldBean bean) {
+		fields.put(bean.getName(), bean);
 	}
 
 	public boolean isPageing() {
@@ -85,5 +98,7 @@ public class ModelBean {
 	public void setDestroyMethod(String destroyMethod) {
 		this.destroyMethod = destroyMethod;
 	}
+
+
 
 }
