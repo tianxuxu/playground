@@ -7,13 +7,22 @@ import java.util.List;
 public class ModelBean {
 	private final String name;
 
-	private final String idProperty;
+	private String idProperty;
 
 	private final List<ModelFieldBean> fields;
 
-	public ModelBean(String name, String idProperty) {
+	private boolean pageing;
+
+	private String readMethod;
+
+	private String createMethod;
+
+	private String updateMethod;
+
+	private String destroyMethod;
+
+	public ModelBean(String name) {
 		this.name = name;
-		this.idProperty = idProperty;
 		this.fields = new ArrayList<>();
 	}
 
@@ -29,8 +38,52 @@ public class ModelBean {
 		return idProperty;
 	}
 
+	public void setIdProperty(String idProperty) {
+		this.idProperty = idProperty;
+	}
+
 	public List<ModelFieldBean> getFields() {
 		return Collections.unmodifiableList(fields);
+	}
+
+	public boolean isPageing() {
+		return pageing;
+	}
+
+	public void setPageing(boolean pageing) {
+		this.pageing = pageing;
+	}
+
+	public String getReadMethod() {
+		return readMethod;
+	}
+
+	public void setReadMethod(String readMethod) {
+		this.readMethod = readMethod;
+	}
+
+	public String getCreateMethod() {
+		return createMethod;
+	}
+
+	public void setCreateMethod(String createMethod) {
+		this.createMethod = createMethod;
+	}
+
+	public String getUpdateMethod() {
+		return updateMethod;
+	}
+
+	public void setUpdateMethod(String updateMethod) {
+		this.updateMethod = updateMethod;
+	}
+
+	public String getDestroyMethod() {
+		return destroyMethod;
+	}
+
+	public void setDestroyMethod(String destroyMethod) {
+		this.destroyMethod = destroyMethod;
 	}
 
 }

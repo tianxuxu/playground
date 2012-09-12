@@ -1,8 +1,13 @@
 package ch.rasc.reflection;
 
+@Model(value = "User", paging = true, readMethod = "read", createMethod = "create", updateMethod = "update", destroyMethod = "destroy")
 public class User extends Base {
 
 	private String name;
+
+	public String firstName;
+
+	private String veryPrivate;
 
 	public String getName() {
 		return name;
