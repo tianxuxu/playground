@@ -28,6 +28,21 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\eventsource
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\github
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\githubbackup
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\guavasandbox
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -98,11 +113,6 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\ra-cometdcall 
-mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
 cd D:\ws\playground\ra-jetty-comet
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -138,6 +148,11 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\reflection
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\security
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -159,6 +174,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\upload
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\watch
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..

@@ -47,7 +47,9 @@ public enum ModelType {
 	DATE("date") {
 		@Override
 		public boolean supports(Class<?> type) {
-			return type.equals(Date.class) || type.equals(java.sql.Date.class) || type.equals(Timestamp.class);
+			return type.equals(Date.class) || type.equals(java.sql.Date.class) || type.equals(Timestamp.class)
+					|| type.getName().equals("org.joda.time.DateTime")
+					|| type.getName().equals("org.joda.time.LocalDate");
 		}
 	},
 	BOOLEAN("boolean") {

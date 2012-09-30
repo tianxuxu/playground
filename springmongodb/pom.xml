@@ -15,9 +15,9 @@
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<logback.version>1.0.7</logback.version>
-		<slf4j.version>1.6.6</slf4j.version>
-		<querydsl.version>2.6.0</querydsl.version>
-		<mongo-java-driver.version>2.9.0</mongo-java-driver.version>
+		<slf4j.version>1.7.1</slf4j.version>
+		<querydsl.version>2.8.0</querydsl.version>
+		<mongo-java-driver.version>2.9.1</mongo-java-driver.version>
 	</properties>
 
 	<dependencies>
@@ -137,7 +137,7 @@
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>maven-apt-plugin</artifactId>
-				<version>1.0.2</version>
+				<version>1.0.4</version>
 				<executions>
 					<execution>
 						<goals>
@@ -184,40 +184,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.3</version>
+				<version>2.12.4</version>
 			</plugin>
 
-
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.mysema.maven</groupId>
-										<artifactId>maven-apt-plugin</artifactId>
-										<versionRange>[1.0.2,)</versionRange>
-										<goals>
-											<goal>process</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+
 	</build>
 
 </project>
