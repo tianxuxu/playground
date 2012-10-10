@@ -59,7 +59,7 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 				sb.append("id:").append(event.getId()).append("\n");
 			}
 			if (StringUtils.hasText(event.getEvent())) {
-				sb.append("event").append(event.getEvent()).append("\n");
+				sb.append("event:").append(event.getEvent()).append("\n");
 			}			
 			if (StringUtils.hasText(event.getData())) {
 				sb.append("data:").append(event.getData()).append("\n");
