@@ -22,13 +22,13 @@ public class Simple {
 				WatchKey key = watchService.take();
 
 				for (WatchEvent<?> watchEvent : key.pollEvents()) {
-					
+
 					Kind<?> kind = watchEvent.kind();
 					Path context = (Path) watchEvent.context();
 
 					System.out.printf("%s:%s\n", context, kind);
 				}
-				
+
 				System.out.println();
 
 				boolean valid = key.reset();

@@ -12,6 +12,5 @@ public enum MessageType {
 	public int getType() {
 		return type;
 	}
-	
-	
+
 }

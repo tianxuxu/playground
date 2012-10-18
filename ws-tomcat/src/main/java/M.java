@@ -14,7 +14,7 @@ public class M {
 		u.name = "name";
 		u.firstName = "firstName";
 		u.email = "email";
-		
+
 		WampCallResultMessage msg = new WampCallResultMessage("callid", u);
 
 		System.out.println(mapper.writeValueAsString(msg.serialize()));

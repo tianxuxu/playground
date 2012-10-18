@@ -12,7 +12,7 @@ public class User extends Base {
 	public String firstName;
 
 	private String veryPrivate;
-	
+
 	private String myName;
 
 	@ModelField(defaultValue = "true")

@@ -1,6 +1,8 @@
 package ch.rasc.sse.twitter;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.Tweet;
@@ -19,46 +21,65 @@ import com.google.common.collect.ImmutableList;
 @Controller
 public class TwitterController {
 
-	private ObjectMapper mapper = new ObjectMapper();
-	
+	ObjectMapper mapper = new ObjectMapper();
+
 	@Autowired
-	private TwitterReader twitterReader;
-	
+	TwitterReader twitterReader;
+
+	AtomicInteger i = new AtomicInteger();
+
 	@RequestMapping(value = "/twittersse", method = RequestMethod.GET, produces = "text/event-stream")
 	@ResponseBody
-	public String getTweets(@RequestHeader(value="Last-Event-ID", required=false) String lastEventId) throws JsonGenerationException, JsonMappingException, IOException {
-		
+	public Object getTweets(@RequestHeader(value = "Last-Event-ID", required = false) final String lastEventId)
+			throws JsonGenerationException, JsonMappingException, IOException {
+
+		if (i.incrementAndGet() % 2 == 0) {
+			System.out.println("RUNNING IN CALLABLE");
+			return new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					return generateResult(lastEventId);
+				}
+
+			};
+		}
+
+		System.out.println("DIRECT");
+		return generateResult(lastEventId);
+	}
+
+	String generateResult(final String lastEventId) throws IOException, JsonGenerationException, JsonMappingException {
+
 		System.out.println("Last Event Id: " + lastEventId);
 		long lastId = 0;
 		if (StringUtils.hasText(lastEventId)) {
 			lastId = Long.valueOf(lastEventId);
 		}
-		
+
 		ImmutableList<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);
 		for (Tweet tweet : tweets) {
 			if (lastId < tweet.getId()) {
 				lastId = tweet.getId();
 			}
 		}
-		
+
 		String resultJson = mapper.writeValueAsString(tweets);
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("id:");
 		sb.append(lastId);
 		sb.append("\n");
-		
+
 		sb.append("data:");
 		sb.append(resultJson);
 		sb.append("\n");
-			
+
 		sb.append("retry:6000");
 		sb.append("\n\n");
-		
-		System.out.println(sb.toString());
-		
+
+		// System.out.println(sb.toString());
+
 		return sb.toString();
-		
 	}
-	
+
 }

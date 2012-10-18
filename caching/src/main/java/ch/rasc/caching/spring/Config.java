@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = { "ch.rasc.caching.spring" })
 @EnableCaching(mode = AdviceMode.ASPECTJ)
-//@EnableCaching
+// @EnableCaching
 public class Config implements CachingConfigurer {
 
 	@Bean

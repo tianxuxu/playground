@@ -28,7 +28,7 @@ import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 
-@WebServlet(urlPatterns="/websocket/echoMessage")
+@WebServlet(urlPatterns = "/websocket/echoMessage")
 public class EchoMessage extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;

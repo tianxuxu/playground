@@ -15,7 +15,7 @@
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<logback.version>1.0.7</logback.version>
-		<slf4j.version>1.7.1</slf4j.version>
+		<slf4j.version>1.7.2</slf4j.version>
 		<querydsl.version>2.8.0</querydsl.version>
 		<mongo-java-driver.version>2.9.1</mongo-java-driver.version>
 	</properties>
@@ -174,7 +174,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.2</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

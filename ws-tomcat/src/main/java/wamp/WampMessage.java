@@ -2,7 +2,7 @@ package wamp;
 
 public class WampMessage {
 
-	private MessageType type;
+	private final MessageType type;
 
 	public WampMessage(MessageType type) {
 		this.type = type;

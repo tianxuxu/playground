@@ -66,10 +66,10 @@ public class ModelGenerator {
 		}
 
 		final List<ModelFieldBean> modelFields = new ArrayList<>();
-		
+
 		ReflectionUtils.doWithFields(clazz, new FieldCallback() {
-			private Set<String> fields = new HashSet<>();
-		 
+			private final Set<String> fields = new HashSet<>();
+
 			@Override
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 				if (Modifier.isPublic(field.getModifiers()) || hasReadMethod.contains(field.getName())) {
@@ -133,9 +133,9 @@ public class ModelGenerator {
 		mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
 		Map<String, Object> modelObject = new LinkedHashMap<>();
 		modelObject.put("extend", "Ext.data.Model");
-		
+
 		Map<String, Object> configObject = new LinkedHashMap<>();
-		
+
 		configObject.put("fields", model.getFields().values());
 
 		if (StringUtils.hasText(model.getIdProperty()) && !model.getIdProperty().equals("id")) {
@@ -189,10 +189,10 @@ public class ModelGenerator {
 		} else {
 			modelObject.put("config", configObject);
 		}
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("Ext.define('").append(model.getName()).append("',\n");
-		
+
 		String configObjectString;
 		try {
 			configObjectString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(modelObject);

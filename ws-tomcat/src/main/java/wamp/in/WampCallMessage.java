@@ -8,7 +8,9 @@ import wamp.WampInboundMessage;
 public class WampCallMessage extends WampInboundMessage {
 
 	private String callId;
-	private String procURI;	
+
+	private String procURI;
+
 	private Object parameters;
 
 	public WampCallMessage() {
@@ -19,7 +21,7 @@ public class WampCallMessage extends WampInboundMessage {
 	public void deserialize(Object[] message) {
 		callId = (String) message[1];
 		procURI = (String) message[2];
-		
+
 		if (message.length == 3) {
 			parameters = null;
 		} else if (message.length == 4) {
@@ -40,7 +42,5 @@ public class WampCallMessage extends WampInboundMessage {
 	public Object getParameters() {
 		return parameters;
 	}
-
-
 
 }

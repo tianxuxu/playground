@@ -27,7 +27,7 @@ import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
-@WebServlet(urlPatterns="/websocket/echoStream")
+@WebServlet(urlPatterns = "/websocket/echoStream")
 public class EchoStream extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class Calculator {
 
 	public BigInteger callFromInside() {
-		Map<String,String> test = new HashMap<>();
+		Map<String, String> test = new HashMap<>();
 		System.out.println("calling factorial from inside Calculator");
 		return factorial(69);
 	}

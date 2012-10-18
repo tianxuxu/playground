@@ -43,7 +43,7 @@ import org.apache.juli.logging.LogFactory;
 /**
  * Example web socket servlet for simple multiplayer snake.
  */
-@WebServlet(urlPatterns="/websocket/snake")
+@WebServlet(urlPatterns = "/websocket/snake")
 public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;

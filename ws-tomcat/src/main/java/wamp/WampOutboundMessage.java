@@ -1,6 +1,5 @@
 package wamp;
 
-
 public abstract class WampOutboundMessage extends WampMessage {
 
 	public WampOutboundMessage(MessageType type) {

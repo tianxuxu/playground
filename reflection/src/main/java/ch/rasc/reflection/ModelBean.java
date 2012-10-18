@@ -48,9 +48,9 @@ public class ModelBean {
 	public void addFields(List<ModelFieldBean> modelFields) {
 		for (ModelFieldBean bean : modelFields) {
 			fields.put(bean.getName(), bean);
-		}		
+		}
 	}
-	
+
 	public ModelFieldBean getField(String fieldName) {
 		return fields.get(fieldName);
 	}
@@ -98,7 +98,5 @@ public class ModelBean {
 	public void setDestroyMethod(String destroyMethod) {
 		this.destroyMethod = destroyMethod;
 	}
-
-
 
 }

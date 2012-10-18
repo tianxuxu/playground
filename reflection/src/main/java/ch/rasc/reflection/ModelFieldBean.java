@@ -69,7 +69,7 @@ public class ModelFieldBean {
 		public void serialize(ModelType value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
 				JsonProcessingException {
 			jgen.writeString(value.getJsName());
-			
+
 		}
 	}
 }

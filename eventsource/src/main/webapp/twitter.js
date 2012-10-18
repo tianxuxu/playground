@@ -3,8 +3,9 @@ function initialize() {
 	eventSource = new EventSource('twittersse');
 
 	eventSource.onmessage = function(event) {
+		console.dir(event);
 		var feeds = event.data.toString();
-		console.log(feeds);
+		//console.log(feeds);
 		var theNewParagraph = document.createElement('p');
 
 		var theBreak = document.createElement('br');

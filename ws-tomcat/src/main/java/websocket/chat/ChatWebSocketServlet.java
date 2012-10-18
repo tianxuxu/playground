@@ -36,7 +36,7 @@ import util.HTMLFilter;
 /**
  * Example web socket servlet for chat.
  */
-@WebServlet(urlPatterns="/websocket/chat")
+@WebServlet(urlPatterns = "/websocket/chat")
 public class ChatWebSocketServlet extends WebSocketServlet {
 
 	private static final long serialVersionUID = 1L;

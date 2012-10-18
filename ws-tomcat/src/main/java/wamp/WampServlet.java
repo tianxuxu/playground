@@ -41,7 +41,7 @@ public class WampServlet extends FixedWebSocketServlet {
 
 	private final class WampMessageInbound extends MessageInbound {
 
-		private String sessionId;
+		private final String sessionId;
 
 		WampMessageInbound(String sessionId) {
 			this.sessionId = sessionId;
@@ -74,23 +74,23 @@ public class WampServlet extends FixedWebSocketServlet {
 			int messageType = (Integer) msgs[0];
 			switch (messageType) {
 			case 1:
-				//PREFIX
-				//ignore
+				// PREFIX
+				// ignore
 				break;
 			case 2:
-				//CALL
+				// CALL
 				WampCallMessage callMessage = new WampCallMessage();
 				callMessage.deserialize(msgs);
 				System.out.println(callMessage.getProcURI());
 				break;
 			case 5:
-				//SUBSCRIBE
+				// SUBSCRIBE
 				break;
 			case 6:
-				//UNSUBSCRIBE
+				// UNSUBSCRIBE
 				break;
 			case 7:
-				//PUBLISH
+				// PUBLISH
 				break;
 			}
 

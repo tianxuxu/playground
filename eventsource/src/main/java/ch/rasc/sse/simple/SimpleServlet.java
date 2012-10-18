@@ -18,13 +18,12 @@ public class SimpleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("USERID: " + request.getParameter("userid"));
+		// System.out.println("USERID: " + request.getParameter("userid"));
 		System.out.println(new Date());
 		System.out.println("Last-Event-ID: " + request.getHeader("Last-Event-ID"));
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setStatus(200);
-		
 
 		PrintWriter out = response.getWriter();
 
@@ -49,28 +48,28 @@ public class SimpleServlet extends HttpServlet {
 		// sb.append("data:}\n");
 		// sb.append("\n");
 
-//		sb.append("event:add\n");
-//		sb.append("data:100\n");
-//		sb.append("\n");
-//		sb.append("data:56\n");
-//		sb.append("event:remove\n");
-//		sb.append("\n");
-//		sb.append("event:add\n");
-//		sb.append("data:101\n");
-//		sb.append("\n");
-//		sb.append("data:common event\n");
-//		sb.append("\n");
-		
-//		sb.append("event:add\n");
-//		sb.append("data:100\n");	
-//		sb.append("retry:0\n");
-//		sb.append("\n");
-		
+		// sb.append("event:add\n");
+		// sb.append("data:100\n");
+		// sb.append("\n");
+		// sb.append("data:56\n");
+		// sb.append("event:remove\n");
+		// sb.append("\n");
+		// sb.append("event:add\n");
+		// sb.append("data:101\n");
+		// sb.append("\n");
+		// sb.append("data:common event\n");
+		// sb.append("\n");
+
+		// sb.append("event:add\n");
+		// sb.append("data:100\n");
+		// sb.append("retry:0\n");
+		// sb.append("\n");
+
 		sb.append("id:2012-08-19T10:11:20\n");
 		sb.append("data:APPL\n");
 		sb.append("data:648\n");
 		sb.append("\n");
-		
+
 		out.write(sb.toString());
 		out.flush();
 

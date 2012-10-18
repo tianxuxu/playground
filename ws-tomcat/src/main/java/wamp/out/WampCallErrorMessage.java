@@ -1,7 +1,5 @@
 package wamp.out;
 
-
-
 import wamp.MessageType;
 import wamp.WampOutboundMessage;
 

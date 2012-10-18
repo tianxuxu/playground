@@ -9,8 +9,7 @@ public class Main {
 
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(mapper.writeValueAsString(new User()));
-		
-		
+
 		ModelBean model = ModelGenerator.createModel(User.class);
 		model.addField(new ModelFieldBean("test", ModelType.BOOLEAN));
 		System.out.println(ModelGenerator.generateJavascript(model, OutputFormat.EXTJS));

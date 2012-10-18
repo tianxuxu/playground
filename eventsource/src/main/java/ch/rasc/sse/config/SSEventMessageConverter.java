@@ -19,8 +19,9 @@ import org.springframework.util.StringUtils;
 public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 
 	private static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
+
 	private static final MediaType EVENT_STREAM_MEDIATYPE = new MediaType("text", "event-stream", UTF8_CHARSET);
-		
+
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
 		return false;
@@ -28,11 +29,12 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 
 	@Override
 	public boolean canWrite(Class<?> clazz, MediaType mediaType) {
-		return ((String.class.equals(clazz) || SSEvent.class.equals(clazz)) && EVENT_STREAM_MEDIATYPE.includes(mediaType));
+		return ((String.class.equals(clazz) || SSEvent.class.equals(clazz)) && EVENT_STREAM_MEDIATYPE
+				.includes(mediaType));
 	}
 
 	@Override
-	public List<MediaType> getSupportedMediaTypes() {		
+	public List<MediaType> getSupportedMediaTypes() {
 		return Arrays.asList(EVENT_STREAM_MEDIATYPE);
 	}
 
@@ -45,13 +47,13 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 	@Override
 	public void write(Object t, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
-		
+
 		HttpHeaders headers = outputMessage.getHeaders();
 		headers.setContentType(EVENT_STREAM_MEDIATYPE);
-		
+
 		StringBuilder sb = new StringBuilder(32);
 		if (t instanceof SSEvent) {
-			SSEvent event = (SSEvent)t;
+			SSEvent event = (SSEvent) t;
 			if (StringUtils.hasText(event.getComment())) {
 				sb.append(":").append(event.getComment()).append("\n");
 			}
@@ -60,19 +62,19 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 			}
 			if (StringUtils.hasText(event.getEvent())) {
 				sb.append("event:").append(event.getEvent()).append("\n");
-			}			
+			}
 			if (StringUtils.hasText(event.getData())) {
 				sb.append("data:").append(event.getData()).append("\n");
 			}
 			if (event.getRetry() != null) {
 				sb.append("retry:").append(event.getRetry()).append("\n");
 			}
-		} else {		
-			sb.append("data:").append(t).append("\n");			
+		} else {
+			sb.append("data:").append(t).append("\n");
 		}
-		
-		sb.append("\n");		
-		FileCopyUtils.copy(sb.toString(), new OutputStreamWriter(outputMessage.getBody(), UTF8_CHARSET));		
+
+		sb.append("\n");
+		FileCopyUtils.copy(sb.toString(), new OutputStreamWriter(outputMessage.getBody(), UTF8_CHARSET));
 	}
 
 }
