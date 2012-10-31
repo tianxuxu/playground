@@ -40,7 +40,7 @@
 		*/
 		
 		r.on('fileProgress', function(file) {
-			//console.dir(file);
+			//console.log(r.progress());
 			document.getElementById("fileName").innerHTML = file.fileName;
 			document.getElementById("noOfChunks").innerHTML = file.chunks.length;
 			if (r.progress()) {

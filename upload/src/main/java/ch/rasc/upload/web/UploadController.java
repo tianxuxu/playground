@@ -22,7 +22,7 @@ public class UploadController {
 	private FileManager fileManager;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void chunkExists(@SuppressWarnings("unused") HttpServletRequest request, HttpServletResponse response,
+	public void chunkExists(HttpServletResponse response,
 			@RequestParam("resumableChunkNumber") final Integer chunkNumber,
 			@RequestParam("resumableChunkSize") final Long chunkSize,
 			@RequestParam("resumableIdentifier") final String identifier,
@@ -38,7 +38,7 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void processUpload(@SuppressWarnings("unused") HttpServletRequest request, HttpServletResponse response,
+	public void processUpload(HttpServletResponse response,
 			@RequestParam(value = "resumableChunkNumber") final Integer chunkNumber,
 			@RequestParam(value = "resumableChunkSize") final Long chunkSize,
 			@RequestParam(value = "resumableTotalSize") final Long totalSize,
