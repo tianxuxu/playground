@@ -23,15 +23,15 @@ public class Svg2PngServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
-		
+
 		response.setContentType("image/png");
 		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart.png\";");
-				
+
 		String svg = request.getParameter("svg");
-		
+
 		StringReader stringReader = new StringReader(svg);
 		TranscoderInput input = new TranscoderInput(stringReader);
-		
+
 		OutputStream out = response.getOutputStream();
 		TranscoderOutput output = new TranscoderOutput(out);
 
@@ -43,7 +43,7 @@ public class Svg2PngServlet extends HttpServlet {
 		}
 
 		stringReader.close();
-		out.close();		
+		out.close();
 	}
 
 }
