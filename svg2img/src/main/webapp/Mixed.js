@@ -4,8 +4,8 @@ Ext.require([ 'Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit', 
 Ext.onReady(function() {
 	store1.loadData(generateData(8));
 
-	Ext.draw.engine.ImageExporter.defaultUrl = "/svg2png";
-	
+	Ext.draw.engine.ImageExporter.defaultUrl = "svg2png";
+
 	var chart = Ext.create('Ext.chart.Chart', {
 		id: 'chartCmp',
 		xtype: 'chart',
