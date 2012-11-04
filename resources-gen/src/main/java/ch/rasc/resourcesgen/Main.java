@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,9 +22,6 @@ import org.yaml.snakeyaml.Yaml;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -76,7 +72,6 @@ public class Main {
 
 		Map<String, String> files = (Map<String, String>) config.get("files");
 		Map<String, String> mappings = (Map<String, String>) config.get("mappings");
-		Map<String, String> dependencies = (Map<String, String>) config.get("dependencies");
 
 		String sourcedir = (String) config.get("sourcedir");
 		String version = (String) config.get("version");
@@ -85,14 +80,14 @@ public class Main {
 		String destdir = (String) config.get("destdir");
 
 		delete(Paths.get(destdir));
-		
+
 		Path srcDirPath = Paths.get(sourcedir);
 
 		Map<String, Object> scopes = Maps.newHashMap();
 		scopes.put("version", version);
 		scopes.put("groupId", groupId);
 
-		Set<Path> projectDirs = Sets.newHashSet();
+		Set<Path> projectDirs = Sets.newTreeSet();
 
 		for (Map.Entry<String, String> entry : files.entrySet()) {
 			String fileName = entry.getKey();
@@ -116,25 +111,6 @@ public class Main {
 			Path pomFile = Paths.get(destdir, artifactIdVersion, "pom.xml");
 			if (!Files.exists(pomFile)) {
 				try (FileWriter fw = new FileWriter(pomFile.toFile())) {
-
-					String deps = Strings.emptyToNull(dependencies.get(entry.getValue()));
-					if (deps != null) {
-						List<Map<String, Object>> depList = Lists.newArrayList();
-						for (String dep : Splitter.on(",").split(deps)) {
-							if (dep.equals("core")) {
-								dep = baseartifactId;
-							} else {
-								dep = baseartifactId + "-" + dep;
-							}
-							Map<String, Object> dm = Maps.newHashMap();
-							dm.put("artifactId", dep);
-							depList.add(dm);
-						}
-						scopes.put("dependencies", depList);
-					} else {
-						scopes.remove("dependencies");
-					}
-
 					mustache.execute(fw, scopes);
 				}
 			}
@@ -161,14 +137,17 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 		for (Path path : projectDirs) {
 			sb.append("cd ");
-			sb.append(path.toString());
+			sb.append(path.toAbsolutePath().toString());
 			sb.append("\n");
-			sb.append("mvn clean deploy");
+			sb.append("call mvn clean deploy");
+			sb.append("\n");
+			sb.append("cd ");
+			sb.append(Paths.get(".").toAbsolutePath());
 			sb.append("\n");
 			sb.append("\n");
 		}
 
-		Path deployPath = Paths.get("deploy.sh");
+		Path deployPath = Paths.get("deploy.bat");
 		Files.deleteIfExists(deployPath);
 		Files.write(deployPath, sb.toString().getBytes());
 

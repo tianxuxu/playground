@@ -2,12 +2,12 @@ sourcedir: D:/js/extjs-4.1.2-commercial
 version: 4.1.2
 groupId: resources
 baseartifactId: extjs
-destdir: ./test
+destdir: ./res
 files:
   bootstrap.js : src
-  ext-all-debug-w-comments.js : core
-  ext-all-debug.js : core
-  ext-all-dev.js : core
+  ext-all-debug-w-comments.js : debug
+  ext-all-debug.js : debug
+  ext-all-dev.js : debug
   ext-all.js : core
   ext-debug-w-comments.js : src
   ext-debug.js : src
@@ -34,11 +34,3 @@ files:
   
 mappings:
   examples/ux : ux
-    
-dependencies:
-  src : core
-  ux : core
-  theme-neptune : core
-  theme-access : core
-  theme-default : core
-  theme-gray : core
