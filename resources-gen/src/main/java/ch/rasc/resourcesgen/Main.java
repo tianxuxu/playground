@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,13 +23,16 @@ import org.yaml.snakeyaml.Yaml;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		ArgumentParser parser = ArgumentParsers.newArgumentParser("Main").defaultHelp(true)
+		ArgumentParser parser = ArgumentParsers.newArgumentParser("resources-gen").defaultHelp(true)
 				.description("Creates maven packages of resourcejars");
 		parser.addArgument("file").nargs(1).required(true).help("Specify the configuration file");
 		Namespace ns = null;
@@ -72,6 +76,7 @@ public class Main {
 
 		Map<String, String> files = (Map<String, String>) config.get("files");
 		Map<String, String> mappings = (Map<String, String>) config.get("mappings");
+		Map<String, String> dependencies = (Map<String, String>) config.get("dependencies");
 
 		String sourcedir = (String) config.get("sourcedir");
 		String version = (String) config.get("version");
@@ -79,6 +84,8 @@ public class Main {
 		String baseartifactId = (String) config.get("baseartifactId");
 		String destdir = (String) config.get("destdir");
 
+		delete(Paths.get(destdir));
+		
 		Path srcDirPath = Paths.get(sourcedir);
 
 		Map<String, Object> scopes = Maps.newHashMap();
@@ -86,7 +93,7 @@ public class Main {
 		scopes.put("groupId", groupId);
 
 		Set<Path> projectDirs = Sets.newHashSet();
-		
+
 		for (Map.Entry<String, String> entry : files.entrySet()) {
 			String fileName = entry.getKey();
 			String artifactId = entry.getValue();
@@ -99,16 +106,37 @@ public class Main {
 			scopes.put("artifactId", artifactId);
 
 			String artifactIdVersion = artifactId + "-" + version;
-			
-			Path destDirPath = Paths.get(destdir, artifactIdVersion, "src/main/resources/META-INF/resources",
-					groupId, baseartifactId, version);
+
+			Path destDirPath = Paths.get(destdir, artifactIdVersion, "src/main/resources/META-INF/resources", groupId,
+					baseartifactId, version);
 			Files.createDirectories(destDirPath);
 
 			projectDirs.add(Paths.get(destdir, artifactIdVersion));
-			
+
 			Path pomFile = Paths.get(destdir, artifactIdVersion, "pom.xml");
-			try (FileWriter fw = new FileWriter(pomFile.toFile())) {
-				mustache.execute(fw, scopes);
+			if (!Files.exists(pomFile)) {
+				try (FileWriter fw = new FileWriter(pomFile.toFile())) {
+
+					String deps = Strings.emptyToNull(dependencies.get(entry.getValue()));
+					if (deps != null) {
+						List<Map<String, Object>> depList = Lists.newArrayList();
+						for (String dep : Splitter.on(",").split(deps)) {
+							if (dep.equals("core")) {
+								dep = baseartifactId;
+							} else {
+								dep = baseartifactId + "-" + dep;
+							}
+							Map<String, Object> dm = Maps.newHashMap();
+							dm.put("artifactId", dep);
+							depList.add(dm);
+						}
+						scopes.put("dependencies", depList);
+					} else {
+						scopes.remove("dependencies");
+					}
+
+					mustache.execute(fw, scopes);
+				}
 			}
 
 			Path srcPath = srcDirPath.resolve(fileName);
@@ -129,7 +157,7 @@ public class Main {
 			copy(srcPath, destPath);
 
 		}
-		
+
 		StringBuilder sb = new StringBuilder();
 		for (Path path : projectDirs) {
 			sb.append("cd ");
@@ -140,14 +168,20 @@ public class Main {
 			sb.append("\n");
 		}
 
-		Files.write(Paths.get("deploy.sh"), sb.toString().getBytes());
-		
-		
+		Path deployPath = Paths.get("deploy.sh");
+		Files.deleteIfExists(deployPath);
+		Files.write(deployPath, sb.toString().getBytes());
 
 	}
 
 	private static void copy(Path from, Path to) throws IOException {
 		Files.walkFileTree(from, new CopyTree(from, to));
+	}
+
+	private static void delete(Path path) throws IOException {
+		if (Files.exists(path)) {
+			Files.walkFileTree(path, new DeleteDirectory());
+		}
 	}
 
 }

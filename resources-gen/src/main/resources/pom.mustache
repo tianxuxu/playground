@@ -6,7 +6,23 @@
   <artifactId>{{artifactId}}</artifactId>
   <version>{{version}}</version>
   <packaging>jar</packaging>
-
+  
+  {{#dependencies}}
+  <dependencies>
+  {{/dependencies}}
+    
+    {{#dependencies}}
+    <dependency>
+			<groupId>{{groupId}}</groupId>
+			<artifactId>{{artifactId}}</artifactId>
+			<version>{{version}}</version>
+    </dependency>
+    {{/dependencies}}
+    
+  {{#dependencies}}		
+  </dependencies>
+  {{/dependencies}}
+    
   <distributionManagement>
     <repository>
       <id>localwww</id>

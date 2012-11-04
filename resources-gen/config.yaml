@@ -31,5 +31,14 @@ files:
   resources/themes/images/gray : theme-gray
   resources/themes/images/neptune : theme-neptune
   examples/ux : ux
+  
 mappings:
-  examples/ux : ux  
+  examples/ux : ux
+    
+dependencies:
+  src : core
+  ux : core
+  theme-neptune : core
+  theme-access : core
+  theme-default : core
+  theme-gray : core
