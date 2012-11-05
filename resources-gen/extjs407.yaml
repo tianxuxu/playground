@@ -1,0 +1,26 @@
+sourcedir: D:\js\ext-4.0.7-gpl
+version: 4.0.7
+groupId: resources
+baseartifactId: extjs
+destdir: ./res
+files:
+  bootstrap.js : src
+  ext-all-debug-w-comments.js : debug
+  ext-all-debug.js : debug
+  ext-all-dev.js : debug
+  ext-all.js : core
+  ext-debug.js : src
+  ext-dev.js : src
+  ext.js : src
+  locale : core
+  src : src
+  resources/css/ext-all-access.css : theme-access
+  resources/css/ext-all-gray.css : theme-gray
+  resources/css/ext-all.css : theme-default
+  resources/themes/images/access : theme-access
+  resources/themes/images/default : theme-default
+  resources/themes/images/gray : theme-gray
+  examples/ux : ux
+  
+mappings:
+  examples/ux : ux

@@ -1,0 +1,9 @@
+sourcedir: D:/js/ext-themes/steelblue
+version: 1.0.0
+groupId: resources
+baseartifactId: extjs
+destdir: ./res
+files:  
+  resources/css : theme-steelblue 
+  resources/themes/images/steelblue : theme-steelblue 
+  

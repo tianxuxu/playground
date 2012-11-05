@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,6 +73,9 @@ public class Main {
 
 		Map<String, String> files = (Map<String, String>) config.get("files");
 		Map<String, String> mappings = (Map<String, String>) config.get("mappings");
+		if (mappings == null) {
+			mappings = Collections.emptyMap();
+		}
 
 		String sourcedir = (String) config.get("sourcedir");
 		String version = (String) config.get("version");

@@ -1,0 +1,14 @@
+sourcedir: D:/js/ext-3.4.1
+version: 3.4.1
+groupId: resources
+baseartifactId: extjs
+destdir: ./res
+files:
+  adapter : core
+  examples/ux : core
+  ext-all-debug.js : core
+  ext-all.js : core
+  resources : core
+  
+mappings:
+  examples/ux : ux
