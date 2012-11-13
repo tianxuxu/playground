@@ -9,17 +9,15 @@ public class Hashes {
 	public static void main(String[] args) {
 
 		Jedis jedis = new Jedis("192.168.20.166");
-		
+
 		jedis.hset("user:1", "username", "sr");
 		jedis.hset("user:1", "firstName", "Ralph");
 		jedis.hset("user:1", "name", "Schaer");
-				
-		Map<String,String> data = jedis.hgetAll("user:1");
+
+		Map<String, String> data = jedis.hgetAll("user:1");
 		for (String key : data.keySet()) {
 			System.out.println(key + "->" + data.get(key));
 		}
 	}
-	
-	
 
 }

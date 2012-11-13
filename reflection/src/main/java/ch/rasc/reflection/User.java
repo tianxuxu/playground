@@ -11,6 +11,7 @@ public class User extends Base {
 
 	public String firstName;
 
+	@SuppressWarnings("unused")
 	private String veryPrivate;
 
 	private String myName;

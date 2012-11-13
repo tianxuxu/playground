@@ -18,9 +18,9 @@ public class Find {
 
 		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();
 
-		String actorName = "Craig, Daniel (I)"; 
-		 
-		//String actorName = "McAvoy, James";
+		String actorName = "Craig, Daniel (I)";
+
+		// String actorName = "McAvoy, James";
 		Node actorNode = index.get("actor", actorName).getSingle();
 
 		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(Traversal.expanderForTypes(RelTypes.ACTS_IN), 10);

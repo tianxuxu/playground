@@ -36,15 +36,15 @@ import org.neo4j.kernel.EmbeddedGraphDatabase;
 public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
-		GraphDatabaseService graphDb = new EmbeddedGraphDatabase("db");		
+		GraphDatabaseService graphDb = new EmbeddedGraphDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
 		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\imdb\\actresses.list.gz");
 		graphDb.shutdown();
-		
+
 		System.gc();
 		graphDb = new EmbeddedGraphDatabase("db");
 		index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\imdb\\actors.list.gz");		
+		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\imdb\\actors.list.gz");
 		graphDb.shutdown();
 
 	}
@@ -116,7 +116,7 @@ public class ImdbParser {
 						Node movieNode = index.get("title", title).getSingle();
 						if (movieNode == null) {
 							movieNode = graphDb.createNode();
-							movieNode.setProperty("title", title);							
+							movieNode.setProperty("title", title);
 							index.add(movieNode, "title", title);
 						}
 

@@ -39,7 +39,7 @@ public class StopWatchDemo {
 		} else // stopwatch not running
 		{
 			out.println(numberLoops + " loops required: ");
-			out.println("\t" + stopwatch.toString(6));
+			out.println("\t" + stopwatch.toString());
 			out.println("\t" + stopwatch.elapsedMillis() + " elapsed milliseconds.");
 			out.println("\t" + stopwatch.elapsedTime(TimeUnit.MINUTES) + " minutes");
 			out.println("\t" + stopwatch.elapsedTime(TimeUnit.SECONDS) + " seconds");

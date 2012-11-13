@@ -2,7 +2,7 @@ package ch.rasc.lucene;
 
 import java.io.IOException;
 
-import org.apache.lucene.analysis.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
@@ -42,15 +42,15 @@ public class Indexing {
 			}
 
 			IndexReader reader = IndexReader.open(writer, true);
-			try (IndexSearcher searcher = new IndexSearcher(reader)) {
-				Term t = new Term("city", "Amsterdam");
-				Query query = new TermQuery(t);
-				TopDocs topDocs = searcher.search(query, 1000);
-				for (ScoreDoc doc : topDocs.scoreDocs) {
-					Document d = searcher.doc(doc.doc);
-					System.out.println(d.get("id"));
-				}
+			IndexSearcher searcher = new IndexSearcher(reader);
+			Term t = new Term("city", "Amsterdam");
+			Query query = new TermQuery(t);
+			TopDocs topDocs = searcher.search(query, 1000);
+			for (ScoreDoc doc : topDocs.scoreDocs) {
+				Document d = searcher.doc(doc.doc);
+				System.out.println(d.get("id"));
 			}
+
 		}
 
 	}

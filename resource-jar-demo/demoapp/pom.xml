@@ -51,8 +51,8 @@
 
     <repositories>
       <repository>
-        <id>myprivaterepo</id>
-        <url>http://ralscha.ch/repository</url>
+        <id>rasc</id>
+        <url>http://repository.rasc.ch</url>
       </repository>
     </repositories>
 

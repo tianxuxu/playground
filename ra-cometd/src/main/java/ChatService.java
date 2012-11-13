@@ -1,15 +1,15 @@
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.cometd.annotation.Configure;
+import org.cometd.annotation.Listener;
+import org.cometd.annotation.Service;
 import org.cometd.bayeux.ChannelId;
 import org.cometd.bayeux.server.Authorizer;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ConfigurableServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
-import org.cometd.java.annotation.Configure;
-import org.cometd.java.annotation.Listener;
-import org.cometd.java.annotation.Service;
 import org.cometd.server.authorizer.GrantAuthorizer;
 
 /**

@@ -13,17 +13,22 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\envers
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\equalsverifier
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\eventbus
+cd D:\ws\playground\escaping
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\escaping
+cd D:\ws\playground\eventbus
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -43,6 +48,16 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\googlemapsexamples
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\GroovyTest
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\guavasandbox
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -53,17 +68,22 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\hc
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\jettyembed
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\jpa
+cd D:\ws\playground\jmx
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\jmx
+cd D:\ws\playground\jpa
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -93,6 +113,21 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\nosql
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\noxml
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\pandora
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\push
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -109,6 +144,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\ra-comet-streaming
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\ra-cometd
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -153,6 +193,16 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\resource-jar-demo
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\resources-gen
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\security
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -163,7 +213,17 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\svg2img
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\taffy
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\tomcatembed
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -174,6 +234,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\upload
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\uploadproblem
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -197,6 +262,4 @@ cd D:\ws\playground\ws-tomcat
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
-
-
 

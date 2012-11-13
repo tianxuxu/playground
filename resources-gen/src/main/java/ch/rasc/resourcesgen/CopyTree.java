@@ -15,7 +15,6 @@ public class CopyTree implements FileVisitor<Path> {
 
 	private final Path to;
 
-	
 	public CopyTree(Path from, Path to) {
 		this.from = from;
 		this.to = to;

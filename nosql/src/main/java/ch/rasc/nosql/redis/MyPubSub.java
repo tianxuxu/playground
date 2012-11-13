@@ -11,29 +11,27 @@ public class MyPubSub extends JedisPubSub {
 
 	@Override
 	public void onPMessage(String pattern, String channel, String message) {
-		//nothing here
+		// nothing here
 	}
 
 	@Override
 	public void onSubscribe(String channel, int subscribedChannels) {
-		//nothing here
+		// nothing here
 	}
 
 	@Override
 	public void onUnsubscribe(String channel, int subscribedChannels) {
-		//nothing here
+		// nothing here
 	}
 
 	@Override
 	public void onPUnsubscribe(String pattern, int subscribedChannels) {
-		//nothing here
+		// nothing here
 	}
 
 	@Override
 	public void onPSubscribe(String pattern, int subscribedChannels) {
-		//nothing here
+		// nothing here
 	}
-
-
 
 }

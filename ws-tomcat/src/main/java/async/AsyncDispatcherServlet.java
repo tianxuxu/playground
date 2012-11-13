@@ -105,6 +105,7 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 			log.debug("Async Event started..");
 		}
 
+		@SuppressWarnings("resource")
 		private void handleTimeoutOrError(AsyncEvent event, String message) {
 			@SuppressWarnings("resource")
 			PrintWriter writer = null;
