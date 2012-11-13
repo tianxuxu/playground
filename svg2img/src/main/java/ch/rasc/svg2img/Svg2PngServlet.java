@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 
 @WebServlet(urlPatterns = "/svg2png")
@@ -24,26 +25,35 @@ public class Svg2PngServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
 
-		response.setContentType("image/png");
-		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart.png\";");
-
+		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");
 
-		StringReader stringReader = new StringReader(svg);
-		TranscoderInput input = new TranscoderInput(stringReader);
-
-		OutputStream out = response.getOutputStream();
-		TranscoderOutput output = new TranscoderOutput(out);
-
-		PNGTranscoder t = new PNGTranscoder();
-		try {
-			t.transcode(input, output);
-		} catch (TranscoderException e) {
-			throw new ServletException(e);
+		String postfix;
+		if ("image/jpeg".equals(type)) {
+			response.setContentType("image/jpeg");
+			postfix = "jpg";
+		} else {
+			response.setContentType("image/png");
+			postfix = "png";
 		}
 
-		stringReader.close();
-		out.close();
-	}
+		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart." + postfix + "\";");
 
+		try (StringReader stringReader = new StringReader(svg); OutputStream out = response.getOutputStream()) {
+			try {
+				TranscoderInput input = new TranscoderInput(stringReader);
+				TranscoderOutput output = new TranscoderOutput(out);
+
+				if ("image/jpeg".equals(type)) {
+					new JPEGTranscoder().transcode(input, output);
+				} else {
+					new PNGTranscoder().transcode(input, output);
+				}
+
+			} catch (TranscoderException e) {
+				throw new ServletException(e);
+			}
+		}
+
+	}
 }
