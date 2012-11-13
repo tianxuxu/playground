@@ -1,4 +1,3 @@
-
 import ch.rasc.embeddedtc.EmbeddedTomcat;
 
 public class StartTomcat {
