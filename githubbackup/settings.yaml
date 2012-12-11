@@ -1,0 +1,10 @@
+backupDirectory : e:/gitbackup
+key: id_rsa
+knownHosts: known_hosts
+
+#githubUsers:
+#  - test
+  
+gitUrls:
+  - name: hc
+    url: git@bitbucket.org:test/test.git  
