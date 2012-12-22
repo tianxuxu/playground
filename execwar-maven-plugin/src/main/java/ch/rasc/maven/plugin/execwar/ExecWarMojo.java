@@ -1,6 +1,5 @@
 package ch.rasc.maven.plugin.execwar;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +24,7 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
@@ -38,7 +38,7 @@ import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.aether.resolution.ArtifactResult;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
 
-@Mojo(name = "build")
+@Mojo(name = "build", defaultPhase = LifecyclePhase.PACKAGE)
 public class ExecWarMojo extends AbstractMojo {
 
 	@Component
@@ -81,21 +81,21 @@ public class ExecWarMojo extends AbstractMojo {
 							ArchiveStreamFactory.JAR, os)) {
 
 				File projectArtifact = project.getArtifact().getFile();
-				System.out.println(projectArtifact);
-				if (Files.exists(projectArtifact.toPath())) {
+				if (projectArtifact != null && Files.exists(projectArtifact.toPath())) {
 					aos.putArchiveEntry(new JarArchiveEntry(projectArtifact.getName()));
 					try (InputStream is = Files.newInputStream(projectArtifact.toPath())) {
 						IOUtils.copy(is, aos);
 					}
 					aos.closeArchiveEntry();
 				}
-				
+
 				Set<String> includeGroupIds = new HashSet<>();
 				includeGroupIds.add("org.apache.tomcat");
 				includeGroupIds.add("org.apache.tomcat.embed");
 				includeGroupIds.add("ecj");
 				includeGroupIds.add("org.yaml");
 				includeGroupIds.add("net.sourceforge.argparse4j");
+				includeGroupIds.add("commons-daemon");
 
 				for (Artifact pluginArtifact : pluginArtifacts) {
 					if (includeGroupIds.contains(pluginArtifact.getGroupId())) {
@@ -128,20 +128,26 @@ public class ExecWarMojo extends AbstractMojo {
 					}
 				}
 
+				Class<Runner> mainClass = Runner.class;
+				String className = mainClass.getName();
+				String classAsPath = className.replace('.', '/') + ".class";
+
+				try (InputStream is = mainClass.getClassLoader().getResourceAsStream(classAsPath);) {
+					aos.putArchiveEntry(new JarArchiveEntry(classAsPath));
+					IOUtils.copy(is, aos);
+					aos.closeArchiveEntry();
+				}
+
 				Manifest manifest = new Manifest();
 
 				Manifest.Attribute mainClassAtt = new Manifest.Attribute();
 				mainClassAtt.setName("Main-Class");
-				mainClassAtt.setValue("test");
+				mainClassAtt.setValue(Runner.class.getName());
 				manifest.addConfiguredAttribute(mainClassAtt);
 
-				try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-					manifest.write(bos);
-
-					aos.putArchiveEntry(new JarArchiveEntry("META-INF/MANIFEST.MF"));
-					aos.write(bos.toByteArray());
-					aos.closeArchiveEntry();
-				}
+				aos.putArchiveEntry(new JarArchiveEntry("META-INF/MANIFEST.MF"));
+				manifest.write(aos);
+				aos.closeArchiveEntry();
 
 				aos.putArchiveEntry(new JarArchiveEntry("EXECWAR_TIMESTAMP"));
 				aos.write(String.valueOf(System.currentTimeMillis()).getBytes());
@@ -149,7 +155,7 @@ public class ExecWarMojo extends AbstractMojo {
 
 			}
 		} catch (IOException | ArchiveException | ManifestException e) {
-			throw new RuntimeException(e);
+			throw new MojoExecutionException(e.getMessage(), e);
 		}
 	}
 

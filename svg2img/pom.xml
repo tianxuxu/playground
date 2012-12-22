@@ -41,6 +41,13 @@
 				<groupId>ch.rasc</groupId>
 				<artifactId>execwar-maven-plugin</artifactId>
 				<version>0.0.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<finalName>test.jar</finalName>
 					<extraDependencies>

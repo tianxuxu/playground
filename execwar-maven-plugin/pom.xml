@@ -89,12 +89,18 @@
 			<artifactId>snakeyaml</artifactId>
 			<version>1.11</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.sourceforge.argparse4j</groupId>
 			<artifactId>argparse4j</artifactId>
 			<version>0.2.2</version>
-		</dependency>		
+		</dependency>
+
+		<dependency>
+			<groupId>commons-daemon</groupId>
+			<artifactId>commons-daemon</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 
 	</dependencies>
 
