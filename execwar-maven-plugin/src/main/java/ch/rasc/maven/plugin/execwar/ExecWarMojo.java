@@ -128,6 +128,10 @@ public class ExecWarMojo extends AbstractMojo {
 					}
 				}
 
+				aos.putArchiveEntry(new JarArchiveEntry("conf/web.xml"));
+				IOUtils.copy(getClass().getResourceAsStream("/conf/web.xml"), aos);
+				aos.closeArchiveEntry();
+
 				Class<Runner> mainClass = Runner.class;
 				String className = mainClass.getName();
 				String classAsPath = className.replace('.', '/') + ".class";

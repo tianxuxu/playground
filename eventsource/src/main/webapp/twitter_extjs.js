@@ -41,7 +41,7 @@ Ext.onReady(function(){
 				store.insert(0, data[k]);
 			}
 		}		
-	}
+	};
 
 	
 });

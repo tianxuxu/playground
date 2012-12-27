@@ -11,7 +11,7 @@
 // Constructor for CoolClock objects
 window.CoolClock = function(options) {
   return this.init(options);
-}
+};
 
 // Config contains some defaults, and clock skins
 CoolClock.config = {
@@ -134,7 +134,7 @@ CoolClock.prototype = {
     }
 
     if (skin.fillColor) {
-      this.ctx.fillStyle = skin.fillColor
+      this.ctx.fillStyle = skin.fillColor;
       this.ctx.fill();
     }
     else {
@@ -200,11 +200,11 @@ CoolClock.prototype = {
       this.ctx.lineWidth = this.ctx.lineWidth * this.scale;
 
     if (skin.radius) {
-      this.fullCircleAt(skin.startAt,0,skin)
+      this.fullCircleAt(skin.startAt,0,skin);
     }
     else {
       this.ctx.beginPath();
-      this.ctx.moveTo(skin.startAt,0)
+      this.ctx.moveTo(skin.startAt,0);
       this.ctx.lineTo(skin.endAt,0);
       this.ctx.stroke();
     }
@@ -280,7 +280,7 @@ CoolClock.prototype = {
   // Main tick handler. Refresh the clock then setup the next tick
   tick: function() {
     if (this.stillHere()) {
-      this.refreshDisplay()
+      this.refreshDisplay();
       this.nextTick();
     }
   }
