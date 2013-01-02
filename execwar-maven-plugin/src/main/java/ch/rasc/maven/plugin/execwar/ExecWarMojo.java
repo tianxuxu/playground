@@ -39,7 +39,6 @@ import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.aether.resolution.ArtifactResult;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
 
-import ch.rasc.maven.plugin.execwar.run.DeleteDirectory;
 import ch.rasc.maven.plugin.execwar.run.Runner;
 
 @Mojo(name = "build", defaultPhase = LifecyclePhase.PACKAGE)
@@ -136,10 +135,13 @@ public class ExecWarMojo extends AbstractMojo {
 				IOUtils.copy(getClass().getResourceAsStream("/conf/web.xml"), aos);
 				aos.closeArchiveEntry();
 
-				String[] runnerClasses = {"ch.rasc.maven.plugin.execwar.run.Runner",
-						"ch.rasc.maven.plugin.execwar.run.Runner$1",
-						"ch.rasc.maven.plugin.execwar.run.DeleteDirectory"};
-				
+				aos.putArchiveEntry(new JarArchiveEntry("conf/logging.properties"));
+				IOUtils.copy(getClass().getResourceAsStream("/conf/logging.properties"), aos);
+				aos.closeArchiveEntry();
+
+				String[] runnerClasses = { "ch.rasc.maven.plugin.execwar.run.Runner",
+						"ch.rasc.maven.plugin.execwar.run.Runner$1", "ch.rasc.maven.plugin.execwar.run.DeleteDirectory" };
+
 				for (String rc : runnerClasses) {
 					String classAsPath = rc.replace('.', '/') + ".class";
 
@@ -147,8 +149,8 @@ public class ExecWarMojo extends AbstractMojo {
 						aos.putArchiveEntry(new JarArchiveEntry(classAsPath));
 						IOUtils.copy(is, aos);
 						aos.closeArchiveEntry();
-					}					
-				}				
+					}
+				}
 
 				Manifest manifest = new Manifest();
 

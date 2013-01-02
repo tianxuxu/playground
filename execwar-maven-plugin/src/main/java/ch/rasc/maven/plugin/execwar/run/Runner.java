@@ -4,19 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
-import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -39,8 +37,9 @@ import org.apache.catalina.startup.Tomcat;
 public class Runner {
 
 	public static void main(String[] args) throws IOException {
-
-		Path extractDir = Paths.get("tc");
+				
+		final Path extractDir = Paths.get("tc");
+		
 		boolean extractWar = true;
 
 		if (Files.exists(extractDir)) {
@@ -64,9 +63,11 @@ public class Runner {
 			}
 		}
 
+		Path loggingPropertyFile = extractDir.resolve("logging.properties");
+		Path loggingDir = extractDir.resolve("logs");		
 		Path tempDir = extractDir.resolve("temp");
 		final Path defaultWebxmlFile = extractDir.resolve("web.xml");
-		
+
 		if (extractWar) {
 			System.out.println("EXTRACT WAR");
 
@@ -77,7 +78,7 @@ public class Runner {
 
 				Files.createDirectories(extractDir);
 				Files.createDirectory(tempDir);
-				Files.createDirectory(extractDir.resolve("logs"));
+				Files.createDirectory(loggingDir);
 
 				CodeSource src = Runner.class.getProtectionDomain().getCodeSource();
 				List<String> warList = new ArrayList<>();
@@ -106,6 +107,10 @@ public class Runner {
 					Files.copy(is, defaultWebxmlFile);
 				}
 
+				try (InputStream is = Runner.class.getResourceAsStream("/conf/logging.properties")) {
+					Files.copy(is, loggingPropertyFile);
+				}
+				
 				Path timestampFile = extractDir.resolve("EXECWAR_TIMESTAMP");
 				try (InputStream is = Runner.class.getResourceAsStream("/EXECWAR_TIMESTAMP")) {
 					Files.copy(is, timestampFile);
@@ -130,9 +135,11 @@ public class Runner {
 		}
 
 		System.setProperty("java.io.tmpdir", tempDir.toAbsolutePath().toString());
-		System.out.printf("java.io.tmpdir: %s\n", System.getProperty("java.io.tmpdir"));
+		System.setProperty("log.dir", loggingDir.toAbsolutePath().toString());
+		System.setProperty("java.util.logging.config.file", loggingPropertyFile.toAbsolutePath().toString());	
+		System.setProperty("java.util.logging.manager", "org.apache.juli.ClassLoaderLogManager");
 
-		// try to shutdown a runing Tomcat
+		
 		sendShutdownCommand();
 		int port = 8080;
 		boolean silent = false;
@@ -142,6 +149,7 @@ public class Runner {
 			final ServerSocket srv = new ServerSocket(port);
 			srv.close();
 		} catch (IOException e) {
+			e.printStackTrace();
 			// todo log.error("PORT " + port + " ALREADY IN USE");
 			return;
 		}
@@ -171,6 +179,7 @@ public class Runner {
 			}
 
 		};
+
 		tomcat.setBaseDir(extractDir.toAbsolutePath().toString());
 
 		if (silent) {
@@ -196,6 +205,8 @@ public class Runner {
 		} catch (ServletException e) {
 			throw new RuntimeException(e);
 		}
+
+		ctx.setSwallowOutput(true);
 
 		// if (privileged) {
 		// ctx.setPrivileged(true);
@@ -231,8 +242,6 @@ public class Runner {
 		}
 
 		((StandardManager) ctx.getManager()).setPathname("");
-
-		installSlf4jBridge();
 
 		tomcat.getServer().await();
 
@@ -291,42 +300,15 @@ public class Runner {
 		// }
 	}
 
-	private static void installSlf4jBridge() {
-		try {
-			// Check if slf4j bridge is available
-			final Class<?> clazz = Class.forName("org.slf4j.bridge.SLF4JBridgeHandler");
-
-			// Remove all JUL handlers
-			java.util.logging.LogManager.getLogManager().reset();
-
-			// Install slf4j bridge handler
-			final Method method = clazz.getMethod("install", new Class<?>[0]);
-			method.invoke(null);
-		} catch (ClassNotFoundException e) {
-			// do nothing
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	
 	/*
 	 * private static String OS = System.getProperty("os.name").toLowerCase();
- 
- 
-	public static boolean isWindows() {
- 
-		return (OS.indexOf("win") >= 0);
- 
-	}
+	 * 
+	 * 
+	 * public static boolean isWindows() {
+	 * 
+	 * return (OS.indexOf("win") >= 0);
+	 * 
+	 * }
 	 */
-	
+
 }
