@@ -136,10 +136,12 @@ public class ExecWarMojo extends AbstractMojo {
 				IOUtils.copy(getClass().getResourceAsStream("/conf/web.xml"), aos);
 				aos.closeArchiveEntry();
 
-				Class<?>[] runnerClasses = new Class<?>[]{Runner.class, DeleteDirectory.class};
-				for (Class<?> rc : runnerClasses) {
-					String className = rc.getName();
-					String classAsPath = className.replace('.', '/') + ".class";
+				String[] runnerClasses = {"ch.rasc.maven.plugin.execwar.run.Runner",
+						"ch.rasc.maven.plugin.execwar.run.Runner$1",
+						"ch.rasc.maven.plugin.execwar.run.DeleteDirectory"};
+				
+				for (String rc : runnerClasses) {
+					String classAsPath = rc.replace('.', '/') + ".class";
 
 					try (InputStream is = getClass().getResourceAsStream("/" + classAsPath)) {
 						aos.putArchiveEntry(new JarArchiveEntry(classAsPath));
