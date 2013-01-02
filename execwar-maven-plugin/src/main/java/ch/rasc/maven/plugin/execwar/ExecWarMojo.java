@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,6 +38,9 @@ import org.sonatype.aether.resolution.ArtifactRequest;
 import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.aether.resolution.ArtifactResult;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
+
+import ch.rasc.maven.plugin.execwar.run.DeleteDirectory;
+import ch.rasc.maven.plugin.execwar.run.Runner;
 
 @Mojo(name = "build", defaultPhase = LifecyclePhase.PACKAGE)
 public class ExecWarMojo extends AbstractMojo {
@@ -132,15 +136,17 @@ public class ExecWarMojo extends AbstractMojo {
 				IOUtils.copy(getClass().getResourceAsStream("/conf/web.xml"), aos);
 				aos.closeArchiveEntry();
 
-				Class<Runner> mainClass = Runner.class;
-				String className = mainClass.getName();
-				String classAsPath = className.replace('.', '/') + ".class";
+				Class<?>[] runnerClasses = new Class<?>[]{Runner.class, DeleteDirectory.class};
+				for (Class<?> rc : runnerClasses) {
+					String className = rc.getName();
+					String classAsPath = className.replace('.', '/') + ".class";
 
-				try (InputStream is = mainClass.getClassLoader().getResourceAsStream(classAsPath);) {
-					aos.putArchiveEntry(new JarArchiveEntry(classAsPath));
-					IOUtils.copy(is, aos);
-					aos.closeArchiveEntry();
-				}
+					try (InputStream is = getClass().getResourceAsStream("/" + classAsPath)) {
+						aos.putArchiveEntry(new JarArchiveEntry(classAsPath));
+						IOUtils.copy(is, aos);
+						aos.closeArchiveEntry();
+					}					
+				}				
 
 				Manifest manifest = new Manifest();
 
@@ -154,7 +160,7 @@ public class ExecWarMojo extends AbstractMojo {
 				aos.closeArchiveEntry();
 
 				aos.putArchiveEntry(new JarArchiveEntry("EXECWAR_TIMESTAMP"));
-				aos.write(String.valueOf(System.currentTimeMillis()).getBytes());
+				aos.write(String.valueOf(System.currentTimeMillis()).getBytes(StandardCharsets.UTF_8));
 				aos.closeArchiveEntry();
 
 			}
