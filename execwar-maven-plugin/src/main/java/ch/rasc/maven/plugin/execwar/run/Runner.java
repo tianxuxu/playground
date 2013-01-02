@@ -14,7 +14,6 @@ import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.LogManager;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -37,9 +36,8 @@ import org.apache.catalina.startup.Tomcat;
 public class Runner {
 
 	public static void main(String[] args) throws IOException {
-				
 		final Path extractDir = Paths.get("tc");
-		
+
 		boolean extractWar = true;
 
 		if (Files.exists(extractDir)) {
@@ -64,7 +62,7 @@ public class Runner {
 		}
 
 		Path loggingPropertyFile = extractDir.resolve("logging.properties");
-		Path loggingDir = extractDir.resolve("logs");		
+		Path loggingDir = extractDir.resolve("logs");
 		Path tempDir = extractDir.resolve("temp");
 		final Path defaultWebxmlFile = extractDir.resolve("web.xml");
 
@@ -110,7 +108,7 @@ public class Runner {
 				try (InputStream is = Runner.class.getResourceAsStream("/conf/logging.properties")) {
 					Files.copy(is, loggingPropertyFile);
 				}
-				
+
 				Path timestampFile = extractDir.resolve("EXECWAR_TIMESTAMP");
 				try (InputStream is = Runner.class.getResourceAsStream("/EXECWAR_TIMESTAMP")) {
 					Files.copy(is, timestampFile);
@@ -136,10 +134,9 @@ public class Runner {
 
 		System.setProperty("java.io.tmpdir", tempDir.toAbsolutePath().toString());
 		System.setProperty("log.dir", loggingDir.toAbsolutePath().toString());
-		System.setProperty("java.util.logging.config.file", loggingPropertyFile.toAbsolutePath().toString());	
+		System.setProperty("java.util.logging.config.file", loggingPropertyFile.toAbsolutePath().toString());
 		System.setProperty("java.util.logging.manager", "org.apache.juli.ClassLoaderLogManager");
 
-		
 		sendShutdownCommand();
 		int port = 8080;
 		boolean silent = false;

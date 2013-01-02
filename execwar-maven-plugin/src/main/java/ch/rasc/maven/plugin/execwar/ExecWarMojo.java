@@ -98,7 +98,6 @@ public class ExecWarMojo extends AbstractMojo {
 				includeGroupIds.add("ecj");
 				includeGroupIds.add("org.yaml");
 				includeGroupIds.add("net.sourceforge.argparse4j");
-				includeGroupIds.add("commons-daemon");
 
 				for (Artifact pluginArtifact : pluginArtifacts) {
 					if (includeGroupIds.contains(pluginArtifact.getGroupId())) {
@@ -131,13 +130,8 @@ public class ExecWarMojo extends AbstractMojo {
 					}
 				}
 
-				aos.putArchiveEntry(new JarArchiveEntry("conf/web.xml"));
-				IOUtils.copy(getClass().getResourceAsStream("/conf/web.xml"), aos);
-				aos.closeArchiveEntry();
-
-				aos.putArchiveEntry(new JarArchiveEntry("conf/logging.properties"));
-				IOUtils.copy(getClass().getResourceAsStream("/conf/logging.properties"), aos);
-				aos.closeArchiveEntry();
+				addFile(aos, "/conf/web.xml", "conf/web.xml");
+				addFile(aos, "/conf/logging.properties", "conf/logging.properties");
 
 				String[] runnerClasses = { "ch.rasc.maven.plugin.execwar.run.Runner",
 						"ch.rasc.maven.plugin.execwar.run.Runner$1", "ch.rasc.maven.plugin.execwar.run.DeleteDirectory" };
@@ -171,6 +165,12 @@ public class ExecWarMojo extends AbstractMojo {
 		} catch (IOException | ArchiveException | ManifestException e) {
 			throw new MojoExecutionException(e.getMessage(), e);
 		}
+	}
+
+	private void addFile(ArchiveOutputStream aos, String from, String to) throws IOException {
+		aos.putArchiveEntry(new JarArchiveEntry(to));
+		IOUtils.copy(getClass().getResourceAsStream(from), aos);
+		aos.closeArchiveEntry();
 	}
 
 	// private static Set<String> fileNames = new HashSet<>();
