@@ -22,7 +22,8 @@ public class JettyWithJndi {
 		WebAppContext context = new WebAppContext("./src/main/webapp", "/");
 		context.setDefaultsDescriptor("./src/main/config/webdefault.xml");
 
-		context.setConfigurations(new Configuration[] { new org.eclipse.jetty.webapp.WebInfConfiguration(),
+		context.setConfigurations(new Configuration[] {				
+				new org.eclipse.jetty.webapp.WebInfConfiguration(),
 				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
 				new org.eclipse.jetty.webapp.MetaInfConfiguration(),
 				new org.eclipse.jetty.webapp.FragmentConfiguration(),
