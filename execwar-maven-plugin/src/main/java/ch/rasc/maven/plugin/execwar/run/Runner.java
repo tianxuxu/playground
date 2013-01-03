@@ -155,8 +155,6 @@ public class Runner {
 
 			@Override
 			public Context addWebapp(@SuppressWarnings("hiding") Host host, String url, String name, String path) {
-				// silence(host, url);
-
 				Context ctx = new StandardContext();
 				ctx.setName(name);
 				ctx.setPath(url);
@@ -165,12 +163,7 @@ public class Runner {
 				ContextConfig ctxCfg = new ContextConfig();
 				ctx.addLifecycleListener(ctxCfg);
 				ctxCfg.setDefaultWebXml(defaultWebxmlFile.toAbsolutePath().toString());
-
-				if (host == null) {
-					getHost().addChild(ctx);
-				} else {
-					host.addChild(ctx);
-				}
+				getHost().addChild(ctx);
 
 				return ctx;
 			}
@@ -238,7 +231,8 @@ public class Runner {
 			throw new RuntimeException(e);
 		}
 
-		((StandardManager) ctx.getManager()).setPathname("");
+		// Disable session persistence support
+		((StandardManager) ctx.getManager()).setPathname(null);
 
 		tomcat.getServer().await();
 
