@@ -134,7 +134,9 @@ public class ExecWarMojo extends AbstractMojo {
 				addFile(aos, "/conf/logging.properties", "conf/logging.properties");
 
 				String[] runnerClasses = { "ch.rasc.maven.plugin.execwar.run.Runner",
-						"ch.rasc.maven.plugin.execwar.run.Runner$1", "ch.rasc.maven.plugin.execwar.run.DeleteDirectory" };
+						"ch.rasc.maven.plugin.execwar.run.Runner$1",
+						"ch.rasc.maven.plugin.execwar.run.DeleteDirectory", "ch.rasc.maven.plugin.execwar.run.Config",
+						"ch.rasc.maven.plugin.execwar.run.Context" };
 
 				for (String rc : runnerClasses) {
 					String classAsPath = rc.replace('.', '/') + ".class";

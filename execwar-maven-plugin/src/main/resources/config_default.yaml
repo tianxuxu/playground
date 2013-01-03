@@ -1,8 +1,3 @@
-# Shutdown port and command. Disabled by default
-shutdown: 
-  port: 8005
-  command: SHUTDOWN
-
 # Has to be specifed if load-balancing is needed. Empty by default.
 jvmRoute: server1
 
@@ -11,10 +6,6 @@ jvmRoute: server1
 # false sets the log level to the default level of INFO.
 # Default false
 silent: true
-
-# If session should be persisted when tomcat shuts down. 
-# Default false
-sessionPersistence: false   
 
 # If not specified then these listeners will be added by default.
 # GlobalResourcesLifecycleListener only if jndi is enabled
@@ -27,7 +18,7 @@ listeners:
   - org.apache.catalina.core.ThreadLocalLeakPreventionListener
 
 # List of connectors.
-# At least one connector must be specified
+# If no connector is specfied the Runner creates a default connector with protocol HTTP/1.1 and port 8080 
 connectors:
   # HTTP Connector
   - port: 8080
@@ -51,7 +42,8 @@ connectors:
     URIEncoding: UTF-8
     tomcatAuthentication: false
     
-# Specifies the application. If no context section is available then the Runner will deploy the first war file he findes to the ROOT context.    
+# Specifies the application. If no context section is specified then the Runner 
+# will deploy the first war file he findes to the ROOT context.    
 contexts:        
   - # Regular expression that specifies the war file. .* is the default value and the Runner chooses the first war he finds
     war: .*
@@ -61,6 +53,10 @@ contexts:
     
     # Deploy at the specified path
     #contextPath: /test
+    
+    # If session should be persisted when tomcat shuts down. 
+    # Default false
+    sessionPersistence: false   
     
     resources:
       - name: jdbc/db

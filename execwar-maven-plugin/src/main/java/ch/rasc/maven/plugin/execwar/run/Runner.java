@@ -13,29 +13,49 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import javax.servlet.ServletException;
-
 import org.apache.catalina.Context;
 import org.apache.catalina.Host;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.Server;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.AprLifecycleListener;
 import org.apache.catalina.core.JasperListener;
 import org.apache.catalina.core.JreMemoryLeakPreventionListener;
 import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.core.ThreadLocalLeakPreventionListener;
+import org.apache.catalina.deploy.ContextEnvironment;
+import org.apache.catalina.deploy.ContextResource;
+import org.apache.catalina.mbeans.GlobalResourcesLifecycleListener;
 import org.apache.catalina.session.StandardManager;
 import org.apache.catalina.startup.ContextConfig;
 import org.apache.catalina.startup.Tomcat;
+import org.yaml.snakeyaml.Yaml;
 
 public class Runner {
 
-	public static void main(String[] args) throws IOException {
+	private static Tomcat tomcat;
+
+	private static Config config;
+
+	public static void main(String[] args) throws Exception {
+
+		Path configFile = Paths.get("config.yaml");
+
+		if (Files.exists(configFile)) {
+			try (InputStream is = Files.newInputStream(configFile)) {
+				Yaml yaml = new Yaml();
+				config = yaml.loadAs(is, Config.class);
+			}
+		} else {
+			config = new Config();
+		}
+
 		final Path extractDir = Paths.get("tc");
 
 		boolean extractWar = true;
@@ -67,67 +87,56 @@ public class Runner {
 		final Path defaultWebxmlFile = extractDir.resolve("web.xml");
 
 		if (extractWar) {
-			System.out.println("EXTRACT WAR");
-
-			try {
-				if (Files.exists(extractDir)) {
-					Files.walkFileTree(extractDir, new DeleteDirectory());
-				}
-
-				Files.createDirectories(extractDir);
-				Files.createDirectory(tempDir);
-				Files.createDirectory(loggingDir);
-
-				CodeSource src = Runner.class.getProtectionDomain().getCodeSource();
-				List<String> warList = new ArrayList<>();
-
-				if (src != null) {
-					URL jar = src.getLocation();
-					ZipInputStream zip = new ZipInputStream(jar.openStream());
-					ZipEntry ze = null;
-
-					while ((ze = zip.getNextEntry()) != null) {
-						String entryName = ze.getName();
-						if (entryName.endsWith(".war")) {
-							warList.add(entryName);
-						}
-					}
-				}
-
-				for (String war : warList) {
-					Path warFile = extractDir.resolve(war);
-					try (InputStream is = Runner.class.getResourceAsStream("/" + war)) {
-						Files.copy(is, warFile);
-					}
-				}
-
-				try (InputStream is = Runner.class.getResourceAsStream("/conf/web.xml")) {
-					Files.copy(is, defaultWebxmlFile);
-				}
-
-				try (InputStream is = Runner.class.getResourceAsStream("/conf/logging.properties")) {
-					Files.copy(is, loggingPropertyFile);
-				}
-
-				Path timestampFile = extractDir.resolve("EXECWAR_TIMESTAMP");
-				try (InputStream is = Runner.class.getResourceAsStream("/EXECWAR_TIMESTAMP")) {
-					Files.copy(is, timestampFile);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return;
+			if (Files.exists(extractDir)) {
+				Files.walkFileTree(extractDir, new DeleteDirectory());
 			}
 
-		} else {
-			System.out.println("NO EXTRACT NEEDED");
+			Files.createDirectories(extractDir);
+			Files.createDirectory(tempDir);
+			Files.createDirectory(loggingDir);
+
+			CodeSource src = Runner.class.getProtectionDomain().getCodeSource();
+			List<String> warList = new ArrayList<>();
+
+			if (src != null) {
+				URL jar = src.getLocation();
+				ZipInputStream zip = new ZipInputStream(jar.openStream());
+				ZipEntry ze = null;
+
+				while ((ze = zip.getNextEntry()) != null) {
+					String entryName = ze.getName();
+					if (entryName.endsWith(".war")) {
+						warList.add(entryName);
+					}
+				}
+			}
+
+			for (String war : warList) {
+				Path warFile = extractDir.resolve(war);
+				try (InputStream is = Runner.class.getResourceAsStream("/" + war)) {
+					Files.copy(is, warFile);
+				}
+			}
+
+			try (InputStream is = Runner.class.getResourceAsStream("/conf/web.xml")) {
+				Files.copy(is, defaultWebxmlFile);
+			}
+
+			try (InputStream is = Runner.class.getResourceAsStream("/conf/logging.properties")) {
+				Files.copy(is, loggingPropertyFile);
+			}
+
+			Path timestampFile = extractDir.resolve("EXECWAR_TIMESTAMP");
+			try (InputStream is = Runner.class.getResourceAsStream("/EXECWAR_TIMESTAMP")) {
+				Files.copy(is, timestampFile);
+			}
+
 		}
 
 		List<String> warAbsolutePaths = new ArrayList<>();
 
 		try (DirectoryStream<Path> wars = Files.newDirectoryStream(extractDir, "*.war")) {
 			for (Path war : wars) {
-				System.out.println(war);
 				warAbsolutePaths.add(war.toAbsolutePath().toString());
 			}
 		}
@@ -137,21 +146,19 @@ public class Runner {
 		System.setProperty("java.util.logging.config.file", loggingPropertyFile.toAbsolutePath().toString());
 		System.setProperty("java.util.logging.manager", "org.apache.juli.ClassLoaderLogManager");
 
-		sendShutdownCommand();
-		int port = 8080;
-		boolean silent = false;
-		boolean useNio = true;
-
-		try {
-			final ServerSocket srv = new ServerSocket(port);
-			srv.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			// todo log.error("PORT " + port + " ALREADY IN USE");
-			return;
+		List<Connector> connectors = config.createConnectorObjects();
+		for (Connector connector : connectors) {
+			try {
+				try (ServerSocket srv = new ServerSocket(connector.getPort())) {
+					// nothing here
+				}
+			} catch (IOException e) {
+				getLogger().severe("PORT " + connector.getPort() + " ALREADY IN USE");
+				return;
+			}
 		}
 
-		Tomcat tomcat = new Tomcat() {
+		tomcat = new Tomcat() {
 
 			@Override
 			public Context addWebapp(@SuppressWarnings("hiding") Host host, String url, String name, String path) {
@@ -171,71 +178,94 @@ public class Runner {
 		};
 
 		tomcat.setBaseDir(extractDir.toAbsolutePath().toString());
+		tomcat.setSilent(config.isSilent());
 
-		if (silent) {
-			tomcat.setSilent(true);
+		for (String s : new String[] { "org.apache.coyote.http11.Http11NioProtocol", "org.apache.tomcat.util.net.NioSelectorPool",
+				Runner.class.getName() }) {
+			if (config.isSilent()) {
+				Logger.getLogger(s).setLevel(Level.WARNING);
+			} else {
+				Logger.getLogger(s).setLevel(Level.INFO);
+			}
 		}
 
-		tomcat.getServer().addLifecycleListener(new AprLifecycleListener());
+		// Create all server objects;
+		tomcat.getHost();
 
-		if (useNio) {
-			Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-			connector.setPort(port);
-			connector.setURIEncoding("UTF-8");
+		if (config.getListeners().contains(AprLifecycleListener.class.getName())) {
+			tomcat.getServer().addLifecycleListener(new AprLifecycleListener());
+		}
+		if (config.getListeners().contains(JasperListener.class.getName())) {
+			tomcat.getServer().addLifecycleListener(new JasperListener());
+		}
+		if (config.getListeners().contains(JreMemoryLeakPreventionListener.class.getName())) {
+			tomcat.getServer().addLifecycleListener(new JreMemoryLeakPreventionListener());
+		}
+		if (config.getListeners().contains(ThreadLocalLeakPreventionListener.class.getName())) {
+			tomcat.getServer().addLifecycleListener(new ThreadLocalLeakPreventionListener());
+		}
+
+		for (Connector connector : connectors) {
 			tomcat.setConnector(connector);
 			tomcat.getService().addConnector(connector);
-		} else {
-			tomcat.setPort(port);
-			tomcat.getConnector().setURIEncoding("UTF-8");
 		}
 
-		final Context ctx;
-		try {
-			ctx = tomcat.addWebapp("", warAbsolutePaths.iterator().next());
-		} catch (ServletException e) {
-			throw new RuntimeException(e);
+		if (config.getJvmRoute() != null && !config.getJvmRoute().isEmpty()) {
+			tomcat.getEngine().setJvmRoute(config.getJvmRoute());
 		}
 
-		ctx.setSwallowOutput(true);
+		if (config.isEnableNaming()) {
+			tomcat.enableNaming();
 
-		// if (privileged) {
-		// ctx.setPrivileged(true);
-		// }
-
-		// if (enableNaming || !contextEnvironments.isEmpty() ||
-		// !contextResources.isEmpty()) {
-		// tomcat.enableNaming();
-		//
-		// if (addDefaultListeners) {
-		// tomcat.getServer().addLifecycleListener(new
-		// GlobalResourcesLifecycleListener());
-		// }
-		// }
-
-		Server server = tomcat.getServer();
-		server.addLifecycleListener(new JasperListener());
-		server.addLifecycleListener(new JreMemoryLeakPreventionListener());
-		server.addLifecycleListener(new ThreadLocalLeakPreventionListener());
-
-		// for (ContextEnvironment env : contextEnvironments) {
-		// ctx.getNamingResources().addEnvironment(env);
-		// }
-		//
-		// for (ContextResource res : contextResources) {
-		// ctx.getNamingResources().addResource(res);
-		// }
-
-		try {
-			tomcat.start();
-		} catch (LifecycleException e) {
-			throw new RuntimeException(e);
+			if (config.getListeners().contains(GlobalResourcesLifecycleListener.class.getName())) {
+				tomcat.getServer().addLifecycleListener(new GlobalResourcesLifecycleListener());
+			}
 		}
+
+		// no context configured. add a default one
+		if (config.getContexts().isEmpty()) {
+			ch.rasc.maven.plugin.execwar.run.Context ctx = new ch.rasc.maven.plugin.execwar.run.Context();
+			ctx.setContextPath("");
+			ctx.setWar(warAbsolutePaths.iterator().next());
+			config.setContexts(Collections.singletonList(ctx));
+		}
+
+		List<Context> contextsWithoutSessionPersistence = new ArrayList<>();
+		for (ch.rasc.maven.plugin.execwar.run.Context configuredContext : config.getContexts()) {
+
+			String contextPath = configuredContext.getContextPath();
+			if (contextPath == null) {
+				contextPath = "";
+			}
+
+			Context ctx = tomcat.addWebapp(contextPath, configuredContext.getWar());
+			ctx.setSwallowOutput(true);
+
+			for (ContextEnvironment env : configuredContext.getEnvironments()) {
+				ctx.getNamingResources().addEnvironment(env);
+			}
+
+			for (ContextResource res : configuredContext.createContextResourceObjects()) {
+				ctx.getNamingResources().addResource(res);
+			}
+
+			if (!configuredContext.isSessionPersistence()) {
+				contextsWithoutSessionPersistence.add(ctx);
+			}
+		}
+
+		tomcat.start();
 
 		// Disable session persistence support
-		((StandardManager) ctx.getManager()).setPathname(null);
+		for (Context ctx : contextsWithoutSessionPersistence) {
+			((StandardManager) ctx.getManager()).setPathname(null);
+		}
 
 		tomcat.getServer().await();
+	}
 
+	private static Logger getLogger() {
+		return Logger.getLogger(Runner.class.getName());
 	}
 
 	private static void copy(InputStream source, OutputStream sink) throws IOException {
@@ -246,60 +276,8 @@ public class Runner {
 		}
 	}
 
-	private static void sendShutdownCommand() {
-		// if (shutdownPort != null) {
-		// try {
-		// final Socket socket = new Socket("localhost", shutdownPort);
-		// final OutputStream stream = socket.getOutputStream();
-		//
-		// for (int i = 0; i < SHUTDOWN_COMMAND.length(); i++) {
-		// stream.write(SHUTDOWN_COMMAND.charAt(i));
-		// }
-		//
-		// stream.flush();
-		// stream.close();
-		// socket.close();
-		// } catch (UnknownHostException e) {
-		// if (!silent) {
-		// log.debug(e);
-		// }
-		// return;
-		// } catch (IOException e) {
-		// if (!silent) {
-		// log.debug(e);
-		// }
-		// return;
-		// }
-		//
-		// // try to wait the specified amount of seconds until port becomes
-		// available
-		// int count = 0;
-		// while (count < secondsToWaitBeforePortBecomesAvailable * 2) {
-		// try {
-		// final ServerSocket srv = new ServerSocket(port);
-		// srv.close();
-		// return;
-		// } catch (IOException e) {
-		// count++;
-		// }
-		// try {
-		// TimeUnit.MILLISECONDS.sleep(500);
-		// } catch (InterruptedException e) {
-		// return;
-		// }
-		// }
-		// }
+	public static void stop(@SuppressWarnings("unused") String[] args) {
+		((StandardServer) tomcat.getServer()).stopAwait();
 	}
-
-	/*
-	 * private static String OS = System.getProperty("os.name").toLowerCase();
-	 * 
-	 * 
-	 * public static boolean isWindows() {
-	 * 
-	 * return (OS.indexOf("win") >= 0);
-	 * 
-	 * }
-	 */
 
 }

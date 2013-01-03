@@ -1,6 +1,7 @@
-package ch.rasc.maven.plugin.execwar.run.config;
+package ch.rasc.maven.plugin.execwar.run;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +14,11 @@ public class Context {
 
 	private String contextPath;
 
-	private List<Map<String, Object>> resources;
+	private boolean sessionPersistence = false;
 
-	private List<ContextEnvironment> environments;
+	private List<Map<String, Object>> resources = Collections.emptyList();
+
+	private List<ContextEnvironment> environments = Collections.emptyList();
 
 	public String getWar() {
 		return war;
@@ -49,6 +52,14 @@ public class Context {
 		this.environments = environments;
 	}
 
+	public boolean isSessionPersistence() {
+		return sessionPersistence;
+	}
+
+	public void setSessionPersistence(boolean sessionPersistence) {
+		this.sessionPersistence = sessionPersistence;
+	}
+
 	public List<ContextResource> createContextResourceObjects() {
 		List<ContextResource> crObjects = new ArrayList<>();
 		for (Map<String, Object> res : getResources()) {
@@ -62,6 +73,12 @@ public class Context {
 		}
 
 		return crObjects;
+	}
+
+	@Override
+	public String toString() {
+		return "Context [war=" + war + ", contextPath=" + contextPath + ", sessionPersistence=" + sessionPersistence
+				+ ", resources=" + resources + ", environments=" + environments + "]";
 	}
 
 }
