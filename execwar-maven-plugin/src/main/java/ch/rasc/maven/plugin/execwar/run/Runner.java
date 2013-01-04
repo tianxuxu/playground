@@ -59,7 +59,7 @@ public class Runner {
 			config = new Config();
 		}
 
-		System.out.println(config);
+		// System.out.println(config);
 
 		for (Map.Entry<String, Object> entry : config.getSystemProperties().entrySet()) {
 			System.setProperty(entry.getKey(), entry.getValue().toString());
@@ -171,6 +171,21 @@ public class Runner {
 
 			@Override
 			public Context addWebapp(@SuppressWarnings("hiding") Host host, String url, String name, String path) {
+				String base = "org.apache.catalina.core.ContainerBase.[default].[";
+				if (host == null) {
+					base += getHost().getName();
+				} else {
+					base += host.getName();
+				}
+				base += "].[";
+				base += url;
+				base += "]";
+				if (config.isSilent()) {
+					Logger.getLogger(base).setLevel(Level.WARNING);
+				} else {
+					Logger.getLogger(base).setLevel(Level.INFO);
+				}
+
 				Context ctx = new StandardContext();
 				ctx.setName(name);
 				ctx.setPath(url);

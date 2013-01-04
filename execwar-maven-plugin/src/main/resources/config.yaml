@@ -90,11 +90,34 @@ context:
       maxActive: 10
       maxWait: 10000
       defaultAutoCommit: false
+      
+  # Optional if there is only one resource definition
+  resource:
+    name: jdbc/db
+    auth: Container
+    factory: org.apache.tomcat.jdbc.pool.DataSourceFactory
+    type: javax.sql.DataSource
+    username: sa
+    password: sa
+    driverClassName: net.sourceforge.jtds.jdbc.Driver
+    url: jdbc:jtds:sqlserver://localhost/db
+    initialSize: 2
+    minIdle: 2
+    maxIdle: 4
+    maxActive: 10
+    maxWait: 10000
+    defaultAutoCommit: false         
     
   # Context Parameters
   parameters:
     - name: aParameter
       value: theValue
+      
+  # Optional if there is only one parameter      
+  parameter:
+    name: aParameter
+    value: theValue
+      
     
   # Environment Entries            
   environments:
@@ -109,7 +132,15 @@ context:
       type: java.lang.Integer
     - name: next.version.minor
       value: 2
-      type: java.lang.Integer          
+      type: java.lang.Integer  
+      
+  # Optional if there is only one environment variable
+  environment:
+    name: spring.profiles.active 
+    value: development
+    type: java.lang.String
+      
+              
     
 # Use contexts section if there are more than one web applications. If no context or contexts section is specified then the Runner 
 # will deploy the first war file he findes to the ROOT context.  

@@ -25,7 +25,7 @@ public class Config {
 	private Map<String, Object> systemProperties = Collections.emptyMap();
 
 	private Map<String, Object> connector;
-	
+
 	private List<Map<String, Object>> connectors = Collections.emptyList();
 
 	private Context context;
@@ -64,12 +64,12 @@ public class Config {
 		this.connector = connector;
 	}
 
-	public List<Context> getContexts() {		
+	public List<Context> getContexts() {
 		if (context != null) {
 			if (contexts.isEmpty()) {
 				return Collections.singletonList(context);
 			}
-			
+
 			List<Context> combinedContexts = new ArrayList<>(contexts);
 			combinedContexts.add(context);
 			return combinedContexts;
@@ -97,7 +97,7 @@ public class Config {
 
 	public List<Connector> createConnectorObjects() throws Exception {
 		List<Connector> conObjects = new ArrayList<>();
-		
+
 		if (connector != null) {
 			if (connectors.isEmpty()) {
 				setConnectors(Collections.singletonList(connector));
@@ -105,7 +105,7 @@ public class Config {
 				connectors.add(connector);
 			}
 		}
-		
+
 		for (Map<String, Object> con : connectors) {
 			Object protocol = con.get(CONNECTOR_PROTOCOL);
 			if (protocol == null) {

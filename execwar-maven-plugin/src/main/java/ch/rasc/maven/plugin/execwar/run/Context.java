@@ -52,17 +52,17 @@ public class Context {
 	}
 
 	public List<ContextEnvironment> getEnvironments() {
-		
+
 		if (environment != null) {
 			if (environments.isEmpty()) {
 				return Collections.singletonList(environment);
 			}
-			
+
 			List<ContextEnvironment> combinedEnvironments = new ArrayList<>(environments);
 			combinedEnvironments.add(environment);
 			return combinedEnvironments;
 		}
-		
+
 		return environments;
 	}
 
@@ -91,12 +91,12 @@ public class Context {
 			if (parameters.isEmpty()) {
 				return Collections.singletonList(parameter);
 			}
-			
+
 			List<ApplicationParameter> combinedParameters = new ArrayList<>(parameters);
 			combinedParameters.add(parameter);
 			return combinedParameters;
 		}
-		
+
 		return parameters;
 	}
 
@@ -117,12 +117,12 @@ public class Context {
 	}
 
 	public boolean hasEnvironmentsOrResources() {
-		return !environments.isEmpty() || !resources.isEmpty();
+		return !environments.isEmpty() || !resources.isEmpty() || environment != null || resource != null;
 	}
 
 	public List<ContextResource> createContextResourceObjects() {
 		List<ContextResource> crObjects = new ArrayList<>();
-		
+
 		if (resource != null) {
 			if (resources.isEmpty()) {
 				setResources(Collections.singletonList(resource));
@@ -130,7 +130,7 @@ public class Context {
 				resources.add(resource);
 			}
 		}
-		
+
 		for (Map<String, Object> res : resources) {
 			ContextResource contextResource = new ContextResource();
 
