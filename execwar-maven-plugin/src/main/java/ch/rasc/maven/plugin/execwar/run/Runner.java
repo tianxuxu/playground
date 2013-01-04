@@ -231,7 +231,7 @@ public class Runner {
 			}
 		}
 
-		// no context configured. add a default one
+		// No contexts configured. Create a default context.
 		if (config.getContexts().isEmpty()) {
 			ch.rasc.maven.plugin.execwar.run.Context ctx = new ch.rasc.maven.plugin.execwar.run.Context();
 			ctx.setContextPath("");
@@ -247,7 +247,12 @@ public class Runner {
 				contextPath = "";
 			}
 
-			Context ctx = tomcat.addWebapp(contextPath, configuredContext.getWar());
+			String warPath = configuredContext.getWar();
+			if (warPath == null) {
+				warPath = warAbsolutePaths.iterator().next();
+			}
+
+			Context ctx = tomcat.addWebapp(contextPath, warPath);
 			ctx.setSwallowOutput(true);
 
 			for (ContextEnvironment env : configuredContext.getEnvironments()) {

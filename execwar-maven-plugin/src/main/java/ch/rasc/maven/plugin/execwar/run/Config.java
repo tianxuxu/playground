@@ -24,7 +24,11 @@ public class Config {
 
 	private Map<String, Object> systemProperties = Collections.emptyMap();
 
+	private Map<String, Object> connector;
+	
 	private List<Map<String, Object>> connectors = Collections.emptyList();
+
+	private Context context;
 
 	private List<Context> contexts = Collections.emptyList();
 
@@ -52,20 +56,33 @@ public class Config {
 		this.listeners = listeners;
 	}
 
-	public List<Map<String, Object>> getConnectors() {
-		return connectors;
-	}
-
 	public void setConnectors(List<Map<String, Object>> connectors) {
 		this.connectors = connectors;
 	}
 
-	public List<Context> getContexts() {
+	public void setConnector(Map<String, Object> connector) {
+		this.connector = connector;
+	}
+
+	public List<Context> getContexts() {		
+		if (context != null) {
+			if (contexts.isEmpty()) {
+				return Collections.singletonList(context);
+			}
+			
+			List<Context> combinedContexts = new ArrayList<>(contexts);
+			combinedContexts.add(context);
+			return combinedContexts;
+		}
 		return contexts;
 	}
 
 	public void setContexts(List<Context> contexts) {
 		this.contexts = contexts;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
 	}
 
 	public Map<String, Object> getSystemProperties() {
@@ -80,16 +97,29 @@ public class Config {
 
 	public List<Connector> createConnectorObjects() throws Exception {
 		List<Connector> conObjects = new ArrayList<>();
-		for (Map<String, Object> con : getConnectors()) {
-			Connector connector = new Connector(con.get(CONNECTOR_PROTOCOL).toString());
+		
+		if (connector != null) {
+			if (connectors.isEmpty()) {
+				setConnectors(Collections.singletonList(connector));
+			} else {
+				connectors.add(connector);
+			}
+		}
+		
+		for (Map<String, Object> con : connectors) {
+			Object protocol = con.get(CONNECTOR_PROTOCOL);
+			if (protocol == null) {
+				protocol = "HTTP/1.1";
+			}
+			Connector tcConnector = new Connector(protocol.toString());
 
 			for (Map.Entry<String, Object> entry : con.entrySet()) {
 				if (!entry.getKey().equals(CONNECTOR_PROTOCOL)) {
-					IntrospectionUtils.setProperty(connector, entry.getKey(), entry.getValue().toString());
+					IntrospectionUtils.setProperty(tcConnector, entry.getKey(), entry.getValue().toString());
 				}
 			}
 
-			conObjects.add(connector);
+			conObjects.add(tcConnector);
 		}
 
 		return conObjects;
@@ -97,7 +127,7 @@ public class Config {
 
 	public boolean isEnableNaming() {
 		for (Context ctx : getContexts()) {
-			if (!ctx.getEnvironments().isEmpty() || !ctx.getResources().isEmpty() || ctx.getContextFile() != null) {
+			if (ctx.hasEnvironmentsOrResources() || ctx.getContextFile() != null) {
 				return true;
 			}
 		}
@@ -108,8 +138,8 @@ public class Config {
 	@Override
 	public String toString() {
 		return "Config [jvmRoute=" + jvmRoute + ", silent=" + silent + ", listeners=" + listeners
-				+ ", systemProperties=" + systemProperties + ", connectors=" + connectors + ", contexts=" + contexts
-				+ "]";
+				+ ", systemProperties=" + systemProperties + ", connectors=" + connectors + ", context=" + context
+				+ ", contexts=" + contexts + "]";
 	}
 
 }

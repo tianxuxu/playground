@@ -22,8 +22,14 @@ public class Context {
 	private List<Map<String, Object>> resources = Collections.emptyList();
 
 	private List<ContextEnvironment> environments = Collections.emptyList();
-	
+
 	private List<ApplicationParameter> parameters = Collections.emptyList();
+
+	private Map<String, Object> resource;
+
+	private ContextEnvironment environment;
+
+	private ApplicationParameter parameter;
 
 	public String getWar() {
 		return war;
@@ -41,15 +47,22 @@ public class Context {
 		this.contextPath = contextPath;
 	}
 
-	public List<Map<String, Object>> getResources() {
-		return resources;
-	}
-
 	public void setResources(List<Map<String, Object>> resources) {
 		this.resources = resources;
 	}
 
 	public List<ContextEnvironment> getEnvironments() {
+		
+		if (environment != null) {
+			if (environments.isEmpty()) {
+				return Collections.singletonList(environment);
+			}
+			
+			List<ContextEnvironment> combinedEnvironments = new ArrayList<>(environments);
+			combinedEnvironments.add(environment);
+			return combinedEnvironments;
+		}
+		
 		return environments;
 	}
 
@@ -74,6 +87,16 @@ public class Context {
 	}
 
 	public List<ApplicationParameter> getParameters() {
+		if (parameter != null) {
+			if (parameters.isEmpty()) {
+				return Collections.singletonList(parameter);
+			}
+			
+			List<ApplicationParameter> combinedParameters = new ArrayList<>(parameters);
+			combinedParameters.add(parameter);
+			return combinedParameters;
+		}
+		
 		return parameters;
 	}
 
@@ -81,16 +104,41 @@ public class Context {
 		this.parameters = parameters;
 	}
 
+	public void setResource(Map<String, Object> resource) {
+		this.resource = resource;
+	}
+
+	public void setEnvironment(ContextEnvironment environment) {
+		this.environment = environment;
+	}
+
+	public void setParameter(ApplicationParameter parameter) {
+		this.parameter = parameter;
+	}
+
+	public boolean hasEnvironmentsOrResources() {
+		return !environments.isEmpty() || !resources.isEmpty();
+	}
+
 	public List<ContextResource> createContextResourceObjects() {
 		List<ContextResource> crObjects = new ArrayList<>();
-		for (Map<String, Object> res : getResources()) {
-			ContextResource resource = new ContextResource();
+		
+		if (resource != null) {
+			if (resources.isEmpty()) {
+				setResources(Collections.singletonList(resource));
+			} else {
+				resources.add(resource);
+			}
+		}
+		
+		for (Map<String, Object> res : resources) {
+			ContextResource contextResource = new ContextResource();
 
 			for (Map.Entry<String, Object> entry : res.entrySet()) {
-				IntrospectionUtils.setProperty(resource, entry.getKey(), entry.getValue().toString());
+				IntrospectionUtils.setProperty(contextResource, entry.getKey(), entry.getValue().toString());
 			}
 
-			crObjects.add(resource);
+			crObjects.add(contextResource);
 		}
 
 		return crObjects;
@@ -102,7 +150,5 @@ public class Context {
 				+ ", sessionPersistence=" + sessionPersistence + ", resources=" + resources + ", environments="
 				+ environments + ", parameters=" + parameters + "]";
 	}
-
-
 
 }
