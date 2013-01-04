@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.deploy.ApplicationParameter;
 import org.apache.catalina.deploy.ContextEnvironment;
 import org.apache.catalina.deploy.ContextResource;
 import org.apache.tomcat.util.IntrospectionUtils;
@@ -14,11 +15,15 @@ public class Context {
 
 	private String contextPath;
 
+	private String contextFile;
+
 	private boolean sessionPersistence = false;
 
 	private List<Map<String, Object>> resources = Collections.emptyList();
 
 	private List<ContextEnvironment> environments = Collections.emptyList();
+	
+	private List<ApplicationParameter> parameters = Collections.emptyList();
 
 	public String getWar() {
 		return war;
@@ -60,6 +65,22 @@ public class Context {
 		this.sessionPersistence = sessionPersistence;
 	}
 
+	public String getContextFile() {
+		return contextFile;
+	}
+
+	public void setContextFile(String contextFile) {
+		this.contextFile = contextFile;
+	}
+
+	public List<ApplicationParameter> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(List<ApplicationParameter> parameters) {
+		this.parameters = parameters;
+	}
+
 	public List<ContextResource> createContextResourceObjects() {
 		List<ContextResource> crObjects = new ArrayList<>();
 		for (Map<String, Object> res : getResources()) {
@@ -77,8 +98,11 @@ public class Context {
 
 	@Override
 	public String toString() {
-		return "Context [war=" + war + ", contextPath=" + contextPath + ", sessionPersistence=" + sessionPersistence
-				+ ", resources=" + resources + ", environments=" + environments + "]";
+		return "Context [war=" + war + ", contextPath=" + contextPath + ", contextFile=" + contextFile
+				+ ", sessionPersistence=" + sessionPersistence + ", resources=" + resources + ", environments="
+				+ environments + ", parameters=" + parameters + "]";
 	}
+
+
 
 }
