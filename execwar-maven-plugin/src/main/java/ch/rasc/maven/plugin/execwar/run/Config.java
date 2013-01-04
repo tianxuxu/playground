@@ -22,6 +22,8 @@ public class Config {
 			"org.apache.catalina.mbeans.GlobalResourcesLifecycleListener",
 			"org.apache.catalina.core.ThreadLocalLeakPreventionListener"));
 
+	private Map<String, Object> systemProperties = Collections.emptyMap();
+
 	private List<Map<String, Object>> connectors = Collections.emptyList();
 
 	private List<Context> contexts = Collections.emptyList();
@@ -66,6 +68,14 @@ public class Config {
 		this.contexts = contexts;
 	}
 
+	public Map<String, Object> getSystemProperties() {
+		return systemProperties;
+	}
+
+	public void setSystemProperties(Map<String, Object> systemProperties) {
+		this.systemProperties = systemProperties;
+	}
+
 	private static final String CONNECTOR_PROTOCOL = "protocol";
 
 	public List<Connector> createConnectorObjects() throws Exception {
@@ -87,7 +97,7 @@ public class Config {
 
 	public boolean isEnableNaming() {
 		for (Context ctx : getContexts()) {
-			if (!ctx.getEnvironments().isEmpty() || !ctx.getResources().isEmpty()) {
+			if (!ctx.getEnvironments().isEmpty() || !ctx.getResources().isEmpty() || ctx.getContextFile() != null) {
 				return true;
 			}
 		}
@@ -97,8 +107,9 @@ public class Config {
 
 	@Override
 	public String toString() {
-		return "Config [jvmRoute=" + jvmRoute + ", silent=" + silent + ", listeners=" + listeners + ", connectors="
-				+ connectors + ", contexts=" + contexts + "]";
+		return "Config [jvmRoute=" + jvmRoute + ", silent=" + silent + ", listeners=" + listeners
+				+ ", systemProperties=" + systemProperties + ", connectors=" + connectors + ", contexts=" + contexts
+				+ "]";
 	}
 
 }
