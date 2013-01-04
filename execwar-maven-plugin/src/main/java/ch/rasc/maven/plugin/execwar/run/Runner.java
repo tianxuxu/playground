@@ -56,7 +56,16 @@ public class Runner {
 				config = yaml.loadAs(is, Config.class);
 			}
 		} else {
-			config = new Config();
+			//try to read it from the classpath
+			try (InputStream is = Runner.class.getResourceAsStream("/config.yaml")) {
+				if (is != null) {
+					Yaml yaml = new Yaml();
+					config = yaml.loadAs(is, Config.class);
+				} else {
+					config = new Config();		
+				}
+			}
+			
 		}
 
 		// System.out.println(config);
@@ -340,7 +349,11 @@ public class Runner {
 		}
 	}
 
-	public static void stop(@SuppressWarnings("unused") String[] args) throws LifecycleException {
+	public static void start(String... args) throws Exception {
+		main(args);
+	}
+	
+	public static void stop(@SuppressWarnings("unused") String... args) throws LifecycleException {
 		tomcat.stop();
 	}
 
