@@ -1,6 +1,7 @@
 package ch.rasc.maven.plugin.execwar.run;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +16,7 @@ import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -22,13 +24,14 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.Host;
+import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.AprLifecycleListener;
 import org.apache.catalina.core.JasperListener;
 import org.apache.catalina.core.JreMemoryLeakPreventionListener;
 import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.core.ThreadLocalLeakPreventionListener;
+import org.apache.catalina.deploy.ApplicationParameter;
 import org.apache.catalina.deploy.ContextEnvironment;
 import org.apache.catalina.deploy.ContextResource;
 import org.apache.catalina.mbeans.GlobalResourcesLifecycleListener;
@@ -54,6 +57,12 @@ public class Runner {
 			}
 		} else {
 			config = new Config();
+		}
+
+		System.out.println(config);
+
+		for (Map.Entry<String, Object> entry : config.getSystemProperties().entrySet()) {
+			System.setProperty(entry.getKey(), entry.getValue().toString());
 		}
 
 		final Path extractDir = Paths.get("tc");
@@ -180,8 +189,8 @@ public class Runner {
 		tomcat.setBaseDir(extractDir.toAbsolutePath().toString());
 		tomcat.setSilent(config.isSilent());
 
-		for (String s : new String[] { "org.apache.coyote.http11.Http11NioProtocol", "org.apache.tomcat.util.net.NioSelectorPool",
-				Runner.class.getName() }) {
+		for (String s : new String[] { "org.apache.coyote.http11.Http11NioProtocol",
+				"org.apache.tomcat.util.net.NioSelectorPool", Runner.class.getName() }) {
 			if (config.isSilent()) {
 				Logger.getLogger(s).setLevel(Level.WARNING);
 			} else {
@@ -249,6 +258,27 @@ public class Runner {
 				ctx.getNamingResources().addResource(res);
 			}
 
+			for (ApplicationParameter param : configuredContext.getParameters()) {
+				ctx.addApplicationParameter(param);
+			}
+
+			if (configuredContext.getContextFile() != null) {
+				Path contextFilePath = Paths.get(configuredContext.getContextFile());
+				if (Files.exists(contextFilePath)) {
+					try {
+						URL contextFileURL = contextFilePath.toUri().toURL();
+						ctx.setConfigFile(contextFileURL);
+					} catch (Exception e) {
+						getLogger().severe("Problem with the context file: " + e.getMessage());
+					}
+				}
+			} else {
+				URL contextFileURL = getContextXml(configuredContext.getWar());
+				if (contextFileURL != null) {
+					ctx.setConfigFile(contextFileURL);
+				}
+			}
+
 			if (!configuredContext.isSessionPersistence()) {
 				contextsWithoutSessionPersistence.add(ctx);
 			}
@@ -264,6 +294,20 @@ public class Runner {
 		tomcat.getServer().await();
 	}
 
+	private static URL getContextXml(String warPath) throws IOException {
+		String urlStr = "jar:file:" + warPath + "!/META-INF/context.xml";
+		URL url = new URL(urlStr);
+		try (InputStream is = url.openConnection().getInputStream()) {
+			if (is != null) {
+				return url;
+			}
+		} catch (FileNotFoundException e) {
+			// ignore this exception
+		}
+
+		return null;
+	}
+
 	private static Logger getLogger() {
 		return Logger.getLogger(Runner.class.getName());
 	}
@@ -276,8 +320,8 @@ public class Runner {
 		}
 	}
 
-	public static void stop(@SuppressWarnings("unused") String[] args) {
-		((StandardServer) tomcat.getServer()).stopAwait();
+	public static void stop(@SuppressWarnings("unused") String[] args) throws LifecycleException {
+		tomcat.stop();
 	}
 
 }

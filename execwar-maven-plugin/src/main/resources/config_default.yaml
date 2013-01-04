@@ -7,6 +7,12 @@ jvmRoute: server1
 # Default false
 silent: true
 
+# Specifies system properties. These are set at the start
+systemProperties: 
+  one: 1
+  two: secondProperty
+
+
 # If not specified then these listeners will be added by default.
 # GlobalResourcesLifecycleListener only if jndi is enabled
 # If specified then only the listed listeners will be added
@@ -48,16 +54,21 @@ contexts:
   - # Regular expression that specifies the war file. .* is the default value and the Runner chooses the first war he finds
     war: .*
     
-    # If specified like this or parameter is omitted then application is deployed as ROOT
+    # Specifies an external context xml file. If this parameter points to a valid context xml file then 
+    # searching for the /META-INF/context.xml file in the war is skipped. 
+    contextFile:
+    
+    # If specified like this or parameter is omitted then application is deployed in the ROOT context ("")
     contextPath:  
     
-    # Deploy at the specified path
+    # Deploy webapp at the specified path
     #contextPath: /test
     
     # If session should be persisted when tomcat shuts down. 
     # Default false
     sessionPersistence: false   
     
+    # Resource Definitions
     resources:
       - name: jdbc/db
         auth: Container
@@ -73,7 +84,13 @@ contexts:
         maxActive: 10
         maxWait: 10000
         defaultAutoCommit: false
-                
+    
+    # Context Parameters
+    parameters:
+      - name: aParameter
+        value: theValue
+    
+    # Environment Entries            
     environments:
       - name: spring.profiles.active 
         value: development
