@@ -48,7 +48,11 @@ public class Runner {
 
 	public static void main(String[] args) throws Exception {
 
-		Path configFile = Paths.get("config.yaml");
+		URL url = Runner.class.getProtectionDomain().getCodeSource().getLocation();
+		Path myJar = Paths.get(url.toURI());
+		Path currentDir = myJar.getParent();
+
+		Path configFile = currentDir.resolve("config.yaml");
 
 		if (Files.exists(configFile)) {
 			try (InputStream is = Files.newInputStream(configFile)) {
@@ -56,16 +60,7 @@ public class Runner {
 				config = yaml.loadAs(is, Config.class);
 			}
 		} else {
-			//try to read it from the classpath
-			try (InputStream is = Runner.class.getResourceAsStream("/config.yaml")) {
-				if (is != null) {
-					Yaml yaml = new Yaml();
-					config = yaml.loadAs(is, Config.class);
-				} else {
-					config = new Config();		
-				}
-			}
-			
+			config = new Config();
 		}
 
 		// System.out.println(config);
@@ -74,7 +69,7 @@ public class Runner {
 			System.setProperty(entry.getKey(), entry.getValue().toString());
 		}
 
-		final Path extractDir = Paths.get("tc");
+		final Path extractDir = currentDir.resolve("tc");
 
 		boolean extractWar = true;
 
@@ -352,7 +347,7 @@ public class Runner {
 	public static void start(String... args) throws Exception {
 		main(args);
 	}
-	
+
 	public static void stop(@SuppressWarnings("unused") String... args) throws LifecycleException {
 		tomcat.stop();
 	}
