@@ -7,8 +7,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +16,13 @@ public class Main {
 
 	private final static Logger logger = LoggerFactory.getLogger(Main.class);
 
-	private final static Timer timer = new Timer();
+	// private final static Timer timer = new Timer();
 
 	// called by procrun
-	public static void stop(@SuppressWarnings("unused") String... args) {
-		timer.cancel();
-		logger.info("service stopped");
-	}
+	// public static void stop(@SuppressWarnings("unused") String... args) {
+	// timer.cancel();
+	// logger.info("service stopped");
+	// }
 
 	public static void main(String... args) {
 		logger.info("service started");
@@ -47,10 +45,11 @@ public class Main {
 					config = yaml.loadAs(is, Config.class);
 				}
 
-				timer.scheduleAtFixedRate(new MailDeleter(config), 0, TimeUnit.DAYS.toMillis(1));
-
+				// timer.scheduleAtFixedRate(new MailDeleter(config), 0,
+				// TimeUnit.DAYS.toMillis(1));
+				new MailDeleter(config).run();
 			} else {
-				timer.cancel();
+				// timer.cancel();
 				logger.error("config file not found");
 			}
 
