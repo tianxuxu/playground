@@ -7,7 +7,7 @@ public class Config {
 	private String user;
 
 	private String password;
-	
+
 	private int days;
 
 	public String getHost() {

@@ -45,7 +45,7 @@ public class TwitterReader {
 		return builder.build();
 	}
 
-	@Scheduled(initialDelay = 5000, fixedDelay = 10000)
+	@Scheduled(fixedDelay = 10000)
 	public void readTwitterFeed() {
 
 		SearchResults results = template.searchOperations().search("java", 1, 50, lastReceivedId, 0);

@@ -18,35 +18,36 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
-		// ctx.scan("ch.rasc.config");
-		ctx.refresh();
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()) {
+			ctx.register(AppConfig.class);
+			// ctx.scan("ch.rasc.config");
+			ctx.refresh();
 
-		System.out.println(ctx);
+			System.out.println(ctx);
 
-		EmployeeRepository rep = ctx.getBean(EmployeeRepository.class);
+			EmployeeRepository rep = ctx.getBean(EmployeeRepository.class);
 
-		Employee newEmployee = new Employee();
-		newEmployee.setEmployeeName("Schaer");
-		newEmployee.setEmployeeSurname("Ralph");
-		rep.update(newEmployee);
+			Employee newEmployee = new Employee();
+			newEmployee.setEmployeeName("Schaer");
+			newEmployee.setEmployeeSurname("Ralph");
+			rep.update(newEmployee);
 
-		List<Employee> employees = rep.getAllEmployees();
-		for (Employee employee : employees) {
-			System.out.println(employee.getEmployeeId());
+			List<Employee> employees = rep.getAllEmployees();
+			for (Employee employee : employees) {
+				System.out.println(employee.getEmployeeId());
+			}
+
+			EntityManagerFactory emf = ctx.getBean(EntityManagerFactory.class);
+			EntityManager em = emf.createEntityManager();
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<Long> query = builder.createQuery(Long.class);
+
+			Root<Employee> root = query.from(Employee.class);
+			query.select(builder.count(root)).distinct(true);
+			Long result = em.createQuery(query).getSingleResult();
+
+			System.out.println(result);
 		}
-
-		EntityManagerFactory emf = ctx.getBean(EntityManagerFactory.class);
-		EntityManager em = emf.createEntityManager();
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Long> query = builder.createQuery(Long.class);
-
-		Root<Employee> root = query.from(Employee.class);
-		query.select(builder.count(root)).distinct(true);
-		Long result = em.createQuery(query).getSingleResult();
-
-		System.out.println(result);
 
 	}
 

@@ -20,7 +20,7 @@ public class MailDeleter extends TimerTask {
 
 	private final static Logger logger = LoggerFactory.getLogger(Main.class);
 
-	private Config config;
+	private final Config config;
 
 	MailDeleter(Config config) {
 		this.config = config;

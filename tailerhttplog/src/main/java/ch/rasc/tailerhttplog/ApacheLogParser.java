@@ -63,8 +63,9 @@ public class ApacheLogParser {
 		int index = 0;
 
 		/* put the URLS to be filtered in HASH MAP */
-		while ((line = bufferReader.readLine()) != null)
+		while ((line = bufferReader.readLine()) != null) {
 			urls.put(index++, line);
+		}
 
 		bufferReader.close();
 
@@ -124,24 +125,27 @@ public class ApacheLogParser {
 			accessLogEntryMatcher = accessLogPattern.matcher(line);
 
 			if (!accessLogEntryMatcher.matches()) {
-				if (DEBUG)
+				if (DEBUG) {
 					System.out.println("" + index + " : couldn't be parsed");
+				}
 				continue;
 			} else {
 				requestTime = accessLogEntryMatcher.group(4);
 				accessLogEntryEpoch = (accesslogDateFormat.parse(requestTime)).getTime();
 
 				if (accessLogEntryEpoch >= startingEpoch && accessLogEntryEpoch <= endingEpoch) {
-					clientRequest = (String) accessLogEntryMatcher.group(5);
+					clientRequest = accessLogEntryMatcher.group(5);
 
-					if (DEBUG)
+					if (DEBUG) {
 						System.out.println("" + index + " : " + (clientRequest.split(" "))[1]);
+					}
 
 					if (urlsMap.containsValue((clientRequest.split(" "))[1])) {
 						System.out.println("Line num : " + index + " " + accessLogEntryMatcher.group(1) + " "
 								+ accessLogEntryMatcher.group(4) + " " + accessLogEntryMatcher.group(5));
-					} else
+					} else {
 						continue;
+					}
 				}
 			}
 		}

@@ -48,7 +48,7 @@ public class Backup {
 					}
 				}
 			}
-			
+
 			if (config.getGitUrls() != null) {
 				for (GitUrl gitUrl : config.getGitUrls()) {
 					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl());

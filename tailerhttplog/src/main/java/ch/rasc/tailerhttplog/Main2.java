@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -17,8 +16,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
 import com.maxmind.geoip.Location;
 import com.maxmind.geoip.LookupService;
 
@@ -53,7 +50,8 @@ public class Main2 {
 
 				String userAgent = accessLogEntryMatcher.group(9);
 				UserAgent ua = parser.parse(userAgent);
-				//System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
+				// System.out.print(ua.getOperatingSystem().getFamilyName() +
+				// ":");
 
 				String ip = accessLogEntryMatcher.group(1);
 				if (!"-".equals(ip) && !"127.0.0.1".equals(ip)) {

@@ -21,8 +21,6 @@ import com.maxmind.geoip.LookupService;
 
 public class Main {
 
-	
-	
 	public static void main(String[] args) throws IOException {
 
 		Executor executor = Executors.newFixedThreadPool(1);
@@ -32,12 +30,14 @@ public class Main {
 		if (args.length == 1) {
 			path = args[0];
 		} else {
-			//path = "e:/u_ex130108.log";
+			// path = "e:/u_ex130108.log";
 			path = "e:/access.log";
 		}
-		//0         1 2 3                            4     5                                                            6         7   8   9   10               11                              
-		//127.0.0.1 - - [13/Jan/2013:01:23:53 +0100] "POST /wp-cron.php?doing_wp_cron=1358036633.5729498863220214843750 HTTP/1.0" 200 211 "-" "WordPress/1988; http://blog.rasc.ch"
-		
+		// 0 1 2 3 4 5 6 7 8 9 10 11
+		// 127.0.0.1 - - [13/Jan/2013:01:23:53 +0100]
+		// "POST /wp-cron.php?doing_wp_cron=1358036633.5729498863220214843750 HTTP/1.0"
+		// 200 211 "-" "WordPress/1988; http://blog.rasc.ch"
+
 		final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
 		final LookupService cl = new LookupService("e:/GeoLiteCity.dat", LookupService.GEOIP_INDEX_CACHE);
 
@@ -48,7 +48,7 @@ public class Main {
 			public void handle(String line) {
 				List<String> splittedLine = Lists.newArrayList(splitter.split(line));
 				System.out.println(splittedLine.size());
-				if (splittedLine.size() == 11/*14*/) {
+				if (splittedLine.size() == 11/* 14 */) {
 					String userAgent = splittedLine.get(9);
 					UserAgent ua = parser.parse(userAgent);
 					System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
@@ -67,7 +67,5 @@ public class Main {
 		executor.execute(tailer);
 
 	}
-
-	
 
 }

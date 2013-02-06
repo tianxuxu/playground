@@ -73,7 +73,7 @@ public class CloudEncryptor {
 				} else if ((kind == StandardWatchEventKinds.ENTRY_MODIFY || kind == StandardWatchEventKinds.ENTRY_CREATE)
 						&& !Files.isDirectory(child)) {
 					if (child.toString().endsWith("_enc") && child.startsWith(cloudDirectory)) {
-
+						//nothing here right now
 					} else if (!child.toString().endsWith("_enc") && child.startsWith(localDirectory)) {
 
 						System.out.println("encrypt: " + child);

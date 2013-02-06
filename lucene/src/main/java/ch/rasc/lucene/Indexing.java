@@ -23,9 +23,12 @@ import org.apache.lucene.util.Version;
 public class Indexing {
 
 	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
-		Directory directory = new RAMDirectory();
-		try (IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_34,
-				new WhitespaceAnalyzer(Version.LUCENE_34)))) {
+		
+		
+		try (Directory directory = new RAMDirectory(); 
+				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_40);
+				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_40,
+				analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };

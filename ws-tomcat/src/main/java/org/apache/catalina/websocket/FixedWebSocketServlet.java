@@ -190,7 +190,7 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	 * of a WebSocket request before processing it.
 	 * 
 	 * @param origin The value of the origin header from the request which may
-	 *        be <code>null</code>
+	 *            be <code>null</code>
 	 * 
 	 * @return <code>true</code> to accept the request. <code>false</code> to
 	 *         reject it. This default implementation always returns
@@ -205,8 +205,8 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	 * sub-protocol if the client provides a list of supported protocols.
 	 * 
 	 * @param subProtocols The list of sub-protocols supported by the client in
-	 *        client preference order. The server is under no obligation to
-	 *        respect the declared preference
+	 *            client preference order. The server is under no obligation to
+	 *            respect the declared preference
 	 * @return <code>null</code> if no sub-protocol is selected or the name of
 	 *         the protocol which <b>must</b> be one of the protocols listed by
 	 *         the client. This default implementation always returns
@@ -221,12 +221,12 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	 * Applications must provide a new instance for each connection.
 	 * 
 	 * @param subProtocol The sub-protocol agreed between the client and server
-	 *        or <code>null</code> if none was agreed
+	 *            or <code>null</code> if none was agreed
 	 * @param request The HTTP request that initiated this WebSocket connection.
-	 *        Note that this object is <b>only</b> valid inside this method. You
-	 *        must not retain a reference to it outside the execution of this
-	 *        method. If Tomcat detects such access, it will throw an
-	 *        IllegalStateException
+	 *            Note that this object is <b>only</b> valid inside this method.
+	 *            You must not retain a reference to it outside the execution of
+	 *            this method. If Tomcat detects such access, it will throw an
+	 *            IllegalStateException
 	 */
 	protected abstract StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request);
 }

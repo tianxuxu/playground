@@ -38,13 +38,14 @@ public class ImdbParser {
 	public static void main(String[] args) throws IOException {
 		GraphDatabaseService graphDb = new EmbeddedGraphDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\imdb\\actresses.list.gz");
+		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actresses.list.gz");
 		graphDb.shutdown();
 
 		System.gc();
+
 		graphDb = new EmbeddedGraphDatabase("db");
 		index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\imdb\\actors.list.gz");
+		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actors.list.gz");
 		graphDb.shutdown();
 
 	}
