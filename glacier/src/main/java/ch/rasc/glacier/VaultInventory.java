@@ -1,11 +1,17 @@
 package ch.rasc.glacier;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.glacier.AmazonGlacierClient;
-import com.amazonaws.services.glacier.model.InitiateJobRequest;
-import com.amazonaws.services.glacier.model.InitiateJobResult;
-import com.amazonaws.services.glacier.model.JobParameters;
+import com.amazonaws.services.glacier.model.DescribeJobRequest;
+import com.amazonaws.services.glacier.model.DescribeJobResult;
+import com.amazonaws.services.glacier.model.GetJobOutputRequest;
+import com.amazonaws.services.glacier.model.GetJobOutputResult;
 
 public class VaultInventory {
 
@@ -16,12 +22,41 @@ public class VaultInventory {
 			AmazonGlacierClient client = new AmazonGlacierClient(credentials);
 			client.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
-			InitiateJobRequest initJobRequest = new InitiateJobRequest().withVaultName("testvault").withJobParameters(
-					new JobParameters().withType("inventory-retrieval"));
+			// InitiateJobRequest initJobRequest = new
+			// InitiateJobRequest().withVaultName("testvault").withJobParameters(
+			// new JobParameters().withType("inventory-retrieval"));
+			//
+			// InitiateJobResult initJobResult =
+			// client.initiateJob(initJobRequest);
+			// String jobId = initJobResult.getJobId();
+			// System.out.println(jobId);
 
-			InitiateJobResult initJobResult = client.initiateJob(initJobRequest);
-			String jobId = initJobResult.getJobId();
-			System.out.println(jobId);
+			String jobId = "xwdLh_ViBRlcPeazzSlY_aCTmKYuGGlamz8zNLNjoHBy0tjZcAIsupm_t1WHJymX-2_0Ueh74DM6s5Gx4lDSTY2CPoHd";
+			DescribeJobResult result = client.describeJob(new DescribeJobRequest("testvault", jobId));
+
+			if (result.isCompleted()) {
+				GetJobOutputRequest jobOutputRequest = new GetJobOutputRequest().withVaultName("testvault").withJobId(
+						jobId);
+				GetJobOutputResult jobOutputResult = client.getJobOutput(jobOutputRequest);
+
+				BufferedReader in = new BufferedReader(new InputStreamReader(jobOutputResult.getBody()));
+				String inputLine;
+				try {
+					while ((inputLine = in.readLine()) != null) {
+						System.out.println(inputLine);
+					}
+				} catch (IOException e) {
+					throw new AmazonClientException("Unable to save archive", e);
+				} finally {
+					try {
+						in.close();
+					} catch (Exception e) {
+					}
+				}
+
+			}
+
+			System.out.println(result);
 		}
 
 	}

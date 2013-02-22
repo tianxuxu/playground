@@ -2,7 +2,10 @@ package ch.rasc.glacier;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.Date;
+import java.util.concurrent.ConcurrentNavigableMap;
+
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
@@ -33,9 +36,6 @@ public class Backup {
 
 			boolean found = false;
 			for (DescribeVaultOutput v : lvResult.getVaultList()) {
-				System.out.println(v.getVaultName());
-				System.out.println(v.getVaultARN());
-
 				if (vaultName.equals(v.getVaultName())) {
 					found = true;
 					// break;
@@ -61,6 +61,14 @@ public class Backup {
 				UploadResult result = atm.upload(vaultName, fileToBackup, Paths.get(fileToBackup).toFile());
 				System.out.println("Archive ID: " + result.getArchiveId());
 
+				DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown().asyncWriteDisable().make();
+				ConcurrentNavigableMap<Long, String> files = db.getTreeMap("glacier");
+
+				files.put(System.currentTimeMillis(), result.getArchiveId() + ";" + fileToBackup);
+
+				db.commit();
+				db.close();
+
 			} catch (Exception e) {
 				System.err.println(e);
 			}
@@ -68,23 +76,6 @@ public class Backup {
 		} else {
 			System.out.println("Backup <accessKey> <secretKey> <file> <vaultName>");
 		}
-		// AWSCredentials credentials = new PropertiesCredentials(
-		// ArchiveUploadHighLevel.class.getResourceAsStream("AwsCredentials.properties"));
-		// client = new AmazonGlacierClient(credentials);
-		// client.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
-		//
-		// try {
-		// ArchiveTransferManager atm = new ArchiveTransferManager(client,
-		// credentials);
-		//
-		// UploadResult result = atm.upload(vaultName, "my archive " + (new
-		// Date()), new File(archiveToUpload));
-		// System.out.println("Archive ID: " + result.getArchiveId());
-		//
-		// } catch (Exception e)
-		// {
-		// System.err.println(e);
-		// }
 
 	}
 
