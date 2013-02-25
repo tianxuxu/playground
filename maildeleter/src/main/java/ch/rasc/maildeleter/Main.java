@@ -16,16 +16,8 @@ public class Main {
 
 	private final static Logger logger = LoggerFactory.getLogger(Main.class);
 
-	// private final static Timer timer = new Timer();
-
-	// called by procrun
-	// public static void stop(@SuppressWarnings("unused") String... args) {
-	// timer.cancel();
-	// logger.info("service stopped");
-	// }
-
 	public static void main(String... args) {
-		logger.info("service started");
+		logger.info("maildeleter: start");
 		try {
 
 			Path configFile = Paths.get("./config.yaml");
@@ -44,12 +36,8 @@ public class Main {
 					Yaml yaml = new Yaml();
 					config = yaml.loadAs(is, Config.class);
 				}
-
-				// timer.scheduleAtFixedRate(new MailDeleter(config), 0,
-				// TimeUnit.DAYS.toMillis(1));
 				new MailDeleter(config).run();
 			} else {
-				// timer.cancel();
 				logger.error("config file not found");
 			}
 
@@ -57,6 +45,7 @@ public class Main {
 			logger.error("error", e);
 		}
 
+		logger.info("maildeleter: end");
 	}
 
 }
