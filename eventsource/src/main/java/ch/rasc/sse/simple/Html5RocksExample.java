@@ -23,6 +23,7 @@ public class Html5RocksExample extends HttpServlet {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setStatus(200);
 
+		@SuppressWarnings("resource")
 		PrintWriter out = response.getWriter();
 		for (int i = 0; i < 10; i++) {
 			out.write(createMessage());

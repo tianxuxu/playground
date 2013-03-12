@@ -5,7 +5,11 @@ import java.io.IOException;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StoredField;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -23,12 +27,10 @@ import org.apache.lucene.util.Version;
 public class Indexing {
 
 	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
-		
-		
-		try (Directory directory = new RAMDirectory(); 
-				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_40);
-				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_40,
-				analyzer))) {
+
+		try (Directory directory = new RAMDirectory();
+				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_42);
+				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_42, analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };
@@ -37,14 +39,14 @@ public class Indexing {
 
 			for (int i = 0; i < ids.length; i++) {
 				Document doc = new Document();
-				doc.add(new Field("id", ids[i], Field.Store.YES, Field.Index.NOT_ANALYZED));
-				doc.add(new Field("country", unindexed[i], Field.Store.YES, Field.Index.NO));
-				doc.add(new Field("contents", unstored[i], Field.Store.NO, Field.Index.ANALYZED));
-				doc.add(new Field("city", text[i], Field.Store.YES, Field.Index.ANALYZED));
+				doc.add(new Field("id", ids[i], StringField.TYPE_STORED));
+				doc.add(new StoredField("country", unindexed[i]));
+				doc.add(new TextField("contents", unstored[i], Field.Store.NO));
+				doc.add(new TextField("city", text[i], Field.Store.YES));
 				writer.addDocument(doc);
 			}
 
-			IndexReader reader = IndexReader.open(writer, true);
+			IndexReader reader = DirectoryReader.open(writer, true);
 			IndexSearcher searcher = new IndexSearcher(reader);
 			Term t = new Term("city", "Amsterdam");
 			Query query = new TermQuery(t);

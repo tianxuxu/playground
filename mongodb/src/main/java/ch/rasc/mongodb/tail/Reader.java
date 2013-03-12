@@ -27,10 +27,12 @@ public class Reader {
 			collection = db.getCollection("log");
 		}
 
-		DBCursor cur = collection.find().addOption(Bytes.QUERYOPTION_TAILABLE).addOption(Bytes.QUERYOPTION_AWAITDATA);
+		try (DBCursor cur = collection.find().addOption(Bytes.QUERYOPTION_TAILABLE)
+				.addOption(Bytes.QUERYOPTION_AWAITDATA)) {
 
-		while (cur.hasNext()) {
-			System.out.println(cur.next());
+			while (cur.hasNext()) {
+				System.out.println(cur.next());
+			}
 		}
 		System.out.println("END");
 	}

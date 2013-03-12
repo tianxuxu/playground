@@ -40,11 +40,11 @@ public class StopWatchDemo {
 		{
 			out.println(numberLoops + " loops required: ");
 			out.println("\t" + stopwatch.toString());
-			out.println("\t" + stopwatch.elapsedMillis() + " elapsed milliseconds.");
-			out.println("\t" + stopwatch.elapsedTime(TimeUnit.MINUTES) + " minutes");
-			out.println("\t" + stopwatch.elapsedTime(TimeUnit.SECONDS) + " seconds");
-			out.println("\t" + stopwatch.elapsedTime(TimeUnit.MILLISECONDS) + " milliseconds");
-			out.println("\t" + stopwatch.elapsedTime(TimeUnit.NANOSECONDS) + " nanoseconds");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " elapsed milliseconds.");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.MINUTES) + " minutes");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " milliseconds");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.NANOSECONDS) + " nanoseconds");
 		}
 	}
 

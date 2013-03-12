@@ -23,64 +23,65 @@ public class CitiesImporter {
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
-		ctx.refresh();
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()) {
+			ctx.register(AppConfig.class);
+			ctx.refresh();
 
-		final MongoOperations mongoOps = ctx.getBean(MongoTemplate.class);
+			final MongoOperations mongoOps = ctx.getBean(MongoTemplate.class);
 
-		if (mongoOps.collectionExists(City.class)) {
-			System.out.println("DROP");
-			mongoOps.dropCollection(City.class);
-		} else {
-			System.out.println("NO DROP");
-		}
+			if (mongoOps.collectionExists(City.class)) {
+				System.out.println("DROP");
+				mongoOps.dropCollection(City.class);
+			} else {
+				System.out.println("NO DROP");
+			}
 
-		File f = new File(CitiesImporter.class.getResource("/worldcitiespop.txt").toURI());
+			File f = new File(CitiesImporter.class.getResource("/worldcitiespop.txt").toURI());
 
-		Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
-			@Override
-			public boolean processLine(String line) throws IOException {
-				if (!line.startsWith("Country,City")) {
-					List<String> splittedItems = Lists.newArrayList(Splitter.on(",").split(line));
-					if (splittedItems.size() == 7) {
+			Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
+				@Override
+				public boolean processLine(String line) throws IOException {
+					if (!line.startsWith("Country,City")) {
+						List<String> splittedItems = Lists.newArrayList(Splitter.on(",").split(line));
+						if (splittedItems.size() == 7) {
 
-						City newCity = new City();
-						newCity.setCountry(splittedItems.get(0));
-						newCity.setAsciiCityName(splittedItems.get(1));
-						newCity.setCityName(splittedItems.get(2));
-						newCity.setRegion(splittedItems.get(3));
+							City newCity = new City();
+							newCity.setCountry(splittedItems.get(0));
+							newCity.setAsciiCityName(splittedItems.get(1));
+							newCity.setCityName(splittedItems.get(2));
+							newCity.setRegion(splittedItems.get(3));
 
-						String populationString = splittedItems.get(4);
-						if (StringUtils.hasText(populationString)) {
-							newCity.setPopulation(Integer.valueOf(populationString));
+							String populationString = splittedItems.get(4);
+							if (StringUtils.hasText(populationString)) {
+								newCity.setPopulation(Integer.valueOf(populationString));
+							}
+
+							String latitudeStr = splittedItems.get(5);
+							String longitudeStr = splittedItems.get(6);
+
+							if (latitudeStr.equals("180.0")) {
+								latitudeStr = "179.9999";
+							}
+
+							if (longitudeStr.equals("180.0")) {
+								longitudeStr = "179.9999";
+							}
+
+							newCity.setLocation(new Point(Double.valueOf(latitudeStr), Double.valueOf(longitudeStr)));
+
+							mongoOps.save(newCity);
 						}
-
-						String latitudeStr = splittedItems.get(5);
-						String longitudeStr = splittedItems.get(6);
-
-						if (latitudeStr.equals("180.0")) {
-							latitudeStr = "179.9999";
-						}
-
-						if (longitudeStr.equals("180.0")) {
-							longitudeStr = "179.9999";
-						}
-
-						newCity.setLocation(new Point(Double.valueOf(latitudeStr), Double.valueOf(longitudeStr)));
-
-						mongoOps.save(newCity);
 					}
+
+					return true;
 				}
 
-				return true;
-			}
-
-			@Override
-			public String getResult() {
-				return null;
-			}
-		});
+				@Override
+				public String getResult() {
+					return null;
+				}
+			});
+		}
 
 	}
 

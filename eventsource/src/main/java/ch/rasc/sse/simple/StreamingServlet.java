@@ -22,6 +22,7 @@ public class StreamingServlet extends HttpServlet {
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
+		@SuppressWarnings("resource")
 		PrintWriter out = response.getWriter();
 
 		for (int i = 0; i < 100; i++) {

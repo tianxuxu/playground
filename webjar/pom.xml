@@ -16,7 +16,7 @@
 		<logback.version>1.0.9</logback.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
-		<jquery.version>1.8.2</jquery.version>
+		<jquery.version>1.9.1</jquery.version>
 	</properties>
 
 	<dependencies>
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>1.4</version>
+			<version>1.5</version>
 			<scope>provided</scope>
 		</dependency>
 

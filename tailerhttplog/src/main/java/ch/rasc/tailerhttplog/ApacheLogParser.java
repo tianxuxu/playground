@@ -55,19 +55,19 @@ public class ApacheLogParser {
 	 * @throws IOException
 	 */
 	public HashMap<Integer, String> readUrlsList(String filePath) throws IOException {
-		HashMap<Integer, String> urls = new HashMap<Integer, String>();
+		HashMap<Integer, String> urls = new HashMap<>();
 
-		BufferedReader bufferReader = new BufferedReader(new FileReader(filePath));
+		try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath))) {
 
-		String line = "";
-		int index = 0;
+			String line = "";
+			int index = 0;
 
-		/* put the URLS to be filtered in HASH MAP */
-		while ((line = bufferReader.readLine()) != null) {
-			urls.put(index++, line);
+			/* put the URLS to be filtered in HASH MAP */
+			while ((line = bufferReader.readLine()) != null) {
+				urls.put(index++, line);
+			}
+
 		}
-
-		bufferReader.close();
 
 		return urls;
 	}
@@ -109,27 +109,27 @@ public class ApacheLogParser {
 
 		HashMap<Integer, String> urlsMap = readUrlsList(urlsFilePath);
 
-		BufferedReader bufferReader = new BufferedReader(new FileReader(accessFilePath));
+		try (BufferedReader bufferReader = new BufferedReader(new FileReader(accessFilePath))) {
 
-		String line = "";
-		long index = 0;
+			String line = "";
+			long index = 0;
 
-		SimpleDateFormat accesslogDateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+			SimpleDateFormat accesslogDateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
 
-		Pattern accessLogPattern = Pattern.compile(getAccessLogRegex(), Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		Matcher accessLogEntryMatcher;
+			Pattern accessLogPattern = Pattern.compile(getAccessLogRegex(), Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			Matcher accessLogEntryMatcher;
 
-		while ((line = bufferReader.readLine()) != null) {
-			index++;
+			while ((line = bufferReader.readLine()) != null) {
+				index++;
 
-			accessLogEntryMatcher = accessLogPattern.matcher(line);
+				accessLogEntryMatcher = accessLogPattern.matcher(line);
 
-			if (!accessLogEntryMatcher.matches()) {
-				if (DEBUG) {
-					System.out.println("" + index + " : couldn't be parsed");
+				if (!accessLogEntryMatcher.matches()) {
+					if (DEBUG) {
+						System.out.println("" + index + " : couldn't be parsed");
+					}
+					continue;
 				}
-				continue;
-			} else {
 				requestTime = accessLogEntryMatcher.group(4);
 				accessLogEntryEpoch = (accesslogDateFormat.parse(requestTime)).getTime();
 
@@ -149,7 +149,6 @@ public class ApacheLogParser {
 				}
 			}
 		}
-		bufferReader.close();
 	}
 
 	/**

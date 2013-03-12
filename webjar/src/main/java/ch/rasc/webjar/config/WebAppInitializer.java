@@ -13,14 +13,15 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) {
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringConfig.class);
-		container.addListener(new ContextLoaderListener(rootContext));
+		try (AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+				GenericWebApplicationContext emptyContext = new GenericWebApplicationContext()) {
+			rootContext.register(SpringConfig.class);
+			container.addListener(new ContextLoaderListener(rootContext));
 
-		GenericWebApplicationContext emptyContext = new GenericWebApplicationContext();
-		ServletRegistration.Dynamic dispatcher = container
-				.addServlet("dispatcher", new DispatcherServlet(emptyContext));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
+			ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
+					emptyContext));
+			dispatcher.setLoadOnStartup(1);
+			dispatcher.addMapping("/");
+		}
 	}
 }

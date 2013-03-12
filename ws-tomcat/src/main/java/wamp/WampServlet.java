@@ -92,6 +92,8 @@ public class WampServlet extends FixedWebSocketServlet {
 			case 7:
 				// PUBLISH
 				break;
+			default:
+				break;
 			}
 
 			getWsOutbound().writeTextMessage(message);

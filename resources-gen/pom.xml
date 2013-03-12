@@ -9,25 +9,25 @@
 		<dependency>
 			<groupId>com.github.spullara.mustache.java</groupId>
 			<artifactId>compiler</artifactId>
-			<version>0.8.9</version>
+			<version>0.8.10</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>13.0.1</version>
+			<version>14.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>1.11</version>
+			<version>1.12</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.sourceforge.argparse4j</groupId>
 			<artifactId>argparse4j</artifactId>
-			<version>0.2.2</version>
+			<version>0.4.0</version>
 		</dependency>
 
 	</dependencies>

@@ -17,31 +17,32 @@ import com.google.common.collect.Maps;
 public class Issue1 {
 
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
-		ctx.refresh();
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()) {
+			ctx.register(AppConfig.class);
+			ctx.refresh();
 
-		MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
-		mongoTemplate.dropCollection(User.class);
+			MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
+			mongoTemplate.dropCollection(User.class);
 
-		User user1 = new User("ralph");
-		User user2 = new User("stefan");
+			User user1 = new User("ralph");
+			User user2 = new User("stefan");
 
-		mongoTemplate.save(user1);
-		mongoTemplate.save(user2);
+			mongoTemplate.save(user1);
+			mongoTemplate.save(user2);
 
-		List<User> allUsers = mongoTemplate.findAll(User.class);
-		Map<ObjectId, String> idToUserNameMap = Maps.newHashMap();
-		for (User user : allUsers) {
-			idToUserNameMap.put(user.getId(), user.getUserName());
+			List<User> allUsers = mongoTemplate.findAll(User.class);
+			Map<ObjectId, String> idToUserNameMap = Maps.newHashMap();
+			for (User user : allUsers) {
+				idToUserNameMap.put(user.getId(), user.getUserName());
+			}
+
+			for (ObjectId id : idToUserNameMap.keySet()) {
+				System.out.println(id);
+				User user = mongoTemplate.findOne(Query.query(Criteria.where("id").ne(id)), User.class);
+				System.out.println(user);
+			}
+
 		}
-
-		for (ObjectId id : idToUserNameMap.keySet()) {
-			System.out.println(id);
-			User user = mongoTemplate.findOne(Query.query(Criteria.where("id").ne(id)), User.class);
-			System.out.println(user);
-		}
-
 	}
 
 }

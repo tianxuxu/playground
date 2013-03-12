@@ -25,6 +25,7 @@ public class SimpleServlet extends HttpServlet {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setStatus(200);
 
+		@SuppressWarnings("resource")
 		PrintWriter out = response.getWriter();
 
 		StringBuilder sb = new StringBuilder();

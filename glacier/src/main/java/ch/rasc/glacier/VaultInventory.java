@@ -39,19 +39,13 @@ public class VaultInventory {
 						jobId);
 				GetJobOutputResult jobOutputResult = client.getJobOutput(jobOutputRequest);
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(jobOutputResult.getBody()));
-				String inputLine;
-				try {
+				try (BufferedReader in = new BufferedReader(new InputStreamReader(jobOutputResult.getBody()))) {
+					String inputLine;
 					while ((inputLine = in.readLine()) != null) {
 						System.out.println(inputLine);
 					}
 				} catch (IOException e) {
 					throw new AmazonClientException("Unable to save archive", e);
-				} finally {
-					try {
-						in.close();
-					} catch (Exception e) {
-					}
 				}
 
 			}

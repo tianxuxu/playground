@@ -56,9 +56,10 @@ public final class ChatHandler implements AtmosphereHandler {
 		try {
 			String message = (String) event.getMessage();
 			if (message != null) {
-				PrintWriter writer = event.getResource().getResponse().getWriter();
-				writer.write(message);
-				writer.flush();
+				try (PrintWriter writer = event.getResource().getResponse().getWriter()) {
+					writer.write(message);
+					writer.flush();
+				}
 			}
 		} finally {
 			if (!event.isResumedOnTimeout()) {

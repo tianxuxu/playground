@@ -28,6 +28,7 @@ public class LongPollingServlet extends HttpServlet {
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
+		@SuppressWarnings("resource")
 		PrintWriter out = response.getWriter();
 
 		try {

@@ -3,15 +3,10 @@ package ch.rasc.tailerhttplog;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import net.sf.uadetector.UserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
@@ -27,10 +22,11 @@ public class Main2 {
 
 		String path = "e:/access.log";
 
-		final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
+		//final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
 		final LookupService cl = new LookupService("e:/GeoLiteCity.dat", LookupService.GEOIP_INDEX_CACHE);
 
-		SimpleDateFormat accesslogDateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+		// SimpleDateFormat accesslogDateFormat = new
+		// SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
 
 		final Pattern accessLogPattern = Pattern
 				.compile(getAccessLogRegex(), Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
@@ -48,8 +44,8 @@ public class Main2 {
 					return;
 				}
 
-				String userAgent = accessLogEntryMatcher.group(9);
-				UserAgent ua = parser.parse(userAgent);
+				//String userAgent = accessLogEntryMatcher.group(9);
+				// UserAgent ua = parser.parse(userAgent);
 				// System.out.print(ua.getOperatingSystem().getFamilyName() +
 				// ":");
 

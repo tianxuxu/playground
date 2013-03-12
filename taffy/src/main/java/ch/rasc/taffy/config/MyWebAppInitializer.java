@@ -13,16 +13,19 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) {
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(WebConfig.class);
+		try (AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+				GenericWebApplicationContext webApplicationContext = new GenericWebApplicationContext()) {
+			rootContext.register(WebConfig.class);
 
-		// Manage the lifecycle of the root application context
-		container.addListener(new ContextLoaderListener(rootContext));
+			// Manage the lifecycle of the root application context
+			container.addListener(new ContextLoaderListener(rootContext));
 
-		// Register and map the dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
-				new GenericWebApplicationContext()));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
+			// Register and map the dispatcher servlet
+
+			ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
+					webApplicationContext));
+			dispatcher.setLoadOnStartup(1);
+			dispatcher.addMapping("/");
+		}
 	}
 }

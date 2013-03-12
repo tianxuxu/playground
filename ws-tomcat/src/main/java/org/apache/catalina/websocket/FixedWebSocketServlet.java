@@ -51,7 +51,7 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 
 	private static final StringManager sm = StringManager.getManager(Constants.Package);
 
-	private final Queue<MessageDigest> sha1Helpers = new ConcurrentLinkedQueue<MessageDigest>();
+	private final Queue<MessageDigest> sha1Helpers = new ConcurrentLinkedQueue<>();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -133,7 +133,7 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	 * This only works for tokens. Quoted strings need more sophisticated
 	 * parsing.
 	 */
-	private boolean headerContainsToken(HttpServletRequest req, String headerName, String target) {
+	private static boolean headerContainsToken(HttpServletRequest req, String headerName, String target) {
 		Enumeration<String> headers = req.getHeaders(headerName);
 		while (headers.hasMoreElements()) {
 			String header = headers.nextElement();
@@ -151,8 +151,8 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	 * This only works for tokens. Quoted strings need more sophisticated
 	 * parsing.
 	 */
-	private List<String> getTokensFromHeader(HttpServletRequest req, String headerName) {
-		List<String> result = new ArrayList<String>();
+	private static List<String> getTokensFromHeader(HttpServletRequest req, String headerName) {
+		List<String> result = new ArrayList<>();
 
 		Enumeration<String> headers = req.getHeaders(headerName);
 		while (headers.hasMoreElements()) {

@@ -10,6 +10,7 @@ import static ch.lambdaj.collection.LambdaCollections.with;
 import static org.hamcrest.Matchers.greaterThan;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
@@ -39,7 +40,7 @@ public class DoSomething {
 			System.out.println(user);
 		}
 
-		System.out.println(stopWatch.elapsedMillis());
+		System.out.println(stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		stopWatch.reset();
 		stopWatch.start();
@@ -55,7 +56,7 @@ public class DoSomething {
 			System.out.println(user);
 		}
 
-		System.out.println(stopWatch.elapsedMillis());
+		System.out.println(stopWatch.elapsed(TimeUnit.MILLISECONDS));
 	}
 
 }
