@@ -1,0 +1,2 @@
+connector: 
+  port: ${VCAP_APP_PORT}

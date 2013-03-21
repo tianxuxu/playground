@@ -22,7 +22,8 @@ public class Main2 {
 
 		String path = "e:/access.log";
 
-		//final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
+		// final UserAgentStringParser parser =
+		// UADetectorServiceFactory.getResourceModuleParser();
 		final LookupService cl = new LookupService("e:/GeoLiteCity.dat", LookupService.GEOIP_INDEX_CACHE);
 
 		// SimpleDateFormat accesslogDateFormat = new
@@ -44,7 +45,7 @@ public class Main2 {
 					return;
 				}
 
-				//String userAgent = accessLogEntryMatcher.group(9);
+				// String userAgent = accessLogEntryMatcher.group(9);
 				// UserAgent ua = parser.parse(userAgent);
 				// System.out.print(ua.getOperatingSystem().getFamilyName() +
 				// ":");

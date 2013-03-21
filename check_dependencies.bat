@@ -48,6 +48,12 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\glacier
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+
 cd D:\ws\playground\googlemapsexamples
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -99,6 +105,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\mail
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\maildeleter
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -213,6 +224,11 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\stats
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\svg2img
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -224,6 +240,16 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\tomcatembed
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\touch
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\twitterstream
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -244,6 +270,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\watch
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\webjar
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..

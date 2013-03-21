@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 @Configuration
 public class AppConfig extends AbstractMongoConfiguration {
@@ -24,7 +25,7 @@ public class AppConfig extends AbstractMongoConfiguration {
 		// options.wtimeout = 0;
 		// options.fsync = false;
 
-		return new Mongo("localhost"/* , options */);
+		return new MongoClient("localhost"/* , options */);
 	}
 
 	@Override

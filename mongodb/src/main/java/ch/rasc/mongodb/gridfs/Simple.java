@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class Simple {
@@ -18,7 +18,7 @@ public class Simple {
 	}
 
 	private static void simpleFile() throws MongoException, IOException {
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
 		DBCollection collection = db.getCollection("files");

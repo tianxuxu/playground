@@ -17,7 +17,7 @@ public class SampleStreamExample {
 	public static void oauth(String consumerKey, String consumerSecret, String token, String secret)
 			throws InterruptedException {
 		// Create an appropriately sized blocking queue
-		BlockingQueue<String> queue = new LinkedBlockingQueue<String>(10000);
+		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
 
 		// Define our endpoint: By default, delimited=length is set (we need
 		// this for our processor)

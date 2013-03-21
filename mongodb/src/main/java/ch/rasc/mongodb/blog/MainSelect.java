@@ -8,14 +8,14 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class MainSelect {
 
 	public static void main(String[] args) throws UnknownHostException, MongoException {
-		Mongo mongo = new Mongo("localhost");
-		// Mongo mongo = new Mongo("localhost", 10000);
+		MongoClient mongo = new MongoClient("localhost");
+		// MongoClient mongo = new MongoClient("localhost", 10000);
 
 		DB db = mongo.getDB("testdb");
 

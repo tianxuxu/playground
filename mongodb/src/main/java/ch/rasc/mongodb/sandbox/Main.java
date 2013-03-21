@@ -16,7 +16,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
 import com.mongodb.util.JSON;
@@ -28,7 +28,7 @@ public class Main {
 		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, Object>> userData = mapper.readValue(Main.class.getResourceAsStream("users.json"), List.class);
 
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 		mongo.setWriteConcern(WriteConcern.SAFE);
 
 		DB db = mongo.getDB("testdbs");

@@ -10,13 +10,13 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class Main3 {
 
 	public static void main(String[] args) throws MongoException, IOException {
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 		DB db = mongo.getDB("tutorial");
 
 		DBCollection collection = db.getCollection("users");
@@ -39,11 +39,12 @@ public class Main3 {
 		BasicDBObject update = new BasicDBObject("$set", new BasicDBObject("city", "Chicago"));
 		collection.update(query, update, false, true);
 
-		DBCursor cursor = collection.find(new BasicDBObject("age", new BasicDBObject("$gt", 20)));
-		while (cursor.hasNext()) {
-			DBObject obj = cursor.next();
-			ObjectId oid = (ObjectId) obj.get("_id");
-			System.out.println(new Date(oid.getTime()));
+		try (DBCursor cursor = collection.find(new BasicDBObject("age", new BasicDBObject("$gt", 20)))) {
+			while (cursor.hasNext()) {
+				DBObject obj = cursor.next();
+				ObjectId oid = (ObjectId) obj.get("_id");
+				System.out.println(new Date(oid.getTime()));
+			}
 		}
 
 		mongo.close();

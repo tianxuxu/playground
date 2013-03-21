@@ -14,6 +14,7 @@ import com.google.code.morphia.Morphia;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
 
@@ -24,7 +25,7 @@ public class AppConfiguration {
 
 	@Bean(destroyMethod = "close")
 	public Mongo mongo() throws UnknownHostException, MongoException {
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 		// mongo.setWriteConcern(WriteConcern.NONE); //184 sec
 		// mongo.setWriteConcern(WriteConcern.NORMAL); //184 sec
 		mongo.setWriteConcern(WriteConcern.SAFE); // 279 sec

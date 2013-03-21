@@ -106,7 +106,7 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 		}
 
 		@SuppressWarnings("resource")
-		private void handleTimeoutOrError(AsyncEvent event, String message) {			
+		private void handleTimeoutOrError(AsyncEvent event, String message) {
 			PrintWriter writer = null;
 			try {
 				future.cancel(true);

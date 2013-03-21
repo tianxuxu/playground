@@ -7,7 +7,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
@@ -15,7 +15,7 @@ import com.mongodb.WriteResult;
 public class MainInsert {
 
 	public static void main(String[] args) throws UnknownHostException, MongoException {
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 		// Mongo mongo = new Mongo("localhost", 10000);
 
 		DB db = mongo.getDB("testdb");

@@ -9,13 +9,13 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class InsertMax {
 	public static void main(String[] args) throws UnknownHostException, MongoException {
 
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
 
@@ -39,10 +39,11 @@ public class InsertMax {
 			collection.insert(logMessage);
 		}
 
-		DBCursor cursor = collection.find();
-		while (cursor.hasNext()) {
-			DBObject obj = cursor.next();
-			System.out.println(obj.get("index"));
+		try (DBCursor cursor = collection.find()) {
+			while (cursor.hasNext()) {
+				DBObject obj = cursor.next();
+				System.out.println(obj.get("index"));
+			}
 		}
 
 		CommandResult stats = collection.getStats();

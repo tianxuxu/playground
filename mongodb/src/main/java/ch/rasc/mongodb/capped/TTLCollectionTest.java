@@ -6,13 +6,13 @@ import java.util.concurrent.TimeUnit;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 public class TTLCollectionTest {
 
 	public static void main(String[] args) throws UnknownHostException {
 
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
 		DBCollection collection = db.getCollection("log");

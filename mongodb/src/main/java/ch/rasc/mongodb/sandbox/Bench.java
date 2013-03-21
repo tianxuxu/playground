@@ -6,7 +6,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
 
@@ -17,7 +17,7 @@ public class Bench {
 	}
 
 	private static void simpleFile() throws MongoException, IOException {
-		Mongo mongo = new Mongo("localhost");
+		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
 		DBCollection collection = db.getCollection("files");

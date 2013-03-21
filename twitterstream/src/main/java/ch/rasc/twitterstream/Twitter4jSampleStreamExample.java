@@ -32,18 +32,22 @@ public class Twitter4jSampleStreamExample {
 
 		@Override
 		public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+			// nothing here
 		}
 
 		@Override
 		public void onTrackLimitationNotice(int limit) {
+			// nothing here
 		}
 
 		@Override
 		public void onScrubGeo(long user, long upToStatus) {
+			// nothing here
 		}
 
 		@Override
 		public void onException(Exception e) {
+			// nothing here
 		}
 	};
 
@@ -57,26 +61,32 @@ public class Twitter4jSampleStreamExample {
 
 		@Override
 		public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+			// nothing here
 		}
 
 		@Override
 		public void onTrackLimitationNotice(int limit) {
+			// nothing here
 		}
 
 		@Override
 		public void onScrubGeo(long user, long upToStatus) {
+			// nothing here
 		}
 
 		@Override
 		public void onException(Exception e) {
+			// nothing here
 		}
 
 		@Override
 		public void onDisconnectMessage(DisconnectMessage message) {
+			// nothing here
 		}
 
 		@Override
 		public void onUnknownMessageType(String s) {
+			// nothing here
 		}
 	};
 

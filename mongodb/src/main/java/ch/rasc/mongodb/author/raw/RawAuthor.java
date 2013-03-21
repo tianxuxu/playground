@@ -5,7 +5,6 @@ import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ch.rasc.mongodb.author.Author;
@@ -20,10 +19,10 @@ import com.mongodb.DBObject;
 public class RawAuthor implements Author {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author");
-
-		RawAuthor author = ctx.getBean("author", RawAuthor.class);
-		author.writeText(1000);
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author")) {
+			RawAuthor author = ctx.getBean("author", RawAuthor.class);
+			author.writeText(1000);
+		}
 	}
 
 	@Inject
@@ -39,36 +38,37 @@ public class RawAuthor implements Author {
 	public String writeText(int maxWords) {
 
 		int skip = (int) (Math.random() * Math.min(100, collection.count()));
-		DBCursor cursor = collection.find().skip(skip);
-		DBObject start = cursor.next();
+		try (DBCursor cursor = collection.find().skip(skip)) {
+			DBObject start = cursor.next();
 
-		StringBuilder sb = new StringBuilder();
-		String w1 = (String) start.get("word1");
-		sb.append(w1);
-		sb.append(" ");
-		String w2 = (String) start.get("word2");
-		sb.append(w2);
-		sb.append(" ");
+			StringBuilder sb = new StringBuilder();
+			String w1 = (String) start.get("word1");
+			sb.append(w1);
+			sb.append(" ");
+			String w2 = (String) start.get("word2");
+			sb.append(w2);
+			sb.append(" ");
 
-		int count = 2;
-		int length = sb.length();
-		String next = getNext(w1, w2);
-		while (next != null && count < maxWords) {
-			sb.append(next).append(" ");
-			length = length + next.length() + 1;
-			if (length > 60) {
-				sb.append("\n");
-				length = 0;
+			int count = 2;
+			int length = sb.length();
+			String next = getNext(w1, w2);
+			while (next != null && count < maxWords) {
+				sb.append(next).append(" ");
+				length = length + next.length() + 1;
+				if (length > 60) {
+					sb.append("\n");
+					length = 0;
+				}
+
+				w1 = w2;
+				w2 = next;
+				next = getNext(w1, w2);
+
+				count++;
 			}
 
-			w1 = w2;
-			w2 = next;
-			next = getNext(w1, w2);
-
-			count++;
+			return sb.toString();
 		}
-
-		return sb.toString();
 	}
 
 	private String getNext(String w1, String w2) {
