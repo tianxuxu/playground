@@ -3,7 +3,7 @@ package ch.rasc.twitterstream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
 import com.twitter.hbc.core.Constants;
@@ -18,10 +18,13 @@ public class FilterStreamExample {
 			throws InterruptedException {
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
-
-		endpoint.trackTerms(Lists.newArrayList("java"));
+		// add some track terms
+		endpoint.trackTerms(ImmutableList.of("#ExtJS", "#atmo_framework", "#java", "#java7", "#java8", "#websockets", "#websocket", "#portal"));
 
 		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
+		// Authentication auth = new BasicAuth(username, password);
+
+		// Create a new BasicClient. By default gzip is enabled.
 		Client client = new ClientBuilder().hosts(Constants.STREAM_HOST).endpoint(endpoint).authentication(auth)
 				.processor(new StringDelimitedProcessor(queue)).build();
 

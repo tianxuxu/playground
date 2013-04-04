@@ -1,15 +1,31 @@
 package ch.rasc.twitterstream;
 
+import java.io.IOException;
+import java.net.ConnectException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.net.ssl.SSLException;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.client.params.HttpClientParams;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
 
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Constants;
 import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
@@ -23,40 +39,32 @@ import com.twitter.hbc.twitter4j.message.DisconnectMessage;
 
 public class Twitter4jSampleStreamExample {
 
-	// A bare bones listener
-	private static StatusListener listener1 = new StatusListener() {
-		@Override
-		public void onStatus(Status status) {
-			// System.out.println("listener1: " + status);
-		}
-
-		@Override
-		public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-			// nothing here
-		}
-
-		@Override
-		public void onTrackLimitationNotice(int limit) {
-			// nothing here
-		}
-
-		@Override
-		public void onScrubGeo(long user, long upToStatus) {
-			// nothing here
-		}
-
-		@Override
-		public void onException(Exception e) {
-			// nothing here
-		}
-	};
+	private final static Pattern URL_PATTERN = Pattern
+			.compile("(((http[s]?:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)");
 
 	// A bare bones StatusStreamHandler, which extends listener and gives some
 	// extra functionality
 	private static StatusListener listener2 = new StatusStreamHandler() {
 		@Override
 		public void onStatus(Status status) {
-			System.out.println(status.getText());
+			System.out.println(status.getUser().getName());
+			String text = status.getText();
+			text = text.replace("<", "&lt;");
+			System.out.println(text);
+			
+			Matcher matcher = URL_PATTERN.matcher(text);			
+			StringBuffer sb = new StringBuffer();
+			while (matcher.find()) {
+				String unshortenedURL = unshorten(matcher.group());
+				if (unshortenedURL != null) {
+					matcher.appendReplacement(sb, "<a href=\""+unshortenedURL+"\">" + unshortenedURL + "</a>");
+				} else {
+					matcher.appendReplacement(sb, "$0");
+				}
+			}
+			matcher.appendTail(sb);
+			System.out.println(sb.toString());
+			System.out.println();
 		}
 
 		@Override
@@ -90,13 +98,14 @@ public class Twitter4jSampleStreamExample {
 		}
 	};
 
-	public static void oauth(String consumerKey, String consumerSecret, String token, String secret)
+	private static void oauth(String consumerKey, String consumerSecret, String token, String secret)
 			throws InterruptedException {
-		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
+		BlockingQueue<String> queue = new LinkedBlockingQueue<>(100);
 
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
-
-		endpoint.trackTerms(Lists.newArrayList("java"));
+		endpoint.trackTerms(ImmutableList.of("ExtJS", "Sencha", "atmo_framework", "#java", "java7", "java8",
+				"websocket", "#portal", "html5", "javascript"));
+		endpoint.languages(ImmutableList.of("en", "de"));
 
 		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
 
@@ -104,13 +113,12 @@ public class Twitter4jSampleStreamExample {
 				.processor(new StringDelimitedProcessor(queue)).build();
 
 		ExecutorService es = Executors.newSingleThreadExecutor();
-		Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(client, queue, Lists.newArrayList(listener1,
-				listener2), es);
+		Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(client, queue, ImmutableList.of(listener2), es);
 
 		t4jClient.connect();
 		t4jClient.process();
 
-		Thread.sleep(10000);
+		TimeUnit.MINUTES.sleep(30);
 
 		t4jClient.stop();
 		client.stop();
@@ -123,5 +131,41 @@ public class Twitter4jSampleStreamExample {
 		} catch (InterruptedException e) {
 			System.out.println(e);
 		}
+	}
+
+	public static String unshorten(String url) {
+		try {
+			HttpHead head = new HttpHead(url);
+			HttpParams params = new BasicHttpParams();
+			HttpClientParams.setRedirecting(params, false);
+			head.setParams(params);
+			DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+			HttpResponse response = defaultHttpClient.execute(head);
+
+			int status = response.getStatusLine().getStatusCode();
+			if (status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_MOVED_TEMPORARILY) {
+				Header locationHeader = response.getFirstHeader("location");
+				if (locationHeader != null) {
+					String value = locationHeader.getValue();
+					if (!value.startsWith("http") && value.startsWith("/")) {
+						value = "http:/" + value;
+					}
+					return unshorten(value);
+				}
+			} else if (status >= 400 && status != HttpStatus.SC_METHOD_NOT_ALLOWED && status != HttpStatus.SC_FORBIDDEN) {
+				System.out.println("STATUS >= 400");
+				System.out.println(status);
+				System.out.println(url);
+				
+				return null;
+			}
+			
+		} catch (IllegalStateException | IOException e) {
+			if (!(e instanceof SSLException || e instanceof ConnectException)) {
+				System.out.println("Exception with url: " + url);
+				e.printStackTrace();
+			}
+		}
+		return url;
 	}
 }
