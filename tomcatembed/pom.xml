@@ -10,7 +10,7 @@
 	</prerequisites>
 
 	<properties>
-		<tomcat.version>7.0.37</tomcat.version>
+		<tomcat.version>7.0.39</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -66,7 +66,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>

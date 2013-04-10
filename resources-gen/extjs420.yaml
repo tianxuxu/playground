@@ -1,6 +1,6 @@
 sourcedir: D:\js\ext-4.2.0.663
 version: 4.2.0
-groupId: resources
+groupId: ch.ess.webjars
 baseartifactId: extjs
 destdir: ./res
 files:

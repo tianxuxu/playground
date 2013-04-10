@@ -106,7 +106,7 @@ public class Main {
 
 			String artifactIdVersion = artifactId + "-" + version;
 
-			Path destDirPath = Paths.get(destdir, artifactIdVersion, "src/main/resources/META-INF/resources", groupId,
+			Path destDirPath = Paths.get(destdir, artifactIdVersion, "src/main/resources/META-INF/resources", "resources",
 					baseartifactId, version);
 			Files.createDirectories(destDirPath);
 

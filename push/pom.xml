@@ -12,8 +12,8 @@
 
 	<properties>
 		<spring.version>3.2.0.BUILD-SNAPSHOT</spring.version>
-		<slf4j.version>1.7.4</slf4j.version>
-		<logback.version>1.0.10</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<logback.version>1.0.11</logback.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
@@ -32,12 +32,6 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2.2</version>
 		</dependency>
 
 		<dependency>
@@ -73,7 +67,7 @@
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>1.5</version>
+			<version>1.6</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -97,7 +91,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
