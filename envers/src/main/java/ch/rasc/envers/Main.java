@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.envers.AuditReader;
@@ -17,7 +18,6 @@ import org.hibernate.envers.exception.RevisionDoesNotExistException;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import com.google.common.collect.Sets;
 import com.mysema.query.jpa.hibernate.HibernateQuery;
@@ -36,8 +36,7 @@ public class Main {
 		configuration.addAnnotatedClass(Firma.class);
 		configuration.addAnnotatedClass(Mitarbeiter.class);
 
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-				.buildServiceRegistry();
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
 		Session session = sessionFactory.openSession();

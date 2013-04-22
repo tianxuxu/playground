@@ -16,7 +16,7 @@
 		<logback.version>1.0.11</logback.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
-		<jquery.version>1.9.1</jquery.version>
+		<jquery.version>2.0.0</jquery.version>
 	</properties>
 
 	<dependencies>

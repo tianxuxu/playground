@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +31,7 @@ public final class ChatHandler implements AtmosphereHandler {
 		String user = (String) req.getSession().getAttribute("user");
 		if (user != null) {
 			if ("GET".equals(req.getMethod())) {
-				resource.suspend(-1, false);
+				resource.suspend(5, TimeUnit.MINUTES);
 			} else if ("POST".equals(req.getMethod())) {
 				String cmd = req.getParameter("cmd");
 				String message = req.getParameter("message");

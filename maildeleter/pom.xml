@@ -25,9 +25,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.6</version>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>
@@ -39,15 +39,11 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>gimap</artifactId>
-			<version>1.4.6</version>
+			<version>1.5.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>
 					<groupId>javax.activation</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.mail</groupId>
-					<artifactId>javax.mail</artifactId>					
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -55,15 +51,11 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>dsn</artifactId>
-			<version>1.4.6</version>
+			<version>1.5.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>
 					<groupId>javax.activation</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.mail</groupId>
-					<artifactId>javax.mail</artifactId>					
 				</exclusion>
 			</exclusions>
 		</dependency>

@@ -56,7 +56,7 @@ public class MeteorPubSub extends HttpServlet {
 		String header = req.getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT);
 		if (header != null && header.equalsIgnoreCase(HeaderConfig.LONG_POLLING_TRANSPORT)) {
 			req.setAttribute(ApplicationConfig.RESUME_ON_BROADCAST, Boolean.TRUE);
-			m.suspend(-1, false);
+			m.suspend(-1);
 		} else {
 			m.suspend(-1);
 		}
