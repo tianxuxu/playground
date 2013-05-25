@@ -10,8 +10,8 @@ public class QueueTake {
 	public static void main(String[] args) throws InterruptedException {
 
 		Config cfg = new Config();
-		cfg.setPort(5901);
-		cfg.setPortAutoIncrement(false);
+		cfg.getNetworkConfig().setPort(5901);
+		cfg.getNetworkConfig().setPortAutoIncrement(false);
 		Hazelcast.init(cfg);
 
 		BlockingQueue<Integer> q = Hazelcast.getQueue("numbers");

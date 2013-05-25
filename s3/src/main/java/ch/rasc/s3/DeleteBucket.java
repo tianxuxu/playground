@@ -16,7 +16,7 @@ public class DeleteBucket {
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			String bucketName = args[2];
-			
+
 			ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucketName);
 			ObjectListing objectListing;
 
@@ -28,8 +28,7 @@ public class DeleteBucket {
 
 				listObjectsRequest.setMarker(objectListing.getNextMarker());
 			} while (objectListing.isTruncated());
-			
-			
+
 			client.deleteBucket(bucketName);
 			System.out.println("Bucket deleted: " + args[2]);
 		} else {

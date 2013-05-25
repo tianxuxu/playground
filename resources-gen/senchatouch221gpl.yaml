@@ -1,0 +1,19 @@
+sourcedir: D:\js\sencha-touch-2.2.1-gpl
+version: 2.2.1
+groupId: resources
+baseartifactId: senchatouch-gpl
+destdir: ./res
+files:
+  microloader\development.js : debug
+  microloader\production.js : core
+  microloader\testing.js : debug
+  resources\css : core
+  resources\css-debug : debug
+  resources\themes\images : core
+  sencha-touch-all-debug.js : debug
+  sencha-touch-all.js : core
+  sencha-touch-debug.js : src
+  sencha-touch.js : src
+  src : src
+
+  

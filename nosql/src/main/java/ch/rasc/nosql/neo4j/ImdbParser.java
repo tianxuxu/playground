@@ -30,20 +30,20 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.index.Index;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
-		GraphDatabaseService graphDb = new EmbeddedGraphDatabase("db");
+		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
 		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actresses.list.gz");
 		graphDb.shutdown();
 
 		System.gc();
 
-		graphDb = new EmbeddedGraphDatabase("db");
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
 		index = graphDb.index().forNodes("myIndex");
 		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actors.list.gz");
 		graphDb.shutdown();

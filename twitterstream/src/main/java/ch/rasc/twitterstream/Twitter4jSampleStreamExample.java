@@ -51,13 +51,13 @@ public class Twitter4jSampleStreamExample {
 			String text = status.getText();
 			text = text.replace("<", "&lt;");
 			System.out.println(text);
-			
-			Matcher matcher = URL_PATTERN.matcher(text);			
+
+			Matcher matcher = URL_PATTERN.matcher(text);
 			StringBuffer sb = new StringBuffer();
 			while (matcher.find()) {
 				String unshortenedURL = unshorten(matcher.group());
 				if (unshortenedURL != null) {
-					matcher.appendReplacement(sb, "<a href=\""+unshortenedURL+"\">" + unshortenedURL + "</a>");
+					matcher.appendReplacement(sb, "<a href=\"" + unshortenedURL + "\">" + unshortenedURL + "</a>");
 				} else {
 					matcher.appendReplacement(sb, "$0");
 				}
@@ -156,10 +156,10 @@ public class Twitter4jSampleStreamExample {
 				System.out.println("STATUS >= 400");
 				System.out.println(status);
 				System.out.println(url);
-				
+
 				return null;
 			}
-			
+
 		} catch (IllegalStateException | IOException e) {
 			if (!(e instanceof SSLException || e instanceof ConnectException)) {
 				System.out.println("Exception with url: " + url);

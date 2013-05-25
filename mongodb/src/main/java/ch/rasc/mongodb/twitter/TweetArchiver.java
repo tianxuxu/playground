@@ -27,7 +27,7 @@ public class TweetArchiver {
 		collection.ensureIndex(new BasicDBObject("id", 1), null, true);
 
 		Twitter twitter = new TwitterTemplate();
-		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("feliciaday", 0, 200);
+		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("feliciaday", 200);
 		for (Tweet tweet : tweets) {
 			BasicDBObject obj = new BasicDBObject("text", tweet.getText());
 			obj.append("fromUser", tweet.getFromUser());

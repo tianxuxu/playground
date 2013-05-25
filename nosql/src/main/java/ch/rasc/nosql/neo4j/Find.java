@@ -6,14 +6,14 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.index.Index;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.neo4j.kernel.Traversal;
 
 public class Find {
 
 	public static void main(String[] args) {
-		GraphDatabaseService graphDb = new EmbeddedGraphDatabase("db");
+		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
 
 		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();

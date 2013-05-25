@@ -36,7 +36,8 @@ public class Main {
 		configuration.addAnnotatedClass(Firma.class);
 		configuration.addAnnotatedClass(Mitarbeiter.class);
 
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+				configuration.getProperties()).build();
 		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
 		Session session = sessionFactory.openSession();

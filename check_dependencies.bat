@@ -54,11 +54,6 @@ call mvn versions:display-plugin-updates
 cd ..
 
 
-cd D:\ws\playground\googlemapsexamples
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
 cd D:\ws\playground\GroovyTest
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -129,10 +124,6 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\noxml
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
 
 cd D:\ws\playground\pandora
 call mvn versions:display-dependency-updates

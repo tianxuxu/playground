@@ -19,7 +19,8 @@ public class FilterStreamExample {
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
 		// add some track terms
-		endpoint.trackTerms(ImmutableList.of("#ExtJS", "#atmo_framework", "#java", "#java7", "#java8", "#websockets", "#websocket", "#portal"));
+		endpoint.trackTerms(ImmutableList.of("#ExtJS", "#atmo_framework", "#java", "#java7", "#java8", "#websockets",
+				"#websocket", "#portal"));
 
 		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
 		// Authentication auth = new BasicAuth(username, password);

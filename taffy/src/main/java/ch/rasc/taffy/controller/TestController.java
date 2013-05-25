@@ -23,11 +23,11 @@ public class TestController {
 	@Autowired
 	private MyConf myConf;
 
-	@RequestMapping("/getPublicTimeline")
+	@RequestMapping("/getHomeTimeline")
 	@ResponseBody
 	public List<Tweet> returnSomeTweets() {
 		System.out.println(myConf.getEnv());
-		return twitter.timelineOperations().getPublicTimeline();
+		return twitter.timelineOperations().getHomeTimeline();
 	}
 
 	@RequestMapping("/getUsers")

@@ -55,11 +55,11 @@ public class HomeController {
 			@Override
 			public String call() throws Exception {
 				final TwitterTemplate twitterTemplate = new TwitterTemplate();
-				final SearchResults results = twitterTemplate.searchOperations().search("world", 1, 5, sinceId, 0);
+				final SearchResults results = twitterTemplate.searchOperations().search("world", 20);
 
-				logger.info("sinceId: " + sinceId + "; maxId: " + results.getMaxId());
+				logger.info("sinceId: " + sinceId + "; maxId: " + results.getSearchMetadata().getMax_id());
 
-				sinceId = results.getMaxId();
+				sinceId = results.getSearchMetadata().getMax_id();
 
 				List<TwitterMessage> twitterMessages = new ArrayList<>();
 
