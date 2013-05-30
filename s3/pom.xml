@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.4.1</version>
+			<version>1.4.5</version>
 		</dependency>
 	</dependencies>
 
@@ -78,7 +78,7 @@
 
 			<plugin>
 				<artifactId> maven-site-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.3</version>
 			</plugin>
 
 			<plugin>
