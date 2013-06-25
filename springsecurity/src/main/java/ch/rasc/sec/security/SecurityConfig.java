@@ -45,10 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		TwoFactorAuthenticationProvider authenticationProvider = new TwoFactorAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(userDetailsService);
-		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		auth.add(authenticationProvider);
+//		TwoFactorAuthenticationProvider authenticationProvider = new TwoFactorAuthenticationProvider();
+//		authenticationProvider.setUserDetailsService(userDetailsService);
+//		authenticationProvider.setPasswordEncoder(passwordEncoder());
+//		auth.add(authenticationProvider);
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpConfiguration http) throws Exception {
 		http
 		  .authorizeUrls()
-		  .antMatchers("/", "/sayHello").hasRole("ADMIN")
+		  .antMatchers("/sayHello").hasRole("ADMIN")
 		  .anyRequest().authenticated()
 
 		  .and()
