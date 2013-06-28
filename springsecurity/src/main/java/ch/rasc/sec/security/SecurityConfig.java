@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -41,15 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-    
-    
+
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//		TwoFactorAuthenticationProvider authenticationProvider = new TwoFactorAuthenticationProvider();
-//		authenticationProvider.setUserDetailsService(userDetailsService);
-//		authenticationProvider.setPasswordEncoder(passwordEncoder());
-//		auth.add(authenticationProvider);
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		TwoFactorAuthenticationProvider authenticationProvider = new TwoFactorAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService);
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		auth.add(authenticationProvider);
+		// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -59,23 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpConfiguration http) throws Exception {
-		http
-		  .authorizeUrls()
-		  .antMatchers("/sayHello").hasRole("ADMIN")
-		  .anyRequest().authenticated()
+		http.authorizeUrls().antMatchers("/sayHello").hasRole("ADMIN").anyRequest().authenticated()
 
-		  .and()
-		    .formLogin()
-		    .authenticationDetailsSource(new AdditionalWebAuthenticationDetailsSource())
-		    .loginPage("/login.jsp")
-		    .failureUrl("/login.jsp?error")		    
-		    .permitAll()
-		    
-	      .and()
-	        .logout()
-	        .logoutSuccessUrl("/login.jsp?logout")
-	        .deleteCookies("JSESSIONID")
-	        .permitAll();
+		.and().formLogin().authenticationDetailsSource(new AdditionalWebAuthenticationDetailsSource())
+				.loginPage("/login.jsp").failureUrl("/login.jsp?error").permitAll()
+
+				.and().logout().logoutSuccessUrl("/login.jsp?logout").deleteCookies("JSESSIONID").permitAll();
 	}
 
 }

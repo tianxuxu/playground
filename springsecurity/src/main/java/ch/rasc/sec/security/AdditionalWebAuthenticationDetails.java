@@ -9,16 +9,21 @@ public class AdditionalWebAuthenticationDetails extends WebAuthenticationDetails
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
-	private String code;
-	
+	private Integer code;
+
 	public AdditionalWebAuthenticationDetails(HttpServletRequest request) {
-		super(request);		
+		super(request);
+
+		String codeString = request.getParameter("code");
+		try {
+			code = Integer.valueOf(codeString);
+		} catch (NumberFormatException e) {
+			code = null;
+		}
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
-	
-	
 
 }

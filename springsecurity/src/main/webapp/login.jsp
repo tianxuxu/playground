@@ -26,12 +26,13 @@
 			</p>
 			<p>
 				<label for="password">Password</label> <input type="password" id="password" name="password" />
-			</p>
-            <!-- 
+			</p> 
+			<p>
+				<label for="code">Google Authenticator Code</label> <input type="text" id="code" name="code" />
+			</p> 			
 			<p>
 				<label for="remember-me">Remember Me?</label> <input type="checkbox" id="remember-me" name="remember-me" />
 			</p>
-			 -->
 			<div>
 				<button type="submit" class="btn">Log in</button>
 			</div>

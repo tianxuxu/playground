@@ -3,6 +3,7 @@ package ch.rasc.sec.controller;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -30,11 +31,11 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		
+
 		Role adminRole = null;
 		Role userRole = null;
 
@@ -63,6 +64,8 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 			adminUser.setLocale("en");
 			adminUser.setPasswordHash(passwordEncoder.encode("admin"));
 			adminUser.setEnabled(true);
+			adminUser.setExpirationDate(DateTime.now().plusYears(1));
+			adminUser.setSecret("IB6EFEQKE7U2TQIB");
 
 			adminUser.setRoles(Sets.newHashSet(adminRole));
 
@@ -75,6 +78,8 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 			normalUser.setFirstName("user");
 			normalUser.setName("user");
 			normalUser.setLocale("de");
+			normalUser.setExpirationDate(DateTime.now().plusYears(1));
+			normalUser.setSecret("BPPGGZTFHRWDUA67");
 
 			normalUser.setPasswordHash(passwordEncoder.encode("user"));
 			normalUser.setEnabled(true);

@@ -54,6 +54,12 @@ public class User extends AbstractPersistable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime lockedOut;
 
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime expirationDate;
+
+	@Size(max = 16)
+	private String secret;
+
 	public String getUserName() {
 		return userName;
 	}
@@ -132,6 +138,22 @@ public class User extends AbstractPersistable {
 
 	public void setLockedOut(DateTime lockedOut) {
 		this.lockedOut = lockedOut;
+	}
+
+	public DateTime getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(DateTime expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
 	}
 
 }

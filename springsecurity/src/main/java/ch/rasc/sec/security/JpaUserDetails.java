@@ -23,23 +23,34 @@ public class JpaUserDetails implements UserDetails {
 
 	private final String username;
 
+	private final String secret;
+
 	private final boolean enabled;
 
 	private final Long userDbId;
 
 	private final boolean locked;
 
+	private final boolean expired;
+
 	public JpaUserDetails(User user) {
 		this.userDbId = user.getId();
 
 		this.password = user.getPasswordHash();
 		this.username = user.getUserName();
+		this.secret = user.getSecret();
 		this.enabled = user.isEnabled();
 
 		if (user.getLockedOut() != null && user.getLockedOut().isAfter(DateTime.now())) {
 			locked = true;
 		} else {
 			locked = false;
+		}
+
+		if (user.getExpirationDate() != null && DateTime.now().isAfter(user.getExpirationDate())) {
+			expired = true;
+		} else {
+			expired = false;
 		}
 
 		Builder<GrantedAuthority> builder = ImmutableSet.builder();
@@ -71,7 +82,7 @@ public class JpaUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return !expired;
 	}
 
 	@Override
@@ -87,6 +98,10 @@ public class JpaUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public String getSecret() {
+		return secret;
 	}
 
 }

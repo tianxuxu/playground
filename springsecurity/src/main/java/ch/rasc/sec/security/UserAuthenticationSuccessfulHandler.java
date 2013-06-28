@@ -3,6 +3,7 @@ package ch.rasc.sec.security;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.joda.time.DateTime;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class UserAuthenticationSuccessfulHandler implements ApplicationListener<
 			User user = entityManager.find(User.class, ((JpaUserDetails) principal).getUserDbId());
 			user.setLockedOut(null);
 			user.setFailedLogins(null);
+			user.setExpirationDate(DateTime.now().plusYears(1));
 		}
 	}
 }
