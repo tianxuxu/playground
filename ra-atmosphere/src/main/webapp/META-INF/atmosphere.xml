@@ -1,3 +1,0 @@
-<atmosphere-handlers>
-    <atmosphere-handler context-root="/chat" class-name="ChatHandler"/>
-</atmosphere-handlers>

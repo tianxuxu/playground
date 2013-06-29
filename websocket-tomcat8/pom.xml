@@ -9,6 +9,10 @@
 	<properties>
 		<spring.version>4.0.0.BUILD-SNAPSHOT</spring.version>
 		<tomcat.version>8.0-SNAPSHOT</tomcat.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<logback.version>1.0.13</logback.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.debug>true</maven.compiler.debug>		
 	</properties>
 
 	<dependencies>
@@ -22,6 +26,7 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-websocket</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -51,6 +56,30 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 
 
 	</dependencies>

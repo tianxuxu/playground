@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
@@ -50,7 +50,7 @@ public class Main {
 				System.out.println(splittedLine.size());
 				if (splittedLine.size() == 11/* 14 */) {
 					String userAgent = splittedLine.get(9);
-					UserAgent ua = parser.parse(userAgent);
+					ReadableUserAgent ua = parser.parse(userAgent);
 					System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
 
 					String ip = splittedLine.get(8);

@@ -11,17 +11,17 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
+	@SuppressWarnings("resource")
 	@Override
 	public void onStartup(ServletContext container) {
-		try (AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-				GenericWebApplicationContext emptyContext = new GenericWebApplicationContext()) {
-			rootContext.register(SpringConfig.class);
-			container.addListener(new ContextLoaderListener(rootContext));
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(SpringConfig.class);
+		container.addListener(new ContextLoaderListener(rootContext));
 
-			ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
-					emptyContext));
-			dispatcher.setLoadOnStartup(1);
-			dispatcher.addMapping("/");
-		}
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
+				new GenericWebApplicationContext()));
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("/");
+
 	}
 }

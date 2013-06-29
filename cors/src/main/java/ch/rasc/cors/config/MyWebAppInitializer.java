@@ -11,26 +11,26 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
 
+	@SuppressWarnings("resource")
 	@Override
 	public void onStartup(ServletContext container) {
-		try (AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-				GenericWebApplicationContext webApplicationContext = new GenericWebApplicationContext()) {
-			rootContext.register(WebConfig.class);
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(WebConfig.class);
 
-			container.addListener(new ContextLoaderListener(rootContext));
+		container.addListener(new ContextLoaderListener(rootContext));
 
-			final DispatcherServlet dispatcherServlet = new DispatcherServlet(webApplicationContext);
+		final DispatcherServlet dispatcherServlet = new DispatcherServlet(new GenericWebApplicationContext());
 
-			dispatcherServlet.setDispatchOptionsRequest(true);
-			/*
-			 * <init-param> <param-name>dispatchOptionsRequest</param-name>
-			 * <param-value>true</param-value> </init-param>
-			 */
+		dispatcherServlet.setDispatchOptionsRequest(true);
+		/*
+		 * <init-param> <param-name>dispatchOptionsRequest</param-name>
+		 * <param-value>true</param-value> </init-param>
+		 */
 
-			ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
-			dispatcher.setLoadOnStartup(1);
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
+		dispatcher.setLoadOnStartup(1);
 
-			dispatcher.addMapping("/action/*");
-		}
+		dispatcher.addMapping("/action/*");
 	}
+
 }
