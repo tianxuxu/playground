@@ -17,7 +17,7 @@
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<spring-security.version>3.2.0.M1</spring-security.version>
 		<hibernate.version>4.3.0.Beta3</hibernate.version>
-		<querydsl.version>3.2.1</querydsl.version>
+		<querydsl.version>3.2.0</querydsl.version>
 	</properties>
 
 	<repositories>

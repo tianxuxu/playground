@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-			<version>3.2.1</version>
+			<version>3.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -89,7 +89,7 @@
 					<dependency>
 						<groupId>com.mysema.querydsl</groupId>
 						<artifactId>querydsl-apt</artifactId>
-						<version>3.2.1</version>
+						<version>3.2.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
