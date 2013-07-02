@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.HttpConfiguration;
-import org.springframework.security.config.annotation.web.WebSecurityBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,26 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		TwoFactorAuthenticationProvider authenticationProvider = new TwoFactorAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(userDetailsService);
-		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		auth.add(authenticationProvider);
-		// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		TwoFactorAuthenticationConfigurer configurer = new TwoFactorAuthenticationConfigurer(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.apply(configurer);
 	}
 
 	@Override
-	public void configure(WebSecurityBuilder builder) throws Exception {
+	public void configure(WebSecurity builder) throws Exception {
 		builder.ignoring().antMatchers("/resources/**", "/favicon.ico", "/robots.txt");
 	}
 
 	@Override
-	protected void configure(HttpConfiguration http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeUrls().antMatchers("/sayHello").hasRole("ADMIN").anyRequest().authenticated()
 
 		.and().formLogin().authenticationDetailsSource(new AdditionalWebAuthenticationDetailsSource())
-				.loginPage("/login.jsp").failureUrl("/login.jsp?error").permitAll()
+		.loginPage("/login.jsp").failureUrl("/login.jsp?error").permitAll()
 
-				.and().logout().logoutSuccessUrl("/login.jsp?logout").deleteCookies("JSESSIONID").permitAll();
+		.and().logout().logoutSuccessUrl("/login.jsp?logout").deleteCookies("JSESSIONID").permitAll();
 	}
 
 }
