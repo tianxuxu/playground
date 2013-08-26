@@ -42,19 +42,13 @@ public class StreamRead {
 
 				switch (event) {
 
-				case START_OBJECT:
-					break;
 				case END_OBJECT:
 					if (!data && hourly) {
-						System.out.println("END HOURLY");
 						hourly = false;
 					}
 					break;
-				case START_ARRAY:
-					break;
 				case END_ARRAY:
 					if (data) {
-						System.out.println("END DATA");
 						data = false;
 					}
 					break;
@@ -66,14 +60,6 @@ public class StreamRead {
 						data = true;
 					}
 					break;
-				case VALUE_FALSE:
-					break;
-				case VALUE_TRUE:
-					break;
-				case VALUE_NULL:
-					break;
-				case VALUE_STRING:
-					break;
 				case VALUE_NUMBER:
 					if (data && "time".equals(keyName)) {
 						time = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
@@ -82,9 +68,6 @@ public class StreamRead {
 						System.out.println(time.getTime() + " : " + parser.getBigDecimal());
 						time = null;
 					}
-					break;
-				default:
-					System.out.println("UNKNOWN EVENT: " + event);
 					break;
 				}
 			}
