@@ -45,7 +45,9 @@ public class Svg2PngServlet extends HttpServlet {
 				TranscoderOutput output = new TranscoderOutput(out);
 
 				if ("image/jpeg".equals(type)) {
-					new JPEGTranscoder().transcode(input, output);
+					JPEGTranscoder jpegTranscoder = new JPEGTranscoder();
+					jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 1F);
+					jpegTranscoder.transcode(input, output);
 				} else {
 					new PNGTranscoder().transcode(input, output);
 				}
