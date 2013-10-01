@@ -7,4 +7,6 @@ knownHosts: known_hosts
   
 gitUrls:
   - name: hc
-    url: git@bitbucket.org:test/test.git  
+    url: git@bitbucket.org:test/test.git
+    username: 
+    password:

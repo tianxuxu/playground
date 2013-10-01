@@ -14,6 +14,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.yaml.snakeyaml.Yaml;
 
 import ch.rasc.githubbackup.Config.GitUrl;
@@ -44,21 +45,21 @@ public class Backup {
 			if (config.getGithubUsers() != null) {
 				for (String githubUser : config.getGithubUsers()) {
 					for (Repository repo : service.getRepositories(githubUser)) {
-						fetchRepo(backupDir, repo.getName(), repo.getGitUrl());
+						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null, null);
 					}
 				}
 			}
 
 			if (config.getGitUrls() != null) {
 				for (GitUrl gitUrl : config.getGitUrls()) {
-					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl());
+					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl(), gitUrl.getUsername(), gitUrl.getPassword());
 				}
 			}
 		}
 
 	}
 
-	private static void fetchRepo(Path backupDir, String name, String url) throws IOException, GitAPIException,
+	private static void fetchRepo(Path backupDir, String name, String url, String username, String password) throws IOException, GitAPIException,
 			InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
@@ -66,7 +67,12 @@ public class Backup {
 		Path configFile = repoDir.resolve("config");
 		if (Files.exists(configFile)) {
 			System.out.println("fetching : " + name);
-			Git.open(repoDir.toFile()).fetch().call();
+			if (username != null) {
+				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
+				Git.open(repoDir.toFile()).fetch().setCredentialsProvider(cp).call();
+			} else {
+				Git.open(repoDir.toFile()).fetch().call();
+			}
 		} else {
 			System.out.println("cloning : " + name);
 			Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
