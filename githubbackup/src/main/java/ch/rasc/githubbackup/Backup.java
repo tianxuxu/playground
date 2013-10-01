@@ -6,6 +6,15 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.RepositoryService;
@@ -27,6 +36,8 @@ public class Backup {
 			System.out.println("java -jar githubbackup.jar <settings.yaml>");
 			return;
 		}
+		
+		disableCertificateValidation();
 
 		Path settingsYamlPath = Paths.get(args[0]);
 		try (BufferedReader br = Files.newBufferedReader(settingsYamlPath, StandardCharsets.UTF_8)) {
@@ -59,8 +70,8 @@ public class Backup {
 
 	}
 
-	private static void fetchRepo(Path backupDir, String name, String url, String username, String password) throws IOException, GitAPIException,
-			InvalidRemoteException, TransportException {
+	private static void fetchRepo(Path backupDir, String name, String url, String username, String password)
+			throws IOException, GitAPIException, InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
 
@@ -75,8 +86,51 @@ public class Backup {
 			}
 		} else {
 			System.out.println("cloning : " + name);
-			Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
+			if (username != null) {
+				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
+				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
+			} else {
+				Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
+			}
+			
 		}
 	}
 
+	public static void disableCertificateValidation() {
+		// Create a trust manager that does not validate certificate chains
+		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+			@Override
+			public X509Certificate[] getAcceptedIssuers() {
+				return new X509Certificate[0];
+			}
+
+			@Override
+			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+				//nothing here
+			}
+
+			@Override
+			public void checkServerTrusted(X509Certificate[] certs, String authType) {
+				//nothing here
+			}
+		} };
+
+		// Ignore differences between given hostname and certificate hostname
+		HostnameVerifier hv = new HostnameVerifier() {
+			@Override
+			public boolean verify(String hostname, SSLSession session) {
+				return true;
+			}
+		};
+
+		// Install the all-trusting trust manager
+		try {
+			SSLContext sc = SSLContext.getInstance("SSL");
+			sc.init(null, trustAllCerts, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+			HttpsURLConnection.setDefaultHostnameVerifier(hv);
+		} catch (Exception e) {
+			//nothing here
+		}
+	}
 }
