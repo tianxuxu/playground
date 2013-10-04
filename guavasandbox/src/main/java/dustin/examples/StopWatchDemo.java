@@ -49,7 +49,7 @@ public class StopWatchDemo {
 	}
 
 	public static void main(String[] arguments) {
-		final Stopwatch stopwatch = new Stopwatch();
+		final Stopwatch stopwatch = Stopwatch.createStarted();
 
 		int numberTimes = 5;
 		stopwatch.start();

@@ -11,7 +11,7 @@ public class StreamWrite {
 		Map<String, Boolean> properties = Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, false);
 		try (JsonGenerator jg = Json.createGeneratorFactory(properties).createGenerator(System.out)) {
 
-		//@formatter:off
+			//@formatter:off
 		jg.writeStartObject()                    
 	        .write("name", "Jane Doe")          
 	        .writeStartObject("address")         
@@ -32,7 +32,7 @@ public class StreamWrite {
 	        .writeEnd()                          
 	      .writeEnd();                             
         //@formatter:on
-	    
+
 		}
 	}
 }

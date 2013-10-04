@@ -13,6 +13,11 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\el
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\envers
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -38,6 +43,11 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\forecastio
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\github
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -52,7 +62,6 @@ cd D:\ws\playground\glacier
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
-
 
 cd D:\ws\playground\GroovyTest
 call mvn versions:display-dependency-updates
@@ -69,10 +78,11 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\hc
+cd D:\ws\playground\irc
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
+
 
 cd D:\ws\playground\jettyembed
 call mvn versions:display-dependency-updates
@@ -90,6 +100,11 @@ call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\json
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\jsonp
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -124,7 +139,6 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-
 cd D:\ws\playground\pandora
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -135,57 +149,7 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\ra-atmosphere
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-comet-long-polling
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-comet-streaming
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-cometd
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-jetty-comet
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-jetty-websocket
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-piggyback
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-polling
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-socketio
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-tomcat-comet
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-cd ..
-
-cd D:\ws\playground\ra-websocket
+cd D:\ws\playground\reactorsandbox
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -205,12 +169,27 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
+cd D:\ws\playground\s3
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\safebrowse
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
 cd D:\ws\playground\security
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
 cd D:\ws\playground\springmongodb
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+cd ..
+
+cd D:\ws\playground\springsecurity
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
@@ -230,12 +209,12 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\tomcatembed
+cd D:\ws\playground\tailerhttplog
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..
 
-cd D:\ws\playground\touch
+cd D:\ws\playground\tomcatembed
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 cd ..

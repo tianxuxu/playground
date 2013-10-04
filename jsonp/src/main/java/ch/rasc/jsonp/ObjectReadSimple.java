@@ -21,12 +21,12 @@ public class ObjectReadSimple {
 			String firstName = jsonObject.getString("firstName");
 			String lastName = jsonObject.getString("lastName");
 			JsonArray array = jsonObject.getJsonArray("hobbies");
-			
-			System.out.println(firstName); //John
-			System.out.println(lastName); //Doe
-			
+
+			System.out.println(firstName); // John
+			System.out.println(lastName); // Doe
+
 			for (JsonValue value : array) {
-				System.out.println(((JsonString)value).getString());
+				System.out.println(((JsonString) value).getString());
 			}
 		}
 	}

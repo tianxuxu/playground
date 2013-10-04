@@ -27,8 +27,7 @@ public class Bench {
 					random.nextInt(99) + 1));
 		}
 
-		Stopwatch stopWatch = new Stopwatch();
-		stopWatch.start();
+		Stopwatch stopWatch = Stopwatch.createStarted();
 		List<User> sorted = sort(users, on(User.class).getAge());
 		stopWatch.stop();
 		System.out.println("Lambdaj sort normal: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));

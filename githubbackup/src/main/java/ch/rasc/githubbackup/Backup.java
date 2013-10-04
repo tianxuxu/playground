@@ -36,7 +36,7 @@ public class Backup {
 			System.out.println("java -jar githubbackup.jar <settings.yaml>");
 			return;
 		}
-		
+
 		disableCertificateValidation();
 
 		Path settingsYamlPath = Paths.get(args[0]);
@@ -88,11 +88,12 @@ public class Backup {
 			System.out.println("cloning : " + name);
 			if (username != null) {
 				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
-				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
+				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url)
+						.setDirectory(repoDir.toFile()).call();
 			} else {
 				Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
 			}
-			
+
 		}
 	}
 
@@ -106,12 +107,12 @@ public class Backup {
 
 			@Override
 			public void checkClientTrusted(X509Certificate[] certs, String authType) {
-				//nothing here
+				// nothing here
 			}
 
 			@Override
 			public void checkServerTrusted(X509Certificate[] certs, String authType) {
-				//nothing here
+				// nothing here
 			}
 		} };
 
@@ -130,7 +131,7 @@ public class Backup {
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			HttpsURLConnection.setDefaultHostnameVerifier(hv);
 		} catch (Exception e) {
-			//nothing here
+			// nothing here
 		}
 	}
 }

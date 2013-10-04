@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		TwoFactorAuthenticationConfigurer configurer = new TwoFactorAuthenticationConfigurer(userDetailsService).passwordEncoder(passwordEncoder());
+		TwoFactorAuthenticationConfigurer configurer = new TwoFactorAuthenticationConfigurer(userDetailsService)
+				.passwordEncoder(passwordEncoder());
 		auth.apply(configurer);
 	}
 
@@ -58,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeUrls().antMatchers("/sayHello").hasRole("ADMIN").anyRequest().authenticated()
 
 		.and().formLogin().authenticationDetailsSource(new AdditionalWebAuthenticationDetailsSource())
-		.loginPage("/login.jsp").failureUrl("/login.jsp?error").permitAll()
+				.loginPage("/login.jsp").failureUrl("/login.jsp?error").permitAll()
 
-		.and().logout().logoutSuccessUrl("/login.jsp?logout").deleteCookies("JSESSIONID").permitAll();
+				.and().logout().logoutSuccessUrl("/login.jsp?logout").deleteCookies("JSESSIONID").permitAll();
 	}
 
 }

@@ -41,7 +41,7 @@ public class FioDataPoint {
 	 * should ensure that a sensible default is defined, as additional values,
 	 * such as hail, thunderstorm, or tornado, may be defined in the future.)
 	 */
-	@JsonDeserialize(using=FioDataPointIconDeserializer.class)
+	@JsonDeserialize(using = FioDataPointIconDeserializer.class)
 	private FioDataPointIcon icon;
 
 	/**

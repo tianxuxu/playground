@@ -10,11 +10,11 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
 		<aspectj.version>1.7.3</aspectj.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
-		<hibernate.version>4.3.0.Beta3</hibernate.version>
+		<hibernate.version>4.3.0.Beta4</hibernate.version>
 		<hibernatevalidator.version>5.0.1.Final</hibernatevalidator.version>
 	</properties>
 
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.3.2.RELEASE</version>
+			<version>1.4.1.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -163,13 +163,13 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.3.172</version>
+			<version>1.3.173</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>14.0.1</version>
+			<version>15.0</version>
 		</dependency>
 	</dependencies>
 
@@ -194,12 +194,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
+				<version>2.8</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -219,7 +219,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.15</version>
+				<version>2.16</version>
 			</plugin>
 
 		</plugins>

@@ -75,7 +75,6 @@ public class ImdbParser {
 						if (tx != null) {
 							if (count % 1000 == 0) {
 								tx.success();
-								tx.finish();
 								tx = graphDb.beginTx();
 							}
 						} else {

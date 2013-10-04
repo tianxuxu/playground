@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 
 public class QueueOffer {
 
@@ -13,9 +14,9 @@ public class QueueOffer {
 		Config cfg = new Config();
 		cfg.getNetworkConfig().setPort(5900);
 		cfg.getNetworkConfig().setPortAutoIncrement(false);
-		Hazelcast.init(cfg);
+		HazelcastInstance hc = Hazelcast.newHazelcastInstance(cfg);
 
-		BlockingQueue<Integer> q = Hazelcast.getQueue("numbers");
+		BlockingQueue<Integer> q = hc.getQueue("numbers");
 
 		for (int i = 0; i < 10000; i++) {
 			q.put(i);

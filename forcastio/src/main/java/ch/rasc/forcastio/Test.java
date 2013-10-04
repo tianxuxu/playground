@@ -13,12 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Test {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
-		
+
 		System.out.println("1371642537");
 		System.out.println(new Date().getTime());
-		
+
 		ObjectMapper om = new ObjectMapper();
-		
+
 		FioResponse fr = null;
 		try (InputStream is = Test.class.getResourceAsStream("/forecastio_reponse.txt");) {
 			fr = om.readValue(is, FioResponse.class);

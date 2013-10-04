@@ -7,7 +7,6 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.DispatcherServlet;
 
-
 public class Test implements ServletContainerInitializer {
 
 	@Override
@@ -15,7 +14,7 @@ public class Test implements ServletContainerInitializer {
 		Dynamic dispatcherServlet = ctx.addServlet("dispatcherServlet", new DispatcherServlet());
 		dispatcherServlet.setAsyncSupported(true);
 		dispatcherServlet.setLoadOnStartup(1);
-		dispatcherServlet.addMapping("/");		
+		dispatcherServlet.addMapping("/");
 	}
 
 }

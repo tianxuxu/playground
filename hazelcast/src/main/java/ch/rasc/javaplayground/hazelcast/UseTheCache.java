@@ -11,7 +11,7 @@ public class UseTheCache {
 	private final HazelcastInstance haz;
 
 	public UseTheCache() {
-		haz = Hazelcast.getDefaultInstance();
+		haz = Hazelcast.newHazelcastInstance();
 	}
 
 	public void readList() {

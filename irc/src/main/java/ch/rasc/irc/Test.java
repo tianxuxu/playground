@@ -13,74 +13,92 @@ public class Test {
 		IRCConnection conn = new IRCConnection("irc.wikimedia.org", 6667, 6669, null, "rcmon", "rcmon", "rcmon");
 
 		conn.addIRCEventListener(new IRCEventListener() {
+			@Override
 			public void onRegistered() {
 				System.out.println("Connected");
 			}
 
+			@Override
 			public void onDisconnected() {
 				System.out.println("Disconnected");
 			}
 
+			@Override
 			public void onError(String msg) {
 				System.out.println("Error: " + msg);
 			}
 
+			@Override
 			public void onError(int num, String msg) {
 				System.out.println("Error #" + num + ": " + msg);
 			}
 
+			@Override
 			public void onInvite(String chan, IRCUser u, String nickPass) {
 				System.out.println(chan + "> " + u.getNick() + " invites " + nickPass);
 			}
 
+			@Override
 			public void onJoin(String chan, IRCUser u) {
 				System.out.println(chan + "> " + u.getNick() + " joins");
 			}
 
+			@Override
 			public void onKick(String chan, IRCUser u, String nickPass, String msg) {
 				System.out.println(chan + "> " + u.getNick() + " kicks " + nickPass);
 			}
 
+			@Override
 			public void onMode(IRCUser u, String nickPass, String mode) {
 				System.out.println("Mode: " + u.getNick() + " sets modes " + mode + " " + nickPass);
 			}
 
+			@Override
 			public void onMode(String chan, IRCUser u, IRCModeParser mp) {
 				System.out.println(chan + "> " + u.getNick() + " sets mode: " + mp.getLine());
 			}
 
+			@Override
 			public void onNick(IRCUser u, String nickNew) {
 				System.out.println("Nick: " + u.getNick() + " is now known as " + nickNew);
 			}
 
+			@Override
 			public void onNotice(String target, IRCUser u, String msg) {
 				System.out.println(target + "> " + u.getNick() + " (notice): " + msg);
 			}
 
+			@Override
 			public void onPart(String chan, IRCUser u, String msg) {
 				System.out.println(chan + "> " + u.getNick() + " parts");
 			}
 
+			@Override
 			public void onPrivmsg(String chan, IRCUser u, String msg) {
 				System.out.println(chan + "> " + u.getNick() + ": " + msg);
 			}
 
+			@Override
 			public void onQuit(IRCUser u, String msg) {
 				System.out.println("Quit: " + u.getNick());
 			}
 
+			@Override
 			public void onReply(int num, String value, String msg) {
 				System.out.println("Reply #" + num + ": " + value + " " + msg);
 			}
 
+			@Override
 			public void onTopic(String chan, IRCUser u, String topic) {
 				System.out.println(chan + "> " + u.getNick() + " changes topic into: " + topic);
 			}
 
+			@Override
 			public void onPing(String p) {
 				System.out.println("onPing: " + p);
 			}
 
+			@Override
 			public void unknown(String a, String b, String c, String d) {
 				System.out.println("UNKNOWN: " + a + " b " + c + " " + d);
 			}

@@ -1,12 +1,18 @@
 package ch.rasc.jpa.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.google.common.collect.Sets;
 
 @Entity
 public class Employee {
@@ -25,6 +31,9 @@ public class Employee {
 
 	@Length(max = 50)
 	private String job;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
+	private Set<Address> address = Sets.newHashSet();
 
 	public long getEmployeeId() {
 		return employeeId;
@@ -57,4 +66,13 @@ public class Employee {
 	public void setJob(String job) {
 		this.job = job;
 	}
+
+	public Set<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(Set<Address> address) {
+		this.address = address;
+	}
+
 }

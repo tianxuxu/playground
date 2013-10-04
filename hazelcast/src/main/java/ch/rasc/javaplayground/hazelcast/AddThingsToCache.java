@@ -11,7 +11,7 @@ public class AddThingsToCache {
 	private final HazelcastInstance haz;
 
 	public AddThingsToCache() {
-		haz = Hazelcast.getDefaultInstance();
+		haz = Hazelcast.newHazelcastInstance();
 	}
 
 	public void addListData() {

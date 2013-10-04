@@ -22,8 +22,6 @@ public class ObjectRead {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 
-		CloseableHttpClient client = HttpClientBuilder.create().build();
-
 		String apiKey = args[0];
 		String latitude = "46.947922";
 		String longitude = "7.444608";
@@ -32,7 +30,8 @@ public class ObjectRead {
 		String url = String.format(urlTemplate, apiKey, latitude, longitude);
 
 		HttpGet httpget = new HttpGet(url);
-		try (CloseableHttpResponse response = client.execute(httpget);
+		try (CloseableHttpClient client = HttpClientBuilder.create().build();
+				CloseableHttpResponse response = client.execute(httpget);
 				JsonReader reader = Json.createReader(response.getEntity().getContent())) {
 
 			JsonObject root = reader.readObject();

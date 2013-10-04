@@ -16,27 +16,33 @@
 
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<spring-security.version>3.2.0.M2</spring-security.version>
-		<hibernate.version>4.3.0.Beta3</hibernate.version>
+		<hibernate.version>4.3.0.Beta4</hibernate.version>
 		<querydsl.version>3.2.0</querydsl.version>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>spring-maven-snapshot</id>
-			<name>Spring Maven Snapshot Repository</name>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>http://repo.spring.io/snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-			<url>http://maven.springframework.org/snapshot</url>
 		</repository>
+		
 		<repository>
-			<id>spring-maven-milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-		</repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>	
+        <repository>
+            <id>jboss.release</id>
+            <name>JBoss Release Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>    		
 
 	</repositories>
 
@@ -146,7 +152,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>14.0.1</version>
+			<version>15.0</version>
 		</dependency>
 
 		<dependency>

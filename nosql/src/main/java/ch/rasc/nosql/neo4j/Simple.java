@@ -10,30 +10,30 @@ public class Simple {
 	public static void main(String[] args) {
 
 		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("simple");
-		Transaction tx = graphDb.beginTx();
+		try (Transaction tx = graphDb.beginTx()) {
 
-		Node john = graphDb.createNode();
-		john.setProperty("name", "John");
+			Node john = graphDb.createNode();
+			john.setProperty("name", "John");
 
-		Node sara = graphDb.createNode();
-		sara.setProperty("name", "Sara");
+			Node sara = graphDb.createNode();
+			sara.setProperty("name", "Sara");
 
-		Node joe = graphDb.createNode();
-		joe.setProperty("name", "Joe");
+			Node joe = graphDb.createNode();
+			joe.setProperty("name", "Joe");
 
-		Node maria = graphDb.createNode();
-		maria.setProperty("name", "Maria");
+			Node maria = graphDb.createNode();
+			maria.setProperty("name", "Maria");
 
-		Node steve = graphDb.createNode();
-		steve.setProperty("name", "Steve");
+			Node steve = graphDb.createNode();
+			steve.setProperty("name", "Steve");
 
-		john.createRelationshipTo(sara, SimpleRelTypes.FRIEND);
-		john.createRelationshipTo(joe, SimpleRelTypes.FRIEND);
-		sara.createRelationshipTo(maria, SimpleRelTypes.FRIEND);
-		joe.createRelationshipTo(steve, SimpleRelTypes.FRIEND);
+			john.createRelationshipTo(sara, SimpleRelTypes.FRIEND);
+			john.createRelationshipTo(joe, SimpleRelTypes.FRIEND);
+			sara.createRelationshipTo(maria, SimpleRelTypes.FRIEND);
+			joe.createRelationshipTo(steve, SimpleRelTypes.FRIEND);
 
-		tx.success();
-		tx.finish();
+			tx.success();
+		}
 
 		graphDb.shutdown();
 
