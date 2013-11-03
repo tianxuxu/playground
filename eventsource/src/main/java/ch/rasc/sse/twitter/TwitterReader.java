@@ -22,7 +22,7 @@ public class TwitterReader {
 
 	private final Lock writeLock = rwl.writeLock();
 
-	private final TwitterTemplate template = new TwitterTemplate();
+	private final TwitterTemplate template = new TwitterTemplate("clientToken");
 
 	private long lastReceivedId = 0;
 

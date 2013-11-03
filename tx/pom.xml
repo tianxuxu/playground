@@ -10,11 +10,11 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>3.2.4.RELEASE</spring.version>
-		<aspectj.version>1.7.3</aspectj.version>
+		<spring.version>4.0.0.RC1</spring.version>
+		<aspectj.version>1.7.4</aspectj.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
-		<hibernate.version>4.3.0.Beta5</hibernate.version>
+		<hibernate.version>4.3.0.Beta4</hibernate.version>
 		<hibernatevalidator.version>5.0.1.Final</hibernatevalidator.version>
 	</properties>
 

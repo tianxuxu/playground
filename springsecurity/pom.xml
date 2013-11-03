@@ -14,10 +14,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
 
-		<spring.version>3.2.3.RELEASE</spring.version>
-		<spring-security.version>3.2.0.M2</spring-security.version>
-		<hibernate.version>4.3.0.Beta5</hibernate.version>
-		<querydsl.version>3.2.0</querydsl.version>
+		<spring.version>4.0.0.RC1</spring.version>
+		<spring-security.version>3.2.0.RC2</spring-security.version>
+		<hibernate.version>4.3.0.Beta4</hibernate.version>
+		<querydsl.version>3.2.4</querydsl.version>
 	</properties>
 
 	<repositories>
@@ -128,7 +128,7 @@
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.core</artifactId>
-			<version>3.1.0.CR7</version>
+			<version>3.1.0.CR8</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>slf4j-api</artifactId>
@@ -182,37 +182,37 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.2</version>
+			<version>2.3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.0-beta7</version>
+			<version>2.0-beta9</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.0-beta7</version>
+			<version>2.0-beta9</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
-			<version>2.0-beta7</version>
+			<version>2.0-beta9</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.0-beta7</version>
+			<version>2.0-beta9</version>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>1.8</version>
+			<version>1.10</version>
 			<scope>provided</scope>
 		</dependency>
 
