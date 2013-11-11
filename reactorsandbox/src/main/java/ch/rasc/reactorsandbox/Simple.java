@@ -15,6 +15,7 @@ public class Simple {
 	public static void main(String[] args) throws InterruptedException {
 
 		Environment env = new Environment();
+
 		Reactor reactor = Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL).get();
 
 		Selector selector = ObjectSelector.objectSelector("parse");
@@ -29,7 +30,7 @@ public class Simple {
 		// that match the given Selector
 		reactor.notify("parse", Event.wrap("Hello World!"));
 		reactor.notify("test", Event.wrap("test"));
-		TimeUnit.MINUTES.sleep(1);
+		TimeUnit.SECONDS.sleep(20);
 
 	}
 

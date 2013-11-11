@@ -6,32 +6,82 @@
 	<version>0.0.1</version>
 
 	<prerequisites>
-		<maven>3.0.0</maven>
+		<maven>3.1.0</maven>
 	</prerequisites>
 
+	<properties>
+        <spring.version>4.0.0.RC1</spring.version>
+		<springboot.version>0.5.0.M3</springboot.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.debug>true</maven.compiler.debug>
+	</properties>
+
 	<dependencies>
+	  <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${springboot.version}</version>	    
+	  </dependency>
+	  
 		<dependency>
-			<groupId>reactor</groupId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	  	  
+		<dependency>
+			<groupId>org.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
 			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.projectreactor</groupId>
+			<artifactId>reactor-spring</artifactId>
+			<version>1.0.0.BUILD-SNAPSHOT</version>
+		</dependency>		
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+				
 	</dependencies>
 
 
 	<repositories>
 
-		<repository>
-			<id>sonatype</id>
-			<name>sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		
 		<repository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
@@ -40,7 +90,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		
+
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
@@ -48,7 +98,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>		
+		</repository>
 
 	</repositories>
 
