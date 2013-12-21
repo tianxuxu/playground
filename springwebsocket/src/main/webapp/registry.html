@@ -1,0 +1,12 @@
+<!doctype html>
+<title>WebSocket Test</title>
+<script>
+  var ws = new WebSocket('ws://localhost:8080/dispatcher/registry');
+    
+  ws.onmessage = function(event) {
+	  var result = JSON.parse(event.data);
+	  console.log('heap:'+result.heap);
+	  console.log('nonheap:'+result.nonheap);
+  };  
+  
+</script>
