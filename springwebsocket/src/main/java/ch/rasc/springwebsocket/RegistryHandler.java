@@ -24,11 +24,6 @@ public class RegistryHandler extends TextWebSocketHandler {
 		sessions.remove(session.getId());
 	}
 
-	@Override
-	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		sessions.remove(session.getId());
-	}
-
 	@Async
 	public void sendToAll(String message) {
 		TextMessage textMessage = new TextMessage(message);
