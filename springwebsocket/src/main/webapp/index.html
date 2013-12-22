@@ -6,10 +6,16 @@
   ws.onopen = function(event) {
 	  console.log('websocket connection open', event);
 	  ws.send('a message from the client');
+	  //ws.close();
   };
   
   ws.onclose = function(event) {
 	  console.log('websocket connection closed', event);
+	  if (event.wasClean) {
+		  console.log('closed normally');
+	  } else {
+		  console.log('something unexpected happened');
+	  }
   };
   
   ws.onmessage = function(event) {

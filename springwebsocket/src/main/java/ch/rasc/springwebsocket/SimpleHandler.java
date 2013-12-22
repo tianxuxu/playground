@@ -9,12 +9,12 @@ public class SimpleHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println(session.getId());
+		System.out.println("open: " + session.getId());
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println(session.getId());
+		System.out.println("close: " + session.getId());
 		System.out.println(status);
 	}
 
