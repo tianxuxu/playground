@@ -23,52 +23,34 @@
 
 	<dependencies>
 
- <!-- 		<dependency> 
+<!-- Jetty 9.1 Native WebSocket implementation -->
+<!--
+  		<dependency> 
 			<groupId>org.eclipse.jetty.websocket</groupId> 
 			<artifactId>websocket-client</artifactId> 
 			<version>9.1.0.v20131115</version> 
-		</dependency>  -->
+		</dependency>  
+-->
 		
+<!-- Jetty 9.1 JSR 356 implementation -->		
 	 	<dependency> 
 			<groupId>org.eclipse.jetty.websocket</groupId> 
 			<artifactId>javax-websocket-client-impl</artifactId> 
 			<version>9.1.0.v20131115</version> 
 		</dependency> 
 		
-		
-		
-<!-- 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-core</artifactId>		
-			<version>8.0.0-RC5</version>
-		</dependency>
- 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-logging-juli</artifactId>		
-			<version>8.0.0-RC5</version>
-		</dependency> -->		
-		
-		
-<!-- 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-core</artifactId>		
-			<version>7.0.47</version>
-		</dependency>
+<!-- Tomcat 7.0.47 -->		
+<!-- 		
 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-logging-juli</artifactId>		
-			<version>7.0.47</version>
-		</dependency> -->
-		
-		
-		
-<!-- 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat7-websocket</artifactId>
 			<version>7.0.47</version>
-		</dependency> -->		
+		</dependency> 
+-->		
 		
-<!-- 		<dependency>
+<!-- Tomcat 8.0.0-RC5 -->		
+<!-- 		
+        <dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-websocket</artifactId>
 			<version>8.0.0-RC5</version>
@@ -77,13 +59,17 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-coyote</artifactId>
 			<version>8.0.0-RC5</version>
-		</dependency> -->
+		</dependency> 
+-->
  
-<!-- 		 <dependency>
+<!-- Tyrus (Glassfish) 1.3.3 --> 
+<!-- 		 
+        <dependency>
 		    <groupId>org.glassfish.tyrus.bundles</groupId>
 		    <artifactId>tyrus-standalone-client</artifactId>
 		    <version>1.3.3</version>
-		</dependency> -->
+		</dependency> 
+-->
  
 		<dependency>
 			<groupId>org.msgpack</groupId>
