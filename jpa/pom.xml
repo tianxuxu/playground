@@ -10,12 +10,12 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.0.0.BUILD-SNAPSHOT</spring.version>
+		<spring.version>4.0.0.RELEASE</spring.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.13</logback.version>
-		<hibernate.version>4.3.0.Beta4</hibernate.version>
-		<hibernatevalidator.version>5.0.1.Final</hibernatevalidator.version>
-        <querydsl.version>3.2.4</querydsl.version>
+		<hibernate.version>4.3.0.Final</hibernate.version>
+		<hibernatevalidator.version>5.0.2.Final</hibernatevalidator.version>
+        <querydsl.version>3.3.0</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>15.0</version>
+			<version>16.0-rc1</version>
 		</dependency>
 
 
@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.4.2.RELEASE</version>			
+			<version>1.4.3.RELEASE</version>			
 		</dependency>
 
 		<dependency>

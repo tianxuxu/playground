@@ -15,13 +15,13 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>15.0</version>
+			<version>16.0-rc1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-resources</artifactId>
-			<version>2013.10</version>
+			<version>2013.11</version>
 		</dependency>
 
 		<dependency>

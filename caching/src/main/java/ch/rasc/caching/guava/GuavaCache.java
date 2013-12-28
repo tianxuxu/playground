@@ -33,6 +33,19 @@ public class GuavaCache implements Cache {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T get(Object key, Class<T> type) {
+		Optional<Object> element = this.store.getIfPresent(key);
+		
+		Object value = (element != null ? element.get() : null);
+		if (value != null && !type.isInstance(value)) {
+			throw new IllegalStateException("Cached value is not of required type [" + type.getName() + "]: " + value);
+		}		
+		return (T)value;
+	}
+
+	
+	@Override
 	public void put(Object key, Object value) {
 		this.store.put(key, Optional.fromNullable(value));
 	}
@@ -46,5 +59,6 @@ public class GuavaCache implements Cache {
 	public void clear() {
 		this.store.invalidateAll();
 	}
+
 
 }
