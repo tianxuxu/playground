@@ -1,7 +1,7 @@
 <!doctype html>
 <title>WebSocket Test</title>
 <script>
-  var ws = new WebSocket('ws://localhost:8080/dispatcher/endpoint');
+  var ws = new WebSocket('ws://'+window.location.host+'/dispatcher/endpoint');
   
   ws.onopen = function(event) {
 	  console.log('websocket connection open', event);

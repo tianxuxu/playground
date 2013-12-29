@@ -33,6 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 		registry.addHandler(simpleHandler(), "/endpoint");
 		registry.addHandler(registryHandler(), "/registry");
 		registry.addHandler(chatHandler(), "/chat");
+		registry.addHandler(chat4Handler(), "/chat4");
 		registry.addHandler(quoteHandler(), "/quotes");	
 	}
 
@@ -58,8 +59,13 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 
 	@Bean
 	public RegistryHandler chatHandler() {
-		return new ChatHandler();
+		return new ChatHandler(getAsyncExecutor());
 	}
+	
+	@Bean
+	public Chat4Handler chat4Handler() {
+		return new Chat4Handler(getAsyncExecutor());
+	}	
 
 	@Bean
 	public MemoryObserver memoryObserver() {

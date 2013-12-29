@@ -1,13 +1,27 @@
 package ch.rasc.springwebsocket;
 
+import java.util.concurrent.Executor;
+
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 public class ChatHandler extends RegistryHandler {
 
+	private final Executor asyncExecutor;
+	
+	public ChatHandler(Executor asyncExecutor) {
+		this.asyncExecutor = asyncExecutor;
+	}
+
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		sendToAll(session.getId() + " says: <strong>" + message.getPayload() + "</strong>");
+	protected void handleTextMessage(final WebSocketSession session, final TextMessage message) throws Exception {
+		asyncExecutor.execute(new Runnable() {			
+			@Override
+			public void run() {
+				sendToAll(session.getId() + " says: <strong>" + message.getPayload() + "</strong>");				
+			}
+		});
+		
 	}
 
 }
