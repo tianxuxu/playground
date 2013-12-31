@@ -52,7 +52,10 @@ public class Main {
 		sw.stop();
 		storage.clear();
 
-		int totalRuns = Integer.valueOf(args[0]);
+		int totalRuns = 500000;
+		if (args.length > 0) {
+			totalRuns = Integer.valueOf(args[0]);
+		}
 		System.out.println("Total Runs: " + totalRuns);
 		sw = new StopWatch();
 		sw.start();
