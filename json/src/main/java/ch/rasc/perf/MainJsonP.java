@@ -1,6 +1,5 @@
 package ch.rasc.perf;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -18,13 +17,11 @@ import javax.json.stream.JsonParserFactory;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.util.StopWatch;
 
-import com.fasterxml.jackson.core.JsonToken;
-
 
 
 public class MainJsonP {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		DataFactory df = new DataFactory();
 		Date today = new Date();
@@ -101,7 +98,7 @@ public class MainJsonP {
 
 	}
 
-	private static String toJson(JsonGeneratorFactory jsonFactory, User user) throws IOException {
+	private static String toJson(JsonGeneratorFactory jsonFactory, User user) {
 		StringWriter sw = new StringWriter();
 		try (JsonGenerator jg = jsonFactory.createGenerator(sw)) {
 			jg.writeStartObject();
@@ -131,7 +128,7 @@ public class MainJsonP {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonParserFactory jsonParserFactory, String json) throws IOException {
+	private static User toObject(JsonParserFactory jsonParserFactory, String json) {
 		User user = new User();
 
 		try (JsonParser parser = jsonParserFactory.createParser(new StringReader(json))) {
