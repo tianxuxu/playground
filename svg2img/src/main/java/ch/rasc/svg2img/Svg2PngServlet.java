@@ -15,6 +15,7 @@ import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.fop.svg.PDFTranscoder;
 
 @WebServlet(urlPatterns = "/svg2png")
 public class Svg2PngServlet extends HttpServlet {
@@ -27,11 +28,17 @@ public class Svg2PngServlet extends HttpServlet {
 
 		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");
+		if (request.getParameter("pdf") != null) {
+			type = "application/pdf";
+		}
 
 		String postfix;
 		if ("image/jpeg".equals(type)) {
 			response.setContentType("image/jpeg");
 			postfix = "jpg";
+		} else if ("application/pdf".equals(type)) {
+			response.setContentType("application/pdf");
+			postfix = "pdf";
 		} else {
 			response.setContentType("image/png");
 			postfix = "png";
@@ -48,6 +55,8 @@ public class Svg2PngServlet extends HttpServlet {
 					JPEGTranscoder jpegTranscoder = new JPEGTranscoder();
 					jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 1F);
 					jpegTranscoder.transcode(input, output);
+				} else if ("application/pdf".equals(type)) {
+					new PDFTranscoder().transcode(input, output);
 				} else {
 					new PNGTranscoder().transcode(input, output);
 				}
@@ -56,6 +65,5 @@ public class Svg2PngServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-
 	}
 }

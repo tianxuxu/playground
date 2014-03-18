@@ -65,9 +65,9 @@ Ext.onReady(function() {
 		renderTo: Ext.getBody(),
 		layout: 'fit',
 		tbar: [ {
-			text: 'Save Chart',
+			text: 'Save Chart as JPEG',
 			handler: function() {
-				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice) {
+				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as a JPEG image?', function(choice) {
 					if (choice == 'yes') {
 						chart.save({
 							type: 'image/jpeg'
@@ -75,6 +75,42 @@ Ext.onReady(function() {
 					}
 				});
 			}
+		}, {
+			text: 'Save Chart as PNG',
+			handler: function() {
+				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as a PNG image?', function(choice) {
+					if (choice == 'yes') {
+						chart.save({
+							type: 'image/png'
+						});
+					}
+				});
+			}		
+		}, {
+			text: 'Save Chart as PDF',
+			handler: function() {
+				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as a PDF?', function(choice) {
+					if (choice == 'yes') {
+						console.log('save');
+						chart.save({
+							type: 'image/png',
+							url: 'svg2png?pdf=true'
+						});
+					}
+				});
+			}		
+		}, {
+			text: 'Save Chart as SVG',
+			handler: function() {
+				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as SVG + XML?', function(choice) {
+					if (choice === 'yes') {
+						var svg = chart.save({
+							type: 'image/svg+xml'
+						});
+						window.open("data:image/svg+xml," + encodeURIComponent(svg));
+					}
+				});
+			}				
 		}, {
 			text: 'Reload Data',
 			handler: function() {
