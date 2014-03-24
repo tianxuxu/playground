@@ -40,7 +40,7 @@ public class Backup {
 				UploadResult result = atm.upload(vaultName, encryptedFileToBackup, encryptedPath.toFile());
 				System.out.println("Archive ID: " + result.getArchiveId());
 
-				DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown().asyncWriteDisable().make();
+				DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown().make();
 				ConcurrentNavigableMap<Long, String> files = db.getTreeMap("glacier");
 
 				files.put(System.currentTimeMillis(), result.getArchiveId() + ";" + encryptedFileToBackup);

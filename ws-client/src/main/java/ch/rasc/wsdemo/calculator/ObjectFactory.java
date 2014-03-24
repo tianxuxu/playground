@@ -14,7 +14,7 @@ import javax.xml.namespace.QName;
  * can consist of schema derived interfaces and classes representing the binding
  * of schema type definitions, element declarations and model groups. Factory
  * methods for each of these are provided in this class.
- * 
+ *
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -38,14 +38,14 @@ public class ObjectFactory {
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of
 	 * schema derived classes for package: ch.rasc.wsdemo.calculator
-	 * 
+	 *
 	 */
 	public ObjectFactory() {
 	}
 
 	/**
 	 * Create an instance of {@link AddResponse }
-	 * 
+	 *
 	 */
 	public AddResponse createAddResponse() {
 		return new AddResponse();
@@ -53,7 +53,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link DivideResponse }
-	 * 
+	 *
 	 */
 	public DivideResponse createDivideResponse() {
 		return new DivideResponse();
@@ -61,7 +61,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link Divide }
-	 * 
+	 *
 	 */
 	public Divide createDivide() {
 		return new Divide();
@@ -69,7 +69,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link MultiplyResponse }
-	 * 
+	 *
 	 */
 	public MultiplyResponse createMultiplyResponse() {
 		return new MultiplyResponse();
@@ -77,7 +77,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link Subtract }
-	 * 
+	 *
 	 */
 	public Subtract createSubtract() {
 		return new Subtract();
@@ -85,7 +85,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link SubtractResponse }
-	 * 
+	 *
 	 */
 	public SubtractResponse createSubtractResponse() {
 		return new SubtractResponse();
@@ -93,7 +93,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link Add }
-	 * 
+	 *
 	 */
 	public Add createAdd() {
 		return new Add();
@@ -101,7 +101,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link Multiply }
-	 * 
+	 *
 	 */
 	public Multiply createMultiply() {
 		return new Multiply();
@@ -110,7 +110,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link Subtract }
 	 * {@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "subtract")
 	public JAXBElement<Subtract> createSubtract(Subtract value) {
@@ -120,7 +120,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }
 	 * {@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "addResponse")
 	public JAXBElement<AddResponse> createAddResponse(AddResponse value) {
@@ -130,7 +130,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}
 	 * {@link MultiplyResponse }{@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "multiplyResponse")
 	public JAXBElement<MultiplyResponse> createMultiplyResponse(MultiplyResponse value) {
@@ -139,7 +139,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link Divide }{@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "divide")
 	public JAXBElement<Divide> createDivide(Divide value) {
@@ -149,7 +149,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link Multiply }
 	 * {@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "multiply")
 	public JAXBElement<Multiply> createMultiply(Multiply value) {
@@ -158,7 +158,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "add")
 	public JAXBElement<Add> createAdd(Add value) {
@@ -168,7 +168,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link DivideResponse }
 	 * {@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "divideResponse")
 	public JAXBElement<DivideResponse> createDivideResponse(DivideResponse value) {
@@ -178,7 +178,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}
 	 * {@link SubtractResponse }{@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "subtractResponse")
 	public JAXBElement<SubtractResponse> createSubtractResponse(SubtractResponse value) {

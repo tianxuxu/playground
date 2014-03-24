@@ -11,6 +11,6 @@ public class StartTomcat {
 		skipJars += "tomcat-*.jar;ecj-*.jar;h2*.jar";
 
 		EmbeddedTomcat.create().skipJarsDefaultJarScanner(skipJars).setContextFile("./src/main/config/tomcat.xml")
-				.startAndWait();
+		.startAndWait();
 	}
 }

@@ -4,7 +4,7 @@ package dustin.examples;
  * Simple employee class using NetBeans-generated 'common' methods
  * implementations that are typical of many such implementations created without
  * Guava or other library.
- * 
+ *
  * @author Dustin
  */
 public class TraditionalEmployee {
@@ -22,7 +22,7 @@ public class TraditionalEmployee {
 
 	/**
 	 * Create an instance of me.
-	 * 
+	 *
 	 * @param newLastName The new last name my instance will have.
 	 * @param newFirstName The new first name my instance will have.
 	 * @param newEmployerName The employer name my instance will have.
@@ -54,7 +54,7 @@ public class TraditionalEmployee {
 	/**
 	 * NetBeans-generated method that compares provided object to me for
 	 * equality.
-	 * 
+	 *
 	 * @param obj Object to be compared to me for equality.
 	 * @return {@code true} if provided object is considered equal to me or
 	 *         {@code false} if provided object is not considered equal to me.
@@ -86,7 +86,7 @@ public class TraditionalEmployee {
 	/**
 	 * NetBeans-generated method that provides hash code of this employee
 	 * instance.
-	 * 
+	 *
 	 * @return My hash code.
 	 */
 	@Override
@@ -102,7 +102,7 @@ public class TraditionalEmployee {
 	/**
 	 * NetBeans-generated method that provides String representation of employee
 	 * instance.
-	 * 
+	 *
 	 * @return My String representation.
 	 */
 	@Override

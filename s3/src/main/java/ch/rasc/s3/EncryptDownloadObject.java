@@ -18,7 +18,7 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 
 public class EncryptDownloadObject {
 	public static void main(String[] args) throws AmazonServiceException, AmazonClientException,
-			NoSuchAlgorithmException, InvalidKeySpecException {
+	NoSuchAlgorithmException, InvalidKeySpecException {
 		if (args.length == 6) {
 			String password = args[2];
 

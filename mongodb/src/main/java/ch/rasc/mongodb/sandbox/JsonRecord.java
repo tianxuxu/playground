@@ -25,7 +25,7 @@ public class JsonRecord {
 
 		@Override
 		public void serialize(List<String> value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-				JsonProcessingException {
+		JsonProcessingException {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");

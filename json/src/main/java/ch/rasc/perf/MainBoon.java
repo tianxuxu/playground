@@ -1,24 +1,22 @@
 package ch.rasc.perf;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.boon.json.JsonFactory;
+import org.boon.json.ObjectMapper;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.util.StopWatch;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
+public class MainBoon {
 
-public class Main {
-
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		DataFactory df = new DataFactory();
 		Date today = new Date();
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new AfterburnerModule());
+
+		ObjectMapper objectMapper = JsonFactory.create();
 
 		// warm up
 		StopWatch sw = new StopWatch();

@@ -21,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 
+import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
@@ -36,6 +37,7 @@ import com.twitter.hbc.httpclient.auth.OAuth1;
 import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 import com.twitter.hbc.twitter4j.handler.StatusStreamHandler;
 import com.twitter.hbc.twitter4j.message.DisconnectMessage;
+import com.twitter.hbc.twitter4j.message.StallWarningMessage;
 
 public class Twitter4jSampleStreamExample {
 
@@ -95,6 +97,16 @@ public class Twitter4jSampleStreamExample {
 		@Override
 		public void onUnknownMessageType(String s) {
 			// nothing here
+		}
+
+		@Override
+		public void onStallWarning(StallWarning stallWarning) {
+			System.out.println(stallWarning.toString());
+		}
+
+		@Override
+		public void onStallWarningMessage(StallWarningMessage stallWarning) {
+			System.out.println(stallWarning.toString());
 		}
 	};
 

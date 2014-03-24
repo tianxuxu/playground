@@ -8,12 +8,12 @@ import org.springframework.web.socket.handler.BinaryWebSocketHandler;
 public class ClientWebSocketHandler extends BinaryWebSocketHandler {
 
 	private final MessagePack msgpack;
-	
+
 	public ClientWebSocketHandler() {
 		msgpack = new MessagePack();
-        msgpack.register(Quote.class);
+		msgpack.register(Quote.class);
 	}
-	
+
 	@Override
 	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
 		Quote[] dst = msgpack.read(message.getPayload(), Quote[].class);

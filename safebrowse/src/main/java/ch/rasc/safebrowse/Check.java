@@ -44,8 +44,8 @@ public class Check {
 
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme("https").setHost("sb-ssl.google.com").setPath("/safebrowsing/api/lookup")
-				.setParameter("client", "simplecli").setParameter("apikey", args[0]).setParameter("appver", "1.0.0")
-				.setParameter("pver", "3.0");
+		.setParameter("client", "simplecli").setParameter("apikey", args[0]).setParameter("appver", "1.0.0")
+		.setParameter("pver", "3.0");
 		URI uri = builder.build();
 		HttpPost httppost = new HttpPost(uri);
 

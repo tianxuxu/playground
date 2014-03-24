@@ -22,7 +22,7 @@ import com.amazonaws.services.s3.transfer.Upload;
 
 public class EncryptUploadObject {
 	public static void main(String[] args) throws AmazonServiceException, AmazonClientException,
-			NoSuchAlgorithmException, InvalidKeySpecException {
+	NoSuchAlgorithmException, InvalidKeySpecException {
 		if (args.length == 5) {
 			String password = args[2];
 

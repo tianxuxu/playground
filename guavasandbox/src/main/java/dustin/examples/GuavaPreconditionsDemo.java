@@ -9,7 +9,7 @@ import static java.lang.System.err;
 
 /**
  * Simple demonstration of Guava's Preconditions support.
- * 
+ *
  * @author Dustin
  */
 public class GuavaPreconditionsDemo {
@@ -17,7 +17,7 @@ public class GuavaPreconditionsDemo {
 
 	/**
 	 * Demonstrate Guava's Preconditions.checkNotNull methods.
-	 * 
+	 *
 	 * @param parameter Parameter that is checked for null-ness.
 	 */
 	public void testForNonNullArgument(String parameter) {

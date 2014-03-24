@@ -13,7 +13,7 @@ public class FioFlagUnitDeserializer extends JsonDeserializer<FioFlagUnit> {
 
 	@Override
 	public FioFlagUnit deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
-			JsonProcessingException {
+	JsonProcessingException {
 		return FioFlagUnit.findByJsonValue(jp.getText());
 	}
 

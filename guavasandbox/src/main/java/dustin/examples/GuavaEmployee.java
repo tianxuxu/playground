@@ -2,10 +2,10 @@ package dustin.examples;
 
 /**
  * Simple employee class using Guava-powered 'common' methods implementations.
- * 
+ *
  * I explicitly scope the com.google.common.base.Objects class here to avoid the
  * inherent name collision with the java.util.Objects class.
- * 
+ *
  * @author Dustin
  */
 public class GuavaEmployee {
@@ -23,7 +23,7 @@ public class GuavaEmployee {
 
 	/**
 	 * Create an instance of me.
-	 * 
+	 *
 	 * @param newLastName The new last name my instance will have.
 	 * @param newFirstName The new first name my instance will have.
 	 * @param newEmployerName The employer name my instance will have.
@@ -55,7 +55,7 @@ public class GuavaEmployee {
 
 	/**
 	 * Using Guava to compare provided object to me for equality.
-	 * 
+	 *
 	 * @param obj Object to be compared to me for equality.
 	 * @return {@code true} if provided object is considered equal to me or
 	 *         {@code false} if provided object is not considered equal to me.
@@ -78,7 +78,7 @@ public class GuavaEmployee {
 
 	/**
 	 * Uses Guava to assist in providing hash code of this employee instance.
-	 * 
+	 *
 	 * @return My hash code.
 	 */
 	@Override
@@ -89,7 +89,7 @@ public class GuavaEmployee {
 	/**
 	 * Method using Guava to provide String representation of this employee
 	 * instance.
-	 * 
+	 *
 	 * @return My String representation.
 	 */
 	@Override

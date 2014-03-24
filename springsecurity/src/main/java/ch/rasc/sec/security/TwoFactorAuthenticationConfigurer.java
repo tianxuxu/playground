@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class TwoFactorAuthenticationConfigurer extends
-		UserDetailsAwareConfigurer<AuthenticationManagerBuilder, UserDetailsService> {
+UserDetailsAwareConfigurer<AuthenticationManagerBuilder, UserDetailsService> {
 
 	private TwoFactorAuthenticationProvider provider = new TwoFactorAuthenticationProvider();
 

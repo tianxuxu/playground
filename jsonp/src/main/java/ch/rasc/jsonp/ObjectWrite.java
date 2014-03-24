@@ -21,9 +21,9 @@ public class ObjectWrite {
 				.add("postalCode", "12345")
 				.add("phoneNumbers",
 						Json.createArrayBuilder()
-								.add(Json.createObjectBuilder().add("type", "mobile").add("number", "111-111-1111"))
-								.add(Json.createObjectBuilder().add("type", "home").add("number", "222-222-2222")))
-				.build();
+						.add(Json.createObjectBuilder().add("type", "mobile").add("number", "111-111-1111"))
+						.add(Json.createObjectBuilder().add("type", "home").add("number", "222-222-2222")))
+						.build();
 
 		Map<String, Boolean> properties = Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true);
 		try (JsonWriter writer = Json.createWriterFactory(properties).createWriter(System.out)) {

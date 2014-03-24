@@ -17,16 +17,15 @@ import javax.json.stream.JsonParserFactory;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.util.StopWatch;
 
-
-
 public class MainJsonP {
 
 	public static void main(String[] args) {
 
 		DataFactory df = new DataFactory();
 		Date today = new Date();
-		JsonGeneratorFactory jsonGeneratorFactory = Json.createGeneratorFactory(Collections.<String,Object>emptyMap());
-		JsonParserFactory jsonParserFactory = Json.createParserFactory(Collections.<String,Object>emptyMap());
+		JsonGeneratorFactory jsonGeneratorFactory = Json
+				.createGeneratorFactory(Collections.<String, Object> emptyMap());
+		JsonParserFactory jsonParserFactory = Json.createParserFactory(Collections.<String, Object> emptyMap());
 
 		// warm up
 		StopWatch sw = new StopWatch();

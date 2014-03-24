@@ -20,7 +20,7 @@ public class TTLCollectionTest {
 		// TTL Index
 		BasicDBObject index = new BasicDBObject("date", 1);
 		BasicDBObject options = new BasicDBObject("expireAfterSeconds", TimeUnit.MINUTES.toSeconds(1));
-		collection.ensureIndex(index, options);
+		collection.createIndex(index, options);
 
 		// for (int j = 0; j < 10; j++) {
 		// BasicDBObject logMessage = new BasicDBObject();

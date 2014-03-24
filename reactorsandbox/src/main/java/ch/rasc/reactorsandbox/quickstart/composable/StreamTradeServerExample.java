@@ -84,7 +84,7 @@ public class StreamTradeServerExample {
 		startTime = System.currentTimeMillis();
 	}
 
-	private static void endTimer() throws InterruptedException {
+	private static void endTimer() {
 		endTime = System.currentTimeMillis();
 		elapsed = (endTime - startTime) * 1.0;
 		throughput = totalTrades / (elapsed / 1000);

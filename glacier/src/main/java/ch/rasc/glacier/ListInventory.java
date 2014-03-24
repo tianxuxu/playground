@@ -10,7 +10,7 @@ import org.mapdb.DBMaker;
 public class ListInventory {
 
 	public static void main(String[] args) {
-		DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown().asyncWriteDisable().make();
+		DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown().make();
 		ConcurrentNavigableMap<Long, String> files = db.getTreeMap("glacier");
 
 		for (Long ts : files.keySet()) {

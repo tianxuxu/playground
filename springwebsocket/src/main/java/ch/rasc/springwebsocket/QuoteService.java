@@ -23,15 +23,15 @@ public class QuoteService {
 	private final Map<String, String> prices = new ConcurrentHashMap<>();
 
 	private final QuoteHandler quoteHandler;
-	
+
 	private final MessagePack msgpack;
-	
+
 	public QuoteService(QuoteHandler quoteHandler) {
 		this.quoteHandler = quoteHandler;
-		
+
 		msgpack = new MessagePack();
-        msgpack.register(Quote.class);
-		
+		msgpack.register(Quote.class);
+
 		this.prices.put("CTXS", "24.30");
 		this.prices.put("DELL", "13.03");
 		this.prices.put("EMC", "24.13");
@@ -59,11 +59,10 @@ public class QuoteService {
 		BigDecimal priceChange = new BigDecimal(String.valueOf(this.random.nextDouble() * range), mathContext);
 		return seedPrice.add(priceChange);
 	}
-	
+
 	@Scheduled(fixedDelay = 1000)
 	public void sendQuotes() throws IOException {
 		quoteHandler.sendToAll(msgpack.write(generateQuotes()));
 	}
-
 
 }

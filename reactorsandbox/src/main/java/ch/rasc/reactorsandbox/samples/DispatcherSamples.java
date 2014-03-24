@@ -18,8 +18,6 @@ import reactor.event.Event;
 import reactor.event.selector.Selector;
 import reactor.function.Consumer;
 import reactor.function.support.Boundary;
-import reactor.spring.context.config.EnableReactor;
-import reactor.tuple.Tuple2;
 
 /**
  * @author Jon Brisbin
@@ -49,13 +47,13 @@ public class DispatcherSamples implements CommandLineRunner {
 		Boundary b = new Boundary();
 
 		// Bind to a Selector using an anonymous object
-		Tuple2<Selector, Object> anon = $();
+		Selector anon = $();
 
-		threadPoolReactor.on(anon.getT1(), b.bind(consumer, 3));
+		threadPoolReactor.on(anon, b.bind(consumer, 3));
 
-		threadPoolReactor.notify(anon.getT2(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getT2(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getT2(), Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon, Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon, Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon, Event.wrap(threadPoolReactor));
 
 		b.await();
 	}
@@ -67,17 +65,17 @@ public class DispatcherSamples implements CommandLineRunner {
 		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.EVENT_LOOP).get();
 
 		// Bind to a Selector using an anonymous object
-		Tuple2<Selector, Object> anon = $();
+		Selector anon = $();
 
-		r1.on(anon.getT1(), b.bind(consumer, 3));
-		r2.on(anon.getT1(), b.bind(consumer, 2));
+		r1.on(anon, b.bind(consumer, 3));
+		r2.on(anon, b.bind(consumer, 2));
 
-		r1.notify(anon.getT2(), Event.wrap(r1));
-		r1.notify(anon.getT2(), Event.wrap(r1));
-		r1.notify(anon.getT2(), Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
 
-		r2.notify(anon.getT2(), Event.wrap(r2));
-		r2.notify(anon.getT2(), Event.wrap(r2));
+		r2.notify(anon, Event.wrap(r2));
+		r2.notify(anon, Event.wrap(r2));
 
 		b.await();
 	}
@@ -89,17 +87,17 @@ public class DispatcherSamples implements CommandLineRunner {
 		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
 
 		// Bind to a Selector using an anonymous object
-		Tuple2<Selector, Object> anon = $();
+		Selector anon = $();
 
-		r1.on(anon.getT1(), b.bind(consumer, 3));
-		r2.on(anon.getT1(), b.bind(consumer, 2));
+		r1.on(anon, b.bind(consumer, 3));
+		r2.on(anon, b.bind(consumer, 2));
 
-		r1.notify(anon.getT2(), Event.wrap(r1));
-		r1.notify(anon.getT2(), Event.wrap(r1));
-		r1.notify(anon.getT2(), Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
+		r1.notify(anon, Event.wrap(r1));
 
-		r2.notify(anon.getT2(), Event.wrap(r2));
-		r2.notify(anon.getT2(), Event.wrap(r2));
+		r2.notify(anon, Event.wrap(r2));
+		r2.notify(anon, Event.wrap(r2));
 
 		b.await();
 	}

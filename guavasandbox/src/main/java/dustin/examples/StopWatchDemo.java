@@ -10,7 +10,7 @@ import com.google.common.base.Stopwatch;
 
 /**
  * Demonstrates Guava's (Release 10) Stopwatch class.
- * 
+ *
  * @author Dustin
  */
 public class StopWatchDemo {
@@ -29,7 +29,7 @@ public class StopWatchDemo {
 	/**
 	 * Print statistics on Stopwatch-reported times for provided number of
 	 * loops.
-	 * 
+	 *
 	 * @param numberLoops Number of loops executed.
 	 * @param stopwatch Stopwatch instance with time used statistics.
 	 */

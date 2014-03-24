@@ -24,7 +24,7 @@ public class ListObjects {
 				objectListing = client.listObjects(listObjectsRequest);
 				for (S3ObjectSummary summary : objectListing.getObjectSummaries()) {
 					System.out
-							.printf("%-30s %10d %s\n", summary.getKey(), summary.getSize(), summary.getStorageClass());
+					.printf("%-30s %10d %s\n", summary.getKey(), summary.getSize(), summary.getStorageClass());
 				}
 
 				listObjectsRequest.setMarker(objectListing.getNextMarker());

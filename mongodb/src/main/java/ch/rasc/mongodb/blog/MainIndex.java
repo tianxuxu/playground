@@ -20,7 +20,7 @@ public class MainIndex {
 		DBCollection collection = db.getCollection("users");
 
 		BasicDBObject index = new BasicDBObject("username", 1);
-		collection.ensureIndex(index);
+		collection.createIndex(index);
 		// collection.dropIndex(index);
 
 		BasicDBObject query = new BasicDBObject();

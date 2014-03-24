@@ -14,7 +14,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Demonstrate use of Guava's Optional class.
- * 
+ *
  * @author Dustin
  */
 public class GuavaOptional {
@@ -40,7 +40,7 @@ public class GuavaOptional {
 	 * Guava's Optional.fromNullable(T) to ensure that a non-null Optional
 	 * instance is always returned with a non-null contained reference or
 	 * without a contained reference.
-	 * 
+	 *
 	 * @param stateName State whose capital is desired.
 	 * @return Instance of Optional possibly containing the capital
 	 *         corresponding to provided the state name, if available.
@@ -51,7 +51,7 @@ public class GuavaOptional {
 
 	/**
 	 * Provide quotient resulting from dividing dividend by divisor.
-	 * 
+	 *
 	 * @param dividend Dividend used in division.
 	 * @param divisor Divisor used in division.
 	 * @return Optional wrapper potentially containing Quotient from dividing
@@ -73,7 +73,7 @@ public class GuavaOptional {
 
 	/**
 	 * Main function for demonstrating Guava's optional class.
-	 * 
+	 *
 	 * @param arguments Command-line arguments; none expected.
 	 */
 	public static void main(String[] arguments) {

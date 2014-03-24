@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base32;
 public class GoogleAuthenticatorUtil {
 
 	public static boolean verifyCode(String secret, int code, int variance) throws InvalidKeyException,
-			NoSuchAlgorithmException {
+	NoSuchAlgorithmException {
 		long timeIndex = System.currentTimeMillis() / 1000 / 30;
 		byte[] secretBytes = new Base32().decode(secret);
 		for (int i = -variance; i <= variance; i++) {

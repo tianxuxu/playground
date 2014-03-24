@@ -24,7 +24,7 @@ public class Svg2PngServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	IOException {
 
 		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");

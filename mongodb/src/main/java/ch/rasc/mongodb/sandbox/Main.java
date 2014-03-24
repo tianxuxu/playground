@@ -63,8 +63,8 @@ public class Main {
 		}
 
 		DBObject query = (DBObject) JSON.parse("{'username': 'johnd'}"); // new
-																			// BasicDBObject("username",
-																			// "johnd");
+		// BasicDBObject("username",
+		// "johnd");
 		BasicDBObject keys = new BasicDBObject("username", 1);
 		keys.append("password", 1);
 		// 1 = nur diese keys zurückliefern

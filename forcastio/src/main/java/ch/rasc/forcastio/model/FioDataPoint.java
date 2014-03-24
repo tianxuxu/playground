@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * representing the weather phenomena that will occur over the entire day. For
  * precipitation fields, this aggregate is a maximum; for other fields, it is an
  * average.
- * 
+ *
  */
 public class FioDataPoint {
 

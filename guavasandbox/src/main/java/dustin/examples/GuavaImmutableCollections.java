@@ -17,13 +17,13 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * Class that demonstrates Guava's support of immutable collections.
- * 
+ *
  * @author Dustin
  */
 public class GuavaImmutableCollections {
 	/**
 	 * Build a sample set to be used in demonstrations.
-	 * 
+	 *
 	 * @return Sample set of Strings.
 	 */
 	public Set<String> buildUnderlyingSampleSet() {
@@ -36,7 +36,7 @@ public class GuavaImmutableCollections {
 
 	/**
 	 * Build a sample list to be used in demonstrations.
-	 * 
+	 *
 	 * @return Sample list of Strings.
 	 */
 	public List<String> buildUnderlyingSampleList() {
@@ -163,7 +163,7 @@ public class GuavaImmutableCollections {
 	/**
 	 * Write a separation header to standard output that includes provided
 	 * header text.
-	 * 
+	 *
 	 * @param headerText Text to be used in separation header.
 	 */
 	public static void printHeader(String headerText) {
@@ -174,7 +174,7 @@ public class GuavaImmutableCollections {
 
 	/**
 	 * Main function to demonstrate Guava's immutable collections support.
-	 * 
+	 *
 	 * @param arguments Command-line arguments; none expected.
 	 */
 	public static void main(String[] arguments) {

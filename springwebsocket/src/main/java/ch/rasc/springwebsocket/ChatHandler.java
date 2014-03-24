@@ -8,20 +8,20 @@ import org.springframework.web.socket.WebSocketSession;
 public class ChatHandler extends RegistryHandler {
 
 	private final Executor asyncExecutor;
-	
+
 	public ChatHandler(Executor asyncExecutor) {
 		this.asyncExecutor = asyncExecutor;
 	}
 
 	@Override
 	protected void handleTextMessage(final WebSocketSession session, final TextMessage message) throws Exception {
-		asyncExecutor.execute(new Runnable() {			
+		asyncExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
-				sendToAll(session.getId() + " says: <strong>" + message.getPayload() + "</strong>");				
+				sendToAll(session.getId() + " says: <strong>" + message.getPayload() + "</strong>");
 			}
 		});
-		
+
 	}
 
 }

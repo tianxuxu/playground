@@ -89,7 +89,7 @@ public class Backup {
 			if (username != null) {
 				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
 				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url)
-						.setDirectory(repoDir.toFile()).call();
+				.setDirectory(repoDir.toFile()).call();
 			} else {
 				Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
 			}

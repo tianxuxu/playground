@@ -67,7 +67,7 @@ public class ModelFieldBean {
 	private final static class ModelTypeSerializer extends JsonSerializer<ModelType> {
 		@Override
 		public void serialize(ModelType value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-				JsonProcessingException {
+		JsonProcessingException {
 			jgen.writeString(value.getJsName());
 
 		}

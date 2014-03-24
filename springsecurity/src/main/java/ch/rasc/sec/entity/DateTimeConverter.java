@@ -14,7 +14,7 @@ import org.joda.time.format.DateTimeFormatterBuilder;
 public class DateTimeConverter implements AttributeConverter<DateTime, Timestamp> {
 
 	private static final DateTimeFormatter DATETIME_FORMATTER = new DateTimeFormatterBuilder()
-			.appendPattern("yyyy-MM-dd HH:mm:ss'.'").appendFractionOfSecond(0, 9).toFormatter();
+	.appendPattern("yyyy-MM-dd HH:mm:ss'.'").appendFractionOfSecond(0, 9).toFormatter();
 
 	@Override
 	public Timestamp convertToDatabaseColumn(DateTime value) {

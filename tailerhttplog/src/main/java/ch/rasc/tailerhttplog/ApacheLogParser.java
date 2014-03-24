@@ -30,7 +30,7 @@ public class ApacheLogParser {
 
 	/**
 	 * Structures Apache combined access log
-	 * 
+	 *
 	 * @return regex
 	 */
 	static String getAccessLogRegex() {
@@ -49,7 +49,7 @@ public class ApacheLogParser {
 
 	/**
 	 * Writes the URLs file to HASHMAP
-	 * 
+	 *
 	 * @param filePath : the file which holds the URLS
 	 * @return hashMap<int,String>
 	 * @throws IOException
@@ -74,7 +74,7 @@ public class ApacheLogParser {
 
 	/**
 	 * Converts any formated date to epoch
-	 * 
+	 *
 	 * @param dateFormmat : eg. yyy-MM-dd
 	 * @param date : it should which fits dateFormmat criteria
 	 * @return long : epoch representation
@@ -91,7 +91,7 @@ public class ApacheLogParser {
 	 * 1. Requester IP <br>
 	 * 2. Date of Request <br>
 	 * 3. Requested Page Path
-	 * 
+	 *
 	 * @param String accessFilePath
 	 * @param String urlsFilePath
 	 * @param String startingDate

@@ -25,7 +25,7 @@ public class SpringConfig {
 		config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
 
 		config.getNetworkConfig().getJoin().getTcpIpConfig()
-				.setMembers(ImmutableList.of("192.168.20.153", "192.168.20.150")).setEnabled(true);
+		.setMembers(ImmutableList.of("192.168.20.153", "192.168.20.150")).setEnabled(true);
 
 		return Hazelcast.newHazelcastInstance(config);
 

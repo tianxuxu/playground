@@ -16,8 +16,6 @@ import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
 import reactor.event.Event;
-import reactor.spring.annotation.Selector;
-import reactor.spring.context.config.EnableReactor;
 
 /**
  * @author Jon Brisbin

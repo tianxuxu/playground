@@ -12,13 +12,13 @@ import com.google.common.collect.Collections2;
 /**
  * Class whose sole reason for existence is to demonstrate Guava's Collections2
  * class.
- * 
+ *
  * @author Dustin
  */
 public class GuavaCollections2 {
 	/**
 	 * Provides a Set of Strings.
-	 * 
+	 *
 	 * @return Set of strings representing some programming languages.
 	 */
 	private static Set<String> buildSetStrings() {
@@ -74,7 +74,7 @@ public class GuavaCollections2 {
 
 	/**
 	 * Print a separation header including the provided text.
-	 * 
+	 *
 	 * @param headerText Text to be included in separation header.
 	 */
 	private static void printHeader(String headerText) {
@@ -85,7 +85,7 @@ public class GuavaCollections2 {
 
 	/**
 	 * Main function for demonstrating Guava's Collections2 class.
-	 * 
+	 *
 	 * @param arguments
 	 */
 	public static void main(String[] arguments) {

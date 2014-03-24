@@ -136,7 +136,7 @@ public class CloudEncryptor {
 	}
 
 	public static void main(String[] args) throws DecoderException, NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeyException {
+	InvalidKeyException {
 
 		String key = "626dce2ee1195e24541f4f0e063e911e";
 

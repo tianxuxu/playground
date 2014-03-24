@@ -35,7 +35,7 @@ public class RawTextImporter implements TextImporter {
 		// ohne Index: 181217 ms
 		// mit Index: 8140 ms
 		BasicDBObject indexes = new BasicDBObject("word1", 1).append("word2", 1);
-		collection.ensureIndex(indexes);
+		collection.createIndex(indexes);
 
 		for (int i = 0; i < words.size() - 3; i++) {
 			String w1 = words.get(i);

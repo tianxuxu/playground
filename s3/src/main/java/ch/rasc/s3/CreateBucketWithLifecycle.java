@@ -28,8 +28,8 @@ public class CreateBucketWithLifecycle {
 
 			Transition transToArchive = new Transition().withDays(transferDays).withStorageClass(StorageClass.Glacier);
 			BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
-					.withId("Archive and delete rule").withPrefix("").withTransition(transToArchive)
-					.withExpirationInDays(expirationDays).withStatus(BucketLifecycleConfiguration.ENABLED.toString());
+			.withId("Archive and delete rule").withPrefix("").withTransition(transToArchive)
+			.withExpirationInDays(expirationDays).withStatus(BucketLifecycleConfiguration.ENABLED.toString());
 
 			List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<>();
 			rules.add(ruleArchiveAndExpire);

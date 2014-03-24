@@ -79,7 +79,7 @@ public class StartJetty {
 		}
 
 		public MavenWebInfConfiguration(List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
-				SAXException, IOException {
+		SAXException, IOException {
 			File homeDir = new File(System.getProperty("user.home"));
 
 			jars = new ArrayList<>();

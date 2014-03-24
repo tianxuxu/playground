@@ -14,7 +14,7 @@ import javax.xml.namespace.QName;
  * can consist of schema derived interfaces and classes representing the binding
  * of schema type definitions, element declarations and model groups. Factory
  * methods for each of these are provided in this class.
- * 
+ *
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -26,14 +26,14 @@ public class ObjectFactory {
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of
 	 * schema derived classes for package: ch.rasc.wsdemo.helloworld
-	 * 
+	 *
 	 */
 	public ObjectFactory() {
 	}
 
 	/**
 	 * Create an instance of {@link SayHi }
-	 * 
+	 *
 	 */
 	public SayHi createSayHi() {
 		return new SayHi();
@@ -41,7 +41,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link SayHiResponse }
-	 * 
+	 *
 	 */
 	public SayHiResponse createSayHiResponse() {
 		return new SayHiResponse();
@@ -50,7 +50,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link SayHiResponse }
 	 * {@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHiResponse")
 	public JAXBElement<SayHiResponse> createSayHiResponse(SayHiResponse value) {
@@ -59,7 +59,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link SayHi }{@code >}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHi")
 	public JAXBElement<SayHi> createSayHi(SayHi value) {
