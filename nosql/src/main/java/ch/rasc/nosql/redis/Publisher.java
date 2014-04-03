@@ -7,12 +7,13 @@ import redis.clients.jedis.Jedis;
 public class Publisher {
 
 	public static void main(String[] args) throws InterruptedException {
-		Jedis jedis = new Jedis("192.168.20.166");
+		try (Jedis jedis = new Jedis("192.168.20.166")) {
 
-		for (int i = 0; i < 10; i++) {
-			System.out.println("Publish: " + i);
-			jedis.publish("channel1", String.valueOf(i));
-			TimeUnit.SECONDS.sleep(1);
+			for (int i = 0; i < 10; i++) {
+				System.out.println("Publish: " + i);
+				jedis.publish("channel1", String.valueOf(i));
+				TimeUnit.SECONDS.sleep(1);
+			}
 		}
 
 	}

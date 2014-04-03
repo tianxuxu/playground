@@ -7,6 +7,7 @@ import ch.rasc.jpa.service.EmployeeService;
 
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);

@@ -24,9 +24,13 @@ public class TweetArchiver {
 
 		DBCollection collection = db.getCollection("tweets");
 		collection.drop();
-		collection.ensureIndex(new BasicDBObject("id", 1), null, true);
 
-		Twitter twitter = new TwitterTemplate();
+		DBObject options = new BasicDBObject();
+		options.put("unique", Boolean.TRUE);
+
+		collection.createIndex(new BasicDBObject("id", 1), options);
+
+		Twitter twitter = new TwitterTemplate(args[0], args[1], args[2], args[3]);
 		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("feliciaday", 200);
 		for (Tweet tweet : tweets) {
 			BasicDBObject obj = new BasicDBObject("text", tweet.getText());

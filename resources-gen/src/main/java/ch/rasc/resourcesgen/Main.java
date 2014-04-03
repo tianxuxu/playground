@@ -28,6 +28,7 @@ import com.google.common.collect.Sets;
 
 public class Main {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ArgumentParser parser = ArgumentParsers.newArgumentParser("resources-gen").defaultHelp(true)
 				.description("Creates maven packages of resourcejars");

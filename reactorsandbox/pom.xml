@@ -10,8 +10,8 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.0.2.RELEASE</spring.version>
-		<springboot.version>1.0.0.RC5</springboot.version>
+		<spring.version>4.0.3.RELEASE</spring.version>
+		<springboot.version>1.0.0.RELEASE</springboot.version>
 		<hibernate.version>4.3.4.Final</hibernate.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
@@ -63,21 +63,21 @@
 		<dependency>
 			<groupId>org.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
-			<version>1.1.0.M2</version>
+			<version>1.1.0.M3</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-spring</artifactId>
-			<version>1.1.0.M2</version>
+			<groupId>org.projectreactor.spring</groupId>
+			<artifactId>reactor-spring-core</artifactId>
+			<version>1.1.0.M3</version>
 		</dependency>
 
-<!-- 		<dependency>
-			<groupId>org.projectreactor.data</groupId>
-			<artifactId>data-spring</artifactId>
-			<version>1.1.0.M2</version>
+		<dependency>
+			<groupId>org.projectreactor.spring</groupId>
+			<artifactId>reactor-spring-context</artifactId>
+			<version>1.1.0.M3</version>
 		</dependency>
- -->
+
 	</dependencies>
 
 	<repositories>

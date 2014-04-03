@@ -37,6 +37,7 @@ public class TradeServer {
 					buys.poll(100, TimeUnit.MILLISECONDS);
 					sells.poll(100, TimeUnit.MILLISECONDS);
 				} catch (InterruptedException e) {
+					//nothing here
 				}
 			}
 		}

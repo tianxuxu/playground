@@ -4,7 +4,6 @@ import java.net.UnknownHostException;
 import java.util.Date;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
@@ -38,12 +37,14 @@ public class MainInsert {
 		user.append("groups", new String[] { "admin", "user" });
 
 		System.out.println(user);
-		WriteResult wr = collection.insert(user);
-		// collection.insert(user, WriteConcern.SAFE);
-		CommandResult lastError = wr.getLastError();
-		System.out.println(lastError);
-		// System.out.println(user);
-		System.out.println(wr);
+		WriteResult wr;
+		try {
+			wr = collection.insert(user);
+			System.out.println(wr.getN());
+		} catch (MongoException e) {
+			System.out.println(e.getMessage());
+		}
+
 
 		// List<DBObject> users = new ArrayList<DBObject>();
 		// users.add(user);

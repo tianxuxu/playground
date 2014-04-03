@@ -6,9 +6,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.geo.Point;
 import org.springframework.util.StringUtils;
 
 import ch.rasc.springmongodb.domain.City;

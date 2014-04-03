@@ -4,8 +4,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
-import org.springframework.cache.interceptor.DefaultKeyGenerator;
 import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +25,7 @@ public class Config implements CachingConfigurer {
 
 	@Override
 	public KeyGenerator keyGenerator() {
-		return new DefaultKeyGenerator();
+		return new SimpleKeyGenerator();
 	}
 
 }

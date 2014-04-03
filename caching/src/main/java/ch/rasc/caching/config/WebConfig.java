@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.interceptor.DefaultKeyGenerator;
 import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,7 +54,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements CachingConfigu
 	@Bean
 	@Override
 	public KeyGenerator keyGenerator() {
-		return new DefaultKeyGenerator();
+		return new SimpleKeyGenerator();
 	}
 
 }

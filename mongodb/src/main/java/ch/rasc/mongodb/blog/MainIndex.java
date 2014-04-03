@@ -25,13 +25,14 @@ public class MainIndex {
 
 		BasicDBObject query = new BasicDBObject();
 		query.append("username", "johnd");
-		DBCursor cursor = collection.find(query);
-		DBObject explain = cursor.explain();
-		System.out.println(explain);
+		try (DBCursor cursor = collection.find(query)) {
+			DBObject explain = cursor.explain();
+			System.out.println(explain);
 
-		List<DBObject> indexes = collection.getIndexInfo();
-		for (DBObject ix : indexes) {
-			System.out.println(ix);
+			List<DBObject> indexes = collection.getIndexInfo();
+			for (DBObject ix : indexes) {
+				System.out.println(ix);
+			}
 		}
 
 		mongo.close();

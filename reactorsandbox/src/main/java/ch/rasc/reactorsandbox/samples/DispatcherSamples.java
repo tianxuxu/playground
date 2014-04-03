@@ -18,6 +18,7 @@ import reactor.event.Event;
 import reactor.event.selector.Selector;
 import reactor.function.Consumer;
 import reactor.function.support.Boundary;
+import reactor.spring.context.config.EnableReactor;
 
 /**
  * @author Jon Brisbin

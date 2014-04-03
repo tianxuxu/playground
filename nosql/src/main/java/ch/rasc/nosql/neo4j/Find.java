@@ -2,13 +2,16 @@ package ch.rasc.nosql.neo4j;
 
 import org.neo4j.graphalgo.GraphAlgoFactory;
 import org.neo4j.graphalgo.PathFinder;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
+import org.neo4j.graphdb.PathExpander;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.index.Index;
-import org.neo4j.kernel.Traversal;
+import org.neo4j.kernel.StandardExpander;
 
 public class Find {
 
@@ -23,7 +26,8 @@ public class Find {
 		// String actorName = "McAvoy, James";
 		Node actorNode = index.get("actor", actorName).getSingle();
 
-		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(Traversal.expanderForTypes(RelTypes.ACTS_IN), 10);
+		PathExpander<RelationshipType> expander = StandardExpander.create( RelTypes.ACTS_IN, Direction.BOTH );
+		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
 		Path path = finder.findSinglePath(actorNode, kevinBaconNode);
 
 		System.out.printf("%s's Bacon number is %d\n", actorName, path.length() / 2);

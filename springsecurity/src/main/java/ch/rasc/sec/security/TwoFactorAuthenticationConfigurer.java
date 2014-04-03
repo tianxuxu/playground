@@ -21,7 +21,8 @@ UserDetailsAwareConfigurer<AuthenticationManagerBuilder, UserDetailsService> {
 		provider.setPasswordEncoder(passwordEncoder);
 		return this;
 	}
-
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	@Override
 	public void configure(AuthenticationManagerBuilder builder) throws Exception {
 		provider = postProcess(provider);

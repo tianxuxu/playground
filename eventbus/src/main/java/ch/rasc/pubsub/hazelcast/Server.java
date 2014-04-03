@@ -12,7 +12,7 @@ public class Server {
 		return new ShortMessageListener();
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "resource" })
 	public static void main(String[] args) {
 		new AnnotationConfigApplicationContext(Server.class);
 	}

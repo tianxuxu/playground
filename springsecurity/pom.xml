@@ -14,10 +14,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
 
-		<spring.version>4.0.2.RELEASE</spring.version>
-		<spring-security.version>3.2.2.RELEASE</spring-security.version>
+		<spring.version>4.0.3.RELEASE</spring.version>
+		<spring-security.version>3.2.3.RELEASE</spring-security.version>
 		<hibernate.version>4.3.4.Final</hibernate.version>
-		<querydsl.version>3.3.1</querydsl.version>
+		<querydsl.version>3.3.2</querydsl.version>
 	</properties>
 
 	<repositories>
@@ -140,7 +140,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.0.2.Final</version>
+			<version>5.1.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -212,7 +212,7 @@
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>1.12</version>
+			<version>1.13</version>
 			<scope>provided</scope>
 		</dependency>
 

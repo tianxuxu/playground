@@ -60,8 +60,14 @@ public class Insert {
 
 		BasicDBObject query = new BasicDBObject();
 		query.append("index", new BasicDBObject("$gt", 990));
-		WriteResult wr = collection.remove(query);
-		System.out.println(wr.getError());
+		
+		try {
+			WriteResult wr = collection.remove(query);
+			System.out.println(wr.getN());
+		} catch (MongoException e) {
+			System.out.println(e.getCode());
+		}
+		
 
 		// collection.drop();
 		mongo.close();

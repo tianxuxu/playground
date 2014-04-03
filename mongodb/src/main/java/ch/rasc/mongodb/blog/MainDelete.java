@@ -30,10 +30,11 @@ public class MainDelete {
 		WriteResult wr = collection.remove(deleteCriteria);
 		System.out.println(wr);
 
-		DBCursor cursor = collection.find();
-		while (cursor.hasNext()) {
-			DBObject dbo = cursor.next();
-			System.out.println(dbo);
+		try (DBCursor cursor = collection.find()) {
+			while (cursor.hasNext()) {
+				DBObject dbo = cursor.next();
+				System.out.println(dbo);
+			}
 		}
 
 		mongo.close();

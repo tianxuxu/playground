@@ -10,12 +10,12 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.0.2.RELEASE</spring.version>
+		<spring.version>4.0.3.RELEASE</spring.version>
 		<aspectj.version>1.7.4</aspectj.version>
 		<slf4j.version>1.7.6</slf4j.version>
-		<logback.version>1.1.1</logback.version>
+		<logback.version>1.1.2</logback.version>
 		<hibernate.version>4.3.4.Final</hibernate.version>
-		<hibernatevalidator.version>5.0.2.Final</hibernatevalidator.version>
+		<hibernatevalidator.version>5.1.0.Final</hibernatevalidator.version>
 	</properties>
 
 
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.5.1.RELEASE</version>
+			<version>1.6.0.M1</version>
 		</dependency>
 
 		<dependency>
@@ -172,7 +172,18 @@
 			<version>16.0.1</version>
 		</dependency>
 	</dependencies>
-
+    
+    <repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>	    
+    </repositories>
+    
 	<build>
 		<plugins>
 

@@ -7,6 +7,7 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.h2.jdbcx.JdbcDataSource;
 
+
 public class JettyWithJndi {
 	public static void main(String[] args) throws Exception {
 

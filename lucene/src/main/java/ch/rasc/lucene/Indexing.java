@@ -29,8 +29,8 @@ public class Indexing {
 	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
 
 		try (Directory directory = new RAMDirectory();
-				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_44);
-				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_44, analyzer))) {
+				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_47);
+				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_47, analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };
@@ -46,14 +46,15 @@ public class Indexing {
 				writer.addDocument(doc);
 			}
 
-			IndexReader reader = DirectoryReader.open(writer, true);
-			IndexSearcher searcher = new IndexSearcher(reader);
-			Term t = new Term("city", "Amsterdam");
-			Query query = new TermQuery(t);
-			TopDocs topDocs = searcher.search(query, 1000);
-			for (ScoreDoc doc : topDocs.scoreDocs) {
-				Document d = searcher.doc(doc.doc);
-				System.out.println(d.get("id"));
+			try (IndexReader reader = DirectoryReader.open(writer, true)) {
+				IndexSearcher searcher = new IndexSearcher(reader);
+				Term t = new Term("city", "Amsterdam");
+				Query query = new TermQuery(t);
+				TopDocs topDocs = searcher.search(query, 1000);
+				for (ScoreDoc doc : topDocs.scoreDocs) {
+					Document d = searcher.doc(doc.doc);
+					System.out.println(d.get("id"));
+				}
 			}
 
 		}

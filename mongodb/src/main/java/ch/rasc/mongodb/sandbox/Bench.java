@@ -8,7 +8,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.WriteConcern;
 
 public class Bench {
 
@@ -27,11 +26,9 @@ public class Bench {
 			BasicDBObject dbObj = new BasicDBObject("myKey", "aValue");
 			collection.insert(dbObj);
 		}
-		CommandResult cr = db.getLastError(WriteConcern.FSYNC_SAFE);
-		System.out.println(cr);
 
 		BasicDBObject sync = new BasicDBObject("fsync", 1);
-		cr = mongo.getDB("admin").command(sync);
+		CommandResult cr = mongo.getDB("admin").command(sync);
 		System.out.println(cr);
 		sync = new BasicDBObject("fsync", 1).append("async", true);
 		cr = mongo.getDB("admin").command(sync);
