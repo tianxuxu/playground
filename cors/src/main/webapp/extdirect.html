@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ext Direct CORS</title>
+<script src="//extjs.cachefly.net/ext/gpl/4.2.1/ext-all.js"></script>
+<script src="api-debug.js?baseRouterUrl=http://localhost:8081"></script>
+<script>
+
+  Ext.onReady(function() {
+    Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+
+    Ext.Ajax.on("beforerequest", function(conn) {
+        conn.withCredentials = true
+    });
+    
+    testService.setCookie(function(result) {
+    	console.log(result);
+    	
+    	testService.readCookie(function(result) {
+    		console.log(result);
+    	});
+    	
+    });
+    
+  });
+
+
+</script>
+</head>
+<body>
+	<h1>Ext Direct CORS</h1>
+</body>
+</html>
