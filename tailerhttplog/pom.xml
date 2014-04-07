@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-resources</artifactId>
-			<version>2014.02</version>
+			<version>2014.03</version>
 		</dependency>
 
 		<dependency>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.6</version>
+			<version>1.7.7</version>
 		</dependency>
 
 		<dependency>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.6</version>
+			<version>1.7.7</version>
 		</dependency>
 
 	</dependencies>
