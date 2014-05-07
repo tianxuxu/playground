@@ -1,3 +1,5 @@
+package ch.rasc.watch;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,28 +21,20 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.DeflaterOutputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
-import org.jasypt.util.binary.BasicBinaryEncryptor;
-
 public class CloudEncryptor {
 
 	static final Map<WatchKey, Path> watchKeyToPathMap = new HashMap<>();
-
-	static final BasicBinaryEncryptor binaryEncryptor = new BasicBinaryEncryptor();
-	static {
-		binaryEncryptor.setPassword("my_super_secret_password");
-	}
 
 	private static void registerTree(final WatchService watchService, Path start) throws IOException {
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
@@ -91,12 +85,12 @@ public class CloudEncryptor {
 								BufferedInputStream bufferedIn = new BufferedInputStream(is);
 								OutputStream out = Files.newOutputStream(encryptedFile);
 								CipherOutputStream cos = new CipherOutputStream(out, cipher);
-								XZCompressorOutputStream xzOut = new XZCompressorOutputStream(cos)) {
+								DeflaterOutputStream dos = new DeflaterOutputStream(cos)) {
 
 							final byte[] buffer = new byte[1024];
 							int n = 0;
 							while ((n = bufferedIn.read(buffer)) != -1) {
-								xzOut.write(buffer, 0, n);
+								dos.write(buffer, 0, n);
 							}
 						}
 
@@ -135,12 +129,11 @@ public class CloudEncryptor {
 
 	}
 
-	public static void main(String[] args) throws DecoderException, NoSuchAlgorithmException, NoSuchPaddingException,
-	InvalidKeyException {
+	public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
 
-		String key = "626dce2ee1195e24541f4f0e063e911e";
+		String key = "97SrFHfWqOlp3vfIOqw9xA==";
 
-		byte[] keyByteArray = Hex.decodeHex(key.toCharArray());
+		byte[] keyByteArray = Base64.getDecoder().decode(key);
 		SecretKeySpec skeySpec = new SecretKeySpec(keyByteArray, "AES");
 
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");

@@ -1,3 +1,5 @@
+package ch.rasc.watch;
+
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
