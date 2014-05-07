@@ -12,7 +12,6 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -89,7 +88,7 @@ public class Backup {
 			if (username != null) {
 				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
 				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url)
-				.setDirectory(repoDir.toFile()).call();
+						.setDirectory(repoDir.toFile()).call();
 			} else {
 				Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
 			}
@@ -117,12 +116,7 @@ public class Backup {
 		} };
 
 		// Ignore differences between given hostname and certificate hostname
-		HostnameVerifier hv = new HostnameVerifier() {
-			@Override
-			public boolean verify(String hostname, SSLSession session) {
-				return true;
-			}
-		};
+		HostnameVerifier hv = (hostname, session) -> true;
 
 		// Install the all-trusting trust manager
 		try {

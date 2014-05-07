@@ -14,25 +14,25 @@ import org.apache.http.util.EntityUtils;
 
 public class Main {
 
-//	public static HttpClient getTestHttpClient() {
-//		try {
-//			SSLSocketFactory sf = new SSLSocketFactory(new TrustStrategy() {
-//				@Override
-//				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-//					return true;
-//				}
-//			}, new AllowAllHostnameVerifier());
-//
-//			SchemeRegistry registry = new SchemeRegistry();
-//			registry.register(new Scheme("https", 443, sf));
-//			registry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
-//			ClientConnectionManager ccm = new PoolingClientConnectionManager(registry);
-//			return new DecompressingHttpClient(new DefaultHttpClient(ccm));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return new DefaultHttpClient();
-//		}
-//	}
+	// public static HttpClient getTestHttpClient() {
+	// try {
+	// SSLSocketFactory sf = new SSLSocketFactory(new TrustStrategy() {
+	// @Override
+	// public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+	// return true;
+	// }
+	// }, new AllowAllHostnameVerifier());
+	//
+	// SchemeRegistry registry = new SchemeRegistry();
+	// registry.register(new Scheme("https", 443, sf));
+	// registry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
+	// ClientConnectionManager ccm = new PoolingClientConnectionManager(registry);
+	// return new DecompressingHttpClient(new DefaultHttpClient(ccm));
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return new DefaultHttpClient();
+	// }
+	// }
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {

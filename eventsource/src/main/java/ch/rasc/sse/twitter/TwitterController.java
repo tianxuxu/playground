@@ -1,6 +1,7 @@
 package ch.rasc.sse.twitter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableList;
 
 @Controller
 public class TwitterController {
@@ -56,7 +56,7 @@ public class TwitterController {
 			lastId = Long.valueOf(lastEventId);
 		}
 
-		ImmutableList<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);
+		List<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);
 		for (Tweet tweet : tweets) {
 			if (lastId < tweet.getId()) {
 				lastId = tweet.getId();

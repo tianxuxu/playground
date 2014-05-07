@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -30,13 +29,7 @@ public class WorkingInitService {
 			}
 		});
 
-		String result = readWriteTransactionTemplate.execute(new TransactionCallback<String>() {
-			@Override
-			public String doInTransaction(TransactionStatus status) {
-				// do some db operation
-				return "theResult";
-			}
-		});
+		String result = readWriteTransactionTemplate.execute(status -> "theResult");
 
 		System.out.println(result);
 

@@ -11,7 +11,6 @@ import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
 import reactor.event.Event;
 import reactor.event.selector.Selectors;
-import reactor.function.Consumer;
 import ch.rasc.reactorsandbox.quickstart.Trade;
 import ch.rasc.reactorsandbox.quickstart.TradeServer;
 
@@ -20,40 +19,22 @@ import ch.rasc.reactorsandbox.quickstart.TradeServer;
  */
 public class TradeServerExample {
 
-	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
-
-	private static CountDownLatch latch;
-
-	private static int totalTrades = 10000000;
-
-	private static long startTime;
-
-	private static long endTime;
-
-	private static double elapsed;
-
-	private static double throughput;
-
 	public static void main(String[] args) throws InterruptedException {
 		Environment env = new Environment();
 		final TradeServer server = new TradeServer();
 
 		// Use a Reactor to dispatch events using the default Dispatcher
-		Reactor reactor = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
+		Reactor reactor = Reactors.reactor().env(env).dispatcher("ringBuffer").get();
 
 		String topic = "trade.execute";
 
 		// For each Trade event, execute that on the server
-		reactor.on(Selectors.object(topic), new Consumer<Event<Trade>>() {
-			@Override
-			public void accept(Event<Trade> tradeEvent) {
-				server.execute(tradeEvent.getData());
+		reactor.on(Selectors.object(topic), (Event<Trade> tradeEvent) -> {
+			server.execute(tradeEvent.getData());
 
-				// Since we're async, for this test, use a latch to tell when
-				// we're done
+			// Since we're async, for this test, use a latch to tell when we're done
 				latch.countDown();
-			}
-		});
+			});
 
 		// Start a throughput timer
 		startTimer();
@@ -87,5 +68,19 @@ public class TradeServerExample {
 
 		LOG.info("Executed {} trades/sec in {}ms", (int) throughput, (int) elapsed);
 	}
+
+	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
+
+	private static CountDownLatch latch;
+
+	private static int totalTrades = 10000000;
+
+	private static long startTime;
+
+	private static long endTime;
+
+	private static double elapsed;
+
+	private static double throughput;
 
 }

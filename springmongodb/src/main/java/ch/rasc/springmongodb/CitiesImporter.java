@@ -3,7 +3,6 @@ package ch.rasc.springmongodb;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.geo.Point;
@@ -14,8 +13,6 @@ import org.springframework.util.StringUtils;
 import ch.rasc.springmongodb.domain.City;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 
@@ -42,22 +39,22 @@ public class CitiesImporter {
 				@Override
 				public boolean processLine(String line) throws IOException {
 					if (!line.startsWith("Country,City")) {
-						List<String> splittedItems = Lists.newArrayList(Splitter.on(",").split(line));
-						if (splittedItems.size() == 7) {
+						String[] splittedItems = StringUtils.commaDelimitedListToStringArray(line);
+						if (splittedItems.length == 7) {
 
 							City newCity = new City();
-							newCity.setCountry(splittedItems.get(0));
-							newCity.setAsciiCityName(splittedItems.get(1));
-							newCity.setCityName(splittedItems.get(2));
-							newCity.setRegion(splittedItems.get(3));
+							newCity.setCountry(splittedItems[0]);
+							newCity.setAsciiCityName(splittedItems[1]);
+							newCity.setCityName(splittedItems[2]);
+							newCity.setRegion(splittedItems[3]);
 
-							String populationString = splittedItems.get(4);
+							String populationString = splittedItems[4];
 							if (StringUtils.hasText(populationString)) {
 								newCity.setPopulation(Integer.valueOf(populationString));
 							}
 
-							String latitudeStr = splittedItems.get(5);
-							String longitudeStr = splittedItems.get(6);
+							String latitudeStr = splittedItems[5];
+							String longitudeStr = splittedItems[6];
 
 							if (latitudeStr.equals("180.0")) {
 								latitudeStr = "179.9999";

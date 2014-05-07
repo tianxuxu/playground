@@ -1,5 +1,6 @@
 package ch.rasc.jpa.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,6 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.google.common.collect.Sets;
 
 @Entity
 public class Employee {
@@ -33,7 +32,7 @@ public class Employee {
 	private String job;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
-	private Set<Address> address = Sets.newHashSet();
+	private Set<Address> address = new HashSet<>();
 
 	public long getEmployeeId() {
 		return employeeId;

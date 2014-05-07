@@ -17,7 +17,7 @@ public class ImportText {
 				importer.doImport(f);
 			}
 
-			System.out.println((System.currentTimeMillis() - start) + " ms");
+			System.out.println(System.currentTimeMillis() - start + " ms");
 		}
 	}
 }

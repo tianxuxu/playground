@@ -7,8 +7,6 @@ import reactor.core.Environment;
 import reactor.core.composable.Deferred;
 import reactor.core.composable.Stream;
 import reactor.core.composable.spec.Streams;
-import reactor.function.Consumer;
-import reactor.function.Function;
 import reactor.function.Predicate;
 import reactor.function.support.Boundary;
 
@@ -41,12 +39,7 @@ public class StreamSamples {
 		Stream<String> stream = deferred.compose();
 
 		// Consume values passing through the Stream
-		stream.consume(b.<String> bind(new Consumer<String>() {
-			@Override
-			public void accept(String t) {
-				LOG.info("Consumed String {}", t);
-			}
-		}));
+		stream.consume(b.<String> bind(s -> LOG.info("Consumed String {}", s)));
 
 		// Publish a value
 		deferred.accept("Hello World!");
@@ -63,17 +56,7 @@ public class StreamSamples {
 		Stream<String> stream = deferred.compose();
 
 		// Transform values passing through the Stream
-		stream.map(new Function<String, String>() {
-			@Override
-			public String apply(String t) {
-				return t.toUpperCase();
-			}
-		}).consume(b.bind(new Consumer<String>() {
-			@Override
-			public void accept(String t) {
-				LOG.info("UC String {}", t);
-			}
-		}));
+		stream.map(String::toUpperCase).consume(b.bind(s -> LOG.info("UC String {}", s)));
 
 		// Publish a value
 		deferred.accept("Hello World!");
@@ -95,12 +78,7 @@ public class StreamSamples {
 			public boolean test(String s) {
 				return s.startsWith("Hello");
 			}
-		}).consume(b.<String> bind(new Consumer<String>() {
-			@Override
-			public void accept(String t) {
-				LOG.info("Filtered String {}", t);
-			}
-		}));
+		}).consume(b.<String> bind(s -> LOG.info("Filtered String {}", s)));
 
 		// Publish a value
 		deferred.accept("Hello World!");
@@ -108,4 +86,5 @@ public class StreamSamples {
 
 		b.await();
 	}
+
 }

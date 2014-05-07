@@ -11,7 +11,7 @@ public class Clone {
 
 	public static void main(String[] args) throws InvalidRemoteException, TransportException, GitAPIException {
 		Git.cloneRepository().setBare(true).setURI("git://github.com/SpringSource/spring-framework.git")
-		.setDirectory(new File("springframework")).call();
+				.setDirectory(new File("springframework")).call();
 	}
 
 }

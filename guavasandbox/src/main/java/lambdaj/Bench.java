@@ -3,6 +3,7 @@ package lambdaj;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.sort;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,13 +14,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Lists;
 
 public class Bench {
 
 	public static void main(String[] args) {
 
-		List<User> users = Lists.newArrayList();
+		List<User> users = new ArrayList<>();
 		Random random = new Random();
 
 		for (int i = 0; i < 100000; i++) {
@@ -38,7 +38,7 @@ public class Bench {
 		stopWatch.stop();
 		System.out.println("Lambdaj sort reverse: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
-		sorted = Lists.newArrayList(users);
+		sorted = new ArrayList<>(users);
 		UserAgeComparator agecomparator = new UserAgeComparator();
 		stopWatch.reset();
 		stopWatch.start();
@@ -46,7 +46,7 @@ public class Bench {
 		stopWatch.stop();
 		System.out.println("Java sort normal: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
-		sorted = Lists.newArrayList(users);
+		sorted = new ArrayList<>(users);
 		Comparator<User> reverseOrder = Collections.reverseOrder(agecomparator);
 		stopWatch.reset();
 		stopWatch.start();

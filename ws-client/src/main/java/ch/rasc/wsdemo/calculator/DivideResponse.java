@@ -10,8 +10,7 @@ import javax.xml.bind.annotation.XmlType;
  * Java class for divideResponse complex type.
  *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  *
  * <pre>
  * &lt;complexType name="divideResponse">

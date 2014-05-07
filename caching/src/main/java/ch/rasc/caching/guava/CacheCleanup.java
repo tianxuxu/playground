@@ -27,13 +27,10 @@ public class CacheCleanup {
 	@PostConstruct
 	public void cacheCleanup() {
 		scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.scheduleWithFixedDelay(new Runnable() {
-			@Override
-			public void run() {
-				for (String cacheName : cacheManager.getCacheNames()) {
-					System.out.println(">> cleanup " + cacheName);
-					((GuavaCache) cacheManager.getCache(cacheName)).getNativeCache().cleanUp();
-				}
+		scheduler.scheduleWithFixedDelay(() -> {
+			for (String cacheName : cacheManager.getCacheNames()) {
+				System.out.println(">> cleanup " + cacheName);
+				((GuavaCache) cacheManager.getCache(cacheName)).getNativeCache().cleanUp();
 			}
 		}, 5, 20, TimeUnit.SECONDS);
 

@@ -29,8 +29,8 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 
 	@Override
 	public boolean canWrite(Class<?> clazz, MediaType mediaType) {
-		return ((String.class.equals(clazz) || SSEvent.class.equals(clazz)) && EVENT_STREAM_MEDIATYPE
-				.includes(mediaType));
+		return (String.class.equals(clazz) || SSEvent.class.equals(clazz))
+				&& EVENT_STREAM_MEDIATYPE.includes(mediaType);
 	}
 
 	@Override
@@ -40,13 +40,13 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 
 	@Override
 	public Object read(Class<? extends Object> clazz, HttpInputMessage inputMessage) throws IOException,
-	HttpMessageNotReadableException {
+			HttpMessageNotReadableException {
 		throw new UnsupportedOperationException("read not supported");
 	}
 
 	@Override
 	public void write(Object t, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
-	HttpMessageNotWritableException {
+			HttpMessageNotWritableException {
 
 		HttpHeaders headers = outputMessage.getHeaders();
 		headers.setContentType(EVENT_STREAM_MEDIATYPE);

@@ -7,6 +7,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -14,12 +17,10 @@ import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.google.common.collect.ImmutableList;
-
 @Service
 public class DataService {
 
-	private ImmutableList<User> users;
+	private List<User> users;
 
 	@PostConstruct
 	public void readData() throws IOException {
@@ -28,7 +29,7 @@ public class DataService {
 		Files.copy(DataService.class.getResourceAsStream("/randomdata.zip"), tempFile,
 				StandardCopyOption.REPLACE_EXISTING);
 
-		ImmutableList.Builder<User> listBuilder = ImmutableList.builder();
+		List<User> listBuilder = new ArrayList<>();
 
 		try (FileSystem zipFs = FileSystems.newFileSystem(tempFile, null)) {
 			Path dataPath = zipFs.getPath("/randomdata.csv");
@@ -42,10 +43,10 @@ public class DataService {
 		}
 		Files.delete(tempFile);
 
-		users = listBuilder.build();
+		users = Collections.unmodifiableList(listBuilder);
 	}
 
-	public ImmutableList<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 

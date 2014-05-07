@@ -29,7 +29,7 @@ public class TestController {
 			@RequestParam(value = "oneFile", required = false) final Part oneFile,
 			@RequestParam(value = "oneFile", required = false) final MultipartFile oneMultipartFile,
 			@RequestParam(value = "multipleFiles", required = false) final List<MultipartFile> multipleMultipartFiles)
-					throws IllegalStateException, IOException, ServletException {
+			throws IllegalStateException, IOException, ServletException {
 
 		Enumeration<String> e = request.getParameterNames();
 		System.out.println("-- START PARAMETERS --");

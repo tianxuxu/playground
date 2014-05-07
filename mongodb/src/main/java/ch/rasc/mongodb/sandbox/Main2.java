@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 public class Main2 {
 
 	public static void main(String[] args) {
-		// List<String> records = Lists.newArrayList();
+		// List<String> records = new ArrayList<>();
 		// records.add("{\"name\": \"johnd\"}");
 		// records.add("{\"name\": \"bill\"}");
 		// JsonRecord jr = new JsonRecord();
@@ -20,10 +20,10 @@ public class Main2 {
 		Date d = new Date();
 		ObjectId oid = new ObjectId(d, 0, 0);
 		System.out.println(oid);
-		System.out.println(new Date(oid.getTime()));
+		System.out.println(oid.getDate());
 
 		ObjectId max = new ObjectId("4d46bf1fffffffffffffffff");
-		System.out.println(new Date(max.getTime()));
+		System.out.println(max.getDate());
 		// new line
 		// a second line
 	}

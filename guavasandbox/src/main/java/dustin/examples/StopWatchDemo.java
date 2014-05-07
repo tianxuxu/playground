@@ -27,8 +27,7 @@ public class StopWatchDemo {
 	}
 
 	/**
-	 * Print statistics on Stopwatch-reported times for provided number of
-	 * loops.
+	 * Print statistics on Stopwatch-reported times for provided number of loops.
 	 *
 	 * @param numberLoops Number of loops executed.
 	 * @param stopwatch Stopwatch instance with time used statistics.

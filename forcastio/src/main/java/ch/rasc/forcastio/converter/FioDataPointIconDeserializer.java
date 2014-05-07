@@ -13,7 +13,7 @@ public class FioDataPointIconDeserializer extends JsonDeserializer<FioDataPointI
 
 	@Override
 	public FioDataPointIcon deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
-	JsonProcessingException {
+			JsonProcessingException {
 		return FioDataPointIcon.findByJsonValue(jp.getText());
 	}
 

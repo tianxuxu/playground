@@ -39,7 +39,7 @@ public class FindIp {
 
 		long start = System.currentTimeMillis();
 		Geolite geo = q.get();
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println(System.currentTimeMillis() - start + " ms");
 		System.out.println(geo);
 	}
 

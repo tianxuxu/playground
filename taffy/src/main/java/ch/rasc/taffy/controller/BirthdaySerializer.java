@@ -2,13 +2,14 @@ package ch.rasc.taffy.controller;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.SerializerProvider;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 public class BirthdaySerializer extends JsonSerializer<LocalDate> {
 
@@ -16,7 +17,7 @@ public class BirthdaySerializer extends JsonSerializer<LocalDate> {
 
 	@Override
 	public void serialize(LocalDate value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-	JsonProcessingException {
+			JsonProcessingException {
 		jgen.writeString(BIRTHDAY_FORMATTER.print(value));
 	}
 }

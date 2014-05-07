@@ -1,5 +1,6 @@
 package ch.rasc.springmongodb.issues;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,6 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import ch.rasc.springmongodb.AppConfig;
 import ch.rasc.springmongodb.domain.User;
-
-import com.google.common.collect.Maps;
 
 public class Issue1 {
 
@@ -31,7 +30,7 @@ public class Issue1 {
 			mongoTemplate.save(user2);
 
 			List<User> allUsers = mongoTemplate.findAll(User.class);
-			Map<ObjectId, String> idToUserNameMap = Maps.newHashMap();
+			Map<ObjectId, String> idToUserNameMap = new HashMap<>();
 			for (User user : allUsers) {
 				idToUserNameMap.put(user.getId(), user.getUserName());
 			}

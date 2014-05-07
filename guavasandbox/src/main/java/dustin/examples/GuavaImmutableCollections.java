@@ -161,8 +161,7 @@ public class GuavaImmutableCollections {
 	}
 
 	/**
-	 * Write a separation header to standard output that includes provided
-	 * header text.
+	 * Write a separation header to standard output that includes provided header text.
 	 *
 	 * @param headerText Text to be used in separation header.
 	 */

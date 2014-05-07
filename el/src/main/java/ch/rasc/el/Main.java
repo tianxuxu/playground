@@ -20,13 +20,13 @@ public class Main {
 		for (int i = 0; i < 10000; i++) {
 			el.eval("user.userName");
 		}
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println(System.currentTimeMillis() - start + " ms");
 
 		start = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++) {
 			u.getUserName();
 		}
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println(System.currentTimeMillis() - start + " ms");
 
 		ExpressionParser parser = new SpelExpressionParser();
 		Expression exp = parser.parseExpression("userName");
@@ -34,7 +34,7 @@ public class Main {
 		for (int i = 0; i < 10000; i++) {
 			exp.getValue(u);
 		}
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println(System.currentTimeMillis() - start + " ms");
 
 		// Long x = (Long)el.eval("a = [1, 2, 3]; a[1]");
 		// System.out.println(x);

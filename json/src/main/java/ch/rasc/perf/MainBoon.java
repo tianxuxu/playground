@@ -12,7 +12,6 @@ import org.springframework.util.StopWatch;
 public class MainBoon {
 
 	public static void main(String[] args) {
-
 		DataFactory df = new DataFactory();
 		Date today = new Date();
 

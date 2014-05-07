@@ -23,7 +23,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public Twitter twitter() {
-		return new TwitterTemplate();
+		return new TwitterTemplate("client_token");
 	}
 
 	// @Autowired

@@ -5,8 +5,6 @@ import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
 import reactor.event.Event;
-import reactor.function.Consumer;
-import reactor.function.Function;
 
 /**
  * @author Jon Brisbin
@@ -18,23 +16,13 @@ public class ReactorSamples {
 		Reactor r = Reactors.reactor().env(env).dispatcher("ringBuffer").get();
 
 		// Subscribe to topic "test"
-		r.on($("test"), new Consumer<Event<String>>() {
-			@Override
-			public void accept(Event<String> ev) {
-				System.out.println("hi " + ev.getData());
-			}
-		});
+		r.<Event<String>> on($("test"), ev -> System.out.println("hi " + ev.getData()));
 
 		// Notify topic "test"
 		r.notify("test", Event.wrap("Jon"));
 
 		// Subscribe to topic "test2" and reply with value
-		r.receive($("test2"), new Function<Event<?>, Object>() {
-			@Override
-			public Object apply(Event<?> event) {
-				return "Jon";
-			}
-		});
+		r.receive($("test2"), event -> "Jon");
 
 		// Notify topic "test2" and reply to topic "test"
 		r.send("test2", Event.wrap("test2").setReplyTo("test"));

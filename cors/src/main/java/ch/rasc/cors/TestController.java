@@ -1,5 +1,7 @@
 package ch.rasc.cors;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.common.collect.ImmutableList;
 
 @Controller
 public class TestController {
@@ -33,8 +33,10 @@ public class TestController {
 
 		// response.addHeader("Access-Control-Allow-Origin", "*");
 
-		ImmutableList.Builder<User> builder = ImmutableList.builder();
-		builder.add(new User(1, "admin"), new User(2, "user1"), new User(3, "user2"));
-		return builder.build();
+		List<User> builder = new ArrayList<>();
+		builder.add(new User(1, "admin"));
+		builder.add(new User(2, "user1"));
+		builder.add(new User(3, "user2"));
+		return Collections.unmodifiableList(builder);
 	}
 }

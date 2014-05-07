@@ -8,17 +8,14 @@ import java.util.List;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.util.StopWatch;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
-
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 
 		DataFactory df = new DataFactory();
 		Date today = new Date();
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new AfterburnerModule());
+		com.fasterxml.jackson.databind.ObjectMapper objectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
+		// objectMapper.registerModule(new AfterburnerModule());
 
 		// warm up
 		StopWatch sw = new StopWatch();

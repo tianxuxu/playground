@@ -9,6 +9,7 @@ import static ch.lambdaj.Lambda.sort;
 import static ch.lambdaj.collection.LambdaCollections.with;
 import static org.hamcrest.Matchers.greaterThan;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +44,7 @@ public class DoSomething {
 
 		stopWatch.reset();
 		stopWatch.start();
-		List<User> older2 = Lists.newArrayList();
+		List<User> older2 = new ArrayList<>();
 		for (User user : users) {
 			if (user.getAge() > 30) {
 				older2.add(user);

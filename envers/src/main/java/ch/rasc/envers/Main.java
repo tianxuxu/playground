@@ -2,6 +2,7 @@ package ch.rasc.envers;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,6 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.hibernate.service.ServiceRegistry;
 
-import com.google.common.collect.Sets;
 import com.mysema.query.jpa.hibernate.HibernateQuery;
 
 public class Main {
@@ -125,7 +125,7 @@ public class Main {
 		firma.setOrt("Zurich");
 		firma.setStrasse("Street");
 
-		Set<Mitarbeiter> mitarbeiterSet = Sets.newHashSet();
+		Set<Mitarbeiter> mitarbeiterSet = new HashSet<>();
 
 		Mitarbeiter mitarbeiter = new Mitarbeiter();
 		mitarbeiter.setFirma(firma);

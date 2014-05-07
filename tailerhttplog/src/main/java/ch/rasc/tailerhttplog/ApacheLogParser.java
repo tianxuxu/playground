@@ -83,7 +83,7 @@ public class ApacheLogParser {
 	public long convertTimetoEpoch(String dateFormat, String date) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
-		return (sdf.parse(date)).getTime();
+		return sdf.parse(date).getTime();
 	}
 
 	/**
@@ -131,16 +131,16 @@ public class ApacheLogParser {
 					continue;
 				}
 				requestTime = accessLogEntryMatcher.group(4);
-				accessLogEntryEpoch = (accesslogDateFormat.parse(requestTime)).getTime();
+				accessLogEntryEpoch = accesslogDateFormat.parse(requestTime).getTime();
 
 				if (accessLogEntryEpoch >= startingEpoch && accessLogEntryEpoch <= endingEpoch) {
 					clientRequest = accessLogEntryMatcher.group(5);
 
 					if (DEBUG) {
-						System.out.println("" + index + " : " + (clientRequest.split(" "))[1]);
+						System.out.println("" + index + " : " + clientRequest.split(" ")[1]);
 					}
 
-					if (urlsMap.containsValue((clientRequest.split(" "))[1])) {
+					if (urlsMap.containsValue(clientRequest.split(" ")[1])) {
 						System.out.println("Line num : " + index + " " + accessLogEntryMatcher.group(1) + " "
 								+ accessLogEntryMatcher.group(4) + " " + accessLogEntryMatcher.group(5));
 					} else {

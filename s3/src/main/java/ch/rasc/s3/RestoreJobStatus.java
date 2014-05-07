@@ -20,7 +20,7 @@ public class RestoreJobStatus {
 			GetObjectMetadataRequest request = new GetObjectMetadataRequest(bucketName, objectKey);
 			ObjectMetadata response = client.getObjectMetadata(request);
 			Boolean restoreFlag = response.getOngoingRestore();
-			System.out.format("Restoration status: %s.\n", (restoreFlag == true) ? "in progress" : "finished");
+			System.out.format("Restoration status: %s.\n", restoreFlag == true ? "in progress" : "finished");
 
 		} else {
 			System.out.println("java -jar s3backup.jar " + RestoreJobStatus.class.getName()

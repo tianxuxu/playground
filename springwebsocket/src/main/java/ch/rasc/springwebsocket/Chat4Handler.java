@@ -6,14 +6,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.AbstractWebSocketHandler;
-
-import com.google.common.io.Resources;
 
 public class Chat4Handler extends AbstractWebSocketHandler {
 
@@ -45,18 +45,16 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	private void sendImages(final WebSocketSession session) {
-		asyncExecutor.execute(new Runnable() {
-			@Override
-			public void run() {
-				for (int index = 0; index < 49; index++) {
-					byte[] imgBytes;
-					try {
-						imgBytes = Resources.toByteArray(Resources.getResource("Video/" + index + ".jpg"));
-						session.sendMessage(new BinaryMessage(imgBytes));
-						TimeUnit.MILLISECONDS.sleep(150);
-					} catch (IOException | InterruptedException e) {
-						e.printStackTrace();
-					}
+		asyncExecutor.execute(() -> {
+			for (int index = 0; index < 49; index++) {
+				byte[] imgBytes;
+				try {
+					ClassPathResource cp = new ClassPathResource("Video/" + index + ".jpg");
+					imgBytes = StreamUtils.copyToByteArray(cp.getInputStream());
+					session.sendMessage(new BinaryMessage(imgBytes));
+					TimeUnit.MILLISECONDS.sleep(150);
+				} catch (IOException | InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		});
@@ -68,23 +66,20 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	public void sendToAll(final WebSocketMessage<?> message) {
-		asyncExecutor.execute(new Runnable() {
-			@Override
-			public void run() {
-				for (WebSocketSession session : sessions.values()) {
-					if (session.isOpen()) {
-						try {
-							session.sendMessage(message);
-						} catch (IOException e) {
-							// sessions.remove(session.getId());
-							e.printStackTrace();
-						}
-					} else {
-						sessions.remove(session.getId());
-					}
-				}
+		asyncExecutor.execute(() -> {
+			for (WebSocketSession session : sessions.values()) {
+				if (session.isOpen()) {
+					try {
+						session.sendMessage(message);
+					} catch (IOException e) {
+						// sessions.remove(session.getId());
+				e.printStackTrace();
 			}
-		});
+		} else {
+			sessions.remove(session.getId());
+		}
+	}
+})		;
 	}
 
 }

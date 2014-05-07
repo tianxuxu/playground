@@ -12,7 +12,6 @@ import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
 import reactor.event.Event;
-import reactor.function.Consumer;
 import reactor.function.support.Boundary;
 
 /**
@@ -30,46 +29,28 @@ public class SelectorSamples {
 		Boundary b = new Boundary();
 
 		// Simple topic selection
-		r.on($("/some/topic"), b.<Event<String>> bind(new Consumer<Event<String>>() {
-			@Override
-			public void accept(Event<String> ev) {
-				LOG.info("Got event '{}'", ev.getData());
-			}
-		}));
+		r.on($("/some/topic"), b.<Event<String>> bind(ev -> LOG.info("Got event '{}'", ev.getData())));
 
 		// Topic selection based on regex
-		r.on(R("/some/(.+)"), b.<Event<String>> bind(new Consumer<Event<String>>() {
-			@Override
-			public void accept(Event<String> ev) {
-				// RegexSelector puts capture groups into headers using
-				// convention 'group'
-				// + [capture group #]
+		r.on(R("/some/(.+)"), b.<Event<String>> bind(ev -> {
+			// RegexSelector puts capture groups into headers using convention 'group'
+			// + [capture group #]
 				String topic = ev.getHeaders().get("group1");
 
 				LOG.info("Got event '{}' for {}", ev.getData(), topic);
-			}
-		}));
+			}));
 
 		// Topic selection based on URI template
-		r.on(U("/some/{topic}"), b.<Event<String>> bind(new Consumer<Event<String>>() {
-			@Override
-			public void accept(Event<String> ev) {
-				// UriTemplateSelector puts path segment matches into headers
-				// using the
-				// path variable name (like Spring MVC)
+		r.on(U("/some/{topic}"), b.<Event<String>> bind(ev -> {
+			// UriTemplateSelector puts path segment matches into headers using the
+			// path variable name (like Spring MVC)
 				String topic = ev.getHeaders().get("topic");
 
 				LOG.info("Got event '{}' for {}", ev.getData(), topic);
-			}
-		}));
+			}));
 
 		// Type selection based on inheritance
-		r.on(T(Exception.class), b.<Event<Exception>> bind(new Consumer<Event<Exception>>() {
-			@Override
-			public void accept(reactor.event.Event<Exception> ev) {
-				LOG.error(ev.getData().getMessage());
-			}
-		}));
+		r.on(T(Exception.class), b.<Event<Exception>> bind(ev -> LOG.error(ev.getData().getMessage())));
 
 		// A single publish goes to three Consumers
 		r.notify("/some/topic", Event.wrap("Hello World!"));
@@ -81,4 +62,5 @@ public class SelectorSamples {
 
 		ENV.shutdown();
 	}
+
 }

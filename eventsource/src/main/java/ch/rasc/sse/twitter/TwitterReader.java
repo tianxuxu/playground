@@ -1,5 +1,8 @@
 package ch.rasc.sse.twitter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -9,9 +12,6 @@ import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.stereotype.Service;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 @Service
 public class TwitterReader {
@@ -26,10 +26,10 @@ public class TwitterReader {
 
 	private long lastReceivedId = 0;
 
-	private final List<Tweet> tweets = Lists.newLinkedList();
+	private final List<Tweet> tweets = new LinkedList<>();
 
-	public ImmutableList<Tweet> getTweetsSinceId(long lastId) {
-		ImmutableList.Builder<Tweet> builder = ImmutableList.builder();
+	public List<Tweet> getTweetsSinceId(long lastId) {
+		List<Tweet> builder = new ArrayList<>();
 
 		readLock.lock();
 		try {
@@ -42,14 +42,14 @@ public class TwitterReader {
 			readLock.unlock();
 		}
 
-		return builder.build();
+		return Collections.unmodifiableList(builder);
 	}
 
 	@Scheduled(fixedDelay = 10000)
 	public void readTwitterFeed() {
 
 		SearchResults results = template.searchOperations().search("java", 50, lastReceivedId, 0);
-		List<Tweet> newTweets = Lists.newLinkedList();
+		List<Tweet> newTweets = new LinkedList<>();
 		long maxId = 0;
 		for (Tweet tweet : results.getTweets()) {
 			if (tweet.getId() > lastReceivedId) {

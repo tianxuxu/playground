@@ -3,6 +3,7 @@ package ch.rasc.tailerhttplog;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -14,8 +15,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
 import com.maxmind.geoip.Location;
 import com.maxmind.geoip.LookupService;
 
@@ -24,7 +23,6 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		Executor executor = Executors.newFixedThreadPool(1);
-		final Splitter splitter = Splitter.on(" ");
 
 		String path;
 		if (args.length == 1) {
@@ -46,7 +44,7 @@ public class Main {
 
 			@Override
 			public void handle(String line) {
-				List<String> splittedLine = Lists.newArrayList(splitter.split(line));
+				List<String> splittedLine = Arrays.asList(line.split(" "));
 				System.out.println(splittedLine.size());
 				if (splittedLine.size() == 11/* 14 */) {
 					String userAgent = splittedLine.get(9);
@@ -67,5 +65,4 @@ public class Main {
 		executor.execute(tailer);
 
 	}
-
 }

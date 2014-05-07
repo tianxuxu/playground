@@ -26,7 +26,7 @@ public class Find {
 		// String actorName = "McAvoy, James";
 		Node actorNode = index.get("actor", actorName).getSingle();
 
-		PathExpander<RelationshipType> expander = StandardExpander.create( RelTypes.ACTS_IN, Direction.BOTH );
+		PathExpander<RelationshipType> expander = StandardExpander.create(RelTypes.ACTS_IN, Direction.BOTH);
 		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
 		Path path = finder.findSinglePath(actorNode, kevinBaconNode);
 

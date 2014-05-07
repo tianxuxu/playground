@@ -8,7 +8,6 @@ import reactor.core.spec.Reactors;
 import reactor.event.Event;
 import reactor.event.selector.ObjectSelector;
 import reactor.event.selector.Selector;
-import reactor.function.Consumer;
 
 public class Simple {
 
@@ -19,12 +18,7 @@ public class Simple {
 		Reactor reactor = Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL).get();
 
 		Selector selector = ObjectSelector.objectSelector("parse");
-		reactor.on(selector, new Consumer<Event<String>>() {
-			@Override
-			public void accept(Event<String> ev) {
-				System.out.println(ev);
-			}
-		});
+		reactor.on(selector, ev -> System.out.println(ev));
 
 		// Send an event to this Reactor and trigger all actions
 		// that match the given Selector

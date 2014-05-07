@@ -33,17 +33,13 @@ public class TextExtractor {
 	}
 
 	private String extractText(File file) {
-		Reader reader = null;
-		try {
-			reader = new ParsingReader(file);
+		try (Reader reader = new ParsingReader(file)) {
 			String text = IOUtils.toString(reader);
 			return text;
 		} catch (FileNotFoundException e) {
 			LoggerFactory.getLogger(getClass()).error("extractText", e);
 		} catch (IOException e) {
 			LoggerFactory.getLogger(getClass()).error("extractText", e);
-		} finally {
-			IOUtils.closeQuietly(reader);
 		}
 
 		return null;

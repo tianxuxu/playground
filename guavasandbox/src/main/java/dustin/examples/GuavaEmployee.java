@@ -3,8 +3,8 @@ package dustin.examples;
 /**
  * Simple employee class using Guava-powered 'common' methods implementations.
  *
- * I explicitly scope the com.google.common.base.Objects class here to avoid the
- * inherent name collision with the java.util.Objects class.
+ * I explicitly scope the com.google.common.base.Objects class here to avoid the inherent name collision with the
+ * java.util.Objects class.
  *
  * @author Dustin
  */
@@ -57,8 +57,8 @@ public class GuavaEmployee {
 	 * Using Guava to compare provided object to me for equality.
 	 *
 	 * @param obj Object to be compared to me for equality.
-	 * @return {@code true} if provided object is considered equal to me or
-	 *         {@code false} if provided object is not considered equal to me.
+	 * @return {@code true} if provided object is considered equal to me or {@code false} if provided object is not
+	 *         considered equal to me.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -87,8 +87,7 @@ public class GuavaEmployee {
 	}
 
 	/**
-	 * Method using Guava to provide String representation of this employee
-	 * instance.
+	 * Method using Guava to provide String representation of this employee instance.
 	 *
 	 * @return My String representation.
 	 */

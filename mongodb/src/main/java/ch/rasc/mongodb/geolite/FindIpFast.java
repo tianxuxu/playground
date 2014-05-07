@@ -41,7 +41,7 @@ public class FindIpFast {
 		q.limit(1);
 		long start = System.currentTimeMillis();
 		Geolite geo = q.get();
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println(System.currentTimeMillis() - start + " ms");
 		System.out.println(geo);
 	}
 

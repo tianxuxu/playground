@@ -1,5 +1,6 @@
 package ch.rasc.jpa.config;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
@@ -10,8 +11,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.google.common.collect.Maps;
 
 @Configuration
 @EnableTransactionManagement
@@ -24,7 +23,7 @@ public class AppConfig {
 
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-		Map<String, String> properties = Maps.newHashMap();
+		Map<String, String> properties = new HashMap<>();
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.hbm2ddl.auto", "create");
 

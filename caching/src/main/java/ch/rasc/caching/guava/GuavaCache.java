@@ -29,7 +29,7 @@ public class GuavaCache implements Cache {
 	@Override
 	public ValueWrapper get(Object key) {
 		Optional<Object> value = this.store.getIfPresent(key);
-		return (value != null ? new SimpleValueWrapper(value.orNull()) : null);
+		return value != null ? new SimpleValueWrapper(value.orNull()) : null;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class GuavaCache implements Cache {
 	public <T> T get(Object key, Class<T> type) {
 		Optional<Object> element = this.store.getIfPresent(key);
 
-		Object value = (element != null ? element.get() : null);
+		Object value = element != null ? element.get() : null;
 		if (value != null && !type.isInstance(value)) {
 			throw new IllegalStateException("Cached value is not of required type [" + type.getName() + "]: " + value);
 		}

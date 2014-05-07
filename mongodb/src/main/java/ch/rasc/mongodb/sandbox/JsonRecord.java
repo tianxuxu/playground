@@ -3,11 +3,11 @@ package ch.rasc.mongodb.sandbox;
 import java.io.IOException;
 import java.util.List;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class JsonRecord {
 	private List<String> result;
@@ -25,7 +25,7 @@ public class JsonRecord {
 
 		@Override
 		public void serialize(List<String> value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-		JsonProcessingException {
+				JsonProcessingException {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("[");

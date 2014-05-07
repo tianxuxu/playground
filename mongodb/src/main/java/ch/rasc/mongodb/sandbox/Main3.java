@@ -1,7 +1,6 @@
 package ch.rasc.mongodb.sandbox;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.bson.types.ObjectId;
 
@@ -43,7 +42,7 @@ public class Main3 {
 			while (cursor.hasNext()) {
 				DBObject obj = cursor.next();
 				ObjectId oid = (ObjectId) obj.get("_id");
-				System.out.println(new Date(oid.getTime()));
+				System.out.println(oid.getDate());
 			}
 		}
 

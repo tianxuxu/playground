@@ -37,14 +37,11 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 		}
 
 		/*
-		 * // Create the dispatcher servlet's Spring application context
-		 * AnnotationConfigWebApplicationContext dispatcherContext = new
-		 * AnnotationConfigWebApplicationContext();
-		 * dispatcherContext.register(DispatcherConfig.class); // Register and
-		 * map the dispatcher servlet ServletRegistration.Dynamic dispatcher =
-		 * container.addServlet("dispatcher", new
-		 * DispatcherServlet(dispatcherContext));
-		 * dispatcher.setLoadOnStartup(1); dispatcher.addMapping("/");
+		 * // Create the dispatcher servlet's Spring application context AnnotationConfigWebApplicationContext
+		 * dispatcherContext = new AnnotationConfigWebApplicationContext();
+		 * dispatcherContext.register(DispatcherConfig.class); // Register and map the dispatcher servlet
+		 * ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new
+		 * DispatcherServlet(dispatcherContext)); dispatcher.setLoadOnStartup(1); dispatcher.addMapping("/");
 		 */
 
 	}

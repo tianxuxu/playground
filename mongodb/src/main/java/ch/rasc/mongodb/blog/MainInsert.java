@@ -45,7 +45,6 @@ public class MainInsert {
 			System.out.println(e.getMessage());
 		}
 
-
 		// List<DBObject> users = new ArrayList<DBObject>();
 		// users.add(user);
 		// collection.insert(users);

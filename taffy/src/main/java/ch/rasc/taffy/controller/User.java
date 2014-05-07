@@ -1,9 +1,10 @@
 package ch.rasc.taffy.controller;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class User {
 

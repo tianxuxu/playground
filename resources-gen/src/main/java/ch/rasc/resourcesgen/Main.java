@@ -10,8 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -23,8 +25,6 @@ import org.yaml.snakeyaml.Yaml;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 public class Main {
 
@@ -88,11 +88,11 @@ public class Main {
 
 		Path srcDirPath = Paths.get(sourcedir);
 
-		Map<String, Object> scopes = Maps.newHashMap();
+		Map<String, Object> scopes = new HashMap<>();
 		scopes.put("version", version);
 		scopes.put("groupId", groupId);
 
-		Set<Path> projectDirs = Sets.newTreeSet();
+		Set<Path> projectDirs = new TreeSet<>();
 
 		for (Map.Entry<String, String> entry : files.entrySet()) {
 			String fileName = entry.getKey();

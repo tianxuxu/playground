@@ -37,7 +37,7 @@ public class TradeServer {
 					buys.poll(100, TimeUnit.MILLISECONDS);
 					sells.poll(100, TimeUnit.MILLISECONDS);
 				} catch (InterruptedException e) {
-					//nothing here
+					// nothing here
 				}
 			}
 		}
@@ -63,6 +63,8 @@ public class TradeServer {
 		case SELL:
 			sells.add(o);
 			break;
+		default:
+			break;
 		}
 
 		return o;
@@ -72,7 +74,7 @@ public class TradeServer {
 		return new Trade(counter.incrementAndGet()).setSymbol(SYMBOLS[RANDOM.nextInt(SYMBOLS.length)])
 				.setQuantity(RANDOM.nextInt(500))
 				.setPrice(Float.parseFloat(RANDOM.nextInt(700) + "." + RANDOM.nextInt(99)))
-				.setType((RANDOM.nextInt() % 2 == 0 ? Type.BUY : Type.SELL));
+				.setType(RANDOM.nextInt() % 2 == 0 ? Type.BUY : Type.SELL);
 	}
 
 	public void stop() {
