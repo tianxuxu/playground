@@ -51,7 +51,8 @@ public class Encrypt {
 				zos.setLevel(9);
 				Files.walk(inputDirectory).filter(file -> !Files.isDirectory(file)).peek(System.out::println)
 						.forEach(Unchecked.consumer(file -> {
-							final String name = inputDirectory.getParent().relativize(file).toString();
+							String name = inputDirectory.getParent().relativize(file).toString();
+							name = name.replace('\\', '/');
 							zos.putNextEntry(new ZipEntry(name));
 							try (FileChannel in = FileChannel.open(file, StandardOpenOption.READ)) {
 								in.transferTo(0, in.size(), out);
