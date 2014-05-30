@@ -20,7 +20,8 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 
 	private static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-	private static final MediaType EVENT_STREAM_MEDIATYPE = new MediaType("text", "event-stream", UTF8_CHARSET);
+	private static final MediaType EVENT_STREAM_MEDIATYPE = new MediaType(
+			"text", "event-stream", UTF8_CHARSET);
 
 	@Override
 	public boolean canRead(Class<?> clazz, MediaType mediaType) {
@@ -39,13 +40,15 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 	}
 
 	@Override
-	public Object read(Class<? extends Object> clazz, HttpInputMessage inputMessage) throws IOException,
+	public Object read(Class<? extends Object> clazz,
+			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {
 		throw new UnsupportedOperationException("read not supported");
 	}
 
 	@Override
-	public void write(Object t, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
+	public void write(Object t, MediaType contentType,
+			HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
 
 		HttpHeaders headers = outputMessage.getHeaders();
@@ -69,12 +72,14 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 			if (event.getRetry() != null) {
 				sb.append("retry:").append(event.getRetry()).append("\n");
 			}
-		} else {
+		}
+		else {
 			sb.append("data:").append(t).append("\n");
 		}
 
 		sb.append("\n");
-		FileCopyUtils.copy(sb.toString(), new OutputStreamWriter(outputMessage.getBody(), UTF8_CHARSET));
+		FileCopyUtils.copy(sb.toString(),
+				new OutputStreamWriter(outputMessage.getBody(), UTF8_CHARSET));
 	}
 
 }

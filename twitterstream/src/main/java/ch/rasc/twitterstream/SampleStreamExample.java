@@ -14,8 +14,8 @@ import com.twitter.hbc.httpclient.auth.OAuth1;
 
 public class SampleStreamExample {
 
-	public static void oauth(String consumerKey, String consumerSecret, String token, String secret)
-			throws InterruptedException {
+	public static void oauth(String consumerKey, String consumerSecret,
+			String token, String secret) throws InterruptedException {
 		// Create an appropriately sized blocking queue
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
 
@@ -25,13 +25,16 @@ public class SampleStreamExample {
 		StatusesSampleEndpoint endpoint = new StatusesSampleEndpoint();
 		endpoint.stallWarnings(false);
 
-		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
+		Authentication auth = new OAuth1(consumerKey, consumerSecret, token,
+				secret);
 		// Authentication auth = new
 		// com.twitter.hbc.httpclient.auth.BasicAuth(username, password);
 
 		// Create a new BasicClient. By default gzip is enabled.
-		BasicClient client = new ClientBuilder().name("sampleExampleClient").hosts(Constants.STREAM_HOST)
-				.endpoint(endpoint).authentication(auth).processor(new StringDelimitedProcessor(queue)).build();
+		BasicClient client = new ClientBuilder().name("sampleExampleClient")
+				.hosts(Constants.STREAM_HOST).endpoint(endpoint)
+				.authentication(auth)
+				.processor(new StringDelimitedProcessor(queue)).build();
 
 		// Establish a connection
 		client.connect();
@@ -39,14 +42,16 @@ public class SampleStreamExample {
 		// Do whatever needs to be done with messages
 		for (int msgRead = 0; msgRead < 1000; msgRead++) {
 			if (client.isDone()) {
-				System.out.println("Client connection closed unexpectedly: " + client.getExitEvent().getMessage());
+				System.out.println("Client connection closed unexpectedly: "
+						+ client.getExitEvent().getMessage());
 				break;
 			}
 
 			String msg = queue.poll(5, TimeUnit.SECONDS);
 			if (msg == null) {
 				System.out.println("Did not receive a message in 5 seconds");
-			} else {
+			}
+			else {
 				System.out.println(msg);
 			}
 		}
@@ -54,13 +59,15 @@ public class SampleStreamExample {
 		client.stop();
 
 		// Print some stats
-		System.out.printf("The client read %d messages!\n", client.getStatsTracker().getNumMessages());
+		System.out.printf("The client read %d messages!\n", client
+				.getStatsTracker().getNumMessages());
 	}
 
 	public static void main(String[] args) {
 		try {
 			SampleStreamExample.oauth(args[0], args[1], args[2], args[3]);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			System.out.println(e);
 		}
 	}

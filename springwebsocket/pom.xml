@@ -14,7 +14,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.0.4.RELEASE</version>
+				<version>4.0.5.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>embeddedtc</artifactId>
-			<version>1.13</version>
+			<version>1.14</version>
 			<scope>provided</scope>
 		</dependency>
 

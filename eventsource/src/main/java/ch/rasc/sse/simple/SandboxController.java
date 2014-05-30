@@ -82,7 +82,8 @@ public class SandboxController {
 
 	@RequestMapping(value = "/lastId", method = RequestMethod.GET, produces = "text/event-stream")
 	@ResponseBody
-	public String lastId(@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
+	public String lastId(
+			@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
 		System.out.println("Last Event Id: " + lastEventId);
 
 		StringBuilder sb = new StringBuilder();

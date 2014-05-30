@@ -27,7 +27,8 @@ public class Main {
 		String path;
 		if (args.length == 1) {
 			path = args[0];
-		} else {
+		}
+		else {
 			// path = "e:/u_ex130108.log";
 			path = "e:/access.log";
 		}
@@ -36,8 +37,10 @@ public class Main {
 		// "POST /wp-cron.php?doing_wp_cron=1358036633.5729498863220214843750 HTTP/1.0"
 		// 200 211 "-" "WordPress/1988; http://blog.rasc.ch"
 
-		final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
-		final LookupService cl = new LookupService("e:/GeoLiteCity.dat", LookupService.GEOIP_INDEX_CACHE);
+		final UserAgentStringParser parser = UADetectorServiceFactory
+				.getResourceModuleParser();
+		final LookupService cl = new LookupService("e:/GeoLiteCity.dat",
+				LookupService.GEOIP_INDEX_CACHE);
 
 		Path p = Paths.get(path);
 		Tailer tailer = new Tailer(p.toFile(), new TailerListenerAdapter() {
@@ -49,13 +52,16 @@ public class Main {
 				if (splittedLine.size() == 11/* 14 */) {
 					String userAgent = splittedLine.get(9);
 					ReadableUserAgent ua = parser.parse(userAgent);
-					System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
+					System.out.print(ua.getOperatingSystem().getFamilyName()
+							+ ":");
 
 					String ip = splittedLine.get(8);
 					Location l = cl.getLocation(ip);
 					if (l != null) {
-						System.out.printf("%s=%s:%s:%f:%f\n", ip, l.countryName, l.city, l.latitude, l.longitude);
-					} else {
+						System.out.printf("%s=%s:%s:%f:%f\n", ip,
+								l.countryName, l.city, l.latitude, l.longitude);
+					}
+					else {
 						System.out.println();
 					}
 				}

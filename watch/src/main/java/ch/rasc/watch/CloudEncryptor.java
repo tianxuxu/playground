@@ -36,20 +36,25 @@ public class CloudEncryptor {
 
 	static final Map<WatchKey, Path> watchKeyToPathMap = new HashMap<>();
 
-	private static void registerTree(final WatchService watchService, Path start) throws IOException {
+	private static void registerTree(final WatchService watchService, Path start)
+			throws IOException {
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-				WatchKey key = dir.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
-						StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+			public FileVisitResult preVisitDirectory(Path dir,
+					BasicFileAttributes attrs) throws IOException {
+				WatchKey key = dir.register(watchService,
+						StandardWatchEventKinds.ENTRY_CREATE,
+						StandardWatchEventKinds.ENTRY_MODIFY,
+						StandardWatchEventKinds.ENTRY_DELETE);
 				watchKeyToPathMap.put(key, dir);
 				return FileVisitResult.CONTINUE;
 			}
 		});
 	}
 
-	private static void watch(WatchService watchService, Cipher cipher, Path localDirectory, Path cloudDirectory)
-			throws IOException, InterruptedException {
+	private static void watch(WatchService watchService, Cipher cipher,
+			Path localDirectory, Path cloudDirectory) throws IOException,
+			InterruptedException {
 		registerTree(watchService, localDirectory);
 		registerTree(watchService, cloudDirectory);
 
@@ -62,30 +67,42 @@ public class CloudEncryptor {
 				Path directory = watchKeyToPathMap.get(key);
 				Path child = directory.resolve(eventPath);
 
-				if (kind == StandardWatchEventKinds.ENTRY_CREATE && Files.isDirectory(child)) {
+				if (kind == StandardWatchEventKinds.ENTRY_CREATE
+						&& Files.isDirectory(child)) {
 					registerTree(watchService, child);
-				} else if ((kind == StandardWatchEventKinds.ENTRY_MODIFY || kind == StandardWatchEventKinds.ENTRY_CREATE)
+				}
+				else if ((kind == StandardWatchEventKinds.ENTRY_MODIFY || kind == StandardWatchEventKinds.ENTRY_CREATE)
 						&& !Files.isDirectory(child)) {
-					if (child.toString().endsWith("_enc") && child.startsWith(cloudDirectory)) {
+					if (child.toString().endsWith("_enc")
+							&& child.startsWith(cloudDirectory)) {
 						// nothing here right now
-					} else if (!child.toString().endsWith("_enc") && child.startsWith(localDirectory)) {
+					}
+					else if (!child.toString().endsWith("_enc")
+							&& child.startsWith(localDirectory)) {
 
 						System.out.println("encrypt: " + child);
-						Path encryptedFile = child.resolveSibling(Paths.get(child.getFileName().toString() + "_enc"));
+						Path encryptedFile = child.resolveSibling(Paths
+								.get(child.getFileName().toString() + "_enc"));
 
 						while (true) {
-							try (ByteChannel channel = Files.newByteChannel(child)) {
+							try (ByteChannel channel = Files
+									.newByteChannel(child)) {
 								break;
-							} catch (FileSystemException fse) {
+							}
+							catch (FileSystemException fse) {
 								TimeUnit.SECONDS.sleep(1);
 							}
 						}
 
 						try (InputStream is = Files.newInputStream(child);
-								BufferedInputStream bufferedIn = new BufferedInputStream(is);
-								OutputStream out = Files.newOutputStream(encryptedFile);
-								CipherOutputStream cos = new CipherOutputStream(out, cipher);
-								DeflaterOutputStream dos = new DeflaterOutputStream(cos)) {
+								BufferedInputStream bufferedIn = new BufferedInputStream(
+										is);
+								OutputStream out = Files
+										.newOutputStream(encryptedFile);
+								CipherOutputStream cos = new CipherOutputStream(
+										out, cipher);
+								DeflaterOutputStream dos = new DeflaterOutputStream(
+										cos)) {
 
 							final byte[] buffer = new byte[1024];
 							int n = 0;
@@ -94,24 +111,36 @@ public class CloudEncryptor {
 							}
 						}
 
-						Path cloudPath = cloudDirectory.resolve(encryptedFile.subpath(localDirectory.getNameCount(),
-								encryptedFile.getNameCount()));
+						Path cloudPath = cloudDirectory.resolve(encryptedFile
+								.subpath(localDirectory.getNameCount(),
+										encryptedFile.getNameCount()));
 
-						Files.move(encryptedFile, cloudPath, StandardCopyOption.REPLACE_EXISTING);
+						Files.move(encryptedFile, cloudPath,
+								StandardCopyOption.REPLACE_EXISTING);
 
 					}
-				} else if (kind == StandardWatchEventKinds.ENTRY_DELETE && !Files.isDirectory(child)) {
+				}
+				else if (kind == StandardWatchEventKinds.ENTRY_DELETE
+						&& !Files.isDirectory(child)) {
 					System.out.println("DELETE: " + child);
-					if (child.toString().endsWith("_enc") && child.startsWith(cloudDirectory)) {
+					if (child.toString().endsWith("_enc")
+							&& child.startsWith(cloudDirectory)) {
 						String fileName = child.getFileName().toString();
-						Path plainFile = child.resolveSibling(Paths.get(fileName.substring(0, fileName.length() - 4)));
-						Path localFile = localDirectory.resolve(plainFile.subpath(cloudDirectory.getNameCount(),
-								plainFile.getNameCount()));
+						Path plainFile = child.resolveSibling(Paths
+								.get(fileName.substring(0,
+										fileName.length() - 4)));
+						Path localFile = localDirectory.resolve(plainFile
+								.subpath(cloudDirectory.getNameCount(),
+										plainFile.getNameCount()));
 						Files.deleteIfExists(localFile);
-					} else if (!child.toString().endsWith("_enc") && child.startsWith(localDirectory)) {
-						Path encryptedFile = child.resolveSibling(Paths.get(child.getFileName().toString() + "_enc"));
-						Path cloudFile = cloudDirectory.resolve(encryptedFile.subpath(localDirectory.getNameCount(),
-								encryptedFile.getNameCount()));
+					}
+					else if (!child.toString().endsWith("_enc")
+							&& child.startsWith(localDirectory)) {
+						Path encryptedFile = child.resolveSibling(Paths
+								.get(child.getFileName().toString() + "_enc"));
+						Path cloudFile = cloudDirectory.resolve(encryptedFile
+								.subpath(localDirectory.getNameCount(),
+										encryptedFile.getNameCount()));
 						Files.deleteIfExists(cloudFile);
 					}
 				}
@@ -129,7 +158,8 @@ public class CloudEncryptor {
 
 	}
 
-	public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+	public static void main(String[] args) throws NoSuchAlgorithmException,
+			NoSuchPaddingException, InvalidKeyException {
 
 		String key = "97SrFHfWqOlp3vfIOqw9xA==";
 
@@ -141,9 +171,11 @@ public class CloudEncryptor {
 
 		Path localDir = Paths.get("C:/localDir");
 		Path cloudDir = Paths.get("C:/cloudDir");
-		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+		try (WatchService watchService = FileSystems.getDefault()
+				.newWatchService()) {
 			watch(watchService, cipher, localDir, cloudDir);
-		} catch (IOException | InterruptedException ex) {
+		}
+		catch (IOException | InterruptedException ex) {
 			ex.printStackTrace();
 		}
 	}

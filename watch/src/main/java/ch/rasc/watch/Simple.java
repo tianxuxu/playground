@@ -12,13 +12,17 @@ import java.nio.file.WatchService;
 
 public class Simple {
 
-	public static void main(String[] args) throws IOException, InterruptedException {
-		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
+		try (WatchService watchService = FileSystems.getDefault()
+				.newWatchService()) {
 
 			Path path = Paths.get("C:/watchme");
 
-			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,
-					StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.OVERFLOW);
+			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+					StandardWatchEventKinds.ENTRY_MODIFY,
+					StandardWatchEventKinds.ENTRY_DELETE,
+					StandardWatchEventKinds.OVERFLOW);
 
 			while (true) {
 				WatchKey key = watchService.take();

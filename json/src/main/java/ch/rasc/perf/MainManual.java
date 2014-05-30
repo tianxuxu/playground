@@ -71,13 +71,15 @@ public class MainManual {
 				user.setFailedLogins(df.getNumberUpTo(3));
 				user.setFirstName(df.getFirstName());
 				user.setId(1L);
-				user.setLocale(df.getItem(new String[] { "de", "en", "fr", "it" }));
+				user.setLocale(df
+						.getItem(new String[] { "de", "en", "fr", "it" }));
 				if (df.chance(98)) {
 					user.setLockedOut(df.getDate(today, 0, 100));
 				}
 				user.setDob(df.getBirthDate());
 				user.setName(df.getLastName());
-				user.setRole(df.getItem(new String[] { "ADMIN", "USER", "READ" }));
+				user.setRole(df
+						.getItem(new String[] { "ADMIN", "USER", "READ" }));
 				user.setUserName(df.getRandomChars(5, 8));
 
 				String value = toJson(jsonFactory, user);
@@ -92,7 +94,8 @@ public class MainManual {
 
 	}
 
-	private static String toJson(JsonFactory jsonFactory, User user) throws IOException {
+	private static String toJson(JsonFactory jsonFactory, User user)
+			throws IOException {
 		StringWriter sw = new StringWriter();
 		try (JsonGenerator jg = jsonFactory.createGenerator(sw)) {
 			jg.writeStartObject();
@@ -108,13 +111,15 @@ public class MainManual {
 
 			if (user.getLockedOut() != null) {
 				jg.writeNumberField("lockedOut", user.getLockedOut().getTime());
-			} else {
+			}
+			else {
 				jg.writeNullField("lockedOut");
 			}
 
 			if (user.getDob() != null) {
 				jg.writeNumberField("dob", user.getDob().getTime());
-			} else {
+			}
+			else {
 				jg.writeNullField("dob");
 			}
 
@@ -124,7 +129,8 @@ public class MainManual {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonFactory jsonFactory, String json) throws IOException {
+	private static User toObject(JsonFactory jsonFactory, String json)
+			throws IOException {
 		User user = new User();
 
 		try (JsonParser parser = jsonFactory.createParser(json)) {
@@ -159,21 +165,24 @@ public class MainManual {
 			JsonToken token = parser.nextValue(); // failedLogins
 			if (token == JsonToken.VALUE_NULL) {
 				user.setFailedLogins(null);
-			} else {
+			}
+			else {
 				user.setFailedLogins(parser.getIntValue());
 			}
 
 			token = parser.nextValue(); // lockedOut
 			if (token == JsonToken.VALUE_NULL) {
 				user.setLockedOut(null);
-			} else {
+			}
+			else {
 				user.setLockedOut(new Date(parser.getLongValue()));
 			}
 
 			token = parser.nextValue(); // dob
 			if (token == JsonToken.VALUE_NULL) {
 				user.setDob(null);
-			} else {
+			}
+			else {
 				user.setDob(new Date(parser.getLongValue()));
 			}
 		}

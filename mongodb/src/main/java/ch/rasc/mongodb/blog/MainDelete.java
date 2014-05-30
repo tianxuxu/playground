@@ -12,7 +12,8 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 public class MainDelete {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException,
+			MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");

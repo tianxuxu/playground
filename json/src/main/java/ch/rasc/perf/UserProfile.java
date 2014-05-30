@@ -46,9 +46,11 @@ public class UserProfile {
 
 	private List<Like> likes;
 
-	public UserProfile(String id, Long profileViews, String email, UserNames name, Integer gender, String birthday,
-			List<Location> locations, String image, String cover, String aboutMe, String etag, Boolean active,
-			Boolean deleted, Date latsAccsess, List<Like> likes) {
+	public UserProfile(String id, Long profileViews, String email,
+			UserNames name, Integer gender, String birthday,
+			List<Location> locations, String image, String cover,
+			String aboutMe, String etag, Boolean active, Boolean deleted,
+			Date latsAccsess, List<Like> likes) {
 
 		this.id = id;
 		this.profileViews = profileViews;

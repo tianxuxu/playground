@@ -23,7 +23,8 @@ public class Main {
 			Path configFile = Paths.get("./config.yaml");
 
 			if (!Files.exists(configFile)) {
-				URL myLocationURL = Main.class.getProtectionDomain().getCodeSource().getLocation();
+				URL myLocationURL = Main.class.getProtectionDomain()
+						.getCodeSource().getLocation();
 				Path myPath = Paths.get(myLocationURL.toURI());
 				Path myDir = myPath.getParent();
 
@@ -37,11 +38,13 @@ public class Main {
 					config = yaml.loadAs(is, Config.class);
 				}
 				new MailDeleter(config).run();
-			} else {
+			}
+			else {
 				logger.error("config file not found");
 			}
 
-		} catch (URISyntaxException | IOException e) {
+		}
+		catch (URISyntaxException | IOException e) {
 			logger.error("error", e);
 		}
 

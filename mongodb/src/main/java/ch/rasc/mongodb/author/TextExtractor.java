@@ -36,9 +36,11 @@ public class TextExtractor {
 		try (Reader reader = new ParsingReader(file)) {
 			String text = IOUtils.toString(reader);
 			return text;
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e) {
 			LoggerFactory.getLogger(getClass()).error("extractText", e);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			LoggerFactory.getLogger(getClass()).error("extractText", e);
 		}
 

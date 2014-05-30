@@ -22,10 +22,12 @@ import com.mongodb.util.JSON;
 
 public class Main {
 
-	public static void main(String[] args) throws MongoException, JsonParseException, JsonMappingException, IOException {
+	public static void main(String[] args) throws MongoException,
+			JsonParseException, JsonMappingException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
-		List<Map<String, Object>> userData = mapper.readValue(Main.class.getResourceAsStream("users.json"), List.class);
+		List<Map<String, Object>> userData = mapper.readValue(
+				Main.class.getResourceAsStream("users.json"), List.class);
 
 		MongoClient mongo = new MongoClient("localhost");
 		mongo.setWriteConcern(WriteConcern.SAFE);
@@ -47,7 +49,8 @@ public class Main {
 
 			try {
 				row.put("dob", df.parse(dateOfBirth));
-			} catch (ParseException e) {
+			}
+			catch (ParseException e) {
 				e.printStackTrace();
 			}
 

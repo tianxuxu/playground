@@ -21,8 +21,9 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 		container.addListener(new ContextLoaderListener(rootContext));
 
 		// Register and map the dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
-				new GenericWebApplicationContext()));
+		ServletRegistration.Dynamic dispatcher = container.addServlet(
+				"dispatcher", new DispatcherServlet(
+						new GenericWebApplicationContext()));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/action/*");
 

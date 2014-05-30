@@ -23,8 +23,8 @@ public class Svg2PngServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
 		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");
@@ -36,32 +36,40 @@ public class Svg2PngServlet extends HttpServlet {
 		if ("image/jpeg".equals(type)) {
 			response.setContentType("image/jpeg");
 			postfix = "jpg";
-		} else if ("application/pdf".equals(type)) {
+		}
+		else if ("application/pdf".equals(type)) {
 			response.setContentType("application/pdf");
 			postfix = "pdf";
-		} else {
+		}
+		else {
 			response.setContentType("image/png");
 			postfix = "png";
 		}
 
-		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart." + postfix + "\";");
+		response.setHeader("Content-Disposition",
+				"attachment; filename=\"mixedchart." + postfix + "\";");
 
-		try (StringReader stringReader = new StringReader(svg); OutputStream out = response.getOutputStream()) {
+		try (StringReader stringReader = new StringReader(svg);
+				OutputStream out = response.getOutputStream()) {
 			try {
 				TranscoderInput input = new TranscoderInput(stringReader);
 				TranscoderOutput output = new TranscoderOutput(out);
 
 				if ("image/jpeg".equals(type)) {
 					JPEGTranscoder jpegTranscoder = new JPEGTranscoder();
-					jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 1F);
+					jpegTranscoder.addTranscodingHint(
+							JPEGTranscoder.KEY_QUALITY, 1F);
 					jpegTranscoder.transcode(input, output);
-				} else if ("application/pdf".equals(type)) {
+				}
+				else if ("application/pdf".equals(type)) {
 					new PDFTranscoder().transcode(input, output);
-				} else {
+				}
+				else {
 					new PNGTranscoder().transcode(input, output);
 				}
 
-			} catch (TranscoderException e) {
+			}
+			catch (TranscoderException e) {
 				throw new ServletException(e);
 			}
 		}

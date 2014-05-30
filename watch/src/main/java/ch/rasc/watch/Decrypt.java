@@ -26,8 +26,10 @@ import javax.crypto.spec.IvParameterSpec;
 
 public class Decrypt {
 
-	public static void main(String[] args) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException,
-			NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+	public static void main(String[] args) throws IOException,
+			NoSuchAlgorithmException, InvalidKeySpecException,
+			NoSuchPaddingException, InvalidKeyException,
+			InvalidAlgorithmParameterException {
 
 		if (args.length == 3) {
 			Path inputFile = Paths.get(args[0]);
@@ -35,7 +37,8 @@ public class Decrypt {
 
 			String password = args[2];
 
-			SecretKey key = Encrypt.createSecretKey(password, inputFile.getFileName().toString());
+			SecretKey key = Encrypt.createSecretKey(password, inputFile
+					.getFileName().toString());
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 
@@ -48,23 +51,29 @@ public class Decrypt {
 					ReadableByteChannel inChannel = Channels.newChannel(zis)) {
 				while ((entry = zis.getNextEntry()) != null) {
 
-					Path entryFile = outputDir.resolve(Paths.get(entry.getName()));
+					Path entryFile = outputDir.resolve(Paths.get(entry
+							.getName()));
 					System.out.println(entryFile);
 
 					Files.createDirectories(entryFile.getParent());
-					try (FileChannel out = FileChannel.open(entryFile, StandardOpenOption.WRITE,
-							StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+					try (FileChannel out = FileChannel.open(entryFile,
+							StandardOpenOption.WRITE,
+							StandardOpenOption.CREATE,
+							StandardOpenOption.TRUNCATE_EXISTING)) {
 						copy(inChannel, out);
 					}
 				}
 			}
-		} else {
-			System.out.println("java ch.rasc.watch.Decrypt <encryptedZipInputFile> <outputFile> <password>");
+		}
+		else {
+			System.out
+					.println("java ch.rasc.watch.Decrypt <encryptedZipInputFile> <outputFile> <password>");
 		}
 
 	}
 
-	public static void copy(final ReadableByteChannel src, final WritableByteChannel dest) throws IOException {
+	public static void copy(final ReadableByteChannel src,
+			final WritableByteChannel dest) throws IOException {
 		final ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
 
 		while (src.read(buffer) != -1) {

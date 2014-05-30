@@ -21,10 +21,12 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @EnableAsync(proxyTargetClass = true)
 @EnableScheduling
-public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer, AsyncConfigurer {
+public class WebConfig extends WebMvcConfigurerAdapter implements
+		WebSocketConfigurer, AsyncConfigurer {
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(
+			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 

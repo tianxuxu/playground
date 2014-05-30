@@ -21,10 +21,12 @@ public class JsonRecord {
 		this.result = result;
 	}
 
-	private final static class CollectionSerializer extends JsonSerializer<List<String>> {
+	private final static class CollectionSerializer extends
+			JsonSerializer<List<String>> {
 
 		@Override
-		public void serialize(List<String> value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+		public void serialize(List<String> value, JsonGenerator jgen,
+				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
 
 			StringBuilder sb = new StringBuilder();

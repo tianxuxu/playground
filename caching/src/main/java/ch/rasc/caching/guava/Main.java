@@ -7,7 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class)) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				Config.class)) {
 			Calculator calculator = ctx.getBean(Calculator.class);
 
 			System.out.println("output: " + calculator.doSomething("1"));
@@ -33,7 +34,8 @@ public class Main {
 			try {
 				System.out.println("Waiting 70 seconds");
 				TimeUnit.SECONDS.sleep(70);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				// do nothing
 			}
 			System.out.println("3rd call");

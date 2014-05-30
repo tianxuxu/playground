@@ -11,7 +11,8 @@ public class JettyNoLock {
 
 		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
 			return;
 		}

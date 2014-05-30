@@ -11,12 +11,14 @@ public class ReadCsv4 {
 	public ReadCsv4() throws IOException {
 
 		try (InputStream is = getClass().getResourceAsStream("/test4.csv");
-				BufferedReader br = new BufferedReader(new InputStreamReader(is));
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(is));
 				CSVReader reader = new CSVReader(br, ';')) {
 
 			List<String[]> lines = reader.readAll();
 			for (String[] line : lines) {
-				System.out.printf("%3d %-15s %s\n", Integer.valueOf(line[2]), line[0], line[1]);
+				System.out.printf("%3d %-15s %s\n", Integer.valueOf(line[2]),
+						line[0], line[1]);
 			}
 
 		}

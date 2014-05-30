@@ -19,7 +19,8 @@ import com.mongodb.DBObject;
 public class RawAuthor implements Author {
 
 	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author")) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				"ch.rasc.mongodb.author")) {
 			RawAuthor author = ctx.getBean("author", RawAuthor.class);
 			author.writeText(1000);
 		}

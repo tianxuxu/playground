@@ -9,7 +9,8 @@ public class Simple {
 
 	public static void main(String[] args) {
 
-		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("simple");
+		GraphDatabaseService graphDb = new GraphDatabaseFactory()
+				.newEmbeddedDatabase("simple");
 		try (Transaction tx = graphDb.beginTx()) {
 
 			Node john = graphDb.createNode();

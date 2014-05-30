@@ -16,21 +16,25 @@ import org.neo4j.kernel.StandardExpander;
 public class Find {
 
 	public static void main(String[] args) {
-		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
+		GraphDatabaseService graphDb = new GraphDatabaseFactory()
+				.newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
 
-		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();
+		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)")
+				.getSingle();
 
 		String actorName = "Craig, Daniel (I)";
 
 		// String actorName = "McAvoy, James";
 		Node actorNode = index.get("actor", actorName).getSingle();
 
-		PathExpander<RelationshipType> expander = StandardExpander.create(RelTypes.ACTS_IN, Direction.BOTH);
+		PathExpander<RelationshipType> expander = StandardExpander.create(
+				RelTypes.ACTS_IN, Direction.BOTH);
 		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
 		Path path = finder.findSinglePath(actorNode, kevinBaconNode);
 
-		System.out.printf("%s's Bacon number is %d\n", actorName, path.length() / 2);
+		System.out.printf("%s's Bacon number is %d\n", actorName,
+				path.length() / 2);
 
 		String movieTitle = null;
 		String prevActor = null;
@@ -41,8 +45,10 @@ public class Find {
 			if (movieTitle == null) {
 				movieTitle = (String) end.getProperty("title");
 				prevActor = (String) start.getProperty("actor");
-			} else {
-				System.out.printf("%s and %s appeared in %s.\n", prevActor, start.getProperty("actor"), movieTitle);
+			}
+			else {
+				System.out.printf("%s and %s appeared in %s.\n", prevActor,
+						start.getProperty("actor"), movieTitle);
 				movieTitle = null;
 				prevActor = null;
 			}

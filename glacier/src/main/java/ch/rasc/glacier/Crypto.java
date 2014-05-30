@@ -29,9 +29,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Crypto {
 
-	public static void writeEncryptedFile(String password, Path input, Path output) throws IOException,
-			IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeySpecException, InvalidKeyException, InvalidParameterSpecException {
+	public static void writeEncryptedFile(String password, Path input,
+			Path output) throws IOException, IllegalBlockSizeException,
+			BadPaddingException, NoSuchAlgorithmException,
+			NoSuchPaddingException, InvalidKeySpecException,
+			InvalidKeyException, InvalidParameterSpecException {
 
 		byte[] salt = new byte[8];
 		SecureRandom rnd = new SecureRandom();
@@ -42,11 +44,13 @@ public class Crypto {
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		cipher.init(Cipher.ENCRYPT_MODE, secret);
 		AlgorithmParameters params = cipher.getParameters();
-		byte[] initVector = params.getParameterSpec(IvParameterSpec.class).getIV();
+		byte[] initVector = params.getParameterSpec(IvParameterSpec.class)
+				.getIV();
 
 		byte[] inbuf = new byte[1024];
 
-		try (InputStream is = Files.newInputStream(input, StandardOpenOption.READ);
+		try (InputStream is = Files.newInputStream(input,
+				StandardOpenOption.READ);
 				OutputStream os = Files.newOutputStream(output)) {
 
 			os.write(salt);
@@ -66,11 +70,14 @@ public class Crypto {
 
 	}
 
-	public static void readEncryptedFile(String password, Path input, Path output) throws IllegalBlockSizeException,
-			BadPaddingException, IOException, InvalidKeyException, InvalidAlgorithmParameterException,
-			NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException {
+	public static void readEncryptedFile(String password, Path input,
+			Path output) throws IllegalBlockSizeException, BadPaddingException,
+			IOException, InvalidKeyException,
+			InvalidAlgorithmParameterException, NoSuchAlgorithmException,
+			InvalidKeySpecException, NoSuchPaddingException {
 
-		try (InputStream is = Files.newInputStream(input, StandardOpenOption.READ);
+		try (InputStream is = Files.newInputStream(input,
+				StandardOpenOption.READ);
 				OutputStream os = Files.newOutputStream(output)) {
 
 			byte[] salt = new byte[8];
@@ -82,7 +89,8 @@ public class Crypto {
 			SecretKey secret = createKey(password, salt);
 
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-			cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(initVector));
+			cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(
+					initVector));
 
 			byte[] inbuf = new byte[1024];
 
@@ -99,9 +107,10 @@ public class Crypto {
 
 	}
 
-	private static SecretKey createKey(String password, byte[] salt) throws NoSuchAlgorithmException,
-			InvalidKeySpecException {
-		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+	private static SecretKey createKey(String password, byte[] salt)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
+		SecretKeyFactory factory = SecretKeyFactory
+				.getInstance("PBKDF2WithHmacSHA1");
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
 
 		SecretKey tmp = factory.generateSecret(spec);
@@ -109,12 +118,16 @@ public class Crypto {
 		return secret;
 	}
 
-	public static void main(String[] args) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
-			NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException, InvalidParameterSpecException,
+	public static void main(String[] args) throws InvalidKeyException,
+			IllegalBlockSizeException, BadPaddingException,
+			NoSuchAlgorithmException, NoSuchPaddingException,
+			InvalidKeySpecException, InvalidParameterSpecException,
 			IOException, InvalidAlgorithmParameterException {
 
-		writeEncryptedFile("mypass", Paths.get("input.txt"), Paths.get("encrypted.aes"));
-		readEncryptedFile("mypass", Paths.get("encrypted.aes"), Paths.get("decrypted.txt"));
+		writeEncryptedFile("mypass", Paths.get("input.txt"),
+				Paths.get("encrypted.aes"));
+		readEncryptedFile("mypass", Paths.get("encrypted.aes"),
+				Paths.get("decrypted.txt"));
 	}
 
 }

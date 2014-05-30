@@ -26,14 +26,15 @@ public class DataService {
 	public void readData() throws IOException {
 
 		Path tempFile = Files.createTempFile("random", "zip");
-		Files.copy(DataService.class.getResourceAsStream("/randomdata.zip"), tempFile,
-				StandardCopyOption.REPLACE_EXISTING);
+		Files.copy(DataService.class.getResourceAsStream("/randomdata.zip"),
+				tempFile, StandardCopyOption.REPLACE_EXISTING);
 
 		List<User> listBuilder = new ArrayList<>();
 
 		try (FileSystem zipFs = FileSystems.newFileSystem(tempFile, null)) {
 			Path dataPath = zipFs.getPath("/randomdata.csv");
-			try (CSVReader reader = new CSVReader(Files.newBufferedReader(dataPath, StandardCharsets.ISO_8859_1), ';')) {
+			try (CSVReader reader = new CSVReader(Files.newBufferedReader(
+					dataPath, StandardCharsets.ISO_8859_1), ';')) {
 				reader.readNext();
 				String[] line;
 				while ((line = reader.readNext()) != null) {

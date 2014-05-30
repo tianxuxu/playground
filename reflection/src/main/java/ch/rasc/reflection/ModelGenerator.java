@@ -35,9 +35,11 @@ public class ModelGenerator {
 
 		final ModelBean model = new ModelBean();
 
-		if (modelAnnotation != null && StringUtils.hasText(modelAnnotation.value())) {
+		if (modelAnnotation != null
+				&& StringUtils.hasText(modelAnnotation.value())) {
 			model.setName(modelAnnotation.value());
-		} else {
+		}
+		else {
 			model.setName(clazz.getName());
 		}
 
@@ -55,7 +57,8 @@ public class ModelGenerator {
 		BeanInfo bi;
 		try {
 			bi = Introspector.getBeanInfo(clazz);
-		} catch (IntrospectionException e) {
+		}
+		catch (IntrospectionException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -71,12 +74,15 @@ public class ModelGenerator {
 			private final Set<String> fields = new HashSet<>();
 
 			@Override
-			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-				if (Modifier.isPublic(field.getModifiers()) || hasReadMethod.contains(field.getName())) {
+			public void doWith(Field field) throws IllegalArgumentException,
+					IllegalAccessException {
+				if (Modifier.isPublic(field.getModifiers())
+						|| hasReadMethod.contains(field.getName())) {
 					if (fields.contains(field.getName())) {
 						// ignore superclass declarations of fields already
 						// found in a subclass
-					} else {
+					}
+					else {
 						fields.add(field.getName());
 
 						Class<?> type = field.getType();
@@ -90,9 +96,11 @@ public class ModelGenerator {
 						}
 
 						if (mt != null) {
-							ModelFieldBean modelField = new ModelFieldBean(field.getName(), mt);
+							ModelFieldBean modelField = new ModelFieldBean(
+									field.getName(), mt);
 
-							ModelField mf = field.getAnnotation(ModelField.class);
+							ModelField mf = field
+									.getAnnotation(ModelField.class);
 							if (mf != null) {
 								if (StringUtils.hasText(mf.dateFormat())) {
 									modelField.setDateFormat(mf.dateFormat());
@@ -100,13 +108,20 @@ public class ModelGenerator {
 
 								if (StringUtils.hasText(mf.defaultValue())) {
 									if (mt == ModelType.BOOLEAN) {
-										modelField.setDefaultValue(Boolean.parseBoolean(mf.defaultValue()));
-									} else if (mt == ModelType.INTEGER) {
-										modelField.setDefaultValue(Long.valueOf(mf.defaultValue()));
-									} else if (mt == ModelType.FLOAT) {
-										modelField.setDefaultValue(Double.valueOf(mf.defaultValue()));
-									} else {
-										modelField.setDefaultValue(mf.defaultValue());
+										modelField.setDefaultValue(Boolean
+												.parseBoolean(mf.defaultValue()));
+									}
+									else if (mt == ModelType.INTEGER) {
+										modelField.setDefaultValue(Long
+												.valueOf(mf.defaultValue()));
+									}
+									else if (mt == ModelType.FLOAT) {
+										modelField.setDefaultValue(Double
+												.valueOf(mf.defaultValue()));
+									}
+									else {
+										modelField.setDefaultValue(mf
+												.defaultValue());
 									}
 								}
 
@@ -138,7 +153,8 @@ public class ModelGenerator {
 
 		configObject.put("fields", model.getFields().values());
 
-		if (StringUtils.hasText(model.getIdProperty()) && !model.getIdProperty().equals("id")) {
+		if (StringUtils.hasText(model.getIdProperty())
+				&& !model.getIdProperty().equals("id")) {
 			configObject.put("idProperty", model.getIdProperty());
 		}
 
@@ -147,11 +163,14 @@ public class ModelGenerator {
 
 		Map<String, Object> apiObject = new LinkedHashMap<>();
 
-		if (StringUtils.hasText(model.getReadMethod()) && !StringUtils.hasText(model.getCreateMethod())
-				&& !StringUtils.hasText(model.getUpdateMethod()) && !StringUtils.hasText(model.getDestroyMethod())) {
+		if (StringUtils.hasText(model.getReadMethod())
+				&& !StringUtils.hasText(model.getCreateMethod())
+				&& !StringUtils.hasText(model.getUpdateMethod())
+				&& !StringUtils.hasText(model.getDestroyMethod())) {
 			proxyObject.put("directFn", model.getReadMethod());
 
-		} else {
+		}
+		else {
 
 			if (StringUtils.hasText(model.getReadMethod())) {
 				apiObject.put("read", model.getReadMethod());
@@ -186,7 +205,8 @@ public class ModelGenerator {
 
 		if (format == OutputFormat.EXTJS) {
 			modelObject.putAll(configObject);
-		} else {
+		}
+		else {
 			modelObject.put("config", configObject);
 		}
 
@@ -195,21 +215,30 @@ public class ModelGenerator {
 
 		String configObjectString;
 		try {
-			configObjectString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(modelObject);
-		} catch (JsonGenerationException e) {
+			configObjectString = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(modelObject);
+		}
+		catch (JsonGenerationException e) {
 			throw new RuntimeException(e);
-		} catch (JsonMappingException e) {
+		}
+		catch (JsonMappingException e) {
 			throw new RuntimeException(e);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 
 		configObjectString = configObjectString.replace("\"", "'");
-		configObjectString = configObjectString.replaceAll("directFn : '([^']+)'", "directFn : $1");
-		configObjectString = configObjectString.replaceAll("read : '([^']+)'", "read : $1");
-		configObjectString = configObjectString.replaceAll("create : '([^']+)'", "create : $1");
-		configObjectString = configObjectString.replaceAll("update : '([^']+)'", "update : $1");
-		configObjectString = configObjectString.replaceAll("destroy : '([^']+)'", "destroy : $1");
+		configObjectString = configObjectString.replaceAll(
+				"directFn : '([^']+)'", "directFn : $1");
+		configObjectString = configObjectString.replaceAll("read : '([^']+)'",
+				"read : $1");
+		configObjectString = configObjectString.replaceAll(
+				"create : '([^']+)'", "create : $1");
+		configObjectString = configObjectString.replaceAll(
+				"update : '([^']+)'", "update : $1");
+		configObjectString = configObjectString.replaceAll(
+				"destroy : '([^']+)'", "destroy : $1");
 		sb.append(configObjectString);
 		sb.append(");");
 

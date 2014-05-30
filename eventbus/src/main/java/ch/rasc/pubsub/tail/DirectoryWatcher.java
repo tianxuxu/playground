@@ -33,34 +33,43 @@ public class DirectoryWatcher {
 		this.eventBus = eventBus;
 		try {
 			this.watchService = FileSystems.getDefault().newWatchService();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public void start() {
-		new Thread(() -> {
+		new Thread(
+				() -> {
 
-			while (watching) {
-				try {
-					final WatchKey watchKey = watchService.poll(10, TimeUnit.SECONDS);
-					if (watchKey != null) {
-						final List<WatchEvent<?>> events = watchKey.pollEvents();
+					while (watching) {
+						try {
+							final WatchKey watchKey = watchService.poll(10,
+									TimeUnit.SECONDS);
+							if (watchKey != null) {
+								final List<WatchEvent<?>> events = watchKey
+										.pollEvents();
 
-						ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList.builder();
-						for (WatchEvent<?> event : events) {
-							pathEventsBuilder.add(new PathEvent((Path) event.context(), event.kind()));
+								ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList
+										.builder();
+								for (WatchEvent<?> event : events) {
+									pathEventsBuilder.add(new PathEvent(
+											(Path) event.context(), event
+													.kind()));
+								}
+
+								watchKey.reset();
+								eventBus.post(new PathEvents((Path) watchKey
+										.watchable(), pathEventsBuilder.build()));
+							}
 						}
-
-						watchKey.reset();
-						eventBus.post(new PathEvents((Path) watchKey.watchable(), pathEventsBuilder.build()));
+						catch (InterruptedException e) {
+							watching = false;
+						}
 					}
-				} catch (InterruptedException e) {
-					watching = false;
-				}
-			}
 
-		}).start();
+				}).start();
 	}
 
 	@PreDestroy
@@ -71,7 +80,8 @@ public class DirectoryWatcher {
 
 	public void startWatch(Path path) {
 		try {
-			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,
+			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+					StandardWatchEventKinds.ENTRY_DELETE,
 					StandardWatchEventKinds.ENTRY_MODIFY);
 
 			if (!watching) {
@@ -79,7 +89,8 @@ public class DirectoryWatcher {
 				start();
 			}
 
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -25,7 +25,8 @@ public class MainJsonP {
 		Date today = new Date();
 		JsonGeneratorFactory jsonGeneratorFactory = Json
 				.createGeneratorFactory(Collections.<String, Object> emptyMap());
-		JsonParserFactory jsonParserFactory = Json.createParserFactory(Collections.<String, Object> emptyMap());
+		JsonParserFactory jsonParserFactory = Json
+				.createParserFactory(Collections.<String, Object> emptyMap());
 
 		// warm up
 		StopWatch sw = new StopWatch();
@@ -76,13 +77,15 @@ public class MainJsonP {
 				user.setFailedLogins(df.getNumberUpTo(3));
 				user.setFirstName(df.getFirstName());
 				user.setId(1L);
-				user.setLocale(df.getItem(new String[] { "de", "en", "fr", "it" }));
+				user.setLocale(df
+						.getItem(new String[] { "de", "en", "fr", "it" }));
 				if (df.chance(98)) {
 					user.setLockedOut(df.getDate(today, 0, 100));
 				}
 				user.setDob(df.getBirthDate());
 				user.setName(df.getLastName());
-				user.setRole(df.getItem(new String[] { "ADMIN", "USER", "READ" }));
+				user.setRole(df
+						.getItem(new String[] { "ADMIN", "USER", "READ" }));
 				user.setUserName(df.getRandomChars(5, 8));
 
 				String value = toJson(jsonGeneratorFactory, user);
@@ -113,13 +116,15 @@ public class MainJsonP {
 
 			if (user.getLockedOut() != null) {
 				jg.write("lockedOut", user.getLockedOut().getTime());
-			} else {
+			}
+			else {
 				jg.writeNull("lockedOut");
 			}
 
 			if (user.getDob() != null) {
 				jg.write("dob", user.getDob().getTime());
-			} else {
+			}
+			else {
 				jg.writeNull("dob");
 			}
 			jg.writeEnd();
@@ -127,10 +132,12 @@ public class MainJsonP {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonParserFactory jsonParserFactory, String json) {
+	private static User toObject(JsonParserFactory jsonParserFactory,
+			String json) {
 		User user = new User();
 
-		try (JsonParser parser = jsonParserFactory.createParser(new StringReader(json))) {
+		try (JsonParser parser = jsonParserFactory
+				.createParser(new StringReader(json))) {
 
 			parser.next();
 
@@ -167,7 +174,8 @@ public class MainJsonP {
 			Event token = parser.next();
 			if (token == Event.VALUE_TRUE) {
 				user.setEnabled(true);
-			} else {
+			}
+			else {
 				user.setEnabled(false);
 			}
 
@@ -175,7 +183,8 @@ public class MainJsonP {
 			token = parser.next(); // failedLogins
 			if (token == Event.VALUE_NULL) {
 				user.setFailedLogins(null);
-			} else {
+			}
+			else {
 				user.setFailedLogins(parser.getInt());
 			}
 
@@ -183,7 +192,8 @@ public class MainJsonP {
 			token = parser.next(); // lockedOut
 			if (token == Event.VALUE_NULL) {
 				user.setLockedOut(null);
-			} else {
+			}
+			else {
 				user.setLockedOut(new Date(parser.getLong()));
 			}
 
@@ -191,7 +201,8 @@ public class MainJsonP {
 			token = parser.next(); // dob
 			if (token == Event.VALUE_NULL) {
 				user.setDob(null);
-			} else {
+			}
+			else {
 				user.setDob(new Date(parser.getLong()));
 			}
 		}

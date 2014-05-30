@@ -27,7 +27,8 @@ public class StartTomcat {
 
 		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
 			return;
 		}
@@ -38,7 +39,8 @@ public class StartTomcat {
 
 		tomcat.setBaseDir(".");
 		File currentDir = new File(".");
-		Context ctx = tomcat.addWebapp("/", currentDir.getAbsolutePath() + "/src/main/webapp");
+		Context ctx = tomcat.addWebapp("/", currentDir.getAbsolutePath()
+				+ "/src/main/webapp");
 		ctx.setResources(new FileDirContext());
 
 		List<Artifact> includeOnlyArtifact = new ArrayList<>();
@@ -52,14 +54,16 @@ public class StartTomcat {
 
 		tomcat.start();
 
-		System.out.println("Tomcat Startup Time: " + (System.currentTimeMillis() - start) + " ms");
+		System.out.println("Tomcat Startup Time: "
+				+ (System.currentTimeMillis() - start) + " ms");
 		System.out.println("Tomcat running on " + port);
 
 		tomcat.getServer().await();
 
 	}
 
-	private static List<File> findResourceUrls(List<Artifact> includeOnlyArtifacts)
+	private static List<File> findResourceUrls(
+			List<Artifact> includeOnlyArtifacts)
 			throws ParserConfigurationException, SAXException, IOException {
 
 		File homeDir = new File(System.getProperty("user.home"));
@@ -73,11 +77,13 @@ public class StartTomcat {
 		Map<String, String> properties = new HashMap<>();
 		NodeList propertiesNodeList = doc.getElementsByTagName("properties");
 		if (propertiesNodeList != null && propertiesNodeList.item(0) != null) {
-			NodeList propertiesChildren = propertiesNodeList.item(0).getChildNodes();
+			NodeList propertiesChildren = propertiesNodeList.item(0)
+					.getChildNodes();
 			for (int i = 0; i < propertiesChildren.getLength(); i++) {
 				Node node = propertiesChildren.item(i);
 				if (node instanceof Element) {
-					properties.put("${" + node.getNodeName() + "}", stripWhitespace(node.getTextContent()));
+					properties.put("${" + node.getNodeName() + "}",
+							stripWhitespace(node.getTextContent()));
 				}
 			}
 		}
@@ -85,9 +91,12 @@ public class StartTomcat {
 		NodeList nodeList = doc.getElementsByTagName("dependency");
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Element node = (Element) nodeList.item(i);
-			String groupId = node.getElementsByTagName("groupId").item(0).getTextContent();
-			String artifact = node.getElementsByTagName("artifactId").item(0).getTextContent();
-			String version = node.getElementsByTagName("version").item(0).getTextContent();
+			String groupId = node.getElementsByTagName("groupId").item(0)
+					.getTextContent();
+			String artifact = node.getElementsByTagName("artifactId").item(0)
+					.getTextContent();
+			String version = node.getElementsByTagName("version").item(0)
+					.getTextContent();
 
 			groupId = stripWhitespace(groupId);
 			artifact = stripWhitespace(artifact);
@@ -107,10 +116,11 @@ public class StartTomcat {
 
 				if (scope == null || !scope.equals("provided")) {
 					groupId = groupId.replace(".", "/");
-					String artifactFileName = groupId + "/" + artifact + "/" + version + "/" + artifact + "-" + version
-							+ ".jar";
+					String artifactFileName = groupId + "/" + artifact + "/"
+							+ version + "/" + artifact + "-" + version + ".jar";
 
-					jars.add(new File(homeDir, ".m2/repository/" + artifactFileName));
+					jars.add(new File(homeDir, ".m2/repository/"
+							+ artifactFileName));
 				}
 
 			}
@@ -119,7 +129,8 @@ public class StartTomcat {
 		return jars;
 	}
 
-	private static boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId, final String artifactId) {
+	private static boolean isIncluded(List<Artifact> includeOnlyArtifacts,
+			String groupId, final String artifactId) {
 		if (includeOnlyArtifacts != null) {
 			for (Artifact artifact : includeOnlyArtifacts) {
 				if (artifact.is(groupId, artifactId)) {
@@ -134,12 +145,14 @@ public class StartTomcat {
 
 	private static String stripWhitespace(String orig) {
 		if (orig != null) {
-			return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
+			return orig.replace("\r", "").replace("\n", "").replace("\t", "")
+					.trim();
 		}
 		return orig;
 	}
 
-	private static String resolveProperty(String orig, Map<String, String> properties) {
+	private static String resolveProperty(String orig,
+			Map<String, String> properties) {
 		String property = properties.get(orig);
 		if (property != null) {
 			return property;

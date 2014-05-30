@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>4.0.4.RELEASE</version>
+			<version>4.0.5.RELEASE</version>
 		</dependency>
 	</dependencies>
 

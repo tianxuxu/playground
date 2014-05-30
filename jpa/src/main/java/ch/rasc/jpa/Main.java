@@ -10,7 +10,8 @@ public class Main {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				AppConfig.class);
 		EmployeeService service = ctx.getBean(EmployeeService.class);
 		service.create();
 		service.update();

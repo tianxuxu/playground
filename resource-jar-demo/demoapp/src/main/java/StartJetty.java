@@ -29,7 +29,8 @@ public class StartJetty {
 
 		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
 			return;
 		}
@@ -40,7 +41,8 @@ public class StartJetty {
 		// List<Artifact> includeOnlyArtifact = new ArrayList<Artifact>();
 		// includeOnlyArtifact.add(new Artifact("resources", "demo"));
 
-		context.setConfigurations(new Configuration[] { new MavenWebInfConfiguration(),
+		context.setConfigurations(new Configuration[] {
+				new MavenWebInfConfiguration(),
 				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
 				new org.eclipse.jetty.webapp.MetaInfConfiguration(),
 				new org.eclipse.jetty.webapp.FragmentConfiguration(),
@@ -50,7 +52,8 @@ public class StartJetty {
 		server.setHandler(context);
 		server.start();
 
-		System.out.println("Jetty Startup Time: " + (System.currentTimeMillis() - start) + " ms");
+		System.out.println("Jetty Startup Time: "
+				+ (System.currentTimeMillis() - start) + " ms");
 		System.out.println("Jetty running on " + port);
 	}
 
@@ -74,12 +77,13 @@ public class StartJetty {
 
 		private final List<File> jars;
 
-		public MavenWebInfConfiguration() throws ParserConfigurationException, SAXException, IOException {
+		public MavenWebInfConfiguration() throws ParserConfigurationException,
+				SAXException, IOException {
 			this(null);
 		}
 
-		public MavenWebInfConfiguration(List<Artifact> includeOnlyArtifacts) throws ParserConfigurationException,
-				SAXException, IOException {
+		public MavenWebInfConfiguration(List<Artifact> includeOnlyArtifacts)
+				throws ParserConfigurationException, SAXException, IOException {
 			File homeDir = new File(System.getProperty("user.home"));
 
 			jars = new ArrayList<>();
@@ -89,13 +93,17 @@ public class StartJetty {
 			Document doc = db.parse(new File("./pom.xml"));
 
 			Map<String, String> properties = new HashMap<>();
-			NodeList propertiesNodeList = doc.getElementsByTagName("properties");
-			if (propertiesNodeList != null && propertiesNodeList.item(0) != null) {
-				NodeList propertiesChildren = propertiesNodeList.item(0).getChildNodes();
+			NodeList propertiesNodeList = doc
+					.getElementsByTagName("properties");
+			if (propertiesNodeList != null
+					&& propertiesNodeList.item(0) != null) {
+				NodeList propertiesChildren = propertiesNodeList.item(0)
+						.getChildNodes();
 				for (int i = 0; i < propertiesChildren.getLength(); i++) {
 					Node node = propertiesChildren.item(i);
 					if (node instanceof Element) {
-						properties.put("${" + node.getNodeName() + "}", stripWhitespace(node.getTextContent()));
+						properties.put("${" + node.getNodeName() + "}",
+								stripWhitespace(node.getTextContent()));
 					}
 				}
 			}
@@ -103,9 +111,12 @@ public class StartJetty {
 			NodeList nodeList = doc.getElementsByTagName("dependency");
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Element node = (Element) nodeList.item(i);
-				String groupId = node.getElementsByTagName("groupId").item(0).getTextContent();
-				String artifact = node.getElementsByTagName("artifactId").item(0).getTextContent();
-				String version = node.getElementsByTagName("version").item(0).getTextContent();
+				String groupId = node.getElementsByTagName("groupId").item(0)
+						.getTextContent();
+				String artifact = node.getElementsByTagName("artifactId")
+						.item(0).getTextContent();
+				String version = node.getElementsByTagName("version").item(0)
+						.getTextContent();
 
 				groupId = stripWhitespace(groupId);
 				artifact = stripWhitespace(artifact);
@@ -120,21 +131,25 @@ public class StartJetty {
 					String scope = null;
 					NodeList scopeNode = node.getElementsByTagName("scope");
 					if (scopeNode != null && scopeNode.item(0) != null) {
-						scope = stripWhitespace(scopeNode.item(0).getTextContent());
+						scope = stripWhitespace(scopeNode.item(0)
+								.getTextContent());
 					}
 
 					if (scope == null || !scope.equals("provided")) {
 						groupId = groupId.replace(".", "/");
-						String artifactFileName = groupId + "/" + artifact + "/" + version + "/" + artifact + "-"
+						String artifactFileName = groupId + "/" + artifact
+								+ "/" + version + "/" + artifact + "-"
 								+ version + ".jar";
-						jars.add(new File(homeDir, ".m2/repository/" + artifactFileName));
+						jars.add(new File(homeDir, ".m2/repository/"
+								+ artifactFileName));
 					}
 
 				}
 			}
 		}
 
-		private static boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId, final String artifactId) {
+		private static boolean isIncluded(List<Artifact> includeOnlyArtifacts,
+				String groupId, final String artifactId) {
 			if (includeOnlyArtifacts != null) {
 				for (Artifact artifact : includeOnlyArtifacts) {
 					if (artifact.is(groupId, artifactId)) {
@@ -149,12 +164,14 @@ public class StartJetty {
 
 		private static String stripWhitespace(String orig) {
 			if (orig != null) {
-				return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
+				return orig.replace("\r", "").replace("\n", "")
+						.replace("\t", "").trim();
 			}
 			return orig;
 		}
 
-		private static String resolveProperty(String orig, Map<String, String> properties) {
+		private static String resolveProperty(String orig,
+				Map<String, String> properties) {
 			String property = properties.get(orig);
 			if (property != null) {
 				return property;
@@ -163,7 +180,8 @@ public class StartJetty {
 		}
 
 		@Override
-		protected List<Resource> findJars(WebAppContext context) throws Exception {
+		protected List<Resource> findJars(WebAppContext context)
+				throws Exception {
 			List<Resource> resources = super.findJars(context);
 
 			for (File jar : jars) {

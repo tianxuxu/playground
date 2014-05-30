@@ -11,7 +11,8 @@ public class GuavaCache implements Cache {
 
 	private final com.google.common.cache.Cache<Object, Optional<Object>> store;
 
-	public GuavaCache(String name, com.google.common.cache.Cache<Object, Optional<Object>> store) {
+	public GuavaCache(String name,
+			com.google.common.cache.Cache<Object, Optional<Object>> store) {
 		this.name = name;
 		this.store = store;
 	}
@@ -39,7 +40,9 @@ public class GuavaCache implements Cache {
 
 		Object value = element != null ? element.get() : null;
 		if (value != null && !type.isInstance(value)) {
-			throw new IllegalStateException("Cached value is not of required type [" + type.getName() + "]: " + value);
+			throw new IllegalStateException(
+					"Cached value is not of required type [" + type.getName()
+							+ "]: " + value);
 		}
 		return (T) value;
 	}

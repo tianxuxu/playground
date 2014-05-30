@@ -36,8 +36,10 @@ import org.jooq.lambda.Unchecked;
 
 public class Encrypt {
 
-	public static void main(String[] args) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException,
-			NoSuchPaddingException, InvalidKeyException, InvalidParameterSpecException {
+	public static void main(String[] args) throws IOException,
+			NoSuchAlgorithmException, InvalidKeySpecException,
+			NoSuchPaddingException, InvalidKeyException,
+			InvalidParameterSpecException {
 
 		if (args.length == 3) {
 
@@ -46,18 +48,24 @@ public class Encrypt {
 
 			Path inputDirectory = Paths.get(args[0]);
 
-			try (ZipOutputStream zos = new ZipOutputStream(Files.newOutputStream(tmpFile));
+			try (ZipOutputStream zos = new ZipOutputStream(
+					Files.newOutputStream(tmpFile));
 					WritableByteChannel out = Channels.newChannel(zos)) {
 				zos.setLevel(9);
-				Files.walk(inputDirectory).filter(file -> !Files.isDirectory(file)).peek(System.out::println)
-						.forEach(Unchecked.consumer(file -> {
-							String name = inputDirectory.getParent().relativize(file).toString();
-							name = name.replace('\\', '/');
-							zos.putNextEntry(new ZipEntry(name));
-							try (FileChannel in = FileChannel.open(file, StandardOpenOption.READ)) {
-								in.transferTo(0, in.size(), out);
-							}
-						}));
+				Files.walk(inputDirectory)
+						.filter(file -> !Files.isDirectory(file))
+						.peek(System.out::println)
+						.forEach(
+								Unchecked.consumer(file -> {
+									String name = inputDirectory.getParent()
+											.relativize(file).toString();
+									name = name.replace('\\', '/');
+									zos.putNextEntry(new ZipEntry(name));
+									try (FileChannel in = FileChannel.open(
+											file, StandardOpenOption.READ)) {
+										in.transferTo(0, in.size(), out);
+									}
+								}));
 			}
 
 			// encrypt from tmpFile to encFile
@@ -67,7 +75,8 @@ public class Encrypt {
 			Path encTmpFile = Files.createTempFile("encrypt", "zip.enc");
 			encTmpFile.toFile().deleteOnExit();
 
-			SecretKey key = createSecretKey(password, outputFile.getFileName().toString());
+			SecretKey key = createSecretKey(password, outputFile.getFileName()
+					.toString());
 
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
@@ -76,7 +85,8 @@ public class Encrypt {
 			AlgorithmParameters params = cipher.getParameters();
 			byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
 
-			try (FileChannel in = FileChannel.open(tmpFile, StandardOpenOption.READ);
+			try (FileChannel in = FileChannel.open(tmpFile,
+					StandardOpenOption.READ);
 					OutputStream fos = Files.newOutputStream(encTmpFile);
 					CipherOutputStream cos = new CipherOutputStream(fos, cipher);
 					WritableByteChannel wbc = Channels.newChannel(cos)) {
@@ -85,7 +95,8 @@ public class Encrypt {
 
 			Path encFile = Paths.get(args[1]);
 
-			if (encFile.getParent() != null && !encFile.getParent().equals(encFile.getRoot())) {
+			if (encFile.getParent() != null
+					&& !encFile.getParent().equals(encFile.getRoot())) {
 				Files.createDirectories(encFile.getParent());
 			}
 
@@ -94,24 +105,31 @@ public class Encrypt {
 				copyOptions.add(StandardCopyOption.ATOMIC_MOVE);
 			}
 			copyOptions.add(StandardCopyOption.REPLACE_EXISTING);
-			Files.move(encTmpFile, encFile, copyOptions.toArray(new CopyOption[copyOptions.size()]));
+			Files.move(encTmpFile, encFile,
+					copyOptions.toArray(new CopyOption[copyOptions.size()]));
 
-			Files.write(Paths.get(args[1] + ".iv"), iv, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+			Files.write(Paths.get(args[1] + ".iv"), iv,
+					StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
 
 			Files.deleteIfExists(tmpFile);
 			Files.deleteIfExists(encTmpFile);
 
-		} else {
-			System.out.println("java ch.rasc.watch.Encrypt <directory> <encryptedZipOutputFile> <password>");
+		}
+		else {
+			System.out
+					.println("java ch.rasc.watch.Encrypt <directory> <encryptedZipOutputFile> <password>");
 		}
 
 	}
 
-	public static SecretKey createSecretKey(String password, String fileName) throws NoSuchAlgorithmException,
-			InvalidKeySpecException {
+	public static SecretKey createSecretKey(String password, String fileName)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		byte[] salt = fileName.getBytes(StandardCharsets.UTF_8);
-		KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536,
+				128);
+		SecretKeyFactory factory = SecretKeyFactory
+				.getInstance("PBKDF2WithHmacSHA1");
 		SecretKey sk = factory.generateSecret(keySpec);
 		SecretKey mySymmetricKey = new SecretKeySpec(sk.getEncoded(), "AES");
 		return mySymmetricKey;

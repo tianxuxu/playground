@@ -20,7 +20,8 @@ public class EmployeeRepository {
 
 	@Transactional(readOnly = true)
 	public List<Employee> getAllEmployees() {
-		CriteriaQuery<Employee> criteria = entityManager.getCriteriaBuilder().createQuery(Employee.class);
+		CriteriaQuery<Employee> criteria = entityManager.getCriteriaBuilder()
+				.createQuery(Employee.class);
 		criteria.select(criteria.from(Employee.class));
 
 		TypedQuery<Employee> query = entityManager.createQuery(criteria);

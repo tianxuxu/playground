@@ -30,7 +30,8 @@ public class CacheCleanup {
 		scheduler.scheduleWithFixedDelay(() -> {
 			for (String cacheName : cacheManager.getCacheNames()) {
 				System.out.println(">> cleanup " + cacheName);
-				((GuavaCache) cacheManager.getCache(cacheName)).getNativeCache().cleanUp();
+				((GuavaCache) cacheManager.getCache(cacheName))
+						.getNativeCache().cleanUp();
 			}
 		}, 5, 20, TimeUnit.SECONDS);
 

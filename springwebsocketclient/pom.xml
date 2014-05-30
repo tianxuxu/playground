@@ -14,7 +14,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.0.4.RELEASE</version>
+				<version>4.0.5.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -49,12 +49,12 @@
 		</dependency> 
 -->		
 		
-<!-- Tomcat 8.0.5 -->		
+<!-- Tomcat 8.0.8 -->		
 <!--   --> 		
         <dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-websocket</artifactId>
-			<version>8.0.5</version>
+			<version>8.0.8</version>
 		</dependency>
 
 <!-- Tyrus (Glassfish) 1.3.3 --> 

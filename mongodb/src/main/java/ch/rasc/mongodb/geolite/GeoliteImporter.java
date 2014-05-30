@@ -24,8 +24,9 @@ public class GeoliteImporter {
 
 		Map<Integer, Geolite> locationMap = new HashMap<>();
 
-		try (CSVReader reader = new CSVReader(new FileReader(
-				"D:\\_download\\GeoLiteCity_20101101\\GeoLiteCity-Location.csv"))) {
+		try (CSVReader reader = new CSVReader(
+				new FileReader(
+						"D:\\_download\\GeoLiteCity_20101101\\GeoLiteCity-Location.csv"))) {
 			reader.readNext();
 			reader.readNext();
 			String[] nextLine;

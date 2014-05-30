@@ -36,9 +36,10 @@ public class Main {
 		configuration.addAnnotatedClass(Firma.class);
 		configuration.addAnnotatedClass(Mitarbeiter.class);
 
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).build();
-		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
+		SessionFactory sessionFactory = configuration
+				.buildSessionFactory(serviceRegistry);
 
 		Session session = sessionFactory.openSession();
 
@@ -84,15 +85,19 @@ public class Main {
 		try {
 			Calendar cal = new GregorianCalendar(2012, Calendar.NOVEMBER, 3);
 			System.out.println(reader.getRevisionNumberForDate(cal.getTime()));
-		} catch (RevisionDoesNotExistException e) {
+		}
+		catch (RevisionDoesNotExistException e) {
 			e.printStackTrace();
-		} catch (IllegalStateException e) {
+		}
+		catch (IllegalStateException e) {
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 
-		AuditQuery query = reader.createQuery().forEntitiesAtRevision(Mitarbeiter.class, 1);
+		AuditQuery query = reader.createQuery().forEntitiesAtRevision(
+				Mitarbeiter.class, 1);
 		query.add(AuditEntity.relatedId("firma").eq(1));
 
 		List<Mitarbeiter> mitarbeiterList = query.getResultList();
@@ -100,7 +105,8 @@ public class Main {
 			System.out.println(mitarbeiter.getName());
 		}
 
-		query = reader.createQuery().forRevisionsOfEntity(Mitarbeiter.class, false, true);
+		query = reader.createQuery().forRevisionsOfEntity(Mitarbeiter.class,
+				false, true);
 		List<Object[]> rersults = query.getResultList();
 		for (Object[] result : rersults) {
 			Mitarbeiter mitarbeiter = (Mitarbeiter) result[0];
@@ -112,7 +118,8 @@ public class Main {
 			System.out.println("Type         : " + revType);
 			System.out.println("Mitarbeiter  : " + mitarbeiter.getName());
 
-			System.out.println("------------------------------------------------");
+			System.out
+					.println("------------------------------------------------");
 		}
 
 		session.close();
@@ -151,7 +158,8 @@ public class Main {
 	}
 
 	private static Firma updateFirma(Session session) {
-		Firma firma = new HibernateQuery(session).from(QFirma.firma).where(QFirma.firma.name.eq("Company A"))
+		Firma firma = new HibernateQuery(session).from(QFirma.firma)
+				.where(QFirma.firma.name.eq("Company A"))
 				.singleResult(QFirma.firma);
 		firma.setStrasse("Neue Strasse");
 		return firma;
@@ -168,8 +176,10 @@ public class Main {
 	}
 
 	private static void updateMitarbeiter(Session session) {
-		Mitarbeiter mitarbeiter = new HibernateQuery(session).from(QMitarbeiter.mitarbeiter)
-				.where(QMitarbeiter.mitarbeiter.vorname.eq("Felix").and(QMitarbeiter.mitarbeiter.name.eq("Muster")))
+		Mitarbeiter mitarbeiter = new HibernateQuery(session)
+				.from(QMitarbeiter.mitarbeiter)
+				.where(QMitarbeiter.mitarbeiter.vorname.eq("Felix").and(
+						QMitarbeiter.mitarbeiter.name.eq("Muster")))
 				.singleResult(QMitarbeiter.mitarbeiter);
 
 		mitarbeiter.setStrasse("Hauptstrasse 10");
@@ -178,8 +188,10 @@ public class Main {
 
 	private static void deleteMitarbeiter(Session session) {
 
-		Mitarbeiter mitarbeiter = new HibernateQuery(session).from(QMitarbeiter.mitarbeiter)
-				.where(QMitarbeiter.mitarbeiter.vorname.eq("Jolanda").and(QMitarbeiter.mitarbeiter.name.eq("Meier")))
+		Mitarbeiter mitarbeiter = new HibernateQuery(session)
+				.from(QMitarbeiter.mitarbeiter)
+				.where(QMitarbeiter.mitarbeiter.vorname.eq("Jolanda").and(
+						QMitarbeiter.mitarbeiter.name.eq("Meier")))
 				.singleResult(QMitarbeiter.mitarbeiter);
 
 		mitarbeiter.getFirma().getMitarbeiter().remove(mitarbeiter);

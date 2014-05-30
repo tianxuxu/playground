@@ -14,19 +14,22 @@ import com.twitter.hbc.httpclient.auth.OAuth1;
 
 public class FilterStreamExample {
 
-	public static void oauth(String consumerKey, String consumerSecret, String token, String secret)
-			throws InterruptedException {
+	public static void oauth(String consumerKey, String consumerSecret,
+			String token, String secret) throws InterruptedException {
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(10000);
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
 		// add some track terms
-		endpoint.trackTerms(ImmutableList.of("#ExtJS", "#atmo_framework", "#java", "#java7", "#java8", "#websockets",
-				"#websocket", "#portal"));
+		endpoint.trackTerms(ImmutableList.of("#ExtJS", "#atmo_framework",
+				"#java", "#java7", "#java8", "#websockets", "#websocket",
+				"#portal"));
 
-		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
+		Authentication auth = new OAuth1(consumerKey, consumerSecret, token,
+				secret);
 		// Authentication auth = new BasicAuth(username, password);
 
 		// Create a new BasicClient. By default gzip is enabled.
-		Client client = new ClientBuilder().hosts(Constants.STREAM_HOST).endpoint(endpoint).authentication(auth)
+		Client client = new ClientBuilder().hosts(Constants.STREAM_HOST)
+				.endpoint(endpoint).authentication(auth)
 				.processor(new StringDelimitedProcessor(queue)).build();
 
 		// Establish a connection
@@ -45,7 +48,8 @@ public class FilterStreamExample {
 	public static void main(String[] args) {
 		try {
 			FilterStreamExample.oauth(args[0], args[1], args[2], args[3]);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			System.out.println(e);
 		}
 	}

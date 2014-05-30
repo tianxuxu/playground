@@ -38,7 +38,8 @@ public class TwitterReader {
 					builder.add(tweet);
 				}
 			}
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 
@@ -48,7 +49,8 @@ public class TwitterReader {
 	@Scheduled(fixedDelay = 10000)
 	public void readTwitterFeed() {
 
-		SearchResults results = template.searchOperations().search("java", 50, lastReceivedId, 0);
+		SearchResults results = template.searchOperations().search("java", 50,
+				lastReceivedId, 0);
 		List<Tweet> newTweets = new LinkedList<>();
 		long maxId = 0;
 		for (Tweet tweet : results.getTweets()) {
@@ -66,7 +68,8 @@ public class TwitterReader {
 			writeLock.lock();
 			try {
 				tweets.addAll(newTweets);
-			} finally {
+			}
+			finally {
 				writeLock.unlock();
 			}
 		}

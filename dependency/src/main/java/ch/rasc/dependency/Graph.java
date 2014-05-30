@@ -26,7 +26,8 @@ public class Graph {
 		return resolved;
 	}
 
-	private void depResolve(Node node, List<Node> resolved, Set<Node> unresolved) throws CircularReferenceException {
+	private void depResolve(Node node, List<Node> resolved, Set<Node> unresolved)
+			throws CircularReferenceException {
 		unresolved.add(node);
 		for (Node edge : node.getEdges()) {
 			if (!resolved.contains(edge)) {

@@ -17,8 +17,10 @@ public class Html5RocksExample extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Last-Event-ID: " + request.getHeader("Last-Event-ID"));
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Last-Event-ID: "
+				+ request.getHeader("Last-Event-ID"));
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setStatus(200);
@@ -30,7 +32,8 @@ public class Html5RocksExample extends HttpServlet {
 			out.flush();
 			try {
 				TimeUnit.SECONDS.sleep(5);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				break;
 			}
 		}

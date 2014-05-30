@@ -7,7 +7,8 @@ import com.google.common.io.ByteStreams;
 
 public class TestProcess {
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "dir c:");
 		pb.redirectErrorStream(true);
 

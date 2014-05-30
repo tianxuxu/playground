@@ -7,7 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class)) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				Config.class)) {
 			Calculator calculator = ctx.getBean(Calculator.class);
 
 			BigInteger result = calculator.factorial(69);

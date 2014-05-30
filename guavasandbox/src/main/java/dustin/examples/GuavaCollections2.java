@@ -10,7 +10,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 
 /**
- * Class whose sole reason for existence is to demonstrate Guava's Collections2 class.
+ * Class whose sole reason for existence is to demonstrate Guava's Collections2
+ * class.
  *
  * @author Dustin
  */
@@ -45,26 +46,29 @@ public class GuavaCollections2 {
 	}
 
 	/**
-	 * Demonstrate Guava's Collections2.filter method. Filter String beginning with letter 'J'.
+	 * Demonstrate Guava's Collections2.filter method. Filter String beginning
+	 * with letter 'J'.
 	 */
 	public static void demonstrateFilter() {
 		printHeader("Collections2.filter(Collection,Predicate): 'J' Languages");
 		final Set<String> strings = buildSetStrings();
 		out.println("\nOriginal Strings (pre-filter):\n\t" + strings);
-		final Collection<String> filteredStrings = Collections2.filter(strings, Predicates.containsPattern("^J"));
+		final Collection<String> filteredStrings = Collections2.filter(strings,
+				Predicates.containsPattern("^J"));
 		out.println("\nFiltered Strings:\n\t" + filteredStrings);
 		out.println("\nOriginal Strings (post-filter):\n\t" + strings);
 	}
 
 	/**
-	 * Demonstrate Guava's Collections2.transform method. Transform input collection's entries to uppercase form.
+	 * Demonstrate Guava's Collections2.transform method. Transform input
+	 * collection's entries to uppercase form.
 	 */
 	public static void demonstrateTransform() {
 		printHeader("Collections2.transform(Collection,Function): Uppercase");
 		final Set<String> strings = buildSetStrings();
 		out.println("\nOriginal Strings (pre-transform):\n\t" + strings);
-		final Collection<String> transformedStrings = Collections2.transform(strings,
-				new UpperCaseFunction<String, String>());
+		final Collection<String> transformedStrings = Collections2.transform(
+				strings, new UpperCaseFunction<String, String>());
 		out.println("\nTransformed Strings:\n\t" + transformedStrings);
 		out.println("\nOriginal Strings (post-transform):\n\t" + strings);
 	}

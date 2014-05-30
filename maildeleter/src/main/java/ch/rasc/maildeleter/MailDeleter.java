@@ -33,13 +33,15 @@ public class MailDeleter extends TimerTask {
 			Session session = Session.getDefaultInstance(props);
 
 			store = session.getStore("imap");
-			store.connect(config.getHost(), config.getUser(), config.getPassword());
+			store.connect(config.getHost(), config.getUser(),
+					config.getPassword());
 
 			folder = store.getFolder("INBOX");
 
 			folder.open(Folder.READ_WRITE);
 
-			DateTime aCoupleOfDaysAgo = DateTime.now().minusDays(config.getDays());
+			DateTime aCoupleOfDaysAgo = DateTime.now().minusDays(
+					config.getDays());
 
 			Message[] messages = folder.getMessages();
 			for (Message msg : messages) {
@@ -50,20 +52,24 @@ public class MailDeleter extends TimerTask {
 					msg.setFlag(Flags.Flag.DELETED, true);
 				}
 			}
-		} catch (MessagingException e) {
+		}
+		catch (MessagingException e) {
 			logger.error("delete emails", e);
-		} finally {
+		}
+		finally {
 			if (folder != null && folder.isOpen()) {
 				try {
 					folder.close(true);
-				} catch (MessagingException e) {
+				}
+				catch (MessagingException e) {
 					logger.error("close folder", e);
 				}
 			}
 			if (store != null) {
 				try {
 					store.close();
-				} catch (MessagingException e) {
+				}
+				catch (MessagingException e) {
 					logger.error("close store", e);
 				}
 			}

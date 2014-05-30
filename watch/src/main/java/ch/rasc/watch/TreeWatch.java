@@ -20,20 +20,25 @@ public class TreeWatch {
 
 	static final Map<WatchKey, Path> watchKeyToPathMap = new HashMap<>();
 
-	private static void registerTree(final WatchService watchService, Path start) throws IOException {
+	private static void registerTree(final WatchService watchService, Path start)
+			throws IOException {
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+			public FileVisitResult preVisitDirectory(Path dir,
+					BasicFileAttributes attrs) throws IOException {
 				System.out.printf("Registering %s\n", dir);
-				WatchKey key = dir.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
-						StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+				WatchKey key = dir.register(watchService,
+						StandardWatchEventKinds.ENTRY_CREATE,
+						StandardWatchEventKinds.ENTRY_MODIFY,
+						StandardWatchEventKinds.ENTRY_DELETE);
 				watchKeyToPathMap.put(key, dir);
 				return FileVisitResult.CONTINUE;
 			}
 		});
 	}
 
-	private static void watch(WatchService watchService, Path start) throws IOException, InterruptedException {
+	private static void watch(WatchService watchService, Path start)
+			throws IOException, InterruptedException {
 		registerTree(watchService, start);
 
 		while (true) {
@@ -47,7 +52,8 @@ public class TreeWatch {
 				// has problems with renames
 				Path child = directory.resolve(eventPath);
 
-				if (kind == StandardWatchEventKinds.ENTRY_CREATE && Files.isDirectory(child)) {
+				if (kind == StandardWatchEventKinds.ENTRY_CREATE
+						&& Files.isDirectory(child)) {
 					registerTree(watchService, child);
 				}
 
@@ -69,9 +75,11 @@ public class TreeWatch {
 
 	public static void main(String[] args) {
 		Path path = Paths.get("C:/watchme");
-		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+		try (WatchService watchService = FileSystems.getDefault()
+				.newWatchService()) {
 			watch(watchService, path);
-		} catch (IOException | InterruptedException ex) {
+		}
+		catch (IOException | InterruptedException ex) {
 			System.err.println(ex);
 		}
 	}

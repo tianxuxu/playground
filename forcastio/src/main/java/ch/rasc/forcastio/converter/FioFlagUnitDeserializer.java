@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 public class FioFlagUnitDeserializer extends JsonDeserializer<FioFlagUnit> {
 
 	@Override
-	public FioFlagUnit deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
-			JsonProcessingException {
+	public FioFlagUnit deserialize(JsonParser jp, DeserializationContext ctxt)
+			throws IOException, JsonProcessingException {
 		return FioFlagUnit.findByJsonValue(jp.getText());
 	}
 

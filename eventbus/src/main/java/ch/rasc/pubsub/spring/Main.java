@@ -5,7 +5,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		try (final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class)) {
+		try (final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				SpringConfig.class)) {
 			ctx.getBean(EventPublisher.class).publishEvent("hello world");
 		}
 

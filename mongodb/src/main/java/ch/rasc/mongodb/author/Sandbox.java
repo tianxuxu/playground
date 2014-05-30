@@ -11,7 +11,8 @@ import com.google.code.morphia.query.UpdateOperations;
 public class Sandbox {
 
 	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.author")) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				"ch.rasc.mongodb.author")) {
 
 			Datastore datastore = ctx.getBean("datastore", Datastore.class);
 
@@ -19,7 +20,8 @@ public class Sandbox {
 			query.field("word1").equal("w1");
 			query.field("word2").equal("w2");
 			query.field("word3.word").equal("w3_b");
-			UpdateOperations<Word12> op = datastore.createUpdateOperations(Word12.class).inc("word3.$.count");
+			UpdateOperations<Word12> op = datastore.createUpdateOperations(
+					Word12.class).inc("word3.$.count");
 			datastore.update(query, op);
 
 			// query = new BasicDBObject();

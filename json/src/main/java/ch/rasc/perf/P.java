@@ -22,7 +22,8 @@ public class P {
 			try {
 				String json = jackson.writeValueAsString(user);
 				json.charAt(0);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -32,7 +33,8 @@ public class P {
 			try {
 				String json = jackson.writeValueAsString(user);
 				json.charAt(0);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -56,7 +58,8 @@ public class P {
 		IntStream.range(0, 10000).forEach(n -> {
 			try {
 				Object u = jackson.readValue(userJson, Object.class);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -64,7 +67,8 @@ public class P {
 		IntStream.range(0, 10000).forEach(n -> {
 			try {
 				Object u = jackson.readValue(userJson, Object.class);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -73,7 +77,8 @@ public class P {
 		IntStream.range(0, 10000).forEach(n -> {
 			try {
 				Object u = boon.fromJson(userJson);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -81,7 +86,8 @@ public class P {
 		IntStream.range(0, 10000).forEach(n -> {
 			try {
 				Object u = boon.fromJson(userJson);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		});

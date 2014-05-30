@@ -52,9 +52,12 @@ public class DispatcherSamples implements CommandLineRunner {
 
 		threadPoolReactor.on(anon, b.bind(consumer, 3));
 
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(threadPoolReactor));
+		threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(threadPoolReactor));
 
 		b.await();
 	}
@@ -62,8 +65,10 @@ public class DispatcherSamples implements CommandLineRunner {
 	private void multipleEventLoopDispatchers() {
 		Boundary b = new Boundary();
 
-		Reactor r1 = Reactors.reactor().env(env).dispatcher(Environment.EVENT_LOOP).get();
-		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.EVENT_LOOP).get();
+		Reactor r1 = Reactors.reactor().env(env)
+				.dispatcher(Environment.EVENT_LOOP).get();
+		Reactor r2 = Reactors.reactor().env(env)
+				.dispatcher(Environment.EVENT_LOOP).get();
 
 		// Bind to a Selector using an anonymous object
 		Selector anon = $();
@@ -84,8 +89,10 @@ public class DispatcherSamples implements CommandLineRunner {
 	private void multipleRingBufferDispatchers() {
 		Boundary b = new Boundary();
 
-		Reactor r1 = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
-		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
+		Reactor r1 = Reactors.reactor().env(env)
+				.dispatcher(Environment.RING_BUFFER).get();
+		Reactor r2 = Reactors.reactor().env(env)
+				.dispatcher(Environment.RING_BUFFER).get();
 
 		// Bind to a Selector using an anonymous object
 		Selector anon = $();
@@ -118,13 +125,15 @@ public class DispatcherSamples implements CommandLineRunner {
 
 		@Bean
 		public Consumer<Event<Reactor>> consumer(Logger log) {
-			return ev -> log.info("Triggered by anonymous object in thread {} on {}", Thread.currentThread(),
-					ev.getData());
+			return ev -> log.info(
+					"Triggered by anonymous object in thread {} on {}",
+					Thread.currentThread(), ev.getData());
 		}
 
 		@Bean
 		public Reactor threadPoolReactor(Environment env) {
-			return Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL).get();
+			return Reactors.reactor().env(env)
+					.dispatcher(Environment.THREAD_POOL).get();
 		}
 
 	}

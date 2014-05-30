@@ -17,10 +17,12 @@ public class SimpleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// System.out.println("USERID: " + request.getParameter("userid"));
 		System.out.println(new Date());
-		System.out.println("Last-Event-ID: " + request.getHeader("Last-Event-ID"));
+		System.out.println("Last-Event-ID: "
+				+ request.getHeader("Last-Event-ID"));
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setStatus(200);

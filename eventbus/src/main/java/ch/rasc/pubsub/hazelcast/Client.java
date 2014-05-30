@@ -16,13 +16,16 @@ public class Client {
 	}
 
 	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Client.class)) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				Client.class)) {
 
 			for (int i = 0; i < 10; i++) {
-				ctx.getBean(ShortMessageSender.class).send("msg:" + i + ":" + new Date());
+				ctx.getBean(ShortMessageSender.class).send(
+						"msg:" + i + ":" + new Date());
 				try {
 					TimeUnit.SECONDS.sleep(10);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}

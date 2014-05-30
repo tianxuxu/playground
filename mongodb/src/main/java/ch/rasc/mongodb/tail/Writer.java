@@ -12,7 +12,8 @@ import com.mongodb.MongoException;
 
 public class Writer {
 
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException,
+			MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
@@ -23,7 +24,8 @@ public class Writer {
 			createOptions.append("capped", true);
 			createOptions.append("size", 100000);
 			collection = db.createCollection("log", createOptions);
-		} else {
+		}
+		else {
 			collection = db.getCollection("log");
 		}
 
@@ -40,7 +42,8 @@ public class Writer {
 			int waitTime = rand.nextInt(30) + 1;
 			try {
 				Thread.sleep(waitTime * 1000);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 

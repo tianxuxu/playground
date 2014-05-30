@@ -9,7 +9,8 @@ public class FindIpFast {
 
 	public static void main(String[] args) {
 
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("ch.rasc.mongodb.geolite")) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				"ch.rasc.mongodb.geolite")) {
 			Datastore datastore = ctx.getBean(Datastore.class);
 
 			// long myIp = 16777216l * 188 + 65536l * 61 + 256l * 140l + 26;

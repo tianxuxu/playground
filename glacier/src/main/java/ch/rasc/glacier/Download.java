@@ -14,11 +14,15 @@ import com.amazonaws.services.sqs.AmazonSQSClient;
 
 public class Download {
 	@SuppressWarnings("unused")
-	public static void main(String[] args) throws AmazonServiceException, AmazonClientException, FileNotFoundException {
+	public static void main(String[] args) throws AmazonServiceException,
+			AmazonClientException, FileNotFoundException {
 		if (args.length == 2) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
-			AmazonGlacierClient glacierClient = new AmazonGlacierClient(credentials);
-			glacierClient.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
+			AWSCredentials credentials = new BasicAWSCredentials(args[0],
+					args[1]);
+			AmazonGlacierClient glacierClient = new AmazonGlacierClient(
+					credentials);
+			glacierClient
+					.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
 			AmazonSQSClient sqsClient = new AmazonSQSClient(credentials);
 			AmazonSNSClient snsClient = new AmazonSNSClient(credentials);
@@ -26,12 +30,15 @@ public class Download {
 			snsClient.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
 			try {
-				ArchiveTransferManager atm = new ArchiveTransferManager(glacierClient, sqsClient, snsClient);
+				ArchiveTransferManager atm = new ArchiveTransferManager(
+						glacierClient, sqsClient, snsClient);
 
 				String archiveId = "K94...";
-				atm.download("testvault", archiveId, Paths.get("e:/test.txt").toFile());
+				atm.download("testvault", archiveId, Paths.get("e:/test.txt")
+						.toFile());
 
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				System.err.println(e);
 			}
 

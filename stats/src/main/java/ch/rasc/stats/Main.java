@@ -16,10 +16,13 @@ public class Main {
 
 	private final static String GOOGLE_GEOCODE_URL = "http://maps.googleapis.com/maps/api/geocode/json?address={address}&components=administrative_area:ZH|country:CH&sensor=false";
 
-	public static void main(String[] args) throws URISyntaxException, IOException {
+	public static void main(String[] args) throws URISyntaxException,
+			IOException {
 
-		Path citiesFilePath = Paths.get(Main.class.getResource("/cities.txt").toURI());
-		List<String> lines = Files.readAllLines(citiesFilePath, StandardCharsets.UTF_8);
+		Path citiesFilePath = Paths.get(Main.class.getResource("/cities.txt")
+				.toURI());
+		List<String> lines = Files.readAllLines(citiesFilePath,
+				StandardCharsets.UTF_8);
 
 		RestTemplate template = new RestTemplate();
 		RateLimiter limiter = RateLimiter.create(2);
@@ -32,7 +35,8 @@ public class Main {
 			limiter.acquire();
 
 			System.out.println("working: " + line);
-			GeoCoderResults results = template.getForObject(GOOGLE_GEOCODE_URL, GeoCoderResults.class, line.trim());
+			GeoCoderResults results = template.getForObject(GOOGLE_GEOCODE_URL,
+					GeoCoderResults.class, line.trim());
 
 			if (results.getStatus() == Status.OK) {
 
@@ -41,7 +45,8 @@ public class Main {
 				System.out.println(result.getGeometry().getLocation().getLat());
 				System.out.println(result.getGeometry().getLocation().getLng());
 
-			} else {
+			}
+			else {
 				System.out.println("Status: " + results.getStatus());
 			}
 

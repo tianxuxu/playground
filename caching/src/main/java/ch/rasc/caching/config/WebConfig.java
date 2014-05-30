@@ -26,10 +26,12 @@ import com.google.common.cache.CacheBuilder;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackages = { "ch.rasc.caching" })
-public class WebConfig extends WebMvcConfigurerAdapter implements CachingConfigurer {
+public class WebConfig extends WebMvcConfigurerAdapter implements
+		CachingConfigurer {
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(
+			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 
@@ -40,13 +42,16 @@ public class WebConfig extends WebMvcConfigurerAdapter implements CachingConfigu
 		// cacheManager.setCaches(Arrays.asList(new
 		// ConcurrentMapCache("default")));
 
-		Cache<Object, Optional<Object>> tenMinutesCache = CacheBuilder.newBuilder()
-				.expireAfterWrite(10, TimeUnit.MINUTES).build();
+		Cache<Object, Optional<Object>> tenMinutesCache = CacheBuilder
+				.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).build();
 
-		Cache<Object, Optional<Object>> maxSizeCache = CacheBuilder.newBuilder().maximumSize(10).build();
+		Cache<Object, Optional<Object>> maxSizeCache = CacheBuilder
+				.newBuilder().maximumSize(10).build();
 
-		cacheManager.setCaches(Arrays.asList(new GuavaCache("tenMinutesCache", tenMinutesCache), new GuavaCache(
-				"maxSizeCache", maxSizeCache)));
+		cacheManager
+				.setCaches(Arrays.asList(new GuavaCache("tenMinutesCache",
+						tenMinutesCache), new GuavaCache("maxSizeCache",
+						maxSizeCache)));
 
 		return cacheManager;
 	}

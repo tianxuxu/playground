@@ -10,7 +10,8 @@ import org.schwering.irc.lib.IRCUser;
 
 public class Test {
 	public static void main(String[] args) throws IOException {
-		IRCConnection conn = new IRCConnection("irc.wikimedia.org", 6667, 6669, null, "rcmon", "rcmon", "rcmon");
+		IRCConnection conn = new IRCConnection("irc.wikimedia.org", 6667, 6669,
+				null, "rcmon", "rcmon", "rcmon");
 
 		conn.addIRCEventListener(new IRCEventListener() {
 			@Override
@@ -35,7 +36,8 @@ public class Test {
 
 			@Override
 			public void onInvite(String chan, IRCUser u, String nickPass) {
-				System.out.println(chan + "> " + u.getNick() + " invites " + nickPass);
+				System.out.println(chan + "> " + u.getNick() + " invites "
+						+ nickPass);
 			}
 
 			@Override
@@ -44,28 +46,34 @@ public class Test {
 			}
 
 			@Override
-			public void onKick(String chan, IRCUser u, String nickPass, String msg) {
-				System.out.println(chan + "> " + u.getNick() + " kicks " + nickPass);
+			public void onKick(String chan, IRCUser u, String nickPass,
+					String msg) {
+				System.out.println(chan + "> " + u.getNick() + " kicks "
+						+ nickPass);
 			}
 
 			@Override
 			public void onMode(IRCUser u, String nickPass, String mode) {
-				System.out.println("Mode: " + u.getNick() + " sets modes " + mode + " " + nickPass);
+				System.out.println("Mode: " + u.getNick() + " sets modes "
+						+ mode + " " + nickPass);
 			}
 
 			@Override
 			public void onMode(String chan, IRCUser u, IRCModeParser mp) {
-				System.out.println(chan + "> " + u.getNick() + " sets mode: " + mp.getLine());
+				System.out.println(chan + "> " + u.getNick() + " sets mode: "
+						+ mp.getLine());
 			}
 
 			@Override
 			public void onNick(IRCUser u, String nickNew) {
-				System.out.println("Nick: " + u.getNick() + " is now known as " + nickNew);
+				System.out.println("Nick: " + u.getNick() + " is now known as "
+						+ nickNew);
 			}
 
 			@Override
 			public void onNotice(String target, IRCUser u, String msg) {
-				System.out.println(target + "> " + u.getNick() + " (notice): " + msg);
+				System.out.println(target + "> " + u.getNick() + " (notice): "
+						+ msg);
 			}
 
 			@Override
@@ -90,7 +98,8 @@ public class Test {
 
 			@Override
 			public void onTopic(String chan, IRCUser u, String topic) {
-				System.out.println(chan + "> " + u.getNick() + " changes topic into: " + topic);
+				System.out.println(chan + "> " + u.getNick()
+						+ " changes topic into: " + topic);
 			}
 
 			@Override
@@ -114,7 +123,8 @@ public class Test {
 		// conn.doNames();
 		try {
 			TimeUnit.MINUTES.sleep(5);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		conn.doQuit();

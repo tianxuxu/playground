@@ -29,13 +29,16 @@ public class Calculator {
 
 	@Cacheable(value = "calculator", key = "#p0")
 	public BigInteger factorial(long n, String user) {
-		System.out.println("calling factorial method with parameter: " + n + " and user: " + user);
+		System.out.println("calling factorial method with parameter: " + n
+				+ " and user: " + user);
 		return factorial(n);
 	}
 
 	@Cacheable(value = "calculator", condition = "#n > 10")
 	public BigInteger factorialWithACondition(long n) {
-		System.out.println("calling condition factorial method with parameter: " + n);
+		System.out
+				.println("calling condition factorial method with parameter: "
+						+ n);
 		return factorial(n);
 	}
 

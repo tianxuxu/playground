@@ -7,9 +7,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		try (final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class)) {
+		try (final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				SpringConfig.class)) {
 
-			ctx.getBean(DirectoryWatcher.class).startWatch(Paths.get("c:/temp"));
+			ctx.getBean(DirectoryWatcher.class)
+					.startWatch(Paths.get("c:/temp"));
 
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				@Override

@@ -28,33 +28,32 @@ public class TradeServer {
 
 	private final AtomicLong counter = new AtomicLong();
 
-	private final Thread queueDrain = new Thread() {
-		@Override
-		public void run() {
-			while (active.get()) {
-				try {
-					// Pull Orders off the queue and process them
-					buys.poll(100, TimeUnit.MILLISECONDS);
-					sells.poll(100, TimeUnit.MILLISECONDS);
-				} catch (InterruptedException e) {
-					// nothing here
-				}
-			}
+	private final BlockingQueue<Order> buys = new LinkedTransferQueue<>();
+
+	private final BlockingQueue<Order> sells = new LinkedTransferQueue<>();
+
+	private final AtomicBoolean active = new AtomicBoolean(true);
+
+	private final Thread queueDrain = new Thread(() -> {
+		while (active.get()) {
+			try {
+				// Pull Orders off the queue and process them
+			buys.poll(100, TimeUnit.MILLISECONDS);
+			sells.poll(100, TimeUnit.MILLISECONDS);
 		}
-	};
-
-	final BlockingQueue<Order> buys = new LinkedTransferQueue<>();
-
-	final BlockingQueue<Order> sells = new LinkedTransferQueue<>();
-
-	final AtomicBoolean active = new AtomicBoolean(true);
+		catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	}
+}	);
 
 	public TradeServer() {
 		queueDrain.start();
 	}
 
 	public Order execute(Trade trade) {
-		Order o = new Order(counter.incrementAndGet()).setTrade(trade).setTimestamp(System.currentTimeMillis());
+		Order o = new Order(counter.incrementAndGet()).setTrade(trade)
+				.setTimestamp(System.currentTimeMillis());
 
 		switch (trade.getType()) {
 		case BUY:
@@ -63,18 +62,19 @@ public class TradeServer {
 		case SELL:
 			sells.add(o);
 			break;
-		default:
-			break;
 		}
 
 		return o;
 	}
 
 	public Trade nextTrade() {
-		return new Trade(counter.incrementAndGet()).setSymbol(SYMBOLS[RANDOM.nextInt(SYMBOLS.length)])
+		return new Trade(counter.incrementAndGet())
+				.setSymbol(SYMBOLS[RANDOM.nextInt(SYMBOLS.length)])
 				.setQuantity(RANDOM.nextInt(500))
-				.setPrice(Float.parseFloat(RANDOM.nextInt(700) + "." + RANDOM.nextInt(99)))
-				.setType(RANDOM.nextInt() % 2 == 0 ? Type.BUY : Type.SELL);
+				.setPrice(
+						Float.parseFloat(RANDOM.nextInt(700) + "."
+								+ RANDOM.nextInt(99)))
+				.setType((RANDOM.nextInt() % 2 == 0 ? Type.BUY : Type.SELL));
 	}
 
 	public void stop() {

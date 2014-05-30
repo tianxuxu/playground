@@ -14,7 +14,8 @@ public class EventListener implements ApplicationListener<AppEvent> {
 		System.out.println("1st: " + new Date() + ": " + event.getMessage());
 		try {
 			TimeUnit.SECONDS.sleep(5);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}

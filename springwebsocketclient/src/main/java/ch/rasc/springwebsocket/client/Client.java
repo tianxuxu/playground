@@ -25,16 +25,18 @@ public class Client {
 	}
 
 	@Bean
-	public WebSocketConnectionManager webSocketConnectionManager(WebSocketClient webSocketClient,
-			WebSocketHandler webSocketHandler) {
-		WebSocketConnectionManager manager = new WebSocketConnectionManager(webSocketClient, webSocketHandler,
+	public WebSocketConnectionManager webSocketConnectionManager(
+			WebSocketClient webSocketClient, WebSocketHandler webSocketHandler) {
+		WebSocketConnectionManager manager = new WebSocketConnectionManager(
+				webSocketClient, webSocketHandler,
 				"ws://localhost:8080/dispatcher/quotes");
 		manager.setAutoStartup(true);
 		return manager;
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Client.class)) {
+		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+				Client.class)) {
 			TimeUnit.MINUTES.sleep(1);
 		}
 	}

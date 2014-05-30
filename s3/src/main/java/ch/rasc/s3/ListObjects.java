@@ -12,26 +12,31 @@ public class ListObjects {
 	public static void main(String[] args) {
 
 		if (args.length == 3) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0],
+					args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			System.out.printf("%-30s %10s %s\n", "Key", "Size", "StorageClass");
 
-			ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(args[2]);
+			ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
+					.withBucketName(args[2]);
 			ObjectListing objectListing;
 
 			do {
 				objectListing = client.listObjects(listObjectsRequest);
-				for (S3ObjectSummary summary : objectListing.getObjectSummaries()) {
-					System.out
-							.printf("%-30s %10d %s\n", summary.getKey(), summary.getSize(), summary.getStorageClass());
+				for (S3ObjectSummary summary : objectListing
+						.getObjectSummaries()) {
+					System.out.printf("%-30s %10d %s\n", summary.getKey(),
+							summary.getSize(), summary.getStorageClass());
 				}
 
 				listObjectsRequest.setMarker(objectListing.getNextMarker());
 			} while (objectListing.isTruncated());
 
-		} else {
-			System.out.println("java -jar s3backup.jar " + ListObjects.class.getName()
+		}
+		else {
+			System.out.println("java -jar s3backup.jar "
+					+ ListObjects.class.getName()
 					+ " accessKey secretKey bucketName");
 		}
 	}

@@ -8,11 +8,14 @@ public enum FioFlagUnit {
 	US("us"),
 
 	/**
-	 * Returns results in SI units. In particular, properties now have the following units: summary: Any summaries
-	 * containing temperature or snow accumulation units will have their values in degrees Celsius or in centimeters
-	 * (respectively). precipIntensity: Millimeters per hour. precipAccumulation: Centimeters. temperature: Degrees
-	 * Celsius. dewPoint: Degrees Celsius. windSpeed: Meters per second. pressure: Hectopascals (which are,
-	 * conveniently, equivalent to the default millibars). visibility: Kilometers.
+	 * Returns results in SI units. In particular, properties now have the
+	 * following units: summary: Any summaries containing temperature or snow
+	 * accumulation units will have their values in degrees Celsius or in
+	 * centimeters (respectively). precipIntensity: Millimeters per hour.
+	 * precipAccumulation: Centimeters. temperature: Degrees Celsius. dewPoint:
+	 * Degrees Celsius. windSpeed: Meters per second. pressure: Hectopascals
+	 * (which are, conveniently, equivalent to the default millibars).
+	 * visibility: Kilometers.
 	 */
 	SI("si"),
 
@@ -22,7 +25,8 @@ public enum FioFlagUnit {
 	CA("ca"),
 
 	/**
-	 * Identical to si, except that windSpeed is in miles per hour, as in the US.
+	 * Identical to si, except that windSpeed is in miles per hour, as in the
+	 * US.
 	 */
 	UK("uk"),
 

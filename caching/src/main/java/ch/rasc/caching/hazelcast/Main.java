@@ -10,7 +10,8 @@ import com.hazelcast.core.HazelcastInstance;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class)) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+				SpringConfig.class)) {
 			Calculator calculator = ctx.getBean(Calculator.class);
 
 			BigInteger result = calculator.factorial(69);
@@ -21,7 +22,8 @@ public class Main {
 
 			TimeUnit.MINUTES.sleep(1);
 
-			ctx.getBean(HazelcastInstance.class).getLifecycleService().shutdown();
+			ctx.getBean(HazelcastInstance.class).getLifecycleService()
+					.shutdown();
 		}
 	}
 

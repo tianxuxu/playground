@@ -23,20 +23,24 @@ public class Bench {
 		Random random = new Random();
 
 		for (int i = 0; i < 100000; i++) {
-			users.add(new User(RandomStringUtils.random(20, true, false), RandomStringUtils.random(20, true, true),
-					random.nextInt(99) + 1));
+			users.add(new User(RandomStringUtils.random(20, true, false),
+					RandomStringUtils.random(20, true, true), random
+							.nextInt(99) + 1));
 		}
 
 		Stopwatch stopWatch = Stopwatch.createStarted();
 		List<User> sorted = sort(users, on(User.class).getAge());
 		stopWatch.stop();
-		System.out.println("Lambdaj sort normal: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Lambdaj sort normal: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		stopWatch.reset();
 		stopWatch.start();
-		sorted = sort(users, on(User.class).getAge(), Collections.reverseOrder());
+		sorted = sort(users, on(User.class).getAge(),
+				Collections.reverseOrder());
 		stopWatch.stop();
-		System.out.println("Lambdaj sort reverse: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Lambdaj sort reverse: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		sorted = new ArrayList<>(users);
 		UserAgeComparator agecomparator = new UserAgeComparator();
@@ -44,7 +48,8 @@ public class Bench {
 		stopWatch.start();
 		Collections.sort(sorted, agecomparator);
 		stopWatch.stop();
-		System.out.println("Java sort normal: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Java sort normal: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		sorted = new ArrayList<>(users);
 		Comparator<User> reverseOrder = Collections.reverseOrder(agecomparator);
@@ -52,21 +57,25 @@ public class Bench {
 		stopWatch.start();
 		Collections.sort(sorted, reverseOrder);
 		stopWatch.stop();
-		System.out.println("Java sort reverse: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Java sort reverse: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		SpelExpressionParser parser = new SpelExpressionParser();
-		PropertyOrdering<User> ordering = new PropertyOrdering<>(parser.parseExpression("age"));
+		PropertyOrdering<User> ordering = new PropertyOrdering<>(
+				parser.parseExpression("age"));
 		stopWatch.reset();
 		stopWatch.start();
 		sorted = ordering.sortedCopy(users);
 		stopWatch.stop();
-		System.out.println("Spel sort normal: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Spel sort normal: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 
 		stopWatch.reset();
 		stopWatch.start();
 		sorted = ordering.reverse().sortedCopy(users);
 		stopWatch.stop();
-		System.out.println("Spel sort reverse: " + stopWatch.elapsed(TimeUnit.MILLISECONDS));
+		System.out.println("Spel sort reverse: "
+				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));
 	}
 
 }

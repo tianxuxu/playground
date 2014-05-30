@@ -17,17 +17,20 @@ import org.apache.commons.mail.HtmlEmail;
 
 public class Template {
 
-	public static void main(String[] args) throws ParseException, IOException, EmailException {
+	public static void main(String[] args) throws ParseException, IOException,
+			EmailException {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("user", "A");
 		parameters.put("books", "B");
 
 		Engine engine = Engine.getEngine();
-		httl.Template t = engine.parseTemplate("<img alt=\"${user}\" src=\"${books}\">");
+		httl.Template t = engine
+				.parseTemplate("<img alt=\"${user}\" src=\"${books}\">");
 		System.out.println(t.evaluate(parameters));
 
 		StringWriter sw = new StringWriter();
-		try (Reader in = new InputStreamReader(Template.class.getResourceAsStream("/basic.html"),
+		try (Reader in = new InputStreamReader(
+				Template.class.getResourceAsStream("/basic.html"),
 				StandardCharsets.UTF_8)) {
 			IOUtils.copy(in, sw);
 		}

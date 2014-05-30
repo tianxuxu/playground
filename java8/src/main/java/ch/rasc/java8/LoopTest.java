@@ -54,11 +54,13 @@ public class LoopTest {
 
 	@GenerateMicroBenchmark
 	public void lambdaStream() throws Exception {
-		shapes.stream().filter(s -> s.getColor() == Color.BLUE).forEach(s -> s.setColor(Color.RED));
+		shapes.stream().filter(s -> s.getColor() == Color.BLUE)
+				.forEach(s -> s.setColor(Color.RED));
 	}
 
 	@GenerateMicroBenchmark
 	public void lambdaParallel() throws Exception {
-		shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE).forEach(s -> s.setColor(Color.RED));
+		shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE)
+				.forEach(s -> s.setColor(Color.RED));
 	}
 }

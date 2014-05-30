@@ -11,8 +11,12 @@ public class SimpleSender {
 		ClientConfig clientConfig = new ClientConfig();
 		clientConfig.getNetworkConfig().addAddress("localhost");
 
-		HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
-		client.getTopic("my_topic").publish(new ShortMessageEvent("message from a simple hazelcast client"));
+		HazelcastInstance client = HazelcastClient
+				.newHazelcastClient(clientConfig);
+		client.getTopic("my_topic")
+				.publish(
+						new ShortMessageEvent(
+								"message from a simple hazelcast client"));
 
 	}
 

@@ -14,7 +14,8 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 public class Insert {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException,
+			MongoException {
 
 		MongoClient mongo = new MongoClient("localhost");
 
@@ -26,7 +27,8 @@ public class Insert {
 			createOptions.append("capped", true);
 			createOptions.append("size", 1000);
 			collection = db.createCollection("log", createOptions);
-		} else {
+		}
+		else {
 			collection = db.getCollection("log");
 		}
 
@@ -64,7 +66,8 @@ public class Insert {
 		try {
 			WriteResult wr = collection.remove(query);
 			System.out.println(wr.getN());
-		} catch (MongoException e) {
+		}
+		catch (MongoException e) {
 			System.out.println(e.getCode());
 		}
 

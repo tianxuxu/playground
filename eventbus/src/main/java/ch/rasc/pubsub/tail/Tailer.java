@@ -35,11 +35,13 @@ public class Tailer {
 			if (path.endsWith(event.getEventTarget())) {
 				if (event.getType() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("TAIL: entry deleted");
-				} else if (event.getType() == StandardWatchEventKinds.ENTRY_MODIFY) {
+				}
+				else if (event.getType() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("TAIL: modified");
 					try {
 						printTail();
-					} catch (IOException e) {
+					}
+					catch (IOException e) {
 						throw new RuntimeException(e);
 					}
 				}
@@ -49,7 +51,8 @@ public class Tailer {
 
 	private void printTail() throws IOException {
 
-		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(path, StandardOpenOption.READ)) {
+		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(
+				path, StandardOpenOption.READ)) {
 			if (seekableByteChannel.size() < position) {
 				position = 0;
 			}

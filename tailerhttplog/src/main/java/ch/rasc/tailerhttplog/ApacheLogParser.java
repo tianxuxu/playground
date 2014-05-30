@@ -44,7 +44,8 @@ public class ApacheLogParser {
 		String regex8 = " \"([^\"]+|(.+?))\""; // Referer
 		String regex9 = " \"([^\"]+|(.+?))\""; // Agent
 
-		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7 + regex8 + regex9;
+		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7
+				+ regex8 + regex9;
 	}
 
 	/**
@@ -54,10 +55,12 @@ public class ApacheLogParser {
 	 * @return hashMap<int,String>
 	 * @throws IOException
 	 */
-	public HashMap<Integer, String> readUrlsList(String filePath) throws IOException {
+	public HashMap<Integer, String> readUrlsList(String filePath)
+			throws IOException {
 		HashMap<Integer, String> urls = new HashMap<>();
 
-		try (BufferedReader bufferReader = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader bufferReader = new BufferedReader(new FileReader(
+				filePath))) {
 
 			String line = "";
 			int index = 0;
@@ -80,7 +83,8 @@ public class ApacheLogParser {
 	 * @return long : epoch representation
 	 * @throws ParseException
 	 */
-	public long convertTimetoEpoch(String dateFormat, String date) throws ParseException {
+	public long convertTimetoEpoch(String dateFormat, String date)
+			throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
 		return sdf.parse(date).getTime();
@@ -100,8 +104,9 @@ public class ApacheLogParser {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public void ApacheAccessLogParser(String accessFilePath, String urlsFilePath, String startingDate,
-			String endingDate, String dateFormat) throws ParseException, IOException {
+	public void ApacheAccessLogParser(String accessFilePath,
+			String urlsFilePath, String startingDate, String endingDate,
+			String dateFormat) throws ParseException, IOException {
 
 		long startingEpoch = convertTimetoEpoch(dateFormat, startingDate);
 		long endingEpoch = convertTimetoEpoch(dateFormat, endingDate);
@@ -109,14 +114,17 @@ public class ApacheLogParser {
 
 		HashMap<Integer, String> urlsMap = readUrlsList(urlsFilePath);
 
-		try (BufferedReader bufferReader = new BufferedReader(new FileReader(accessFilePath))) {
+		try (BufferedReader bufferReader = new BufferedReader(new FileReader(
+				accessFilePath))) {
 
 			String line = "";
 			long index = 0;
 
-			SimpleDateFormat accesslogDateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+			SimpleDateFormat accesslogDateFormat = new SimpleDateFormat(
+					"dd/MMM/yyyy:HH:mm:ss Z");
 
-			Pattern accessLogPattern = Pattern.compile(getAccessLogRegex(), Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			Pattern accessLogPattern = Pattern.compile(getAccessLogRegex(),
+					Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 			Matcher accessLogEntryMatcher;
 
 			while ((line = bufferReader.readLine()) != null) {
@@ -126,24 +134,31 @@ public class ApacheLogParser {
 
 				if (!accessLogEntryMatcher.matches()) {
 					if (DEBUG) {
-						System.out.println("" + index + " : couldn't be parsed");
+						System.out
+								.println("" + index + " : couldn't be parsed");
 					}
 					continue;
 				}
 				requestTime = accessLogEntryMatcher.group(4);
-				accessLogEntryEpoch = accesslogDateFormat.parse(requestTime).getTime();
+				accessLogEntryEpoch = accesslogDateFormat.parse(requestTime)
+						.getTime();
 
-				if (accessLogEntryEpoch >= startingEpoch && accessLogEntryEpoch <= endingEpoch) {
+				if (accessLogEntryEpoch >= startingEpoch
+						&& accessLogEntryEpoch <= endingEpoch) {
 					clientRequest = accessLogEntryMatcher.group(5);
 
 					if (DEBUG) {
-						System.out.println("" + index + " : " + clientRequest.split(" ")[1]);
+						System.out.println("" + index + " : "
+								+ clientRequest.split(" ")[1]);
 					}
 
 					if (urlsMap.containsValue(clientRequest.split(" ")[1])) {
-						System.out.println("Line num : " + index + " " + accessLogEntryMatcher.group(1) + " "
-								+ accessLogEntryMatcher.group(4) + " " + accessLogEntryMatcher.group(5));
-					} else {
+						System.out.println("Line num : " + index + " "
+								+ accessLogEntryMatcher.group(1) + " "
+								+ accessLogEntryMatcher.group(4) + " "
+								+ accessLogEntryMatcher.group(5));
+					}
+					else {
 						continue;
 					}
 				}
@@ -158,12 +173,15 @@ public class ApacheLogParser {
 
 		try {
 			ApacheLogParser logParser = new ApacheLogParser();
-			logParser.ApacheAccessLogParser("Z:\\Scripts\\access_log", "Z:\\Scripts\\urls.txt", "01/Oct/2011",
-					"08/Oct/2011", "dd/MMM/yyyy");
+			logParser.ApacheAccessLogParser("Z:\\Scripts\\access_log",
+					"Z:\\Scripts\\urls.txt", "01/Oct/2011", "08/Oct/2011",
+					"dd/MMM/yyyy");
 
-		} catch (ParseException e) {
+		}
+		catch (ParseException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -24,8 +24,8 @@ public class UserNames {
 	public UserNames() {
 	}
 
-	public UserNames(String nickname, String displayName, String givenName, String familyName, String middleName,
-			String prefix, String suffix) {
+	public UserNames(String nickname, String displayName, String givenName,
+			String familyName, String middleName, String prefix, String suffix) {
 		this.nickname = nickname;
 		this.displayName = displayName;
 		this.givenName = givenName;

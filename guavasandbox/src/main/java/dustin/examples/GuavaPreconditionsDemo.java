@@ -22,7 +22,8 @@ public class GuavaPreconditionsDemo {
 	 */
 	public void testForNonNullArgument(String parameter) {
 		@SuppressWarnings("unused")
-		final String localParameter = checkNotNull(parameter, "Provided parameter is unacceptably null.");
+		final String localParameter = checkNotNull(parameter,
+				"Provided parameter is unacceptably null.");
 	}
 
 	public void testDivisorNotZero(int divisor) {
@@ -31,16 +32,19 @@ public class GuavaPreconditionsDemo {
 
 	public void testArrayElement(String[] strArray, int indexNumber) {
 		@SuppressWarnings("unused")
-		final int index = checkElementIndex(indexNumber, strArray.length, "String array index number");
+		final int index = checkElementIndex(indexNumber, strArray.length,
+				"String array index number");
 	}
 
 	public void testArrayPosition(String[] strArray, int indexNumber) {
 		@SuppressWarnings("unused")
-		final int index = checkPositionIndex(indexNumber, strArray.length, "String array index number");
+		final int index = checkPositionIndex(indexNumber, strArray.length,
+				"String array index number");
 	}
 
 	public void testState() {
-		checkState(this.initialized, "Cannot perform action because not initialized.");
+		checkState(this.initialized,
+				"Cannot perform action because not initialized.");
 	}
 
 	public static void printHeader(String newHeaderText) {
@@ -58,35 +62,40 @@ public class GuavaPreconditionsDemo {
 		printHeader("Preconditions.checkNotNull");
 		try {
 			me.testForNonNullArgument(null);
-		} catch (NullPointerException npe) {
+		}
+		catch (NullPointerException npe) {
 			npe.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkArgument");
 		try {
 			me.testDivisorNotZero(0);
-		} catch (IllegalArgumentException illArgEx) {
+		}
+		catch (IllegalArgumentException illArgEx) {
 			illArgEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkElementIndex");
 		try {
 			me.testArrayElement(new String[] { "Dustin", "Java" }, 3);
-		} catch (IndexOutOfBoundsException ioobEx) {
+		}
+		catch (IndexOutOfBoundsException ioobEx) {
 			ioobEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkPositionIndex");
 		try {
 			me.testArrayPosition(new String[] { "Dustin", "Java" }, 3);
-		} catch (IndexOutOfBoundsException ioobEx) {
+		}
+		catch (IndexOutOfBoundsException ioobEx) {
 			ioobEx.printStackTrace();
 		}
 
 		printHeader("Preconditions.checkState");
 		try {
 			me.testState();
-		} catch (IllegalStateException illStateEx) {
+		}
+		catch (IllegalStateException illStateEx) {
 			illStateEx.printStackTrace();
 		}
 	}

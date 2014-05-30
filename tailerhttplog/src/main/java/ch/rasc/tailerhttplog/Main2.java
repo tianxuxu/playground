@@ -24,13 +24,14 @@ public class Main2 {
 
 		// final UserAgentStringParser parser =
 		// UADetectorServiceFactory.getResourceModuleParser();
-		final LookupService cl = new LookupService("e:/GeoLiteCity.dat", LookupService.GEOIP_INDEX_CACHE);
+		final LookupService cl = new LookupService("e:/GeoLiteCity.dat",
+				LookupService.GEOIP_INDEX_CACHE);
 
 		// SimpleDateFormat accesslogDateFormat = new
 		// SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
 
-		final Pattern accessLogPattern = Pattern
-				.compile(getAccessLogRegex(), Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		final Pattern accessLogPattern = Pattern.compile(getAccessLogRegex(),
+				Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
 		Path p = Paths.get(path);
 		Tailer tailer = new Tailer(p.toFile(), new TailerListenerAdapter() {
@@ -54,7 +55,8 @@ public class Main2 {
 				if (!"-".equals(ip) && !"127.0.0.1".equals(ip)) {
 					Location l = cl.getLocation(ip);
 					if (l != null) {
-						System.out.printf("%s=%s:%s:%f:%f", ip, l.countryName, l.city, l.latitude, l.longitude);
+						System.out.printf("%s=%s:%s:%f:%f", ip, l.countryName,
+								l.city, l.latitude, l.longitude);
 					}
 					System.out.println();
 
@@ -77,6 +79,7 @@ public class Main2 {
 		String regex8 = " \"([^\"]+|(.+?))\""; // Referer
 		String regex9 = " \"([^\"]+|(.+?))\""; // Agent
 
-		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7 + regex8 + regex9;
+		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7
+				+ regex8 + regex9;
 	}
 }

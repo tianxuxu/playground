@@ -20,42 +20,42 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-annotations</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-servlets</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-plus</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>			
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-jsp</artifactId>
-			<version>9.2.0.M1</version>
+			<version>9.2.0.v20140526</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -73,7 +73,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.0.M1</version>
+				<version>9.2.0.v20140526</version>
 				<configuration>
 					<stopPort>8005</stopPort>
 					<stopKey>STOP</stopKey>

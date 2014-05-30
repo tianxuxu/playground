@@ -19,7 +19,8 @@ public class DateController {
 
 	@RequestMapping(value = "/date", method = RequestMethod.GET, produces = "text/event-stream")
 	@ResponseBody
-	public SSEvent getTime(@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
+	public SSEvent getTime(
+			@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
 		System.out.println("Last Event Id: " + lastEventId);
 
 		SSEvent event = new SSEvent();

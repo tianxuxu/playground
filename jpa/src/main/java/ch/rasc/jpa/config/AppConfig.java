@@ -28,7 +28,8 @@ public class AppConfig {
 		properties.put("hibernate.hbm2ddl.auto", "create");
 
 		properties.put("hibernate.connection.driver_class", "org.h2.Driver");
-		properties.put("hibernate.connection.url", "jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE");
+		properties.put("hibernate.connection.url",
+				"jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE");
 		properties.put("hibernate.connection.username", "sa");
 		properties.put("hibernate.connection.password", "update");
 

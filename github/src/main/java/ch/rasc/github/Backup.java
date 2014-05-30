@@ -30,9 +30,11 @@ public class Backup {
 			if (Files.exists(configFile)) {
 				System.out.println("fetching : " + repo.getName());
 				Git.open(repoDir.toFile()).fetch().call();
-			} else {
+			}
+			else {
 				System.out.println("cloning : " + repo.getName());
-				Git.cloneRepository().setBare(true).setURI(repo.getGitUrl()).setDirectory(repoDir.toFile()).call();
+				Git.cloneRepository().setBare(true).setURI(repo.getGitUrl())
+						.setDirectory(repoDir.toFile()).call();
 			}
 
 		}

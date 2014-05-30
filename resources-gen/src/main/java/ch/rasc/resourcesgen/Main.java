@@ -29,10 +29,13 @@ import com.github.mustachejava.MustacheFactory;
 public class Main {
 
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		ArgumentParser parser = ArgumentParsers.newArgumentParser("resources-gen").defaultHelp(true)
+	public static void main(String[] args) throws FileNotFoundException,
+			IOException {
+		ArgumentParser parser = ArgumentParsers
+				.newArgumentParser("resources-gen").defaultHelp(true)
 				.description("Creates maven packages of resourcejars");
-		parser.addArgument("file").nargs(1).required(true).help("Specify the configuration file");
+		parser.addArgument("file").nargs(1).required(true)
+				.help("Specify the configuration file");
 		Namespace ns = null;
 		try {
 			ns = parser.parseArgs(args);
@@ -41,7 +44,8 @@ public class Main {
 				System.exit(1);
 				return;
 			}
-		} catch (ArgumentParserException e) {
+		}
+		catch (ArgumentParserException e) {
 			parser.handleError(e);
 			System.exit(1);
 			return;
@@ -55,7 +59,8 @@ public class Main {
 				InputStreamReader isr = new InputStreamReader(is)) {
 			try {
 				mustache = mf.compile(isr, "pom.xml");
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 				System.exit(1);
 				return;
@@ -73,7 +78,8 @@ public class Main {
 		}
 
 		Map<String, String> files = (Map<String, String>) config.get("files");
-		Map<String, String> mappings = (Map<String, String>) config.get("mappings");
+		Map<String, String> mappings = (Map<String, String>) config
+				.get("mappings");
 		if (mappings == null) {
 			mappings = Collections.emptyMap();
 		}
@@ -99,7 +105,8 @@ public class Main {
 			String artifactId = entry.getValue();
 			if (artifactId.equals("core")) {
 				artifactId = baseartifactId;
-			} else {
+			}
+			else {
 				artifactId = baseartifactId + "-" + artifactId;
 			}
 
@@ -107,8 +114,9 @@ public class Main {
 
 			String artifactIdVersion = artifactId + "-" + version;
 
-			Path destDirPath = Paths.get(destdir, artifactIdVersion, "src/main/resources/META-INF/resources",
-					"resources", baseartifactId, version);
+			Path destDirPath = Paths.get(destdir, artifactIdVersion,
+					"src/main/resources/META-INF/resources", "resources",
+					baseartifactId, version);
 			Files.createDirectories(destDirPath);
 
 			projectDirs.add(Paths.get(destdir, artifactIdVersion));
@@ -130,8 +138,10 @@ public class Main {
 			Path destPath = destDirPath.resolve(mappedFileName);
 
 			if (!Files.isDirectory(srcPath) && destPath.getNameCount() > 1) {
-				Files.createDirectories(destPath.subpath(0, destPath.getNameCount() - 1));
-			} else if (destPath.getNameCount() > 1) {
+				Files.createDirectories(destPath.subpath(0,
+						destPath.getNameCount() - 1));
+			}
+			else if (destPath.getNameCount() > 1) {
 				Files.createDirectories(destPath);
 			}
 

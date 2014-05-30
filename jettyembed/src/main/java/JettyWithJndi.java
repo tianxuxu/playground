@@ -14,7 +14,8 @@ public class JettyWithJndi {
 
 		try (ServerSocket srv = new ServerSocket(port)) {
 			srv.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("PORT " + port + " ALREADY IN USE");
 			return;
 		}
@@ -22,7 +23,8 @@ public class JettyWithJndi {
 		WebAppContext context = new WebAppContext("./src/main/webapp", "/");
 		context.setDefaultsDescriptor("./src/main/config/webdefault.xml");
 
-		context.setConfigurations(new Configuration[] { new org.eclipse.jetty.webapp.WebInfConfiguration(),
+		context.setConfigurations(new Configuration[] {
+				new org.eclipse.jetty.webapp.WebInfConfiguration(),
 				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
 				new org.eclipse.jetty.webapp.MetaInfConfiguration(),
 				new org.eclipse.jetty.webapp.FragmentConfiguration(),
@@ -35,7 +37,8 @@ public class JettyWithJndi {
 		JdbcDataSource dataSource = new JdbcDataSource();
 		dataSource.setUser("sa");
 		dataSource.setURL("jdbc:h2:~/myDb");
-		context.addBean(new org.eclipse.jetty.plus.jndi.Resource("jdbc/ds", dataSource));
+		context.addBean(new org.eclipse.jetty.plus.jndi.Resource("jdbc/ds",
+				dataSource));
 
 		Server server = new Server(port);
 		server.setHandler(context);

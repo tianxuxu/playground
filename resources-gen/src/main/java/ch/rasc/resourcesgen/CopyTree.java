@@ -21,7 +21,8 @@ public class CopyTree implements FileVisitor<Path> {
 	}
 
 	@Override
-	public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+	public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+			throws IOException {
 		return FileVisitResult.CONTINUE;
 	}
 
@@ -29,8 +30,10 @@ public class CopyTree implements FileVisitor<Path> {
 	public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
 		Path newdir = to.resolve(from.relativize(dir));
 		try {
-			Files.copy(dir, newdir, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
-		} catch (IOException e) {
+			Files.copy(dir, newdir, StandardCopyOption.REPLACE_EXISTING,
+					StandardCopyOption.COPY_ATTRIBUTES);
+		}
+		catch (IOException e) {
 			System.err.println("Unable to create " + newdir + " [" + e + "]");
 			return FileVisitResult.SKIP_SUBTREE;
 		}
@@ -38,22 +41,28 @@ public class CopyTree implements FileVisitor<Path> {
 	}
 
 	@Override
-	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+			throws IOException {
 		try {
-			Files.copy(file, to.resolve(from.relativize(file)), StandardCopyOption.REPLACE_EXISTING,
+			Files.copy(file, to.resolve(from.relativize(file)),
+					StandardCopyOption.REPLACE_EXISTING,
 					StandardCopyOption.COPY_ATTRIBUTES);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.err.println("Unable to copy " + file + " [" + e + "]");
 		}
 		return FileVisitResult.CONTINUE;
 	}
 
 	@Override
-	public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+	public FileVisitResult visitFileFailed(Path file, IOException exc)
+			throws IOException {
 		if (exc instanceof FileSystemLoopException) {
 			System.err.println("Cycle was detected: " + file);
-		} else {
-			System.err.println("Error occurred, unable to copy:" + file + " [" + exc + "]");
+		}
+		else {
+			System.err.println("Error occurred, unable to copy:" + file + " ["
+					+ exc + "]");
 		}
 		return FileVisitResult.CONTINUE;
 	}

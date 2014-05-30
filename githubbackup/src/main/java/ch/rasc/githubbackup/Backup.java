@@ -39,7 +39,8 @@ public class Backup {
 		disableCertificateValidation();
 
 		Path settingsYamlPath = Paths.get(args[0]);
-		try (BufferedReader br = Files.newBufferedReader(settingsYamlPath, StandardCharsets.UTF_8)) {
+		try (BufferedReader br = Files.newBufferedReader(settingsYamlPath,
+				StandardCharsets.UTF_8)) {
 			Config config = new Yaml().loadAs(br, Config.class);
 
 			if (config.getKey() != null) {
@@ -55,22 +56,25 @@ public class Backup {
 			if (config.getGithubUsers() != null) {
 				for (String githubUser : config.getGithubUsers()) {
 					for (Repository repo : service.getRepositories(githubUser)) {
-						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null, null);
+						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(),
+								null, null);
 					}
 				}
 			}
 
 			if (config.getGitUrls() != null) {
 				for (GitUrl gitUrl : config.getGitUrls()) {
-					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl(), gitUrl.getUsername(), gitUrl.getPassword());
+					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl(),
+							gitUrl.getUsername(), gitUrl.getPassword());
 				}
 			}
 		}
 
 	}
 
-	private static void fetchRepo(Path backupDir, String name, String url, String username, String password)
-			throws IOException, GitAPIException, InvalidRemoteException, TransportException {
+	private static void fetchRepo(Path backupDir, String name, String url,
+			String username, String password) throws IOException,
+			GitAPIException, InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
 
@@ -78,19 +82,26 @@ public class Backup {
 		if (Files.exists(configFile)) {
 			System.out.println("fetching : " + name);
 			if (username != null) {
-				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
-				Git.open(repoDir.toFile()).fetch().setCredentialsProvider(cp).call();
-			} else {
+				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(
+						username, password);
+				Git.open(repoDir.toFile()).fetch().setCredentialsProvider(cp)
+						.call();
+			}
+			else {
 				Git.open(repoDir.toFile()).fetch().call();
 			}
-		} else {
+		}
+		else {
 			System.out.println("cloning : " + name);
 			if (username != null) {
-				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(username, password);
-				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url)
+				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(
+						username, password);
+				Git.cloneRepository().setCredentialsProvider(cp).setBare(true)
+						.setURI(url).setDirectory(repoDir.toFile()).call();
+			}
+			else {
+				Git.cloneRepository().setBare(true).setURI(url)
 						.setDirectory(repoDir.toFile()).call();
-			} else {
-				Git.cloneRepository().setBare(true).setURI(url).setDirectory(repoDir.toFile()).call();
 			}
 
 		}
@@ -105,12 +116,14 @@ public class Backup {
 			}
 
 			@Override
-			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+			public void checkClientTrusted(X509Certificate[] certs,
+					String authType) {
 				// nothing here
 			}
 
 			@Override
-			public void checkServerTrusted(X509Certificate[] certs, String authType) {
+			public void checkServerTrusted(X509Certificate[] certs,
+					String authType) {
 				// nothing here
 			}
 		} };
@@ -122,9 +135,11 @@ public class Backup {
 		try {
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new SecureRandom());
-			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+			HttpsURLConnection
+					.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			HttpsURLConnection.setDefaultHostnameVerifier(hv);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// nothing here
 		}
 	}

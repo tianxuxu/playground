@@ -15,7 +15,8 @@ public class Simple {
 
 		Environment env = new Environment();
 
-		Reactor reactor = Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL).get();
+		Reactor reactor = Reactors.reactor().env(env)
+				.dispatcher(Environment.THREAD_POOL).get();
 
 		Selector selector = ObjectSelector.objectSelector("parse");
 		reactor.on(selector, ev -> System.out.println(ev));

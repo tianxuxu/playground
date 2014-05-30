@@ -26,15 +26,19 @@ import org.apache.lucene.util.Version;
 
 public class Indexing {
 
-	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException {
+	public static void main(String[] args) throws CorruptIndexException,
+			LockObtainFailedException, IOException {
 
 		try (Directory directory = new RAMDirectory();
-				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_48);
-				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_48, analyzer))) {
+				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(
+						Version.LUCENE_48);
+				IndexWriter writer = new IndexWriter(directory,
+						new IndexWriterConfig(Version.LUCENE_48, analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };
-			String[] unstored = { "Amsterdam has lots of bridges", "Venice has lots of canals" };
+			String[] unstored = { "Amsterdam has lots of bridges",
+					"Venice has lots of canals" };
 			String[] text = { "Amsterdam", "Venice" };
 
 			for (int i = 0; i < ids.length; i++) {

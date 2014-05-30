@@ -12,7 +12,8 @@ import com.mongodb.MongoException;
 
 public class Reader {
 
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws UnknownHostException,
+			MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
@@ -23,11 +24,13 @@ public class Reader {
 			createOptions.append("capped", true);
 			createOptions.append("size", 100000);
 			collection = db.createCollection("log", createOptions);
-		} else {
+		}
+		else {
 			collection = db.getCollection("log");
 		}
 
-		try (DBCursor cur = collection.find().addOption(Bytes.QUERYOPTION_TAILABLE)
+		try (DBCursor cur = collection.find()
+				.addOption(Bytes.QUERYOPTION_TAILABLE)
 				.addOption(Bytes.QUERYOPTION_AWAITDATA)) {
 
 			while (cur.hasNext()) {

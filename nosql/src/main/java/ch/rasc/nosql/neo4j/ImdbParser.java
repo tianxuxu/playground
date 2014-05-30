@@ -36,25 +36,29 @@ import org.neo4j.graphdb.index.Index;
 public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
-		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
+		GraphDatabaseService graphDb = new GraphDatabaseFactory()
+				.newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actresses.list.gz");
+		new ImdbParser().readImdbData(graphDb, index,
+				"E:\\_download\\actresses.list.gz");
 		graphDb.shutdown();
 
 		System.gc();
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
 		index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actors.list.gz");
+		new ImdbParser().readImdbData(graphDb, index,
+				"E:\\_download\\actors.list.gz");
 		graphDb.shutdown();
 
 	}
 
-	public void readImdbData(GraphDatabaseService graphDb, Index<Node> index, String fileName)
-			throws FileNotFoundException, IOException {
+	public void readImdbData(GraphDatabaseService graphDb, Index<Node> index,
+			String fileName) throws FileNotFoundException, IOException {
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(
-				fileName)), StandardCharsets.ISO_8859_1))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(
+				new GZIPInputStream(new FileInputStream(fileName)),
+				StandardCharsets.ISO_8859_1))) {
 
 			String line = br.readLine();
 			Node currentActorNode = null;
@@ -77,7 +81,8 @@ public class ImdbParser {
 								tx.success();
 								tx = graphDb.beginTx();
 							}
-						} else {
+						}
+						else {
 							tx = graphDb.beginTx();
 						}
 						currentActorNode = graphDb.createNode();
@@ -89,8 +94,11 @@ public class ImdbParser {
 					}
 
 					String title = line.substring(actorSep).trim();
-					if (title.length() == 0 || title.contains("{") || title.startsWith("\"") || title.contains("????")
-							|| title.contains(" (TV)") || title.contains(" (VG)") || title.contains(" (V)")) {
+					if (title.length() == 0 || title.contains("{")
+							|| title.startsWith("\"") || title.contains("????")
+							|| title.contains(" (TV)")
+							|| title.contains(" (VG)")
+							|| title.contains(" (V)")) {
 						line = br.readLine();
 						continue;
 					}
@@ -98,17 +106,20 @@ public class ImdbParser {
 					int characterEnd = title.indexOf(']');
 					String character = null;
 					if (characterStart > 0 && characterEnd > characterStart) {
-						character = title.substring(characterStart + 1, characterEnd);
+						character = title.substring(characterStart + 1,
+								characterEnd);
 					}
 					int creditStart = title.indexOf('<');
 					if (characterStart > 0) {
 						title = title.substring(0, characterStart).trim();
-					} else if (creditStart > 0) {
+					}
+					else if (creditStart > 0) {
 						title = title.substring(0, creditStart).trim();
 					}
 					int spaces = title.indexOf("  ");
 					if (spaces > 0) {
-						if (title.charAt(spaces - 1) == ')' && title.charAt(spaces + 2) == '(') {
+						if (title.charAt(spaces - 1) == ')'
+								&& title.charAt(spaces + 2) == '(') {
 							title = title.substring(0, spaces).trim();
 						}
 					}
@@ -120,7 +131,9 @@ public class ImdbParser {
 							index.add(movieNode, "title", title);
 						}
 
-						Relationship relationship = currentActorNode.createRelationshipTo(movieNode, RelTypes.ACTS_IN);
+						Relationship relationship = currentActorNode
+								.createRelationshipTo(movieNode,
+										RelTypes.ACTS_IN);
 						relationship.setProperty("character", character);
 
 					}

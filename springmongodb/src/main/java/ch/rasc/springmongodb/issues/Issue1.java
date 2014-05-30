@@ -37,7 +37,8 @@ public class Issue1 {
 
 			for (ObjectId id : idToUserNameMap.keySet()) {
 				System.out.println(id);
-				User user = mongoTemplate.findOne(Query.query(Criteria.where("id").ne(id)), User.class);
+				User user = mongoTemplate.findOne(
+						Query.query(Criteria.where("id").ne(id)), User.class);
 				System.out.println(user);
 			}
 

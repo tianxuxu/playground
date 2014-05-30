@@ -21,20 +21,23 @@ public class PromiseSamples {
 
 	public static void main(String... args) throws Exception {
 		// Deferred is the publisher, Promise the consumer
-		Deferred<String, Promise<String>> deferred = Promises.<String> defer().env(ENV)
-				.dispatcher(Environment.RING_BUFFER).get();
+		Deferred<String, Promise<String>> deferred = Promises.<String> defer()
+				.env(ENV).dispatcher(Environment.RING_BUFFER).get();
 		Promise<String> promise = deferred.compose();
 
-		promise.onComplete(p -> LOG.info("Promise completed {}", p)).onSuccess(s -> LOG.info("Got value: {}", s))
+		promise.onComplete(p -> LOG.info("Promise completed {}", p))
+				.onSuccess(s -> LOG.info("Got value: {}", s))
 				.onError(t -> LOG.error(t.getMessage(), t));
 
 		try {
 			deferred.accept("Hello World!");
-			// deferred.accept(new IllegalArgumentException("Hello Shmello! :P"));
+			// deferred.accept(new
+			// IllegalArgumentException("Hello Shmello! :P"));
 
 			String s = promise.await(1, TimeUnit.SECONDS);
 			LOG.info("s={}", s);
-		} finally {
+		}
+		finally {
 			ENV.shutdown();
 		}
 	}

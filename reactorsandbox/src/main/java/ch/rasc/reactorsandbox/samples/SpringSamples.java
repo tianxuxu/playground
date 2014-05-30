@@ -49,7 +49,8 @@ public class SpringSamples implements CommandLineRunner {
 
 		@Bean
 		public Reactor reactor(Environment env) {
-			return Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
+			return Reactors.reactor().env(env)
+					.dispatcher(Environment.RING_BUFFER).get();
 		}
 
 		@Bean

@@ -21,12 +21,14 @@ public class EventBusSubscriberRegisterar implements BeanPostProcessor {
 	}
 
 	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+	public Object postProcessBeforeInitialization(Object bean, String beanName)
+			throws BeansException {
 		return bean;
 	}
 
 	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+	public Object postProcessAfterInitialization(Object bean, String beanName)
+			throws BeansException {
 
 		for (Method method : bean.getClass().getMethods()) {
 			if (method.getAnnotation(Subscribe.class) != null) {

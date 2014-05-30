@@ -13,8 +13,10 @@ public class WatchListener {
 	@Subscribe
 	@AllowConcurrentEvents
 	public void handleWatchEvent(PathEvents pathEvents) {
-		System.out.println("--------------------------------------------------");
-		System.out.println(new Date() + ": " + pathEvents.getWatchedDirectory());
+		System.out
+				.println("--------------------------------------------------");
+		System.out
+				.println(new Date() + ": " + pathEvents.getWatchedDirectory());
 		for (PathEvent event : pathEvents.getEvents()) {
 			System.out.print("  ");
 			System.out.print(event.getEventTarget());

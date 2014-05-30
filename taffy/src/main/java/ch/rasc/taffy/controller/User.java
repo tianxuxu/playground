@@ -8,7 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class User {
 
-	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat.forPattern("dd/MM/yyyy");
+	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat
+			.forPattern("dd/MM/yyyy");
 
 	private final int id;
 

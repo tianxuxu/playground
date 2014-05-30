@@ -14,9 +14,10 @@ public class ChatHandler extends RegistryHandler {
 	}
 
 	@Override
-	protected void handleTextMessage(final WebSocketSession session, final TextMessage message) throws Exception {
-		asyncExecutor
-				.execute(() -> sendToAll(session.getId() + " says: <strong>" + message.getPayload() + "</strong>"));
+	protected void handleTextMessage(final WebSocketSession session,
+			final TextMessage message) throws Exception {
+		asyncExecutor.execute(() -> sendToAll(session.getId()
+				+ " says: <strong>" + message.getPayload() + "</strong>"));
 
 	}
 

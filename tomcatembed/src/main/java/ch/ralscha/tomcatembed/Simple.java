@@ -8,7 +8,8 @@ import org.apache.catalina.startup.Tomcat;
 
 public class Simple {
 
-	public static void main(String[] args) throws ServletException, LifecycleException {
+	public static void main(String[] args) throws ServletException,
+			LifecycleException {
 
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);
@@ -16,7 +17,8 @@ public class Simple {
 		tomcat.setBaseDir(".");
 
 		Context ctx = tomcat.addWebapp("/examples", "examples");
-		Tomcat.addServlet(ctx, "helloWorldServlet", "ch.ralscha.tomcatembed.HelloWorldServlet");
+		Tomcat.addServlet(ctx, "helloWorldServlet",
+				"ch.ralscha.tomcatembed.HelloWorldServlet");
 
 		ctx.addServletMapping("/helloworld", "helloWorldServlet");
 
