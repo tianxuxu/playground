@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.function.Predicate;
 
 public class CopyTree implements FileVisitor<Path> {
 
@@ -15,9 +16,17 @@ public class CopyTree implements FileVisitor<Path> {
 
 	private final Path to;
 
-	public CopyTree(Path from, Path to) {
+	private final Predicate<Path> fileFilter;
+
+	public CopyTree(Path from, Path to, Predicate<Path> fileFilter) {
 		this.from = from;
 		this.to = to;
+		if (fileFilter == null) {
+			this.fileFilter = p -> true;
+		}
+		else {
+			this.fileFilter = fileFilter;
+		}
 	}
 
 	@Override
@@ -44,9 +53,11 @@ public class CopyTree implements FileVisitor<Path> {
 	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 			throws IOException {
 		try {
-			Files.copy(file, to.resolve(from.relativize(file)),
-					StandardCopyOption.REPLACE_EXISTING,
-					StandardCopyOption.COPY_ATTRIBUTES);
+			if (fileFilter.test(file)) {
+				Files.copy(file, to.resolve(from.relativize(file)),
+						StandardCopyOption.REPLACE_EXISTING,
+						StandardCopyOption.COPY_ATTRIBUTES);
+			}
 		}
 		catch (IOException e) {
 			System.err.println("Unable to copy " + file + " [" + e + "]");
@@ -55,14 +66,13 @@ public class CopyTree implements FileVisitor<Path> {
 	}
 
 	@Override
-	public FileVisitResult visitFileFailed(Path file, IOException exc)
-			throws IOException {
+	public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
 		if (exc instanceof FileSystemLoopException) {
 			System.err.println("Cycle was detected: " + file);
 		}
 		else {
-			System.err.println("Error occurred, unable to copy:" + file + " ["
-					+ exc + "]");
+			System.err.println("Error occurred, unable to copy:" + file + " [" + exc
+					+ "]");
 		}
 		return FileVisitResult.CONTINUE;
 	}

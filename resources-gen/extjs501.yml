@@ -1,0 +1,103 @@
+sourceDir: D:\js\ext-5.0.1.1109
+version: 5.0.1.1109-NIGHTLY
+groupId: resources
+baseArtifactId: ext
+destDir: ./res
+
+artifacts:
+  - artifactId: ext-all
+    mappings:
+      - from: build/ext-all.js
+        to: ext-all.js
+
+      - from: build/packages/ext-locale/build
+        to: locale
+        parameter: locale
+        
+  - artifactId: ext-all-debug
+    mappings:      
+      - from: build/ext-all-debug.js
+        to: ext-all-debug.js
+      
+      - from: build/packages/ext-locale/build
+        to: locale
+        parameter: localedebug
+
+  - artifactId: ext-ux
+    mappings:
+      - from: examples/ux
+        to: ux
+
+  - artifactId: ext-theme-classic
+    mappings:
+      - from: build/packages/ext-theme-classic/build/ext-theme-classic.js
+        to: ext-theme-classic/ext-theme-classic.js
+      - from: build/packages/ext-theme-classic/build/resources/ext-theme-classic-all.css
+        to: ext-theme-classic/ext-theme-classic-all.css
+      - from: build/packages/ext-theme-classic/build/resources/images
+        to: ext-theme-classic/images
+        
+  - artifactId: ext-theme-crisp
+    mappings:  
+      - from: build/packages/ext-theme-crisp/build/ext-theme-crisp.js
+        to: ext-theme-crisp/ext-theme-crisp.js
+      - from: build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css
+        to: ext-theme-crisp/ext-theme-crisp-all.css
+      - from: build/packages/ext-theme-crisp/build/resources/images
+        to: ext-theme-crisp/images
+        
+  - artifactId: ext-theme-crisp-touch
+    mappings:    
+      - from: build/packages/ext-theme-crisp-touch/build/ext-theme-crisp-touch.js
+        to: ext-theme-crisp-touch/ext-theme-crisp-touch.js
+      - from: build/packages/ext-theme-crisp-touch/build/resources/ext-theme-crisp-touch-all.css
+        to: ext-theme-crisp-touch/ext-theme-crisp-touch-all.css
+      - from: build/packages/ext-theme-crisp-touch/build/resources/images
+        to: ext-theme-crisp-touch/images
+    
+  - artifactId: ext-theme-gray
+    mappings:
+      - from: build/packages/ext-theme-gray/build/ext-theme-gray.js
+        to: ext-theme-gray/ext-theme-gray.js
+      - from: build/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css
+        to: ext-theme-gray/ext-theme-gray-all.css
+      - from: build/packages/ext-theme-gray/build/resources/images
+        to: ext-theme-gray/images
+  
+  - artifactId: ext-theme-neptune
+    mappings:
+      - from: build/packages/ext-theme-neptune/build/ext-theme-neptune.js
+        to: ext-theme-neptune/ext-theme-neptune.js
+      - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css
+        to: ext-theme-neptune/ext-theme-neptune-all.css
+        parameter: fixcssinclude  
+      - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all_01.css
+        to: ext-theme-neptune/ext-theme-neptune-all_01.css
+      - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all_02.css
+        to: ext-theme-neptune/ext-theme-neptune-all_02.css
+      - from: build/packages/ext-theme-neptune/build/resources/images
+        to: ext-theme-neptune/images
+  
+  - artifactId: ext-theme-neptune-touch
+    mappings:     
+      - from: build/packages/ext-theme-neptune-touch/build/ext-theme-neptune-touch.js
+        to: ext-theme-neptune-touch/ext-theme-neptune-touch.js
+      - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all.css
+        to: ext-theme-neptune-touch/ext-theme-neptune-touch-all.css
+        parameter: fixcssinclude
+      - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all_01.css
+        to: ext-theme-neptune-touch/ext-theme-neptune-touch-all_01.css
+      - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all_02.css
+        to: ext-theme-neptune-touch/ext-theme-neptune-touch-all_02.css
+      - from: build/packages/ext-theme-neptune-touch/build/resources/images
+        to: ext-theme-neptune-touch/images
+
+  - artifactId: sencha-charts
+    mappings:     
+      - from: packages/sencha-charts/build/sencha-charts.js
+        to: sencha-charts.js 
+
+  - artifactId: sencha-charts-debug
+    mappings:     
+      - from: packages/sencha-charts/build/sencha-charts-debug.js
+        to: sencha-charts-debug.js
