@@ -23,8 +23,8 @@ public class Main {
 			Path configFile = Paths.get("./config.yaml");
 
 			if (!Files.exists(configFile)) {
-				URL myLocationURL = Main.class.getProtectionDomain()
-						.getCodeSource().getLocation();
+				URL myLocationURL = Main.class.getProtectionDomain().getCodeSource()
+						.getLocation();
 				Path myPath = Paths.get(myLocationURL.toURI());
 				Path myDir = myPath.getParent();
 

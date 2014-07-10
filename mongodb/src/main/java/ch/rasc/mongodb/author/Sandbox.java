@@ -20,8 +20,8 @@ public class Sandbox {
 			query.field("word1").equal("w1");
 			query.field("word2").equal("w2");
 			query.field("word3.word").equal("w3_b");
-			UpdateOperations<Word12> op = datastore.createUpdateOperations(
-					Word12.class).inc("word3.$.count");
+			UpdateOperations<Word12> op = datastore.createUpdateOperations(Word12.class)
+					.inc("word3.$.count");
 			datastore.update(query, op);
 
 			// query = new BasicDBObject();

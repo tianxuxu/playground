@@ -7,8 +7,7 @@ public class ReadCsv1c {
 
 	public ReadCsv1c() throws IOException {
 		try (InputStream is = getClass().getResourceAsStream("/test1.csv");
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(is))) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
 			String line;
 			while ((line = br.readLine()) != null) {

@@ -39,16 +39,14 @@ public class ImdbParser {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
 				.newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index,
-				"E:\\_download\\actresses.list.gz");
+		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actresses.list.gz");
 		graphDb.shutdown();
 
 		System.gc();
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
 		index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index,
-				"E:\\_download\\actors.list.gz");
+		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actors.list.gz");
 		graphDb.shutdown();
 
 	}
@@ -96,8 +94,7 @@ public class ImdbParser {
 					String title = line.substring(actorSep).trim();
 					if (title.length() == 0 || title.contains("{")
 							|| title.startsWith("\"") || title.contains("????")
-							|| title.contains(" (TV)")
-							|| title.contains(" (VG)")
+							|| title.contains(" (TV)") || title.contains(" (VG)")
 							|| title.contains(" (V)")) {
 						line = br.readLine();
 						continue;
@@ -106,8 +103,7 @@ public class ImdbParser {
 					int characterEnd = title.indexOf(']');
 					String character = null;
 					if (characterStart > 0 && characterEnd > characterStart) {
-						character = title.substring(characterStart + 1,
-								characterEnd);
+						character = title.substring(characterStart + 1, characterEnd);
 					}
 					int creditStart = title.indexOf('<');
 					if (characterStart > 0) {
@@ -132,8 +128,7 @@ public class ImdbParser {
 						}
 
 						Relationship relationship = currentActorNode
-								.createRelationshipTo(movieNode,
-										RelTypes.ACTS_IN);
+								.createRelationshipTo(movieNode, RelTypes.ACTS_IN);
 						relationship.setProperty("character", character);
 
 					}

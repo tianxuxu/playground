@@ -35,8 +35,8 @@ public class Main3 {
 		// }
 
 		BasicDBObject query = new BasicDBObject("last_name", "smith");
-		BasicDBObject update = new BasicDBObject("$set", new BasicDBObject(
-				"city", "Chicago"));
+		BasicDBObject update = new BasicDBObject("$set", new BasicDBObject("city",
+				"Chicago"));
 		collection.update(query, update, false, true);
 
 		try (DBCursor cursor = collection.find(new BasicDBObject("age",

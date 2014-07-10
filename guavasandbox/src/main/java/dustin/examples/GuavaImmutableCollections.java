@@ -55,8 +55,7 @@ public class GuavaImmutableCollections {
 	public void demoGuavaImmutableSet() {
 		printHeader("Guava's ImmutableSet");
 		final Set<String> originalStrings = buildUnderlyingSampleSet();
-		final ImmutableSet<String> strings = ImmutableSet
-				.copyOf(originalStrings);
+		final ImmutableSet<String> strings = ImmutableSet.copyOf(originalStrings);
 		out.println("Immutable Set of Strings: " + strings);
 		originalStrings.remove("Java");
 		out.println("Original Set of Strings: " + originalStrings);
@@ -69,8 +68,7 @@ public class GuavaImmutableCollections {
 	public void demoJdkUnmodifiableSet() {
 		printHeader("JDK unmodifiableSet");
 		final Set<String> originalStrings = buildUnderlyingSampleSet();
-		final Set<String> strings = Collections
-				.unmodifiableSet(originalStrings);
+		final Set<String> strings = Collections.unmodifiableSet(originalStrings);
 		out.println("Unmodifiable Set of Strings: " + strings);
 		originalStrings.remove("Java");
 		out.println("Original Set of Strings: " + originalStrings);
@@ -83,8 +81,7 @@ public class GuavaImmutableCollections {
 	public void demoGuavaImmutableList() {
 		printHeader("Guava's ImmutableList");
 		final List<String> originalStrings = buildUnderlyingSampleList();
-		final ImmutableList<String> strings = ImmutableList
-				.copyOf(originalStrings);
+		final ImmutableList<String> strings = ImmutableList.copyOf(originalStrings);
 		out.println("Immutable List of Strings: " + strings);
 		originalStrings.remove("Groovy");
 		out.println("Original List of Strings: " + originalStrings);
@@ -97,8 +94,7 @@ public class GuavaImmutableCollections {
 	public void demoJdkUnmodifiableList() {
 		printHeader("JDK unmodifiableList");
 		final List<String> originalStrings = buildUnderlyingSampleList();
-		final List<String> strings = Collections
-				.unmodifiableList(originalStrings);
+		final List<String> strings = Collections.unmodifiableList(originalStrings);
 		out.println("Unmodifiable List of Strings: " + strings);
 		originalStrings.remove("Groovy");
 		out.println("Original List of Strings: " + originalStrings);
@@ -115,8 +111,7 @@ public class GuavaImmutableCollections {
 		originalStringsMapping.put("G", "Guava");
 		originalStringsMapping.put("J", "Java");
 		final ImmutableMap<String, String> strings = ImmutableMap
-				.<String, String> builder().putAll(originalStringsMapping)
-				.build();
+				.<String, String> builder().putAll(originalStringsMapping).build();
 		out.println("Immutable Map of Strings: " + strings);
 		originalStringsMapping.remove("D");
 		out.println("Original Map of Strings: " + originalStringsMapping);
@@ -148,8 +143,8 @@ public class GuavaImmutableCollections {
 
 		final ImmutableMap<String, String> languageStrings = ImmutableMap
 				.<String, String> builder().put("C", "C++").put("F", "Fortran")
-				.put("G", "Groovy").put("J", "Java").put("P", "Pascal")
-				.put("R", "Ruby").put("S", "Scala").build();
+				.put("G", "Groovy").put("J", "Java").put("P", "Pascal").put("R", "Ruby")
+				.put("S", "Scala").build();
 		out.println("Languages Map: " + languageStrings);
 
 		final ImmutableSet<String> states = ImmutableSet.<String> builder()
@@ -157,23 +152,20 @@ public class GuavaImmutableCollections {
 		out.println("States: " + states);
 
 		final ImmutableList<String> cities = ImmutableList.<String> builder()
-				.add("Boston").add("Colorado Springs").add("Denver")
-				.add("Fort Collins").add("Salt Lake City").add("San Francisco")
-				.add("Toledo").build();
+				.add("Boston").add("Colorado Springs").add("Denver").add("Fort Collins")
+				.add("Salt Lake City").add("San Francisco").add("Toledo").build();
 		out.println("Cities: " + cities);
 
 		final ImmutableMultimap<String, String> multimapLanguages = ImmutableMultimap
-				.<String, String> builder().put("C", "C").put("C", "C++")
-				.put("C", "C#").put("F", "Fortran").put("G", "Groovy")
-				.put("J", "Java").put("P", "Pascal").put("P", "Perl")
-				.put("P", "PHP").put("P", "Python").put("R", "Ruby")
-				.put("S", "Scala").build();
+				.<String, String> builder().put("C", "C").put("C", "C++").put("C", "C#")
+				.put("F", "Fortran").put("G", "Groovy").put("J", "Java")
+				.put("P", "Pascal").put("P", "Perl").put("P", "PHP").put("P", "Python")
+				.put("R", "Ruby").put("S", "Scala").build();
 		out.println("Languages: " + multimapLanguages);
 	}
 
 	/**
-	 * Write a separation header to standard output that includes provided
-	 * header text.
+	 * Write a separation header to standard output that includes provided header text.
 	 *
 	 * @param headerText Text to be used in separation header.
 	 */

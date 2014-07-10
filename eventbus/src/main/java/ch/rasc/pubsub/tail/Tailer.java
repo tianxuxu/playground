@@ -51,8 +51,8 @@ public class Tailer {
 
 	private void printTail() throws IOException {
 
-		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(
-				path, StandardOpenOption.READ)) {
+		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(path,
+				StandardOpenOption.READ)) {
 			if (seekableByteChannel.size() < position) {
 				position = 0;
 			}

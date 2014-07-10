@@ -43,8 +43,7 @@ public class GuavaPreconditionsDemo {
 	}
 
 	public void testState() {
-		checkState(this.initialized,
-				"Cannot perform action because not initialized.");
+		checkState(this.initialized, "Cannot perform action because not initialized.");
 	}
 
 	public static void printHeader(String newHeaderText) {

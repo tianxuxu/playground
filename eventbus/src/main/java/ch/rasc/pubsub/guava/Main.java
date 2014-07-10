@@ -9,8 +9,8 @@ public class Main {
 				SpringConfig.class)) {
 			ctx.getBean(Publisher.class).publishMsgEvent("a normal MsgEvent");
 			System.out.println("=====");
-			ctx.getBean(Publisher.class).publishSpecialMsgEvent(
-					"a special MsgEvent", "me");
+			ctx.getBean(Publisher.class).publishSpecialMsgEvent("a special MsgEvent",
+					"me");
 			System.out.println("=====");
 			ctx.getBean(Publisher.class).publishTimeEvent();
 		}

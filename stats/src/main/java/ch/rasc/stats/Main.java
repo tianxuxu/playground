@@ -16,13 +16,10 @@ public class Main {
 
 	private final static String GOOGLE_GEOCODE_URL = "http://maps.googleapis.com/maps/api/geocode/json?address={address}&components=administrative_area:ZH|country:CH&sensor=false";
 
-	public static void main(String[] args) throws URISyntaxException,
-			IOException {
+	public static void main(String[] args) throws URISyntaxException, IOException {
 
-		Path citiesFilePath = Paths.get(Main.class.getResource("/cities.txt")
-				.toURI());
-		List<String> lines = Files.readAllLines(citiesFilePath,
-				StandardCharsets.UTF_8);
+		Path citiesFilePath = Paths.get(Main.class.getResource("/cities.txt").toURI());
+		List<String> lines = Files.readAllLines(citiesFilePath, StandardCharsets.UTF_8);
 
 		RestTemplate template = new RestTemplate();
 		RateLimiter limiter = RateLimiter.create(2);

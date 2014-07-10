@@ -23,8 +23,8 @@ public class Svg2PngServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");
@@ -46,8 +46,8 @@ public class Svg2PngServlet extends HttpServlet {
 			postfix = "png";
 		}
 
-		response.setHeader("Content-Disposition",
-				"attachment; filename=\"mixedchart." + postfix + "\";");
+		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart."
+				+ postfix + "\";");
 
 		try (StringReader stringReader = new StringReader(svg);
 				OutputStream out = response.getOutputStream()) {
@@ -57,8 +57,7 @@ public class Svg2PngServlet extends HttpServlet {
 
 				if ("image/jpeg".equals(type)) {
 					JPEGTranscoder jpegTranscoder = new JPEGTranscoder();
-					jpegTranscoder.addTranscodingHint(
-							JPEGTranscoder.KEY_QUALITY, 1F);
+					jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 1F);
 					jpegTranscoder.transcode(input, output);
 				}
 				else if ("application/pdf".equals(type)) {

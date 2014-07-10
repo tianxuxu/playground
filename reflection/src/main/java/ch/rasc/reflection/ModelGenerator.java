@@ -35,8 +35,7 @@ public class ModelGenerator {
 
 		final ModelBean model = new ModelBean();
 
-		if (modelAnnotation != null
-				&& StringUtils.hasText(modelAnnotation.value())) {
+		if (modelAnnotation != null && StringUtils.hasText(modelAnnotation.value())) {
 			model.setName(modelAnnotation.value());
 		}
 		else {
@@ -96,11 +95,10 @@ public class ModelGenerator {
 						}
 
 						if (mt != null) {
-							ModelFieldBean modelField = new ModelFieldBean(
-									field.getName(), mt);
+							ModelFieldBean modelField = new ModelFieldBean(field
+									.getName(), mt);
 
-							ModelField mf = field
-									.getAnnotation(ModelField.class);
+							ModelField mf = field.getAnnotation(ModelField.class);
 							if (mf != null) {
 								if (StringUtils.hasText(mf.dateFormat())) {
 									modelField.setDateFormat(mf.dateFormat());
@@ -112,16 +110,15 @@ public class ModelGenerator {
 												.parseBoolean(mf.defaultValue()));
 									}
 									else if (mt == ModelType.INTEGER) {
-										modelField.setDefaultValue(Long
-												.valueOf(mf.defaultValue()));
+										modelField.setDefaultValue(Long.valueOf(mf
+												.defaultValue()));
 									}
 									else if (mt == ModelType.FLOAT) {
-										modelField.setDefaultValue(Double
-												.valueOf(mf.defaultValue()));
+										modelField.setDefaultValue(Double.valueOf(mf
+												.defaultValue()));
 									}
 									else {
-										modelField.setDefaultValue(mf
-												.defaultValue());
+										modelField.setDefaultValue(mf.defaultValue());
 									}
 								}
 
@@ -229,16 +226,16 @@ public class ModelGenerator {
 		}
 
 		configObjectString = configObjectString.replace("\"", "'");
-		configObjectString = configObjectString.replaceAll(
-				"directFn : '([^']+)'", "directFn : $1");
+		configObjectString = configObjectString.replaceAll("directFn : '([^']+)'",
+				"directFn : $1");
 		configObjectString = configObjectString.replaceAll("read : '([^']+)'",
 				"read : $1");
-		configObjectString = configObjectString.replaceAll(
-				"create : '([^']+)'", "create : $1");
-		configObjectString = configObjectString.replaceAll(
-				"update : '([^']+)'", "update : $1");
-		configObjectString = configObjectString.replaceAll(
-				"destroy : '([^']+)'", "destroy : $1");
+		configObjectString = configObjectString.replaceAll("create : '([^']+)'",
+				"create : $1");
+		configObjectString = configObjectString.replaceAll("update : '([^']+)'",
+				"update : $1");
+		configObjectString = configObjectString.replaceAll("destroy : '([^']+)'",
+				"destroy : $1");
 		sb.append(configObjectString);
 		sb.append(");");
 

@@ -56,8 +56,7 @@ public class Backup {
 			if (config.getGithubUsers() != null) {
 				for (String githubUser : config.getGithubUsers()) {
 					for (Repository repo : service.getRepositories(githubUser)) {
-						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(),
-								null, null);
+						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null, null);
 					}
 				}
 			}
@@ -73,8 +72,8 @@ public class Backup {
 	}
 
 	private static void fetchRepo(Path backupDir, String name, String url,
-			String username, String password) throws IOException,
-			GitAPIException, InvalidRemoteException, TransportException {
+			String username, String password) throws IOException, GitAPIException,
+			InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
 
@@ -84,8 +83,7 @@ public class Backup {
 			if (username != null) {
 				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(
 						username, password);
-				Git.open(repoDir.toFile()).fetch().setCredentialsProvider(cp)
-						.call();
+				Git.open(repoDir.toFile()).fetch().setCredentialsProvider(cp).call();
 			}
 			else {
 				Git.open(repoDir.toFile()).fetch().call();
@@ -116,14 +114,12 @@ public class Backup {
 			}
 
 			@Override
-			public void checkClientTrusted(X509Certificate[] certs,
-					String authType) {
+			public void checkClientTrusted(X509Certificate[] certs, String authType) {
 				// nothing here
 			}
 
 			@Override
-			public void checkServerTrusted(X509Certificate[] certs,
-					String authType) {
+			public void checkServerTrusted(X509Certificate[] certs, String authType) {
 				// nothing here
 			}
 		} };
@@ -135,8 +131,7 @@ public class Backup {
 		try {
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new SecureRandom());
-			HttpsURLConnection
-					.setDefaultSSLSocketFactory(sc.getSocketFactory());
+			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			HttpsURLConnection.setDefaultHostnameVerifier(hv);
 		}
 		catch (Exception e) {

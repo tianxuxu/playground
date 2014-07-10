@@ -13,8 +13,8 @@ public class ReadFile {
 
 	public static void main(String[] args) throws IOException {
 		Path path = Paths.get("C:/temp", "t.txt");
-		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(
-				path, StandardOpenOption.READ)) {
+		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(path,
+				StandardOpenOption.READ)) {
 			ByteBuffer buffer = ByteBuffer.allocate(128);
 			String encoding = System.getProperty("file.encoding");
 			buffer.clear();

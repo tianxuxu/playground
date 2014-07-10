@@ -28,9 +28,9 @@ public class ProcessorSamples {
 		CountDownLatch latch = new CountDownLatch(runs);
 		AtomicLong sum = new AtomicLong();
 
-		Processor<Buffer> proc = new ProcessorSpec<Buffer>()
-				.singleThreadedProducer().dataBufferSize(1024 * 16)
-				.dataSupplier(() -> new Buffer(4, true)).consume(buff -> {
+		Processor<Buffer> proc = new ProcessorSpec<Buffer>().singleThreadedProducer()
+				.dataBufferSize(1024 * 16).dataSupplier(() -> new Buffer(4, true))
+				.consume(buff -> {
 					sum.addAndGet(buff.readInt());
 					buff.clear();
 					latch.countDown();

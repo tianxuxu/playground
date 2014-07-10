@@ -23,16 +23,14 @@ public class StopWatchDemo {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			}
 			catch (InterruptedException interruptEx) {
-				LOGGER.log(Level.INFO,
-						"Don't interrupt me when I'm trying to sleep!",
+				LOGGER.log(Level.INFO, "Don't interrupt me when I'm trying to sleep!",
 						interruptEx);
 			}
 		}
 	}
 
 	/**
-	 * Print statistics on Stopwatch-reported times for provided number of
-	 * loops.
+	 * Print statistics on Stopwatch-reported times for provided number of loops.
 	 *
 	 * @param numberLoops Number of loops executed.
 	 * @param stopwatch Stopwatch instance with time used statistics.
@@ -49,10 +47,8 @@ public class StopWatchDemo {
 					+ " elapsed milliseconds.");
 			out.println("\t" + stopwatch.elapsed(TimeUnit.MINUTES) + " minutes");
 			out.println("\t" + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
-			out.println("\t" + stopwatch.elapsed(TimeUnit.MILLISECONDS)
-					+ " milliseconds");
-			out.println("\t" + stopwatch.elapsed(TimeUnit.NANOSECONDS)
-					+ " nanoseconds");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " milliseconds");
+			out.println("\t" + stopwatch.elapsed(TimeUnit.NANOSECONDS) + " nanoseconds");
 		}
 	}
 

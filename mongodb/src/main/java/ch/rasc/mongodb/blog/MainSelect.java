@@ -13,8 +13,7 @@ import com.mongodb.MongoException;
 
 public class MainSelect {
 
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 		// MongoClient mongo = new MongoClient("localhost", 10000);
 
@@ -82,8 +81,7 @@ public class MainSelect {
 
 		System.out.println();
 
-		BasicDBObject inQuery = new BasicDBObject("$in",
-				new String[] { "admin" });
+		BasicDBObject inQuery = new BasicDBObject("$in", new String[] { "admin" });
 		query = new BasicDBObject("groups", inQuery);
 
 		cursor = collection.find(query);

@@ -21,8 +21,7 @@ public class StreamReadSimple {
 		try (JsonParser parser = Json.createParser(new StringReader(json))) {
 			while (parser.hasNext()) {
 				Event e = parser.next();
-				if (e == Event.KEY_NAME
-						&& parser.getString().equals("firstName")) {
+				if (e == Event.KEY_NAME && parser.getString().equals("firstName")) {
 					parser.next();
 					System.out.println(parser.getString());
 				}

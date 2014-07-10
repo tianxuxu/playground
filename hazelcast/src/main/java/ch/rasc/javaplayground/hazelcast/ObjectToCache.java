@@ -48,8 +48,8 @@ public class ObjectToCache implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ObjectToCache [objectID=" + objectID + ", objectName="
-				+ objectName + ", objectValue=" + objectValue + "]";
+		return "ObjectToCache [objectID=" + objectID + ", objectName=" + objectName
+				+ ", objectValue=" + objectValue + "]";
 	}
 
 }

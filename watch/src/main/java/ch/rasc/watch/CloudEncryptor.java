@@ -40,8 +40,8 @@ public class CloudEncryptor {
 			throws IOException {
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path dir,
-					BasicFileAttributes attrs) throws IOException {
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+					throws IOException {
 				WatchKey key = dir.register(watchService,
 						StandardWatchEventKinds.ENTRY_CREATE,
 						StandardWatchEventKinds.ENTRY_MODIFY,
@@ -81,12 +81,11 @@ public class CloudEncryptor {
 							&& child.startsWith(localDirectory)) {
 
 						System.out.println("encrypt: " + child);
-						Path encryptedFile = child.resolveSibling(Paths
-								.get(child.getFileName().toString() + "_enc"));
+						Path encryptedFile = child.resolveSibling(Paths.get(child
+								.getFileName().toString() + "_enc"));
 
 						while (true) {
-							try (ByteChannel channel = Files
-									.newByteChannel(child)) {
+							try (ByteChannel channel = Files.newByteChannel(child)) {
 								break;
 							}
 							catch (FileSystemException fse) {
@@ -97,12 +96,10 @@ public class CloudEncryptor {
 						try (InputStream is = Files.newInputStream(child);
 								BufferedInputStream bufferedIn = new BufferedInputStream(
 										is);
-								OutputStream out = Files
-										.newOutputStream(encryptedFile);
-								CipherOutputStream cos = new CipherOutputStream(
-										out, cipher);
-								DeflaterOutputStream dos = new DeflaterOutputStream(
-										cos)) {
+								OutputStream out = Files.newOutputStream(encryptedFile);
+								CipherOutputStream cos = new CipherOutputStream(out,
+										cipher);
+								DeflaterOutputStream dos = new DeflaterOutputStream(cos)) {
 
 							final byte[] buffer = new byte[1024];
 							int n = 0;
@@ -111,9 +108,9 @@ public class CloudEncryptor {
 							}
 						}
 
-						Path cloudPath = cloudDirectory.resolve(encryptedFile
-								.subpath(localDirectory.getNameCount(),
-										encryptedFile.getNameCount()));
+						Path cloudPath = cloudDirectory.resolve(encryptedFile.subpath(
+								localDirectory.getNameCount(),
+								encryptedFile.getNameCount()));
 
 						Files.move(encryptedFile, cloudPath,
 								StandardCopyOption.REPLACE_EXISTING);
@@ -126,21 +123,19 @@ public class CloudEncryptor {
 					if (child.toString().endsWith("_enc")
 							&& child.startsWith(cloudDirectory)) {
 						String fileName = child.getFileName().toString();
-						Path plainFile = child.resolveSibling(Paths
-								.get(fileName.substring(0,
-										fileName.length() - 4)));
-						Path localFile = localDirectory.resolve(plainFile
-								.subpath(cloudDirectory.getNameCount(),
-										plainFile.getNameCount()));
+						Path plainFile = child.resolveSibling(Paths.get(fileName
+								.substring(0, fileName.length() - 4)));
+						Path localFile = localDirectory.resolve(plainFile.subpath(
+								cloudDirectory.getNameCount(), plainFile.getNameCount()));
 						Files.deleteIfExists(localFile);
 					}
 					else if (!child.toString().endsWith("_enc")
 							&& child.startsWith(localDirectory)) {
-						Path encryptedFile = child.resolveSibling(Paths
-								.get(child.getFileName().toString() + "_enc"));
-						Path cloudFile = cloudDirectory.resolve(encryptedFile
-								.subpath(localDirectory.getNameCount(),
-										encryptedFile.getNameCount()));
+						Path encryptedFile = child.resolveSibling(Paths.get(child
+								.getFileName().toString() + "_enc"));
+						Path cloudFile = cloudDirectory.resolve(encryptedFile.subpath(
+								localDirectory.getNameCount(),
+								encryptedFile.getNameCount()));
 						Files.deleteIfExists(cloudFile);
 					}
 				}
@@ -171,8 +166,7 @@ public class CloudEncryptor {
 
 		Path localDir = Paths.get("C:/localDir");
 		Path cloudDir = Paths.get("C:/cloudDir");
-		try (WatchService watchService = FileSystems.getDefault()
-				.newWatchService()) {
+		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
 			watch(watchService, cipher, localDir, cloudDir);
 		}
 		catch (IOException | InterruptedException ex) {

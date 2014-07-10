@@ -22,8 +22,8 @@ import com.mongodb.util.JSON;
 
 public class Main {
 
-	public static void main(String[] args) throws MongoException,
-			JsonParseException, JsonMappingException, IOException {
+	public static void main(String[] args) throws MongoException, JsonParseException,
+			JsonMappingException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, Object>> userData = mapper.readValue(

@@ -21,8 +21,7 @@ public class Test {
 		ObjectMapper om = new ObjectMapper();
 
 		FioResponse fr = null;
-		try (InputStream is = Test.class
-				.getResourceAsStream("/forecastio_reponse.txt");) {
+		try (InputStream is = Test.class.getResourceAsStream("/forecastio_reponse.txt");) {
 			fr = om.readValue(is, FioResponse.class);
 		}
 

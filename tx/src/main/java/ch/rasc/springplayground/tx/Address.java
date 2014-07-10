@@ -88,8 +88,8 @@ public class Address extends AbstractPersistable<Long> {
 	@Override
 	public String toString() {
 		return "Address [type=" + type + ", street=" + street + ", postalCode="
-				+ postalCode + ", city=" + city + ", country=" + country
-				+ ", customer=" + customer + "]";
+				+ postalCode + ", city=" + city + ", country=" + country + ", customer="
+				+ customer + "]";
 	}
 
 }

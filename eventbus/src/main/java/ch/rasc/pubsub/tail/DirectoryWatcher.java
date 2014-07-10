@@ -48,20 +48,18 @@ public class DirectoryWatcher {
 							final WatchKey watchKey = watchService.poll(10,
 									TimeUnit.SECONDS);
 							if (watchKey != null) {
-								final List<WatchEvent<?>> events = watchKey
-										.pollEvents();
+								final List<WatchEvent<?>> events = watchKey.pollEvents();
 
 								ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList
 										.builder();
 								for (WatchEvent<?> event : events) {
-									pathEventsBuilder.add(new PathEvent(
-											(Path) event.context(), event
-													.kind()));
+									pathEventsBuilder.add(new PathEvent((Path) event
+											.context(), event.kind()));
 								}
 
 								watchKey.reset();
-								eventBus.post(new PathEvents((Path) watchKey
-										.watchable(), pathEventsBuilder.build()));
+								eventBus.post(new PathEvents((Path) watchKey.watchable(),
+										pathEventsBuilder.build()));
 							}
 						}
 						catch (InterruptedException e) {

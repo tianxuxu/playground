@@ -10,8 +10,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class ConvertToCapped {
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 
 		MongoClient mongo = new MongoClient("localhost");
 
@@ -35,8 +34,8 @@ public class ConvertToCapped {
 		}
 
 		System.out.println("Count : " + collection.count());
-		System.out.println("Capped: "
-				+ collection.getStats().getBoolean("capped", false));
+		System.out
+				.println("Capped: " + collection.getStats().getBoolean("capped", false));
 
 		BasicDBObject ctcCommand = new BasicDBObject();
 		ctcCommand.append("convertToCapped", "log");
@@ -44,8 +43,8 @@ public class ConvertToCapped {
 		db.command(ctcCommand);
 
 		System.out.println("Count : " + collection.count());
-		System.out.println("Capped: "
-				+ collection.getStats().getBoolean("capped", false));
+		System.out
+				.println("Capped: " + collection.getStats().getBoolean("capped", false));
 
 		mongo.close();
 	}

@@ -11,10 +11,9 @@ public class JettySimple {
 	public static void main(String[] args) throws Exception {
 		WebAppContext context = new WebAppContext("./src/main/webapp", "/");
 
-		context.setConfigurations(new Configuration[] {
-				new AnnotationConfiguration(), new WebXmlConfiguration(),
-				new WebInfConfiguration(), new MetaInfConfiguration(),
-				new FragmentConfiguration(), });
+		context.setConfigurations(new Configuration[] { new AnnotationConfiguration(),
+				new WebXmlConfiguration(), new WebInfConfiguration(),
+				new MetaInfConfiguration(), new FragmentConfiguration(), });
 
 		Server server = new Server(8080);
 		server.setHandler(context);

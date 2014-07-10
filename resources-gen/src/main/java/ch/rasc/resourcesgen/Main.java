@@ -33,7 +33,7 @@ public class Main {
 		ArgumentParser parser = ArgumentParsers.newArgumentParser("resources-gen")
 				.defaultHelp(true).description("Creates maven packages of resourcejars");
 		parser.addArgument("file").nargs(1).required(true)
-		.help("Specify the configuration file");
+				.help("Specify the configuration file");
 		Namespace ns = null;
 		try {
 			ns = parser.parseArgs(args);

@@ -52,8 +52,8 @@ public class TradeServer {
 	}
 
 	public Order execute(Trade trade) {
-		Order o = new Order(counter.incrementAndGet()).setTrade(trade)
-				.setTimestamp(System.currentTimeMillis());
+		Order o = new Order(counter.incrementAndGet()).setTrade(trade).setTimestamp(
+				System.currentTimeMillis());
 
 		switch (trade.getType()) {
 		case BUY:
@@ -72,8 +72,7 @@ public class TradeServer {
 				.setSymbol(SYMBOLS[RANDOM.nextInt(SYMBOLS.length)])
 				.setQuantity(RANDOM.nextInt(500))
 				.setPrice(
-						Float.parseFloat(RANDOM.nextInt(700) + "."
-								+ RANDOM.nextInt(99)))
+						Float.parseFloat(RANDOM.nextInt(700) + "." + RANDOM.nextInt(99)))
 				.setType((RANDOM.nextInt() % 2 == 0 ? Type.BUY : Type.SELL));
 	}
 

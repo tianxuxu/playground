@@ -92,12 +92,12 @@ artifacts:
       - from: build/packages/ext-theme-neptune-touch/build/resources/images
         to: ext-theme-neptune-touch/images
 
-  - artifactId: sencha-charts
+  - artifactId: ext-sencha-charts
     mappings:     
       - from: packages/sencha-charts/build/sencha-charts.js
         to: sencha-charts.js 
 
-  - artifactId: sencha-charts-debug
+  - artifactId: ext-sencha-charts-debug
     mappings:     
       - from: packages/sencha-charts/build/sencha-charts-debug.js
         to: sencha-charts-debug.js

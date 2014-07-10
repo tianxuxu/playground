@@ -65,15 +65,13 @@ public class MainBoon {
 				user.setFailedLogins(df.getNumberUpTo(3));
 				user.setFirstName(df.getFirstName());
 				user.setId(1L);
-				user.setLocale(df
-						.getItem(new String[] { "de", "en", "fr", "it" }));
+				user.setLocale(df.getItem(new String[] { "de", "en", "fr", "it" }));
 				if (df.chance(98)) {
 					user.setLockedOut(df.getDate(today, 0, 100));
 				}
 				user.setDob(df.getBirthDate());
 				user.setName(df.getLastName());
-				user.setRole(df
-						.getItem(new String[] { "ADMIN", "USER", "READ" }));
+				user.setRole(df.getItem(new String[] { "ADMIN", "USER", "READ" }));
 				user.setUserName(df.getRandomChars(5, 8));
 
 				String value = objectMapper.writeValueAsString(user);

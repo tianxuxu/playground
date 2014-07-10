@@ -25,8 +25,8 @@ public class MainJsonP {
 		Date today = new Date();
 		JsonGeneratorFactory jsonGeneratorFactory = Json
 				.createGeneratorFactory(Collections.<String, Object> emptyMap());
-		JsonParserFactory jsonParserFactory = Json
-				.createParserFactory(Collections.<String, Object> emptyMap());
+		JsonParserFactory jsonParserFactory = Json.createParserFactory(Collections
+				.<String, Object> emptyMap());
 
 		// warm up
 		StopWatch sw = new StopWatch();
@@ -77,15 +77,13 @@ public class MainJsonP {
 				user.setFailedLogins(df.getNumberUpTo(3));
 				user.setFirstName(df.getFirstName());
 				user.setId(1L);
-				user.setLocale(df
-						.getItem(new String[] { "de", "en", "fr", "it" }));
+				user.setLocale(df.getItem(new String[] { "de", "en", "fr", "it" }));
 				if (df.chance(98)) {
 					user.setLockedOut(df.getDate(today, 0, 100));
 				}
 				user.setDob(df.getBirthDate());
 				user.setName(df.getLastName());
-				user.setRole(df
-						.getItem(new String[] { "ADMIN", "USER", "READ" }));
+				user.setRole(df.getItem(new String[] { "ADMIN", "USER", "READ" }));
 				user.setUserName(df.getRandomChars(5, 8));
 
 				String value = toJson(jsonGeneratorFactory, user);
@@ -132,12 +130,10 @@ public class MainJsonP {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonParserFactory jsonParserFactory,
-			String json) {
+	private static User toObject(JsonParserFactory jsonParserFactory, String json) {
 		User user = new User();
 
-		try (JsonParser parser = jsonParserFactory
-				.createParser(new StringReader(json))) {
+		try (JsonParser parser = jsonParserFactory.createParser(new StringReader(json))) {
 
 			parser.next();
 

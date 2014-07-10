@@ -37,8 +37,7 @@ public class JettyWithJndi {
 		JdbcDataSource dataSource = new JdbcDataSource();
 		dataSource.setUser("sa");
 		dataSource.setURL("jdbc:h2:~/myDb");
-		context.addBean(new org.eclipse.jetty.plus.jndi.Resource("jdbc/ds",
-				dataSource));
+		context.addBean(new org.eclipse.jetty.plus.jndi.Resource("jdbc/ds", dataSource));
 
 		Server server = new Server(port);
 		server.setHandler(context);

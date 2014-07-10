@@ -19,8 +19,7 @@ public class Backup {
 
 	public static void main(String[] args) {
 		if (args.length == 5) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0],
-					args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonGlacierClient client = new AmazonGlacierClient(credentials);
 			client.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
@@ -29,29 +28,27 @@ public class Backup {
 			String vaultName = args[3];
 			String password = args[4];
 
-			client.createVault(new CreateVaultRequest()
-					.withVaultName(vaultName));
+			client.createVault(new CreateVaultRequest().withVaultName(vaultName));
 
 			try {
 
 				Path encryptedPath = Paths.get(encryptedFileToBackup);
-				Crypto.writeEncryptedFile(password,
-						Paths.get(plainFileToBackup), encryptedPath);
+				Crypto.writeEncryptedFile(password, Paths.get(plainFileToBackup),
+						encryptedPath);
 
 				ArchiveTransferManager atm = new ArchiveTransferManager(client,
 						credentials);
 
-				UploadResult result = atm.upload(vaultName,
-						encryptedFileToBackup, encryptedPath.toFile());
+				UploadResult result = atm.upload(vaultName, encryptedFileToBackup,
+						encryptedPath.toFile());
 				System.out.println("Archive ID: " + result.getArchiveId());
 
-				DB db = DBMaker.newFileDB(new File("glacierdb"))
-						.closeOnJvmShutdown().make();
-				ConcurrentNavigableMap<Long, String> files = db
-						.getTreeMap("glacier");
+				DB db = DBMaker.newFileDB(new File("glacierdb")).closeOnJvmShutdown()
+						.make();
+				ConcurrentNavigableMap<Long, String> files = db.getTreeMap("glacier");
 
-				files.put(System.currentTimeMillis(), result.getArchiveId()
-						+ ";" + encryptedFileToBackup);
+				files.put(System.currentTimeMillis(), result.getArchiveId() + ";"
+						+ encryptedFileToBackup);
 
 				db.commit();
 				db.close();
@@ -63,8 +60,7 @@ public class Backup {
 
 		}
 		else {
-			System.out
-					.println("Backup <accessKey> <secretKey> <file> <vaultName>");
+			System.out.println("Backup <accessKey> <secretKey> <file> <vaultName>");
 		}
 
 	}

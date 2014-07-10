@@ -21,8 +21,8 @@ public class PromiseSamples {
 
 	public static void main(String... args) throws Exception {
 		// Deferred is the publisher, Promise the consumer
-		Deferred<String, Promise<String>> deferred = Promises.<String> defer()
-				.env(ENV).dispatcher(Environment.RING_BUFFER).get();
+		Deferred<String, Promise<String>> deferred = Promises.<String> defer().env(ENV)
+				.dispatcher(Environment.RING_BUFFER).get();
 		Promise<String> promise = deferred.compose();
 
 		promise.onComplete(p -> LOG.info("Promise completed {}", p))

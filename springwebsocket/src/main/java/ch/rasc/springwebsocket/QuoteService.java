@@ -54,11 +54,10 @@ public class QuoteService {
 	}
 
 	private BigDecimal getPrice(String ticker) {
-		BigDecimal seedPrice = new BigDecimal(this.prices.get(ticker),
-				mathContext);
+		BigDecimal seedPrice = new BigDecimal(this.prices.get(ticker), mathContext);
 		double range = seedPrice.multiply(new BigDecimal("0.02")).doubleValue();
-		BigDecimal priceChange = new BigDecimal(String.valueOf(this.random
-				.nextDouble() * range), mathContext);
+		BigDecimal priceChange = new BigDecimal(String.valueOf(this.random.nextDouble()
+				* range), mathContext);
 		return seedPrice.add(priceChange);
 	}
 

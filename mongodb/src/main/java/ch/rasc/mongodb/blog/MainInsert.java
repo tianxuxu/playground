@@ -13,8 +13,7 @@ import com.mongodb.WriteResult;
 
 public class MainInsert {
 
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 		// Mongo mongo = new Mongo("localhost", 10000);
 

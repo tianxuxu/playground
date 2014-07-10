@@ -11,8 +11,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class MainUpdate {
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
@@ -39,8 +38,8 @@ public class MainUpdate {
 		update.append("$set", new BasicDBObject("country", "US"));
 
 		// DBObject user = collection.findAndModify(updateQuery, update);
-		DBObject user = collection.findAndModify(updateQuery, null, null,
-				false, update, true, false);
+		DBObject user = collection.findAndModify(updateQuery, null, null, false, update,
+				true, false);
 		System.out.println(user);
 
 		mongo.close();

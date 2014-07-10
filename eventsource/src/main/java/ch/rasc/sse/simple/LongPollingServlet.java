@@ -18,8 +18,8 @@ public class LongPollingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String lastEventId = request.getHeader("Last-Event-ID");
 		int lastId = 0;
 		if (lastEventId != null) {

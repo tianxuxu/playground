@@ -24,8 +24,7 @@ public class TradeServerExample {
 		final TradeServer server = new TradeServer();
 
 		// Use a Reactor to dispatch events using the default Dispatcher
-		Reactor reactor = Reactors.reactor().env(env).dispatcher("ringBuffer")
-				.get();
+		Reactor reactor = Reactors.reactor().env(env).dispatcher("ringBuffer").get();
 
 		String topic = "trade.execute";
 
@@ -68,12 +67,10 @@ public class TradeServerExample {
 		elapsed = (endTime - startTime) * 1.0;
 		throughput = totalTrades / (elapsed / 1000);
 
-		LOG.info("Executed {} trades/sec in {}ms", (int) throughput,
-				(int) elapsed);
+		LOG.info("Executed {} trades/sec in {}ms", (int) throughput, (int) elapsed);
 	}
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(TradeServerExample.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
 
 	private static CountDownLatch latch;
 

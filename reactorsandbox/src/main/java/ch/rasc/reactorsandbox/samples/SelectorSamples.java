@@ -25,14 +25,12 @@ public class SelectorSamples {
 
 	public static void main(String... args) {
 
-		Reactor r = Reactors.reactor().env(ENV)
-				.dispatcher(Environment.RING_BUFFER).get();
+		Reactor r = Reactors.reactor().env(ENV).dispatcher(Environment.RING_BUFFER).get();
 		Boundary b = new Boundary();
 
 		// Simple topic selection
 		r.on($("/some/topic"),
-				b.<Event<String>> bind(ev -> LOG.info("Got event '{}'",
-						ev.getData())));
+				b.<Event<String>> bind(ev -> LOG.info("Got event '{}'", ev.getData())));
 
 		// Topic selection based on regex
 		r.on(R("/some/(.+)"), b.<Event<String>> bind(ev -> {
@@ -55,15 +53,14 @@ public class SelectorSamples {
 			}));
 
 		// Type selection based on inheritance
-		r.on(T(Exception.class), b.<Event<Exception>> bind(ev -> LOG.error(ev
-				.getData().getMessage())));
+		r.on(T(Exception.class),
+				b.<Event<Exception>> bind(ev -> LOG.error(ev.getData().getMessage())));
 
 		// A single publish goes to three Consumers
 		r.notify("/some/topic", Event.wrap("Hello World!"));
 		// Publish exception using Exception class as the key
 		r.notify(IllegalArgumentException.class,
-				Event.wrap(new IllegalArgumentException(
-						"That argument was invalid")));
+				Event.wrap(new IllegalArgumentException("That argument was invalid")));
 
 		// Wait for all Consumers to have been called
 		b.await();

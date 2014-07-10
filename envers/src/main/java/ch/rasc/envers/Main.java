@@ -96,8 +96,8 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		AuditQuery query = reader.createQuery().forEntitiesAtRevision(
-				Mitarbeiter.class, 1);
+		AuditQuery query = reader.createQuery().forEntitiesAtRevision(Mitarbeiter.class,
+				1);
 		query.add(AuditEntity.relatedId("firma").eq(1));
 
 		List<Mitarbeiter> mitarbeiterList = query.getResultList();
@@ -105,8 +105,7 @@ public class Main {
 			System.out.println(mitarbeiter.getName());
 		}
 
-		query = reader.createQuery().forRevisionsOfEntity(Mitarbeiter.class,
-				false, true);
+		query = reader.createQuery().forRevisionsOfEntity(Mitarbeiter.class, false, true);
 		List<Object[]> rersults = query.getResultList();
 		for (Object[] result : rersults) {
 			Mitarbeiter mitarbeiter = (Mitarbeiter) result[0];
@@ -118,8 +117,7 @@ public class Main {
 			System.out.println("Type         : " + revType);
 			System.out.println("Mitarbeiter  : " + mitarbeiter.getName());
 
-			System.out
-					.println("------------------------------------------------");
+			System.out.println("------------------------------------------------");
 		}
 
 		session.close();
@@ -159,8 +157,7 @@ public class Main {
 
 	private static Firma updateFirma(Session session) {
 		Firma firma = new HibernateQuery(session).from(QFirma.firma)
-				.where(QFirma.firma.name.eq("Company A"))
-				.singleResult(QFirma.firma);
+				.where(QFirma.firma.name.eq("Company A")).singleResult(QFirma.firma);
 		firma.setStrasse("Neue Strasse");
 		return firma;
 	}

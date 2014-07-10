@@ -22,13 +22,13 @@ public class UploadController {
 	private FileManager fileManager;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void chunkExists(HttpServletResponse response,
-			@RequestParam("resumableChunkNumber")
-			final Integer chunkNumber, @RequestParam("resumableChunkSize")
-			final Long chunkSize, @RequestParam("resumableIdentifier")
-			final String identifier, @SuppressWarnings("unused")
-			@RequestParam("resumableFilename")
-			final String filename) throws IOException {
+	public void chunkExists(
+			HttpServletResponse response,
+			@RequestParam("resumableChunkNumber") final Integer chunkNumber,
+			@RequestParam("resumableChunkSize") final Long chunkSize,
+			@RequestParam("resumableIdentifier") final String identifier,
+			@SuppressWarnings("unused") @RequestParam("resumableFilename") final String filename)
+			throws IOException {
 
 		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
 			// do not upload chunk again
@@ -42,14 +42,12 @@ public class UploadController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public void processUpload(HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber")
-			final Integer chunkNumber,
-			@RequestParam(value = "resumableChunkSize")
-			final Long chunkSize, @RequestParam(value = "resumableTotalSize")
-			final Long totalSize, @RequestParam(value = "resumableIdentifier")
-			final String identifier, @RequestParam(value = "resumableFilename")
-			final String fileName, @RequestParam(value = "file")
-			final MultipartFile file) throws IOException {
+			@RequestParam(value = "resumableChunkNumber") final Integer chunkNumber,
+			@RequestParam(value = "resumableChunkSize") final Long chunkSize,
+			@RequestParam(value = "resumableTotalSize") final Long totalSize,
+			@RequestParam(value = "resumableIdentifier") final String identifier,
+			@RequestParam(value = "resumableFilename") final String fileName,
+			@RequestParam(value = "file") final MultipartFile file) throws IOException {
 
 		if (!fileManager.isSupported(fileName)) {
 			// cancel the whole upload
@@ -62,8 +60,7 @@ public class UploadController {
 		}
 
 		if (fileManager.allChunksUploaded(identifier, chunkSize, totalSize)) {
-			fileManager.mergeAndDeleteChunks(fileName, identifier, chunkSize,
-					totalSize);
+			fileManager.mergeAndDeleteChunks(fileName, identifier, chunkSize, totalSize);
 		}
 
 		response.setStatus(200);
@@ -95,8 +92,7 @@ public class UploadController {
 
 		for (String cd : partHeader.split(";")) {
 			if (cd.trim().startsWith("filename")) {
-				return cd.substring(cd.indexOf('=') + 1).trim()
-						.replace("\"", "");
+				return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
 			}
 		}
 		return null;

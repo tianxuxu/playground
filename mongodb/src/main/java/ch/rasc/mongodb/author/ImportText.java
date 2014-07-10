@@ -9,8 +9,7 @@ public class ImportText {
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
 				"ch.rasc.mongodb.author")) {
 
-			TextImporter importer = ctx.getBean("textImporter",
-					TextImporter.class);
+			TextImporter importer = ctx.getBean("textImporter", TextImporter.class);
 			long start = System.currentTimeMillis();
 
 			File dir = new File(

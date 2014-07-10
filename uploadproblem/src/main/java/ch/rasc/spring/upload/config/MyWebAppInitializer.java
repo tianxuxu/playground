@@ -25,12 +25,10 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
 		// Register and map the dispatcher servlet
 
-		ServletRegistration.Dynamic dispatcher = container.addServlet(
-				"dispatcher", new DispatcherServlet(
-						new GenericWebApplicationContext()));
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher",
+				new DispatcherServlet(new GenericWebApplicationContext()));
 		dispatcher.setLoadOnStartup(1);
-		dispatcher
-				.setMultipartConfig(new MultipartConfigElement((String) null));
+		dispatcher.setMultipartConfig(new MultipartConfigElement((String) null));
 
 		Set<String> mappingConflicts = dispatcher.addMapping("/");
 		if (!mappingConflicts.isEmpty()) {
@@ -42,10 +40,9 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 		 * // Create the dispatcher servlet's Spring application context
 		 * AnnotationConfigWebApplicationContext dispatcherContext = new
 		 * AnnotationConfigWebApplicationContext();
-		 * dispatcherContext.register(DispatcherConfig.class); // Register and
-		 * map the dispatcher servlet ServletRegistration.Dynamic dispatcher =
-		 * container.addServlet("dispatcher", new
-		 * DispatcherServlet(dispatcherContext));
+		 * dispatcherContext.register(DispatcherConfig.class); // Register and map the
+		 * dispatcher servlet ServletRegistration.Dynamic dispatcher =
+		 * container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
 		 * dispatcher.setLoadOnStartup(1); dispatcher.addMapping("/");
 		 */
 

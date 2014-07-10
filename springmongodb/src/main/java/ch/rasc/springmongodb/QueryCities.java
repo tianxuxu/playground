@@ -34,19 +34,16 @@ public class QueryCities {
 			GeoResults<City> geoResults = mongoOps.geoNear(query, City.class);
 			for (GeoResult<City> geoResult : geoResults) {
 				System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent()
-						.getCityName(), geoResult.getDistance()
-						.getNormalizedValue());
+						.getCityName(), geoResult.getDistance().getNormalizedValue());
 			}
 
 			System.out.println("-------------------------");
 			System.out.println("BOX");
 			System.out.println("-------------------------");
 
-			Box box = new Box(new Point(46.933333, 7.566667), new Point(46.95,
-					7.616667));
-			List<City> cities = mongoOps.find(
-					new Query(Criteria.where("location").within(box)),
-					City.class);
+			Box box = new Box(new Point(46.933333, 7.566667), new Point(46.95, 7.616667));
+			List<City> cities = mongoOps.find(new Query(Criteria.where("location")
+					.within(box)), City.class);
 			for (City city : cities) {
 				System.out.printf("%-20s\n", city.getCityName());
 			}
@@ -56,21 +53,20 @@ public class QueryCities {
 			System.out.println("-------------------------");
 
 			Circle circle = new Circle(46.933333, 7.566667, 0.05);
-			cities = mongoOps.find(
-					new Query(Criteria.where("location").within(circle)),
+			cities = mongoOps.find(new Query(Criteria.where("location").within(circle)),
 					City.class);
 			for (City city : cities) {
 				System.out.printf("%-20s\n", city.getCityName());
 			}
 
 			City city = mongoOps.findOne(
-					Query.query(Criteria.where("id").is(
-							"4e70a60a32a954d3b582d9d5")), City.class);
+					Query.query(Criteria.where("id").is("4e70a60a32a954d3b582d9d5")),
+					City.class);
 			System.out.println(city);
 
 			cities = mongoOps.find(
-					Query.query(Criteria.where("cityName").regex("^Wo", "i"))
-							.limit(10), City.class);
+					Query.query(Criteria.where("cityName").regex("^Wo", "i")).limit(10),
+					City.class);
 			for (City c : cities) {
 				System.out.println(c.getCityName());
 			}

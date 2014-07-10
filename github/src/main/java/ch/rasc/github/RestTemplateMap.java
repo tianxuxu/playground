@@ -15,8 +15,8 @@ public class RestTemplateMap {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		List<Map<String, Object>> repos = restTemplate.getForObject(
-				GITHUB_REPOS_URI, List.class, "ralscha");
+		List<Map<String, Object>> repos = restTemplate.getForObject(GITHUB_REPOS_URI,
+				List.class, "ralscha");
 
 		for (Map<String, Object> repo : repos) {
 			System.out.println("Name: " + repo.get("name"));

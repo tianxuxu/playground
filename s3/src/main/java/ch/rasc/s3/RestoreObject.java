@@ -10,8 +10,7 @@ public class RestoreObject {
 	public static void main(String[] args) throws AmazonServiceException,
 			AmazonClientException {
 		if (args.length == 4) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0],
-					args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			String bucketName = args[2];
@@ -21,8 +20,7 @@ public class RestoreObject {
 
 		}
 		else {
-			System.out.println("java -jar s3backup.jar "
-					+ RestoreObject.class.getName()
+			System.out.println("java -jar s3backup.jar " + RestoreObject.class.getName()
 					+ " accessKey secretKey bucketName objectKey");
 		}
 

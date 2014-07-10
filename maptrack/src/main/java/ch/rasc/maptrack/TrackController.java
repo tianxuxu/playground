@@ -13,8 +13,7 @@ public class TrackController {
 	@RequestMapping(value = "/time", method = RequestMethod.GET, produces = "text/event-stream")
 	@ResponseBody
 	public String getTime() {
-		return "data: "
-				+ DateTime.now().toString(ISODateTimeFormat.basicDateTime())
+		return "data: " + DateTime.now().toString(ISODateTimeFormat.basicDateTime())
 				+ "\n\n";
 	}
 

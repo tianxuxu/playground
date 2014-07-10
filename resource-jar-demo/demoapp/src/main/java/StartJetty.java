@@ -41,8 +41,7 @@ public class StartJetty {
 		// List<Artifact> includeOnlyArtifact = new ArrayList<Artifact>();
 		// includeOnlyArtifact.add(new Artifact("resources", "demo"));
 
-		context.setConfigurations(new Configuration[] {
-				new MavenWebInfConfiguration(),
+		context.setConfigurations(new Configuration[] { new MavenWebInfConfiguration(),
 				new org.eclipse.jetty.webapp.WebXmlConfiguration(),
 				new org.eclipse.jetty.webapp.MetaInfConfiguration(),
 				new org.eclipse.jetty.webapp.FragmentConfiguration(),
@@ -52,8 +51,8 @@ public class StartJetty {
 		server.setHandler(context);
 		server.start();
 
-		System.out.println("Jetty Startup Time: "
-				+ (System.currentTimeMillis() - start) + " ms");
+		System.out.println("Jetty Startup Time: " + (System.currentTimeMillis() - start)
+				+ " ms");
 		System.out.println("Jetty running on " + port);
 	}
 
@@ -93,12 +92,9 @@ public class StartJetty {
 			Document doc = db.parse(new File("./pom.xml"));
 
 			Map<String, String> properties = new HashMap<>();
-			NodeList propertiesNodeList = doc
-					.getElementsByTagName("properties");
-			if (propertiesNodeList != null
-					&& propertiesNodeList.item(0) != null) {
-				NodeList propertiesChildren = propertiesNodeList.item(0)
-						.getChildNodes();
+			NodeList propertiesNodeList = doc.getElementsByTagName("properties");
+			if (propertiesNodeList != null && propertiesNodeList.item(0) != null) {
+				NodeList propertiesChildren = propertiesNodeList.item(0).getChildNodes();
 				for (int i = 0; i < propertiesChildren.getLength(); i++) {
 					Node node = propertiesChildren.item(i);
 					if (node instanceof Element) {
@@ -113,8 +109,8 @@ public class StartJetty {
 				Element node = (Element) nodeList.item(i);
 				String groupId = node.getElementsByTagName("groupId").item(0)
 						.getTextContent();
-				String artifact = node.getElementsByTagName("artifactId")
-						.item(0).getTextContent();
+				String artifact = node.getElementsByTagName("artifactId").item(0)
+						.getTextContent();
 				String version = node.getElementsByTagName("version").item(0)
 						.getTextContent();
 
@@ -131,17 +127,14 @@ public class StartJetty {
 					String scope = null;
 					NodeList scopeNode = node.getElementsByTagName("scope");
 					if (scopeNode != null && scopeNode.item(0) != null) {
-						scope = stripWhitespace(scopeNode.item(0)
-								.getTextContent());
+						scope = stripWhitespace(scopeNode.item(0).getTextContent());
 					}
 
 					if (scope == null || !scope.equals("provided")) {
 						groupId = groupId.replace(".", "/");
-						String artifactFileName = groupId + "/" + artifact
-								+ "/" + version + "/" + artifact + "-"
-								+ version + ".jar";
-						jars.add(new File(homeDir, ".m2/repository/"
-								+ artifactFileName));
+						String artifactFileName = groupId + "/" + artifact + "/"
+								+ version + "/" + artifact + "-" + version + ".jar";
+						jars.add(new File(homeDir, ".m2/repository/" + artifactFileName));
 					}
 
 				}
@@ -164,14 +157,12 @@ public class StartJetty {
 
 		private static String stripWhitespace(String orig) {
 			if (orig != null) {
-				return orig.replace("\r", "").replace("\n", "")
-						.replace("\t", "").trim();
+				return orig.replace("\r", "").replace("\n", "").replace("\t", "").trim();
 			}
 			return orig;
 		}
 
-		private static String resolveProperty(String orig,
-				Map<String, String> properties) {
+		private static String resolveProperty(String orig, Map<String, String> properties) {
 			String property = properties.get(orig);
 			if (property != null) {
 				return property;
@@ -180,8 +171,7 @@ public class StartJetty {
 		}
 
 		@Override
-		protected List<Resource> findJars(WebAppContext context)
-				throws Exception {
+		protected List<Resource> findJars(WebAppContext context) throws Exception {
 			List<Resource> resources = super.findJars(context);
 
 			for (File jar : jars) {

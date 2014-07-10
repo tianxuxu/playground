@@ -39,8 +39,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order{" + "id=" + id + ", trade=" + trade + ", timestamp="
-				+ timestamp + '}';
+		return "Order{" + "id=" + id + ", trade=" + trade + ", timestamp=" + timestamp
+				+ '}';
 	}
 
 }

@@ -25,35 +25,32 @@ public class FioResponse {
 	private int offset;
 
 	/**
-	 * A data point containing the current weather conditions at the requested
-	 * location.
+	 * A data point containing the current weather conditions at the requested location.
 	 */
 	private FioDataPoint currently;
 
 	/**
-	 * A data block containing the weather conditions minute-by-minute for the
-	 * next hour. (This property’s name should be read as an
-	 * adjective—analogously to "hourly" or "daily" and meaning
-	 * "reckoned by the minute"—rather than as an adverb meaning "meticulously."
+	 * A data block containing the weather conditions minute-by-minute for the next hour.
+	 * (This property’s name should be read as an adjective—analogously to "hourly" or
+	 * "daily" and meaning "reckoned by the minute"—rather than as an adverb meaning
+	 * "meticulously."
 	 */
 	private FioDataBlock minutely;
 
 	/**
-	 * A data block (see below) containing the weather conditions hour-by-hour
-	 * for the next two days.
+	 * A data block (see below) containing the weather conditions hour-by-hour for the
+	 * next two days.
 	 */
 	private FioDataBlock hourly;
 
 	/**
-	 * A data block containing the weather conditions day-by-day for the next
-	 * week.
+	 * A data block containing the weather conditions day-by-day for the next week.
 	 */
 	private FioDataBlock daily;
 
 	/**
-	 * An array of alert objects, which, if present, contains any severe weather
-	 * alerts, issued by a governmental weather authority, pertinent to the
-	 * requested location.
+	 * An array of alert objects, which, if present, contains any severe weather alerts,
+	 * issued by a governmental weather authority, pertinent to the requested location.
 	 */
 	private List<FioAlert> alerts;
 
@@ -145,10 +142,9 @@ public class FioResponse {
 	@Override
 	public String toString() {
 		return "FioResponse [latitude=" + latitude + ", longitude=" + longitude
-				+ ", timezone=" + timezone + ", offset=" + offset
-				+ ", currently=" + currently + ", minutely=" + minutely
-				+ ", hourly=" + hourly + ", daily=" + daily + ", alerts="
-				+ alerts + ", flags=" + flags + "]";
+				+ ", timezone=" + timezone + ", offset=" + offset + ", currently="
+				+ currently + ", minutely=" + minutely + ", hourly=" + hourly
+				+ ", daily=" + daily + ", alerts=" + alerts + ", flags=" + flags + "]";
 	}
 
 }

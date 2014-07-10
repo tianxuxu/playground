@@ -31,8 +31,7 @@ public class Simple {
 				System.out.println(file.getName());
 				BasicDBObject fileObject = new BasicDBObject();
 				fileObject.append("fileName", file.getName());
-				fileObject.append("content",
-						FileUtils.readFileToByteArray(file));
+				fileObject.append("content", FileUtils.readFileToByteArray(file));
 				collection.insert(fileObject);
 			}
 		}

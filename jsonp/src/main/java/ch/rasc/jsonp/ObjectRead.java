@@ -20,8 +20,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 public class ObjectRead {
 
-	public static void main(String[] args) throws ClientProtocolException,
-			IOException {
+	public static void main(String[] args) throws ClientProtocolException, IOException {
 
 		String apiKey = args[0];
 		String latitude = "46.947922";
@@ -33,8 +32,7 @@ public class ObjectRead {
 		HttpGet httpget = new HttpGet(url);
 		try (CloseableHttpClient client = HttpClientBuilder.create().build();
 				CloseableHttpResponse response = client.execute(httpget);
-				JsonReader reader = Json.createReader(response.getEntity()
-						.getContent())) {
+				JsonReader reader = Json.createReader(response.getEntity().getContent())) {
 
 			JsonObject root = reader.readObject();
 			JsonObject hourly = root.getJsonObject("hourly");
@@ -43,8 +41,7 @@ public class ObjectRead {
 				JsonObject dataBlock = (JsonObject) entry;
 
 				long seconds = dataBlock.getJsonNumber("time").longValue();
-				Calendar time = new GregorianCalendar(
-						TimeZone.getTimeZone("UTC"));
+				Calendar time = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 				time.setTimeInMillis(seconds * 1000);
 
 				BigDecimal temperature = dataBlock.getJsonNumber("temperature")

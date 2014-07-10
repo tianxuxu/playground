@@ -26,10 +26,8 @@ public class EmployeeService {
 		Address a = entityManager.find(Address.class, 1L);
 
 		System.out.println("contains query");
-		List<Employee> employees = new JPAQuery(entityManager)
-				.from(QEmployee.employee)
-				.where(QEmployee.employee.address.contains(a))
-				.list(QEmployee.employee);
+		List<Employee> employees = new JPAQuery(entityManager).from(QEmployee.employee)
+				.where(QEmployee.employee.address.contains(a)).list(QEmployee.employee);
 		for (Employee employee : employees) {
 			System.out.println(employee);
 		}

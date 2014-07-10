@@ -13,8 +13,7 @@ public class Main {
 
 		ModelBean model = ModelGenerator.createModel(User.class);
 		model.addField(new ModelFieldBean("test", ModelType.BOOLEAN));
-		System.out.println(ModelGenerator.generateJavascript(model,
-				OutputFormat.EXTJS));
+		System.out.println(ModelGenerator.generateJavascript(model, OutputFormat.EXTJS));
 	}
 
 }

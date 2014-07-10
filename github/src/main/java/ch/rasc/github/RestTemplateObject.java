@@ -12,8 +12,8 @@ public class RestTemplateObject {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		Repo[] repos = restTemplate.getForObject(GITHUB_REPOS_URI,
-				Repo[].class, "ralscha");
+		Repo[] repos = restTemplate.getForObject(GITHUB_REPOS_URI, Repo[].class,
+				"ralscha");
 		for (Repo repo : repos) {
 			System.out.println("Name: " + repo.name);
 			System.out.println("URL: " + repo.git_url);

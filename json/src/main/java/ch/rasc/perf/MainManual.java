@@ -71,15 +71,13 @@ public class MainManual {
 				user.setFailedLogins(df.getNumberUpTo(3));
 				user.setFirstName(df.getFirstName());
 				user.setId(1L);
-				user.setLocale(df
-						.getItem(new String[] { "de", "en", "fr", "it" }));
+				user.setLocale(df.getItem(new String[] { "de", "en", "fr", "it" }));
 				if (df.chance(98)) {
 					user.setLockedOut(df.getDate(today, 0, 100));
 				}
 				user.setDob(df.getBirthDate());
 				user.setName(df.getLastName());
-				user.setRole(df
-						.getItem(new String[] { "ADMIN", "USER", "READ" }));
+				user.setRole(df.getItem(new String[] { "ADMIN", "USER", "READ" }));
 				user.setUserName(df.getRandomChars(5, 8));
 
 				String value = toJson(jsonFactory, user);
@@ -94,8 +92,7 @@ public class MainManual {
 
 	}
 
-	private static String toJson(JsonFactory jsonFactory, User user)
-			throws IOException {
+	private static String toJson(JsonFactory jsonFactory, User user) throws IOException {
 		StringWriter sw = new StringWriter();
 		try (JsonGenerator jg = jsonFactory.createGenerator(sw)) {
 			jg.writeStartObject();
@@ -129,8 +126,7 @@ public class MainManual {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonFactory jsonFactory, String json)
-			throws IOException {
+	private static User toObject(JsonFactory jsonFactory, String json) throws IOException {
 		User user = new User();
 
 		try (JsonParser parser = jsonFactory.createParser(json)) {

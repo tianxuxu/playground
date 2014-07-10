@@ -15,8 +15,8 @@ public class ClientWebSocketHandler extends BinaryWebSocketHandler {
 	}
 
 	@Override
-	protected void handleBinaryMessage(WebSocketSession session,
-			BinaryMessage message) throws Exception {
+	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message)
+			throws Exception {
 		Quote[] dst = msgpack.read(message.getPayload(), Quote[].class);
 		for (Quote quote : dst) {
 			System.out.println(quote);

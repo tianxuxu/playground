@@ -24,8 +24,7 @@ public class Bench {
 
 		for (int i = 0; i < 100000; i++) {
 			users.add(new User(RandomStringUtils.random(20, true, false),
-					RandomStringUtils.random(20, true, true), random
-							.nextInt(99) + 1));
+					RandomStringUtils.random(20, true, true), random.nextInt(99) + 1));
 		}
 
 		Stopwatch stopWatch = Stopwatch.createStarted();
@@ -36,8 +35,7 @@ public class Bench {
 
 		stopWatch.reset();
 		stopWatch.start();
-		sorted = sort(users, on(User.class).getAge(),
-				Collections.reverseOrder());
+		sorted = sort(users, on(User.class).getAge(), Collections.reverseOrder());
 		stopWatch.stop();
 		System.out.println("Lambdaj sort reverse: "
 				+ stopWatch.elapsed(TimeUnit.MILLISECONDS));

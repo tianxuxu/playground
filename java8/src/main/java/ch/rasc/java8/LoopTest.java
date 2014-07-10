@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -23,7 +23,7 @@ public class LoopTest {
 		}
 	}
 
-	@GenerateMicroBenchmark
+	@Benchmark
 	public void loop() throws Exception {
 		for (Shape s : shapes) {
 			if (s.getColor() == Color.BLUE) {
@@ -32,7 +32,7 @@ public class LoopTest {
 		}
 	}
 
-	@GenerateMicroBenchmark
+	@Benchmark
 	public void iterator() throws Exception {
 		Iterator<Shape> it = shapes.iterator();
 		while (it.hasNext()) {
@@ -43,7 +43,7 @@ public class LoopTest {
 		}
 	}
 
-	@GenerateMicroBenchmark
+	@Benchmark
 	public void lambdaStreamEmbeddedIf() throws Exception {
 		shapes.stream().forEach(s -> {
 			if (s.getColor() == Color.BLUE) {
@@ -52,13 +52,13 @@ public class LoopTest {
 		});
 	}
 
-	@GenerateMicroBenchmark
+	@Benchmark
 	public void lambdaStream() throws Exception {
 		shapes.stream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));
 	}
 
-	@GenerateMicroBenchmark
+	@Benchmark
 	public void lambdaParallel() throws Exception {
 		shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));

@@ -9,8 +9,7 @@ import org.apache.commons.mail.MultiPartEmail;
 
 public class TextEmailWithAttachment {
 
-	public static void main(String[] args) throws EmailException,
-			MalformedURLException {
+	public static void main(String[] args) throws EmailException, MalformedURLException {
 
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("localhost");
@@ -21,8 +20,7 @@ public class TextEmailWithAttachment {
 
 		EmailAttachment attachment = new EmailAttachment();
 		// attachment.setURL(TextEmailWithAttachment.class.getResource("/commons-logo.png"));
-		attachment.setURL(new URL(
-				"http://www.flags.net/images/largeflags/SWIT0001.GIF"));
+		attachment.setURL(new URL("http://www.flags.net/images/largeflags/SWIT0001.GIF"));
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		attachment.setDescription("Swiss Flag");
 		attachment.setName("swissflag");

@@ -24,8 +24,8 @@ public class TreeWatch {
 			throws IOException {
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path dir,
-					BasicFileAttributes attrs) throws IOException {
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+					throws IOException {
 				System.out.printf("Registering %s\n", dir);
 				WatchKey key = dir.register(watchService,
 						StandardWatchEventKinds.ENTRY_CREATE,
@@ -37,8 +37,8 @@ public class TreeWatch {
 		});
 	}
 
-	private static void watch(WatchService watchService, Path start)
-			throws IOException, InterruptedException {
+	private static void watch(WatchService watchService, Path start) throws IOException,
+			InterruptedException {
 		registerTree(watchService, start);
 
 		while (true) {
@@ -75,8 +75,7 @@ public class TreeWatch {
 
 	public static void main(String[] args) {
 		Path path = Paths.get("C:/watchme");
-		try (WatchService watchService = FileSystems.getDefault()
-				.newWatchService()) {
+		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
 			watch(watchService, path);
 		}
 		catch (IOException | InterruptedException ex) {

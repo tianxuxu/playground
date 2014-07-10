@@ -19,10 +19,9 @@ import com.google.common.collect.Lists;
 public class DoSomething {
 
 	public static void main(String[] args) {
-		List<User> users = Lists.newArrayList(new User("admin",
-				"admin@test.com", 31), new User("user1", "user1@test.com", 22),
-				new User("user2", "user2@test.com", 27), new User("user3",
-						"user3@test.com", 39));
+		List<User> users = Lists.newArrayList(new User("admin", "admin@test.com", 31),
+				new User("user1", "user1@test.com", 22), new User("user2",
+						"user2@test.com", 27), new User("user3", "user3@test.com", 39));
 
 		List<User> sorted = sort(users, on(User.class).getAge());
 		System.out.println(join(sorted, "\n"));
@@ -34,8 +33,7 @@ public class DoSomething {
 
 		Stopwatch stopWatch = Stopwatch.createStarted();
 		stopWatch.start();
-		List<User> older = filter(
-				having(on(User.class).getAge(), greaterThan(30)), users);
+		List<User> older = filter(having(on(User.class).getAge(), greaterThan(30)), users);
 		stopWatch.stop();
 
 		for (User user : older) {

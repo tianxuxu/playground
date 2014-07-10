@@ -27,14 +27,12 @@ public class StreamTradeServerExample {
 
 		// Rather than handling Trades as events, each Trade is accessible via
 		// Stream.
-		Deferred<Trade, Stream<Trade>> trades = Streams.<Trade> defer()
-				.env(env).dispatcher(Environment.RING_BUFFER)
-				.batchSize(totalTrades).get();
+		Deferred<Trade, Stream<Trade>> trades = Streams.<Trade> defer().env(env)
+				.dispatcher(Environment.RING_BUFFER).batchSize(totalTrades).get();
 
 		// We compose an action to turn a Trade into an Order by calling
 		// server.execute(Trade).
-		Stream<Order> orders = trades.compose()
-				.map(trade -> server.execute(trade))
+		Stream<Order> orders = trades.compose().map(trade -> server.execute(trade))
 				.consume(order -> latch.countDown());
 
 		// Start a throughput timer.
@@ -68,8 +66,7 @@ public class StreamTradeServerExample {
 		elapsed = (endTime - startTime) * 1.0;
 		throughput = totalTrades / (elapsed / 1000);
 
-		LOG.info("Executed {} trades/sec in {}ms", (int) throughput,
-				(int) elapsed);
+		LOG.info("Executed {} trades/sec in {}ms", (int) throughput, (int) elapsed);
 	}
 
 	private static final Logger LOG = LoggerFactory

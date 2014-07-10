@@ -17,9 +17,8 @@ public class BirthdaySerializer extends JsonSerializer<LocalDate> {
 			.forPattern("MM-dd-yyyy");
 
 	@Override
-	public void serialize(LocalDate value, JsonGenerator jgen,
-			SerializerProvider provider) throws IOException,
-			JsonProcessingException {
+	public void serialize(LocalDate value, JsonGenerator jgen, SerializerProvider provider)
+			throws IOException, JsonProcessingException {
 		jgen.writeString(BIRTHDAY_FORMATTER.print(value));
 	}
 }

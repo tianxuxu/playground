@@ -34,23 +34,21 @@ public class Check {
 	public static void main(String[] args) throws URISyntaxException,
 			ClientProtocolException, IOException {
 
-		URL myJarLocationURL = Check.class.getProtectionDomain()
-				.getCodeSource().getLocation();
+		URL myJarLocationURL = Check.class.getProtectionDomain().getCodeSource()
+				.getLocation();
 		Path myJar = Paths.get(myJarLocationURL.toURI());
 		Path myJarDir = myJar.getParent();
 		Path checkUrlsFile = myJarDir.resolve("checkurls.txt");
 		if (!Files.exists(checkUrlsFile)) {
 			checkUrlsFile = Paths.get(".", "checkurls.txt");
 		}
-		List<String> urls = Files.readAllLines(checkUrlsFile,
-				StandardCharsets.UTF_8);
+		List<String> urls = Files.readAllLines(checkUrlsFile, StandardCharsets.UTF_8);
 
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme("https").setHost("sb-ssl.google.com")
-				.setPath("/safebrowsing/api/lookup")
-				.setParameter("client", "simplecli")
-				.setParameter("apikey", args[0])
-				.setParameter("appver", "1.0.0").setParameter("pver", "3.0");
+				.setPath("/safebrowsing/api/lookup").setParameter("client", "simplecli")
+				.setParameter("apikey", args[0]).setParameter("appver", "1.0.0")
+				.setParameter("pver", "3.0");
 		URI uri = builder.build();
 		HttpPost httppost = new HttpPost(uri);
 
@@ -61,8 +59,7 @@ public class Check {
 			sb.append(url).append("\n");
 		}
 
-		httppost.setEntity(new StringEntity(sb.toString(),
-				ContentType.TEXT_PLAIN));
+		httppost.setEntity(new StringEntity(sb.toString(), ContentType.TEXT_PLAIN));
 
 		StringBuilder result = new StringBuilder();
 		try (CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -75,8 +72,7 @@ public class Check {
 				result.append("AT LEAST ONE of the queried URLs are matched in either the phishing or malware lists");
 				result.append("\n");
 				result.append("\n");
-				String responseBody = EntityUtils
-						.toString(response.getEntity());
+				String responseBody = EntityUtils.toString(response.getEntity());
 				List<String> results = Arrays.asList(responseBody.split("\n"));
 				for (int i = 0; i < urls.size(); i++) {
 					result.append(String.format("%-30s --> %s", urls.get(i),
@@ -116,8 +112,7 @@ public class Check {
 				MimeMessage message = new MimeMessage(session);
 
 				message.setFrom(new InternetAddress(from));
-				message.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(to));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 				message.setSubject("ALARM: Google Safe Browsing");
 

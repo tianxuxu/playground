@@ -39,11 +39,11 @@ public class RxJavaSamples {
 		// Observable<Integer> obs = Observable.from(1,2,3,4,5);
 		// obs.subscribe(i -> System.out.println("a:" + i));
 
-		Deferred<Integer, Stream<Integer>> stream = Streams.<Integer> defer()
-				.env(ENV).get();
+		Deferred<Integer, Stream<Integer>> stream = Streams.<Integer> defer().env(ENV)
+				.get();
 
-		stream.compose().consume(i -> System.out.println("0:" + i))
-				.map(i -> ":" + i).consume(i -> System.out.println("a:" + i))
+		stream.compose().consume(i -> System.out.println("0:" + i)).map(i -> ":" + i)
+				.consume(i -> System.out.println("a:" + i))
 				.consume(i -> System.out.println("b:" + i));
 
 		stream.accept(1);

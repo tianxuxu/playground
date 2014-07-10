@@ -17,8 +17,7 @@ import com.mongodb.MongoException;
 
 public class TweetArchiver {
 
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 
 		MongoClient mongo = new MongoClient("localhost");
 		DB db = mongo.getDB("tutorial");
@@ -31,10 +30,9 @@ public class TweetArchiver {
 
 		collection.createIndex(new BasicDBObject("id", 1), options);
 
-		Twitter twitter = new TwitterTemplate(args[0], args[1], args[2],
-				args[3]);
-		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(
-				"feliciaday", 200);
+		Twitter twitter = new TwitterTemplate(args[0], args[1], args[2], args[3]);
+		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("feliciaday",
+				200);
 		for (Tweet tweet : tweets) {
 			BasicDBObject obj = new BasicDBObject("text", tweet.getText());
 			obj.append("fromUser", tweet.getFromUser());
@@ -43,8 +41,8 @@ public class TweetArchiver {
 			collection.insert(obj);
 		}
 
-		try (DBCursor cursor = collection.find(new BasicDBObject(),
-				new BasicDBObject("text", 1))) {
+		try (DBCursor cursor = collection.find(new BasicDBObject(), new BasicDBObject(
+				"text", 1))) {
 			while (cursor.hasNext()) {
 				DBObject obj = cursor.next();
 				System.out.println(obj.get("text"));

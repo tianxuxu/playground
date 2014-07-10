@@ -18,8 +18,8 @@ public class StreamingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/event-stream");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
@@ -37,8 +37,7 @@ public class StreamingServlet extends HttpServlet {
 			out.flush();
 
 			try {
-				TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(3,
-						11));
+				TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(3, 11));
 			}
 			catch (InterruptedException e) {
 				break;

@@ -12,15 +12,14 @@ public class RestoreJobStatus {
 	public static void main(String[] args) throws AmazonServiceException,
 			AmazonClientException {
 		if (args.length == 4) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0],
-					args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			String bucketName = args[2];
 			String objectKey = args[3];
 
-			GetObjectMetadataRequest request = new GetObjectMetadataRequest(
-					bucketName, objectKey);
+			GetObjectMetadataRequest request = new GetObjectMetadataRequest(bucketName,
+					objectKey);
 			ObjectMetadata response = client.getObjectMetadata(request);
 			Boolean restoreFlag = response.getOngoingRestore();
 			System.out.format("Restoration status: %s.\n",

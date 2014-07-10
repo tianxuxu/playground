@@ -37,10 +37,8 @@ public class Main {
 	// }
 	// }
 
-	public static void main(String[] args) throws ClientProtocolException,
-			IOException {
-		try (CloseableHttpClient httpClient = HttpClientBuilder.create()
-				.build()) {
+	public static void main(String[] args) throws ClientProtocolException, IOException {
+		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
 
 			// HttpClient httpClient = getTestHttpClient();
 			// HttpHost proxy = new HttpHost("127.0.0.1", 8888);
@@ -52,8 +50,7 @@ public class Main {
 			String longitude = "7.444608";
 
 			String urlTemplate = "https://api.forecast.io/forecast/%s/%s,%s";
-			String url = String
-					.format(urlTemplate, apiKey, latitude, longitude);
+			String url = String.format(urlTemplate, apiKey, latitude, longitude);
 			System.out.println(url);
 
 			HttpGet httpget = new HttpGet(url);
@@ -66,8 +63,7 @@ public class Main {
 				}
 
 				HttpEntity entity = response.getEntity();
-				String jsonData = EntityUtils.toString(entity,
-						StandardCharsets.UTF_8);
+				String jsonData = EntityUtils.toString(entity, StandardCharsets.UTF_8);
 
 				System.out.println(jsonData);
 			}

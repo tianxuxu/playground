@@ -25,10 +25,9 @@ public class FileManager {
 		}
 	}
 
-	public boolean chunkExists(String identifier, Integer chunkNumber,
-			Long chunkSize) throws IOException {
-		Path chunkFile = Paths.get(dataDirectory, identifier,
-				chunkNumber.toString());
+	public boolean chunkExists(String identifier, Integer chunkNumber, Long chunkSize)
+			throws IOException {
+		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		if (Files.exists(chunkFile)) {
 			long size = (Long) Files.getAttribute(chunkFile, "basic:size");
 			return size == chunkSize;
@@ -36,15 +35,13 @@ public class FileManager {
 		return false;
 	}
 
-	public boolean isSupported(
-			@SuppressWarnings("unused") String resumableFilename) {
+	public boolean isSupported(@SuppressWarnings("unused") String resumableFilename) {
 		return true;
 	}
 
-	public void storeChunk(String identifier, Integer chunkNumber,
-			InputStream inputStream) throws IOException {
-		Path chunkFile = Paths.get(dataDirectory, identifier,
-				chunkNumber.toString());
+	public void storeChunk(String identifier, Integer chunkNumber, InputStream inputStream)
+			throws IOException {
+		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
 		}
@@ -54,8 +51,7 @@ public class FileManager {
 		Files.copy(inputStream, chunkFile, StandardCopyOption.REPLACE_EXISTING);
 	}
 
-	public boolean allChunksUploaded(String identifier, Long chunkSize,
-			Long totalSize) {
+	public boolean allChunksUploaded(String identifier, Long chunkSize, Long totalSize) {
 
 		long noOfChunks = totalSize / chunkSize;
 
@@ -69,8 +65,8 @@ public class FileManager {
 
 	}
 
-	public void mergeAndDeleteChunks(String fileName, String identifier,
-			Long chunkSize, final Long totalSize) throws IOException {
+	public void mergeAndDeleteChunks(String fileName, String identifier, Long chunkSize,
+			final Long totalSize) throws IOException {
 		long noOfChunks = totalSize / chunkSize;
 
 		Path newFilePath = Paths.get(dataDirectory, fileName);
@@ -78,8 +74,8 @@ public class FileManager {
 			Files.delete(newFilePath);
 		}
 
-		try (BufferedOutputStream bos = new BufferedOutputStream(
-				new FileOutputStream(newFilePath.toFile()))) {
+		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(
+				newFilePath.toFile()))) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
 				Path chunkPath = Paths.get(dataDirectory, identifier,
 						String.valueOf(chunkNo));

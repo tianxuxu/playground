@@ -7,10 +7,11 @@ import java.util.function.Predicate;
 
 public class Util {
 
-	public static void copy(Path from, Path to, Predicate<Path> fileFilter) throws IOException {
+	public static void copy(Path from, Path to, Predicate<Path> fileFilter)
+			throws IOException {
 		Files.walkFileTree(from, new CopyTree(from, to, fileFilter));
-	}	
-	
+	}
+
 	public static void copy(Path from, Path to) throws IOException {
 		Files.walkFileTree(from, new CopyTree(from, to, null));
 	}

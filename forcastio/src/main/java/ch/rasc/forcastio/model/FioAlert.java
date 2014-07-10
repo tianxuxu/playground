@@ -3,8 +3,8 @@ package ch.rasc.forcastio.model;
 import java.util.Date;
 
 /**
- * An alert object represents a severe weather warning issued for the requested
- * location by a governmental authority.
+ * An alert object represents a severe weather warning issued for the requested location
+ * by a governmental authority.
  */
 public class FioAlert {
 
@@ -14,8 +14,8 @@ public class FioAlert {
 	private String title;
 
 	/**
-	 * The UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) at
-	 * which the alert will cease to be valid.
+	 * The UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) at which the
+	 * alert will cease to be valid.
 	 */
 	private Date expires;
 
@@ -50,8 +50,7 @@ public class FioAlert {
 
 	@Override
 	public String toString() {
-		return "FioAlert [title=" + title + ", expires=" + expires + ", uri="
-				+ uri + "]";
+		return "FioAlert [title=" + title + ", expires=" + expires + ", uri=" + uri + "]";
 	}
 
 }

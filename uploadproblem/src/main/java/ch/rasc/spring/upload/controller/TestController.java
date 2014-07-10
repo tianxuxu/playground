@@ -25,13 +25,11 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
-	public String uploadTest(HttpServletRequest request,
-			@RequestParam(value = "oneFile", required = false)
-			final Part oneFile,
-			@RequestParam(value = "oneFile", required = false)
-			final MultipartFile oneMultipartFile,
-			@RequestParam(value = "multipleFiles", required = false)
-			final List<MultipartFile> multipleMultipartFiles)
+	public String uploadTest(
+			HttpServletRequest request,
+			@RequestParam(value = "oneFile", required = false) final Part oneFile,
+			@RequestParam(value = "oneFile", required = false) final MultipartFile oneMultipartFile,
+			@RequestParam(value = "multipleFiles", required = false) final List<MultipartFile> multipleMultipartFiles)
 			throws IllegalStateException, IOException, ServletException {
 
 		Enumeration<String> e = request.getParameterNames();
@@ -50,8 +48,7 @@ public class TestController {
 
 			System.out.println("  Headers    :");
 			for (String header : part.getHeaderNames()) {
-				System.out.printf("     %s->%s\n", header,
-						part.getHeader(header));
+				System.out.printf("     %s->%s\n", header, part.getHeader(header));
 			}
 
 			// Test if getHeader is case insensitive according to servlet 3.0
@@ -86,8 +83,7 @@ public class TestController {
 
 		System.out.println("-- START ONE MULTIPART FILE --");
 		if (oneMultipartFile != null) {
-			System.out.println("FileName: "
-					+ oneMultipartFile.getOriginalFilename());
+			System.out.println("FileName: " + oneMultipartFile.getOriginalFilename());
 			System.out.println("Size    : " + oneMultipartFile.getSize());
 		}
 		System.out.println("-- END ONE MULTIPART FILE --\n");
@@ -95,8 +91,7 @@ public class TestController {
 		System.out.println("-- START MULTIPLE MULTIPART FILES --");
 		if (multipleMultipartFiles != null && !multipleMultipartFiles.isEmpty()) {
 			for (MultipartFile multipartFile : multipleMultipartFiles) {
-				System.out.println("FileName: "
-						+ multipartFile.getOriginalFilename());
+				System.out.println("FileName: " + multipartFile.getOriginalFilename());
 				System.out.println("Size    : " + multipartFile.getSize());
 				System.out.println();
 			}
@@ -111,8 +106,7 @@ public class TestController {
 
 		for (String cd : partHeader.split(";")) {
 			if (cd.trim().startsWith("filename")) {
-				return cd.substring(cd.indexOf('=') + 1).trim()
-						.replace("\"", "");
+				return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
 			}
 		}
 		return null;

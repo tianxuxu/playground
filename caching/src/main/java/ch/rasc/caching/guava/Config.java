@@ -23,11 +23,11 @@ public class Config {
 	public CacheManager cacheManager() {
 		SimpleCacheManager cacheManager = new SimpleCacheManager();
 
-		Cache<Object, Optional<Object>> oneMinuteCache = CacheBuilder
-				.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
+		Cache<Object, Optional<Object>> oneMinuteCache = CacheBuilder.newBuilder()
+				.expireAfterWrite(1, TimeUnit.MINUTES).build();
 
-		Cache<Object, Optional<Object>> maxSizeCache = CacheBuilder
-				.newBuilder().maximumSize(10).build();
+		Cache<Object, Optional<Object>> maxSizeCache = CacheBuilder.newBuilder()
+				.maximumSize(10).build();
 
 		cacheManager.setCaches(Arrays.asList(new GuavaCache("oneMinuteCache",
 				oneMinuteCache), new GuavaCache("maxSizeCache", maxSizeCache)));

@@ -55,8 +55,8 @@ public class Main2 {
 				if (!"-".equals(ip) && !"127.0.0.1".equals(ip)) {
 					Location l = cl.getLocation(ip);
 					if (l != null) {
-						System.out.printf("%s=%s:%s:%f:%f", ip, l.countryName,
-								l.city, l.latitude, l.longitude);
+						System.out.printf("%s=%s:%s:%f:%f", ip, l.countryName, l.city,
+								l.latitude, l.longitude);
 					}
 					System.out.println();
 
@@ -79,7 +79,7 @@ public class Main2 {
 		String regex8 = " \"([^\"]+|(.+?))\""; // Referer
 		String regex9 = " \"([^\"]+|(.+?))\""; // Agent
 
-		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7
-				+ regex8 + regex9;
+		return regex1 + regex2 + regex3 + regex4 + regex5 + regex6 + regex7 + regex8
+				+ regex9;
 	}
 }

@@ -34,8 +34,8 @@ public class StreamSamples {
 		Boundary b = new Boundary();
 
 		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer()
-				.env(ENV).dispatcher(Environment.RING_BUFFER).get();
+		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
+				.dispatcher(Environment.RING_BUFFER).get();
 		Stream<String> stream = deferred.compose();
 
 		// Consume values passing through the Stream
@@ -51,13 +51,12 @@ public class StreamSamples {
 		Boundary b = new Boundary();
 
 		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer()
-				.env(ENV).dispatcher(Environment.RING_BUFFER).get();
+		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
+				.dispatcher(Environment.RING_BUFFER).get();
 		Stream<String> stream = deferred.compose();
 
 		// Transform values passing through the Stream
-		stream.map(String::toUpperCase).consume(
-				b.bind(s -> LOG.info("UC String {}", s)));
+		stream.map(String::toUpperCase).consume(b.bind(s -> LOG.info("UC String {}", s)));
 
 		// Publish a value
 		deferred.accept("Hello World!");
@@ -69,8 +68,8 @@ public class StreamSamples {
 		Boundary b = new Boundary();
 
 		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer()
-				.env(ENV).dispatcher(Environment.RING_BUFFER).get();
+		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
+				.dispatcher(Environment.RING_BUFFER).get();
 		Stream<String> stream = deferred.compose();
 
 		// Filter values passing through the Stream

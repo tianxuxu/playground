@@ -26,20 +26,19 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session)
-			throws Exception {
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.put(session.getId(), session);
 	}
 
 	@Override
-	public void afterConnectionClosed(WebSocketSession session,
-			CloseStatus status) throws Exception {
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
+			throws Exception {
 		sessions.remove(session.getId());
 	}
 
 	@Override
-	protected void handleTextMessage(WebSocketSession session,
-			TextMessage message) throws Exception {
+	protected void handleTextMessage(WebSocketSession session, TextMessage message)
+			throws Exception {
 		if ("get-video".equals(message.getPayload())) {
 			sendImages(session);
 		}
@@ -49,28 +48,26 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	private void sendImages(final WebSocketSession session) {
-		asyncExecutor
-				.execute(() -> {
-					for (int index = 0; index < 49; index++) {
-						byte[] imgBytes;
-						try {
-							ClassPathResource cp = new ClassPathResource(
-									"Video/" + index + ".jpg");
-							imgBytes = StreamUtils.copyToByteArray(cp
-									.getInputStream());
-							session.sendMessage(new BinaryMessage(imgBytes));
-							TimeUnit.MILLISECONDS.sleep(150);
-						}
-						catch (IOException | InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				});
+		asyncExecutor.execute(() -> {
+			for (int index = 0; index < 49; index++) {
+				byte[] imgBytes;
+				try {
+					ClassPathResource cp = new ClassPathResource("Video/" + index
+							+ ".jpg");
+					imgBytes = StreamUtils.copyToByteArray(cp.getInputStream());
+					session.sendMessage(new BinaryMessage(imgBytes));
+					TimeUnit.MILLISECONDS.sleep(150);
+				}
+				catch (IOException | InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	@Override
-	protected void handleBinaryMessage(WebSocketSession session,
-			BinaryMessage message) throws Exception {
+	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message)
+			throws Exception {
 		sendToAll(message);
 	}
 

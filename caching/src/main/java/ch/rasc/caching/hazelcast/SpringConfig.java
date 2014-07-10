@@ -22,14 +22,10 @@ public class SpringConfig {
 
 		Config config = new Config();
 		config.getGroupConfig().setName("user").setPassword("password");
-		config.getNetworkConfig().getJoin().getMulticastConfig()
-				.setEnabled(false);
+		config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
 
-		config.getNetworkConfig()
-				.getJoin()
-				.getTcpIpConfig()
-				.setMembers(
-						ImmutableList.of("192.168.20.153", "192.168.20.150"))
+		config.getNetworkConfig().getJoin().getTcpIpConfig()
+				.setMembers(ImmutableList.of("192.168.20.153", "192.168.20.150"))
 				.setEnabled(true);
 
 		return Hazelcast.newHazelcastInstance(config);

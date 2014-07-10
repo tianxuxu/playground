@@ -27,8 +27,7 @@ public class TestController {
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> getUsers(@RequestBody String postData,
-			HttpServletResponse response) {
+	public List<User> getUsers(@RequestBody String postData, HttpServletResponse response) {
 
 		System.out.println(postData);
 

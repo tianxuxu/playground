@@ -12,10 +12,8 @@ import java.nio.file.WatchService;
 
 public class Simple {
 
-	public static void main(String[] args) throws IOException,
-			InterruptedException {
-		try (WatchService watchService = FileSystems.getDefault()
-				.newWatchService()) {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
 
 			Path path = Paths.get("C:/watchme");
 

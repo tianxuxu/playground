@@ -20,8 +20,7 @@ public class Find {
 				.newEmbeddedDatabase("db");
 		Index<Node> index = graphDb.index().forNodes("myIndex");
 
-		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)")
-				.getSingle();
+		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();
 
 		String actorName = "Craig, Daniel (I)";
 
@@ -33,8 +32,7 @@ public class Find {
 		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
 		Path path = finder.findSinglePath(actorNode, kevinBaconNode);
 
-		System.out.printf("%s's Bacon number is %d\n", actorName,
-				path.length() / 2);
+		System.out.printf("%s's Bacon number is %d\n", actorName, path.length() / 2);
 
 		String movieTitle = null;
 		String prevActor = null;

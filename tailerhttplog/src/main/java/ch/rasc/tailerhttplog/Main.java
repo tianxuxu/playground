@@ -52,14 +52,13 @@ public class Main {
 				if (splittedLine.size() == 11/* 14 */) {
 					String userAgent = splittedLine.get(9);
 					ReadableUserAgent ua = parser.parse(userAgent);
-					System.out.print(ua.getOperatingSystem().getFamilyName()
-							+ ":");
+					System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
 
 					String ip = splittedLine.get(8);
 					Location l = cl.getLocation(ip);
 					if (l != null) {
-						System.out.printf("%s=%s:%s:%f:%f\n", ip,
-								l.countryName, l.city, l.latitude, l.longitude);
+						System.out.printf("%s=%s:%s:%f:%f\n", ip, l.countryName, l.city,
+								l.latitude, l.longitude);
 					}
 					else {
 						System.out.println();

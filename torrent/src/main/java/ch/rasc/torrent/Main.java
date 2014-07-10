@@ -14,8 +14,7 @@ import com.turn.ttorrent.client.SharedTorrent;
 
 public class Main {
 
-	public static void main(String[] args) throws UnknownHostException,
-			IOException {
+	public static void main(String[] args) throws UnknownHostException, IOException {
 
 		String torrentUrl = args[0];
 		File torrentFile;
@@ -23,8 +22,7 @@ public class Main {
 			File localFile = new File("./t.torrent");
 			URL website = new URL(args[0]);
 
-			try (ReadableByteChannel rbc = Channels.newChannel(website
-					.openStream());
+			try (ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 					FileOutputStream fos = new FileOutputStream(localFile)) {
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			}
@@ -38,8 +36,8 @@ public class Main {
 		File downloadDirectory = new File(".");
 		downloadDirectory.mkdirs();
 
-		Client client = new Client(InetAddress.getLocalHost(),
-				SharedTorrent.fromFile(torrentFile, downloadDirectory));
+		Client client = new Client(InetAddress.getLocalHost(), SharedTorrent.fromFile(
+				torrentFile, downloadDirectory));
 
 		// You can optionally set download/upload rate limits
 		// in kB/second. Setting a limit to 0.0 disables rate

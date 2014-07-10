@@ -13,8 +13,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class InsertMax {
-	public static void main(String[] args) throws UnknownHostException,
-			MongoException {
+	public static void main(String[] args) throws UnknownHostException, MongoException {
 
 		MongoClient mongo = new MongoClient("localhost");
 
@@ -50,8 +49,8 @@ public class InsertMax {
 		CommandResult stats = collection.getStats();
 		System.out.println("Anzahl Dokumente: " + stats.get("count"));
 		System.out.println("Anzahl Bytes: " + stats.get("size"));
-		System.out.println("Durchschnitt Bytes pro Dokument : "
-				+ stats.get("avgObjSize"));
+		System.out
+				.println("Durchschnitt Bytes pro Dokument : " + stats.get("avgObjSize"));
 
 		// for (String key : stats.keySet()) {
 		// System.out.printf("%s = %s\n", key, stats.get(key));

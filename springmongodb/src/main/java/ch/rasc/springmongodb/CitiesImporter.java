@@ -18,8 +18,7 @@ import com.google.common.io.LineProcessor;
 
 public class CitiesImporter {
 
-	public static void main(String[] args) throws IOException,
-			URISyntaxException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()) {
 			ctx.register(AppConfig.class);
@@ -35,58 +34,54 @@ public class CitiesImporter {
 				System.out.println("NO DROP");
 			}
 
-			File f = new File(CitiesImporter.class.getResource(
-					"/worldcitiespop.txt").toURI());
+			File f = new File(CitiesImporter.class.getResource("/worldcitiespop.txt")
+					.toURI());
 
-			Files.readLines(f, Charsets.ISO_8859_1,
-					new LineProcessor<String>() {
-						@Override
-						public boolean processLine(String line)
-								throws IOException {
-							if (!line.startsWith("Country,City")) {
-								String[] splittedItems = StringUtils
-										.commaDelimitedListToStringArray(line);
-								if (splittedItems.length == 7) {
+			Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
+				@Override
+				public boolean processLine(String line) throws IOException {
+					if (!line.startsWith("Country,City")) {
+						String[] splittedItems = StringUtils
+								.commaDelimitedListToStringArray(line);
+						if (splittedItems.length == 7) {
 
-									City newCity = new City();
-									newCity.setCountry(splittedItems[0]);
-									newCity.setAsciiCityName(splittedItems[1]);
-									newCity.setCityName(splittedItems[2]);
-									newCity.setRegion(splittedItems[3]);
+							City newCity = new City();
+							newCity.setCountry(splittedItems[0]);
+							newCity.setAsciiCityName(splittedItems[1]);
+							newCity.setCityName(splittedItems[2]);
+							newCity.setRegion(splittedItems[3]);
 
-									String populationString = splittedItems[4];
-									if (StringUtils.hasText(populationString)) {
-										newCity.setPopulation(Integer
-												.valueOf(populationString));
-									}
-
-									String latitudeStr = splittedItems[5];
-									String longitudeStr = splittedItems[6];
-
-									if (latitudeStr.equals("180.0")) {
-										latitudeStr = "179.9999";
-									}
-
-									if (longitudeStr.equals("180.0")) {
-										longitudeStr = "179.9999";
-									}
-
-									newCity.setLocation(new Point(Double
-											.valueOf(latitudeStr), Double
-											.valueOf(longitudeStr)));
-
-									mongoOps.save(newCity);
-								}
+							String populationString = splittedItems[4];
+							if (StringUtils.hasText(populationString)) {
+								newCity.setPopulation(Integer.valueOf(populationString));
 							}
 
-							return true;
-						}
+							String latitudeStr = splittedItems[5];
+							String longitudeStr = splittedItems[6];
 
-						@Override
-						public String getResult() {
-							return null;
+							if (latitudeStr.equals("180.0")) {
+								latitudeStr = "179.9999";
+							}
+
+							if (longitudeStr.equals("180.0")) {
+								longitudeStr = "179.9999";
+							}
+
+							newCity.setLocation(new Point(Double.valueOf(latitudeStr),
+									Double.valueOf(longitudeStr)));
+
+							mongoOps.save(newCity);
 						}
-					});
+					}
+
+					return true;
+				}
+
+				@Override
+				public String getResult() {
+					return null;
+				}
+			});
 		}
 
 	}

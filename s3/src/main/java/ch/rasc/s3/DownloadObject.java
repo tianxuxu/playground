@@ -15,8 +15,7 @@ public class DownloadObject {
 	public static void main(String[] args) throws AmazonServiceException,
 			AmazonClientException {
 		if (args.length == 5) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0],
-					args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			String bucketName = args[2];
@@ -24,23 +23,20 @@ public class DownloadObject {
 			Path file = Paths.get(args[4]);
 
 			TransferManager tm = new TransferManager(client);
-			Download download = tm.download(bucketName, objectKey,
-					file.toFile());
+			Download download = tm.download(bucketName, objectKey, file.toFile());
 			try {
 				download.waitForCompletion();
 				tm.shutdownNow();
 			}
 			catch (InterruptedException | AmazonClientException e) {
-				System.out
-						.println("Unable to download file, download was aborted: "
-								+ file);
+				System.out.println("Unable to download file, download was aborted: "
+						+ file);
 				e.printStackTrace();
 			}
 
 		}
 		else {
-			System.out.println("java -jar s3backup.jar "
-					+ DownloadObject.class.getName()
+			System.out.println("java -jar s3backup.jar " + DownloadObject.class.getName()
 					+ " accessKey secretKey bucketName objectKey pathToFile");
 		}
 

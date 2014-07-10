@@ -10,8 +10,7 @@ public class Main {
 		try (final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
 				SpringConfig.class)) {
 
-			ctx.getBean(DirectoryWatcher.class)
-					.startWatch(Paths.get("c:/temp"));
+			ctx.getBean(DirectoryWatcher.class).startWatch(Paths.get("c:/temp"));
 
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				@Override

@@ -24,14 +24,12 @@ public class Template {
 		parameters.put("books", "B");
 
 		Engine engine = Engine.getEngine();
-		httl.Template t = engine
-				.parseTemplate("<img alt=\"${user}\" src=\"${books}\">");
+		httl.Template t = engine.parseTemplate("<img alt=\"${user}\" src=\"${books}\">");
 		System.out.println(t.evaluate(parameters));
 
 		StringWriter sw = new StringWriter();
 		try (Reader in = new InputStreamReader(
-				Template.class.getResourceAsStream("/basic.html"),
-				StandardCharsets.UTF_8)) {
+				Template.class.getResourceAsStream("/basic.html"), StandardCharsets.UTF_8)) {
 			IOUtils.copy(in, sw);
 		}
 		System.out.println(sw.toString());

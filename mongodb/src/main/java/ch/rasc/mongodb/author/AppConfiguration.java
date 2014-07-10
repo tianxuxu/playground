@@ -40,8 +40,7 @@ public class AppConfiguration {
 	}
 
 	@Bean
-	public DBCollection collection() throws UnknownHostException,
-			MongoException {
+	public DBCollection collection() throws UnknownHostException, MongoException {
 		return db().getCollection("text");
 	}
 

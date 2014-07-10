@@ -25,10 +25,9 @@ public class TestController {
 
 	@RequestMapping("/somedata")
 	@ResponseBody
-	public String getSomeData() throws InstanceNotFoundException,
-			ReflectionException, AttributeNotFoundException,
-			MalformedObjectNameException, MBeanException, NullPointerException,
-			IntrospectionException {
+	public String getSomeData() throws InstanceNotFoundException, ReflectionException,
+			AttributeNotFoundException, MalformedObjectNameException, MBeanException,
+			NullPointerException, IntrospectionException {
 
 		MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		Set<ObjectInstance> instances = mbeanServer.queryMBeans(null, null);
@@ -42,12 +41,10 @@ public class TestController {
 				ObjectName.getInstance("bean:name=testBean"), "Name");
 		System.out.println(n);
 
-		List<MemoryPoolMXBean> memPoolBeans = ManagementFactory
-				.getMemoryPoolMXBeans();
+		List<MemoryPoolMXBean> memPoolBeans = ManagementFactory.getMemoryPoolMXBeans();
 		for (MemoryPoolMXBean mpb : memPoolBeans) {
 			System.out.println("Memory Pool: " + mpb.getObjectName());
-			System.out.println("Memory Pool Used: "
-					+ mpb.getPeakUsage().getUsed());
+			System.out.println("Memory Pool Used: " + mpb.getPeakUsage().getUsed());
 		}
 
 		return "hi";

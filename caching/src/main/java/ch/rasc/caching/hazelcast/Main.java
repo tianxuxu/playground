@@ -22,8 +22,7 @@ public class Main {
 
 			TimeUnit.MINUTES.sleep(1);
 
-			ctx.getBean(HazelcastInstance.class).getLifecycleService()
-					.shutdown();
+			ctx.getBean(HazelcastInstance.class).getLifecycleService().shutdown();
 		}
 	}
 

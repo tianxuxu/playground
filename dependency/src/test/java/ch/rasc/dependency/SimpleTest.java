@@ -30,8 +30,7 @@ public class SimpleTest {
 	}
 
 	@Test(expected = CircularReferenceException.class)
-	public void testThrowCircularReferenceException()
-			throws CircularReferenceException {
+	public void testThrowCircularReferenceException() throws CircularReferenceException {
 		Graph g = new Graph();
 		Node a = g.createNode("a");
 		Node b = g.createNode("b");

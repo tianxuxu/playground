@@ -16,8 +16,7 @@ public class CreateBucketWithLifecycle {
 	public static void main(String[] args) {
 
 		if (args.length == 5) {
-			AWSCredentials credentials = new BasicAWSCredentials(args[0],
-					args[1]);
+			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
 
 			String bucketName = args[2];
@@ -30,10 +29,8 @@ public class CreateBucketWithLifecycle {
 			Transition transToArchive = new Transition().withDays(transferDays)
 					.withStorageClass(StorageClass.Glacier);
 			BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
-					.withId("Archive and delete rule")
-					.withPrefix("")
-					.withTransition(transToArchive)
-					.withExpirationInDays(expirationDays)
+					.withId("Archive and delete rule").withPrefix("")
+					.withTransition(transToArchive).withExpirationInDays(expirationDays)
 					.withStatus(BucketLifecycleConfiguration.ENABLED.toString());
 
 			List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<>();

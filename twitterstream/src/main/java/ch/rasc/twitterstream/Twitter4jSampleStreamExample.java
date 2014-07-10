@@ -59,8 +59,8 @@ public class Twitter4jSampleStreamExample {
 			while (matcher.find()) {
 				String unshortenedURL = unshorten(matcher.group());
 				if (unshortenedURL != null) {
-					matcher.appendReplacement(sb, "<a href=\"" + unshortenedURL
-							+ "\">" + unshortenedURL + "</a>");
+					matcher.appendReplacement(sb, "<a href=\"" + unshortenedURL + "\">"
+							+ unshortenedURL + "</a>");
 				}
 				else {
 					matcher.appendReplacement(sb, "$0");
@@ -112,26 +112,24 @@ public class Twitter4jSampleStreamExample {
 		}
 	};
 
-	private static void oauth(String consumerKey, String consumerSecret,
-			String token, String secret) throws InterruptedException {
+	private static void oauth(String consumerKey, String consumerSecret, String token,
+			String secret) throws InterruptedException {
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(100);
 
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
-		endpoint.trackTerms(ImmutableList.of("ExtJS", "Sencha",
-				"atmo_framework", "#java", "java7", "java8", "websocket",
-				"#portal", "html5", "javascript"));
+		endpoint.trackTerms(ImmutableList.of("ExtJS", "Sencha", "atmo_framework",
+				"#java", "java7", "java8", "websocket", "#portal", "html5", "javascript"));
 		endpoint.languages(ImmutableList.of("en", "de"));
 
-		Authentication auth = new OAuth1(consumerKey, consumerSecret, token,
-				secret);
+		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
 
 		BasicClient client = new ClientBuilder().hosts(Constants.STREAM_HOST)
 				.endpoint(endpoint).authentication(auth)
 				.processor(new StringDelimitedProcessor(queue)).build();
 
 		ExecutorService es = Executors.newSingleThreadExecutor();
-		Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(client,
-				queue, ImmutableList.of(listener2), es);
+		Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(client, queue,
+				ImmutableList.of(listener2), es);
 
 		t4jClient.connect();
 		t4jClient.process();
@@ -145,8 +143,7 @@ public class Twitter4jSampleStreamExample {
 
 	public static void main(String[] args) {
 		try {
-			Twitter4jSampleStreamExample.oauth(args[0], args[1], args[2],
-					args[3]);
+			Twitter4jSampleStreamExample.oauth(args[0], args[1], args[2], args[3]);
 		}
 		catch (InterruptedException e) {
 			System.out.println(e);
@@ -174,8 +171,7 @@ public class Twitter4jSampleStreamExample {
 					return unshorten(value);
 				}
 			}
-			else if (status >= 400
-					&& status != HttpStatus.SC_METHOD_NOT_ALLOWED
+			else if (status >= 400 && status != HttpStatus.SC_METHOD_NOT_ALLOWED
 					&& status != HttpStatus.SC_FORBIDDEN) {
 				System.out.println("STATUS >= 400");
 				System.out.println(status);

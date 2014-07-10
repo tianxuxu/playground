@@ -36,9 +36,7 @@ public class Calculator {
 
 	@Cacheable(value = "calculator", condition = "#n > 10")
 	public BigInteger factorialWithACondition(long n) {
-		System.out
-				.println("calling condition factorial method with parameter: "
-						+ n);
+		System.out.println("calling condition factorial method with parameter: " + n);
 		return factorial(n);
 	}
 

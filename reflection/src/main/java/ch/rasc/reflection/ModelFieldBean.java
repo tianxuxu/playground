@@ -64,12 +64,10 @@ public class ModelFieldBean {
 		this.useNull = useNull;
 	}
 
-	private final static class ModelTypeSerializer extends
-			JsonSerializer<ModelType> {
+	private final static class ModelTypeSerializer extends JsonSerializer<ModelType> {
 		@Override
 		public void serialize(ModelType value, JsonGenerator jgen,
-				SerializerProvider provider) throws IOException,
-				JsonProcessingException {
+				SerializerProvider provider) throws IOException, JsonProcessingException {
 			jgen.writeString(value.getJsName());
 
 		}

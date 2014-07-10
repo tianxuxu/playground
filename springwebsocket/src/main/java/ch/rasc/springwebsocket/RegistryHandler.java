@@ -15,14 +15,13 @@ public class RegistryHandler extends TextWebSocketHandler {
 	private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session)
-			throws Exception {
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.put(session.getId(), session);
 	}
 
 	@Override
-	public void afterConnectionClosed(WebSocketSession session,
-			CloseStatus status) throws Exception {
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
+			throws Exception {
 		sessions.remove(session.getId());
 	}
 

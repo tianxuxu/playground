@@ -27,8 +27,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", email=" + email + ", age="
-				+ age + "]";
+		return "User [userName=" + userName + ", email=" + email + ", age=" + age + "]";
 	}
 
 }

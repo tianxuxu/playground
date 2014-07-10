@@ -33,8 +33,8 @@ public class MongoApp {
 			log.info("Found: " + p);
 
 			// Update
-			mongoOps.updateFirst(query(where("name").is("Joe")),
-					update("age", 35), Person.class);
+			mongoOps.updateFirst(query(where("name").is("Joe")), update("age", 35),
+					Person.class);
 			p = mongoOps.findOne(query(where("name").is("Joe")), Person.class);
 			log.info("Updated: " + p);
 

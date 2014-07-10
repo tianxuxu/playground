@@ -10,7 +10,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.178</version>
+			<version>1.4.179</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-			<version>3.3.4</version>
+			<version>3.4.1</version>
 		</dependency>
 
 		<dependency>
@@ -83,7 +83,7 @@
 					<dependency>
 						<groupId>com.mysema.querydsl</groupId>
 						<artifactId>querydsl-apt</artifactId>
-						<version>3.3.4</version>
+						<version>3.4.1</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -91,7 +91,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
+				<version>1.9</version>
 				<executions>
 					<execution>
 						<id>add-source</id>
