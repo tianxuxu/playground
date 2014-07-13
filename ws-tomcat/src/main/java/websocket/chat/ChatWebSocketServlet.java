@@ -48,7 +48,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 	final Set<ChatMessageInbound> connections = new CopyOnWriteArraySet<>();
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request) {
 		return new ChatMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -82,7 +83,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 		@Override
 		protected void onTextMessage(CharBuffer message) throws IOException {
 			// Never trust the client
-			String filteredMessage = String.format("%s: %s", nickname, HTMLFilter.filter(message.toString()));
+			String filteredMessage = String.format("%s: %s", nickname,
+					HTMLFilter.filter(message.toString()));
 			broadcast(filteredMessage);
 		}
 
@@ -91,7 +93,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 				try {
 					CharBuffer buffer = CharBuffer.wrap(message);
 					connection.getWsOutbound().writeTextMessage(buffer);
-				} catch (IOException ignore) {
+				}
+				catch (IOException ignore) {
 					// Ignore
 				}
 			}

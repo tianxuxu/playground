@@ -2,7 +2,7 @@ package ch.rasc.perf;
 
 /**
  * User name components.
- * 
+ *
  * @author Andrey Bloschetsov
  */
 public class UserNames {

@@ -33,7 +33,8 @@ public class WampPublishMessage extends WampInboundMessage {
 		if (message.length == 4) {
 			if (message[3] instanceof Boolean) {
 				excludeMe = (Boolean) message[3];
-			} else {
+			}
+			else {
 				exclude = (List<String>) message[3];
 			}
 		}

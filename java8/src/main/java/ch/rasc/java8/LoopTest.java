@@ -13,7 +13,7 @@ import org.openjdk.jmh.annotations.State;
 
 @State(Scope.Thread)
 public class LoopTest {
-	private List<Shape> shapes = new ArrayList<>();
+	private final List<Shape> shapes = new ArrayList<>();
 
 	@Setup(Level.Invocation)
 	public void init() {

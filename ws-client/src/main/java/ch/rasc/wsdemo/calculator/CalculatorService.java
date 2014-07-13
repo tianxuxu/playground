@@ -15,7 +15,9 @@ import javax.xml.ws.WebServiceFeature;
  * version: 2.1
  *
  */
-@WebServiceClient(name = "CalculatorService", targetNamespace = "http://wsdemo.ralscha.ch/", wsdlLocation = "http://localhost:8080/cxf/Calculator?wsdl")
+@WebServiceClient(name = "CalculatorService",
+		targetNamespace = "http://wsdemo.ralscha.ch/",
+		wsdlLocation = "http://localhost:8080/cxf/Calculator?wsdl")
 public class CalculatorService extends Service {
 
 	private final static URL CALCULATORSERVICE_WSDL_LOCATION;

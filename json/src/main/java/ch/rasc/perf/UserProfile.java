@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * The data of user profile.
- * 
+ *
  * @author Andrey Bloschetsov
  */
 public class UserProfile {

@@ -30,9 +30,9 @@ import org.atmosphere.cpr.Meteor;
 import org.atmosphere.websocket.WebSocketEventListenerAdapter;
 
 /**
- * Simple PubSub resource that demonstrate many functionality supported by
- * Atmosphere JQuery Plugin (WebSocket, Comet) and Atmosphere Meteor extension.
- * 
+ * Simple PubSub resource that demonstrate many functionality supported by Atmosphere
+ * JQuery Plugin (WebSocket, Comet) and Atmosphere Meteor extension.
+ *
  * @author Jeanfrancois Arcand
  */
 @MeteorService
@@ -54,17 +54,20 @@ public class MeteorPubSub extends HttpServlet {
 		m.setBroadcaster(b);
 
 		String header = req.getHeader(HeaderConfig.X_ATMOSPHERE_TRANSPORT);
-		if (header != null && header.equalsIgnoreCase(HeaderConfig.LONG_POLLING_TRANSPORT)) {
+		if (header != null
+				&& header.equalsIgnoreCase(HeaderConfig.LONG_POLLING_TRANSPORT)) {
 			req.setAttribute(ApplicationConfig.RESUME_ON_BROADCAST, Boolean.TRUE);
 			m.suspend(-1);
-		} else {
+		}
+		else {
 			m.suspend(-1);
 		}
 
 	}
 
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws IOException {
 		Broadcaster b = lookupBroadcaster(req.getPathInfo());
 
 		String message = req.getReader().readLine();
@@ -76,7 +79,8 @@ public class MeteorPubSub extends HttpServlet {
 
 	Broadcaster lookupBroadcaster(String pathInfo) {
 		String[] decodedPath = pathInfo.split("/");
-		Broadcaster b = BroadcasterFactory.getDefault().lookup(decodedPath[decodedPath.length - 1], true);
+		Broadcaster b = BroadcasterFactory.getDefault().lookup(
+				decodedPath[decodedPath.length - 1], true);
 		return b;
 	}
 }

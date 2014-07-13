@@ -17,7 +17,8 @@ public class DateController {
 
 	private final static AtomicInteger counter = new AtomicInteger(1);
 
-	@RequestMapping(value = "/date", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/date", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public SSEvent getTime(
 			@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
@@ -30,7 +31,8 @@ public class DateController {
 		return event;
 	}
 
-	@RequestMapping(value = "/datedata", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/datedata", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public String getTime() {
 		return DateTime.now().toString("dd.MM.yyyy HH:mm:ss.SSS");

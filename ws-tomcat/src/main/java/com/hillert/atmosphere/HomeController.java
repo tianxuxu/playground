@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.cpr.Meteor;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.twitter.api.SearchResults;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hillert.atmosphere.model.TwitterMessage;
 
 @Controller
@@ -54,18 +54,21 @@ public class HomeController {
 
 			@Override
 			public String call() throws Exception {
-				final TwitterTemplate twitterTemplate = new TwitterTemplate();
-				final SearchResults results = twitterTemplate.searchOperations().search("world", 20);
+				final TwitterTemplate twitterTemplate = new TwitterTemplate("key");
+				final SearchResults results = twitterTemplate.searchOperations().search(
+						"world", 20);
 
-				logger.info("sinceId: " + sinceId + "; maxId: " + results.getSearchMetadata().getMax_id());
+				logger.info("sinceId: " + sinceId + "; maxId: "
+						+ results.getSearchMetadata().getMaxId());
 
-				sinceId = results.getSearchMetadata().getMax_id();
+				sinceId = results.getSearchMetadata().getMaxId();
 
 				List<TwitterMessage> twitterMessages = new ArrayList<>();
 
 				for (Tweet tweet : results.getTweets()) {
-					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet.getCreatedAt(), tweet.getText(), tweet
-							.getFromUser(), tweet.getProfileImageUrl()));
+					twitterMessages.add(new TwitterMessage(tweet.getId(), tweet
+							.getCreatedAt(), tweet.getText(), tweet.getFromUser(), tweet
+							.getProfileImageUrl()));
 				}
 
 				String s = mapper.writeValueAsString(twitterMessages);

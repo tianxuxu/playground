@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SandboxController {
 
-	@RequestMapping(value = "/simple", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/simple", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public String simple() {
 
@@ -24,7 +25,8 @@ public class SandboxController {
 		return sb.toString();
 	}
 
-	@RequestMapping(value = "/multiline", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/multiline", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public String multiline() {
 
@@ -46,7 +48,8 @@ public class SandboxController {
 		return sb.toString();
 	}
 
-	@RequestMapping(value = "/event", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/event", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public String event() {
 
@@ -80,7 +83,8 @@ public class SandboxController {
 
 	private final static AtomicInteger counter = new AtomicInteger(1);
 
-	@RequestMapping(value = "/lastId", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/lastId", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public String lastId(
 			@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {

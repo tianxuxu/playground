@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Like data.
- * 
+ *
  * @author Andrey Bloschetsov
  */
 public class Like {

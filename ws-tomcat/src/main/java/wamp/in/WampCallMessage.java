@@ -24,9 +24,11 @@ public class WampCallMessage extends WampInboundMessage {
 
 		if (message.length == 3) {
 			parameters = null;
-		} else if (message.length == 4) {
+		}
+		else if (message.length == 4) {
 			parameters = message[3];
-		} else {
+		}
+		else {
 			parameters = Arrays.copyOfRange(message, 3, message.length);
 		}
 	}

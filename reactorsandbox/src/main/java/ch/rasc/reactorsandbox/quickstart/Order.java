@@ -5,7 +5,7 @@ package ch.rasc.reactorsandbox.quickstart;
  */
 public class Order {
 
-	private Long id;
+	private final Long id;
 
 	private Trade trade;
 

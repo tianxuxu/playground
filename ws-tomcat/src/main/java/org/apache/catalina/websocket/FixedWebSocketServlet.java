@@ -39,22 +39,24 @@ import org.apache.tomcat.util.buf.B2CConverter;
 import org.apache.tomcat.util.res.StringManager;
 
 /**
- * Provides the base implementation of a Servlet for processing WebSocket
- * connections as per RFC6455. It is expected that applications will extend this
- * implementation and provide application specific functionality.
+ * Provides the base implementation of a Servlet for processing WebSocket connections as
+ * per RFC6455. It is expected that applications will extend this implementation and
+ * provide application specific functionality.
  */
 public abstract class FixedWebSocketServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final byte[] WS_ACCEPT = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".getBytes(B2CConverter.ISO_8859_1);
+	private static final byte[] WS_ACCEPT = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
+			.getBytes(B2CConverter.ISO_8859_1);
 
 	private static final StringManager sm = StringManager.getManager(Constants.Package);
 
 	private final Queue<MessageDigest> sha1Helpers = new ConcurrentLinkedQueue<>();
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 
 		// Information required to send the server handshake message
 		String key;
@@ -124,16 +126,18 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 		}
 		if (inner instanceof RequestFacade) {
 			((RequestFacade) inner).doUpgrade(inbound);
-		} else {
-			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, sm.getString("servlet.reqUpgradeFail"));
+		}
+		else {
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+					sm.getString("servlet.reqUpgradeFail"));
 		}
 	}
 
 	/*
-	 * This only works for tokens. Quoted strings need more sophisticated
-	 * parsing.
+	 * This only works for tokens. Quoted strings need more sophisticated parsing.
 	 */
-	private static boolean headerContainsToken(HttpServletRequest req, String headerName, String target) {
+	private static boolean headerContainsToken(HttpServletRequest req, String headerName,
+			String target) {
 		Enumeration<String> headers = req.getHeaders(headerName);
 		while (headers.hasMoreElements()) {
 			String header = headers.nextElement();
@@ -148,10 +152,10 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	}
 
 	/*
-	 * This only works for tokens. Quoted strings need more sophisticated
-	 * parsing.
+	 * This only works for tokens. Quoted strings need more sophisticated parsing.
 	 */
-	private static List<String> getTokensFromHeader(HttpServletRequest req, String headerName) {
+	private static List<String> getTokensFromHeader(HttpServletRequest req,
+			String headerName) {
 		List<String> result = new ArrayList<>();
 
 		Enumeration<String> headers = req.getHeaders(headerName);
@@ -171,7 +175,8 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 		if (sha1Helper == null) {
 			try {
 				sha1Helper = MessageDigest.getInstance("SHA1");
-			} catch (NoSuchAlgorithmException e) {
+			}
+			catch (NoSuchAlgorithmException e) {
 				throw new ServletException(e);
 			}
 		}
@@ -186,47 +191,45 @@ public abstract class FixedWebSocketServlet extends HttpServlet {
 	}
 
 	/**
-	 * Intended to be overridden by sub-classes that wish to verify the origin
-	 * of a WebSocket request before processing it.
-	 * 
-	 * @param origin The value of the origin header from the request which may
-	 *            be <code>null</code>
-	 * 
-	 * @return <code>true</code> to accept the request. <code>false</code> to
-	 *         reject it. This default implementation always returns
-	 *         <code>true</code>.
+	 * Intended to be overridden by sub-classes that wish to verify the origin of a
+	 * WebSocket request before processing it.
+	 *
+	 * @param origin The value of the origin header from the request which may be
+	 * <code>null</code>
+	 *
+	 * @return <code>true</code> to accept the request. <code>false</code> to reject it.
+	 * This default implementation always returns <code>true</code>.
 	 */
 	protected boolean verifyOrigin(String origin) {
 		return true;
 	}
 
 	/**
-	 * Intended to be overridden by sub-classes that wish to select a
-	 * sub-protocol if the client provides a list of supported protocols.
-	 * 
-	 * @param subProtocols The list of sub-protocols supported by the client in
-	 *            client preference order. The server is under no obligation to
-	 *            respect the declared preference
-	 * @return <code>null</code> if no sub-protocol is selected or the name of
-	 *         the protocol which <b>must</b> be one of the protocols listed by
-	 *         the client. This default implementation always returns
-	 *         <code>null</code>.
+	 * Intended to be overridden by sub-classes that wish to select a sub-protocol if the
+	 * client provides a list of supported protocols.
+	 *
+	 * @param subProtocols The list of sub-protocols supported by the client in client
+	 * preference order. The server is under no obligation to respect the declared
+	 * preference
+	 * @return <code>null</code> if no sub-protocol is selected or the name of the
+	 * protocol which <b>must</b> be one of the protocols listed by the client. This
+	 * default implementation always returns <code>null</code>.
 	 */
 	protected String selectSubProtocol(List<String> subProtocols) {
 		return null;
 	}
 
 	/**
-	 * Create the instance that will process this inbound connection.
-	 * Applications must provide a new instance for each connection.
-	 * 
-	 * @param subProtocol The sub-protocol agreed between the client and server
-	 *            or <code>null</code> if none was agreed
-	 * @param request The HTTP request that initiated this WebSocket connection.
-	 *            Note that this object is <b>only</b> valid inside this method.
-	 *            You must not retain a reference to it outside the execution of
-	 *            this method. If Tomcat detects such access, it will throw an
-	 *            IllegalStateException
+	 * Create the instance that will process this inbound connection. Applications must
+	 * provide a new instance for each connection.
+	 *
+	 * @param subProtocol The sub-protocol agreed between the client and server or
+	 * <code>null</code> if none was agreed
+	 * @param request The HTTP request that initiated this WebSocket connection. Note that
+	 * this object is <b>only</b> valid inside this method. You must not retain a
+	 * reference to it outside the execution of this method. If Tomcat detects such
+	 * access, it will throw an IllegalStateException
 	 */
-	protected abstract StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request);
+	protected abstract StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request);
 }

@@ -28,7 +28,8 @@ public class TwitterController {
 
 	AtomicInteger i = new AtomicInteger();
 
-	@RequestMapping(value = "/twittersse", method = RequestMethod.GET, produces = "text/event-stream")
+	@RequestMapping(value = "/twittersse", method = RequestMethod.GET,
+			produces = "text/event-stream")
 	@ResponseBody
 	public Object getTweets(
 			@RequestHeader(value = "Last-Event-ID", required = false) final String lastEventId)

@@ -15,7 +15,9 @@ import javax.xml.ws.WebServiceFeature;
  * version: 2.1
  *
  */
-@WebServiceClient(name = "HelloWorldImplService", targetNamespace = "http://wsdemo.ralscha.ch/", wsdlLocation = "http://localhost:8080/cxf/HelloWorld?wsdl")
+@WebServiceClient(name = "HelloWorldImplService",
+		targetNamespace = "http://wsdemo.ralscha.ch/",
+		wsdlLocation = "http://localhost:8080/cxf/HelloWorld?wsdl")
 public class HelloWorldImplService extends Service {
 
 	private final static URL HELLOWORLDIMPLSERVICE_WSDL_LOCATION;

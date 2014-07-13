@@ -33,7 +33,8 @@ public class EchoStream extends WebSocketServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request) {
 		return new EchoStreamInbound();
 	}
 

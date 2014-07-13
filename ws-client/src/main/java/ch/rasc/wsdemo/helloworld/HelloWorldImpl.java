@@ -24,8 +24,11 @@ public interface HelloWorldImpl {
 	 */
 	@WebMethod
 	@WebResult(targetNamespace = "")
-	@RequestWrapper(localName = "sayHi", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.helloworld.SayHi")
-	@ResponseWrapper(localName = "sayHiResponse", targetNamespace = "http://wsdemo.ralscha.ch/", className = "ch.rasc.wsdemo.helloworld.SayHiResponse")
+	@RequestWrapper(localName = "sayHi", targetNamespace = "http://wsdemo.ralscha.ch/",
+			className = "ch.rasc.wsdemo.helloworld.SayHi")
+	@ResponseWrapper(localName = "sayHiResponse",
+			targetNamespace = "http://wsdemo.ralscha.ch/",
+			className = "ch.rasc.wsdemo.helloworld.SayHiResponse")
 	public String sayHi(@WebParam(name = "arg0", targetNamespace = "") String arg0);
 
 }

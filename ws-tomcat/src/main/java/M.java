@@ -1,14 +1,15 @@
 import java.io.IOException;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import wamp.out.WampCallResultMessage;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class M {
 
-	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
+	public static void main(String[] args) throws JsonGenerationException,
+			JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		U u = new U();
 		u.name = "name";

@@ -60,7 +60,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 
 	private static final Random random = new Random();
 
-	private final Timer gameTimer = new Timer(SnakeWebSocketServlet.class.getSimpleName() + " Timer");
+	private final Timer gameTimer = new Timer(SnakeWebSocketServlet.class.getSimpleName()
+			+ " Timer");
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
 
@@ -76,7 +77,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			public void run() {
 				try {
 					tick();
-				} catch (RuntimeException e) {
+				}
+				catch (RuntimeException e) {
 					log.error("Caught to prevent timer from shutting down", e);
 				}
 			}
@@ -101,7 +103,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			try {
 				CharBuffer buffer = CharBuffer.wrap(message);
 				connection.getWsOutbound().writeTextMessage(buffer);
-			} catch (IOException ignore) {
+			}
+			catch (IOException ignore) {
 				// Ignore
 			}
 		}
@@ -121,7 +124,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 		float saturation = (random.nextInt(2000) + 1000) / 10000f;
 		float luminance = 0.9f;
 		Color color = Color.getHSBColor(hue, saturation, luminance);
-		return '#' + Integer.toHexString((color.getRGB() & 0xffffff) | 0x1000000).substring(1);
+		return '#' + Integer.toHexString(color.getRGB() & 0xffffff | 0x1000000)
+				.substring(1);
 	}
 
 	public static Location getRandomLocation() {
@@ -131,7 +135,7 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	}
 
 	private static int roundByGridSize(int value) {
-		int v = value + (SnakeWebSocketServlet.GRID_SIZE / 2);
+		int v = value + SnakeWebSocketServlet.GRID_SIZE / 2;
 		v = v / SnakeWebSocketServlet.GRID_SIZE;
 		v = v * SnakeWebSocketServlet.GRID_SIZE;
 		return v;
@@ -146,7 +150,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 	}
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request) {
 		return new SnakeMessageInbound(connectionIds.incrementAndGet());
 	}
 
@@ -168,7 +173,8 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			StringBuilder sb = new StringBuilder();
 			for (Iterator<Snake> iterator = getSnakes().iterator(); iterator.hasNext();) {
 				Snake _snake = iterator.next();
-				sb.append(String.format("{id: %d, color: '%s'}", Integer.valueOf(_snake.getId()), _snake.getHexColor()));
+				sb.append(String.format("{id: %d, color: '%s'}",
+						Integer.valueOf(_snake.getId()), _snake.getHexColor()));
 				if (iterator.hasNext()) {
 					sb.append(',');
 				}
@@ -193,11 +199,14 @@ public class SnakeWebSocketServlet extends WebSocketServlet {
 			String message = charBuffer.toString();
 			if ("west".equals(message)) {
 				snake.setDirection(Direction.WEST);
-			} else if ("north".equals(message)) {
+			}
+			else if ("north".equals(message)) {
 				snake.setDirection(Direction.NORTH);
-			} else if ("east".equals(message)) {
+			}
+			else if ("east".equals(message)) {
 				snake.setDirection(Direction.EAST);
-			} else if ("south".equals(message)) {
+			}
+			else if ("south".equals(message)) {
 				snake.setDirection(Direction.SOUTH);
 			}
 		}

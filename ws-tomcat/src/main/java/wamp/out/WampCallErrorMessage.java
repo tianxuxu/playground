@@ -17,7 +17,8 @@ public class WampCallErrorMessage extends WampOutboundMessage {
 		this(callId, errorURI, errorDesc, null);
 	}
 
-	public WampCallErrorMessage(String callId, String errorURI, String errorDesc, Object errorDetails) {
+	public WampCallErrorMessage(String callId, String errorURI, String errorDesc,
+			Object errorDetails) {
 		super(MessageType.CALLERROR);
 		this.callId = callId;
 		this.errorURI = errorURI;

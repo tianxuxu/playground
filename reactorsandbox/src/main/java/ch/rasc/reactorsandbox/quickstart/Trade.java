@@ -5,7 +5,7 @@ package ch.rasc.reactorsandbox.quickstart;
  */
 public class Trade {
 
-	private Long id;
+	private final Long id;
 
 	private String symbol;
 

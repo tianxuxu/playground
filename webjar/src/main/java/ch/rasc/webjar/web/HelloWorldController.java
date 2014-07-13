@@ -11,8 +11,8 @@ public class HelloWorldController {
 
 	@RequestMapping(value = "/sayHello", method = RequestMethod.GET)
 	@ResponseBody
-	public String sayHello(
-			@RequestParam(value = "name", required = false, defaultValue = "Mister X") String name) {
+	public String sayHello(@RequestParam(value = "name", required = false,
+			defaultValue = "Mister X") String name) {
 		return "Hello " + name + ". My name is Server";
 	}
 

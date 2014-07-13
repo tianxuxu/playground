@@ -2,7 +2,6 @@ package async;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -51,23 +50,21 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 	}
 
 	@Override
-	protected void doDispatch(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+	protected void doDispatch(final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
 		final AsyncContext ac = request.startAsync(request, response);
 		ac.setTimeout(TIME_OUT);
-		FutureTask<Void> task = new FutureTask<>(new Callable<Void>() {
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public Void call() throws Exception {
-				try {
-					log.debug("Dispatching request " + request);
-					AsyncDispatcherServlet.super.doDispatch(request, response);
-					log.debug("doDispatch returned from processing request " + request);
-					ac.complete();
-				} catch (Exception ex) {
-					log.error("Error in async request", ex);
-				}
-				return null;
+		FutureTask<Void> task = new FutureTask<>(() -> {
+			try {
+				log.debug("Dispatching request " + request);
+				AsyncDispatcherServlet.super.doDispatch(request, response);
+				log.debug("doDispatch returned from processing request " + request);
+				ac.complete();
 			}
+			catch (Exception ex) {
+				log.error("Error in async request", ex);
+			}
+			return null;
 		});
 
 		ac.addListener(new AsyncDispatcherServletListener(task));
@@ -95,7 +92,8 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 
 		@Override
 		public void onError(AsyncEvent event) throws IOException {
-			String error = (event.getThrowable() == null ? "UNKNOWN ERROR" : event.getThrowable().getMessage());
+			String error = event.getThrowable() == null ? "UNKNOWN ERROR" : event
+					.getThrowable().getMessage();
 			log.error("Error in async request " + error);
 			handleTimeoutOrError(event, "Error processing " + error);
 		}
@@ -110,7 +108,8 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 			PrintWriter writer = null;
 			try {
 				future.cancel(true);
-				HttpServletResponse response = (HttpServletResponse) event.getAsyncContext().getResponse();
+				HttpServletResponse response = (HttpServletResponse) event
+						.getAsyncContext().getResponse();
 				// HttpServletRequest request = (HttpServletRequest)
 				// event.getAsyncContext().getRequest();
 				// request.getRequestDispatcher("/app/error.htm").forward(request,
@@ -118,9 +117,11 @@ public class AsyncDispatcherServlet extends DispatcherServlet {
 				writer = response.getWriter();
 				writer.print(message);
 				writer.flush();
-			} catch (Exception ex) {
+			}
+			catch (Exception ex) {
 				log.error("handleTimeoutOrError", ex);
-			} finally {
+			}
+			finally {
 				event.getAsyncContext().complete();
 				if (writer != null) {
 					writer.close();

@@ -2,7 +2,7 @@ package ch.rasc.perf;
 
 /**
  * Information about location.
- * 
+ *
  * @author Andrey Bloschetsov
  */
 public class Location {

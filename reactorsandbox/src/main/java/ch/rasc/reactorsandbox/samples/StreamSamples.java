@@ -73,12 +73,8 @@ public class StreamSamples {
 		Stream<String> stream = deferred.compose();
 
 		// Filter values passing through the Stream
-		stream.filter(new Predicate<String>() {
-			@Override
-			public boolean test(String s) {
-				return s.startsWith("Hello");
-			}
-		}).consume(b.<String> bind(s -> LOG.info("Filtered String {}", s)));
+		stream.filter((Predicate<String>) s -> s.startsWith("Hello")).consume(
+				b.<String> bind(s -> LOG.info("Filtered String {}", s)));
 
 		// Publish a value
 		deferred.accept("Hello World!");

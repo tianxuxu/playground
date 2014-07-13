@@ -4,7 +4,8 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Model(value = "User", paging = true, readMethod = "read", createMethod = "create", updateMethod = "update", destroyMethod = "destroy")
+@Model(value = "User", paging = true, readMethod = "read", createMethod = "create",
+		updateMethod = "update", destroyMethod = "destroy")
 public class User extends Base {
 
 	private String name;

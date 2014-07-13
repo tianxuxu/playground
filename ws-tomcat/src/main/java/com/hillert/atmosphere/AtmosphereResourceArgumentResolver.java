@@ -20,8 +20,10 @@ public class AtmosphereResourceArgumentResolver implements HandlerMethodArgument
 	}
 
 	@Override
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-			final NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		return AtmosphereUtils.getAtmosphereResource(webRequest.getNativeRequest(HttpServletRequest.class));
+	public Object resolveArgument(MethodParameter parameter,
+			ModelAndViewContainer mavContainer, final NativeWebRequest webRequest,
+			WebDataBinderFactory binderFactory) throws Exception {
+		return AtmosphereUtils.getAtmosphereResource(webRequest
+				.getNativeRequest(HttpServletRequest.class));
 	}
 }

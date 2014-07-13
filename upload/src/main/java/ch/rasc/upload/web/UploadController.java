@@ -41,13 +41,13 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void processUpload(HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber") final Integer chunkNumber,
-			@RequestParam(value = "resumableChunkSize") final Long chunkSize,
-			@RequestParam(value = "resumableTotalSize") final Long totalSize,
-			@RequestParam(value = "resumableIdentifier") final String identifier,
-			@RequestParam(value = "resumableFilename") final String fileName,
-			@RequestParam(value = "file") final MultipartFile file) throws IOException {
+	public void processUpload(HttpServletResponse response, @RequestParam(
+			value = "resumableChunkNumber") final Integer chunkNumber, @RequestParam(
+			value = "resumableChunkSize") final Long chunkSize, @RequestParam(
+			value = "resumableTotalSize") final Long totalSize, @RequestParam(
+			value = "resumableIdentifier") final String identifier, @RequestParam(
+			value = "resumableFilename") final String fileName, @RequestParam(
+			value = "file") final MultipartFile file) throws IOException {
 
 		if (!fileManager.isSupported(fileName)) {
 			// cancel the whole upload

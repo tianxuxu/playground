@@ -50,10 +50,12 @@ public class EchoMessage extends WebSocketServlet {
 		if (null != val) {
 			try {
 				result = Integer.parseInt(val);
-			} catch (Exception x) {
+			}
+			catch (Exception x) {
 				result = defaultValue;
 			}
-		} else {
+		}
+		else {
 			result = defaultValue;
 		}
 
@@ -61,7 +63,8 @@ public class EchoMessage extends WebSocketServlet {
 	}
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request) {
 		return new EchoMessageInbound(byteBufSize, charBufSize);
 	}
 

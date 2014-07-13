@@ -12,10 +12,11 @@ import org.apache.catalina.websocket.FixedWebSocketServlet;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WsOutbound;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import wamp.in.WampCallMessage;
 import wamp.out.WampWelcomeMessage;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet(urlPatterns = "/wamp")
 public class WampServlet extends FixedWebSocketServlet {
@@ -35,7 +36,8 @@ public class WampServlet extends FixedWebSocketServlet {
 	}
 
 	@Override
-	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+	protected StreamInbound createWebSocketInbound(String subProtocol,
+			HttpServletRequest request) {
 		return new WampMessageInbound(request.getSession().getId());
 	}
 
@@ -53,7 +55,8 @@ public class WampServlet extends FixedWebSocketServlet {
 				WampWelcomeMessage msg = new WampWelcomeMessage(sessionId);
 				String m = objectMapper.writeValueAsString(msg.serialize());
 				outbound.writeTextMessage(CharBuffer.wrap(m));
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
