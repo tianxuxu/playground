@@ -17,7 +17,6 @@ import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.fop.svg.PDFTranscoder;
 
-@WebServlet(urlPatterns = "/svg2png")
 public class Svg2PngServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
