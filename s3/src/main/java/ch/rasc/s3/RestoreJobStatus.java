@@ -23,7 +23,7 @@ public class RestoreJobStatus {
 			ObjectMetadata response = client.getObjectMetadata(request);
 			Boolean restoreFlag = response.getOngoingRestore();
 			System.out.format("Restoration status: %s.\n",
-					restoreFlag == true ? "in progress" : "finished");
+					restoreFlag == Boolean.TRUE ? "in progress" : "finished");
 
 		}
 		else {
