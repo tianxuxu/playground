@@ -6,21 +6,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Addresses {
-	private List<Address> addresses;
+	private List<Address> address;
 
 	public Addresses() {
 	}
 
-	public Addresses(List<Address> items) {
-		this.addresses = items;
+	public Addresses(List<Address> address) {
+		this.address = address;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public List<Address> getAddress() {
+		return address;
 	}
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 
