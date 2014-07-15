@@ -5,12 +5,13 @@ import java.time.format.DateTimeFormatter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
+
+import org.msgpack.annotation.Message;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @XmlRootElement
+@Message
 public class Address {
 
 	private final static DateTimeFormatter dobFormatter = DateTimeFormatter
