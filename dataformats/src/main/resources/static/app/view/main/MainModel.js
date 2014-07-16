@@ -13,6 +13,19 @@ Ext.define('DF.view.main.MainModel', {
 				}
 			}
 		},
+		addressesJSONARRAY: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			proxy: {
+				type: 'ajax',
+				url: 'addressesArray.json',
+				reader: {
+					type: 'json',
+					reader: {
+						type: 'array'
+					}
+				}
+			}
+		},
 		addressesXML: {
 			xclass: 'DF.view.main.AddressBaseStore',
 			proxy: {

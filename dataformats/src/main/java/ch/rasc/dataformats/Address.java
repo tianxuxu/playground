@@ -51,6 +51,11 @@ public class Address {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dob;
 
+	public Object[] toArray() {
+		return new Object[] { id, lastName, firstName, street, zip, city, country, lat,
+				lng, email, dob.toString() };
+	}
+
 	public Address() {
 	}
 

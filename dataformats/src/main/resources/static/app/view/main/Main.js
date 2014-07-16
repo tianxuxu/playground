@@ -23,6 +23,10 @@ Ext.define('DF.view.main.Main', {
 			xclass: 'DF.view.main.AddressGrid',
 			bind: '{addressesJSON}'
 		}, {
+			title: 'JSON-ARRAY',
+			xclass: 'DF.view.main.AddressGrid',
+			bind: '{addressesJSONARRAY}'
+		}, {
 			title: 'CBOR',
 			xclass: 'DF.view.main.AddressGrid',
 			bind: '{addressesCBOR}'

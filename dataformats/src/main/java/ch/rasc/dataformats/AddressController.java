@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,6 +34,12 @@ public class AddressController {
 	public List<Address> getAddressesJson() {
 		return testData;
 	}
+	
+	@RequestMapping(value = "/addressesArray", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Object[]> getAddressesJsonArray() {
+		return testData.stream().map(Address::toArray).collect(Collectors.toList());
+	}	
 
 	@RequestMapping(value = "/addresses", method = RequestMethod.GET,
 			produces = "application/cbor")

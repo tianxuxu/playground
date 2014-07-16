@@ -2,25 +2,25 @@ Ext.define("DF.model.Address", {
 	extend: "Ext.data.Model",
 
 	fields: [ {
-		name: "id",
+		name: "id"
 	}, {
-		name: "lastName",
+		name: "lastName"
 	}, {
-		name: "firstName",
+		name: "firstName"
 	}, {
-		name: "street",
+		name: "street"
 	}, {
-		name: "zip",
+		name: "zip"
 	}, {
-		name: "city",
+		name: "city"
 	}, {
-		name: "country",
+		name: "country"
 	}, {
-		name: "lat",
+		name: "lat"
 	}, {
-		name: "lng",
+		name: "lng"
 	}, {
-		name: "email",
+		name: "email"
 	}, {
 		name: "dob",
 		dateFormat: 'Y-m-d'
