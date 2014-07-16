@@ -1,15 +1,10 @@
 Ext.define('DF.view.main.MainModel', {
 	extend: 'Ext.app.ViewModel',
-	alias: 'viewmodel.main',
+	requires: ['DF.view.main.AddressBaseStore'],
 
 	stores: {
-		addressesJson: {
-			model: 'DF.model.Address',
-			autoLoad: true,
-			pageSize: 0,
-			remoteSort: false,
-			remoteFilter: false,
-			autoSync: false,
+		addressesJSON: {
+			xclass: 'DF.view.main.AddressBaseStore',
 			proxy: {
 				type: 'ajax',
 				url: 'addresses.json',
@@ -19,21 +14,27 @@ Ext.define('DF.view.main.MainModel', {
 			}
 		},
 		addressesXML: {
-			model: 'DF.model.Address',
-			autoLoad: true,
-			pageSize: 0,
-			remoteSort: false,
-			remoteFilter: false,
-			autoSync: false,
+			xclass: 'DF.view.main.AddressBaseStore',
 			proxy: {
 				type: 'ajax',
 				url: 'addresses.xml',
 				reader: {
 					type: 'xml',
-		            record: 'address',
-		            rootProperty: 'addresses'
+					record: 'address',
+					rootProperty: 'addresses'
 				}
 			}
-		}
+		},
+		addressesCBOR: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			proxy: {
+				type: 'ajax',
+				binary: true,
+				url: 'addresses.cbor',
+				reader: {
+					xclass: 'DF.data.reader.Cbor'
+				}
+			}
+		},
 	}
 });

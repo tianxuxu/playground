@@ -42,8 +42,10 @@ public class AddressController {
 
 		CBORFactory f = new CBORFactory();
 		ObjectMapper mapper = new ObjectMapper(f);
+	
 		byte[] cborData = mapper.writeValueAsBytes(testData);
 
+		response.setContentLength(cborData.length);
 		response.getOutputStream().write(cborData);
 		response.getOutputStream().flush();
 	}
@@ -53,7 +55,6 @@ public class AddressController {
 	public void getAddressesMsgpack(HttpServletResponse response) throws IOException {
 		// TODO create a HttpMessageConverter
 		response.setContentType("application/x-msgpack");
-
 		
 		MessagePack msgpack = new MessagePack();
 		msgpack.register(LocalDate.class, LocalDateTemplate.instance);

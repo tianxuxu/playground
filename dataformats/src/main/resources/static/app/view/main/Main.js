@@ -1,20 +1,31 @@
 Ext.define('DF.view.main.Main', {
 	extend: 'Ext.container.Container',
-	requires: [ 'DF.view.main.MainController', 'DF.view.main.MainModel' ],
-	controller: 'main',
+	requires: [ 'DF.view.main.MainController', 'DF.view.main.MainModel', 'DF.view.main.AddressGrid' ],
+	
+	controller: {
+		xclass: 'DF.view.main.MainController',
+	},
+	
 	viewModel: {
-		type: 'main'
+		xclass: 'DF.view.main.MainModel'
 	},
 
 	layout: 'fit',
 
 	items: [ {
-		xtype: 'grid',
-		bind: '{addressesXML}',
-		columns: [ {
-			dataIndex: 'firstName',
-			text: 'First Name',
-			flex: 1
+		xtype: 'tabpanel',
+		items: [ {
+			title: 'XML',
+			xclass: 'DF.view.main.AddressGrid',
+			bind: '{addressesXML}'
+		}, {
+			title: 'JSON',
+			xclass: 'DF.view.main.AddressGrid',
+			bind: '{addressesJSON}'
+		}, {
+			title: 'CBOR',
+			xclass: 'DF.view.main.AddressGrid',
+			bind: '{addressesCBOR}'
 		} ]
 	} ]
 
