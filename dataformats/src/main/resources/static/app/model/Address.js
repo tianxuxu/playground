@@ -23,6 +23,7 @@ Ext.define("DF.model.Address", {
 		name: "email"
 	}, {
 		name: "dob",
+		type: 'date',
 		dateFormat: 'Y-m-d'
 	} ]
 });

@@ -1,9 +1,8 @@
 Ext.define('DF.Application', {
 	extend: 'Ext.app.Application',
-	requires: ['DF.data.reader.Cbor'],
+	requires: [ 'DF.data.reader.Cbor', 'DF.data.reader.Msgpack',
+			'DF.data.reader.CborArray', 'DF.data.reader.MsgpackArray' ],
 	name: 'DF',
-
-	models: [ 'Address' ],
 
 	launch: function() {
 		Ext.fly('appLoadingIndicator').destroy();

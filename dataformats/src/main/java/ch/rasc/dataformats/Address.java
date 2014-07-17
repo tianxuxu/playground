@@ -2,6 +2,8 @@ package ch.rasc.dataformats;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -54,6 +56,22 @@ public class Address {
 	public Object[] toArray() {
 		return new Object[] { id, lastName, firstName, street, zip, city, country, lat,
 				lng, email, dob.toString() };
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("lastName", lastName);
+		map.put("firstName", firstName);
+		map.put("street", street);
+		map.put("zip", zip);
+		map.put("city", city);
+		map.put("country", country);
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("email", email);
+		map.put("dob", dob.toString());
+		return map;
 	}
 
 	public Address() {

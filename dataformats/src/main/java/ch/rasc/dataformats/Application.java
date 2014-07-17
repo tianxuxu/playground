@@ -40,7 +40,7 @@ public class Application extends WebMvcConfigurerAdapter {
 			return reader.lines().map(Address::new).collect(Collectors.toList());
 		}
 	}
-	
+
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.favorPathExtension(true).ignoreAcceptHeader(true).useJaf(false)
@@ -50,7 +50,7 @@ public class Application extends WebMvcConfigurerAdapter {
 				.mediaType("cbor", MediaType.valueOf("application/cbor"))
 				.mediaType("msgpack", MediaType.valueOf("application/x-msgpack"));
 	}
-	
+
 	@Bean
 	@Profile("compression")
 	public EmbeddedServletContainerCustomizer servletContainerCustomizer() {
@@ -63,8 +63,7 @@ public class Application extends WebMvcConfigurerAdapter {
 					String mimeTypes = httpProtocol.getCompressableMimeTypes();
 					String additionalMimeTypes = mimeTypes + ","
 							+ MediaType.APPLICATION_JSON_VALUE + ","
-							+ MediaType.APPLICATION_XML_VALUE + ","
-							+ "application/cbor";
+							+ MediaType.APPLICATION_XML_VALUE + "," + "application/cbor";
 
 					httpProtocol.setCompressableMimeTypes(additionalMimeTypes);
 				});

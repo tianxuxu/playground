@@ -1,6 +1,6 @@
 Ext.define('DF.view.main.MainModel', {
 	extend: 'Ext.app.ViewModel',
-	requires: ['DF.view.main.AddressBaseStore'],
+	requires: ['DF.view.main.AddressBaseStore', 'DF.model.AddressWithMapping'],
 
 	stores: {
 		addressesJSON: {
@@ -13,21 +13,20 @@ Ext.define('DF.view.main.MainModel', {
 				}
 			}
 		},
-		addressesJSONARRAY: {
+		addressesJSONARRAY: {			
 			xclass: 'DF.view.main.AddressBaseStore',
+			model: 'DF.model.AddressWithMapping',			
 			proxy: {
 				type: 'ajax',
 				url: 'addressesArray.json',
 				reader: {
-					type: 'json',
-					reader: {
-						type: 'array'
-					}
+					type: 'array'
 				}
 			}
 		},
 		addressesXML: {
 			xclass: 'DF.view.main.AddressBaseStore',
+			autoLoad: true,
 			proxy: {
 				type: 'ajax',
 				url: 'addresses.xml',
@@ -49,5 +48,40 @@ Ext.define('DF.view.main.MainModel', {
 				}
 			}
 		},
+		addressesCBORARRAY: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			model: 'DF.model.AddressWithMapping',
+			proxy: {
+				type: 'ajax',
+				binary: true,
+				url: 'addressesArray.cbor',
+				reader: {
+					xclass: 'DF.data.reader.CborArray'
+				}
+			}
+		},		
+		addressesMSGPACK: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			proxy: {
+				type: 'ajax',
+				binary: true,
+				url: 'addresses.msgpack',
+				reader: {
+					xclass: 'DF.data.reader.Msgpack'
+				}
+			}
+		},		
+		addressesMSGPACKARRAY: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			model: 'DF.model.AddressWithMapping',
+			proxy: {
+				type: 'ajax',
+				binary: true,
+				url: 'addressesArray.msgpack',
+				reader: {
+					xclass: 'DF.data.reader.MsgpackArray'
+				}
+			}
+		}
 	}
 });

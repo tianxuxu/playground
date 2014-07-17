@@ -33,6 +33,7 @@ Ext.define("DF.model.AddressWithMapping", {
 		mapping: 9
 	}, {
 		name: "dob",
+		type: 'date',
 		dateFormat: 'Y-m-d',
 		mapping: 10
 	} ]

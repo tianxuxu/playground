@@ -1,6 +1,6 @@
-Ext.define('DF.data.reader.Cbor', {
+Ext.define('DF.data.reader.Msgpack', {
     extend: 'Ext.data.reader.Json',
-    alias: 'reader.cbor',
+    alias: 'reader.msgpack',
     
 	read: function(response, readOptions) {
         var data, result;
@@ -25,7 +25,7 @@ Ext.define('DF.data.reader.Cbor', {
 
     getResponseData: function(response) {
         try {
-            return CBOR.decode(response.responseBytes.buffer);
+            return msgpack.unpack(response.responseBytes);
         } catch (ex) {
         console.log(ex);
             Ext.Logger.warn('Unable to parse the CBOR returned by the server');

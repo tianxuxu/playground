@@ -1,6 +1,6 @@
-Ext.define('DF.data.reader.Cbor', {
-    extend: 'Ext.data.reader.Json',
-    alias: 'reader.cbor',
+Ext.define('DF.data.reader.CborArray', {
+    extend: 'Ext.data.reader.Array',
+    alias: 'reader.cborarray',
     
 	read: function(response, readOptions) {
         var data, result;

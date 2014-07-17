@@ -34,12 +34,12 @@ public class AddressController {
 	public List<Address> getAddressesJson() {
 		return testData;
 	}
-	
+
 	@RequestMapping(value = "/addressesArray", method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Object[]> getAddressesJsonArray() {
 		return testData.stream().map(Address::toArray).collect(Collectors.toList());
-	}	
+	}
 
 	@RequestMapping(value = "/addresses", method = RequestMethod.GET,
 			produces = "application/cbor")
@@ -49,8 +49,25 @@ public class AddressController {
 
 		CBORFactory f = new CBORFactory();
 		ObjectMapper mapper = new ObjectMapper(f);
-	
+
 		byte[] cborData = mapper.writeValueAsBytes(testData);
+
+		response.setContentLength(cborData.length);
+		response.getOutputStream().write(cborData);
+		response.getOutputStream().flush();
+	}
+
+	@RequestMapping(value = "/addressesArray", method = RequestMethod.GET,
+			produces = "application/cbor")
+	public void getAddressesCborArray(HttpServletResponse response) throws IOException {
+		// TODO create a HttpMessageConverter
+		response.setContentType("application/cbor");
+
+		CBORFactory f = new CBORFactory();
+		ObjectMapper mapper = new ObjectMapper(f);
+
+		byte[] cborData = mapper.writeValueAsBytes(testData.stream()
+				.map(Address::toArray).collect(Collectors.toList()));
 
 		response.setContentLength(cborData.length);
 		response.getOutputStream().write(cborData);
@@ -62,7 +79,22 @@ public class AddressController {
 	public void getAddressesMsgpack(HttpServletResponse response) throws IOException {
 		// TODO create a HttpMessageConverter
 		response.setContentType("application/x-msgpack");
-		
+
+		MessagePack msgpack = new MessagePack();
+		msgpack.register(LocalDate.class, LocalDateTemplate.instance);
+		byte[] raw = msgpack.write(testData.stream().map(Address::toMap)
+				.collect(Collectors.toList()));
+
+		response.getOutputStream().write(raw);
+		response.getOutputStream().flush();
+	}
+
+	@RequestMapping(value = "/addressesArray", method = RequestMethod.GET,
+			produces = "application/x-msgpack")
+	public void getAddressesMsgpackArray(HttpServletResponse response) throws IOException {
+		// TODO create a HttpMessageConverter
+		response.setContentType("application/x-msgpack");
+
 		MessagePack msgpack = new MessagePack();
 		msgpack.register(LocalDate.class, LocalDateTemplate.instance);
 		byte[] raw = msgpack.write(testData);

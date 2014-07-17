@@ -23,5 +23,4 @@ public class Addresses {
 		this.address = address;
 	}
 
-
 }
