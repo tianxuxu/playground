@@ -1,6 +1,6 @@
 package ch.rasc.reflection;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,7 +21,7 @@ public class User extends Base {
 	private boolean active;
 
 	@ModelField(defaultValue = "c")
-	private DateTime dob;
+	private LocalDateTime dob;
 
 	public String getName() {
 		return name;
@@ -39,11 +39,11 @@ public class User extends Base {
 		this.active = active;
 	}
 
-	public DateTime getDob() {
+	public LocalDateTime getDob() {
 		return dob;
 	}
 
-	public void setDob(DateTime dob) {
+	public void setDob(LocalDateTime dob) {
 		this.dob = dob;
 	}
 

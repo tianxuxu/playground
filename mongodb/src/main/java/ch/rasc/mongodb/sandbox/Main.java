@@ -58,10 +58,11 @@ public class Main {
 			collection.insert(dbObject);
 		}
 
-		DBCursor cursor = collection.find();
-		while (cursor.hasNext()) {
-			DBObject dbo = cursor.next();
-			System.out.println(dbo);
+		try (DBCursor cursor = collection.find()) {
+			while (cursor.hasNext()) {
+				DBObject dbo = cursor.next();
+				System.out.println(dbo);
+			}
 		}
 
 		DBObject query = (DBObject) JSON.parse("{'username': 'johnd'}"); // new
@@ -72,10 +73,11 @@ public class Main {
 		// 1 = nur diese keys zurückliefern
 		// 0 = alle keys bis auf diese zurückliefern
 
-		cursor = collection.find(query, keys);
-		while (cursor.hasNext()) {
-			DBObject dbo = cursor.next();
-			System.out.println(dbo);
+		try (DBCursor cursor = collection.find(query, keys)) {
+			while (cursor.hasNext()) {
+				DBObject dbo = cursor.next();
+				System.out.println(dbo);
+			}
 		}
 
 	}

@@ -23,7 +23,7 @@ public class Insert {
 		DBCollection collection;
 		if (!db.collectionExists("log")) {
 			BasicDBObject createOptions = new BasicDBObject();
-			createOptions.append("capped", true);
+			createOptions.append("capped", Boolean.TRUE);
 			createOptions.append("size", 1000);
 			collection = db.createCollection("log", createOptions);
 		}

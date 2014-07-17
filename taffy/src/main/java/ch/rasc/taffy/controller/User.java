@@ -26,7 +26,7 @@ public class User {
 	private final String country;
 
 	public User(String[] line) {
-		this.id = Integer.valueOf(line[0]);
+		this.id = Integer.parseInt(line[0]);
 		this.name = line[1];
 		this.surname = line[2];
 		this.email = line[3];

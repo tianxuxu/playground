@@ -9,7 +9,6 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 @Configuration
 @EnableAutoConfiguration
 public class Application extends SpringBootServletInitializer {

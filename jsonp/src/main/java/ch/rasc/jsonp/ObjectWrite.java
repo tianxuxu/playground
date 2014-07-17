@@ -27,7 +27,7 @@ public class ObjectWrite {
 										.add("number", "222-222-2222"))).build();
 
 		Map<String, Boolean> properties = Collections.singletonMap(
-				JsonGenerator.PRETTY_PRINTING, true);
+				JsonGenerator.PRETTY_PRINTING, Boolean.TRUE);
 		try (JsonWriter writer = Json.createWriterFactory(properties).createWriter(
 				System.out)) {
 			writer.write(model);

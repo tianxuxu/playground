@@ -54,13 +54,15 @@ public class ImdbParser {
 	public void readImdbData(GraphDatabaseService graphDb, Index<Node> index,
 			String fileName) throws FileNotFoundException, IOException {
 
+		Transaction tx = null;
+
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(
 				new GZIPInputStream(new FileInputStream(fileName)),
 				StandardCharsets.ISO_8859_1))) {
 
 			String line = br.readLine();
 			Node currentActorNode = null;
-			Transaction tx = null;
+
 			int count = 0;
 
 			while (line != null) {
@@ -137,6 +139,11 @@ public class ImdbParser {
 				line = br.readLine();
 			}
 
+		}
+		finally {
+			if (tx != null) {
+				tx.success();
+			}
 		}
 
 	}

@@ -31,14 +31,14 @@ public class GeoliteImporter {
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
 				// locId,country,region,city,postalCode,latitude,longitude,metroCode,areaCode
-				int locId = Integer.valueOf(nextLine[0]);
+				int locId = Integer.parseInt(nextLine[0]);
 				Geolite geolite = new Geolite();
 				geolite.setCountry(nextLine[1]);
 				geolite.setRegion(nextLine[2]);
 				geolite.setCity(nextLine[3]);
 				geolite.setPostalCode(nextLine[4]);
-				geolite.setLatitude(Double.valueOf(nextLine[5]));
-				geolite.setLongitude(Double.valueOf(nextLine[6]));
+				geolite.setLatitude(Double.parseDouble(nextLine[5]));
+				geolite.setLongitude(Double.parseDouble(nextLine[6]));
 				geolite.setMetroCode(nextLine[7]);
 				geolite.setAreaCode(nextLine[8]);
 
@@ -52,9 +52,9 @@ public class GeoliteImporter {
 			reader.readNext();
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
-				long startIp = Long.valueOf(nextLine[0]);
-				long endIp = Long.valueOf(nextLine[1]);
-				int locId = Integer.valueOf(nextLine[2]);
+				long startIp = Long.parseLong(nextLine[0]);
+				long endIp = Long.parseLong(nextLine[1]);
+				int locId = Integer.parseInt(nextLine[2]);
 
 				Geolite geolite = locationMap.get(locId);
 				geolite.setStartIpNum(startIp);

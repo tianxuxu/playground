@@ -1,5 +1,7 @@
 package ch.rasc.maildeleter;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Properties;
 import java.util.TimerTask;
 
@@ -10,7 +12,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,12 +40,12 @@ public class MailDeleter extends TimerTask {
 
 			folder.open(Folder.READ_WRITE);
 
-			DateTime aCoupleOfDaysAgo = DateTime.now().minusDays(config.getDays());
+			LocalDateTime aCoupleOfDaysAgo = LocalDateTime.now().minusDays(config.getDays());
 
 			Message[] messages = folder.getMessages();
 			for (Message msg : messages) {
 
-				DateTime receivedDateTime = new DateTime(msg.getReceivedDate());
+				LocalDateTime receivedDateTime = LocalDateTime.ofInstant(msg.getReceivedDate().toInstant(), ZoneId.systemDefault());
 				if (receivedDateTime.isBefore(aCoupleOfDaysAgo)) {
 					logger.info("delete msg: {} ", msg.getMessageNumber());
 					msg.setFlag(Flags.Flag.DELETED, true);

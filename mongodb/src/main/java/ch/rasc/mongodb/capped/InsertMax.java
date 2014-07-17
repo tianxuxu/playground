@@ -25,7 +25,7 @@ public class InsertMax {
 		}
 
 		BasicDBObject createOptions = new BasicDBObject();
-		createOptions.append("capped", true);
+		createOptions.append("capped", Boolean.TRUE);
 		createOptions.append("size", 1000);
 		createOptions.append("max", 3);
 		collection = db.createCollection("log", createOptions);

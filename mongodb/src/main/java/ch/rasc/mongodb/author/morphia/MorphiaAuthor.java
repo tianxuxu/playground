@@ -29,36 +29,37 @@ public class MorphiaAuthor implements Author {
 	public String writeText(int maxWords) {
 
 		int skip = (int) (Math.random() * Math.min(100, collection.count()));
-		DBCursor cursor = collection.find().skip(skip);
-		DBObject start = cursor.next();
+		try (DBCursor cursor = collection.find().skip(skip)) {
+			DBObject start = cursor.next();
 
-		StringBuilder sb = new StringBuilder();
-		String w1 = (String) start.get("word1");
-		sb.append(w1);
-		sb.append(" ");
-		String w2 = (String) start.get("word2");
-		sb.append(w2);
-		sb.append(" ");
+			StringBuilder sb = new StringBuilder();
+			String w1 = (String) start.get("word1");
+			sb.append(w1);
+			sb.append(" ");
+			String w2 = (String) start.get("word2");
+			sb.append(w2);
+			sb.append(" ");
 
-		int count = 2;
-		int length = sb.length();
-		String next = getNext(w1, w2);
-		while (next != null && count < maxWords) {
-			sb.append(next).append(" ");
-			length = length + next.length() + 1;
-			if (length > 60) {
-				sb.append("\n");
-				length = 0;
+			int count = 2;
+			int length = sb.length();
+			String next = getNext(w1, w2);
+			while (next != null && count < maxWords) {
+				sb.append(next).append(" ");
+				length = length + next.length() + 1;
+				if (length > 60) {
+					sb.append("\n");
+					length = 0;
+				}
+
+				w1 = w2;
+				w2 = next;
+				next = getNext(w1, w2);
+
+				count++;
 			}
 
-			w1 = w2;
-			w2 = next;
-			next = getNext(w1, w2);
-
-			count++;
+			return sb.toString();
 		}
-
-		return sb.toString();
 
 	}
 

@@ -1,9 +1,10 @@
 package ch.rasc.sse.simple;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,8 @@ public class DateController {
 		System.out.println("Last Event Id: " + lastEventId);
 
 		SSEvent event = new SSEvent();
-		event.setData(DateTime.now().toString("dd.MM.yyyy HH:mm:ss.SSS"));
+		event.setData(LocalDateTime.now().format(
+				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS")));
 		event.setId(String.valueOf(counter.incrementAndGet()));
 		event.setRetry((ThreadLocalRandom.current().nextInt(10) + 3) * 1000);
 		return event;
@@ -35,7 +37,8 @@ public class DateController {
 			produces = "text/event-stream")
 	@ResponseBody
 	public String getTime() {
-		return DateTime.now().toString("dd.MM.yyyy HH:mm:ss.SSS");
+		return LocalDateTime.now().format(
+				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS"));
 	}
 
 	// @RequestMapping(value = "/dateString", method = RequestMethod.GET,

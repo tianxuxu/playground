@@ -30,7 +30,7 @@ public class Bench {
 		BasicDBObject sync = new BasicDBObject("fsync", 1);
 		CommandResult cr = mongo.getDB("admin").command(sync);
 		System.out.println(cr);
-		sync = new BasicDBObject("fsync", 1).append("async", true);
+		sync = new BasicDBObject("fsync", 1).append("async", Boolean.TRUE);
 		cr = mongo.getDB("admin").command(sync);
 		System.out.println(cr);
 		Double success = (Double) cr.get("ok");

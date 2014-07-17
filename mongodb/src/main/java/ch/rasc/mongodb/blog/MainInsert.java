@@ -31,7 +31,7 @@ public class MainInsert {
 		user.append("_id", 1);
 		user.append("firstName", "John");
 		user.append("name", "Doe");
-		user.append("enabled", false);
+		user.append("enabled", Boolean.FALSE);
 		user.append("noOfLogins", 0);
 		user.append("lastLogin", new Date());
 		user.append("groups", new String[] { "admin", "user" });
@@ -53,7 +53,7 @@ public class MainInsert {
 		user = new BasicDBObject("username", "francol");
 		user.append("firstName", "Franco");
 		user.append("name", "Lawrence");
-		user.append("enabled", true);
+		user.append("enabled", Boolean.TRUE);
 		user.append("noOfLogins", 0);
 		user.append("lastLogin", new Date());
 		user.append("groups", new String[] { "user" });

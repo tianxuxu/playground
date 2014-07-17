@@ -51,7 +51,7 @@ public class MainBoon {
 
 		int totalRuns = 500000;
 		if (args.length > 0) {
-			totalRuns = Integer.valueOf(args[0]);
+			totalRuns = Integer.parseInt(args[0]);
 		}
 		System.out.println("Total Runs: " + totalRuns);
 		sw = new StopWatch();

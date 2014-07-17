@@ -106,8 +106,8 @@ public class ModelGenerator {
 
 								if (StringUtils.hasText(mf.defaultValue())) {
 									if (mt == ModelType.BOOLEAN) {
-										modelField.setDefaultValue(Boolean
-												.parseBoolean(mf.defaultValue()));
+										modelField.setDefaultValue(Boolean.valueOf(mf
+												.defaultValue()));
 									}
 									else if (mt == ModelType.INTEGER) {
 										modelField.setDefaultValue(Long.valueOf(mf
@@ -123,7 +123,7 @@ public class ModelGenerator {
 								}
 
 								if (mf.useNull()) {
-									modelField.setUseNull(true);
+									modelField.setUseNull(Boolean.TRUE);
 								}
 							}
 

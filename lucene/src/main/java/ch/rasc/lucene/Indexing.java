@@ -30,9 +30,9 @@ public class Indexing {
 			LockObtainFailedException, IOException {
 
 		try (Directory directory = new RAMDirectory();
-				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_48);
+				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer(Version.LUCENE_4_9);
 				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(
-						Version.LUCENE_48, analyzer))) {
+						Version.LUCENE_4_9, analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };

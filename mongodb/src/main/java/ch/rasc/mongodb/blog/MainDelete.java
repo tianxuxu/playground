@@ -24,7 +24,7 @@ public class MainDelete {
 		// collection.drop();
 
 		BasicDBObject deleteCriteria = new BasicDBObject();
-		deleteCriteria.append("enabled", false);
+		deleteCriteria.append("enabled", Boolean.FALSE);
 		deleteCriteria.append("noOfLogins", 0);
 		System.out.println(deleteCriteria);
 		WriteResult wr = collection.remove(deleteCriteria);

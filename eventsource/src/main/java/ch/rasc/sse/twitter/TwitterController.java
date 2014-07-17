@@ -56,7 +56,7 @@ public class TwitterController {
 		System.out.println("Last Event Id: " + lastEventId);
 		long lastId = 0;
 		if (StringUtils.hasText(lastEventId)) {
-			lastId = Long.valueOf(lastEventId);
+			lastId = Long.parseLong(lastEventId);
 		}
 
 		List<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);

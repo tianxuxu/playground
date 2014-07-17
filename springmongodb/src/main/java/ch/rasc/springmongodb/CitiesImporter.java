@@ -67,8 +67,9 @@ public class CitiesImporter {
 								longitudeStr = "179.9999";
 							}
 
-							newCity.setLocation(new Point(Double.valueOf(latitudeStr),
-									Double.valueOf(longitudeStr)));
+							newCity.setLocation(new Point(
+									Double.parseDouble(latitudeStr), Double
+											.parseDouble(longitudeStr)));
 
 							mongoOps.save(newCity);
 						}

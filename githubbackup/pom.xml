@@ -5,10 +5,6 @@
 	<artifactId>githubbackup</artifactId>
 	<version>1.0.0</version>
 
-	<prerequisites>
-		<maven>3.0.0</maven>
-	</prerequisites>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.mylyn.github</groupId>

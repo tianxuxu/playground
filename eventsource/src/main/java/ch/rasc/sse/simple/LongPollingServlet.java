@@ -23,7 +23,7 @@ public class LongPollingServlet extends HttpServlet {
 		String lastEventId = request.getHeader("Last-Event-ID");
 		int lastId = 0;
 		if (lastEventId != null) {
-			lastId = Integer.valueOf(lastEventId);
+			lastId = Integer.parseInt(lastEventId);
 		}
 
 		response.setContentType("text/event-stream");

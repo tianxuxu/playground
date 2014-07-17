@@ -21,20 +21,22 @@ public class MainSelect {
 
 		DBCollection collection = db.getCollection("users");
 
-		DBCursor cursor = collection.find();
-		while (cursor.hasNext()) {
-			DBObject doc = cursor.next();
-			System.out.println(doc);
+		try (DBCursor cursor = collection.find()) {
+			while (cursor.hasNext()) {
+				DBObject doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		System.out.println();
 
 		BasicDBObject query = new BasicDBObject();
 		query.append("username", "johnd");
-		cursor = collection.find(query);
-		while (cursor.hasNext()) {
-			DBObject doc = cursor.next();
-			System.out.println(doc);
+		try (DBCursor cursor = collection.find(query)) {
+			while (cursor.hasNext()) {
+				DBObject doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		System.out.println();
@@ -60,10 +62,11 @@ public class MainSelect {
 		query = new BasicDBObject();
 		query.append("username", "johnd");
 		query.append("name", "Doe");
-		cursor = collection.find(query);
-		while (cursor.hasNext()) {
-			doc = cursor.next();
-			System.out.println(doc);
+		try (DBCursor cursor = collection.find(query)) {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		System.out.println();
@@ -73,10 +76,11 @@ public class MainSelect {
 		query = new BasicDBObject();
 		query.append("$or", new DBObject[] { u1, u2 });
 
-		cursor = collection.find(query);
-		while (cursor.hasNext()) {
-			doc = cursor.next();
-			System.out.println(doc);
+		try (DBCursor cursor = collection.find(query)) {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		System.out.println();
@@ -84,10 +88,11 @@ public class MainSelect {
 		BasicDBObject inQuery = new BasicDBObject("$in", new String[] { "admin" });
 		query = new BasicDBObject("groups", inQuery);
 
-		cursor = collection.find(query);
-		while (cursor.hasNext()) {
-			doc = cursor.next();
-			System.out.println(doc);
+		try (DBCursor cursor = collection.find(query)) {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		System.out.println();
@@ -95,14 +100,15 @@ public class MainSelect {
 		Pattern pattern = Pattern.compile("^D.*", Pattern.CASE_INSENSITIVE);
 		query = new BasicDBObject("name", pattern);
 
-		cursor = collection.find(query);
+		try (DBCursor cursor = collection.find(query)) {
 
-		BasicDBObject sort = new BasicDBObject("username", 1);
-		cursor.limit(1).skip(10).sort(sort);
+			BasicDBObject sort = new BasicDBObject("username", 1);
+			cursor.limit(1).skip(10).sort(sort);
 
-		while (cursor.hasNext()) {
-			doc = cursor.next();
-			System.out.println(doc);
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				System.out.println(doc);
+			}
 		}
 
 		mongo.close();
