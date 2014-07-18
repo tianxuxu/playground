@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.coyote.http11.AbstractHttp11Protocol;
+import org.msgpack.MessagePack;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
@@ -39,6 +41,23 @@ public class Application extends WebMvcConfigurerAdapter {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
 			return reader.lines().map(Address::new).collect(Collectors.toList());
 		}
+	}
+
+	@Bean
+	public CborHttpMessageConverter cborHttpMessageConverter() {
+		return new CborHttpMessageConverter();
+	}
+
+	@Bean
+	public MessagePackHttpMessageConverter messagePackHttpMessageConverter() {
+		return new MessagePackHttpMessageConverter(messagePack());
+	}
+
+	@Bean
+	public MessagePack messagePack() {
+		MessagePack msgpack = new MessagePack();
+		msgpack.register(LocalDate.class, LocalDateTemplate.instance);
+		return msgpack;
 	}
 
 	@Override
