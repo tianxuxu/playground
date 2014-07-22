@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.common.collect.ImmutableList;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -22,11 +21,11 @@ public class SpringConfig {
 
 		Config config = new Config();
 		config.getGroupConfig().setName("user").setPassword("password");
-		config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+		// config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
 
-		config.getNetworkConfig().getJoin().getTcpIpConfig()
-				.setMembers(ImmutableList.of("192.168.20.153", "192.168.20.150"))
-				.setEnabled(true);
+		// config.getNetworkConfig().getJoin().getTcpIpConfig()
+		// .setMembers(ImmutableList.of("192.168.20.153", "192.168.20.150"))
+		// .setEnabled(true);
 
 		return Hazelcast.newHazelcastInstance(config);
 

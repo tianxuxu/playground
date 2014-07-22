@@ -1,4 +1,4 @@
-package ch.rasc.caching;
+package ch.rasc.caching.web;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
+	private final TestService testService;
+
 	@Autowired
-	private TestService testService;
+	public TestController(TestService testService) {
+		this.testService = testService;
+	}
 
 	@RequestMapping(value = "/getSomething", produces = "application/json")
 	@ResponseBody

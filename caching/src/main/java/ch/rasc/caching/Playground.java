@@ -1,10 +1,12 @@
+package ch.rasc.caching;
+
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Optional;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
-public class Main {
+public class Playground {
 
 	public static void main(String[] args) {
 		Cache<String, Optional<String>> cache = CacheBuilder.newBuilder()

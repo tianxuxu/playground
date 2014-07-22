@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.guava.GuavaCache;
 import org.springframework.stereotype.Service;
 
 @Service
