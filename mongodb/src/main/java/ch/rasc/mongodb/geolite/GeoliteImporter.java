@@ -8,9 +8,9 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import au.com.bytecode.opencsv.CSVReader;
+import org.mongodb.morphia.Datastore;
 
-import com.google.code.morphia.Datastore;
+import au.com.bytecode.opencsv.CSVReader;
 
 @Named
 public class GeoliteImporter {

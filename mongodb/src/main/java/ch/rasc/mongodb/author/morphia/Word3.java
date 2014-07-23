@@ -1,6 +1,6 @@
 package ch.rasc.mongodb.author.morphia;
 
-import com.google.code.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Entity;
 
 @Entity(noClassnameStored = true)
 public class Word3 {

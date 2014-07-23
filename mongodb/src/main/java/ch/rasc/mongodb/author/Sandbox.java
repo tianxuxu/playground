@@ -1,12 +1,11 @@
 package ch.rasc.mongodb.author;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ch.rasc.mongodb.author.morphia.Word12;
-
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Query;
-import com.google.code.morphia.query.UpdateOperations;
 
 public class Sandbox {
 

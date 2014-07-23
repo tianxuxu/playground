@@ -6,12 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
+
 import ch.rasc.mongodb.author.TextExtractor;
 import ch.rasc.mongodb.author.TextImporter;
-
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Query;
-import com.google.code.morphia.query.UpdateOperations;
 
 @Named
 public class MorphiaTextImporter implements TextImporter {

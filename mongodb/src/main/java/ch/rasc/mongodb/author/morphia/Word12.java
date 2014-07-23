@@ -3,11 +3,10 @@ package ch.rasc.mongodb.author.morphia;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Index;
-import com.google.code.morphia.annotations.Indexes;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.Indexes;
 
 @Entity(noClassnameStored = true)
 @Indexes({ @Index("word1,word2") })

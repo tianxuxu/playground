@@ -1,9 +1,8 @@
 package ch.rasc.mongodb.geolite;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Query;
 
 public class FindIp {
 
