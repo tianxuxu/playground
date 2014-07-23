@@ -2,28 +2,25 @@ package ch.rasc.springmongodb;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 @Configuration
+@EnableMongoRepositories
 public class AppConfig extends AbstractMongoConfiguration {
 
 	@Override
-	public Mongo mongo() throws Exception {
+	public MongoClient mongo() throws Exception {
 
-		// MongoOptions options = new MongoOptions();
-		// options.connectionsPerHost = 8;
-		// options.threadsAllowedToBlockForConnectionMultiplier = 4;
-		// options.connectTimeout = 1000;
-		// options.maxWaitTime = 1500;
-		// options.autoConnectRetry = true;
-		// options.socketKeepAlive = true;
-		// options.socketTimeout = 1500;
-		// options.slaveOk = true;
-		// options.w = 1;
-		// options.wtimeout = 0;
-		// options.fsync = false;
+		// MongoClientOptions options = MongoClientOptions.builder()
+		// .connectionsPerHost(8)
+		// .threadsAllowedToBlockForConnectionMultiplier(4)
+		// .connectTimeout(1000)
+		// .maxWaitTime(1500)
+		// .socketKeepAlive(true)
+		// .socketTimeout(1500)
+		// .build();
 
 		return new MongoClient("localhost"/* , options */);
 	}
