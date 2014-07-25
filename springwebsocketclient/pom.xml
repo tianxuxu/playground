@@ -5,6 +5,10 @@
 	<artifactId>springwebsocketclient</artifactId>
 	<version>0.0.1</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

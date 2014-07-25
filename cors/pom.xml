@@ -6,6 +6,10 @@
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<properties>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
@@ -20,7 +24,7 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>extdirectspring</artifactId>
-			<version>1.4.1</version>
+			<version>1.4.2</version>
 		</dependency>
 
 		<dependency>

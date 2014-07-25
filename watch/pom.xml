@@ -5,6 +5,10 @@
 	<artifactId>watch</artifactId>
 	<version>0.0.1</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.jooq</groupId>

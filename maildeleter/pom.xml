@@ -5,6 +5,10 @@
 	<artifactId>maildeleter</artifactId>
 	<version>0.0.1</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>

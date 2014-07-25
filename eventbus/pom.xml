@@ -5,6 +5,10 @@
 	<artifactId>eventbus</artifactId>
 	<version>0.0.1</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<properties>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>

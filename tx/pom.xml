@@ -5,12 +5,16 @@
 	<artifactId>tx</artifactId>
 	<version>0.0.1</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+
 	<properties>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<aspectj.version>1.8.1</aspectj.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 		<hibernatevalidator.version>5.1.1.Final</hibernatevalidator.version>
 	</properties>
 

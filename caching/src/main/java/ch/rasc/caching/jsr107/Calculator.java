@@ -33,7 +33,7 @@ public class Calculator {
 	public BigInteger factorialAlways(@CacheKey long n, boolean notPartOfTheKey) {
 		return factorial(n);
 	}
-	
+
 	@CachePut
 	public void putSomethingIntoTheCache(long n, @CacheValue BigInteger result) {
 	}
@@ -41,8 +41,8 @@ public class Calculator {
 	@CacheRemove
 	public void removeSomethingFromTheCache(long n) {
 	}
-	
+
 	@CacheRemoveAll
 	public void removeEverythingFromTheCache() {
-	}	
+	}
 }

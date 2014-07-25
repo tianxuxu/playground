@@ -6,6 +6,10 @@
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<properties>
 		<maven.compiler.debug>true</maven.compiler.debug>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

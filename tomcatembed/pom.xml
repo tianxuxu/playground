@@ -5,6 +5,10 @@
 	<artifactId>tomcatembed</artifactId>
 	<version>1.0.0</version>
 
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>	
+	
 	<properties>
 		<tomcat.version>8.0.9</tomcat.version>
 	</properties>
