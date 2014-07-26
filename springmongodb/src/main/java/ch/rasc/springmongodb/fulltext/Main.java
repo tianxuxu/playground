@@ -3,16 +3,15 @@ package ch.rasc.springmongodb.fulltext;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,9 +26,6 @@ import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
-import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -41,6 +37,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.util.StringUtils;
 
 import com.mongodb.MongoClient;
+import com.mongodb.WriteConcern;
 
 @Configuration
 @EnableMongoRepositories
@@ -59,7 +56,6 @@ public class Main extends AbstractMongoConfiguration {
 		}
 
 		// Search
-
 		TextCriteria criteria = TextCriteria.forDefaultLanguage().matching("hops");
 		Query query = TextQuery.queryText(criteria).sortByScore()
 				.with(new PageRequest(0, 5));
@@ -94,12 +90,7 @@ public class Main extends AbstractMongoConfiguration {
 			while ((entry = sevenZFile.getNextEntry()) != null) {
 				if ("Posts.xml".equals(entry.getName())) {
 
-					byte[] content = new byte[(int) entry.getSize()];
-					sevenZFile.read(content);
-
-					String xml = new String(content, 3, content.length - 3);
-					List<Post> posts = readXml(xml);
-					posts.forEach(p -> mongoTemplate.save(p));
+					importPosts(sevenZFile, mongoTemplate);
 
 					break;
 				}
@@ -114,27 +105,9 @@ public class Main extends AbstractMongoConfiguration {
 
 	@Override
 	public MongoClient mongo() throws Exception {
-		return new MongoClient("localhost");
-	}
-
-	@WritingConverter
-	static enum LocalDateTimeToStringConverter implements
-			Converter<LocalDateTime, String> {
-		INSTANCE;
-		@Override
-		public String convert(LocalDateTime source) {
-			return source == null ? null : source.toString();
-		}
-	}
-
-	@ReadingConverter
-	static enum StringToLocalDateTimeConverter implements
-			Converter<String, LocalDateTime> {
-		INSTANCE;
-		@Override
-		public LocalDateTime convert(String source) {
-			return source == null ? null : LocalDateTime.parse(source);
-		}
+		MongoClient mongoClient = new MongoClient("localhost");
+		mongoClient.setWriteConcern(WriteConcern.UNACKNOWLEDGED);
+		return mongoClient;
 	}
 
 	@Override
@@ -144,14 +117,15 @@ public class Main extends AbstractMongoConfiguration {
 				StringToLocalDateTimeConverter.INSTANCE));
 	}
 
-	private static List<Post> readXml(String xml) throws NumberFormatException,
-			XMLStreamException {
-
-		List<Post> posts = new ArrayList<>();
+	private static void importPosts(SevenZFile sevenZFile, MongoTemplate mongoTemplate)
+			throws NumberFormatException, XMLStreamException {
 		Post post = null;
 
 		XMLInputFactory factory = XMLInputFactory.newInstance();
-		XMLStreamReader reader = factory.createXMLStreamReader(new StringReader(xml));
+
+		@SuppressWarnings("resource")
+		XMLStreamReader reader = factory.createXMLStreamReader(new SevenZFileInputStream(
+				sevenZFile), StandardCharsets.UTF_8.name());
 
 		while (reader.hasNext()) {
 			int event = reader.next();
@@ -198,13 +172,12 @@ public class Main extends AbstractMongoConfiguration {
 						}
 					}
 
-					posts.add(post);
+					mongoTemplate.save(post);
 				}
 			}
 
 		}
 
-		return posts;
 	}
 
 }
