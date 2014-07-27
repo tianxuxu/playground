@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,6 +85,8 @@ public class Main extends AbstractMongoConfiguration {
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			}
 		}
+		
+		//Path path = Paths.get("./stackoverflow.com-Posts.7z");
 
 		try (SevenZFile sevenZFile = new SevenZFile(path.toFile())) {
 			SevenZArchiveEntry entry = null;
@@ -119,6 +122,8 @@ public class Main extends AbstractMongoConfiguration {
 
 	private static void importPosts(SevenZFile sevenZFile, MongoTemplate mongoTemplate)
 			throws NumberFormatException, XMLStreamException {
+		
+		List<Post> posts = new ArrayList<>();
 		Post post = null;
 
 		XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -172,7 +177,13 @@ public class Main extends AbstractMongoConfiguration {
 						}
 					}
 
-					mongoTemplate.save(post);
+					posts.add(post);
+					
+					if (posts.size() > 10000) {
+						mongoTemplate.insert(posts, Post.class);
+						posts.clear();
+					}
+					
 				}
 			}
 
