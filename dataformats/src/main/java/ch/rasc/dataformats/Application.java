@@ -82,7 +82,8 @@ public class Application extends WebMvcConfigurerAdapter {
 					String mimeTypes = httpProtocol.getCompressableMimeTypes();
 					String additionalMimeTypes = mimeTypes + ","
 							+ MediaType.APPLICATION_JSON_VALUE + ","
-							+ MediaType.APPLICATION_XML_VALUE + "," + "application/cbor";
+							+ MediaType.APPLICATION_XML_VALUE + ","
+							+ "application/cbor,application/x-msgpack";
 
 					httpProtocol.setCompressableMimeTypes(additionalMimeTypes);
 				});
