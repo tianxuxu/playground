@@ -14,8 +14,8 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
-		<hibernatevalidator.version>5.1.1.Final</hibernatevalidator.version>
-        <querydsl.version>3.4.1</querydsl.version>
+		<hibernatevalidator.version>5.1.2.Final</hibernatevalidator.version>
+        <querydsl.version>3.4.2</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.6.1.RELEASE</version>			
+			<version>1.6.2.RELEASE</version>			
 		</dependency>
 
 		<dependency>
@@ -129,7 +129,7 @@
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>apt-maven-plugin</artifactId>
-				<version>1.1.1</version>
+				<version>1.1.2</version>
 				<executions>
 					<execution>
 						<id>jpa</id>

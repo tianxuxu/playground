@@ -1,5 +1,5 @@
-sourceDir: D:\js\ext-5.0.1.1109
-version: 5.0.1.1109-NIGHTLY
+sourceDir: D:\js\ext-5.0.1.1226
+version: 5.0.1.1226-NIGHTLY
 groupId: resources
 baseArtifactId: ext
 destDir: ./res
@@ -42,7 +42,11 @@ artifacts:
       - from: build/packages/ext-theme-crisp/build/ext-theme-crisp.js
         to: ext-theme-crisp/ext-theme-crisp.js
       - from: build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css
-        to: ext-theme-crisp/ext-theme-crisp-all.css
+        to: ext-theme-crisp/ext-theme-crisp-all.css	
+      - from: build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all_01.css
+        to: ext-theme-crisp/ext-theme-crisp-all_01.css
+      - from: build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all_02.css
+        to: ext-theme-crisp/ext-theme-crisp-all_02.css
       - from: build/packages/ext-theme-crisp/build/resources/images
         to: ext-theme-crisp/images
         
@@ -52,6 +56,10 @@ artifacts:
         to: ext-theme-crisp-touch/ext-theme-crisp-touch.js
       - from: build/packages/ext-theme-crisp-touch/build/resources/ext-theme-crisp-touch-all.css
         to: ext-theme-crisp-touch/ext-theme-crisp-touch-all.css
+      - from: build/packages/ext-theme-crisp-touch/build/resources/ext-theme-crisp-touch-all_01.css
+        to: ext-theme-crisp-touch/ext-theme-crisp-touch-all_01.css
+      - from: build/packages/ext-theme-crisp-touch/build/resources/ext-theme-crisp-touch-all_02.css
+        to: ext-theme-crisp-touch/ext-theme-crisp-touch-all_02.css
       - from: build/packages/ext-theme-crisp-touch/build/resources/images
         to: ext-theme-crisp-touch/images
     
@@ -70,7 +78,6 @@ artifacts:
         to: ext-theme-neptune/ext-theme-neptune.js
       - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css
         to: ext-theme-neptune/ext-theme-neptune-all.css
-        parameter: fixcssinclude  
       - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all_01.css
         to: ext-theme-neptune/ext-theme-neptune-all_01.css
       - from: build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all_02.css
@@ -84,7 +91,6 @@ artifacts:
         to: ext-theme-neptune-touch/ext-theme-neptune-touch.js
       - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all.css
         to: ext-theme-neptune-touch/ext-theme-neptune-touch-all.css
-        parameter: fixcssinclude
       - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all_01.css
         to: ext-theme-neptune-touch/ext-theme-neptune-touch-all_01.css
       - from: build/packages/ext-theme-neptune-touch/build/resources/ext-theme-neptune-touch-all_02.css
@@ -101,3 +107,18 @@ artifacts:
     mappings:     
       - from: packages/sencha-charts/build/sencha-charts-debug.js
         to: sencha-charts-debug.js
+
+  - artifactId: ext-sencha-charts-theme-classic
+    mappings:     
+      - from: packages/sencha-charts/build/classic/resources/sencha-charts-all.css
+        to: sencha-charts-all.css
+
+  - artifactId: ext-sencha-charts-theme-crisp
+    mappings:     
+      - from: packages/sencha-charts/build/crisp/resources/sencha-charts-all.css
+        to: sencha-charts-all.css
+
+  - artifactId: ext-sencha-charts-theme-neptune
+    mappings:     
+      - from: packages/sencha-charts/build/neptune/resources/sencha-charts-all.css
+        to: sencha-charts-all.css

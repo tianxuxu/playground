@@ -1,15 +1,16 @@
 package ch.rasc.taffy.controller;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class User {
 
-	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormat
-			.forPattern("dd/MM/yyyy");
+	private final static DateTimeFormatter BIRTHDAY_FORMATTER = DateTimeFormatter
+			.ofPattern("dd/MM/yyyy");
 
 	private final int id;
 

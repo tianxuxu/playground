@@ -85,8 +85,8 @@ public class Main extends AbstractMongoConfiguration {
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			}
 		}
-		
-		//Path path = Paths.get("./stackoverflow.com-Posts.7z");
+
+		// Path path = Paths.get("./stackoverflow.com-Posts.7z");
 
 		try (SevenZFile sevenZFile = new SevenZFile(path.toFile())) {
 			SevenZArchiveEntry entry = null;
@@ -122,7 +122,7 @@ public class Main extends AbstractMongoConfiguration {
 
 	private static void importPosts(SevenZFile sevenZFile, MongoTemplate mongoTemplate)
 			throws NumberFormatException, XMLStreamException {
-		
+
 		List<Post> posts = new ArrayList<>();
 		Post post = null;
 
@@ -178,12 +178,12 @@ public class Main extends AbstractMongoConfiguration {
 					}
 
 					posts.add(post);
-					
+
 					if (posts.size() > 10000) {
 						mongoTemplate.insert(posts, Post.class);
 						posts.clear();
 					}
-					
+
 				}
 			}
 
