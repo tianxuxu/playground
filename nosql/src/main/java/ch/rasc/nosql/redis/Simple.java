@@ -8,7 +8,7 @@ public class Simple {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		try (Jedis jedis = new Jedis("192.168.20.166")) {
+		try (Jedis jedis = new Jedis("192.168.178.35")) {
 
 			jedis.set("2", "two");
 			jedis.set("3", "three");

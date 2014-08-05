@@ -8,7 +8,7 @@ public class Hashes {
 
 	public static void main(String[] args) {
 
-		try (Jedis jedis = new Jedis("192.168.20.166")) {
+		try (Jedis jedis = new Jedis("192.168.178.35")) {
 
 			jedis.hset("user:1", "username", "sr");
 			jedis.hset("user:1", "firstName", "Ralph");
