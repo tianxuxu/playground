@@ -7,8 +7,8 @@
 
 	<prerequisites>
 		<maven>3.0.0</maven>
-	</prerequisites>	
-	
+	</prerequisites>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.neo4j</groupId>
@@ -19,13 +19,31 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.5.1</version>
+			<version>2.5.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.12.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.tukaani</groupId>
+			<artifactId>xz</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.clearspring.analytics</groupId>
+			<artifactId>stream</artifactId>
+			<version>2.7.0</version>
 		</dependency>
 
 	</dependencies>
