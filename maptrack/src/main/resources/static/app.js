@@ -1,6 +1,6 @@
 Ext.onReady(function() {
 
-	var south = Ext.create('Ext.panel.Panel', {
+	var south = new Ext.panel.Panel({
 		title: 'Log',
 		region: 'south',
 		xtype: 'panel',
@@ -10,21 +10,21 @@ Ext.onReady(function() {
 		tpl: '<p>{data}</p>',
 		tplWriteMode: 'insertFirst',
 		autoScroll: true,
-		
-		dockedItems: [{
-	        xtype: 'toolbar',
-	        dock: 'top',
-	        items: [{
-	            text: 'Start',
-	            handler: startPolling
-	        }, {
-	        	text: 'Stop',
-	        	handler: stopPolling
-	        }]
-	    }]
+
+		dockedItems: [ {
+			xtype: 'toolbar',
+			dock: 'top',
+			items: [ {
+				text: 'Start',
+				handler: startPolling
+			}, {
+				text: 'Stop',
+				handler: stopPolling
+			} ]
+		} ]
 	});
 
-	Ext.create('Ext.panel.Panel', {
+	new Ext.panel.Panel({
 		width: 700,
 		height: 500,
 		title: 'Map Track',
@@ -47,23 +47,21 @@ Ext.onReady(function() {
 	});
 
 	var source;
-	
+
 	function startPolling() {
-		source = new EventSource('action/time');
+		source = new EventSource('time');
 		source.addEventListener('message', function(e) {
 			south.update({
 				data: e.data
 			});
-		}, false);	
-		
+		}, false);
+
 	}
-	
+
 	function stopPolling() {
 		if (source) {
 			source.close();
 		}
 	}
-
-
 
 });
