@@ -6,7 +6,7 @@ Ext.onReady(function() {
 
 	Ext.draw.engine.ImageExporter.defaultUrl = "svg2png";
 
-	var chart = Ext.create('Ext.chart.Chart', {
+	var chart = new Ext.chart.Chart({
 		id: 'chartCmp',
 		xtype: 'chart',
 		style: 'background:#fff',
@@ -54,7 +54,7 @@ Ext.onReady(function() {
 		} ]
 	});
 
-	var win = Ext.create('Ext.Window', {
+	new Ext.Window({
 		width: 800,
 		height: 600,
 		minHeight: 400,
