@@ -3,7 +3,14 @@
 <head>
 <meta charset="utf-8">
 <title>Ext Direct CORS</title>
-<script src="//extjs.cachefly.net/ext/gpl/4.2.1/ext-all.js"></script>
+<!--
+DOES NOT WORK: 
+<script src="http://cdn.sencha.com/ext/gpl/5.0.0/build/ext-all.js"></script>
+ -->
+ 
+<!-- STILL DOES NOT WORK  -->
+<script src="//demo.rasc.ch/resources/ext-5.0.1.1226/build/ext-all.js"></script>
+
 <script src="api-debug.js?baseRouterUrl=http://localhost:8081"></script>
 <script>
 
@@ -11,7 +18,8 @@
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     Ext.Ajax.on("beforerequest", function(conn) {
-        conn.withCredentials = true
+        conn.withCredentials = true;
+        conn.cors = true; 
     });
     
     testService.setCookie(function(result) {
@@ -19,12 +27,9 @@
     	
     	testService.readCookie(function(result) {
     		console.log(result);
-    	});
-    	
+    	});    	
     });
-    
   });
-
 
 </script>
 </head>
