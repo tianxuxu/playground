@@ -100,9 +100,6 @@ call mvn versions:display-plugin-updates
 cd D:\ws\playground\safebrowse
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
-cd D:\ws\playground\security
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
 cd D:\ws\playground\servicerestarter
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
