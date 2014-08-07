@@ -4,7 +4,6 @@
 	<groupId>ch.rasc</groupId>
 	<artifactId>pandora</artifactId>
 	<version>0.0.1</version>
-	<packaging>war</packaging>
 
 	<prerequisites>
 		<maven>3.0.0</maven>

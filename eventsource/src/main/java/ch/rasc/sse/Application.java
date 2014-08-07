@@ -3,7 +3,6 @@ package ch.rasc.sse;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +17,7 @@ import ch.rasc.sse.simple.StreamingServlet;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableScheduling
-public class Application extends SpringBootServletInitializer {
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
-	}
+public class Application {
 
 	public static void main(String[] args) throws Exception {
 		new SpringApplicationBuilder(Application.class).run(args);
