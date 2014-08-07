@@ -1,4 +1,4 @@
-package ch.rasc.webjar.web;
+package ch.rasc.webjar;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloWorldController {
+
+	@RequestMapping("/")
+	public String welcome() {
+		return "index";
+	}
 
 	@RequestMapping(value = "/sayHello", method = RequestMethod.GET)
 	@ResponseBody
