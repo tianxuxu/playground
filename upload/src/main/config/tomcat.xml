@@ -1,4 +1,0 @@
-<!DOCTYPE context>
-<Context>
-  <Environment name="uploadDirectory" value="e:/upload" type="java.lang.String" override="false"/>  
-</Context>

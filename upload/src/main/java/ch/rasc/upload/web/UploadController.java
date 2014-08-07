@@ -18,19 +18,29 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadController {
 
-	@Autowired
-	private FileManager fileManager;
+	private final FileManager fileManager;
 
+	@Autowired
+	UploadController(FileManager fileManager) {
+		this.fileManager = fileManager;
+	}
+
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void chunkExists(
-			HttpServletResponse response,
-			@RequestParam("resumableChunkNumber") final Integer chunkNumber,
-			@RequestParam("resumableChunkSize") final Long chunkSize,
-			@RequestParam("resumableIdentifier") final String identifier,
-			@SuppressWarnings("unused") @RequestParam("resumableFilename") final String filename)
+	public void chunkExists(HttpServletResponse response,
+			@RequestParam("resumableChunkNumber") Integer resumableChunkNumber,
+			@RequestParam("resumableTotalChunks") Integer resumableTotalChunks,
+			@RequestParam("resumableChunkSize") Long resumableChunkSize,
+			@RequestParam("resumableIdentifier") String resumableIdentifier,
+			@RequestParam("resumableFilename") String resumableFilename,
+			@RequestParam("resumableCurrentChunkSize") Long resumableCurrentChunkSize,
+			@RequestParam("resumableTotalSize") Long resumableTotalSize,
+			@RequestParam("resumableType") String resumableType,
+			@RequestParam("resumableRelativePath") String resumableRelativePath)
 			throws IOException {
 
-		if (fileManager.chunkExists(identifier, chunkNumber, chunkSize)) {
+		if (fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
+				resumableChunkSize)) {
 			// do not upload chunk again
 			response.setStatus(200);
 		}
@@ -40,27 +50,34 @@ public class UploadController {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public void processUpload(HttpServletResponse response, @RequestParam(
-			value = "resumableChunkNumber") final Integer chunkNumber, @RequestParam(
-			value = "resumableChunkSize") final Long chunkSize, @RequestParam(
-			value = "resumableTotalSize") final Long totalSize, @RequestParam(
-			value = "resumableIdentifier") final String identifier, @RequestParam(
-			value = "resumableFilename") final String fileName, @RequestParam(
-			value = "file") final MultipartFile file) throws IOException {
+			value = "resumableChunkNumber") Integer resumableChunkNumber,
+			@RequestParam("resumableTotalChunks") Integer resumableTotalChunks,
+			@RequestParam(value = "resumableChunkSize") Long resumableChunkSize,
+			@RequestParam("resumableCurrentChunkSize") Long resumableCurrentChunkSize,
+			@RequestParam(value = "resumableTotalSize") Long resumableTotalSize,
+			@RequestParam(value = "resumableIdentifier") String resumableIdentifier,
+			@RequestParam(value = "resumableFilename") String resumableFilename,
+			@RequestParam("resumableType") String resumableType,
+			@RequestParam("resumableRelativePath") String resumableRelativePath,
+			@RequestParam(value = "file") MultipartFile file) throws IOException {
 
-		if (!fileManager.isSupported(fileName)) {
+		if (!fileManager.isSupported(resumableFilename)) {
 			// cancel the whole upload
 			response.setStatus(501);
 			return;
 		}
 
 		try (InputStream is = file.getInputStream()) {
-			fileManager.storeChunk(identifier, chunkNumber, is);
+			fileManager.storeChunk(resumableIdentifier, resumableChunkNumber, is);
 		}
 
-		if (fileManager.allChunksUploaded(identifier, chunkSize, totalSize)) {
-			fileManager.mergeAndDeleteChunks(fileName, identifier, chunkSize, totalSize);
+		if (fileManager.allChunksUploaded(resumableIdentifier, resumableChunkSize,
+				resumableTotalSize)) {
+			fileManager.mergeAndDeleteChunks(resumableFilename, resumableIdentifier,
+					resumableChunkSize, resumableTotalSize);
 		}
 
 		response.setStatus(200);

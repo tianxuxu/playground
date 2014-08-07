@@ -9,13 +9,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
 public class FileManager {
 
-	private final String dataDirectory;
+	private final String uploadDirectory;
 
-	public FileManager(String dataDirectory) {
-		this.dataDirectory = dataDirectory;
-		Path dataDir = Paths.get(dataDirectory);
+	@Autowired
+	public FileManager(@Value("#{environment.uploadDirectory}") String uploadDirectory) {
+		System.out.println(uploadDirectory);
+		this.uploadDirectory = uploadDirectory;
+		Path dataDir = Paths.get(uploadDirectory);
 
 		try {
 			Files.createDirectories(dataDir);
@@ -27,7 +34,7 @@ public class FileManager {
 
 	public boolean chunkExists(String identifier, Integer chunkNumber, Long chunkSize)
 			throws IOException {
-		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
+		Path chunkFile = Paths.get(uploadDirectory, identifier, chunkNumber.toString());
 		if (Files.exists(chunkFile)) {
 			long size = (Long) Files.getAttribute(chunkFile, "basic:size");
 			return size == chunkSize;
@@ -41,7 +48,7 @@ public class FileManager {
 
 	public void storeChunk(String identifier, Integer chunkNumber, InputStream inputStream)
 			throws IOException {
-		Path chunkFile = Paths.get(dataDirectory, identifier, chunkNumber.toString());
+		Path chunkFile = Paths.get(uploadDirectory, identifier, chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
 		}
@@ -56,7 +63,7 @@ public class FileManager {
 		long noOfChunks = totalSize / chunkSize;
 
 		for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
-			if (!Files.exists(Paths.get(dataDirectory, identifier,
+			if (!Files.exists(Paths.get(uploadDirectory, identifier,
 					String.valueOf(chunkNo)))) {
 				return false;
 			}
@@ -69,7 +76,7 @@ public class FileManager {
 			final Long totalSize) throws IOException {
 		long noOfChunks = totalSize / chunkSize;
 
-		Path newFilePath = Paths.get(dataDirectory, fileName);
+		Path newFilePath = Paths.get(uploadDirectory, fileName);
 		if (Files.exists(newFilePath)) {
 			Files.delete(newFilePath);
 		}
@@ -77,14 +84,14 @@ public class FileManager {
 		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(
 				newFilePath.toFile()))) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
-				Path chunkPath = Paths.get(dataDirectory, identifier,
+				Path chunkPath = Paths.get(uploadDirectory, identifier,
 						String.valueOf(chunkNo));
 				Files.copy(chunkPath, bos);
 				Files.delete(chunkPath);
 			}
 		}
 
-		Files.delete(Paths.get(dataDirectory, identifier));
+		Files.delete(Paths.get(uploadDirectory, identifier));
 	}
 
 }
