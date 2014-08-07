@@ -38,7 +38,7 @@ public class Application implements WebSocketConfigurer, AsyncConfigurer {
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(simpleHandler(), "/endpoint");
-		registry.addHandler(registryHandler(), "/registry");
+		registry.addHandler(registryHandler(), "/registry").withSockJS().setHeartbeatTime(5000);
 		registry.addHandler(chatHandler(), "/chat");
 		registry.addHandler(chat4Handler(), "/chat4");
 		registry.addHandler(quoteHandler(), "/quotes");

@@ -14,7 +14,7 @@ public class MemoryObserver {
 		this.registryHandler = registryHandler;
 	}
 
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 10000)
 	public void observe() {
 
 		MemoryMXBean memBean = ManagementFactory.getMemoryMXBean();
