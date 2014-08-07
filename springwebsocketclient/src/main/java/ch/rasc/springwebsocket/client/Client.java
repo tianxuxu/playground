@@ -28,8 +28,7 @@ public class Client {
 	public WebSocketConnectionManager webSocketConnectionManager(
 			WebSocketClient webSocketClient, WebSocketHandler webSocketHandler) {
 		WebSocketConnectionManager manager = new WebSocketConnectionManager(
-				webSocketClient, webSocketHandler,
-				"ws://localhost:8080/dispatcher/quotes");
+				webSocketClient, webSocketHandler, "ws://localhost:8080/quotes");
 		manager.setAutoStartup(true);
 		return manager;
 	}
