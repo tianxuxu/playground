@@ -28,30 +28,28 @@ public class HyperLogLog {
 
 			jedis.del("userIdsHLL");
 			jedis.del("userIds");
-			
-//			Path path = Paths.get("e:/stackexchange/stackoverflow.com-Posts.7z");
-//			try (SevenZFile sevenZFile = new SevenZFile(path.toFile())) {
-//				SevenZArchiveEntry entry = null;
-//				while ((entry = sevenZFile.getNextEntry()) != null) {
-//					if ("Posts.xml".equals(entry.getName())) {
-//
-//						uniqueUsers(new SevenZFileInputStream(sevenZFile), jedis);
-//						System.out.println("Unique Users with HLL: "
-//								+ jedis.pfcount("userIdsHLL"));
-//						System.out.println("Unique Users with Set: "
-//								+ jedis.scard("userIds"));
-//
-//						break;
-//					}
-//				}
-//			}
-			
+
+			// Path path = Paths.get("e:/stackexchange/stackoverflow.com-Posts.7z");
+			// try (SevenZFile sevenZFile = new SevenZFile(path.toFile())) {
+			// SevenZArchiveEntry entry = null;
+			// while ((entry = sevenZFile.getNextEntry()) != null) {
+			// if ("Posts.xml".equals(entry.getName())) {
+			//
+			// uniqueUsers(new SevenZFileInputStream(sevenZFile), jedis);
+			// System.out.println("Unique Users with HLL: "
+			// + jedis.pfcount("userIdsHLL"));
+			// System.out.println("Unique Users with Set: "
+			// + jedis.scard("userIds"));
+			//
+			// break;
+			// }
+			// }
+			// }
+
 			Path path = Paths.get("e:/stackexchange/Posts.xml");
 			uniqueUsers(new BufferedInputStream(Files.newInputStream(path)), jedis);
-			System.out.println("Unique Users with HLL: "
-					+ jedis.pfcount("userIdsHLL"));
-			System.out.println("Unique Users with Set: "
-					+ jedis.scard("userIds"));			
+			System.out.println("Unique Users with HLL: " + jedis.pfcount("userIdsHLL"));
+			System.out.println("Unique Users with Set: " + jedis.scard("userIds"));
 
 			jedis.disconnect();
 		}
@@ -61,10 +59,12 @@ public class HyperLogLog {
 	private static void uniqueUsers(InputStream is, Jedis jedis)
 			throws XMLStreamException {
 
-		com.clearspring.analytics.stream.cardinality.HyperLogLog hyperLogLog = new com.clearspring.analytics.stream.cardinality.HyperLogLog(16);
-		
+		com.clearspring.analytics.stream.cardinality.HyperLogLog hyperLogLog = new com.clearspring.analytics.stream.cardinality.HyperLogLog(
+				16);
+
 		XMLInputFactory factory = XMLInputFactory.newInstance();
-		XMLStreamReader reader = factory.createXMLStreamReader(is, StandardCharsets.UTF_8.name());
+		XMLStreamReader reader = factory.createXMLStreamReader(is,
+				StandardCharsets.UTF_8.name());
 
 		long grandeTotal = 0;
 		int ix = 0;
@@ -80,7 +80,7 @@ public class HyperLogLog {
 						array[ix++] = attributeValue;
 						grandeTotal++;
 						hyperLogLog.offer(attributeValue);
-						
+
 						if (ix % 10000 == 0) {
 							jedis.pfadd("userIdsHLL", array);
 							jedis.sadd("userIds", array);
