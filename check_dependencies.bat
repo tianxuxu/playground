@@ -82,9 +82,6 @@ call mvn versions:display-plugin-updates
 cd D:\ws\playground\nosql
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
-cd D:\ws\playground\pandora
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
 cd D:\ws\playground\reactorsandbox
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
