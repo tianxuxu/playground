@@ -4,7 +4,6 @@
 window.onload = function() {
 
 	// Create a reference for the required DOM elements.
-	var nameView = document.getElementById("name-view");
 	var textView = document.getElementById("text-view");
 	var buttonSend = document.getElementById("send-button");
 	var buttonStop = document.getElementById("stop-button");
@@ -12,7 +11,7 @@ window.onload = function() {
 	var chatArea = document.getElementById("chat-area");
 
 	// Connect to the WebSocket server!
-	var socket = new WebSocket("ws://"+window.location.host+"/dispatcher/chat4");
+	var socket = new WebSocket("ws://"+window.location.host+"/chat");
 
 	/**
 	 * WebSocket onopen event.
@@ -25,34 +24,12 @@ window.onload = function() {
 	 * WebSocket onmessage event.
 	 */
 	socket.onmessage = function(event) {
-
 		if (typeof event.data === "string") {
-
-			// Create a JSON object.
-			var jsonObject = JSON.parse(event.data);
-
-			// Extract the values for each key.
-			var userName = jsonObject.name;
-			var userMessage = jsonObject.message;
-
 			// Display message.
-			chatArea.innerHTML = chatArea.innerHTML + "<p>" + userName + " says: <strong>" + userMessage + "</strong>" + "</p>";
+			chatArea.innerHTML = chatArea.innerHTML + "<p>" + event.data + "</p>";
 
 			// Scroll to bottom.
 			chatArea.scrollTop = chatArea.scrollHeight;
-		} else if (event.data instanceof Blob) {
-
-			// Get the raw data and create an image element.
-			var blob = event.data;
-
-			window.URL = window.URL || window.webkitURL;
-			var source = window.URL.createObjectURL(blob);
-
-			var image = document.createElement("img");
-			image.src = source;
-			image.alt = "Image generated from blob";
-
-			document.body.appendChild(image);
 		}
 	}
 
@@ -68,9 +45,6 @@ window.onload = function() {
 			label.innerHTML = "Connection closed normally.";
 		} else {
 			label.innerHTML = "Connection closed with message: " + reason + " (Code: " + code + ")";
-
-			//try to open a new connection
-			socket = new WebSocket("ws://localhost:8080/dispatcher/chat4");
 		}
 	}
 
@@ -94,7 +68,10 @@ window.onload = function() {
 	 * Send the message and empty the text field.
 	 */
 	buttonSend.onclick = function(event) {
-		sendText();
+		if (socket.readyState == WebSocket.OPEN) {
+			socket.send(textView.value);
+			textView.value = "";
+		}
 	}
 
 	/**
@@ -102,38 +79,10 @@ window.onload = function() {
 	 */
 	textView.onkeypress = function(event) {
 		if (event.keyCode == 13) {
-			sendText();
-		}
-	}
-
-	/**
-	 * Handle the drop event.
-	 */
-	document.ondrop = function(event) {
-		var file = event.dataTransfer.files[0];
-		socket.send(file);
-
-		return false;
-	}
-
-	/**
-	 * Prevent the default behaviour of the dragover event.
-	 */
-	document.ondragover = function(event) {
-		event.preventDefault();
-	}
-
-	/**
-	 * Send a text message using WebSocket.
-	 */
-	function sendText() {
-		if (socket.readyState == WebSocket.OPEN) {
-			var msg = {
-					name: nameView.value,
-					message: textView.value
-			};
-			socket.send(JSON.stringify(msg));
-			textView.value = "";
+			if (socket.readyState == WebSocket.OPEN) {
+				socket.send(textView.value);
+				textView.value = "";
+			}
 		}
 	}
 }

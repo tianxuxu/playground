@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <title>WebSocket Test</title>
 <script>
-  var ws = new WebSocket('ws://'+window.location.host+'/dispatcher/registry');
+  var ws = new WebSocket('ws://'+window.location.host+'/registry');
     
   ws.onmessage = function(event) {
 	  var result = JSON.parse(event.data);

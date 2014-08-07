@@ -2,31 +2,37 @@ package ch.rasc.springwebsocket;
 
 import java.util.concurrent.Executor;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
-@EnableWebMvc
-@EnableWebSocket
+@EnableAutoConfiguration
 @EnableAsync(proxyTargetClass = true)
 @EnableScheduling
-public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer,
-		AsyncConfigurer {
+@EnableWebSocket
+public class Application implements WebSocketConfigurer, AsyncConfigurer {
+
+	public static void main(String[] args) throws Exception {
+		new SpringApplicationBuilder(Application.class).run(args);
+	}
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
+	public Executor getAsyncExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setMaxPoolSize(10);
+		executor.setThreadNamePrefix("MyExecutor-");
+		executor.initialize();
+		return executor;
 	}
 
 	@Override
@@ -72,14 +78,4 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 	public MemoryObserver memoryObserver() {
 		return new MemoryObserver(registryHandler());
 	}
-
-	@Override
-	public Executor getAsyncExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setMaxPoolSize(10);
-		executor.setThreadNamePrefix("MyExecutor-");
-		executor.initialize();
-		return executor;
-	}
-
 }

@@ -11,9 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.msgpack.MessagePack;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 
-@Service
 public class QuoteService {
 
 	private static final MathContext mathContext = new MathContext(2);

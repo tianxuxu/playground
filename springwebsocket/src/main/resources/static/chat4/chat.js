@@ -10,11 +10,9 @@ window.onload = function() {
 	var buttonStop = document.getElementById("stop-button");
 	var label = document.getElementById("status-label");
 	var chatArea = document.getElementById("chat-area");
-	var buttonVideo = document.getElementById("video-button");
-	var video = document.getElementById("video");
 
 	// Connect to the WebSocket server!
-	var socket = new WebSocket("ws://" + window.location.host + "/dispatcher/chat4");
+	var socket = new WebSocket("ws://"+window.location.host+"/chat4");
 
 	/**
 	 * WebSocket onopen event.
@@ -27,6 +25,7 @@ window.onload = function() {
 	 * WebSocket onmessage event.
 	 */
 	socket.onmessage = function(event) {
+
 		if (typeof event.data === "string") {
 
 			// Create a JSON object.
@@ -43,19 +42,17 @@ window.onload = function() {
 			chatArea.scrollTop = chatArea.scrollHeight;
 		} else if (event.data instanceof Blob) {
 
-			// 1. Get the raw data.
+			// Get the raw data and create an image element.
 			var blob = event.data;
 
-			// 2. Create a new URL for the blob object.
 			window.URL = window.URL || window.webkitURL;
-
 			var source = window.URL.createObjectURL(blob);
 
-			// 3. Update the image source.
-			video.src = source;
+			var image = document.createElement("img");
+			image.src = source;
+			image.alt = "Image generated from blob";
 
-			// 4. Release the allocated memory.
-			window.URL.revokeObjectURL(source);
+			document.body.appendChild(image);
 		}
 	}
 
@@ -71,6 +68,9 @@ window.onload = function() {
 			label.innerHTML = "Connection closed normally.";
 		} else {
 			label.innerHTML = "Connection closed with message: " + reason + " (Code: " + code + ")";
+
+			//try to open a new connection
+			socket = new WebSocket("ws://localhost:8080/chat4");
 		}
 	}
 
@@ -79,12 +79,6 @@ window.onload = function() {
 	 */
 	socket.onerror = function(event) {
 		label.innerHTML = "Error: " + event;
-	}
-
-	buttonVideo.onclick = function(event) {
-		if (socket.readyState == WebSocket.OPEN) {
-			socket.send("get-video");
-		}
 	}
 
 	/**
@@ -113,13 +107,30 @@ window.onload = function() {
 	}
 
 	/**
+	 * Handle the drop event.
+	 */
+	document.ondrop = function(event) {
+		var file = event.dataTransfer.files[0];
+		socket.send(file);
+
+		return false;
+	}
+
+	/**
+	 * Prevent the default behaviour of the dragover event.
+	 */
+	document.ondragover = function(event) {
+		event.preventDefault();
+	}
+
+	/**
 	 * Send a text message using WebSocket.
 	 */
 	function sendText() {
 		if (socket.readyState == WebSocket.OPEN) {
 			var msg = {
-				name: nameView.value,
-				message: textView.value
+					name: nameView.value,
+					message: textView.value
 			};
 			socket.send(JSON.stringify(msg));
 			textView.value = "";
