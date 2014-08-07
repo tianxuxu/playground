@@ -88,6 +88,8 @@ public class Backup {
 			else {
 				Git.open(repoDir.toFile()).fetch().call();
 			}
+			
+			Git.open(repoDir.toFile()).gc().call();
 		}
 		else {
 			System.out.println("cloning : " + name);
