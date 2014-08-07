@@ -5,11 +5,11 @@ import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.BinaryWebSocketHandler;
 
-public class ClientWebSocketHandler extends BinaryWebSocketHandler {
+public class ClientQuoteHandler extends BinaryWebSocketHandler {
 
 	private final MessagePack msgpack;
 
-	public ClientWebSocketHandler() {
+	public ClientQuoteHandler() {
 		msgpack = new MessagePack();
 		msgpack.register(Quote.class);
 	}
