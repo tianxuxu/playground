@@ -84,12 +84,6 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>ch.rasc</groupId>
-			<artifactId>embeddedtc</artifactId>
-			<version>1.14</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<repositories>
