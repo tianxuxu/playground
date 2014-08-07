@@ -8,8 +8,8 @@
 
 	<prerequisites>
 		<maven>3.0.0</maven>
-	</prerequisites>	
-	
+	</prerequisites>
+
 	<properties>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
@@ -18,13 +18,26 @@
 		<maven.compiler.debug>true</maven.compiler.debug>
 	</properties>
 
-
+	<repositories>
+		<repository>
+			<id>sonatype</id>
+			<name>sonatype</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>extdirectspring</artifactId>
-			<version>1.4.2</version>
+			<version>1.4.3-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

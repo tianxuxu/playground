@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.bind.annotation.CookieValue;
 
 import ch.ralscha.extdirectspring.annotation.ExtDirectMethod;
 
@@ -22,11 +22,9 @@ public class TestService {
 	}
 
 	@ExtDirectMethod
-	public String readCookie(HttpServletRequest request) {
-		String accessToken = null;
-		Cookie accessTokenCookie = WebUtils.getCookie(request, "access_token");
-		if (accessTokenCookie != null) {
-			accessToken = accessTokenCookie.getValue();
+	public String readCookie(HttpServletRequest request, @CookieValue("access_token") String accessToken) {
+		for (Cookie c : request.getCookies()) {
+			System.out.println(c.getName()+"="+c.getValue());
 		}
 		return "I got this cookie : access_token=" + accessToken;
 	}
