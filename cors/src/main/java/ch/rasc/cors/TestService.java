@@ -22,9 +22,10 @@ public class TestService {
 	}
 
 	@ExtDirectMethod
-	public String readCookie(HttpServletRequest request, @CookieValue("access_token") String accessToken) {
+	public String readCookie(HttpServletRequest request,
+			@CookieValue("access_token") String accessToken) {
 		for (Cookie c : request.getCookies()) {
-			System.out.println(c.getName()+"="+c.getValue());
+			System.out.println(c.getName() + "=" + c.getValue());
 		}
 		return "I got this cookie : access_token=" + accessToken;
 	}
