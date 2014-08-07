@@ -19,11 +19,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	private final static QName _SayHiResponse_QNAME = new QName(
-			"http://wsdemo.ralscha.ch/", "sayHiResponse");
-
-	private final static QName _SayHi_QNAME = new QName("http://wsdemo.ralscha.ch/",
-			"sayHi");
+	private final static QName _SayHiResponse_QNAME = new QName("http://wsdemo.rasc.ch/",
+			"sayHiResponse");
+	private final static QName _SayHi_QNAME = new QName("http://wsdemo.rasc.ch/", "sayHi");
 
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of schema
@@ -31,14 +29,6 @@ public class ObjectFactory {
 	 *
 	 */
 	public ObjectFactory() {
-	}
-
-	/**
-	 * Create an instance of {@link SayHi }
-	 *
-	 */
-	public SayHi createSayHi() {
-		return new SayHi();
 	}
 
 	/**
@@ -50,21 +40,30 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link SayHiResponse } {@code >}
+	 * Create an instance of {@link SayHi }
 	 *
 	 */
-	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHiResponse")
+	public SayHi createSayHi() {
+		return new SayHi();
+	}
+
+	/**
+	 * Create an instance of {@link JAXBElement }{@code <}{@link SayHiResponse }{@code >}
+	 *
+	 */
+	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "sayHiResponse")
 	public JAXBElement<SayHiResponse> createSayHiResponse(SayHiResponse value) {
-		return new JAXBElement<>(_SayHiResponse_QNAME, SayHiResponse.class, null, value);
+		return new JAXBElement<SayHiResponse>(_SayHiResponse_QNAME, SayHiResponse.class,
+				null, value);
 	}
 
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link SayHi }{@code >}
 	 *
 	 */
-	@XmlElementDecl(namespace = "http://wsdemo.ralscha.ch/", name = "sayHi")
+	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "sayHi")
 	public JAXBElement<SayHi> createSayHi(SayHi value) {
-		return new JAXBElement<>(_SayHi_QNAME, SayHi.class, null, value);
+		return new JAXBElement<SayHi>(_SayHi_QNAME, SayHi.class, null, value);
 	}
 
 }

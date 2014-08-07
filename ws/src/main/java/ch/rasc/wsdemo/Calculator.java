@@ -1,11 +1,12 @@
 package ch.rasc.wsdemo;
 
-import javax.inject.Named;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import org.springframework.stereotype.Service;
+
 @WebService
-@Named
+@Service
 public class Calculator {
 
 	public int add(int a, int b) {

@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlType;
 public class Add {
 
 	protected int arg0;
-
 	protected int arg1;
 
 	/**

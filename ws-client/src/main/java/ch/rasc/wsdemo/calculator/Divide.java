@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlType;
 public class Divide {
 
 	protected int arg0;
-
 	protected int arg1;
 
 	/**
