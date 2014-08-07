@@ -16,21 +16,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TrackController {
 
 	@RequestMapping(value = "/time", method = RequestMethod.GET)
-	public void getTime(HttpServletResponse response) throws IOException, InterruptedException {
-		
+	public void getTime(HttpServletResponse response) throws IOException,
+			InterruptedException {
+
 		response.setContentType("text/event-stream");
 		ServletOutputStream os = response.getOutputStream();
-		
+
 		for (int i = 0; i < 10; i++) {
 			if (i == 9) {
 				os.write("retry: 1000\n".getBytes());
 			}
-			os.write(("data: " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)
-					+ "\n\n").getBytes());
+			os.write(("data: "
+					+ LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) + "\n\n")
+					.getBytes());
 			os.flush();
 			TimeUnit.SECONDS.sleep(1);
 		}
-	
+
 	}
 
 }
