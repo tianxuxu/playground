@@ -151,8 +151,3 @@ call mvn versions:display-plugin-updates
 cd D:\ws\playground\ws-client
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
-cd D:\ws\playground\ws-tomcat
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
-
