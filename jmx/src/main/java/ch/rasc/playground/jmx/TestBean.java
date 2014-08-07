@@ -1,4 +1,4 @@
-package ch.rasc.playground.jmx.config;
+package ch.rasc.playground.jmx;
 
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;

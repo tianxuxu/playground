@@ -25,20 +25,20 @@ public class TestController {
 
 	@RequestMapping("/somedata")
 	@ResponseBody
-	public String getSomeData() throws InstanceNotFoundException, ReflectionException,
-			AttributeNotFoundException, MalformedObjectNameException, MBeanException,
-			NullPointerException, IntrospectionException {
+	public String getSomeData() throws IntrospectionException, InstanceNotFoundException,
+			ReflectionException, AttributeNotFoundException,
+			MalformedObjectNameException, MBeanException, NullPointerException {
 
 		MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		Set<ObjectInstance> instances = mbeanServer.queryMBeans(null, null);
 		for (ObjectInstance oi : instances) {
-			// System.out.println(oi);
 			MBeanInfo info = mbeanServer.getMBeanInfo(oi.getObjectName());
 			System.out.println(info);
 		}
 
 		String n = (String) mbeanServer.getAttribute(
 				ObjectName.getInstance("bean:name=testBean"), "Name");
+		System.out.println("TestBean");
 		System.out.println(n);
 
 		List<MemoryPoolMXBean> memPoolBeans = ManagementFactory.getMemoryPoolMXBeans();
