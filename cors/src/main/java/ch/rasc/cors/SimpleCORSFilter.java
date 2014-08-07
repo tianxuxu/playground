@@ -1,4 +1,4 @@
-package ch.rasc.cors.config;
+package ch.rasc.cors;
 
 import java.io.IOException;
 
@@ -10,6 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SimpleCORSFilter implements Filter {
 
 	@Override
