@@ -3,7 +3,6 @@ package ch.rasc.wsdemo;
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.Bus;
-import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.jaxws.spring.EndpointDefinitionParser.SpringEndpointImpl;
 import org.apache.cxf.transport.servlet.CXFServlet;
 import org.springframework.boot.SpringApplication;
