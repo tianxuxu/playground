@@ -40,7 +40,7 @@ public class ReadCommonCsv {
 		
 		try (InputStream is = getClass().getResourceAsStream("/testHeader.csv");
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
-				CSVParser parser = CSVFormat.DEFAULT.withHeader().with.parse(br)) {
+				CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(br)) {
 			
 			Map<String,Integer> headerMap = parser.getHeaderMap();
 			headerMap.forEach((k,v)->System.out.println(k+"->"+v));
