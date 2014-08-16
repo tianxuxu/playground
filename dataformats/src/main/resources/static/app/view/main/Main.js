@@ -43,6 +43,10 @@ Ext.define('DF.view.main.Main', {
 		title: 'MessagePack Array',
 		xclass: 'DF.view.main.AddressGrid',
 		bind: '{addressesMSGPACKARRAY}'
+	}, {
+		title: 'CSV',
+		xclass: 'DF.view.main.AddressGrid',
+		bind: '{addressesCSV}'
 	} ]
 
 });

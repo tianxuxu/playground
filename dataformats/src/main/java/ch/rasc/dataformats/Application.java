@@ -54,6 +54,11 @@ public class Application extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
+	public CsvHttpMessageConverter csvHttpMessageConverter() {
+		return new CsvHttpMessageConverter();
+	}
+
+	@Bean
 	public MessagePack messagePack() {
 		MessagePack msgpack = new MessagePack();
 		msgpack.register(LocalDate.class, LocalDateTemplate.instance);
@@ -67,7 +72,8 @@ public class Application extends WebMvcConfigurerAdapter {
 				.mediaType("json", MediaType.APPLICATION_JSON)
 				.mediaType("xml", MediaType.APPLICATION_XML)
 				.mediaType("cbor", MediaType.valueOf("application/cbor"))
-				.mediaType("msgpack", MediaType.valueOf("application/x-msgpack"));
+				.mediaType("msgpack", MediaType.valueOf("application/x-msgpack"))
+				.mediaType("csv", MediaType.valueOf("text/csv"));
 	}
 
 	@Bean
@@ -83,7 +89,7 @@ public class Application extends WebMvcConfigurerAdapter {
 					String additionalMimeTypes = mimeTypes + ","
 							+ MediaType.APPLICATION_JSON_VALUE + ","
 							+ MediaType.APPLICATION_XML_VALUE + ","
-							+ "application/cbor,application/x-msgpack";
+							+ "application/cbor,application/x-msgpack,text/csv";
 
 					httpProtocol.setCompressableMimeTypes(additionalMimeTypes);
 				});

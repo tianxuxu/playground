@@ -10,10 +10,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.msgpack.annotation.Message;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @XmlRootElement
 @Message
+@JsonPropertyOrder({ "id", "lastName", "firstName", "street", "zip", "city", "country",
+		"lat", "lng", "email", "dob" })
 public class Address {
 
 	private final static DateTimeFormatter dobFormatter = DateTimeFormatter

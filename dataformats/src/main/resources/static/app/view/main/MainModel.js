@@ -82,6 +82,16 @@ Ext.define('DF.view.main.MainModel', {
 					xclass: 'DF.data.reader.MsgpackArray'
 				}
 			}
-		}
+		},
+		addressesCSV: {
+			xclass: 'DF.view.main.AddressBaseStore',
+			proxy: {
+				type: 'ajax',
+				url: 'addresses.csv',
+				reader: {
+					xclass: 'DF.data.reader.Csv'
+				}
+			}
+		},	
 	}
 });

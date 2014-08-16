@@ -64,4 +64,10 @@ public class AddressController {
 		return new Addresses(testData);
 	}
 
+	@RequestMapping(value = "/addresses", method = RequestMethod.GET,
+			produces = "text/csv")
+	public List<Address> getAddressesCsv() {
+		return testData;
+	}
+
 }
