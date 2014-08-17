@@ -27,7 +27,6 @@ Ext.define('DF.data.reader.MsgpackArray', {
         try {
             return msgpack.unpack(response.responseBytes);
         } catch (ex) {
-        console.log(ex);
             Ext.Logger.warn('Unable to parse the CBOR returned by the server');
             return this.createReadError(ex.message);   
         }

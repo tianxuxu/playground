@@ -7,7 +7,6 @@ Ext.define('DF.data.reader.Csv', {
         	var results = Papa.parse(response.responseText);
         	return results.data;
         } catch (ex) {
-        console.log(ex);
             Ext.Logger.warn('Unable to parse the CSV returned by the server');
             return this.createReadError(ex.message);   
         }

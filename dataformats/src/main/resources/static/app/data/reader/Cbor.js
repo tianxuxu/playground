@@ -27,7 +27,6 @@ Ext.define('DF.data.reader.Cbor', {
         try {
             return CBOR.decode(response.responseBytes.buffer);
         } catch (ex) {
-        console.log(ex);
             Ext.Logger.warn('Unable to parse the CBOR returned by the server');
             return this.createReadError(ex.message);   
         }
