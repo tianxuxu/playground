@@ -93,5 +93,23 @@ Ext.define('DF.view.main.MainModel', {
 				}
 			}
 		},	
+		results: {
+			 fields: ['format', 'uncompressed', 'compressed', {
+				 name: 'compressionSave',
+			     calculate: function (data) {
+			         return 100 - (data.compressed * 100 / data.uncompressed);
+			     }
+			 } ],
+	            data: [
+	                { format: 'XML', uncompressed: 297696, compressed: 77689 },
+	                { format: 'JSON', uncompressed: 232557, compressed: 73923 },
+	                { format: 'JSON Array', uncompressed: 146475, compressed: 65966 },
+	                { format: 'CBOR', uncompressed: 185537, compressed: 75035 },
+	                { format: 'CBOR Array', uncompressed: 121478, compressed: 66013 },
+	                { format: 'MessagePack', uncompressed: 184052, compressed: 75666 },
+	                { format: 'MessagePack Array', uncompressed: 119994, compressed: 66411 },
+	                { format: 'CSV', uncompressed: 132873, compressed: 64246 }
+	            ]
+		}
 	}
 });

@@ -1,10 +1,10 @@
 Ext.define('DF.view.main.Main', {
 	extend: 'Ext.tab.Panel',
 	requires: [ 'DF.view.main.MainController', 'DF.view.main.MainModel',
-			'DF.view.main.AddressGrid' ],
+			'DF.view.main.AddressGrid', 'DF.view.main.ResultPanel' ],
 
 	controller: {
-		xclass: 'DF.view.main.MainController',
+		xclass: 'DF.view.main.MainController'
 	},
 
 	viewModel: {
@@ -47,6 +47,9 @@ Ext.define('DF.view.main.Main', {
 		title: 'CSV',
 		xclass: 'DF.view.main.AddressGrid',
 		bind: '{addressesCSV}'
-	} ]
+	}, {
+		title: 'Result',
+		xclass: 'DF.view.main.ResultPanel'
+	}]
 
 });
