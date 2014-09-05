@@ -1,6 +1,9 @@
 package ch.rasc.tailerhttplog;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -15,8 +18,9 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 
-import com.maxmind.geoip.Location;
-import com.maxmind.geoip.LookupService;
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
+import com.maxmind.geoip2.model.CityResponse;
 
 public class Main {
 
@@ -39,8 +43,9 @@ public class Main {
 
 		final UserAgentStringParser parser = UADetectorServiceFactory
 				.getResourceModuleParser();
-		final LookupService cl = new LookupService("e:/GeoLiteCity.dat",
-				LookupService.GEOIP_INDEX_CACHE);
+
+		File database = new File("e:/_download/GeoLite2-City.mmdb");
+		DatabaseReader reader = new DatabaseReader.Builder(database).build();
 
 		Path p = Paths.get(path);
 		Tailer tailer = new Tailer(p.toFile(), new TailerListenerAdapter() {
@@ -55,13 +60,27 @@ public class Main {
 					System.out.print(ua.getOperatingSystem().getFamilyName() + ":");
 
 					String ip = splittedLine.get(8);
-					Location l = cl.getLocation(ip);
-					if (l != null) {
-						System.out.printf("%s=%s:%s:%f:%f\n", ip, l.countryName, l.city,
-								l.latitude, l.longitude);
-					}
-					else {
+					System.out.println(ip);
+					CityResponse response;
+					try {
+						response = reader.city(InetAddress.getByName(ip));
+
+						if (response != null) {
+							System.out.printf("%s=%s:%s:%f:%f", ip, response.getCountry()
+									.getName(), response.getCity().getName(), response
+									.getLocation().getLatitude(), response.getLocation()
+									.getLongitude());
+						}
 						System.out.println();
+					}
+					catch (UnknownHostException e) {
+						e.printStackTrace();
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+					}
+					catch (GeoIp2Exception e) {
+						e.printStackTrace();
 					}
 				}
 			}

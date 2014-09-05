@@ -10,12 +10,12 @@
 	</prerequisites>	
 	
 	<properties>
-		<spring.version>4.0.6.RELEASE</spring.version>
+		<spring.version>4.1.0.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<hibernatevalidator.version>5.1.2.Final</hibernatevalidator.version>
-        <querydsl.version>3.4.2</querydsl.version>
+        <querydsl.version>3.4.3</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -229,18 +229,6 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-		</repository>
-
-		<repository>
-			<id>sonatype</id>
-			<name>sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
 		</repository>
 
 	</repositories>

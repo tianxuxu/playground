@@ -37,9 +37,6 @@ call mvn versions:display-plugin-updates
 cd D:\ws\playground\glacier
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
-cd D:\ws\playground\googlemapsexamples
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
 cd D:\ws\playground\hazelcast
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates

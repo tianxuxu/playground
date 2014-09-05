@@ -10,7 +10,7 @@
 	</prerequisites>	
 	
 	<properties>
-		<spring.version>4.0.6.RELEASE</spring.version>
+		<spring.version>4.1.0.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>io.fastjson</groupId>
 			<artifactId>boon</artifactId>
-			<version>0.23</version>
+			<version>0.24</version>
 		</dependency>
 
 		<dependency>
@@ -85,20 +85,6 @@
 		</dependency>
 
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>sonatype</id>
-			<name>sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>		
-	</repositories>
 
 	<build>
 		<plugins>

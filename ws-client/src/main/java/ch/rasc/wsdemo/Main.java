@@ -14,12 +14,14 @@ public class Main {
 
 		// <JDK_HOME>\bin\wsimport.exe -s main\java -Xnocompile -p
 		// ch.rasc.wsdemo.calculator http://localhost:8080/cxf/Calculator?wsdl
-		HelloWorldImplService service = new HelloWorldImplService(new URL("http://localhost:8080/cxf/HelloWorld?wsdl"));
+		HelloWorldImplService service = new HelloWorldImplService(new URL(
+				"http://localhost:8080/cxf/HelloWorld?wsdl"));
 		HelloWorldImpl helloWorld = service.getHelloWorldImplPort();
 		String msgFromServer = helloWorld.sayHi("John");
 		System.out.println(msgFromServer);
 
-		CalculatorService calcService = new CalculatorService(new URL("http://localhost:8080/cxf/Calculator?wsdl"));
+		CalculatorService calcService = new CalculatorService(new URL(
+				"http://localhost:8080/cxf/Calculator?wsdl"));
 		Calculator calc = calcService.getCalculatorPort();
 		System.out.println(calc.add(10, 20)); // returns 30
 		System.out.println(calc.divide(20, 10)); // return 2

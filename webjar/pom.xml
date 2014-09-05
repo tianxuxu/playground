@@ -12,11 +12,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.1.5.RELEASE</version>
+		<version>1.1.6.RELEASE </version>
 	</parent>
 
 	<properties>
-		<tomcat.version>8.0.11</tomcat.version>
+		<tomcat.version>8.0.12</tomcat.version>
 		<java.version>1.8</java.version>
 		<jackson.version>2.4.2</jackson.version>
 		<jquery.version>2.1.1</jquery.version>
