@@ -7,15 +7,15 @@
 
 	<prerequisites>
 		<maven>3.0.0</maven>
-	</prerequisites>	
-	
+	</prerequisites>
+
 	<properties>
-		<spring.version>4.1.0.RELEASE</spring.version>
+		<spring.version>4.1.1.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<hibernatevalidator.version>5.1.2.Final</hibernatevalidator.version>
-        <querydsl.version>3.4.3</querydsl.version>
+		<querydsl.version>3.5.0</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -79,13 +79,19 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.7.0.RELEASE</version>			
+			<version>1.7.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -98,6 +104,18 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernatevalidator.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.6</version>
 		</dependency>
 
 		<dependency>

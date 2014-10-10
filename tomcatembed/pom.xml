@@ -10,7 +10,7 @@
 	</prerequisites>	
 	
 	<properties>
-		<tomcat.version>8.0.12</tomcat.version>
+		<tomcat.version>8.0.14</tomcat.version>
 	</properties>
 
 	<dependencies>
