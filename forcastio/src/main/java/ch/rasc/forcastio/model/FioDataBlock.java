@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.rasc.forcastio.converter.FioIconDeserializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * data block will be omitted from the response in its entirety.
  */
 @SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FioDataBlock {
 	private String summary;
 

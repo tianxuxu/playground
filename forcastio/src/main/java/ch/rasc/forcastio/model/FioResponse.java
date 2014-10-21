@@ -3,10 +3,13 @@ package ch.rasc.forcastio.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * The response to a forecat.io call
  */
 @SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FioResponse {
 
 	private BigDecimal latitude;

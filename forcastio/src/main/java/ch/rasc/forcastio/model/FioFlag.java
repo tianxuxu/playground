@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.rasc.forcastio.converter.FioUnitDeserializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * The flags object contains various metadata information related to the request.
  */
 @SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FioFlag {
 
 	@JsonProperty("darksky-unavailable")

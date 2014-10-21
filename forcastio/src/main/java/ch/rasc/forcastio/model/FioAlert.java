@@ -1,10 +1,13 @@
 package ch.rasc.forcastio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * An alert object represents a severe weather warning issued for the requested location
  * by a governmental authority
  */
 @SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FioAlert {
 
 	private String title;
