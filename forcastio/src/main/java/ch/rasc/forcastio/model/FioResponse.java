@@ -1,141 +1,150 @@
 package ch.rasc.forcastio.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * The response to a forecat.io call
+ */
+@SuppressWarnings("unused")
 public class FioResponse {
+
+	private BigDecimal latitude;
+
+	private BigDecimal longitude;
+
+	private String timezone;
+
+	private int offset;
+
+	private FioDataPoint currently;
+
+	private FioDataBlock minutely;
+
+	private FioDataBlock hourly;
+
+	private FioDataBlock daily;
+
+	private List<FioAlert> alerts;
+
+	private FioFlag flags;
 
 	/**
 	 * The requested latitude.
 	 */
-	private double latitude;
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
 
 	/**
 	 * The requested longitude.
 	 */
-	private double longitude;
-
-	/**
-	 * The IANA timezone name for the requested location
-	 */
-	private String timezone;
-
-	/**
-	 * The current timezone offset in hours from GMT.
-	 */
-	private int offset;
-
-	/**
-	 * A data point containing the current weather conditions at the requested location.
-	 */
-	private FioDataPoint currently;
-
-	/**
-	 * A data block containing the weather conditions minute-by-minute for the next hour.
-	 * (This property’s name should be read as an adjective—analogously to "hourly" or
-	 * "daily" and meaning "reckoned by the minute"—rather than as an adverb meaning
-	 * "meticulously."
-	 */
-	private FioDataBlock minutely;
-
-	/**
-	 * A data block (see below) containing the weather conditions hour-by-hour for the
-	 * next two days.
-	 */
-	private FioDataBlock hourly;
-
-	/**
-	 * A data block containing the weather conditions day-by-day for the next week.
-	 */
-	private FioDataBlock daily;
-
-	/**
-	 * An array of alert objects, which, if present, contains any severe weather alerts,
-	 * issued by a governmental weather authority, pertinent to the requested location.
-	 */
-	private List<FioAlert> alerts;
-
-	/**
-	 * An object containing miscellaneous metadata concerning this request.
-	 */
-	private FioFlag flags;
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
+	/**
+	 * The IANA timezone name for the requested location (e.g. America/New_York). This is
+	 * the timezone used for text forecast summaries and for determining the exact start
+	 * time of daily data points.
+	 */
 	public String getTimezone() {
 		return timezone;
 	}
 
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
-	}
-
+	/**
+	 * The current timezone offset in hours from GMT.
+	 */
 	public int getOffset() {
 		return offset;
 	}
 
-	public void setOffset(int offset) {
-		this.offset = offset;
-	}
-
+	/**
+	 * A {@link FioDataPoint} object containing the current weather conditions at the
+	 * requested location.
+	 */
 	public FioDataPoint getCurrently() {
 		return currently;
 	}
 
-	public void setCurrently(FioDataPoint currently) {
-		this.currently = currently;
-	}
-
+	/**
+	 * A {@link FioDataPoint} object containing the weather conditions minute-by-minute
+	 * for the next hour.
+	 */
 	public FioDataBlock getMinutely() {
 		return minutely;
 	}
 
-	public void setMinutely(FioDataBlock minutely) {
-		this.minutely = minutely;
-	}
-
+	/**
+	 * A {@link FioDataPoint} object containing the weather conditions hour-by-hour for
+	 * the next two days.
+	 */
 	public FioDataBlock getHourly() {
 		return hourly;
 	}
 
-	public void setHourly(FioDataBlock hourly) {
-		this.hourly = hourly;
-	}
-
+	/**
+	 * A {@link FioDataPoint} object containing the weather conditions day-by-day for the
+	 * next week.
+	 */
 	public FioDataBlock getDaily() {
 		return daily;
 	}
 
-	public void setDaily(FioDataBlock daily) {
-		this.daily = daily;
-	}
-
+	/**
+	 * A collection of {@link FioAlert} instances, which, if present, contains any severe
+	 * weather alerts, issued by a governmental weather authority, pertinent to the
+	 * requested location.
+	 */
 	public List<FioAlert> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(List<FioAlert> alerts) {
-		this.alerts = alerts;
-	}
-
+	/**
+	 * A {@link FioFlag} instance containing miscellaneous metadata concerning this
+	 * request.
+	 */
 	public FioFlag getFlags() {
 		return flags;
 	}
 
-	public void setFlags(FioFlag flags) {
+	private void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	private void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
+
+	private void setTimezone(String timezone) {
+		this.timezone = timezone;
+	}
+
+	private void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	private void setCurrently(FioDataPoint currently) {
+		this.currently = currently;
+	}
+
+	private void setMinutely(FioDataBlock minutely) {
+		this.minutely = minutely;
+	}
+
+	private void setHourly(FioDataBlock hourly) {
+		this.hourly = hourly;
+	}
+
+	private void setDaily(FioDataBlock daily) {
+		this.daily = daily;
+	}
+
+	private void setAlerts(List<FioAlert> alerts) {
+		this.alerts = alerts;
+	}
+
+	private void setFlags(FioFlag flags) {
 		this.flags = flags;
 	}
 
