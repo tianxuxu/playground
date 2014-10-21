@@ -1,10 +1,13 @@
 package ch.rasc.forcastio.model;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import ch.rasc.forcastio.converter.FioIconDeserializer;
 import ch.rasc.forcastio.converter.FioPrecipTypeDeserializer;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -88,6 +91,8 @@ public class FioDataPoint {
 	private BigDecimal visibility;
 
 	private BigDecimal ozone;
+
+	private Map<String, Object> additionalProperties = new HashMap<>();
 
 	/**
 	 * The UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) at which this
@@ -520,6 +525,15 @@ public class FioDataPoint {
 		this.ozone = ozone;
 	}
 
+	@JsonAnySetter
+	void handleUnknown(String key, Object value) {
+		additionalProperties.put(key, value);
+	}
+
+	public Object getAdditionalProperty(String key) {
+		return additionalProperties.get(key);
+	}
+
 	@Override
 	public String toString() {
 		return "FioDataPoint [time=" + time + ", summary=" + summary + ", icon=" + icon
@@ -541,7 +555,8 @@ public class FioDataPoint {
 				+ apparentTemperatureMaxTime + ", dewPoint=" + dewPoint + ", windSpeed="
 				+ windSpeed + ", windBearing=" + windBearing + ", cloudCover="
 				+ cloudCover + ", humidity=" + humidity + ", pressure=" + pressure
-				+ ", visibility=" + visibility + ", ozone=" + ozone + "]";
+				+ ", visibility=" + visibility + ", ozone=" + ozone
+				+ ", additionalProperties=" + additionalProperties + "]";
 	}
 
 }
