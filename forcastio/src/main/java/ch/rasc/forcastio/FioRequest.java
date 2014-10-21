@@ -102,7 +102,8 @@ public class FioRequest {
 
 	/**
 	 * Include some number of data blocks in the API response. Every block that is not
-	 * specifed is automatically excluded.
+	 * specifed is automatically excluded. By default (this method and
+	 * {@link #exclude(FioBlock...)} is never called) all blocks are included.
 	 */
 	public FioRequest include(FioBlock... blocks) {
 		if (blocks != null && blocks.length > 0) {
