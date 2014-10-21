@@ -18,7 +18,7 @@ public class Main {
 		// System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http.wire",
 		// "DEBUG");
 
-		FioResponse response = FioRequest.create(args[0], "46.947922", "7.444608")
+		FioResponse response = FioRequest.create(args[0], "47.948915", "-100.1019949")
 				.unit(FioUnit.SI).language(FioLanguage.DE).include(FioBlock.DAILY)
 				// .exclude(FioBlock.ALERTS, FioBlock.FLAGS, FioBlock.CURRENTLY,
 				// FioBlock.MINUTELY)
