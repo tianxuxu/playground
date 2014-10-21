@@ -164,7 +164,7 @@ public class FioRequest {
 			}
 
 			if (excludeBlocks != null && !excludeBlocks.isEmpty()) {
-				if (excludeBlocks.size() == 6) {
+				if (excludeBlocks.size() == FioBlock.values().length) {
 					// Everything excluded
 					return null;
 				}
