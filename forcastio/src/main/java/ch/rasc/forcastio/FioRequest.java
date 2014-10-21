@@ -3,10 +3,9 @@ package ch.rasc.forcastio;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.http.HttpEntity;
@@ -39,7 +38,9 @@ public class FioRequest {
 
 	private String units = null;
 
-	private Set<FioBlock> excludeBlocks = null;
+	private EnumSet<FioBlock> excludeBlocks = null;
+
+	private EnumSet<FioBlock> includeBlocks = null;
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -88,11 +89,29 @@ public class FioRequest {
 	public FioRequest exclude(FioBlock... blocks) {
 		if (blocks != null && blocks.length > 0) {
 			if (excludeBlocks == null) {
-				excludeBlocks = new HashSet<>();
+				excludeBlocks = EnumSet.noneOf(FioBlock.class);
 			}
 
 			for (FioBlock fioBlock : blocks) {
 				excludeBlocks.add(fioBlock);
+			}
+		}
+
+		return this;
+	}
+
+	/**
+	 * Include some number of data blocks in the API response. Every block that is not
+	 * specifed is automatically excluded.
+	 */
+	public FioRequest include(FioBlock... blocks) {
+		if (blocks != null && blocks.length > 0) {
+			if (includeBlocks == null) {
+				includeBlocks = EnumSet.noneOf(FioBlock.class);
+			}
+
+			for (FioBlock fioBlock : blocks) {
+				includeBlocks.add(fioBlock);
 			}
 		}
 
@@ -132,6 +151,16 @@ public class FioRequest {
 
 			if (language != null) {
 				queryParameters.put("lang", language);
+			}
+
+			if (includeBlocks != null && !includeBlocks.isEmpty()) {
+				EnumSet<FioBlock> exclude = EnumSet.complementOf(includeBlocks);
+				if (excludeBlocks == null) {
+					excludeBlocks = exclude;
+				}
+				else {
+					excludeBlocks.addAll(exclude);
+				}
 			}
 
 			if (excludeBlocks != null && !excludeBlocks.isEmpty()) {
