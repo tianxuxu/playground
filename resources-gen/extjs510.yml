@@ -1,5 +1,5 @@
-sourceDir: D:\js\ext-5.0.2.1436
-version: 5.0.2.1436-NIGHTLY
+sourceDir: D:\js\ext-5.1.0.70
+version: 5.1.0.70-NIGHTLY
 groupId: resources
 baseArtifactId: ext
 destDir: ./res
@@ -24,9 +24,40 @@ artifacts:
         parameter: localedebug
 
   - artifactId: ext-ux
+    mappings:      
+      - from: build/packages/ext-ux/build/ext-ux.js
+        to: ext-ux/ext-ux.js
+
+  - artifactId: ext-ux-debug
+    mappings:      
+      - from: build/packages/ext-ux/build/ext-ux-debug.js
+        to: ext-ux/ext-ux-debug.js
+
+  - artifactId: ext-ux-theme-classic
+    mappings:
+      - from: build/packages/ext-ux/build/classic/resources/ext-ux-all.css
+        to: ext-ux/theme-classic/ext-ux-all.css
+      - from: build/packages/ext-ux/build/classic/resources/images
+        to: ext-ux/theme-classic/images
+
+  - artifactId: ext-ux-theme-crisp
+    mappings:
+      - from: build/packages/ext-ux/build/crisp/resources/ext-ux-all.css
+        to: ext-ux/theme-crisp/ext-ux-all.css
+      - from: build/packages/ext-ux/build/crisp/resources/images
+        to: ext-ux/theme-crisp/images
+
+  - artifactId: ext-ux-theme-neptune
+    mappings:
+      - from: build/packages/ext-ux/build/neptune/resources/ext-ux-all.css
+        to: ext-ux/theme-neptune/ext-ux-all.css
+      - from: build/packages/ext-ux/build/neptune/resources/images
+        to: ext-ux/theme-neptune/images
+
+  - artifactId: ext-ux-examples
     mappings:
       - from: examples/ux
-        to: ux
+        to: ext-ux/examples
 
   - artifactId: ext-theme-classic
     mappings:
@@ -100,25 +131,26 @@ artifacts:
 
   - artifactId: ext-sencha-charts
     mappings:     
-      - from: packages/sencha-charts/build/sencha-charts.js
-        to: sencha-charts.js 
+      - from: build/packages/sencha-charts/build/sencha-charts.js
+        to: sencha-charts/sencha-charts.js 
 
   - artifactId: ext-sencha-charts-debug
     mappings:     
-      - from: packages/sencha-charts/build/sencha-charts-debug.js
-        to: sencha-charts-debug.js
-
+      - from: build/packages/sencha-charts/build/sencha-charts-debug.js
+        to: sencha-charts/sencha-charts-debug.js
+        
   - artifactId: ext-sencha-charts-theme-classic
-    mappings:     
-      - from: packages/sencha-charts/build/classic/resources/sencha-charts-all.css
-        to: sencha-charts-all.css
+    mappings:
+      - from: build/packages/sencha-charts/build/classic/resources/sencha-charts-all.css
+        to: sencha-charts/theme-classic/sencha-charts-all.css
 
   - artifactId: ext-sencha-charts-theme-crisp
-    mappings:     
-      - from: packages/sencha-charts/build/crisp/resources/sencha-charts-all.css
-        to: sencha-charts-all.css
+    mappings:
+      - from: build/packages/sencha-charts/build/crisp/resources/sencha-charts-all.css
+        to: sencha-charts/theme-crisp/sencha-charts-all.css
 
   - artifactId: ext-sencha-charts-theme-neptune
-    mappings:     
-      - from: packages/sencha-charts/build/neptune/resources/sencha-charts-all.css
-        to: sencha-charts-all.css
+    mappings:
+      - from: build/packages/sencha-charts/build/neptune/resources/sencha-charts-all.css
+        to: sencha-charts/theme-neptune/sencha-charts-all.css
+        
