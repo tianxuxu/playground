@@ -32,7 +32,7 @@ public class Indexing {
 		try (Directory directory = new RAMDirectory();
 				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
 				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(
-						Version.LUCENE_4_10_0, analyzer))) {
+						Version.LUCENE_4_10_3, analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };

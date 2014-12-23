@@ -18,7 +18,7 @@ public class Main2 {
 		// System.out.println(result);
 
 		Date d = new Date();
-		ObjectId oid = new ObjectId(d, 0, 0);
+		ObjectId oid = ObjectId.createFromLegacyFormat((int) (d.getTime() / 1000), 0, 0);
 		System.out.println(oid);
 		System.out.println(oid.getDate());
 

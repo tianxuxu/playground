@@ -51,6 +51,7 @@ public class TradeServer {
 		queueDrain.start();
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	public Order execute(Trade trade) {
 		Order o = new Order(counter.incrementAndGet()).setTrade(trade).setTimestamp(
 				System.currentTimeMillis());

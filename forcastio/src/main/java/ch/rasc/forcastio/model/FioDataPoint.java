@@ -92,7 +92,7 @@ public class FioDataPoint {
 
 	private BigDecimal ozone;
 
-	private Map<String, Object> additionalProperties = new HashMap<>();
+	private final Map<String, Object> additionalProperties = new HashMap<>();
 
 	/**
 	 * The UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) at which this

@@ -12,6 +12,7 @@ public class MongoRepositoryApp {
 
 	public static void main(String[] args) throws Exception {
 
+		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		PersonRepository personRepository = ctx.getBean(PersonRepository.class);

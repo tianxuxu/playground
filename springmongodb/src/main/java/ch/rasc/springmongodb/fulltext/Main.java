@@ -48,6 +48,7 @@ public class Main extends AbstractMongoConfiguration {
 
 	public static void main(String[] args) throws IOException, NumberFormatException,
 			XMLStreamException {
+		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(Main.class);
 		MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
 		// PostRepository postRepo = ctx.getBean(PostRepository.class);

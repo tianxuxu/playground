@@ -36,7 +36,7 @@ public class Playground implements CommandLineRunner {
 		Result<AddressRecord> ar = dsl.fetch(Tables.ADDRESS);
 		// System.out.println(ar);
 		for (AddressRecord record : ar) {
-			// System.out.println(record.getCity());
+			System.out.println(record.getCity());
 		}
 		// System.out.println(ar.formatJSON());
 

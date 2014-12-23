@@ -18,6 +18,7 @@ public class MongoApp {
 
 	public static void main(String[] args) throws Exception {
 
+		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		MongoOperations mongoOps = ctx.getBean(MongoTemplate.class);

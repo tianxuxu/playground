@@ -85,9 +85,6 @@ call mvn versions:display-plugin-updates
 cd D:\ws\playground\reflection
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
-cd D:\ws\playground\resource-jar-demo
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
 cd D:\ws\playground\resources-gen
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates

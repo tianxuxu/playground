@@ -2,6 +2,7 @@ package ch.rasc.springwebsocket;
 
 import java.util.concurrent.Executor;
 
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -78,5 +79,10 @@ public class Application implements WebSocketConfigurer, AsyncConfigurer {
 	@Bean
 	public MemoryObserver memoryObserver() {
 		return new MemoryObserver(registryHandler());
+	}
+
+	@Override
+	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+		return null;
 	}
 }

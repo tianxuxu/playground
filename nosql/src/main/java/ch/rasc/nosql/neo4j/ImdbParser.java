@@ -51,6 +51,7 @@ public class ImdbParser {
 
 	}
 
+	@SuppressWarnings("resource")
 	public void readImdbData(GraphDatabaseService graphDb, Index<Node> index,
 			String fileName) throws FileNotFoundException, IOException {
 

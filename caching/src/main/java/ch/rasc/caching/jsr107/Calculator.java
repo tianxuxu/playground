@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @CacheDefaults(cacheName = "results")
+@SuppressWarnings("unused")
 public class Calculator {
 
 	@CacheResult
@@ -36,13 +37,16 @@ public class Calculator {
 
 	@CachePut
 	public void putSomethingIntoTheCache(long n, @CacheValue BigInteger result) {
+		// nothing here
 	}
 
 	@CacheRemove
 	public void removeSomethingFromTheCache(long n) {
+		// nothing here
 	}
 
 	@CacheRemoveAll
 	public void removeEverythingFromTheCache() {
+		// nothing here
 	}
 }
