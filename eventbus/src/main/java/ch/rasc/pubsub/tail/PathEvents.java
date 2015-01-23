@@ -16,11 +16,11 @@ public class PathEvents {
 	}
 
 	public Path getWatchedDirectory() {
-		return watchedDirectory;
+		return this.watchedDirectory;
 	}
 
 	public ImmutableList<PathEvent> getEvents() {
-		return pathEvents;
+		return this.pathEvents;
 	}
 
 }

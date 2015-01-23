@@ -8,7 +8,7 @@ public class GeoCoderResults {
 	private List<GeoCoderResult> results;
 
 	public Status getStatus() {
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(Status status) {
@@ -16,7 +16,7 @@ public class GeoCoderResults {
 	}
 
 	public List<GeoCoderResult> getResults() {
-		return results;
+		return this.results;
 	}
 
 	public void setResults(List<GeoCoderResult> results) {

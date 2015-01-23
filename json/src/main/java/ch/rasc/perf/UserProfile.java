@@ -69,7 +69,7 @@ public class UserProfile {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -77,7 +77,7 @@ public class UserProfile {
 	}
 
 	public Long getProfileViews() {
-		return profileViews;
+		return this.profileViews;
 	}
 
 	public void setProfileViews(Long profileViews) {
@@ -85,7 +85,7 @@ public class UserProfile {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -93,7 +93,7 @@ public class UserProfile {
 	}
 
 	public UserNames getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(UserNames name) {
@@ -101,7 +101,7 @@ public class UserProfile {
 	}
 
 	public Integer getGender() {
-		return gender;
+		return this.gender;
 	}
 
 	public void setGender(Integer gender) {
@@ -109,7 +109,7 @@ public class UserProfile {
 	}
 
 	public String getBirthday() {
-		return birthday;
+		return this.birthday;
 	}
 
 	public void setBirthday(String birthday) {
@@ -117,7 +117,7 @@ public class UserProfile {
 	}
 
 	public List<Location> getLocations() {
-		return locations;
+		return this.locations;
 	}
 
 	public void setLocations(List<Location> locations) {
@@ -125,7 +125,7 @@ public class UserProfile {
 	}
 
 	public String getImage() {
-		return image;
+		return this.image;
 	}
 
 	public void setImage(String image) {
@@ -133,7 +133,7 @@ public class UserProfile {
 	}
 
 	public String getCover() {
-		return cover;
+		return this.cover;
 	}
 
 	public void setCover(String cover) {
@@ -141,7 +141,7 @@ public class UserProfile {
 	}
 
 	public String getAboutMe() {
-		return aboutMe;
+		return this.aboutMe;
 	}
 
 	public void setAboutMe(String aboutMe) {
@@ -149,7 +149,7 @@ public class UserProfile {
 	}
 
 	public String getEtag() {
-		return etag;
+		return this.etag;
 	}
 
 	public void setEtag(String etag) {
@@ -157,7 +157,7 @@ public class UserProfile {
 	}
 
 	public Boolean getActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(Boolean active) {
@@ -165,7 +165,7 @@ public class UserProfile {
 	}
 
 	public Boolean getDeleted() {
-		return deleted;
+		return this.deleted;
 	}
 
 	public void setDeleted(Boolean deleted) {
@@ -173,7 +173,7 @@ public class UserProfile {
 	}
 
 	public Date getLatsAccsess() {
-		return latsAccsess;
+		return this.latsAccsess;
 	}
 
 	public void setLatsAccsess(Date latsAccsess) {
@@ -181,7 +181,7 @@ public class UserProfile {
 	}
 
 	public List<Like> getLikes() {
-		return likes;
+		return this.likes;
 	}
 
 	public void setLikes(List<Like> likes) {

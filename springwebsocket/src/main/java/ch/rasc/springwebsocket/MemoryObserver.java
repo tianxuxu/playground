@@ -21,7 +21,7 @@ public class MemoryObserver {
 		MemoryUsage heap = memBean.getHeapMemoryUsage();
 		MemoryUsage nonHeap = memBean.getNonHeapMemoryUsage();
 
-		registryHandler.sendToAll("{\"heap\":" + heap.getUsed() + ", \"nonheap\":"
+		this.registryHandler.sendToAll("{\"heap\":" + heap.getUsed() + ", \"nonheap\":"
 				+ nonHeap.getUsed() + "}");
 	}
 

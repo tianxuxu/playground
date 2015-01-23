@@ -32,6 +32,6 @@ public class InitService {
 		a.setCustomer(c);
 		c.getAddresses().add(a);
 
-		entityManager.persist(c);
+		this.entityManager.persist(c);
 	}
 }

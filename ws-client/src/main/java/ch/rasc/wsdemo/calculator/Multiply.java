@@ -39,7 +39,7 @@ public class Multiply {
 	 *
 	 */
 	public int getArg0() {
-		return arg0;
+		return this.arg0;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Multiply {
 	 *
 	 */
 	public int getArg1() {
-		return arg1;
+		return this.arg1;
 	}
 
 	/**

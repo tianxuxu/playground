@@ -11,18 +11,18 @@ public class AddThingsToCache {
 	private final HazelcastInstance haz;
 
 	public AddThingsToCache() {
-		haz = Hazelcast.newHazelcastInstance();
+		this.haz = Hazelcast.newHazelcastInstance();
 	}
 
 	public void addListData() {
-		List<ObjectToCache> list = haz.getList("testlist");
+		List<ObjectToCache> list = this.haz.getList("testlist");
 		for (int i = 0; i < 10000; i++) {
 			list.add(new ObjectToCache("example: " + i, "value" + i, i));
 		}
 	}
 
 	public void addMapData() {
-		Map<Integer, ObjectToCache> map = haz.getMap("testmap");
+		Map<Integer, ObjectToCache> map = this.haz.getMap("testmap");
 		for (int i = 0; i < 10000; i++) {
 			map.put(i, new ObjectToCache("example: " + i, "value" + i, i));
 		}

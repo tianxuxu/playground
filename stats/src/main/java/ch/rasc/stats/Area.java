@@ -6,7 +6,7 @@ public class Area {
 	private LatLng southwest;
 
 	public LatLng getNortheast() {
-		return northeast;
+		return this.northeast;
 	}
 
 	public void setNortheast(LatLng northeast) {
@@ -14,7 +14,7 @@ public class Area {
 	}
 
 	public LatLng getSouthwest() {
-		return southwest;
+		return this.southwest;
 	}
 
 	public void setSouthwest(LatLng southwest) {

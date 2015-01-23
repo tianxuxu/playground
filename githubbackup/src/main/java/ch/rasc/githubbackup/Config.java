@@ -14,7 +14,7 @@ public class Config {
 	private String knownHosts;
 
 	public String getBackupDirectory() {
-		return backupDirectory;
+		return this.backupDirectory;
 	}
 
 	public void setBackupDirectory(String backupDirectory) {
@@ -22,7 +22,7 @@ public class Config {
 	}
 
 	public List<String> getGithubUsers() {
-		return githubUsers;
+		return this.githubUsers;
 	}
 
 	public void setGithubUsers(List<String> githubUsers) {
@@ -30,7 +30,7 @@ public class Config {
 	}
 
 	public List<GitUrl> getGitUrls() {
-		return gitUrls;
+		return this.gitUrls;
 	}
 
 	public void setGitUrls(List<GitUrl> gitUrls) {
@@ -38,7 +38,7 @@ public class Config {
 	}
 
 	public String getKey() {
-		return key;
+		return this.key;
 	}
 
 	public void setKey(String key) {
@@ -46,7 +46,7 @@ public class Config {
 	}
 
 	public String getKnownHosts() {
-		return knownHosts;
+		return this.knownHosts;
 	}
 
 	public void setKnownHosts(String knownHosts) {
@@ -63,7 +63,7 @@ public class Config {
 		public String password;
 
 		public String getName() {
-			return name;
+			return this.name;
 		}
 
 		public void setName(String name) {
@@ -71,7 +71,7 @@ public class Config {
 		}
 
 		public String getUrl() {
-			return url;
+			return this.url;
 		}
 
 		public void setUrl(String url) {
@@ -79,7 +79,7 @@ public class Config {
 		}
 
 		public String getUsername() {
-			return username;
+			return this.username;
 		}
 
 		public void setUsername(String username) {
@@ -87,7 +87,7 @@ public class Config {
 		}
 
 		public String getPassword() {
-			return password;
+			return this.password;
 		}
 
 		public void setPassword(String password) {

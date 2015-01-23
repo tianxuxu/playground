@@ -1,19 +1,19 @@
 package ch.rasc.reactorsandbox.samples;
 
-import static reactor.event.selector.Selectors.$;
-import reactor.core.Environment;
-import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
-import reactor.event.Event;
+import static reactor.bus.selector.Selectors.$;
+import reactor.Environment;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
 
 /**
  * @author Jon Brisbin
+ * @author Stephane Maldini
  */
-public class ReactorSamples {
+public class EventBusSamples {
 
 	public static void main(String... args) {
 		Environment env = new Environment();
-		Reactor r = Reactors.reactor().env(env).dispatcher("ringBuffer").get();
+		EventBus r = EventBus.config().env(env).dispatcher("ringBuffer").get();
 
 		// Subscribe to topic "test"
 		r.<Event<String>> on($("test"), ev -> System.out.println("hi " + ev.getData()));

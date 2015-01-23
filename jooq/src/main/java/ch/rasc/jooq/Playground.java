@@ -24,7 +24,7 @@ public class Playground implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		Result<Record> result = dsl.select().from(Tables.ADDRESS).fetch();
+		Result<Record> result = this.dsl.select().from(Tables.ADDRESS).fetch();
 
 		for (Record r : result) {
 			Integer id = r.getValue(Tables.ADDRESS.ID);
@@ -33,7 +33,7 @@ public class Playground implements CommandLineRunner {
 			System.out.println("ID: " + id + " city: " + city);
 		}
 
-		Result<AddressRecord> ar = dsl.fetch(Tables.ADDRESS);
+		Result<AddressRecord> ar = this.dsl.fetch(Tables.ADDRESS);
 		// System.out.println(ar);
 		for (AddressRecord record : ar) {
 			System.out.println(record.getCity());
@@ -41,7 +41,7 @@ public class Playground implements CommandLineRunner {
 		// System.out.println(ar.formatJSON());
 
 		AddressRecord newAddress = new AddressRecord();
-		newAddress.attach(dsl.configuration());
+		newAddress.attach(this.dsl.configuration());
 		newAddress.setCity("a new city");
 		newAddress.setFirstname("first");
 		newAddress.setLastname("last");

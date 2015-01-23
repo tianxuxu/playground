@@ -3,12 +3,10 @@ package ch.rasc.reactorsandbox.samples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.core.Environment;
-import reactor.core.composable.Deferred;
-import reactor.core.composable.Stream;
-import reactor.core.composable.spec.Streams;
-import reactor.function.Predicate;
-import reactor.function.support.Boundary;
+import reactor.Environment;
+import reactor.rx.Promise;
+import reactor.rx.Streams;
+import reactor.rx.stream.Broadcaster;
 
 /**
  * @author Jon Brisbin
@@ -16,10 +14,9 @@ import reactor.function.support.Boundary;
 public class StreamSamples {
 
 	static final Logger LOG = LoggerFactory.getLogger(StreamSamples.class);
-
 	static final Environment ENV = new Environment();
 
-	public static void main(String... args) {
+	public static void main(String... args) throws InterruptedException {
 
 		simpleStream();
 
@@ -30,57 +27,48 @@ public class StreamSamples {
 		ENV.shutdown();
 	}
 
-	private static void simpleStream() {
-		Boundary b = new Boundary();
+	private static void simpleStream() throws InterruptedException {
+		// A Stream is a data publisher
+		Broadcaster<String> stream = Streams.<String> broadcast(ENV);
 
-		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
-				.dispatcher(Environment.RING_BUFFER).get();
-		Stream<String> stream = deferred.compose();
-
-		// Consume values passing through the Stream
-		stream.consume(b.<String> bind(s -> LOG.info("Consumed String {}", s)));
+		// Log values passing through the Stream and capture the first coming signal
+		Promise<String> promise = stream.observe(s -> LOG.info("Consumed String {}", s))
+				.next();
 
 		// Publish a value
-		deferred.accept("Hello World!");
+		stream.onNext("Hello World!");
 
-		b.await();
+		promise.await();
 	}
 
-	private static void transformValues() {
-		Boundary b = new Boundary();
+	private static void transformValues() throws InterruptedException {
+		// A Stream is a data publisher
+		Broadcaster<String> stream = Streams.<String> broadcast(ENV);
 
-		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
-				.dispatcher(Environment.RING_BUFFER).get();
-		Stream<String> stream = deferred.compose();
-
-		// Transform values passing through the Stream
-		stream.map(String::toUpperCase).consume(b.bind(s -> LOG.info("UC String {}", s)));
+		// Transform values passing through the Stream, observe and capture the result
+		// once.
+		Promise<String> promise = stream.map(String::toUpperCase)
+				.observe(s -> LOG.info("UC String {}", s)).next();
 
 		// Publish a value
-		deferred.accept("Hello World!");
+		stream.onNext("Hello World!");
 
-		b.await();
+		promise.await();
 	}
 
-	private static void filterValues() {
-		Boundary b = new Boundary();
+	private static void filterValues() throws InterruptedException {
+		// A Stream is a data publisher
+		Broadcaster<String> stream = Streams.<String> broadcast(ENV);
 
-		// Deferred is the publisher, Stream the consumer
-		Deferred<String, Stream<String>> deferred = Streams.<String> defer().env(ENV)
-				.dispatcher(Environment.RING_BUFFER).get();
-		Stream<String> stream = deferred.compose();
-
-		// Filter values passing through the Stream
-		stream.filter((Predicate<String>) s -> s.startsWith("Hello")).consume(
-				b.<String> bind(s -> LOG.info("Filtered String {}", s)));
+		// Filter values passing through the Stream, observe and capture the result once.
+		Promise<String> promise = stream.filter(s -> s.startsWith("Hello"))
+				.observe(s -> LOG.info("Filtered String {}", s)).next();
 
 		// Publish a value
-		deferred.accept("Hello World!");
-		deferred.accept("Goodbye World!");
+		stream.onNext("Hello World!");
+		stream.onNext("Goodbye World!");
 
-		b.await();
+		promise.await();
 	}
 
 }

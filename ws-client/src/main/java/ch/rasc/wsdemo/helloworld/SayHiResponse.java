@@ -41,7 +41,7 @@ public class SayHiResponse {
 	 *
 	 */
 	public String getReturn() {
-		return _return;
+		return this._return;
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class Geometry {
 	private Area viewport;
 
 	public Area getBounds() {
-		return bounds;
+		return this.bounds;
 	}
 
 	public void setBounds(Area bounds) {
@@ -22,7 +22,7 @@ public class Geometry {
 	}
 
 	public LocationType getLocationType() {
-		return locationType;
+		return this.locationType;
 	}
 
 	public void setLocationType(LocationType locationType) {
@@ -30,7 +30,7 @@ public class Geometry {
 	}
 
 	public LatLng getLocation() {
-		return location;
+		return this.location;
 	}
 
 	public void setLocation(LatLng location) {
@@ -38,7 +38,7 @@ public class Geometry {
 	}
 
 	public Area getViewport() {
-		return viewport;
+		return this.viewport;
 	}
 
 	public void setViewport(Area viewport) {

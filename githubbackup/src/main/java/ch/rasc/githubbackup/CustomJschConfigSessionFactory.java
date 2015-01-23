@@ -29,8 +29,8 @@ public class CustomJschConfigSessionFactory extends JschConfigSessionFactory {
 	@Override
 	protected JSch getJSch(Host hc, FS fs) throws JSchException {
 		JSch jsch = super.getJSch(hc, fs);
-		jsch.addIdentity(key);
-		jsch.setKnownHosts(knownHosts);
+		jsch.addIdentity(this.key);
+		jsch.setKnownHosts(this.knownHosts);
 		return jsch;
 	}
 

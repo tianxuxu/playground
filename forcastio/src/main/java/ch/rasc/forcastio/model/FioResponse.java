@@ -36,14 +36,14 @@ public class FioResponse {
 	 * The requested latitude.
 	 */
 	public BigDecimal getLatitude() {
-		return latitude;
+		return this.latitude;
 	}
 
 	/**
 	 * The requested longitude.
 	 */
 	public BigDecimal getLongitude() {
-		return longitude;
+		return this.longitude;
 	}
 
 	/**
@@ -52,14 +52,14 @@ public class FioResponse {
 	 * time of daily data points.
 	 */
 	public String getTimezone() {
-		return timezone;
+		return this.timezone;
 	}
 
 	/**
 	 * The current timezone offset in hours from GMT.
 	 */
 	public int getOffset() {
-		return offset;
+		return this.offset;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class FioResponse {
 	 * requested location.
 	 */
 	public FioDataPoint getCurrently() {
-		return currently;
+		return this.currently;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class FioResponse {
 	 * for the next hour.
 	 */
 	public FioDataBlock getMinutely() {
-		return minutely;
+		return this.minutely;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class FioResponse {
 	 * the next two days.
 	 */
 	public FioDataBlock getHourly() {
-		return hourly;
+		return this.hourly;
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class FioResponse {
 	 * next week.
 	 */
 	public FioDataBlock getDaily() {
-		return daily;
+		return this.daily;
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class FioResponse {
 	 * requested location.
 	 */
 	public List<FioAlert> getAlerts() {
-		return alerts;
+		return this.alerts;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class FioResponse {
 	 * request.
 	 */
 	public FioFlag getFlags() {
-		return flags;
+		return this.flags;
 	}
 
 	private void setLatitude(BigDecimal latitude) {
@@ -153,10 +153,11 @@ public class FioResponse {
 
 	@Override
 	public String toString() {
-		return "FioResponse [latitude=" + latitude + ", longitude=" + longitude
-				+ ", timezone=" + timezone + ", offset=" + offset + ", currently="
-				+ currently + ", minutely=" + minutely + ", hourly=" + hourly
-				+ ", daily=" + daily + ", alerts=" + alerts + ", flags=" + flags + "]";
+		return "FioResponse [latitude=" + this.latitude + ", longitude=" + this.longitude
+				+ ", timezone=" + this.timezone + ", offset=" + this.offset
+				+ ", currently=" + this.currently + ", minutely=" + this.minutely
+				+ ", hourly=" + this.hourly + ", daily=" + this.daily + ", alerts="
+				+ this.alerts + ", flags=" + this.flags + "]";
 	}
 
 }

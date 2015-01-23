@@ -16,31 +16,31 @@ public class RegistryHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		sessions.put(session.getId(), session);
+		this.sessions.put(session.getId(), session);
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
 			throws Exception {
-		sessions.remove(session.getId());
+		this.sessions.remove(session.getId());
 	}
 
 	@Async
 	public void sendToAll(String message) {
 		TextMessage textMessage = new TextMessage(message);
 
-		for (WebSocketSession session : sessions.values()) {
+		for (WebSocketSession session : this.sessions.values()) {
 			if (session.isOpen()) {
 				try {
 					session.sendMessage(textMessage);
 				}
 				catch (IOException e) {
-					sessions.remove(session.getId());
+					this.sessions.remove(session.getId());
 					e.printStackTrace();
 				}
 			}
 			else {
-				sessions.remove(session.getId());
+				this.sessions.remove(session.getId());
 			}
 		}
 	}

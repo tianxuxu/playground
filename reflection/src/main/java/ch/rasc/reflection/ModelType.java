@@ -69,7 +69,7 @@ public enum ModelType {
 	}
 
 	public String getJsName() {
-		return jsName;
+		return this.jsName;
 	}
 
 	public abstract boolean supports(Class<?> type);

@@ -10,7 +10,7 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "Quote [ticker=" + ticker + ", price=" + price + "]";
+		return "Quote [ticker=" + this.ticker + ", price=" + this.price + "]";
 	}
 
 }

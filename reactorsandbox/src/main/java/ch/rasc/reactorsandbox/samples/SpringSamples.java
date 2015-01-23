@@ -12,10 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import reactor.core.Environment;
-import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
-import reactor.event.Event;
+import reactor.Environment;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
 import reactor.spring.context.annotation.Selector;
 import reactor.spring.context.config.EnableReactor;
 
@@ -27,15 +26,14 @@ public class SpringSamples implements CommandLineRunner {
 
 	@Autowired
 	private Environment env;
-
 	@Autowired
 	private TestService service;
 
 	@Override
 	public void run(String... args) throws Exception {
-		service.test();
+		this.service.test();
 
-		env.shutdown();
+		this.env.shutdown();
 	}
 
 	public static void main(String... args) {
@@ -48,13 +46,13 @@ public class SpringSamples implements CommandLineRunner {
 	public static class ReactorConfiguration {
 
 		@Bean
-		public Reactor reactor(Environment env) {
-			return Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER).get();
+		public EventBus reactor(Environment env) {
+			return EventBus.config().env(env).dispatcher(Environment.SHARED).get();
 		}
 
 		@Bean
 		public Logger log() {
-			return LoggerFactory.getLogger(ReactorSamples.class);
+			return LoggerFactory.getLogger(SpringSamples.class);
 		}
 
 	}
@@ -63,13 +61,12 @@ public class SpringSamples implements CommandLineRunner {
 	public static class AnnotatedHandler {
 		@Autowired
 		private Logger log;
-
 		@Autowired
-		public Reactor reactor;
+		public EventBus reactor;
 
 		@Selector("test.topic")
 		public void onTestTopic(String s) {
-			log.info("onTestTopic: {}", s);
+			this.log.info("onTestTopic: {}", s);
 		}
 	}
 
@@ -77,13 +74,12 @@ public class SpringSamples implements CommandLineRunner {
 	public static class TestService {
 		@Autowired
 		private Logger log;
-
 		@Autowired
-		private Reactor reactor;
+		private EventBus reactor;
 
 		public void test() {
-			log.info("Testing service...");
-			reactor.notify("test.topic", Event.wrap("Hello World!"));
+			this.log.info("Testing service...");
+			this.reactor.notify("test.topic", Event.wrap("Hello World!"));
 		}
 	}
 

@@ -22,16 +22,16 @@ public class CacheCleanup {
 
 	@PreDestroy
 	public void shutdown() {
-		scheduler.shutdown();
+		this.scheduler.shutdown();
 	}
 
 	@PostConstruct
 	public void cacheCleanup() {
-		scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.scheduleWithFixedDelay(() -> {
-			for (String cacheName : cacheManager.getCacheNames()) {
+		this.scheduler = Executors.newScheduledThreadPool(1);
+		this.scheduler.scheduleWithFixedDelay(() -> {
+			for (String cacheName : this.cacheManager.getCacheNames()) {
 				System.out.println(">> cleanup " + cacheName);
-				((GuavaCache) cacheManager.getCache(cacheName)).getNativeCache()
+				((GuavaCache) this.cacheManager.getCache(cacheName)).getNativeCache()
 						.cleanUp();
 			}
 		}, 5, 20, TimeUnit.SECONDS);

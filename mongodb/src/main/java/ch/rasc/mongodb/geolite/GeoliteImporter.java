@@ -60,7 +60,7 @@ public class GeoliteImporter {
 				geolite.setStartIpNum(startIp);
 				geolite.setEndIpNum(endIp);
 				geolite.setId(null);
-				datastore.save(geolite);
+				this.datastore.save(geolite);
 			}
 		}
 

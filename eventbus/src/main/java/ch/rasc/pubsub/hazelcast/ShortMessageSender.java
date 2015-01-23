@@ -12,12 +12,12 @@ public class ShortMessageSender {
 	public ShortMessageSender() {
 		Config config = new Config();
 		config.setInstanceName("myHazelcastInstance");
-		hi = Hazelcast.newHazelcastInstance(config);
+		this.hi = Hazelcast.newHazelcastInstance(config);
 	}
 
 	public void send(String msg) {
 
-		ITopic<ShortMessageEvent> topic = hi.getTopic("my_topic");
+		ITopic<ShortMessageEvent> topic = this.hi.getTopic("my_topic");
 		topic.publish(new ShortMessageEvent(msg));
 	}
 

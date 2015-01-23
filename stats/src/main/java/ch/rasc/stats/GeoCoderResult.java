@@ -20,7 +20,7 @@ public class GeoCoderResult {
 	private boolean partialMatch;
 
 	public String getFormattedAddress() {
-		return formattedAddress;
+		return this.formattedAddress;
 	}
 
 	public void setFormattedAddress(String formattedAddress) {
@@ -28,7 +28,7 @@ public class GeoCoderResult {
 	}
 
 	public List<AddressComponents> getAddressComponents() {
-		return addressComponents;
+		return this.addressComponents;
 	}
 
 	public void setAddressComponents(List<AddressComponents> addressComponents) {
@@ -36,7 +36,7 @@ public class GeoCoderResult {
 	}
 
 	public Geometry getGeometry() {
-		return geometry;
+		return this.geometry;
 	}
 
 	public void setGeometry(Geometry geometry) {
@@ -44,7 +44,7 @@ public class GeoCoderResult {
 	}
 
 	public List<String> getTypes() {
-		return types;
+		return this.types;
 	}
 
 	public void setTypes(List<String> types) {
@@ -52,7 +52,7 @@ public class GeoCoderResult {
 	}
 
 	public boolean isPartialMatch() {
-		return partialMatch;
+		return this.partialMatch;
 	}
 
 	public void setPartialMatch(boolean partialMatch) {

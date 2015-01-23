@@ -19,7 +19,7 @@ public class FioAlert {
 	 * A short text summary of the alert.
 	 */
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	/**
@@ -27,21 +27,21 @@ public class FioAlert {
 	 * alert will cease to be valid.
 	 */
 	public Integer getExpires() {
-		return expires;
+		return this.expires;
 	}
 
 	/**
 	 * An HTTP(S) URI that contains detailed information about the alert.
 	 */
 	public String getUri() {
-		return uri;
+		return this.uri;
 	}
 
 	/**
 	 * A detailed text description of the alert from the appropriate weather service.
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	private void setTitle(String title) {
@@ -62,8 +62,8 @@ public class FioAlert {
 
 	@Override
 	public String toString() {
-		return "FioAlert [title=" + title + ", expires=" + expires + ", uri=" + uri
-				+ ", description=" + description + "]";
+		return "FioAlert [title=" + this.title + ", expires=" + this.expires + ", uri="
+				+ this.uri + ", description=" + this.description + "]";
 	}
 
 }

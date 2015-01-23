@@ -22,7 +22,7 @@ public class ModelBean {
 	private String destroyMethod;
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -30,7 +30,7 @@ public class ModelBean {
 	}
 
 	public String getIdProperty() {
-		return idProperty;
+		return this.idProperty;
 	}
 
 	public void setIdProperty(String idProperty) {
@@ -38,7 +38,7 @@ public class ModelBean {
 	}
 
 	public Map<String, ModelFieldBean> getFields() {
-		return fields;
+		return this.fields;
 	}
 
 	public void setFields(Map<String, ModelFieldBean> fields) {
@@ -47,20 +47,20 @@ public class ModelBean {
 
 	public void addFields(List<ModelFieldBean> modelFields) {
 		for (ModelFieldBean bean : modelFields) {
-			fields.put(bean.getName(), bean);
+			this.fields.put(bean.getName(), bean);
 		}
 	}
 
 	public ModelFieldBean getField(String fieldName) {
-		return fields.get(fieldName);
+		return this.fields.get(fieldName);
 	}
 
 	public void addField(ModelFieldBean bean) {
-		fields.put(bean.getName(), bean);
+		this.fields.put(bean.getName(), bean);
 	}
 
 	public boolean isPageing() {
-		return pageing;
+		return this.pageing;
 	}
 
 	public void setPageing(boolean pageing) {
@@ -68,7 +68,7 @@ public class ModelBean {
 	}
 
 	public String getReadMethod() {
-		return readMethod;
+		return this.readMethod;
 	}
 
 	public void setReadMethod(String readMethod) {
@@ -76,7 +76,7 @@ public class ModelBean {
 	}
 
 	public String getCreateMethod() {
-		return createMethod;
+		return this.createMethod;
 	}
 
 	public void setCreateMethod(String createMethod) {
@@ -84,7 +84,7 @@ public class ModelBean {
 	}
 
 	public String getUpdateMethod() {
-		return updateMethod;
+		return this.updateMethod;
 	}
 
 	public void setUpdateMethod(String updateMethod) {
@@ -92,7 +92,7 @@ public class ModelBean {
 	}
 
 	public String getDestroyMethod() {
-		return destroyMethod;
+		return this.destroyMethod;
 	}
 
 	public void setDestroyMethod(String destroyMethod) {

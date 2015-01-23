@@ -77,12 +77,12 @@ public class ModelGenerator {
 					IllegalAccessException {
 				if (Modifier.isPublic(field.getModifiers())
 						|| hasReadMethod.contains(field.getName())) {
-					if (fields.contains(field.getName())) {
+					if (this.fields.contains(field.getName())) {
 						// ignore superclass declarations of fields already
 						// found in a subclass
 					}
 					else {
-						fields.add(field.getName());
+						this.fields.add(field.getName());
 
 						Class<?> type = field.getType();
 

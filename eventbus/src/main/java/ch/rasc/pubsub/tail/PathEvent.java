@@ -14,10 +14,10 @@ public class PathEvent {
 	}
 
 	public Path getEventTarget() {
-		return eventTarget;
+		return this.eventTarget;
 	}
 
 	public WatchEvent.Kind<?> getType() {
-		return type;
+		return this.type;
 	}
 }

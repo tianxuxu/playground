@@ -24,7 +24,7 @@ public class User extends Base {
 	private LocalDateTime dob;
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -32,7 +32,7 @@ public class User extends Base {
 	}
 
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(boolean active) {
@@ -40,7 +40,7 @@ public class User extends Base {
 	}
 
 	public LocalDateTime getDob() {
-		return dob;
+		return this.dob;
 	}
 
 	public void setDob(LocalDateTime dob) {
@@ -49,7 +49,7 @@ public class User extends Base {
 
 	@JsonIgnore
 	public String getMyName() {
-		return myName;
+		return this.myName;
 	}
 
 	public void setMyName(String myName) {

@@ -99,14 +99,14 @@ public class FioDataPoint {
 	 * data point occurs.
 	 */
 	public Integer getTime() {
-		return time;
+		return this.time;
 	}
 
 	/**
 	 * A human-readable text summary of this data point.
 	 */
 	public String getSummary() {
-		return summary;
+		return this.summary;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class FioDataPoint {
 	 * for display.
 	 */
 	public FioIcon getIcon() {
-		return icon;
+		return this.icon;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getSunriseTime() {
-		return sunriseTime;
+		return this.sunriseTime;
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getSunsetTime() {
-		return sunsetTime;
+		return this.sunsetTime;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getMoonPhase() {
-		return moonPhase;
+		return this.moonPhase;
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class FioDataPoint {
 	 * Only defined on currently data points.
 	 */
 	public BigDecimal getNearestStormDistance() {
-		return nearestStormDistance;
+		return this.nearestStormDistance;
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class FioDataPoint {
 	 * Only defined on currently data points.
 	 */
 	public BigDecimal getNearestStormBearing() {
-		return nearestStormBearing;
+		return this.nearestStormBearing;
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class FioDataPoint {
 	 * corresponds to heavy precipitation.
 	 */
 	public BigDecimal getPrecipIntensity() {
-		return precipIntensity;
+		return this.precipIntensity;
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getPrecipIntensityMax() {
-		return precipIntensityMax;
+		return this.precipIntensityMax;
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getPrecipIntensityMaxTime() {
-		return precipIntensityMaxTime;
+		return this.precipIntensityMaxTime;
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class FioDataPoint {
 	 * precipitation occuring at the given time.
 	 */
 	public BigDecimal getPrecipProbability() {
-		return precipProbability;
+		return this.precipProbability;
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class FioDataPoint {
 	 * If {@link #getPrecipIntensity()} is zero, then this property will not be defined.
 	 */
 	public FioPrecipType getPrecipType() {
-		return precipType;
+		return this.precipType;
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getPrecipAccumulation() {
-		return precipAccumulation;
+		return this.precipAccumulation;
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class FioDataPoint {
 	 * Not defined on daily data points.
 	 */
 	public BigDecimal getTemperature() {
-		return temperature;
+		return this.temperature;
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getTemperatureMin() {
-		return temperatureMin;
+		return this.temperatureMin;
 	}
 
 	/**
@@ -265,7 +265,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getTemperatureMinTime() {
-		return temperatureMinTime;
+		return this.temperatureMinTime;
 	}
 
 	/**
@@ -275,7 +275,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getTemperatureMax() {
-		return temperatureMax;
+		return this.temperatureMax;
 	}
 
 	/**
@@ -284,7 +284,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getTemperatureMaxTime() {
-		return temperatureMaxTime;
+		return this.temperatureMaxTime;
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class FioDataPoint {
 	 * Not defined on daily data points.
 	 */
 	public BigDecimal getApparentTemperature() {
-		return apparentTemperature;
+		return this.apparentTemperature;
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getApparentTemperatureMin() {
-		return apparentTemperatureMin;
+		return this.apparentTemperatureMin;
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getApparentTemperatureMinTime() {
-		return apparentTemperatureMinTime;
+		return this.apparentTemperatureMinTime;
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public BigDecimal getApparentTemperatureMax() {
-		return apparentTemperatureMax;
+		return this.apparentTemperatureMax;
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class FioDataPoint {
 	 * Only defined on daily data points.
 	 */
 	public Integer getApparentTemperatureMaxTime() {
-		return apparentTemperatureMaxTime;
+		return this.apparentTemperatureMaxTime;
 	}
 
 	/**
@@ -340,14 +340,14 @@ public class FioDataPoint {
 	 * Fahrenheit.
 	 */
 	public BigDecimal getDewPoint() {
-		return dewPoint;
+		return this.dewPoint;
 	}
 
 	/**
 	 * A numerical value representing the wind speed in miles per hour.
 	 */
 	public BigDecimal getWindSpeed() {
-		return windSpeed;
+		return this.windSpeed;
 	}
 
 	/**
@@ -356,7 +356,7 @@ public class FioDataPoint {
 	 * then this value will not be defined.)
 	 */
 	public BigDecimal getWindBearing() {
-		return windBearing;
+		return this.windBearing;
 	}
 
 	/**
@@ -365,28 +365,28 @@ public class FioDataPoint {
 	 * 0.75 to broken cloud cover, and 1 to completely overcast skies.
 	 */
 	public BigDecimal getCloudCover() {
-		return cloudCover;
+		return this.cloudCover;
 	}
 
 	/**
 	 * A numerical value between 0 and 1 (inclusive) representing the relative humidity.
 	 */
 	public BigDecimal getHumidity() {
-		return humidity;
+		return this.humidity;
 	}
 
 	/**
 	 * A numerical value representing the sea-level air pressure in millibars.
 	 */
 	public BigDecimal getPressure() {
-		return pressure;
+		return this.pressure;
 	}
 
 	/**
 	 * A numerical value representing the average visibility in miles, capped at 10 miles.
 	 */
 	public BigDecimal getVisibility() {
-		return visibility;
+		return this.visibility;
 	}
 
 	/**
@@ -394,7 +394,7 @@ public class FioDataPoint {
 	 * the given time in Dobson units.
 	 */
 	public BigDecimal getOzone() {
-		return ozone;
+		return this.ozone;
 	}
 
 	private void setTime(Integer time) {
@@ -527,36 +527,38 @@ public class FioDataPoint {
 
 	@JsonAnySetter
 	void handleUnknown(String key, Object value) {
-		additionalProperties.put(key, value);
+		this.additionalProperties.put(key, value);
 	}
 
 	public Object getAdditionalProperty(String key) {
-		return additionalProperties.get(key);
+		return this.additionalProperties.get(key);
 	}
 
 	@Override
 	public String toString() {
-		return "FioDataPoint [time=" + time + ", summary=" + summary + ", icon=" + icon
-				+ ", sunriseTime=" + sunriseTime + ", sunsetTime=" + sunsetTime
-				+ ", moonPhase=" + moonPhase + ", nearestStormDistance="
-				+ nearestStormDistance + ", nearestStormBearing=" + nearestStormBearing
-				+ ", precipIntensity=" + precipIntensity + ", precipIntensityMax="
-				+ precipIntensityMax + ", precipIntensityMaxTime="
-				+ precipIntensityMaxTime + ", precipProbability=" + precipProbability
-				+ ", precipType=" + precipType + ", precipAccumulation="
-				+ precipAccumulation + ", temperature=" + temperature
-				+ ", temperatureMin=" + temperatureMin + ", temperatureMinTime="
-				+ temperatureMinTime + ", temperatureMax=" + temperatureMax
-				+ ", temperatureMaxTime=" + temperatureMaxTime + ", apparentTemperature="
-				+ apparentTemperature + ", apparentTemperatureMin="
-				+ apparentTemperatureMin + ", apparentTemperatureMinTime="
-				+ apparentTemperatureMinTime + ", apparentTemperatureMax="
-				+ apparentTemperatureMax + ", apparentTemperatureMaxTime="
-				+ apparentTemperatureMaxTime + ", dewPoint=" + dewPoint + ", windSpeed="
-				+ windSpeed + ", windBearing=" + windBearing + ", cloudCover="
-				+ cloudCover + ", humidity=" + humidity + ", pressure=" + pressure
-				+ ", visibility=" + visibility + ", ozone=" + ozone
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "FioDataPoint [time=" + this.time + ", summary=" + this.summary
+				+ ", icon=" + this.icon + ", sunriseTime=" + this.sunriseTime
+				+ ", sunsetTime=" + this.sunsetTime + ", moonPhase=" + this.moonPhase
+				+ ", nearestStormDistance=" + this.nearestStormDistance
+				+ ", nearestStormBearing=" + this.nearestStormBearing
+				+ ", precipIntensity=" + this.precipIntensity + ", precipIntensityMax="
+				+ this.precipIntensityMax + ", precipIntensityMaxTime="
+				+ this.precipIntensityMaxTime + ", precipProbability="
+				+ this.precipProbability + ", precipType=" + this.precipType
+				+ ", precipAccumulation=" + this.precipAccumulation + ", temperature="
+				+ this.temperature + ", temperatureMin=" + this.temperatureMin
+				+ ", temperatureMinTime=" + this.temperatureMinTime + ", temperatureMax="
+				+ this.temperatureMax + ", temperatureMaxTime=" + this.temperatureMaxTime
+				+ ", apparentTemperature=" + this.apparentTemperature
+				+ ", apparentTemperatureMin=" + this.apparentTemperatureMin
+				+ ", apparentTemperatureMinTime=" + this.apparentTemperatureMinTime
+				+ ", apparentTemperatureMax=" + this.apparentTemperatureMax
+				+ ", apparentTemperatureMaxTime=" + this.apparentTemperatureMaxTime
+				+ ", dewPoint=" + this.dewPoint + ", windSpeed=" + this.windSpeed
+				+ ", windBearing=" + this.windBearing + ", cloudCover=" + this.cloudCover
+				+ ", humidity=" + this.humidity + ", pressure=" + this.pressure
+				+ ", visibility=" + this.visibility + ", ozone=" + this.ozone
+				+ ", additionalProperties=" + this.additionalProperties + "]";
 	}
 
 }

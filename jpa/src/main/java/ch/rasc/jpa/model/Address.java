@@ -22,7 +22,7 @@ public class Address {
 	private String street;
 
 	public String getStreet() {
-		return street;
+		return this.street;
 	}
 
 	public void setStreet(String street) {
@@ -30,7 +30,7 @@ public class Address {
 	}
 
 	public Employee getEmployee() {
-		return employee;
+		return this.employee;
 	}
 
 	public void setEmployee(Employee employee) {
@@ -38,7 +38,7 @@ public class Address {
 	}
 
 	public long getAddressId() {
-		return addressId;
+		return this.addressId;
 	}
 
 	public void setAddressId(long addressId) {

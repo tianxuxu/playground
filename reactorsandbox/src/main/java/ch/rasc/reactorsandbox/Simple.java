@@ -1,13 +1,12 @@
 package ch.rasc.reactorsandbox;
 
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CountDownLatch;
 
-import reactor.core.Environment;
-import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
-import reactor.event.Event;
-import reactor.event.selector.ObjectSelector;
-import reactor.event.selector.Selector;
+import reactor.Environment;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.ObjectSelector;
+import reactor.bus.selector.Selector;
 
 public class Simple {
 
@@ -15,17 +14,23 @@ public class Simple {
 
 		Environment env = new Environment();
 
-		Reactor reactor = Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL)
-				.get();
+		EventBus reactor = EventBus.create(env, Environment.WORK_QUEUE);
 
+		CountDownLatch latch = new CountDownLatch(1);
 		Selector selector = ObjectSelector.objectSelector("parse");
-		reactor.on(selector, ev -> System.out.println(ev));
+		reactor.on(selector, ev -> {
+			System.out.println(ev);
+			System.out.println("selector: " + Thread.currentThread().getName());
+			latch.countDown();
+		});
 
+		System.out.println(Thread.currentThread().getName());
 		// Send an event to this Reactor and trigger all actions
 		// that match the given Selector
 		reactor.notify("parse", Event.wrap("Hello World!"));
 		reactor.notify("test", Event.wrap("test"));
-		TimeUnit.SECONDS.sleep(20);
+
+		latch.await();
 
 	}
 

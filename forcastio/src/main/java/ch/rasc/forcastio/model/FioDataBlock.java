@@ -31,14 +31,14 @@ public class FioDataBlock {
 	 * A human-readable text summary of this data block.
 	 */
 	public String getSummary() {
-		return summary;
+		return this.summary;
 	}
 
 	/**
 	 * A machine-readable text summary of this data block
 	 */
 	public FioIcon getIcon() {
-		return icon;
+		return this.icon;
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class FioDataBlock {
 	 * weather conditions at the requested location over time.
 	 */
 	public List<FioDataPoint> getData() {
-		return data;
+		return this.data;
 	}
 
 	private void setSummary(String summary) {
@@ -63,8 +63,8 @@ public class FioDataBlock {
 
 	@Override
 	public String toString() {
-		return "FioDataBlock [summary=" + summary + ", icon=" + icon + ", data=" + data
-				+ "]";
+		return "FioDataBlock [summary=" + this.summary + ", icon=" + this.icon
+				+ ", data=" + this.data + "]";
 	}
 
 }

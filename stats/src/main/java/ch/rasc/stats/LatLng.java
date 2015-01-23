@@ -6,7 +6,7 @@ public class LatLng {
 	private float lng;
 
 	public float getLat() {
-		return lat;
+		return this.lat;
 	}
 
 	public void setLat(float lat) {
@@ -14,7 +14,7 @@ public class LatLng {
 	}
 
 	public float getLng() {
-		return lng;
+		return this.lng;
 	}
 
 	public void setLng(float lng) {

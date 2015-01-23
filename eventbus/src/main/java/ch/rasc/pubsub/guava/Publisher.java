@@ -18,15 +18,15 @@ public class Publisher {
 	}
 
 	public void publishMsgEvent(String message) {
-		eventBus.post(new MsgEvent(message));
+		this.eventBus.post(new MsgEvent(message));
 	}
 
 	public void publishSpecialMsgEvent(String message, String user) {
-		eventBus.post(new SpecialMsgEvent(message, user));
+		this.eventBus.post(new SpecialMsgEvent(message, user));
 	}
 
 	public void publishTimeEvent() {
-		eventBus.post(new TimeEvent(new Date()));
+		this.eventBus.post(new TimeEvent(new Date()));
 	}
 
 }

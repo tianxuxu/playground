@@ -130,24 +130,25 @@ public class ApacheLogParser {
 				accessLogEntryMatcher = accessLogPattern.matcher(line);
 
 				if (!accessLogEntryMatcher.matches()) {
-					if (DEBUG) {
+					if (this.DEBUG) {
 						System.out.println("" + index + " : couldn't be parsed");
 					}
 					continue;
 				}
-				requestTime = accessLogEntryMatcher.group(4);
-				accessLogEntryEpoch = accesslogDateFormat.parse(requestTime).getTime();
+				this.requestTime = accessLogEntryMatcher.group(4);
+				accessLogEntryEpoch = accesslogDateFormat.parse(this.requestTime)
+						.getTime();
 
 				if (accessLogEntryEpoch >= startingEpoch
 						&& accessLogEntryEpoch <= endingEpoch) {
-					clientRequest = accessLogEntryMatcher.group(5);
+					this.clientRequest = accessLogEntryMatcher.group(5);
 
-					if (DEBUG) {
+					if (this.DEBUG) {
 						System.out.println("" + index + " : "
-								+ clientRequest.split(" ")[1]);
+								+ this.clientRequest.split(" ")[1]);
 					}
 
-					if (urlsMap.containsValue(clientRequest.split(" ")[1])) {
+					if (urlsMap.containsValue(this.clientRequest.split(" ")[1])) {
 						System.out.println("Line num : " + index + " "
 								+ accessLogEntryMatcher.group(1) + " "
 								+ accessLogEntryMatcher.group(4) + " "

@@ -24,7 +24,7 @@ public class SimpleTest {
 
 	@Test
 	public void test() {
-		List<Customer> allCustomers = customerRepository.findAll();
+		List<Customer> allCustomers = this.customerRepository.findAll();
 		assertEquals(1, allCustomers.size());
 
 		for (Customer customer : allCustomers) {

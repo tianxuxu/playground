@@ -19,13 +19,13 @@ public class LoopTest {
 	public void init() {
 		Color[] twoColors = new Color[] { Color.BLACK, Color.BLUE };
 		for (int i = 0; i < 1_000_000; i++) {
-			shapes.add(new Shape(twoColors[i % 2]));
+			this.shapes.add(new Shape(twoColors[i % 2]));
 		}
 	}
 
 	@Benchmark
 	public void loop() throws Exception {
-		for (Shape s : shapes) {
+		for (Shape s : this.shapes) {
 			if (s.getColor() == Color.BLUE) {
 				s.setColor(Color.RED);
 			}
@@ -34,7 +34,7 @@ public class LoopTest {
 
 	@Benchmark
 	public void iterator() throws Exception {
-		Iterator<Shape> it = shapes.iterator();
+		Iterator<Shape> it = this.shapes.iterator();
 		while (it.hasNext()) {
 			Shape s = it.next();
 			if (s.getColor() == Color.BLUE) {
@@ -45,7 +45,7 @@ public class LoopTest {
 
 	@Benchmark
 	public void lambdaStreamEmbeddedIf() throws Exception {
-		shapes.stream().forEach(s -> {
+		this.shapes.stream().forEach(s -> {
 			if (s.getColor() == Color.BLUE) {
 				s.setColor(Color.RED);
 			}
@@ -54,13 +54,13 @@ public class LoopTest {
 
 	@Benchmark
 	public void lambdaStream() throws Exception {
-		shapes.stream().filter(s -> s.getColor() == Color.BLUE)
+		this.shapes.stream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));
 	}
 
 	@Benchmark
 	public void lambdaParallel() throws Exception {
-		shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE)
+		this.shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));
 	}
 }

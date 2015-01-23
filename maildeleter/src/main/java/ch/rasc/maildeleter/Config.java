@@ -11,7 +11,7 @@ public class Config {
 	private int days;
 
 	public String getHost() {
-		return host;
+		return this.host;
 	}
 
 	public void setHost(String host) {
@@ -19,7 +19,7 @@ public class Config {
 	}
 
 	public String getUser() {
-		return user;
+		return this.user;
 	}
 
 	public void setUser(String user) {
@@ -27,7 +27,7 @@ public class Config {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -35,7 +35,7 @@ public class Config {
 	}
 
 	public int getDays() {
-		return days;
+		return this.days;
 	}
 
 	public void setDays(int days) {

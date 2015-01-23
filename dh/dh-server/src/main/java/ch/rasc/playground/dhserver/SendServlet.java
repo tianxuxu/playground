@@ -39,7 +39,8 @@ public class SendServlet extends HttpServlet {
 			String dsaPrivateKeyString = StreamUtils.copyToString(getClass()
 					.getResourceAsStream("/private_key"), StandardCharsets.UTF_8);
 			byte[] dsaPrivateKeyPkcs8 = CryptoUtil.hexToBytes(dsaPrivateKeyString);
-			dsaPrivateKey = CryptoUtil.convertPKCS8ToDSAPrivateKey(dsaPrivateKeyPkcs8);
+			this.dsaPrivateKey = CryptoUtil
+					.convertPKCS8ToDSAPrivateKey(dsaPrivateKeyPkcs8);
 		}
 		catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new ServletException(e);
@@ -71,7 +72,7 @@ public class SendServlet extends HttpServlet {
 
 			// Create signature
 			Signature dsaSignature = Signature.getInstance("SHA256withDSA");
-			dsaSignature.initSign(dsaPrivateKey);
+			dsaSignature.initSign(this.dsaPrivateKey);
 			dsaSignature.update(plainMessage.getBytes());
 			byte[] signature = new byte[50];
 			int actualBytes = dsaSignature.sign(signature, 1, 49);

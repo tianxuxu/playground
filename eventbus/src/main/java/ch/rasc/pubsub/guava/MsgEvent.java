@@ -8,7 +8,7 @@ public class MsgEvent {
 	}
 
 	public String getMessage() {
-		return message;
+		return this.message;
 	}
 
 }

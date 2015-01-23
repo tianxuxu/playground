@@ -27,8 +27,8 @@ public class QuoteService {
 	public QuoteService(QuoteHandler quoteHandler) {
 		this.quoteHandler = quoteHandler;
 
-		msgpack = new MessagePack();
-		msgpack.register(Quote.class);
+		this.msgpack = new MessagePack();
+		this.msgpack.register(Quote.class);
 
 		this.prices.put("CTXS", "24.30");
 		this.prices.put("DELL", "13.03");
@@ -61,7 +61,7 @@ public class QuoteService {
 
 	@Scheduled(fixedDelay = 1000)
 	public void sendQuotes() throws IOException {
-		quoteHandler.sendToAll(msgpack.write(generateQuotes()));
+		this.quoteHandler.sendToAll(this.msgpack.write(generateQuotes()));
 	}
 
 }

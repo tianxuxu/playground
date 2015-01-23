@@ -50,7 +50,7 @@ public class FioFlag {
 	 * maintenace) has made the data unavailable.
 	 */
 	public Object getDarkskyUnavailable() {
-		return darkskyUnavailable;
+		return this.darkskyUnavailable;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class FioFlag {
 	 * this request.
 	 */
 	public List<String> getDarkskyStations() {
-		return darkskyStations;
+		return this.darkskyStations;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class FioFlag {
 	 * servicing this request.
 	 */
 	public List<String> getDatapointStations() {
-		return datapointStations;
+		return this.datapointStations;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class FioFlag {
 	 * this request.
 	 */
 	public List<String> getIsdStations() {
-		return isdStations;
+		return this.isdStations;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class FioFlag {
 	 * this request.
 	 */
 	public List<String> getLampStations() {
-		return lampStations;
+		return this.lampStations;
 	}
 
 	/**
@@ -90,11 +90,11 @@ public class FioFlag {
 	 * this request.
 	 */
 	public List<String> getMetarStations() {
-		return metarStations;
+		return this.metarStations;
 	}
 
 	public List<String> getMadisStations() {
-		return madisStations;
+		return this.madisStations;
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class FioFlag {
 	 * order to facilitate this request (as per their license agreement).
 	 */
 	public String getMetnoLicense() {
-		return metnoLicense;
+		return this.metnoLicense;
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class FioFlag {
 	 * this request.
 	 */
 	public List<String> getSources() {
-		return sources;
+		return this.sources;
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class FioFlag {
 	 * request.
 	 */
 	public FioUnit getUnits() {
-		return units;
+		return this.units;
 	}
 
 	private void setDarkskyUnavailable(Object darkskyUnavailable) {
@@ -163,12 +163,13 @@ public class FioFlag {
 
 	@Override
 	public String toString() {
-		return "FioFlag [darkskyUnavailable=" + darkskyUnavailable + ", darkskyStations="
-				+ darkskyStations + ", datapointStations=" + datapointStations
-				+ ", isdStations=" + isdStations + ", lampStations=" + lampStations
-				+ ", metarStations=" + metarStations + ", madisStations=" + madisStations
-				+ ", metnoLicense=" + metnoLicense + ", sources=" + sources + ", units="
-				+ units + "]";
+		return "FioFlag [darkskyUnavailable=" + this.darkskyUnavailable
+				+ ", darkskyStations=" + this.darkskyStations + ", datapointStations="
+				+ this.datapointStations + ", isdStations=" + this.isdStations
+				+ ", lampStations=" + this.lampStations + ", metarStations="
+				+ this.metarStations + ", madisStations=" + this.madisStations
+				+ ", metnoLicense=" + this.metnoLicense + ", sources=" + this.sources
+				+ ", units=" + this.units + "]";
 	}
 
 }

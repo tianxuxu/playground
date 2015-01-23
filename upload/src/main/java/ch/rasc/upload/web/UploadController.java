@@ -39,7 +39,7 @@ public class UploadController {
 			@RequestParam("resumableRelativePath") String resumableRelativePath)
 			throws IOException {
 
-		if (fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
+		if (this.fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
 				resumableChunkSize)) {
 			// do not upload chunk again
 			response.setStatus(200);
@@ -64,19 +64,19 @@ public class UploadController {
 			@RequestParam("resumableRelativePath") String resumableRelativePath,
 			@RequestParam(value = "file") MultipartFile file) throws IOException {
 
-		if (!fileManager.isSupported(resumableFilename)) {
+		if (!this.fileManager.isSupported(resumableFilename)) {
 			// cancel the whole upload
 			response.setStatus(501);
 			return;
 		}
 
 		try (InputStream is = file.getInputStream()) {
-			fileManager.storeChunk(resumableIdentifier, resumableChunkNumber, is);
+			this.fileManager.storeChunk(resumableIdentifier, resumableChunkNumber, is);
 		}
 
-		if (fileManager.allChunksUploaded(resumableIdentifier, resumableChunkSize,
+		if (this.fileManager.allChunksUploaded(resumableIdentifier, resumableChunkSize,
 				resumableTotalSize)) {
-			fileManager.mergeAndDeleteChunks(resumableFilename, resumableIdentifier,
+			this.fileManager.mergeAndDeleteChunks(resumableFilename, resumableIdentifier,
 					resumableChunkSize, resumableTotalSize);
 		}
 

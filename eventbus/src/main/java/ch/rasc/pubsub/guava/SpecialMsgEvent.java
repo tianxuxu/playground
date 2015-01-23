@@ -10,7 +10,7 @@ public class SpecialMsgEvent extends MsgEvent {
 	}
 
 	public String getUser() {
-		return user;
+		return this.user;
 	}
 
 }

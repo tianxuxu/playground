@@ -14,12 +14,12 @@ public class QueryTheCache {
 	private final HazelcastInstance haz;
 
 	public QueryTheCache() {
-		haz = Hazelcast.newHazelcastInstance();
+		this.haz = Hazelcast.newHazelcastInstance();
 	}
 
 	public void queryMap() {
 
-		IMap<Predicate<?, ?>, ObjectToCache> map = haz.getMap("testmap");
+		IMap<Predicate<?, ?>, ObjectToCache> map = this.haz.getMap("testmap");
 		EntryObject e = new PredicateBuilder().getEntryObject();
 		Predicate<?, ?> predicate = e.get("objectName")
 				.in("example: 1", "example: 2", "example: 3")

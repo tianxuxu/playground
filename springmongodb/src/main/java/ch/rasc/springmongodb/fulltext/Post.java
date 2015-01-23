@@ -35,17 +35,17 @@ public class Post {
 	private Float score;
 
 	public Float getScore() {
-		return score;
+		return this.score;
 	}
 
 	private List<String> tags;
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public long getStackexchangeId() {
-		return stackexchangeId;
+		return this.stackexchangeId;
 	}
 
 	public void setStackexchangeId(long stackexchangeId) {
@@ -53,7 +53,7 @@ public class Post {
 	}
 
 	public long getPostTypeId() {
-		return postTypeId;
+		return this.postTypeId;
 	}
 
 	public void setPostTypeId(long postTypeId) {
@@ -61,7 +61,7 @@ public class Post {
 	}
 
 	public long getAcceptedAnswerId() {
-		return acceptedAnswerId;
+		return this.acceptedAnswerId;
 	}
 
 	public void setAcceptedAnswerId(long acceptedAnswerId) {
@@ -69,7 +69,7 @@ public class Post {
 	}
 
 	public LocalDateTime getCreationDate() {
-		return creationDate;
+		return this.creationDate;
 	}
 
 	public void setCreationDate(LocalDateTime creationDate) {
@@ -77,7 +77,7 @@ public class Post {
 	}
 
 	public long getStackexchangeScore() {
-		return stackexchangeScore;
+		return this.stackexchangeScore;
 	}
 
 	public void setStackexchangeScore(long stackexchangeScore) {
@@ -85,7 +85,7 @@ public class Post {
 	}
 
 	public long getViewCount() {
-		return viewCount;
+		return this.viewCount;
 	}
 
 	public void setViewCount(long viewCount) {
@@ -93,7 +93,7 @@ public class Post {
 	}
 
 	public String getBody() {
-		return body;
+		return this.body;
 	}
 
 	public void setBody(String body) {
@@ -101,7 +101,7 @@ public class Post {
 	}
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
@@ -109,7 +109,7 @@ public class Post {
 	}
 
 	public List<String> getTags() {
-		return tags;
+		return this.tags;
 	}
 
 	public void setTags(List<String> tags) {
@@ -118,11 +118,12 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", stackexchangeId=" + stackexchangeId
-				+ ", postTypeId=" + postTypeId + ", acceptedAnswerId=" + acceptedAnswerId
-				+ ", creationDate=" + creationDate + ", stackexchangeScore="
-				+ stackexchangeScore + ", viewCount=" + viewCount + ", body=" + body
-				+ ", title=" + title + ", tags=" + tags + "]";
+		return "Post [id=" + this.id + ", stackexchangeId=" + this.stackexchangeId
+				+ ", postTypeId=" + this.postTypeId + ", acceptedAnswerId="
+				+ this.acceptedAnswerId + ", creationDate=" + this.creationDate
+				+ ", stackexchangeScore=" + this.stackexchangeScore + ", viewCount="
+				+ this.viewCount + ", body=" + this.body + ", title=" + this.title
+				+ ", tags=" + this.tags + "]";
 	}
 
 }

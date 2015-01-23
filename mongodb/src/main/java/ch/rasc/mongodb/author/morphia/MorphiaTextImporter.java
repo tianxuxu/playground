@@ -29,7 +29,7 @@ public class MorphiaTextImporter implements TextImporter {
 
 	@Override
 	public void doImport(File file) {
-		List<String> words = extractor.extractWords(file);
+		List<String> words = this.extractor.extractWords(file);
 
 		for (int i = 0; i < words.size() - 3; i++) {
 			String w1 = words.get(i);
@@ -38,12 +38,12 @@ public class MorphiaTextImporter implements TextImporter {
 
 			// Upsert base document. If exists increment count, otherwise insert
 			// document
-			Query<Word12> query = datastore.createQuery(Word12.class);
+			Query<Word12> query = this.datastore.createQuery(Word12.class);
 			query.field("word1").equal(w1);
 			query.field("word2").equal(w2);
-			UpdateOperations<Word12> op = datastore.createUpdateOperations(Word12.class)
-					.inc("count");
-			datastore.update(query, op, true);
+			UpdateOperations<Word12> op = this.datastore.createUpdateOperations(
+					Word12.class).inc("count");
+			this.datastore.update(query, op, true);
 
 			// // update count in embedded document
 			// query = new BasicDBObject();

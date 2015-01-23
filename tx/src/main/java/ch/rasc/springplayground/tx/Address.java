@@ -38,7 +38,7 @@ public class Address extends AbstractPersistable<Long> {
 	private Customer customer;
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -46,7 +46,7 @@ public class Address extends AbstractPersistable<Long> {
 	}
 
 	public String getStreet() {
-		return street;
+		return this.street;
 	}
 
 	public void setStreet(String street) {
@@ -54,7 +54,7 @@ public class Address extends AbstractPersistable<Long> {
 	}
 
 	public String getPostalCode() {
-		return postalCode;
+		return this.postalCode;
 	}
 
 	public void setPostalCode(String postalCode) {
@@ -62,7 +62,7 @@ public class Address extends AbstractPersistable<Long> {
 	}
 
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	public void setCity(String city) {
@@ -70,7 +70,7 @@ public class Address extends AbstractPersistable<Long> {
 	}
 
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	public void setCountry(String country) {
@@ -78,7 +78,7 @@ public class Address extends AbstractPersistable<Long> {
 	}
 
 	public Customer getCustomer() {
-		return customer;
+		return this.customer;
 	}
 
 	public void setCustomer(Customer customer) {
@@ -87,9 +87,9 @@ public class Address extends AbstractPersistable<Long> {
 
 	@Override
 	public String toString() {
-		return "Address [type=" + type + ", street=" + street + ", postalCode="
-				+ postalCode + ", city=" + city + ", country=" + country + ", customer="
-				+ customer + "]";
+		return "Address [type=" + this.type + ", street=" + this.street + ", postalCode="
+				+ this.postalCode + ", city=" + this.city + ", country=" + this.country
+				+ ", customer=" + this.customer + "]";
 	}
 
 }

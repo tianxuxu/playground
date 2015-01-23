@@ -1,6 +1,8 @@
 package ch.rasc.reactorsandbox.samples;
 
-import static reactor.event.selector.Selectors.$;
+import static reactor.bus.selector.Selectors.$;
+
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,89 +13,71 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import reactor.core.Environment;
-import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
-import reactor.event.Event;
-import reactor.event.selector.Selector;
-import reactor.function.Consumer;
-import reactor.function.support.Boundary;
+import reactor.Environment;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.Selector;
+import reactor.fn.Consumer;
+import reactor.rx.Promise;
+import reactor.rx.Streams;
+import reactor.rx.stream.Broadcaster;
 import reactor.spring.context.config.EnableReactor;
 
 /**
  * @author Jon Brisbin
+ * @author Stephane Maldini
  */
 @EnableAutoConfiguration
 public class DispatcherSamples implements CommandLineRunner {
 
 	@Autowired
-	private Consumer<Event<Reactor>> consumer;
-
+	private Consumer<Event<EventBus>> consumer;
 	@Autowired
 	private Environment env;
-
 	@Autowired
-	private Reactor threadPoolReactor;
+	private EventBus threadPoolReactor;
 
 	@Override
 	public void run(String... args) throws Exception {
 		threadPoolDispatcher();
-		multipleEventLoopDispatchers();
 		multipleRingBufferDispatchers();
 
-		env.shutdown();
+		this.env.shutdown();
 	}
 
 	private void threadPoolDispatcher() {
-		Boundary b = new Boundary();
-
 		// Bind to a Selector using an anonymous object
 		Selector anon = $();
 
-		threadPoolReactor.on(anon, b.bind(consumer, 3));
+		Broadcaster<Object> broadcaster = Streams.broadcast();
+		Promise<List<Object>> promise = broadcaster.toList(3);
 
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
-		threadPoolReactor.notify(anon.getObject(), Event.wrap(threadPoolReactor));
+		this.threadPoolReactor.on(anon, this.consumer);
 
-		b.await();
-	}
+		this.threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(this.threadPoolReactor));
+		this.threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(this.threadPoolReactor));
+		this.threadPoolReactor.notify(anon.getObject(),
+				Event.wrap(this.threadPoolReactor));
 
-	private void multipleEventLoopDispatchers() {
-		Boundary b = new Boundary();
-
-		Reactor r1 = Reactors.reactor().env(env).dispatcher(Environment.EVENT_LOOP).get();
-		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.EVENT_LOOP).get();
-
-		// Bind to a Selector using an anonymous object
-		Selector anon = $();
-
-		r1.on(anon, b.bind(consumer, 3));
-		r2.on(anon, b.bind(consumer, 2));
-
-		r1.notify(anon.getObject(), Event.wrap(r1));
-		r1.notify(anon.getObject(), Event.wrap(r1));
-		r1.notify(anon.getObject(), Event.wrap(r1));
-
-		r2.notify(anon.getObject(), Event.wrap(r2));
-		r2.notify(anon.getObject(), Event.wrap(r2));
-
-		b.await();
+		promise.poll();
 	}
 
 	private void multipleRingBufferDispatchers() {
-		Boundary b = new Boundary();
+		Broadcaster<Object> broadcaster = Streams.broadcast();
+		Promise<List<Object>> promise = broadcaster.toList(5);
 
-		Reactor r1 = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER)
+		EventBus r1 = EventBus.config().env(this.env).dispatcher(Environment.SHARED)
 				.get();
-		Reactor r2 = Reactors.reactor().env(env).dispatcher(Environment.RING_BUFFER)
+		EventBus r2 = EventBus.config().env(this.env).dispatcher(Environment.SHARED)
 				.get();
 
 		// Bind to a Selector using an anonymous object
 		Selector anon = $();
 
-		r1.on(anon, b.bind(consumer, 3));
-		r2.on(anon, b.bind(consumer, 2));
+		r1.on(anon, this.consumer);
+		r2.on(anon, this.consumer);
 
 		r1.notify(anon.getObject(), Event.wrap(r1));
 		r1.notify(anon.getObject(), Event.wrap(r1));
@@ -102,7 +86,7 @@ public class DispatcherSamples implements CommandLineRunner {
 		r2.notify(anon.getObject(), Event.wrap(r2));
 		r2.notify(anon.getObject(), Event.wrap(r2));
 
-		b.await();
+		promise.poll();
 	}
 
 	public static void main(String... args) {
@@ -119,14 +103,14 @@ public class DispatcherSamples implements CommandLineRunner {
 		}
 
 		@Bean
-		public Consumer<Event<Reactor>> consumer(Logger log) {
+		public Consumer<Event<EventBus>> consumer(Logger log) {
 			return ev -> log.info("Triggered by anonymous object in thread {} on {}",
 					Thread.currentThread(), ev.getData());
 		}
 
 		@Bean
-		public Reactor threadPoolReactor(Environment env) {
-			return Reactors.reactor().env(env).dispatcher(Environment.THREAD_POOL).get();
+		public EventBus threadPoolReactor(Environment env) {
+			return EventBus.config().env(env).dispatcher(Environment.THREAD_POOL).get();
 		}
 
 	}

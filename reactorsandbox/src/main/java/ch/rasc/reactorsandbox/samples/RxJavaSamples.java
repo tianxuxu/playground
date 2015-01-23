@@ -18,38 +18,43 @@ package ch.rasc.reactorsandbox.samples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.core.Environment;
-import reactor.core.composable.Deferred;
-import reactor.core.composable.Stream;
-import reactor.core.composable.spec.Streams;
+import reactor.Environment;
+import reactor.rx.Streams;
+import reactor.rx.stream.Broadcaster;
+import rx.Observable;
+import rx.Observer;
 
 /**
- * @author Jon Brisbin
+ * @author Stephane Maldini
  */
 public class RxJavaSamples {
 
 	static final Logger LOG = LoggerFactory.getLogger(RxJavaSamples.class);
-
 	static final Environment ENV = new Environment();
-
-	static final int runs = 10000000;
 
 	public static void main(String... args) throws Exception {
 
-		// Observable<Integer> obs = Observable.from(1,2,3,4,5);
-		// obs.subscribe(i -> System.out.println("a:" + i));
+		final Broadcaster<Integer> stream = Streams.<Integer> broadcast(ENV);
 
-		Deferred<Integer, Stream<Integer>> stream = Streams.<Integer> defer().env(ENV)
-				.get();
+		stream.map(i -> ":" + i).consume(i -> LOG.info("consumed:" + i));
 
-		stream.compose().consume(i -> System.out.println("0:" + i)).map(i -> ":" + i)
-				.consume(i -> System.out.println("a:" + i))
-				.consume(i -> System.out.println("b:" + i));
+		Observable<Integer> obs = Observable.from(1, 2, 3, 4, 5);
+		obs.subscribe(new Observer<Integer>() {
+			@Override
+			public void onCompleted() {
+				stream.broadcastComplete();
+			}
 
-		stream.accept(1);
-		stream.accept(2);
-		stream.accept(3);
-		stream.accept(4);
+			@Override
+			public void onError(Throwable e) {
+				stream.broadcastError(e);
+			}
+
+			@Override
+			public void onNext(Integer arg) {
+				stream.onNext(arg);
+			}
+		});
 
 		ENV.shutdown();
 	}

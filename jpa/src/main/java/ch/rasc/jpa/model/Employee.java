@@ -35,7 +35,7 @@ public class Employee {
 	private Set<Address> address = new HashSet<>();
 
 	public long getEmployeeId() {
-		return employeeId;
+		return this.employeeId;
 	}
 
 	public void setEmployeeId(long employeeId) {
@@ -43,7 +43,7 @@ public class Employee {
 	}
 
 	public String getEmployeeName() {
-		return employeeName;
+		return this.employeeName;
 	}
 
 	public void setEmployeeName(String employeeName) {
@@ -51,7 +51,7 @@ public class Employee {
 	}
 
 	public String getEmployeeSurname() {
-		return employeeSurname;
+		return this.employeeSurname;
 	}
 
 	public void setEmployeeSurname(String employeeSurname) {
@@ -59,7 +59,7 @@ public class Employee {
 	}
 
 	public String getJob() {
-		return job;
+		return this.job;
 	}
 
 	public void setJob(String job) {
@@ -67,7 +67,7 @@ public class Employee {
 	}
 
 	public Set<Address> getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(Set<Address> address) {

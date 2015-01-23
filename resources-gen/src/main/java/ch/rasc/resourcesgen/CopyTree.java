@@ -37,7 +37,7 @@ public class CopyTree implements FileVisitor<Path> {
 
 	@Override
 	public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-		Path newdir = to.resolve(from.relativize(dir));
+		Path newdir = this.to.resolve(this.from.relativize(dir));
 		try {
 			Files.copy(dir, newdir, StandardCopyOption.REPLACE_EXISTING,
 					StandardCopyOption.COPY_ATTRIBUTES);
@@ -53,8 +53,8 @@ public class CopyTree implements FileVisitor<Path> {
 	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 			throws IOException {
 		try {
-			if (fileFilter.test(file)) {
-				Files.copy(file, to.resolve(from.relativize(file)),
+			if (this.fileFilter.test(file)) {
+				Files.copy(file, this.to.resolve(this.from.relativize(file)),
 						StandardCopyOption.REPLACE_EXISTING,
 						StandardCopyOption.COPY_ATTRIBUTES);
 			}

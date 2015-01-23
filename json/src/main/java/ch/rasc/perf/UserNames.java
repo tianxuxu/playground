@@ -36,7 +36,7 @@ public class UserNames {
 	}
 
 	public String getNickname() {
-		return nickname;
+		return this.nickname;
 	}
 
 	public void setNickname(String nickname) {
@@ -44,7 +44,7 @@ public class UserNames {
 	}
 
 	public String getDisplayName() {
-		return displayName;
+		return this.displayName;
 	}
 
 	public void setDisplayName(String displayName) {
@@ -52,7 +52,7 @@ public class UserNames {
 	}
 
 	public String getGivenName() {
-		return givenName;
+		return this.givenName;
 	}
 
 	public void setGivenName(String givenName) {
@@ -60,7 +60,7 @@ public class UserNames {
 	}
 
 	public String getFamilyName() {
-		return familyName;
+		return this.familyName;
 	}
 
 	public void setFamilyName(String familyName) {
@@ -68,7 +68,7 @@ public class UserNames {
 	}
 
 	public String getMiddleName() {
-		return middleName;
+		return this.middleName;
 	}
 
 	public void setMiddleName(String middleName) {
@@ -76,7 +76,7 @@ public class UserNames {
 	}
 
 	public String getPrefix() {
-		return prefix;
+		return this.prefix;
 	}
 
 	public void setPrefix(String prefix) {
@@ -84,7 +84,7 @@ public class UserNames {
 	}
 
 	public String getSuffix() {
-		return suffix;
+		return this.suffix;
 	}
 
 	public void setSuffix(String suffix) {

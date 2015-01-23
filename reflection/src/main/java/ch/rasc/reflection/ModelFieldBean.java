@@ -28,12 +28,12 @@ public class ModelFieldBean {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@JsonSerialize(using = ModelTypeSerializer.class)
 	public ModelType getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(ModelType type) {
@@ -41,7 +41,7 @@ public class ModelFieldBean {
 	}
 
 	public Object getDefaultValue() {
-		return defaultValue;
+		return this.defaultValue;
 	}
 
 	public void setDefaultValue(Object defaultValue) {
@@ -49,7 +49,7 @@ public class ModelFieldBean {
 	}
 
 	public String getDateFormat() {
-		return dateFormat;
+		return this.dateFormat;
 	}
 
 	public void setDateFormat(String dateFormat) {
@@ -57,7 +57,7 @@ public class ModelFieldBean {
 	}
 
 	public Boolean getUseNull() {
-		return useNull;
+		return this.useNull;
 	}
 
 	public void setUseNull(Boolean useNull) {

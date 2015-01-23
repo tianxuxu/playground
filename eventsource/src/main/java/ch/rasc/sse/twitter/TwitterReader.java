@@ -20,9 +20,9 @@ public class TwitterReader {
 
 	private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
-	private final Lock readLock = rwl.readLock();
+	private final Lock readLock = this.rwl.readLock();
 
-	private final Lock writeLock = rwl.writeLock();
+	private final Lock writeLock = this.rwl.writeLock();
 
 	private final TwitterTemplate twitterTemplate;
 
@@ -36,23 +36,23 @@ public class TwitterReader {
 		String consumerSecret = environment.getProperty("twitter.consumerSecret");
 		String accessToken = environment.getProperty("twitter.accessToken");
 		String accessTokenSecret = environment.getProperty("twtter.accessTokenSecret");
-		twitterTemplate = new TwitterTemplate(consumerKey, consumerSecret, accessToken,
-				accessTokenSecret);
+		this.twitterTemplate = new TwitterTemplate(consumerKey, consumerSecret,
+				accessToken, accessTokenSecret);
 	}
 
 	public List<Tweet> getTweetsSinceId(long lastId) {
 		List<Tweet> builder = new ArrayList<>();
 
-		readLock.lock();
+		this.readLock.lock();
 		try {
-			for (Tweet tweet : tweets) {
+			for (Tweet tweet : this.tweets) {
 				if (tweet.getId() > lastId) {
 					builder.add(tweet);
 				}
 			}
 		}
 		finally {
-			readLock.unlock();
+			this.readLock.unlock();
 		}
 
 		return Collections.unmodifiableList(builder);
@@ -61,28 +61,28 @@ public class TwitterReader {
 	@Scheduled(fixedDelay = 10000)
 	public void readTwitterFeed() {
 
-		SearchResults results = twitterTemplate.searchOperations().search("java", 50,
-				lastReceivedId, 0);
+		SearchResults results = this.twitterTemplate.searchOperations().search("java",
+				50, this.lastReceivedId, 0);
 		List<Tweet> newTweets = new LinkedList<>();
 		long maxId = 0;
 		for (Tweet tweet : results.getTweets()) {
-			if (tweet.getId() > lastReceivedId) {
+			if (tweet.getId() > this.lastReceivedId) {
 				newTweets.add(0, tweet);
 				if (tweet.getId() > maxId) {
 					maxId = tweet.getId();
 				}
 			}
 		}
-		lastReceivedId = maxId;
+		this.lastReceivedId = maxId;
 
 		if (!newTweets.isEmpty()) {
 			System.out.printf("Got %d new tweets\n", newTweets.size());
-			writeLock.lock();
+			this.writeLock.lock();
 			try {
-				tweets.addAll(newTweets);
+				this.tweets.addAll(newTweets);
 			}
 			finally {
-				writeLock.unlock();
+				this.writeLock.unlock();
 			}
 		}
 	}

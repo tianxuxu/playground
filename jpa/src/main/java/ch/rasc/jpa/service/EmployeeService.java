@@ -23,11 +23,12 @@ public class EmployeeService {
 	@Transactional(readOnly = true)
 	public void query() {
 		System.out.println("lookup address");
-		Address a = entityManager.find(Address.class, 1L);
+		Address a = this.entityManager.find(Address.class, 1L);
 
 		System.out.println("contains query");
-		List<Employee> employees = new JPAQuery(entityManager).from(QEmployee.employee)
-				.where(QEmployee.employee.address.contains(a)).list(QEmployee.employee);
+		List<Employee> employees = new JPAQuery(this.entityManager)
+				.from(QEmployee.employee).where(QEmployee.employee.address.contains(a))
+				.list(QEmployee.employee);
 		for (Employee employee : employees) {
 			System.out.println(employee);
 		}
@@ -46,19 +47,19 @@ public class EmployeeService {
 		address.setStreet("a street");
 		e.getAddress().add(address);
 
-		entityManager.persist(e);
+		this.entityManager.persist(e);
 	}
 
 	@Transactional(readOnly = true)
 	public void update() {
-		Employee e = entityManager.find(Employee.class, 1L);
+		Employee e = this.entityManager.find(Employee.class, 1L);
 		e.setEmployeeName("test");
 	}
 
 	@Transactional(readOnly = true)
 	public void remove() {
-		Employee e = entityManager.find(Employee.class, 1L);
-		entityManager.remove(e);
+		Employee e = this.entityManager.find(Employee.class, 1L);
+		this.entityManager.remove(e);
 	}
 
 }

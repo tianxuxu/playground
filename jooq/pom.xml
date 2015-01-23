@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.0.RELEASE</version>
+		<version>1.2.1.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.5.0</version>
+			<version>3.5.1</version>
 		</dependency>
 	</dependencies>
 
@@ -61,7 +61,7 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>3.5.0</version>
+				<version>3.5.1</version>
 
 				<dependencies>
 					<dependency>

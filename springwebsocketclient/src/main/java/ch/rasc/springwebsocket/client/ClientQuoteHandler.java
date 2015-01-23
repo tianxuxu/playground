@@ -10,14 +10,14 @@ public class ClientQuoteHandler extends BinaryWebSocketHandler {
 	private final MessagePack msgpack;
 
 	public ClientQuoteHandler() {
-		msgpack = new MessagePack();
-		msgpack.register(Quote.class);
+		this.msgpack = new MessagePack();
+		this.msgpack.register(Quote.class);
 	}
 
 	@Override
 	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message)
 			throws Exception {
-		Quote[] dst = msgpack.read(message.getPayload(), Quote[].class);
+		Quote[] dst = this.msgpack.read(message.getPayload(), Quote[].class);
 		for (Quote quote : dst) {
 			System.out.println(quote);
 		}

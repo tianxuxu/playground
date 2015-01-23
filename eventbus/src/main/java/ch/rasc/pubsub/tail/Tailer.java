@@ -26,13 +26,13 @@ public class Tailer {
 	private final String encoding = System.getProperty("file.encoding");
 
 	public Tailer() {
-		path = Paths.get("c:/temp/t.txt");
+		this.path = Paths.get("c:/temp/t.txt");
 	}
 
 	@Subscribe
 	public void handleWatchEvent(PathEvents pathEvents) {
 		for (PathEvent event : pathEvents.getEvents()) {
-			if (path.endsWith(event.getEventTarget())) {
+			if (this.path.endsWith(event.getEventTarget())) {
 				if (event.getType() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("TAIL: entry deleted");
 				}
@@ -51,22 +51,22 @@ public class Tailer {
 
 	private void printTail() throws IOException {
 
-		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(path,
+		try (SeekableByteChannel seekableByteChannel = Files.newByteChannel(this.path,
 				StandardOpenOption.READ)) {
-			if (seekableByteChannel.size() < position) {
-				position = 0;
+			if (seekableByteChannel.size() < this.position) {
+				this.position = 0;
 			}
 
-			seekableByteChannel.position(position);
-			buffer.clear();
+			seekableByteChannel.position(this.position);
+			this.buffer.clear();
 
-			while (seekableByteChannel.read(buffer) > 0) {
-				buffer.flip();
-				System.out.print(Charset.forName(encoding).decode(buffer));
-				buffer.clear();
+			while (seekableByteChannel.read(this.buffer) > 0) {
+				this.buffer.flip();
+				System.out.print(Charset.forName(this.encoding).decode(this.buffer));
+				this.buffer.clear();
 			}
 
-			position = seekableByteChannel.position();
+			this.position = seekableByteChannel.position();
 		}
 
 	}

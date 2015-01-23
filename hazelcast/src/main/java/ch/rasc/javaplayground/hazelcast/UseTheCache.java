@@ -11,16 +11,16 @@ public class UseTheCache {
 	private final HazelcastInstance haz;
 
 	public UseTheCache() {
-		haz = Hazelcast.newHazelcastInstance();
+		this.haz = Hazelcast.newHazelcastInstance();
 	}
 
 	public void readList() {
-		List<ObjectToCache> list = haz.getList("testlist");
+		List<ObjectToCache> list = this.haz.getList("testlist");
 		System.out.println("List has " + list.size() + " items.");
 	}
 
 	public void readMap() {
-		Map<Integer, ObjectToCache> map = haz.getMap("testmap");
+		Map<Integer, ObjectToCache> map = this.haz.getMap("testmap");
 		System.out.println("Map has " + map.size() + " items.");
 
 	}

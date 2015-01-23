@@ -12,7 +12,7 @@ public enum FioBlock {
 	}
 
 	public String getJsonValue() {
-		return jsonValue;
+		return this.jsonValue;
 	}
 
 }

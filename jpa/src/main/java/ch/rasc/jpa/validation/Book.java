@@ -21,7 +21,7 @@ public class Book {
 	private String isbn;
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
@@ -29,7 +29,7 @@ public class Book {
 	}
 
 	public String getAuthor() {
-		return author;
+		return this.author;
 	}
 
 	public void setAuthor(String author) {
@@ -37,7 +37,7 @@ public class Book {
 	}
 
 	public int getNumOfPages() {
-		return numOfPages;
+		return this.numOfPages;
 	}
 
 	public void setNumOfPages(int numOfPages) {
@@ -45,7 +45,7 @@ public class Book {
 	}
 
 	public String getIsbn() {
-		return isbn;
+		return this.isbn;
 	}
 
 	public void setIsbn(String isbn) {

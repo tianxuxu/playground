@@ -14,7 +14,7 @@ public class AppEvent extends ApplicationEvent {
 	}
 
 	public String getMessage() {
-		return message;
+		return this.message;
 	}
 
 }

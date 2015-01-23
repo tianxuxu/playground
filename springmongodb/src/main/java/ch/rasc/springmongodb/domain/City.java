@@ -27,31 +27,31 @@ public class City {
 	private Point location;
 
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	public String getAsciiCityName() {
-		return asciiCityName;
+		return this.asciiCityName;
 	}
 
 	public String getCityName() {
-		return cityName;
+		return this.cityName;
 	}
 
 	public String getRegion() {
-		return region;
+		return this.region;
 	}
 
 	public Integer getPopulation() {
-		return population;
+		return this.population;
 	}
 
 	public Point getLocation() {
-		return location;
+		return this.location;
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setCountry(String country) {

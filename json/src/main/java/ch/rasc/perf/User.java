@@ -27,7 +27,7 @@ public class User {
 	private Date dob;
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -35,7 +35,7 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return this.userName;
 	}
 
 	public void setUserName(String userName) {
@@ -43,7 +43,7 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -51,7 +51,7 @@ public class User {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -59,7 +59,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -67,7 +67,7 @@ public class User {
 	}
 
 	public String getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(String role) {
@@ -75,7 +75,7 @@ public class User {
 	}
 
 	public String getLocale() {
-		return locale;
+		return this.locale;
 	}
 
 	public void setLocale(String locale) {
@@ -83,7 +83,7 @@ public class User {
 	}
 
 	public boolean isEnabled() {
-		return enabled;
+		return this.enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -91,7 +91,7 @@ public class User {
 	}
 
 	public Integer getFailedLogins() {
-		return failedLogins;
+		return this.failedLogins;
 	}
 
 	public void setFailedLogins(Integer failedLogins) {
@@ -99,7 +99,7 @@ public class User {
 	}
 
 	public Date getLockedOut() {
-		return lockedOut;
+		return this.lockedOut;
 	}
 
 	public void setLockedOut(Date lockedOut) {
@@ -107,7 +107,7 @@ public class User {
 	}
 
 	public Date getDob() {
-		return dob;
+		return this.dob;
 	}
 
 	public void setDob(Date dob) {

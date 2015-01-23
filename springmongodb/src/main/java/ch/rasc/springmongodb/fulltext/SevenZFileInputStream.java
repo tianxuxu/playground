@@ -15,16 +15,16 @@ final class SevenZFileInputStream extends InputStream {
 
 	@Override
 	public int read() throws IOException {
-		return sevenZFile.read();
+		return this.sevenZFile.read();
 	}
 
 	@Override
 	public int read(byte[] b) throws IOException {
-		return sevenZFile.read(b);
+		return this.sevenZFile.read(b);
 	}
 
 	@Override
 	public int read(byte[] b, int off, int len) throws IOException {
-		return sevenZFile.read(b, off, len);
+		return this.sevenZFile.read(b, off, len);
 	}
 }

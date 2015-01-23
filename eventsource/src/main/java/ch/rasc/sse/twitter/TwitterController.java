@@ -35,7 +35,7 @@ public class TwitterController {
 			@RequestHeader(value = "Last-Event-ID", required = false) final String lastEventId)
 			throws JsonGenerationException, JsonMappingException, IOException {
 
-		if (i.incrementAndGet() % 2 == 0) {
+		if (this.i.incrementAndGet() % 2 == 0) {
 			System.out.println("RUNNING IN CALLABLE");
 			return new Callable<String>() {
 				@Override
@@ -59,14 +59,14 @@ public class TwitterController {
 			lastId = Long.parseLong(lastEventId);
 		}
 
-		List<Tweet> tweets = twitterReader.getTweetsSinceId(lastId);
+		List<Tweet> tweets = this.twitterReader.getTweetsSinceId(lastId);
 		for (Tweet tweet : tweets) {
 			if (lastId < tweet.getId()) {
 				lastId = tweet.getId();
 			}
 		}
 
-		String resultJson = mapper.writeValueAsString(tweets);
+		String resultJson = this.mapper.writeValueAsString(tweets);
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("id:");

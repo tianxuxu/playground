@@ -15,7 +15,7 @@ public class AddressComponents {
 	private List<String> types;
 
 	public String getLongName() {
-		return longName;
+		return this.longName;
 	}
 
 	public void setLongName(String longName) {
@@ -23,7 +23,7 @@ public class AddressComponents {
 	}
 
 	public String getShortName() {
-		return shortName;
+		return this.shortName;
 	}
 
 	public void setShortName(String shortName) {
@@ -31,7 +31,7 @@ public class AddressComponents {
 	}
 
 	public List<String> getTypes() {
-		return types;
+		return this.types;
 	}
 
 	public void setTypes(List<String> types) {

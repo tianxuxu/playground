@@ -27,7 +27,7 @@ public class Firma {
 	private Set<Mitarbeiter> mitarbeiter;
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -35,7 +35,7 @@ public class Firma {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -43,7 +43,7 @@ public class Firma {
 	}
 
 	public String getStrasse() {
-		return strasse;
+		return this.strasse;
 	}
 
 	public void setStrasse(String strasse) {
@@ -51,7 +51,7 @@ public class Firma {
 	}
 
 	public String getOrt() {
-		return ort;
+		return this.ort;
 	}
 
 	public void setOrt(String ort) {
@@ -59,7 +59,7 @@ public class Firma {
 	}
 
 	public Set<Mitarbeiter> getMitarbeiter() {
-		return mitarbeiter;
+		return this.mitarbeiter;
 	}
 
 	public void setMitarbeiter(Set<Mitarbeiter> mitarbeiter) {

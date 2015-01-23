@@ -22,14 +22,14 @@ public class MorphiaAuthor implements Author {
 	private final Random random;
 
 	public MorphiaAuthor() {
-		random = new Random();
+		this.random = new Random();
 	}
 
 	@Override
 	public String writeText(int maxWords) {
 
-		int skip = (int) (Math.random() * Math.min(100, collection.count()));
-		try (DBCursor cursor = collection.find().skip(skip)) {
+		int skip = (int) (Math.random() * Math.min(100, this.collection.count()));
+		try (DBCursor cursor = this.collection.find().skip(skip)) {
 			DBObject start = cursor.next();
 
 			StringBuilder sb = new StringBuilder();
@@ -67,13 +67,13 @@ public class MorphiaAuthor implements Author {
 		BasicDBObject query = new BasicDBObject();
 		query.append("word1", w1);
 		query.append("word2", w2);
-		DBObject result = collection.findOne(query);
+		DBObject result = this.collection.findOne(query);
 
 		if (result != null) {
 			BasicDBList word3 = (BasicDBList) result.get("word3");
 
 			int total = (Integer) result.get("count");
-			int rnd = random.nextInt(total) + 1;
+			int rnd = this.random.nextInt(total) + 1;
 			int sum = 0;
 
 			DBObject dbObj = null;

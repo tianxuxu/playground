@@ -39,7 +39,7 @@ public class SayHi {
 	 *
 	 */
 	public String getArg0() {
-		return arg0;
+		return this.arg0;
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class MultiplyResponse {
 	 *
 	 */
 	public int getReturn() {
-		return _return;
+		return this._return;
 	}
 
 	/**

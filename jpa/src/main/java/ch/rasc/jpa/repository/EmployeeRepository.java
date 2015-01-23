@@ -20,16 +20,16 @@ public class EmployeeRepository {
 
 	@Transactional(readOnly = true)
 	public List<Employee> getAllEmployees() {
-		CriteriaQuery<Employee> criteria = entityManager.getCriteriaBuilder()
+		CriteriaQuery<Employee> criteria = this.entityManager.getCriteriaBuilder()
 				.createQuery(Employee.class);
 		criteria.select(criteria.from(Employee.class));
 
-		TypedQuery<Employee> query = entityManager.createQuery(criteria);
+		TypedQuery<Employee> query = this.entityManager.createQuery(criteria);
 		return query.getResultList();
 	}
 
 	@Transactional
 	public Employee update(Employee employee) {
-		return entityManager.merge(employee);
+		return this.entityManager.merge(employee);
 	}
 }

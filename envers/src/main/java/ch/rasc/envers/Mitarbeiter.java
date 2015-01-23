@@ -26,7 +26,7 @@ public class Mitarbeiter {
 	private Firma firma;
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -34,7 +34,7 @@ public class Mitarbeiter {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -42,7 +42,7 @@ public class Mitarbeiter {
 	}
 
 	public String getVorname() {
-		return vorname;
+		return this.vorname;
 	}
 
 	public void setVorname(String vorname) {
@@ -50,7 +50,7 @@ public class Mitarbeiter {
 	}
 
 	public String getStrasse() {
-		return strasse;
+		return this.strasse;
 	}
 
 	public void setStrasse(String strasse) {
@@ -58,7 +58,7 @@ public class Mitarbeiter {
 	}
 
 	public String getOrt() {
-		return ort;
+		return this.ort;
 	}
 
 	public void setOrt(String ort) {
@@ -66,7 +66,7 @@ public class Mitarbeiter {
 	}
 
 	public Firma getFirma() {
-		return firma;
+		return this.firma;
 	}
 
 	public void setFirma(Firma firma) {

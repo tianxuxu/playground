@@ -24,11 +24,11 @@ public class Word12 {
 	private List<Word3> word3;
 
 	public ObjectId getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getWord1() {
-		return word1;
+		return this.word1;
 	}
 
 	public void setWord1(String word1) {
@@ -36,7 +36,7 @@ public class Word12 {
 	}
 
 	public String getWord2() {
-		return word2;
+		return this.word2;
 	}
 
 	public void setWord2(String word2) {
@@ -44,7 +44,7 @@ public class Word12 {
 	}
 
 	public int getCount() {
-		return count;
+		return this.count;
 	}
 
 	public void setCount(int count) {
@@ -52,7 +52,7 @@ public class Word12 {
 	}
 
 	public List<Word3> getWord3() {
-		return word3;
+		return this.word3;
 	}
 
 	public void setWord3(List<Word3> word3) {

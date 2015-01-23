@@ -45,7 +45,7 @@ public enum FioUnit {
 	}
 
 	public String getJsonValue() {
-		return jsonValue;
+		return this.jsonValue;
 	}
 
 	public static FioUnit findByJsonValue(String jsonValue) {

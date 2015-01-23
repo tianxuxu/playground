@@ -17,16 +17,16 @@ public class User {
 	}
 
 	public ObjectId getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getUserName() {
-		return userName;
+		return this.userName;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + "]";
+		return "User [id=" + this.id + ", userName=" + this.userName + "]";
 	}
 
 }

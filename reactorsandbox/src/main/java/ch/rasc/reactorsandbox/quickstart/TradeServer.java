@@ -35,11 +35,11 @@ public class TradeServer {
 	private final AtomicBoolean active = new AtomicBoolean(true);
 
 	private final Thread queueDrain = new Thread(() -> {
-		while (active.get()) {
+		while (this.active.get()) {
 			try {
 				// Pull Orders off the queue and process them
-			buys.poll(100, TimeUnit.MILLISECONDS);
-			sells.poll(100, TimeUnit.MILLISECONDS);
+			this.buys.poll(100, TimeUnit.MILLISECONDS);
+			this.sells.poll(100, TimeUnit.MILLISECONDS);
 		}
 		catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
@@ -48,20 +48,20 @@ public class TradeServer {
 }	);
 
 	public TradeServer() {
-		queueDrain.start();
+		this.queueDrain.start();
 	}
 
 	@SuppressWarnings("incomplete-switch")
 	public Order execute(Trade trade) {
-		Order o = new Order(counter.incrementAndGet()).setTrade(trade).setTimestamp(
+		Order o = new Order(this.counter.incrementAndGet()).setTrade(trade).setTimestamp(
 				System.currentTimeMillis());
 
 		switch (trade.getType()) {
 		case BUY:
-			buys.add(o);
+			this.buys.add(o);
 			break;
 		case SELL:
-			sells.add(o);
+			this.sells.add(o);
 			break;
 		}
 
@@ -69,7 +69,7 @@ public class TradeServer {
 	}
 
 	public Trade nextTrade() {
-		return new Trade(counter.incrementAndGet())
+		return new Trade(this.counter.incrementAndGet())
 				.setSymbol(SYMBOLS[RANDOM.nextInt(SYMBOLS.length)])
 				.setQuantity(RANDOM.nextInt(500))
 				.setPrice(
@@ -78,7 +78,7 @@ public class TradeServer {
 	}
 
 	public void stop() {
-		active.set(false);
+		this.active.set(false);
 	}
 
 	private static String nextSymbol() {

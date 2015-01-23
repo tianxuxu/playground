@@ -9,7 +9,7 @@ public class Word3 {
 	private int count;
 
 	public String getWord() {
-		return word;
+		return this.word;
 	}
 
 	public void setWord(String word) {
@@ -17,7 +17,7 @@ public class Word3 {
 	}
 
 	public int getCount() {
-		return count;
+		return this.count;
 	}
 
 	public void setCount(int count) {

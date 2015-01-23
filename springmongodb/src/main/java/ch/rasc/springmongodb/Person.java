@@ -19,15 +19,15 @@ public class Person {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public int getAge() {
-		return age;
+		return this.age;
 	}
 
 	public void setName(String name) {
@@ -40,6 +40,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", age=" + age + "]";
+		return "Person [id=" + this.id + ", name=" + this.name + ", age=" + this.age
+				+ "]";
 	}
 }

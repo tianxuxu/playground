@@ -8,10 +8,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.core.Environment;
-import reactor.core.processor.Processor;
-import reactor.core.processor.spec.ProcessorSpec;
-import reactor.io.Buffer;
+import reactor.Environment;
+import reactor.core.dispatch.processor.Processor;
+import reactor.core.dispatch.processor.spec.ProcessorSpec;
+import reactor.io.buffer.Buffer;
 
 /**
  * @author Jon Brisbin
@@ -19,9 +19,7 @@ import reactor.io.Buffer;
 public class ProcessorSamples {
 
 	static final Logger LOG = LoggerFactory.getLogger(ProcessorSamples.class);
-
 	static final Environment ENV = new Environment();
-
 	static final int runs = 10000000;
 
 	public static void main(String... args) throws Exception {

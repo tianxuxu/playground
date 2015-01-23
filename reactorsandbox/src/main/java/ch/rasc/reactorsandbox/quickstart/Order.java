@@ -16,11 +16,11 @@ public class Order {
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public Trade getTrade() {
-		return trade;
+		return this.trade;
 	}
 
 	public Order setTrade(Trade trade) {
@@ -29,7 +29,7 @@ public class Order {
 	}
 
 	public Long getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 
 	public Order setTimestamp(Long timestamp) {
@@ -39,8 +39,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order{" + "id=" + id + ", trade=" + trade + ", timestamp=" + timestamp
-				+ '}';
+		return "Order{" + "id=" + this.id + ", trade=" + this.trade + ", timestamp="
+				+ this.timestamp + '}';
 	}
 
 }

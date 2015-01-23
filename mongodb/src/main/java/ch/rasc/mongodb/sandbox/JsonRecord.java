@@ -14,7 +14,7 @@ public class JsonRecord {
 
 	@JsonSerialize(using = CollectionSerializer.class)
 	public List<String> getResult() {
-		return result;
+		return this.result;
 	}
 
 	public void setResult(List<String> result) {

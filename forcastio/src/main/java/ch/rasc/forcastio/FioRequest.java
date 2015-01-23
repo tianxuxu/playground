@@ -68,7 +68,7 @@ public class FioRequest {
 	 */
 	public FioRequest unit(FioUnit fioUnit) {
 		if (fioUnit != FioUnit.US) {
-			units = fioUnit.getJsonValue();
+			this.units = fioUnit.getJsonValue();
 		}
 		return this;
 	}
@@ -88,12 +88,12 @@ public class FioRequest {
 	 */
 	public FioRequest exclude(FioBlock... blocks) {
 		if (blocks != null && blocks.length > 0) {
-			if (excludeBlocks == null) {
-				excludeBlocks = EnumSet.noneOf(FioBlock.class);
+			if (this.excludeBlocks == null) {
+				this.excludeBlocks = EnumSet.noneOf(FioBlock.class);
 			}
 
 			for (FioBlock fioBlock : blocks) {
-				excludeBlocks.add(fioBlock);
+				this.excludeBlocks.add(fioBlock);
 			}
 		}
 
@@ -107,12 +107,12 @@ public class FioRequest {
 	 */
 	public FioRequest include(FioBlock... blocks) {
 		if (blocks != null && blocks.length > 0) {
-			if (includeBlocks == null) {
-				includeBlocks = EnumSet.noneOf(FioBlock.class);
+			if (this.includeBlocks == null) {
+				this.includeBlocks = EnumSet.noneOf(FioBlock.class);
 			}
 
 			for (FioBlock fioBlock : blocks) {
-				includeBlocks.add(fioBlock);
+				this.includeBlocks.add(fioBlock);
 			}
 		}
 
@@ -124,7 +124,7 @@ public class FioRequest {
 	 */
 	public FioRequest language(FioLanguage fioLanguage) {
 		if (fioLanguage != FioLanguage.EN) {
-			language = fioLanguage.name().toLowerCase().replace('_', '-');
+			this.language = fioLanguage.name().toLowerCase().replace('_', '-');
 		}
 
 		return this;
@@ -134,44 +134,44 @@ public class FioRequest {
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
 
 			StringBuilder url = new StringBuilder(FORECAST_IO_URL);
-			url.append(apiKey);
+			url.append(this.apiKey);
 			url.append("/");
-			url.append(latitude);
+			url.append(this.latitude);
 			url.append(",");
-			url.append(longitude);
+			url.append(this.longitude);
 
 			Map<String, String> queryParameters = new HashMap<>();
 
-			if (units != null) {
-				queryParameters.put("units", units);
+			if (this.units != null) {
+				queryParameters.put("units", this.units);
 			}
 
-			if (extend) {
+			if (this.extend) {
 				queryParameters.put("extend", "hourly");
 			}
 
-			if (language != null) {
-				queryParameters.put("lang", language);
+			if (this.language != null) {
+				queryParameters.put("lang", this.language);
 			}
 
-			if (includeBlocks != null && !includeBlocks.isEmpty()) {
-				EnumSet<FioBlock> exclude = EnumSet.complementOf(includeBlocks);
-				if (excludeBlocks == null) {
-					excludeBlocks = exclude;
+			if (this.includeBlocks != null && !this.includeBlocks.isEmpty()) {
+				EnumSet<FioBlock> exclude = EnumSet.complementOf(this.includeBlocks);
+				if (this.excludeBlocks == null) {
+					this.excludeBlocks = exclude;
 				}
 				else {
-					excludeBlocks.addAll(exclude);
+					this.excludeBlocks.addAll(exclude);
 				}
 			}
 
-			if (excludeBlocks != null && !excludeBlocks.isEmpty()) {
-				if (excludeBlocks.size() == FioBlock.values().length) {
+			if (this.excludeBlocks != null && !this.excludeBlocks.isEmpty()) {
+				if (this.excludeBlocks.size() == FioBlock.values().length) {
 					// Everything excluded
 					return null;
 				}
 				queryParameters.put(
 						"exclude",
-						excludeBlocks.stream().map(FioBlock::getJsonValue)
+						this.excludeBlocks.stream().map(FioBlock::getJsonValue)
 								.collect(Collectors.joining(",")));
 			}
 
@@ -188,7 +188,7 @@ public class FioRequest {
 			try (CloseableHttpResponse response = httpClient.execute(httpget)) {
 				HttpEntity entity = response.getEntity();
 				String jsonData = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-				return objectMapper.readValue(jsonData, FioResponse.class);
+				return this.objectMapper.readValue(jsonData, FioResponse.class);
 			}
 
 		}

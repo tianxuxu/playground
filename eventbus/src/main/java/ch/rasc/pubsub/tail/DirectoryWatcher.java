@@ -43,9 +43,9 @@ public class DirectoryWatcher {
 		new Thread(
 				() -> {
 
-					while (watching) {
+					while (this.watching) {
 						try {
-							final WatchKey watchKey = watchService.poll(10,
+							final WatchKey watchKey = this.watchService.poll(10,
 									TimeUnit.SECONDS);
 							if (watchKey != null) {
 								final List<WatchEvent<?>> events = watchKey.pollEvents();
@@ -58,12 +58,12 @@ public class DirectoryWatcher {
 								}
 
 								watchKey.reset();
-								eventBus.post(new PathEvents((Path) watchKey.watchable(),
-										pathEventsBuilder.build()));
+								this.eventBus.post(new PathEvents((Path) watchKey
+										.watchable(), pathEventsBuilder.build()));
 							}
 						}
 						catch (InterruptedException e) {
-							watching = false;
+							this.watching = false;
 						}
 					}
 
@@ -73,17 +73,17 @@ public class DirectoryWatcher {
 	@PreDestroy
 	public void stop() {
 		System.out.println("Stopping...");
-		watching = false;
+		this.watching = false;
 	}
 
 	public void startWatch(Path path) {
 		try {
-			path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+			path.register(this.watchService, StandardWatchEventKinds.ENTRY_CREATE,
 					StandardWatchEventKinds.ENTRY_DELETE,
 					StandardWatchEventKinds.ENTRY_MODIFY);
 
-			if (!watching) {
-				watching = true;
+			if (!this.watching) {
+				this.watching = true;
 				start();
 			}
 

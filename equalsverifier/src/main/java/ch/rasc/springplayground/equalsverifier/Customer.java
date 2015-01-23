@@ -11,19 +11,19 @@ public class Customer {
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
-		result = prime * result + (name == null ? 0 : name.hashCode());
+		result = prime * result + this.id;
+		result = prime * result + (this.name == null ? 0 : this.name.hashCode());
 		return result;
 	}
 
@@ -39,15 +39,15 @@ public class Customer {
 			return false;
 		}
 		Customer other = (Customer) obj;
-		if (id != other.id) {
+		if (this.id != other.id) {
 			return false;
 		}
-		if (name == null) {
+		if (this.name == null) {
 			if (other.name != null) {
 				return false;
 			}
 		}
-		else if (!name.equals(other.name)) {
+		else if (!this.name.equals(other.name)) {
 			return false;
 		}
 		return true;

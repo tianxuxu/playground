@@ -32,7 +32,7 @@ public class EventBusSubscriberRegisterar implements BeanPostProcessor {
 
 		for (Method method : bean.getClass().getMethods()) {
 			if (method.getAnnotation(Subscribe.class) != null) {
-				eventBus.register(bean);
+				this.eventBus.register(bean);
 				break;
 			}
 		}

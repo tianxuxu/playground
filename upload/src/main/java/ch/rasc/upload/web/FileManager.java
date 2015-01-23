@@ -34,7 +34,8 @@ public class FileManager {
 
 	public boolean chunkExists(String identifier, Integer chunkNumber, Long chunkSize)
 			throws IOException {
-		Path chunkFile = Paths.get(uploadDirectory, identifier, chunkNumber.toString());
+		Path chunkFile = Paths.get(this.uploadDirectory, identifier,
+				chunkNumber.toString());
 		if (Files.exists(chunkFile)) {
 			long size = (Long) Files.getAttribute(chunkFile, "basic:size");
 			return size == chunkSize;
@@ -48,7 +49,8 @@ public class FileManager {
 
 	public void storeChunk(String identifier, Integer chunkNumber, InputStream inputStream)
 			throws IOException {
-		Path chunkFile = Paths.get(uploadDirectory, identifier, chunkNumber.toString());
+		Path chunkFile = Paths.get(this.uploadDirectory, identifier,
+				chunkNumber.toString());
 		try {
 			Files.createDirectories(chunkFile);
 		}
@@ -63,7 +65,7 @@ public class FileManager {
 		long noOfChunks = totalSize / chunkSize;
 
 		for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
-			if (!Files.exists(Paths.get(uploadDirectory, identifier,
+			if (!Files.exists(Paths.get(this.uploadDirectory, identifier,
 					String.valueOf(chunkNo)))) {
 				return false;
 			}
@@ -76,7 +78,7 @@ public class FileManager {
 			final Long totalSize) throws IOException {
 		long noOfChunks = totalSize / chunkSize;
 
-		Path newFilePath = Paths.get(uploadDirectory, fileName);
+		Path newFilePath = Paths.get(this.uploadDirectory, fileName);
 		if (Files.exists(newFilePath)) {
 			Files.delete(newFilePath);
 		}
@@ -84,14 +86,14 @@ public class FileManager {
 		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(
 				newFilePath.toFile()))) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
-				Path chunkPath = Paths.get(uploadDirectory, identifier,
+				Path chunkPath = Paths.get(this.uploadDirectory, identifier,
 						String.valueOf(chunkNo));
 				Files.copy(chunkPath, bos);
 				Files.delete(chunkPath);
 			}
 		}
 
-		Files.delete(Paths.get(uploadDirectory, identifier));
+		Files.delete(Paths.get(this.uploadDirectory, identifier));
 	}
 
 }

@@ -35,7 +35,7 @@ public class Geolite {
 	private String areaCode;
 
 	public long getStartIpNum() {
-		return startIpNum;
+		return this.startIpNum;
 	}
 
 	public void setStartIpNum(long startIpNum) {
@@ -43,7 +43,7 @@ public class Geolite {
 	}
 
 	public long getEndIpNum() {
-		return endIpNum;
+		return this.endIpNum;
 	}
 
 	public void setEndIpNum(long endIpNum) {
@@ -51,7 +51,7 @@ public class Geolite {
 	}
 
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	public void setCountry(String country) {
@@ -59,7 +59,7 @@ public class Geolite {
 	}
 
 	public String getRegion() {
-		return region;
+		return this.region;
 	}
 
 	public void setRegion(String region) {
@@ -67,7 +67,7 @@ public class Geolite {
 	}
 
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	public void setCity(String city) {
@@ -75,7 +75,7 @@ public class Geolite {
 	}
 
 	public String getPostalCode() {
-		return postalCode;
+		return this.postalCode;
 	}
 
 	public void setPostalCode(String postalCode) {
@@ -83,7 +83,7 @@ public class Geolite {
 	}
 
 	public double getLatitude() {
-		return latitude;
+		return this.latitude;
 	}
 
 	public void setLatitude(double latitude) {
@@ -91,7 +91,7 @@ public class Geolite {
 	}
 
 	public double getLongitude() {
-		return longitude;
+		return this.longitude;
 	}
 
 	public void setLongitude(double longitude) {
@@ -99,7 +99,7 @@ public class Geolite {
 	}
 
 	public String getMetroCode() {
-		return metroCode;
+		return this.metroCode;
 	}
 
 	public void setMetroCode(String metroCode) {
@@ -107,7 +107,7 @@ public class Geolite {
 	}
 
 	public String getAreaCode() {
-		return areaCode;
+		return this.areaCode;
 	}
 
 	public void setAreaCode(String areaCode) {
@@ -115,7 +115,7 @@ public class Geolite {
 	}
 
 	public ObjectId getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(ObjectId id) {
@@ -124,11 +124,12 @@ public class Geolite {
 
 	@Override
 	public String toString() {
-		return "Geolite [id=" + id + ", startIpNum=" + startIpNum + ", endIpNum="
-				+ endIpNum + ", country=" + country + ", region=" + region + ", city="
-				+ city + ", postalCode=" + postalCode + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", metroCode=" + metroCode + ", areaCode="
-				+ areaCode + "]";
+		return "Geolite [id=" + this.id + ", startIpNum=" + this.startIpNum
+				+ ", endIpNum=" + this.endIpNum + ", country=" + this.country
+				+ ", region=" + this.region + ", city=" + this.city + ", postalCode="
+				+ this.postalCode + ", latitude=" + this.latitude + ", longitude="
+				+ this.longitude + ", metroCode=" + this.metroCode + ", areaCode="
+				+ this.areaCode + "]";
 	}
 
 }

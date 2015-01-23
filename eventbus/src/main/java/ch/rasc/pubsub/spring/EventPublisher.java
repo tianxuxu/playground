@@ -15,7 +15,7 @@ public class EventPublisher {
 	}
 
 	public void publishEvent(String message) {
-		publisher.publishEvent(new AppEvent(this, message));
+		this.publisher.publishEvent(new AppEvent(this, message));
 	}
 
 }

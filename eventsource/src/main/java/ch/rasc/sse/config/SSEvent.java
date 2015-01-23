@@ -13,7 +13,7 @@ public class SSEvent {
 	private String comment;
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -21,7 +21,7 @@ public class SSEvent {
 	}
 
 	public String getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(String data) {
@@ -29,7 +29,7 @@ public class SSEvent {
 	}
 
 	public Integer getRetry() {
-		return retry;
+		return this.retry;
 	}
 
 	public void setRetry(Integer retry) {
@@ -37,7 +37,7 @@ public class SSEvent {
 	}
 
 	public String getEvent() {
-		return event;
+		return this.event;
 	}
 
 	public void setEvent(String event) {
@@ -45,7 +45,7 @@ public class SSEvent {
 	}
 
 	public String getComment() {
-		return comment;
+		return this.comment;
 	}
 
 	public void setComment(String comment) {

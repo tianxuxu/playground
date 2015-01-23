@@ -39,7 +39,7 @@ public class DivideResponse {
 	 *
 	 */
 	public int getReturn() {
-		return _return;
+		return this._return;
 	}
 
 	/**

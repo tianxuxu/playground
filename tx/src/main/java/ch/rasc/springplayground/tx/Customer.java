@@ -32,7 +32,7 @@ public class Customer extends AbstractPersistable<Long> {
 	private Set<Address> addresses = new HashSet<>();
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -40,7 +40,7 @@ public class Customer extends AbstractPersistable<Long> {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -48,7 +48,7 @@ public class Customer extends AbstractPersistable<Long> {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -56,7 +56,7 @@ public class Customer extends AbstractPersistable<Long> {
 	}
 
 	public Set<Address> getAddresses() {
-		return addresses;
+		return this.addresses;
 	}
 
 	public void setAddresses(Set<Address> addresses) {

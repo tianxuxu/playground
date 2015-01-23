@@ -85,7 +85,7 @@ public class StartJetty {
 				throws ParserConfigurationException, SAXException, IOException {
 			File homeDir = new File(System.getProperty("user.home"));
 
-			jars = new ArrayList<>();
+			this.jars = new ArrayList<>();
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -134,7 +134,8 @@ public class StartJetty {
 						groupId = groupId.replace(".", "/");
 						String artifactFileName = groupId + "/" + artifact + "/"
 								+ version + "/" + artifact + "-" + version + ".jar";
-						jars.add(new File(homeDir, ".m2/repository/" + artifactFileName));
+						this.jars.add(new File(homeDir, ".m2/repository/"
+								+ artifactFileName));
 					}
 
 				}
@@ -174,7 +175,7 @@ public class StartJetty {
 		protected List<Resource> findJars(WebAppContext context) throws Exception {
 			List<Resource> resources = super.findJars(context);
 
-			for (File jar : jars) {
+			for (File jar : this.jars) {
 				resources.add(new FileResource(jar.toURI().toURL()));
 			}
 

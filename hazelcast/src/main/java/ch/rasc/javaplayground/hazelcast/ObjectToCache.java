@@ -23,7 +23,7 @@ public class ObjectToCache implements Serializable {
 	}
 
 	public final String getObjectName() {
-		return objectName;
+		return this.objectName;
 	}
 
 	public final void setObjectName(String objectName) {
@@ -31,7 +31,7 @@ public class ObjectToCache implements Serializable {
 	}
 
 	public final String getObjectValue() {
-		return objectValue;
+		return this.objectValue;
 	}
 
 	public final void setObjectValue(String objectValue) {
@@ -39,7 +39,7 @@ public class ObjectToCache implements Serializable {
 	}
 
 	public final Integer getObjectID() {
-		return objectID;
+		return this.objectID;
 	}
 
 	public final void setObjectID(Integer objectID) {
@@ -48,8 +48,8 @@ public class ObjectToCache implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ObjectToCache [objectID=" + objectID + ", objectName=" + objectName
-				+ ", objectValue=" + objectValue + "]";
+		return "ObjectToCache [objectID=" + this.objectID + ", objectName="
+				+ this.objectName + ", objectValue=" + this.objectValue + "]";
 	}
 
 }

@@ -27,13 +27,13 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		sessions.put(session.getId(), session);
+		this.sessions.put(session.getId(), session);
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
 			throws Exception {
-		sessions.remove(session.getId());
+		this.sessions.remove(session.getId());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	private void sendImages(final WebSocketSession session) {
-		asyncExecutor.execute(() -> {
+		this.asyncExecutor.execute(() -> {
 			for (int index = 0; index < 49; index++) {
 				byte[] imgBytes;
 				try {
@@ -72,8 +72,8 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 	}
 
 	public void sendToAll(final WebSocketMessage<?> message) {
-		asyncExecutor.execute(() -> {
-			for (WebSocketSession session : sessions.values()) {
+		this.asyncExecutor.execute(() -> {
+			for (WebSocketSession session : this.sessions.values()) {
 				if (session.isOpen()) {
 					try {
 						session.sendMessage(message);
@@ -84,7 +84,7 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 			}
 		}
 		else {
-			sessions.remove(session.getId());
+			this.sessions.remove(session.getId());
 		}
 	}
 })		;

@@ -24,7 +24,7 @@ public class Location {
 	private String place;
 
 	public Integer getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Integer type) {
@@ -32,7 +32,7 @@ public class Location {
 	}
 
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	public void setCountry(String country) {
@@ -40,7 +40,7 @@ public class Location {
 	}
 
 	public String getState() {
-		return state;
+		return this.state;
 	}
 
 	public void setState(String state) {
@@ -48,7 +48,7 @@ public class Location {
 	}
 
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	public void setCity(String city) {
@@ -56,7 +56,7 @@ public class Location {
 	}
 
 	public String getPlace() {
-		return place;
+		return this.place;
 	}
 
 	public void setPlace(String place) {

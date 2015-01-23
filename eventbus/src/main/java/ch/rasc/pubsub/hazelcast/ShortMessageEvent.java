@@ -13,7 +13,7 @@ public class ShortMessageEvent implements Serializable {
 	}
 
 	public String getMsg() {
-		return msg;
+		return this.msg;
 	}
 
 	public void setMsg(String msg) {

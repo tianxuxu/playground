@@ -34,14 +34,15 @@ public class MailDeleter extends TimerTask {
 			Session session = Session.getDefaultInstance(props);
 
 			store = session.getStore("imap");
-			store.connect(config.getHost(), config.getUser(), config.getPassword());
+			store.connect(this.config.getHost(), this.config.getUser(),
+					this.config.getPassword());
 
 			folder = store.getFolder("INBOX");
 
 			folder.open(Folder.READ_WRITE);
 
 			LocalDateTime aCoupleOfDaysAgo = LocalDateTime.now().minusDays(
-					config.getDays());
+					this.config.getDays());
 
 			Message[] messages = folder.getMessages();
 			for (Message msg : messages) {

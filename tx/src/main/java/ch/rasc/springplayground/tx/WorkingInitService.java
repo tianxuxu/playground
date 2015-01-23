@@ -22,14 +22,14 @@ public class WorkingInitService {
 
 	@PostConstruct
 	public void init() {
-		readWriteTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
+		this.readWriteTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				doDbStuff();
 			}
 		});
 
-		String result = readWriteTransactionTemplate.execute(status -> "theResult");
+		String result = this.readWriteTransactionTemplate.execute(status -> "theResult");
 
 		System.out.println(result);
 
@@ -52,6 +52,6 @@ public class WorkingInitService {
 		a.setCustomer(c);
 		c.getAddresses().add(a);
 
-		entityManager.persist(c);
+		this.entityManager.persist(c);
 	}
 }

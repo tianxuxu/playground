@@ -30,12 +30,12 @@ public class RawTextImporter implements TextImporter {
 	@Override
 	public void doImport(File file) {
 
-		List<String> words = extractor.extractWords(file);
+		List<String> words = this.extractor.extractWords(file);
 
 		// ohne Index: 181217 ms
 		// mit Index: 8140 ms
 		BasicDBObject indexes = new BasicDBObject("word1", 1).append("word2", 1);
-		collection.createIndex(indexes);
+		this.collection.createIndex(indexes);
 
 		for (int i = 0; i < words.size() - 3; i++) {
 			String w1 = words.get(i);
@@ -49,7 +49,7 @@ public class RawTextImporter implements TextImporter {
 			query.append("word2", w2);
 			BasicDBObject update = new BasicDBObject("$inc",
 					new BasicDBObject("count", 1));
-			collection.update(query, update, true, false);
+			this.collection.update(query, update, true, false);
 
 			// update count in embedded document
 			query = new BasicDBObject();
@@ -58,7 +58,7 @@ public class RawTextImporter implements TextImporter {
 			query.append("word3.word", w3);
 			update = new BasicDBObject("$inc", new BasicDBObject("word3.$.count", 1));
 
-			WriteResult result = collection.update(query, update, false, false);
+			WriteResult result = this.collection.update(query, update, false, false);
 			if (result.getN() == 0) {
 
 				// add embedded word3 document to the array
@@ -70,8 +70,8 @@ public class RawTextImporter implements TextImporter {
 				word3.append("word", w3);
 				word3.append("count", 1);
 
-				collection.update(query, new BasicDBObject("$push", new BasicDBObject(
-						"word3", word3)));
+				this.collection.update(query, new BasicDBObject("$push",
+						new BasicDBObject("word3", word3)));
 			}
 
 		}

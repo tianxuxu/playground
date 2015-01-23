@@ -25,12 +25,12 @@ public class TestController {
 	@Cacheable("tenMinutesCache")
 	public List<String> getSomething() {
 		System.out.println("inside getSomething");
-		return Arrays.asList(testService.getData("one"), testService.getData("two"),
-				testService.getData("three"), testService.getData("four"),
-				testService.getData("five"), testService.getData("six"),
-				testService.getData("seven"), testService.getData("eight"),
-				testService.getData("nine"), testService.getData("ten"),
-				testService.getData("eleven"));
+		return Arrays.asList(this.testService.getData("one"),
+				this.testService.getData("two"), this.testService.getData("three"),
+				this.testService.getData("four"), this.testService.getData("five"),
+				this.testService.getData("six"), this.testService.getData("seven"),
+				this.testService.getData("eight"), this.testService.getData("nine"),
+				this.testService.getData("ten"), this.testService.getData("eleven"));
 	}
 
 	@RequestMapping(value = "/cacheEvict", produces = "application/json")
