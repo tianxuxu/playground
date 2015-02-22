@@ -1,5 +1,5 @@
-sourceDir: D:\js\ext-5.1.1.264
-version: 5.1.1.264-NIGHTLY
+sourceDir: D:\js\ext-5.1.1.288
+version: 5.1.1.288-NIGHTLY
 groupId: resources
 baseArtifactId: ext
 destDir: ./res
