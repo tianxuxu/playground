@@ -22,7 +22,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 
 public class Indexing {
 
@@ -32,7 +31,7 @@ public class Indexing {
 		try (Directory directory = new RAMDirectory();
 				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
 				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(
-						Version.LUCENE_4_10_3, analyzer))) {
+						analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };
