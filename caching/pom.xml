@@ -88,13 +88,13 @@
  		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
-			<version>3.4</version>
+			<version>3.4.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast-spring</artifactId>
-			<version>3.4</version>
+			<version>3.4.1</version>
 		</dependency>
 
 	</dependencies>
