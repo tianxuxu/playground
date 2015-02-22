@@ -37,16 +37,23 @@ public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
-				.newEmbeddedDatabase("db");
+				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
+		Transaction tx = graphDb.beginTx();
 		Index<Node> index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actresses.list.gz");
+		tx.success();
+		tx.close();
+		new ImdbParser().readImdbData(graphDb, index, "E:\\temp\\actresses.list.gz");
 		graphDb.shutdown();
 
 		System.gc();
 
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("db");
+		graphDb = new GraphDatabaseFactory()
+				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
+		tx = graphDb.beginTx();
 		index = graphDb.index().forNodes("myIndex");
-		new ImdbParser().readImdbData(graphDb, index, "E:\\_download\\actors.list.gz");
+		tx.success();
+		tx.close();
+		new ImdbParser().readImdbData(graphDb, index, "E:\\temp\\actors.list.gz");
 		graphDb.shutdown();
 
 	}
@@ -80,6 +87,7 @@ public class ImdbParser {
 						if (tx != null) {
 							if (count % 1000 == 0) {
 								tx.success();
+								tx.close();
 								tx = graphDb.beginTx();
 							}
 						}
@@ -144,6 +152,7 @@ public class ImdbParser {
 		finally {
 			if (tx != null) {
 				tx.success();
+				tx.close();
 			}
 		}
 
