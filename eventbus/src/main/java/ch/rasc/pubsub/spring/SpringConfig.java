@@ -15,7 +15,7 @@ public class SpringConfig {
 	@Bean
 	public ApplicationEventMulticaster applicationEventMulticaster() {
 		SimpleApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
-		multicaster.setTaskExecutor(Executors.newFixedThreadPool(10));
+		multicaster.setTaskExecutor(Executors.newSingleThreadExecutor());
 		return multicaster;
 	}
 

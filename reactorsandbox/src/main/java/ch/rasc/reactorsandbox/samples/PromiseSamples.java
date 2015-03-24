@@ -1,5 +1,7 @@
 package ch.rasc.reactorsandbox.samples;
 
+import static reactor.Environment.get;
+
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -15,27 +17,31 @@ import reactor.rx.Promises;
  */
 public class PromiseSamples {
 
-	static final Logger LOG = LoggerFactory.getLogger(PromiseSamples.class);
-	static final Environment ENV = new Environment();
+	static final Logger      LOG = LoggerFactory.getLogger(PromiseSamples.class);
+
+	static {
+		Environment.initializeIfEmpty()
+		           .assignErrorJournal();
+	}
 
 	public static void main(String... args) throws Exception {
 		// Deferred is the publisher, Promise the consumer
-		Promise<String> promise = Promises.<String> prepare(ENV);
+		Promise<String> promise = Promises.prepare(get());
 
 		promise.onComplete(p -> LOG.info("Promise completed {}", p))
-				.onSuccess(s -> LOG.info("Got value: {}", s))
-				.onError(t -> LOG.error(t.getMessage(), t));
+		       .onSuccess(s -> LOG.info("Got value: {}", s))
+		       .onError(t -> LOG.error(t.getMessage(), t));
 
 		try {
 			promise.onNext("Hello World!");
-			// deferred.broadcastNext(new IllegalArgumentException("Hello Shmello! :P"));
+			//promise.onError(new IllegalArgumentException("Hello Shmello! :P"));
 
 			String s = promise.await(1, TimeUnit.SECONDS);
 			LOG.info("s={}", s);
-		}
-		finally {
-			ENV.shutdown();
+		} finally {
+			get().shutdown();
 		}
 	}
+
 
 }

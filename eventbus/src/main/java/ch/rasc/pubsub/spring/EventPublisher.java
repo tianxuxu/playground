@@ -15,7 +15,9 @@ public class EventPublisher {
 	}
 
 	public void publishEvent(String message) {
+		System.out.println(System.currentTimeMillis());
 		this.publisher.publishEvent(new AppEvent(this, message));
+		System.out.println(System.currentTimeMillis());
 	}
 
 }

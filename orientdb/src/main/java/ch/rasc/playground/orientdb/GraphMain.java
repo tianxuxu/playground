@@ -54,7 +54,7 @@ public class GraphMain {
 			}
 
 			for (Vertex c : graph.getVerticesOfClass("Customer")) {
-				System.out.println(c.getProperty("name"));
+				System.out.println((String)c.getProperty("name"));
 			}
 
 			graph.commit();

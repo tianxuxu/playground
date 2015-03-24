@@ -20,7 +20,7 @@ import reactor.bus.selector.Selector;
 import reactor.fn.Consumer;
 import reactor.rx.Promise;
 import reactor.rx.Streams;
-import reactor.rx.stream.Broadcaster;
+import reactor.rx.broadcast.Broadcaster;
 import reactor.spring.context.config.EnableReactor;
 
 /**

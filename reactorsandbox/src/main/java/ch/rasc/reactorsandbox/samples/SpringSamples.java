@@ -1,5 +1,7 @@
 package ch.rasc.reactorsandbox.samples;
 
+import static reactor.Environment.get;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
+import reactor.spring.context.annotation.Consumer;
 import reactor.spring.context.annotation.Selector;
 import reactor.spring.context.config.EnableReactor;
 
@@ -24,16 +26,18 @@ import reactor.spring.context.config.EnableReactor;
 @EnableAutoConfiguration
 public class SpringSamples implements CommandLineRunner {
 
-	@Autowired
-	private Environment env;
+	static {
+		Environment.initializeIfEmpty()
+		           .assignErrorJournal();
+	}
+
 	@Autowired
 	private TestService service;
 
-	@Override
-	public void run(String... args) throws Exception {
+	@Override public void run(String... args) throws Exception {
 		this.service.test();
 
-		this.env.shutdown();
+		get().shutdown();
 	}
 
 	public static void main(String... args) {
@@ -41,28 +45,29 @@ public class SpringSamples implements CommandLineRunner {
 	}
 
 	@Configuration
-	@EnableReactor
 	@ComponentScan
+	@EnableReactor
 	public static class ReactorConfiguration {
 
-		@Bean
-		public EventBus reactor(Environment env) {
-			return EventBus.config().env(env).dispatcher(Environment.SHARED).get();
+		@Bean public EventBus eventBus() {
+			return EventBus.config()
+			               .env(get())
+			               .dispatcher(Environment.SHARED)
+			               .get();
 		}
 
-		@Bean
-		public Logger log() {
-			return LoggerFactory.getLogger(SpringSamples.class);
+		@Bean public Logger log() {
+			return LoggerFactory.getLogger(EventBusSamples.class);
 		}
 
 	}
 
-	@Component
+	@Consumer
 	public static class AnnotatedHandler {
 		@Autowired
-		private Logger log;
+		private Logger  log;
 		@Autowired
-		public EventBus reactor;
+		public  EventBus eventBus;
 
 		@Selector("test.topic")
 		public void onTestTopic(String s) {
@@ -73,13 +78,13 @@ public class SpringSamples implements CommandLineRunner {
 	@Service
 	public static class TestService {
 		@Autowired
-		private Logger log;
+		private Logger  log;
 		@Autowired
-		private EventBus reactor;
+		private EventBus eventBus;
 
 		public void test() {
 			this.log.info("Testing service...");
-			this.reactor.notify("test.topic", Event.wrap("Hello World!"));
+			this.eventBus.notify("test.topic", Event.wrap("Hello World!"));
 		}
 	}
 
