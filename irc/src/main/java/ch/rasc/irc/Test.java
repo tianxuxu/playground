@@ -11,7 +11,7 @@ import org.schwering.irc.lib.IRCUser;
 public class Test {
 	public static void main(String[] args) throws IOException {
 		IRCConnection conn = new IRCConnection("irc.wikimedia.org", 6667, 6669, null,
-				"rcmon", "rcmon", "rcmon");
+				"rcmon", "rcmon", "rcmon", null, null, null);
 
 		conn.addIRCEventListener(new IRCEventListener() {
 			@Override
