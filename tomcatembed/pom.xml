@@ -10,7 +10,7 @@
 	</prerequisites>	
 	
 	<properties>
-		<tomcat.version>8.0.20</tomcat.version>
+		<tomcat.version>8.0.21</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -40,14 +40,6 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Remove this depedency when Tomcat 8.0.10 is released -->
-		<dependency>
-			<groupId>org.eclipse.jdt.core.compiler</groupId>
-			<artifactId>ecj</artifactId>
-			<version>4.4</version>
-			<scope>provided</scope>
-		</dependency>		
-
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-dbcp</artifactId>

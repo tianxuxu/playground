@@ -34,7 +34,7 @@ public class Client {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException,
 			InvalidKeySpecException, InvalidKeyException, IllegalStateException,
-			ShortBufferException, NoSuchPaddingException,
+			NoSuchPaddingException,
 			InvalidAlgorithmParameterException, IllegalBlockSizeException,
 			BadPaddingException, SignatureException {
 
