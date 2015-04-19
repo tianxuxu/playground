@@ -38,10 +38,14 @@ public class ImdbParser {
 	public static void main(String[] args) throws IOException {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
 				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
-		Transaction tx = graphDb.beginTx();
-		Index<Node> index = graphDb.index().forNodes("myIndex");
-		tx.success();
-		tx.close();
+		
+		long start = System.currentTimeMillis();
+		
+		Index<Node> index;
+		try (Transaction tx = graphDb.beginTx()) {
+			index = graphDb.index().forNodes("myIndex");
+			tx.success();
+		}
 		new ImdbParser().readImdbData(graphDb, index, "E:\\temp\\actresses.list.gz");
 		graphDb.shutdown();
 
@@ -49,12 +53,14 @@ public class ImdbParser {
 
 		graphDb = new GraphDatabaseFactory()
 				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
-		tx = graphDb.beginTx();
-		index = graphDb.index().forNodes("myIndex");
-		tx.success();
-		tx.close();
+		try (Transaction tx = graphDb.beginTx()) {
+			index = graphDb.index().forNodes("myIndex");
+			tx.success();
+		}
 		new ImdbParser().readImdbData(graphDb, index, "E:\\temp\\actors.list.gz");
 		graphDb.shutdown();
+		
+		System.out.println((System.currentTimeMillis() - start) / 1000 + " seconds");
 
 	}
 
@@ -98,7 +104,7 @@ public class ImdbParser {
 						currentActorNode.setProperty("actor", actor);
 						index.add(currentActorNode, "actor", actor);
 						count++;
-						System.out.println(actor);
+						// System.out.println(actor);
 
 					}
 

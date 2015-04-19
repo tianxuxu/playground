@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 
+import com.orientechnologies.orient.core.intent.OIntentMassiveInsert;
 import com.orientechnologies.orient.core.metadata.schema.OClass.INDEX_TYPE;
 import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.tinkerpop.blueprints.Edge;
@@ -38,9 +39,11 @@ import com.tinkerpop.blueprints.impls.orient.OrientVertexType;
 public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
+		System.setProperty("storage.useWAL", "false");
+		System.setProperty("storage.wal.syncOnPageFlush", "false");
 
 		OrientGraphFactory factory = new OrientGraphFactory(
-				"plocal:/E:/temp/orientdb-community-2.0.3/databases/moviedb");
+				"plocal:/E:/temp/databases/moviedb");
 
 		// new OServerAdmin("remote:localhost").connect("root", "root")
 		// .createDatabase("moviedb", "graph", "plocal").close();
@@ -48,14 +51,17 @@ public class ImdbParser {
 		// OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/moviedb",
 		// "admin", "admin");
 
+		long start = System.currentTimeMillis();
 		OrientGraphNoTx graphDb = factory.getNoTx();
-
+		graphDb.declareIntent( new OIntentMassiveInsert() );
+				
 		OrientVertexType movieVertexType = graphDb.createVertexType("Movie");
 		movieVertexType.createProperty("title", OType.STRING);
 		movieVertexType.createIndex("Movie.title", INDEX_TYPE.UNIQUE, "title");
 
-		OrientVertexType actorVertexType = graphDb.createVertexType("Actor");
+		OrientVertexType actorVertexType = graphDb.createVertexType("Actor");		
 		actorVertexType.createProperty("actor", OType.STRING);
+		actorVertexType.createIndex("Actor.actor", INDEX_TYPE.UNIQUE, "actor");
 
 		OrientEdgeType actsInEdgeType = graphDb.createEdgeType("ActsIn");
 		actsInEdgeType.createProperty("character", OType.STRING);
@@ -68,6 +74,8 @@ public class ImdbParser {
 		finally {
 			graphDb.shutdown();
 		}
+
+		System.out.println((System.currentTimeMillis() - start) / 1000 + " seconds");
 	}
 
 	public void readImdbData(OrientGraphNoTx graphDb, String fileName)
@@ -90,9 +98,11 @@ public class ImdbParser {
 				int actorSep = line.indexOf('\t');
 				if (actorSep >= 0) {
 					String actor = line.substring(0, actorSep).trim();
-					if (!"".equals(actor)) {
-						currentActorVertex = graphDb.addVertex("class:Actor");
-						currentActorVertex.setProperty("actor", actor);
+					if (!"".equals(actor)) {						
+						currentActorVertex = graphDb.getVertexByKey("Actor.actor", actor);
+						if (currentActorVertex == null) {						
+							currentActorVertex = graphDb.addVertex("class:Actor", "actor", actor);
+						}
 					}
 
 					String title = line.substring(actorSep).trim();
@@ -124,15 +134,20 @@ public class ImdbParser {
 						}
 					}
 					if (character != null && currentActorVertex != null) {
-						Iterable<Vertex> movies = graphDb.getVertices("Movie.title",
-								title);
-						Vertex movieVertex;
-						if (movies.iterator().hasNext()) {
-							movieVertex = movies.iterator().next();
-						}
-						else {
-							movieVertex = graphDb.addVertex("class:Movie");
-							movieVertex.setProperty("title", title);
+						Vertex movieVertex = graphDb.getVertexByKey("Movie.title", title);
+						if (movieVertex == null) {
+//						Iterable<Vertex> movies = graphDb.getVertices("Movie.title",
+//								title);
+//						Vertex movieVertex;
+//						if (movies.iterator().hasNext()) {
+//							movieVertex = movies.iterator().next();
+//						}
+//						else {
+							// movieVertex = graphDb.addVertex("class:Movie");
+							// movieVertex.setProperty("title", title);
+
+							movieVertex = graphDb
+									.addVertex("class:Movie", "title", title);
 						}
 
 						Edge edge = graphDb.addEdge("class:ActsIn", currentActorVertex,

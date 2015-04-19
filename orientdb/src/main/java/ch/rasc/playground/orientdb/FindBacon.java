@@ -12,7 +12,11 @@ import java.util.Set;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.orientechnologies.orient.core.index.OIndex;
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.record.impl.ODocumentEntry;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
+import com.orientechnologies.orient.core.sql.query.OResultSet;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
@@ -25,7 +29,7 @@ import com.tinkerpop.pipes.branch.LoopPipe.LoopBundle;
 public class FindBacon {
 	public static void main(String[] args) {
 		OrientGraphFactory factory = new OrientGraphFactory(
-				"plocal:/E:/temp/orientdb-community-2.0.3/databases/moviedb");
+				"plocal:/E:/temp/databases/moviedb");
 		// OrientGraphFactory factory = new
 		// OrientGraphFactory("remote:localhost/moviedb","admin", "admin");
 
@@ -33,24 +37,27 @@ public class FindBacon {
 
 		final OIndex<?> idx = graphDb.getRawGraph().getMetadata().getIndexManager()
 				.getIndex("Actor.actor");
-		String target = "McAvoy, James";// "Craig, Daniel (I)";
-		Set<ORecordId> r = (Set<ORecordId>) idx.get(target);
-		ORecordId bond = r.iterator().next();
+		String target = "Craig, Daniel (I)";
+		ORecordId bond = (ORecordId) idx.get(target);
 
-		r = (Set<ORecordId>) idx.get("Bacon, Kevin (I)");
-		ORecordId mrBacon = r.iterator().next();
+		ORecordId mrBacon = (ORecordId) idx.get("Bacon, Kevin (I)");
 
 		System.out.println(bond);
 		System.out.println(mrBacon);
 
-		String s = "select expand(shortestPath) from (select shortestPath(" + mrBacon
-				+ "," + bond + ",'BOTH'))";
+		String s = "select shortestPath(" + mrBacon
+				+ "," + bond + ",'BOTH')";
 		System.out.println(s);
 
-		// List<ORecordId> spath = graphDb.getRawGraph().query(new OSQLSynchQuery<>(s));
-		// for (ORecordId oDocument : spath) {
-		// System.out.println(oDocument);
-		// }
+		OResultSet<ODocument> spath = graphDb.getRawGraph().query(new OSQLSynchQuery<>(s));
+
+		for (ODocument oDocument : spath) {
+			System.out.println(oDocument);
+			List<ORecordId> ids = oDocument.field("shortestPath");
+			for (ORecordId id : ids) {
+				System.out.println(id);
+			}
+		}
 
 		int no = 0;
 
@@ -89,7 +96,7 @@ public class FindBacon {
 			System.out.println(orid);
 		}
 
-		// final Graph g = TinkerGraphFactory.createTinkerGraph(); // see model
+		// final Graph g = TinkerGraphFactory.createTinkerGraph();
 		// g.getVertex(1).addEdge("knows", g.getVertex(6));
 
 		OrientVertex v1 = graphDb.getVertex(bond);
@@ -119,10 +126,7 @@ public class FindBacon {
 				.as("x")
 				.both()
 				.loop("x",
-						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> /*
-																			 * bundle.getLoops
-																			 * () < 6 &&
-																			 */!bundle
+						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> !bundle
 								.getObject().equals(v2),
 						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> bundle
 								.getObject().equals(v2)).path();
