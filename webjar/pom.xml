@@ -19,7 +19,7 @@
 		
 		<java.version>1.8</java.version>
 		
-		<jquery.version>2.1.3</jquery.version>
+		<jquery.version>2.1.4</jquery.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
 	</properties>

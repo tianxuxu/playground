@@ -34,27 +34,24 @@ public class RxJavaSamples {
 	public static void main(String... args) throws Exception {
 		final Broadcaster<Integer> stream = Broadcaster.create();
 
-		stream
-				.map(i -> ":" + i)
-				.consume(i -> LOG.info("consumed:" + i));
+		stream.map(i -> ":" + i).consume(i -> LOG.info("consumed:" + i));
 
-		Observable.from(Arrays.asList(1, 2, 3, 4, 5))
-		          .subscribe(new Observer<Integer>() {
-			          @Override
-			          public void onCompleted() {
-				          stream.onComplete();
-			          }
+		Observable.from(Arrays.asList(1, 2, 3, 4, 5)).subscribe(new Observer<Integer>() {
+			@Override
+			public void onCompleted() {
+				stream.onComplete();
+			}
 
-			          @Override
-			          public void onError(Throwable e) {
-				          stream.onError(e);
-			          }
+			@Override
+			public void onError(Throwable e) {
+				stream.onError(e);
+			}
 
-			          @Override
-			          public void onNext(Integer arg) {
-				          stream.onNext(arg);
-			          }
-		          });
+			@Override
+			public void onNext(Integer arg) {
+				stream.onNext(arg);
+			}
+		});
 	}
 
 }

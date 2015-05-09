@@ -1,0 +1,11 @@
+sourceDir: D:\js\echarts-2.2.2\build\dist
+version: 2.2.2
+groupId: resources
+baseArtifactId: echarts
+destDir: ./res
+
+artifacts:
+  - artifactId: echarts
+    mappings:
+      - from: .
+        to: .

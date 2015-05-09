@@ -17,11 +17,10 @@ import reactor.rx.Promises;
  */
 public class PromiseSamples {
 
-	static final Logger      LOG = LoggerFactory.getLogger(PromiseSamples.class);
+	static final Logger LOG = LoggerFactory.getLogger(PromiseSamples.class);
 
 	static {
-		Environment.initializeIfEmpty()
-		           .assignErrorJournal();
+		Environment.initializeIfEmpty().assignErrorJournal();
 	}
 
 	public static void main(String... args) throws Exception {
@@ -29,19 +28,19 @@ public class PromiseSamples {
 		Promise<String> promise = Promises.prepare(get());
 
 		promise.onComplete(p -> LOG.info("Promise completed {}", p))
-		       .onSuccess(s -> LOG.info("Got value: {}", s))
-		       .onError(t -> LOG.error(t.getMessage(), t));
+				.onSuccess(s -> LOG.info("Got value: {}", s))
+				.onError(t -> LOG.error(t.getMessage(), t));
 
 		try {
 			promise.onNext("Hello World!");
-			//promise.onError(new IllegalArgumentException("Hello Shmello! :P"));
+			// promise.onError(new IllegalArgumentException("Hello Shmello! :P"));
 
 			String s = promise.await(1, TimeUnit.SECONDS);
 			LOG.info("s={}", s);
-		} finally {
+		}
+		finally {
 			get().shutdown();
 		}
 	}
-
 
 }

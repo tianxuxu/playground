@@ -1,17 +1,25 @@
 package ch.rasc.irc;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
 import org.schwering.irc.lib.IRCConnection;
 import org.schwering.irc.lib.IRCEventListener;
-import org.schwering.irc.lib.IRCModeParser;
+import org.schwering.irc.lib.IRCRuntimeConfig;
+import org.schwering.irc.lib.IRCServerConfig;
 import org.schwering.irc.lib.IRCUser;
+import org.schwering.irc.lib.impl.DefaultIRCConnection;
+import org.schwering.irc.lib.impl.DefaultIRCRuntimeConfig;
+import org.schwering.irc.lib.impl.DefaultIRCServerConfig;
+import org.schwering.irc.lib.util.IRCModeParser;
 
 public class Test {
-	public static void main(String[] args) throws IOException {
-		IRCConnection conn = new IRCConnection("irc.wikimedia.org", 6667, 6669, null,
-				"rcmon", "rcmon", "rcmon", null, null, null);
+	public static void main(String[] args) throws IOException, KeyManagementException, NoSuchAlgorithmException {
+		IRCServerConfig config = new DefaultIRCServerConfig("irc.wikimedia.org", new int[] {6667,6669}, "rcmon", "rcmon", "rcmon", "rcmon", "UTF-8");
+		IRCRuntimeConfig runtimeConfig = new DefaultIRCRuntimeConfig(2000, true, true, null, null, null, null);
+		IRCConnection conn = new DefaultIRCConnection(config, runtimeConfig);
 
 		conn.addIRCEventListener(new IRCEventListener() {
 			@Override
@@ -108,10 +116,6 @@ public class Test {
 			}
 		});
 
-		conn.setEncoding("UTF-8");
-		conn.setPong(true);
-		conn.setDaemon(false);
-		conn.setColors(false);
 		conn.connect();
 		// conn.doList();
 		conn.doJoin("#en.wikipedia");

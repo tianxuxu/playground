@@ -27,14 +27,14 @@ import reactor.spring.context.config.EnableReactor;
 public class SpringSamples implements CommandLineRunner {
 
 	static {
-		Environment.initializeIfEmpty()
-		           .assignErrorJournal();
+		Environment.initializeIfEmpty().assignErrorJournal();
 	}
 
 	@Autowired
 	private TestService service;
 
-	@Override public void run(String... args) throws Exception {
+	@Override
+	public void run(String... args) throws Exception {
 		this.service.test();
 
 		get().shutdown();
@@ -49,14 +49,13 @@ public class SpringSamples implements CommandLineRunner {
 	@EnableReactor
 	public static class ReactorConfiguration {
 
-		@Bean public EventBus eventBus() {
-			return EventBus.config()
-			               .env(get())
-			               .dispatcher(Environment.SHARED)
-			               .get();
+		@Bean
+		public EventBus eventBus() {
+			return EventBus.config().env(get()).dispatcher(Environment.SHARED).get();
 		}
 
-		@Bean public Logger log() {
+		@Bean
+		public Logger log() {
 			return LoggerFactory.getLogger(EventBusSamples.class);
 		}
 
@@ -65,9 +64,9 @@ public class SpringSamples implements CommandLineRunner {
 	@Consumer
 	public static class AnnotatedHandler {
 		@Autowired
-		private Logger  log;
+		private Logger log;
 		@Autowired
-		public  EventBus eventBus;
+		public EventBus eventBus;
 
 		@Selector("test.topic")
 		public void onTestTopic(String s) {
@@ -78,7 +77,7 @@ public class SpringSamples implements CommandLineRunner {
 	@Service
 	public static class TestService {
 		@Autowired
-		private Logger  log;
+		private Logger log;
 		@Autowired
 		private EventBus eventBus;
 

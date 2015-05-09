@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
-import ch.rasc.reactorsandbox.quickstart.Trade;
-import ch.rasc.reactorsandbox.quickstart.TradeServer;
+import ch.rasc.reactorsandbox.quickstart.core.Trade;
+import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 
 /**
  * @author Jon Brisbin
@@ -30,12 +30,12 @@ public class TradeServerExample {
 		final TradeServer server = new TradeServer();
 
 		// Use a Reactor to dispatch events using the default Dispatcher
-		EventBus reactor = EventBus.create(env);
+		EventBus bus = EventBus.create(env);
 
 		String topic = "trade.execute";
 
 		// For each Trade event, execute that on the server
-		reactor.on($(topic), (Event<Trade> ev) -> {
+		bus.<Event<Trade>> on($(topic), ev -> {
 			server.execute(ev.getData());
 
 			// Since we're async, for this test, use a latch to tell when we're done
@@ -51,7 +51,7 @@ public class TradeServerExample {
 			Trade t = server.nextTrade();
 
 			// Notify the Reactor the event is ready to be handled
-			reactor.notify(topic, Event.wrap(t));
+			bus.notify(topic, Event.wrap(t));
 		}
 
 		// Stop throughput timer and output metrics
