@@ -3,6 +3,10 @@ package ch.rasc.springwebsocket.client;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import javax.websocket.CloseReason;
+
+import org.glassfish.tyrus.client.ClientManager;
+import org.glassfish.tyrus.client.ClientProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +21,50 @@ public class Client {
 
 	@Bean
 	public WebSocketClient webSocketClient() {
-		return new StandardWebSocketClient();
+		ClientManager client = ClientManager.createClient();
+
+		ClientManager.ReconnectHandler reconnectHandler = new ClientManager.ReconnectHandler() {
+
+			private int counter = 0;
+
+			@Override
+			public boolean onDisconnect(CloseReason closeReason) {
+				counter++;
+				if (counter <= 3) {
+					System.out.println("### Reconnecting... (reconnect count: " + counter
+							+ ")");
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public boolean onConnectFailure(Exception exception) {
+				counter++;
+				if (counter <= 3) {
+					System.out.println("### Reconnecting... (reconnect count: " + counter
+							+ ") " + exception.getMessage());
+
+					// Thread.sleep(...) or something other "sleep-like" expression can be
+					// put here - you might want
+					// to do it here to avoid potential DDoS when you don't limit number
+					// of reconnects.
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public long getDelay() {
+				return 1;
+			}
+		};
+
+		client.getProperties().put(ClientProperties.RECONNECT_HANDLER, reconnectHandler);
+
+		// client.getProperties().put(ClientProperties.RETRY_AFTER_SERVICE_UNAVAILABLE,
+		// true);
+		return new StandardWebSocketClient(client);
 		// return new JettyWebSocketClient();
 	}
 
