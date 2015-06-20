@@ -50,7 +50,7 @@ public class Main {
 				forPattern("feed").createObject().ofType(ArrayList.class);
 				bindRulesFrom(Adresse.class);
 				forPattern("feed/entry/sdata:payload/Adresse").setNext("add");
-			};
+			}
 		};
 
 		DigesterLoader loader = DigesterLoader.newLoader(module);

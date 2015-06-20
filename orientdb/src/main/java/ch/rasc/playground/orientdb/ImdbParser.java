@@ -53,13 +53,13 @@ public class ImdbParser {
 
 		long start = System.currentTimeMillis();
 		OrientGraphNoTx graphDb = factory.getNoTx();
-		graphDb.declareIntent( new OIntentMassiveInsert() );
-				
+		graphDb.declareIntent(new OIntentMassiveInsert());
+
 		OrientVertexType movieVertexType = graphDb.createVertexType("Movie");
 		movieVertexType.createProperty("title", OType.STRING);
 		movieVertexType.createIndex("Movie.title", INDEX_TYPE.UNIQUE, "title");
 
-		OrientVertexType actorVertexType = graphDb.createVertexType("Actor");		
+		OrientVertexType actorVertexType = graphDb.createVertexType("Actor");
 		actorVertexType.createProperty("actor", OType.STRING);
 		actorVertexType.createIndex("Actor.actor", INDEX_TYPE.UNIQUE, "actor");
 
@@ -98,10 +98,11 @@ public class ImdbParser {
 				int actorSep = line.indexOf('\t');
 				if (actorSep >= 0) {
 					String actor = line.substring(0, actorSep).trim();
-					if (!"".equals(actor)) {						
+					if (!"".equals(actor)) {
 						currentActorVertex = graphDb.getVertexByKey("Actor.actor", actor);
-						if (currentActorVertex == null) {						
-							currentActorVertex = graphDb.addVertex("class:Actor", "actor", actor);
+						if (currentActorVertex == null) {
+							currentActorVertex = graphDb.addVertex("class:Actor",
+									"actor", actor);
 						}
 					}
 
@@ -136,13 +137,14 @@ public class ImdbParser {
 					if (character != null && currentActorVertex != null) {
 						Vertex movieVertex = graphDb.getVertexByKey("Movie.title", title);
 						if (movieVertex == null) {
-//						Iterable<Vertex> movies = graphDb.getVertices("Movie.title",
-//								title);
-//						Vertex movieVertex;
-//						if (movies.iterator().hasNext()) {
-//							movieVertex = movies.iterator().next();
-//						}
-//						else {
+							// Iterable<Vertex> movies =
+							// graphDb.getVertices("Movie.title",
+							// title);
+							// Vertex movieVertex;
+							// if (movies.iterator().hasNext()) {
+							// movieVertex = movies.iterator().next();
+							// }
+							// else {
 							// movieVertex = graphDb.addVertex("class:Movie");
 							// movieVertex.setProperty("title", title);
 

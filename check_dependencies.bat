@@ -1,3 +1,7 @@
+cd D:\ws\playground\arangodb
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\autovalue
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -123,10 +127,6 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
 cd D:\ws\playground\orientdb
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
-cd D:\ws\playground\qbit
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 

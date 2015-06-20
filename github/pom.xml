@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.5.3</version>
+			<version>2.6.0-rc2</version>
 		</dependency>
 
 		<dependency>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
-			<version>4.0.0.201505050340-m2</version>
+			<version>4.0.0.201506090130-r</version>
 		</dependency>
 	</dependencies>
 
@@ -66,7 +66,7 @@
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.3</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

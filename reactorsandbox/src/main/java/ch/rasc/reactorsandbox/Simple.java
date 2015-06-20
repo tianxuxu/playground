@@ -17,7 +17,7 @@ public class Simple {
 		EventBus reactor = EventBus.create(env, Environment.WORK_QUEUE);
 
 		CountDownLatch latch = new CountDownLatch(1);
-		Selector selector = ObjectSelector.objectSelector("parse");
+		Selector<String> selector = ObjectSelector.objectSelector("parse");
 		reactor.on(selector, ev -> {
 			System.out.println(ev);
 			System.out.println("selector: " + Thread.currentThread().getName());

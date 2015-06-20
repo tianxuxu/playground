@@ -24,7 +24,7 @@ public class SelectorSamples {
 		Environment.initializeIfEmpty().assignErrorJournal();
 	}
 
-	public static void main(String... args) throws InterruptedException {
+	public static void main(String... args) {
 
 		EventBus r = EventBus.config().env(get()).synchronousDispatcher().get();
 

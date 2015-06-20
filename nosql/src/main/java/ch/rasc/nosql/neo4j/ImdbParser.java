@@ -38,9 +38,9 @@ public class ImdbParser {
 	public static void main(String[] args) throws IOException {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
 				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
-		
+
 		long start = System.currentTimeMillis();
-		
+
 		Index<Node> index;
 		try (Transaction tx = graphDb.beginTx()) {
 			index = graphDb.index().forNodes("myIndex");
@@ -59,7 +59,7 @@ public class ImdbParser {
 		}
 		new ImdbParser().readImdbData(graphDb, index, "E:\\temp\\actors.list.gz");
 		graphDb.shutdown();
-		
+
 		System.out.println((System.currentTimeMillis() - start) / 1000 + " seconds");
 
 	}

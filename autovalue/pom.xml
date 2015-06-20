@@ -13,37 +13,23 @@
 		<dependency>
 			<groupId>com.google.auto.value</groupId>
 			<artifactId>auto-value</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-<!-- 	<repositories>
-		<repository>
-			<id>sonatype</id>
-			<name>sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-	</repositories> -->
 
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.3</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>apt-maven-plugin</artifactId>
@@ -58,11 +44,11 @@
 							<outputDirectory>${project.basedir}/target/generated-sources/java</outputDirectory>
 							<processor>com.google.auto.value.processor.AutoValueProcessor</processor>
 						</configuration>
-					</execution>					
+					</execution>
 				</executions>
 
 			</plugin>
-			
+
 		</plugins>
 	</build>
 

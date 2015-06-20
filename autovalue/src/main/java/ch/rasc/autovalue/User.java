@@ -12,19 +12,20 @@ public abstract class User {
 
 	abstract String name();
 
-	@AutoValue.Validate
-	void validate() {
-		if (loginId() < 0) {
-			throw new IllegalStateException("Negative loginId");
-		}
-	}
-
 	@AutoValue.Builder
-	interface Builder {
-		Builder loginId(long l);
+	abstract static class Builder {
+		abstract Builder loginId(long l);
 
-		Builder name(String s);
+		abstract Builder name(String s);
 
-		User build();
+		abstract User autoBuild();
+
+		User build() {
+			User u = autoBuild();
+			if (u.loginId() < 0) {
+				throw new IllegalStateException("Negative loginId");
+			}
+			return u;
+		}
 	}
 }

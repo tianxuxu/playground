@@ -16,9 +16,12 @@ import org.schwering.irc.lib.impl.DefaultIRCServerConfig;
 import org.schwering.irc.lib.util.IRCModeParser;
 
 public class Test {
-	public static void main(String[] args) throws IOException, KeyManagementException, NoSuchAlgorithmException {
-		IRCServerConfig config = new DefaultIRCServerConfig("irc.wikimedia.org", new int[] {6667,6669}, "rcmon", "rcmon", "rcmon", "rcmon", "UTF-8");
-		IRCRuntimeConfig runtimeConfig = new DefaultIRCRuntimeConfig(2000, true, true, null, null, null, null);
+	public static void main(String[] args) throws IOException, KeyManagementException,
+			NoSuchAlgorithmException {
+		IRCServerConfig config = new DefaultIRCServerConfig("irc.wikimedia.org",
+				new int[] { 6667, 6669 }, "rcmon", "rcmon", "rcmon", "rcmon", "UTF-8");
+		IRCRuntimeConfig runtimeConfig = new DefaultIRCRuntimeConfig(2000, true, true,
+				null, null, null, null);
 		IRCConnection conn = new DefaultIRCConnection(config, runtimeConfig);
 
 		conn.addIRCEventListener(new IRCEventListener() {

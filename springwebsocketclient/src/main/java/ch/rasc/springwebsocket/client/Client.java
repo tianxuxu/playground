@@ -29,10 +29,10 @@ public class Client {
 
 			@Override
 			public boolean onDisconnect(CloseReason closeReason) {
-				counter++;
-				if (counter <= 3) {
-					System.out.println("### Reconnecting... (reconnect count: " + counter
-							+ ")");
+				this.counter++;
+				if (this.counter <= 3) {
+					System.out.println("### Reconnecting... (reconnect count: "
+							+ this.counter + ")");
 					return true;
 				}
 				return false;
@@ -40,10 +40,10 @@ public class Client {
 
 			@Override
 			public boolean onConnectFailure(Exception exception) {
-				counter++;
-				if (counter <= 3) {
-					System.out.println("### Reconnecting... (reconnect count: " + counter
-							+ ") " + exception.getMessage());
+				this.counter++;
+				if (this.counter <= 3) {
+					System.out.println("### Reconnecting... (reconnect count: "
+							+ this.counter + ") " + exception.getMessage());
 
 					// Thread.sleep(...) or something other "sleep-like" expression can be
 					// put here - you might want

@@ -17,7 +17,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.ShortBufferException;
 
 import ch.rasc.playground.util.CryptoUtil;
 
@@ -34,9 +33,8 @@ public class Client {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException,
 			InvalidKeySpecException, InvalidKeyException, IllegalStateException,
-			NoSuchPaddingException,
-			InvalidAlgorithmParameterException, IllegalBlockSizeException,
-			BadPaddingException, SignatureException {
+			NoSuchPaddingException, InvalidAlgorithmParameterException,
+			IllegalBlockSizeException, BadPaddingException, SignatureException {
 
 		// create dh keypair
 		KeyPair clientDHKeyPair = CryptoUtil.generateDHKeyPair();

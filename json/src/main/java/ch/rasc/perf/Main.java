@@ -22,7 +22,7 @@ public class Main {
 
 		List<String> storage = new ArrayList<>();
 		sw.start("write");
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			User user = new User();
 			user.setEmail(df.getEmailAddress());
 			user.setEnabled(df.chance(90));
@@ -43,7 +43,7 @@ public class Main {
 		}
 		sw.stop();
 		sw.start("read");
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			objectMapper.readValue(storage.get(i), User.class);
 		}
 		sw.stop();

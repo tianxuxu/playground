@@ -24,8 +24,8 @@ public class TradeServer {
 	}
 
 	private final AtomicLong counter = new AtomicLong();
-	private final BlockingQueue<Order> buys = new LinkedTransferQueue<Order>();
-	private final BlockingQueue<Order> sells = new LinkedTransferQueue<Order>();
+	private final BlockingQueue<Order> buys = new LinkedTransferQueue<>();
+	private final BlockingQueue<Order> sells = new LinkedTransferQueue<>();
 	private final AtomicBoolean active = new AtomicBoolean(true);
 	private final Thread queueDrain = new Thread(() -> {
 		while (this.active.get()) {

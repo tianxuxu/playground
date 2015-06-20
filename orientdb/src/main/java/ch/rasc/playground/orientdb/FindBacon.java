@@ -13,7 +13,6 @@ import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.orientechnologies.orient.core.index.OIndex;
 import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.record.impl.ODocumentEntry;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.orientechnologies.orient.core.sql.query.OResultSet;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
@@ -45,11 +44,11 @@ public class FindBacon {
 		System.out.println(bond);
 		System.out.println(mrBacon);
 
-		String s = "select shortestPath(" + mrBacon
-				+ "," + bond + ",'BOTH')";
+		String s = "select shortestPath(" + mrBacon + "," + bond + ",'BOTH')";
 		System.out.println(s);
 
-		OResultSet<ODocument> spath = graphDb.getRawGraph().query(new OSQLSynchQuery<>(s));
+		OResultSet<ODocument> spath = graphDb.getRawGraph()
+				.query(new OSQLSynchQuery<>(s));
 
 		for (ODocument oDocument : spath) {
 			System.out.println(oDocument);

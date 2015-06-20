@@ -1,5 +1,5 @@
-sourceDir: D:\js\echarts-2.2.2\build\dist
-version: 2.2.2
+sourceDir: D:\js\echarts-2.2.4\build\dist
+version: 2.2.4
 groupId: resources
 baseArtifactId: echarts
 destDir: ./res

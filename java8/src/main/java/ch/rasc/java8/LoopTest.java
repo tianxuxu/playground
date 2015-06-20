@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -23,7 +22,7 @@ public class LoopTest {
 		}
 	}
 
-	@Benchmark
+	// @Benchmark
 	public void loop() throws Exception {
 		for (Shape s : this.shapes) {
 			if (s.getColor() == Color.BLUE) {
@@ -32,7 +31,7 @@ public class LoopTest {
 		}
 	}
 
-	@Benchmark
+	// @Benchmark
 	public void iterator() throws Exception {
 		Iterator<Shape> it = this.shapes.iterator();
 		while (it.hasNext()) {
@@ -43,7 +42,7 @@ public class LoopTest {
 		}
 	}
 
-	@Benchmark
+	// @Benchmark
 	public void lambdaStreamEmbeddedIf() throws Exception {
 		this.shapes.stream().forEach(s -> {
 			if (s.getColor() == Color.BLUE) {
@@ -52,13 +51,13 @@ public class LoopTest {
 		});
 	}
 
-	@Benchmark
+	// @Benchmark
 	public void lambdaStream() throws Exception {
 		this.shapes.stream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));
 	}
 
-	@Benchmark
+	// @Benchmark
 	public void lambdaParallel() throws Exception {
 		this.shapes.parallelStream().filter(s -> s.getColor() == Color.BLUE)
 				.forEach(s -> s.setColor(Color.RED));
