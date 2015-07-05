@@ -7,14 +7,14 @@ import org.mongodb.morphia.Morphia;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ch.rasc.mongodb.author.morphia.Word12;
-import ch.rasc.mongodb.author.raw.RawAuthor;
-import ch.rasc.mongodb.author.raw.RawTextImporter;
-
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+
+import ch.rasc.mongodb.author.morphia.Word12;
+import ch.rasc.mongodb.author.raw.RawAuthor;
+import ch.rasc.mongodb.author.raw.RawTextImporter;
 
 @Configuration
 public class AppConfiguration {

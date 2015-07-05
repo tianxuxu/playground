@@ -2,19 +2,19 @@ package ch.rasc.playground.orientdb;
 
 import java.util.List;
 
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
+
 import ch.rasc.playground.orientdb.domain.Account;
 import ch.rasc.playground.orientdb.domain.Address;
 import ch.rasc.playground.orientdb.domain.City;
 import ch.rasc.playground.orientdb.domain.Country;
 
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
-
 public class ObjectMain {
 
 	public static void main(String[] args) {
-		OObjectDatabaseTx db = new OObjectDatabaseTx("remote:localhost/testdb").open(
-				"root", "root");
+		OObjectDatabaseTx db = new OObjectDatabaseTx("remote:localhost/testdb")
+				.open("root", "root");
 
 		// REGISTER THE CLASS ONLY ONCE AFTER THE DB IS OPEN/CREATED
 		db.setAutomaticSchemaGeneration(true);
@@ -43,8 +43,8 @@ public class ObjectMain {
 		// INSTANCE
 		account = db.save(account);
 
-		List<Account> accounts = db.query(new OSQLSynchQuery<Account>(
-				"select from Account where name like 'L%'"));
+		List<Account> accounts = db.query(
+				new OSQLSynchQuery<Account>("select from Account where name like 'L%'"));
 		for (Account acc : accounts) {
 			Account detached = db.detach(acc, true);
 			System.out.println(detached);

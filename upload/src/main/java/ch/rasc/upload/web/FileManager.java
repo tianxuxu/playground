@@ -47,8 +47,8 @@ public class FileManager {
 		return true;
 	}
 
-	public void storeChunk(String identifier, Integer chunkNumber, InputStream inputStream)
-			throws IOException {
+	public void storeChunk(String identifier, Integer chunkNumber,
+			InputStream inputStream) throws IOException {
 		Path chunkFile = Paths.get(this.uploadDirectory, identifier,
 				chunkNumber.toString());
 		try {
@@ -83,8 +83,8 @@ public class FileManager {
 			Files.delete(newFilePath);
 		}
 
-		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(
-				newFilePath.toFile()))) {
+		try (BufferedOutputStream bos = new BufferedOutputStream(
+				new FileOutputStream(newFilePath.toFile()))) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
 				Path chunkPath = Paths.get(this.uploadDirectory, identifier,
 						String.valueOf(chunkNo));

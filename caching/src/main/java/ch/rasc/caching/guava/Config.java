@@ -29,8 +29,9 @@ public class Config {
 		Cache<Object, Object> maxSizeCache = CacheBuilder.newBuilder().maximumSize(10)
 				.build();
 
-		cacheManager.setCaches(Arrays.asList(new GuavaCache("oneMinuteCache",
-				oneMinuteCache), new GuavaCache("maxSizeCache", maxSizeCache)));
+		cacheManager
+				.setCaches(Arrays.asList(new GuavaCache("oneMinuteCache", oneMinuteCache),
+						new GuavaCache("maxSizeCache", maxSizeCache)));
 
 		return cacheManager;
 	}

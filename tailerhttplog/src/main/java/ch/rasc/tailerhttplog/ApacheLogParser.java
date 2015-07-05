@@ -103,7 +103,7 @@ public class ApacheLogParser {
 	 */
 	public void ApacheAccessLogParser(String accessFilePath, String urlsFilePath,
 			String startingDate, String endingDate, String dateFormat)
-			throws ParseException, IOException {
+					throws ParseException, IOException {
 
 		long startingEpoch = convertTimetoEpoch(dateFormat, startingDate);
 		long endingEpoch = convertTimetoEpoch(dateFormat, endingDate);
@@ -111,8 +111,8 @@ public class ApacheLogParser {
 
 		HashMap<Integer, String> urlsMap = readUrlsList(urlsFilePath);
 
-		try (BufferedReader bufferReader = new BufferedReader(new FileReader(
-				accessFilePath))) {
+		try (BufferedReader bufferReader = new BufferedReader(
+				new FileReader(accessFilePath))) {
 
 			String line = "";
 			long index = 0;
@@ -144,8 +144,8 @@ public class ApacheLogParser {
 					this.clientRequest = accessLogEntryMatcher.group(5);
 
 					if (this.DEBUG) {
-						System.out.println("" + index + " : "
-								+ this.clientRequest.split(" ")[1]);
+						System.out.println(
+								"" + index + " : " + this.clientRequest.split(" ")[1]);
 					}
 
 					if (urlsMap.containsValue(this.clientRequest.split(" ")[1])) {

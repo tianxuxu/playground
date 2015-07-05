@@ -36,9 +36,9 @@ import org.jooq.lambda.Unchecked;
 
 public class Encrypt {
 
-	public static void main(String[] args) throws IOException, NoSuchAlgorithmException,
-			InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException,
-			InvalidParameterSpecException {
+	public static void main(String[] args)
+			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException,
+			NoSuchPaddingException, InvalidKeyException, InvalidParameterSpecException {
 
 		if (args.length == 3) {
 
@@ -47,23 +47,21 @@ public class Encrypt {
 
 			Path inputDirectory = Paths.get(args[0]);
 
-			try (ZipOutputStream zos = new ZipOutputStream(Files.newOutputStream(tmpFile));
+			try (ZipOutputStream zos = new ZipOutputStream(
+					Files.newOutputStream(tmpFile));
 					WritableByteChannel out = Channels.newChannel(zos)) {
 				zos.setLevel(9);
-				Files.walk(inputDirectory)
-						.filter(file -> !Files.isDirectory(file))
-						.peek(System.out::println)
-						.forEach(
-								Unchecked.consumer(file -> {
-									String name = inputDirectory.getParent()
-											.relativize(file).toString();
-									name = name.replace('\\', '/');
-									zos.putNextEntry(new ZipEntry(name));
-									try (FileChannel in = FileChannel.open(file,
-											StandardOpenOption.READ)) {
-										in.transferTo(0, in.size(), out);
-									}
-								}));
+				Files.walk(inputDirectory).filter(file -> !Files.isDirectory(file))
+						.peek(System.out::println).forEach(Unchecked.consumer(file -> {
+							String name = inputDirectory.getParent().relativize(file)
+									.toString();
+							name = name.replace('\\', '/');
+							zos.putNextEntry(new ZipEntry(name));
+							try (FileChannel in = FileChannel.open(file,
+									StandardOpenOption.READ)) {
+								in.transferTo(0, in.size(), out);
+							}
+						}));
 			}
 
 			// encrypt from tmpFile to encFile
@@ -73,7 +71,8 @@ public class Encrypt {
 			Path encTmpFile = Files.createTempFile("encrypt", "zip.enc");
 			encTmpFile.toFile().deleteOnExit();
 
-			SecretKey key = createSecretKey(password, outputFile.getFileName().toString());
+			SecretKey key = createSecretKey(password,
+					outputFile.getFileName().toString());
 
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
@@ -112,8 +111,8 @@ public class Encrypt {
 
 		}
 		else {
-			System.out
-					.println("java ch.rasc.watch.Encrypt <directory> <encryptedZipOutputFile> <password>");
+			System.out.println(
+					"java ch.rasc.watch.Encrypt <directory> <encryptedZipOutputFile> <password>");
 		}
 
 	}

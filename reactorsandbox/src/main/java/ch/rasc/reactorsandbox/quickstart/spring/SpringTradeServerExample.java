@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import ch.rasc.reactorsandbox.quickstart.core.Trade;
+import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 import reactor.spring.context.config.EnableReactor;
-import ch.rasc.reactorsandbox.quickstart.core.Trade;
-import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 
 /**
  * @author Jon Brisbin

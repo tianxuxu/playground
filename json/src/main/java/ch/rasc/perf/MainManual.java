@@ -126,7 +126,8 @@ public class MainManual {
 		return sw.toString();
 	}
 
-	private static User toObject(JsonFactory jsonFactory, String json) throws IOException {
+	private static User toObject(JsonFactory jsonFactory, String json)
+			throws IOException {
 		User user = new User();
 
 		try (JsonParser parser = jsonFactory.createParser(json)) {

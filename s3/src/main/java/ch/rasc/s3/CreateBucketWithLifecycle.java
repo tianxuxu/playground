@@ -42,10 +42,9 @@ public class CreateBucketWithLifecycle {
 
 		}
 		else {
-			System.out
-					.println("java -jar s3backup.jar "
-							+ CreateBucketWithLifecycle.class.getName()
-							+ " accessKey secretKey bucketName transferToGlacierInDays expirationInDays");
+			System.out.println("java -jar s3backup.jar "
+					+ CreateBucketWithLifecycle.class.getName()
+					+ " accessKey secretKey bucketName transferToGlacierInDays expirationInDays");
 		}
 	}
 }

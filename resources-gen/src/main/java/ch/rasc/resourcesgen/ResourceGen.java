@@ -18,20 +18,19 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import net.sourceforge.argparse4j.ArgumentParsers;
-import net.sourceforge.argparse4j.inf.ArgumentParser;
-import net.sourceforge.argparse4j.inf.ArgumentParserException;
-import net.sourceforge.argparse4j.inf.Namespace;
-
 import org.yaml.snakeyaml.Yaml;
-
-import ch.rasc.resourcesgen.config.Artifact;
-import ch.rasc.resourcesgen.config.Config;
-import ch.rasc.resourcesgen.config.Mapping;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+
+import ch.rasc.resourcesgen.config.Artifact;
+import ch.rasc.resourcesgen.config.Config;
+import ch.rasc.resourcesgen.config.Mapping;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 public class ResourceGen {
 
@@ -117,8 +116,8 @@ public class ResourceGen {
 				Path destPath = destDirPath.resolve(mapping.to);
 
 				if (!Files.isDirectory(srcPath) && destPath.getNameCount() > 1) {
-					Files.createDirectories(destPath.subpath(0,
-							destPath.getNameCount() - 1));
+					Files.createDirectories(
+							destPath.subpath(0, destPath.getNameCount() - 1));
 				}
 				else if (destPath.getNameCount() > 1) {
 					Files.createDirectories(destPath);

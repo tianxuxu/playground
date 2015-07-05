@@ -31,8 +31,9 @@ public class Application {
 	}
 
 	@Bean
-	public DataSourceConnectionProvider dataSourceConnectionProvider(DataSource dataSource) {
-		return new DataSourceConnectionProvider(new TransactionAwareDataSourceProxy(
-				dataSource));
+	public DataSourceConnectionProvider dataSourceConnectionProvider(
+			DataSource dataSource) {
+		return new DataSourceConnectionProvider(
+				new TransactionAwareDataSourceProxy(dataSource));
 	}
 }

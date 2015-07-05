@@ -51,8 +51,8 @@ public class StartJetty {
 		server.setHandler(context);
 		server.start();
 
-		System.out.println("Jetty Startup Time: " + (System.currentTimeMillis() - start)
-				+ " ms");
+		System.out.println(
+				"Jetty Startup Time: " + (System.currentTimeMillis() - start) + " ms");
 		System.out.println("Jetty running on " + port);
 	}
 
@@ -76,8 +76,8 @@ public class StartJetty {
 
 		private final List<File> jars;
 
-		public MavenWebInfConfiguration() throws ParserConfigurationException,
-				SAXException, IOException {
+		public MavenWebInfConfiguration()
+				throws ParserConfigurationException, SAXException, IOException {
 			this(null);
 		}
 
@@ -132,10 +132,10 @@ public class StartJetty {
 
 					if (scope == null || !scope.equals("provided")) {
 						groupId = groupId.replace(".", "/");
-						String artifactFileName = groupId + "/" + artifact + "/"
-								+ version + "/" + artifact + "-" + version + ".jar";
-						this.jars.add(new File(homeDir, ".m2/repository/"
-								+ artifactFileName));
+						String artifactFileName = groupId + "/" + artifact + "/" + version
+								+ "/" + artifact + "-" + version + ".jar";
+						this.jars.add(
+								new File(homeDir, ".m2/repository/" + artifactFileName));
 					}
 
 				}
@@ -163,7 +163,8 @@ public class StartJetty {
 			return orig;
 		}
 
-		private static String resolveProperty(String orig, Map<String, String> properties) {
+		private static String resolveProperty(String orig,
+				Map<String, String> properties) {
 			String property = properties.get(orig);
 			if (property != null) {
 				return property;

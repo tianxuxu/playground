@@ -1,6 +1,7 @@
 package ch.rasc.reactorsandbox.samples;
 
 import static reactor.bus.selector.Selectors.$;
+
 import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;

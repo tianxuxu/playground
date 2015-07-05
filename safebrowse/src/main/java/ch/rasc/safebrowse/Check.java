@@ -31,8 +31,8 @@ import org.apache.http.util.EntityUtils;
 
 public class Check {
 
-	public static void main(String[] args) throws URISyntaxException,
-			ClientProtocolException, IOException {
+	public static void main(String[] args)
+			throws URISyntaxException, ClientProtocolException, IOException {
 
 		URL myJarLocationURL = Check.class.getProtectionDomain().getCodeSource()
 				.getLocation();
@@ -69,20 +69,21 @@ public class Check {
 			switch (status) {
 			case 200:
 
-				result.append("AT LEAST ONE of the queried URLs are matched in either the phishing or malware lists");
+				result.append(
+						"AT LEAST ONE of the queried URLs are matched in either the phishing or malware lists");
 				result.append("\n");
 				result.append("\n");
 				String responseBody = EntityUtils.toString(response.getEntity());
 				List<String> results = Arrays.asList(responseBody.split("\n"));
 				for (int i = 0; i < urls.size(); i++) {
-					result.append(String.format("%-30s --> %s", urls.get(i),
-							results.get(i)));
+					result.append(
+							String.format("%-30s --> %s", urls.get(i), results.get(i)));
 					result.append("\n");
 				}
 				break;
 			case 204:
-				System.out
-						.println("NONE of the queried URLs matched the phishing or malware lists");
+				System.out.println(
+						"NONE of the queried URLs matched the phishing or malware lists");
 				break;
 			case 400:
 				result.append("Bad Request — The HTTP request was not correctly formed");

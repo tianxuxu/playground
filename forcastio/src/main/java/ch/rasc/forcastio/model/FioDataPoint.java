@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.rasc.forcastio.converter.FioIconDeserializer;
-import ch.rasc.forcastio.converter.FioPrecipTypeDeserializer;
-
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import ch.rasc.forcastio.converter.FioIconDeserializer;
+import ch.rasc.forcastio.converter.FioPrecipTypeDeserializer;
 
 /**
  * A data point object represents the various weather phenomena occurring at a specific
@@ -536,9 +536,9 @@ public class FioDataPoint {
 
 	@Override
 	public String toString() {
-		return "FioDataPoint [time=" + this.time + ", summary=" + this.summary
-				+ ", icon=" + this.icon + ", sunriseTime=" + this.sunriseTime
-				+ ", sunsetTime=" + this.sunsetTime + ", moonPhase=" + this.moonPhase
+		return "FioDataPoint [time=" + this.time + ", summary=" + this.summary + ", icon="
+				+ this.icon + ", sunriseTime=" + this.sunriseTime + ", sunsetTime="
+				+ this.sunsetTime + ", moonPhase=" + this.moonPhase
 				+ ", nearestStormDistance=" + this.nearestStormDistance
 				+ ", nearestStormBearing=" + this.nearestStormBearing
 				+ ", precipIntensity=" + this.precipIntensity + ", precipIntensityMax="

@@ -29,18 +29,18 @@ public abstract class CompanyDomainForKata {
 	}
 
 	private void setUpSuppliers() {
-		this.company.addSupplier(new Supplier("Shedtastic", new String[] { "shed",
-				"big shed", "huge shed" }));
-		this.company.addSupplier(new Supplier("Splendid Crocks", new String[] { "cup",
-				"saucer", "bowl" }));
-		this.company.addSupplier(new Supplier("Annoying Pets", new String[] { "dog",
-				"cat", "goldfish" }));
+		this.company.addSupplier(new Supplier("Shedtastic",
+				new String[] { "shed", "big shed", "huge shed" }));
+		this.company.addSupplier(new Supplier("Splendid Crocks",
+				new String[] { "cup", "saucer", "bowl" }));
+		this.company.addSupplier(
+				new Supplier("Annoying Pets", new String[] { "dog", "cat", "goldfish" }));
 		this.company.addSupplier(new Supplier("Gnomes 'R' Us", new String[] { "gnome" }));
-		this.company.addSupplier(new Supplier("Furniture Hamlet", new String[] { "table",
-				"sofa", "chair" }));
+		this.company.addSupplier(new Supplier("Furniture Hamlet",
+				new String[] { "table", "sofa", "chair" }));
 		this.company.addSupplier(new Supplier("SFD", new String[] { "sofa", "chair" }));
-		this.company.addSupplier(new Supplier("Doxins", new String[] { "kettle",
-				"plasma screen", "sandwich toaster" }));
+		this.company.addSupplier(new Supplier("Doxins",
+				new String[] { "kettle", "plasma screen", "sandwich toaster" }));
 	}
 
 	private void setUpCustomersAndOrders() {

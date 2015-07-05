@@ -35,19 +35,19 @@ public class SelectorSamples {
 		r.on(R("/some/(.+)"), ev -> {
 			// RegexSelector puts capture groups into headers using convention 'group'
 			// + [capture group #]
-				String topic = ev.getHeaders().get("group1");
+			String topic = ev.getHeaders().get("group1");
 
-				LOG.info("Got event '{}' for {}", ev.getData(), topic);
-			});
+			LOG.info("Got event '{}' for {}", ev.getData(), topic);
+		});
 
 		// Topic selection based on URI template
 		r.on(U("/some/{topic}"), ev -> {
 			// UriTemplateSelector puts path segment matches into headers using the
 			// path variable name (like Spring MVC)
-				String topic = ev.getHeaders().get("topic");
+			String topic = ev.getHeaders().get("topic");
 
-				LOG.info("Got event '{}' for {}", ev.getData(), topic);
-			});
+			LOG.info("Got event '{}' for {}", ev.getData(), topic);
+		});
 
 		// Type selection based on inheritance
 		r.on(T(Exception.class),

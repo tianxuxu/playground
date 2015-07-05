@@ -44,8 +44,8 @@ public class Svg2PngServlet extends HttpServlet {
 			postfix = "png";
 		}
 
-		response.setHeader("Content-Disposition", "attachment; filename=\"mixedchart."
-				+ postfix + "\";");
+		response.setHeader("Content-Disposition",
+				"attachment; filename=\"mixedchart." + postfix + "\";");
 
 		try (StringReader stringReader = new StringReader(svg);
 				OutputStream out = response.getOutputStream()) {

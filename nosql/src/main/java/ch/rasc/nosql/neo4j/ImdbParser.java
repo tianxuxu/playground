@@ -70,9 +70,9 @@ public class ImdbParser {
 
 		Transaction tx = null;
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(
-				new GZIPInputStream(new FileInputStream(fileName)),
-				StandardCharsets.ISO_8859_1))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new GZIPInputStream(new FileInputStream(fileName)),
+						StandardCharsets.ISO_8859_1))) {
 
 			String line = br.readLine();
 			Node currentActorNode = null;

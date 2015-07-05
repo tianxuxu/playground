@@ -1,5 +1,5 @@
-sourceDir: D:\js\ext-5.1.2.474
-version: 5.1.2.474
+sourceDir: D:\js\ext-5.1.2.559
+version: 5.1.2.559
 groupId: resources
 baseArtifactId: ext
 destDir: ./res

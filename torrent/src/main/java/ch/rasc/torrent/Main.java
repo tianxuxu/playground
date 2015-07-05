@@ -36,8 +36,8 @@ public class Main {
 		File downloadDirectory = new File(".");
 		downloadDirectory.mkdirs();
 
-		Client client = new Client(InetAddress.getLocalHost(), SharedTorrent.fromFile(
-				torrentFile, downloadDirectory));
+		Client client = new Client(InetAddress.getLocalHost(),
+				SharedTorrent.fromFile(torrentFile, downloadDirectory));
 
 		// You can optionally set download/upload rate limits
 		// in kB/second. Setting a limit to 0.0 disables rate

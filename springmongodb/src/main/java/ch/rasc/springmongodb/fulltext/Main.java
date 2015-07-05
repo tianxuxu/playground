@@ -46,8 +46,8 @@ public class Main extends AbstractMongoConfiguration {
 
 	// http://spring.io/blog/2014/07/17/text-search-your-documents-with-spring-data-mongodb
 
-	public static void main(String[] args) throws IOException, NumberFormatException,
-			XMLStreamException {
+	public static void main(String[] args)
+			throws IOException, NumberFormatException, XMLStreamException {
 		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(Main.class);
 		MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
@@ -116,9 +116,9 @@ public class Main extends AbstractMongoConfiguration {
 
 	@Override
 	public CustomConversions customConversions() {
-		return new CustomConversions(Arrays.asList(
-				LocalDateTimeToStringConverter.INSTANCE,
-				StringToLocalDateTimeConverter.INSTANCE));
+		return new CustomConversions(
+				Arrays.asList(LocalDateTimeToStringConverter.INSTANCE,
+						StringToLocalDateTimeConverter.INSTANCE));
 	}
 
 	private static void importPosts(SevenZFile sevenZFile, MongoTemplate mongoTemplate)
@@ -130,8 +130,8 @@ public class Main extends AbstractMongoConfiguration {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		@SuppressWarnings("resource")
-		XMLStreamReader reader = factory.createXMLStreamReader(new SevenZFileInputStream(
-				sevenZFile), StandardCharsets.UTF_8.name());
+		XMLStreamReader reader = factory.createXMLStreamReader(
+				new SevenZFileInputStream(sevenZFile), StandardCharsets.UTF_8.name());
 
 		while (reader.hasNext()) {
 			int event = reader.next();

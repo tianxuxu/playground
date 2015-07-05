@@ -64,7 +64,8 @@ public class FindBacon {
 		String movie = null;
 
 		long start = System.currentTimeMillis();
-		for (Vertex v : (Iterable<Vertex>) graphDb.command(new OCommandSQL(s)).execute()) {
+		for (Vertex v : (Iterable<Vertex>) graphDb.command(new OCommandSQL(s))
+				.execute()) {
 			String actor = v.getProperty("actor");
 			String title = v.getProperty("title");
 			if (actor != null) {
@@ -104,16 +105,14 @@ public class FindBacon {
 		System.out.println(v2);
 		Set<Vertex> x = new HashSet<>(Collections.singleton(v1));
 
-		GremlinPipeline<Object, List> pipe = new GremlinPipeline<>(v1)
-				.as("x")
-				.both()
-				.except(x)
-				.store(x)
+		GremlinPipeline<Object, List> pipe = new GremlinPipeline<>(v1).as("x").both()
+				.except(x).store(x)
 				.loop("x",
 						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> !x
 								.contains(v2),
 						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> bundle
-								.getObject().equals(v2)).path();
+								.getObject().equals(v2))
+				.path();
 
 		for (final List path : pipe) {
 			System.out.println(path);
@@ -121,14 +120,13 @@ public class FindBacon {
 
 		System.out.println("====");
 
-		pipe = new GremlinPipeline<>(v1)
-				.as("x")
-				.both()
+		pipe = new GremlinPipeline<>(v1).as("x").both()
 				.loop("x",
 						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> !bundle
 								.getObject().equals(v2),
 						(PipeFunction<LoopBundle<Vertex>, Boolean>) bundle -> bundle
-								.getObject().equals(v2)).path();
+								.getObject().equals(v2))
+				.path();
 
 		int pathLength = Integer.MAX_VALUE;
 		for (final List path : pipe) {

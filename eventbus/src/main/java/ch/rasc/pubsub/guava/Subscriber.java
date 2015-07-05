@@ -17,8 +17,8 @@ public class Subscriber {
 
 	@Subscribe
 	public void handleSpecialMsgEvent(SpecialMsgEvent event) {
-		System.out.println("SpecialMsgEvent: " + event.getMessage() + " User: "
-				+ event.getUser());
+		System.out.println(
+				"SpecialMsgEvent: " + event.getMessage() + " User: " + event.getUser());
 		try {
 			TimeUnit.SECONDS.sleep(5);
 		}

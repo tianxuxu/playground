@@ -40,34 +40,33 @@ public class DirectoryWatcher {
 	}
 
 	public void start() {
-		new Thread(
-				() -> {
+		new Thread(() -> {
 
-					while (this.watching) {
-						try {
-							final WatchKey watchKey = this.watchService.poll(10,
-									TimeUnit.SECONDS);
-							if (watchKey != null) {
-								final List<WatchEvent<?>> events = watchKey.pollEvents();
+			while (this.watching) {
+				try {
+					final WatchKey watchKey = this.watchService.poll(10,
+							TimeUnit.SECONDS);
+					if (watchKey != null) {
+						final List<WatchEvent<?>> events = watchKey.pollEvents();
 
-								ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList
-										.builder();
-								for (WatchEvent<?> event : events) {
-									pathEventsBuilder.add(new PathEvent((Path) event
-											.context(), event.kind()));
-								}
-
-								watchKey.reset();
-								this.eventBus.post(new PathEvents((Path) watchKey
-										.watchable(), pathEventsBuilder.build()));
-							}
+						ImmutableList.Builder<PathEvent> pathEventsBuilder = ImmutableList
+								.builder();
+						for (WatchEvent<?> event : events) {
+							pathEventsBuilder.add(
+									new PathEvent((Path) event.context(), event.kind()));
 						}
-						catch (InterruptedException e) {
-							this.watching = false;
-						}
+
+						watchKey.reset();
+						this.eventBus.post(new PathEvents((Path) watchKey.watchable(),
+								pathEventsBuilder.build()));
 					}
+				}
+				catch (InterruptedException e) {
+					this.watching = false;
+				}
+			}
 
-				}).start();
+		}).start();
 	}
 
 	@PreDestroy

@@ -32,7 +32,8 @@ public class ObjectRead {
 		HttpGet httpget = new HttpGet(url);
 		try (CloseableHttpClient client = HttpClientBuilder.create().build();
 				CloseableHttpResponse response = client.execute(httpget);
-				JsonReader reader = Json.createReader(response.getEntity().getContent())) {
+				JsonReader reader = Json
+						.createReader(response.getEntity().getContent())) {
 
 			JsonObject root = reader.readObject();
 			JsonObject hourly = root.getJsonObject("hourly");

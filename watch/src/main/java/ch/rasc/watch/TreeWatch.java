@@ -37,8 +37,8 @@ public class TreeWatch {
 		});
 	}
 
-	private static void watch(WatchService watchService, Path start) throws IOException,
-			InterruptedException {
+	private static void watch(WatchService watchService, Path start)
+			throws IOException, InterruptedException {
 		registerTree(watchService, start);
 
 		while (true) {

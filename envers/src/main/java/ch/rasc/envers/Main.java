@@ -175,8 +175,8 @@ public class Main {
 	private static void updateMitarbeiter(Session session) {
 		Mitarbeiter mitarbeiter = new HibernateQuery(session)
 				.from(QMitarbeiter.mitarbeiter)
-				.where(QMitarbeiter.mitarbeiter.vorname.eq("Felix").and(
-						QMitarbeiter.mitarbeiter.name.eq("Muster")))
+				.where(QMitarbeiter.mitarbeiter.vorname.eq("Felix")
+						.and(QMitarbeiter.mitarbeiter.name.eq("Muster")))
 				.singleResult(QMitarbeiter.mitarbeiter);
 
 		mitarbeiter.setStrasse("Hauptstrasse 10");
@@ -187,8 +187,8 @@ public class Main {
 
 		Mitarbeiter mitarbeiter = new HibernateQuery(session)
 				.from(QMitarbeiter.mitarbeiter)
-				.where(QMitarbeiter.mitarbeiter.vorname.eq("Jolanda").and(
-						QMitarbeiter.mitarbeiter.name.eq("Meier")))
+				.where(QMitarbeiter.mitarbeiter.vorname.eq("Jolanda")
+						.and(QMitarbeiter.mitarbeiter.name.eq("Meier")))
 				.singleResult(QMitarbeiter.mitarbeiter);
 
 		mitarbeiter.getFirma().getMitarbeiter().remove(mitarbeiter);

@@ -113,8 +113,7 @@ public class Exercise8Test extends CompanyDomainForKata {
 		MutableListMultimap<Double, Customer> multimap = null;
 		Assert.assertEquals(3, multimap.size());
 		Assert.assertEquals(2, multimap.keysView().size());
-		Assert.assertEquals(
-				FastList.newListWith(this.company.getCustomerNamed("Fred"),
-						this.company.getCustomerNamed("Bill")), multimap.get(50.0));
+		Assert.assertEquals(FastList.newListWith(this.company.getCustomerNamed("Fred"),
+				this.company.getCustomerNamed("Bill")), multimap.get(50.0));
 	}
 }

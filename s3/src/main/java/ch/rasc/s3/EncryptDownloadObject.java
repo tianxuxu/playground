@@ -42,8 +42,8 @@ public class EncryptDownloadObject {
 				tm.shutdownNow();
 			}
 			catch (InterruptedException | AmazonClientException e) {
-				System.out.println("Unable to download file, download was aborted: "
-						+ objectKey);
+				System.out.println(
+						"Unable to download file, download was aborted: " + objectKey);
 				e.printStackTrace();
 			}
 

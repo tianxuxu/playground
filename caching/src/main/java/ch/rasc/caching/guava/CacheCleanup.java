@@ -34,7 +34,7 @@ public class CacheCleanup {
 				((GuavaCache) this.cacheManager.getCache(cacheName)).getNativeCache()
 						.cleanUp();
 			}
-		}, 5, 20, TimeUnit.SECONDS);
+		} , 5, 20, TimeUnit.SECONDS);
 
 	}
 }

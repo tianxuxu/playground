@@ -30,7 +30,8 @@ public class ContextExample {
 		res.setProperty("password", "dbpassword");
 		res.setProperty("driverClassName", "com.mysql.jdbc.Driver");
 
-		res.setProperty("url", "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8");
+		res.setProperty("url",
+				"jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8");
 		res.setProperty("maxActive", "10");
 		res.setProperty("maxIdle", "3");
 		res.setProperty("maxWait", "10000");

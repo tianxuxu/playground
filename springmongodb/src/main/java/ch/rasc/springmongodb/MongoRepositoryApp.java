@@ -27,8 +27,8 @@ public class MongoRepositoryApp {
 		log.info("Found: " + p);
 
 		// Find with Querydsl
-		for (Person person : personRepository.findAll(QPerson.person.name
-				.startsWithIgnoreCase("J"))) {
+		for (Person person : personRepository
+				.findAll(QPerson.person.name.startsWithIgnoreCase("J"))) {
 			System.out.println("Found with QueryDSL: " + person);
 		}
 

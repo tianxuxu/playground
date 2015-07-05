@@ -8,11 +8,11 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysema.query.jpa.impl.JPAQuery;
+
 import ch.rasc.jpa.model.Address;
 import ch.rasc.jpa.model.Employee;
 import ch.rasc.jpa.model.QEmployee;
-
-import com.mysema.query.jpa.impl.JPAQuery;
 
 @Service
 public class EmployeeService {

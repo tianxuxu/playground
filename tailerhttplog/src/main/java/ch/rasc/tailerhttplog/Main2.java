@@ -64,11 +64,11 @@ public class Main2 {
 						response = reader.city(InetAddress.getByName(ip));
 
 						if (response != null) {
-							System.out.printf("%s=%s:%s:%f:%f\n", ip, response
-									.getCountry().getName(),
-									response.getCity().getName(), response.getLocation()
-											.getLatitude(), response.getLocation()
-											.getLongitude());
+							System.out.printf("%s=%s:%s:%f:%f\n", ip,
+									response.getCountry().getName(),
+									response.getCity().getName(),
+									response.getLocation().getLatitude(),
+									response.getLocation().getLongitude());
 						}
 						else {
 							System.out.println(ip + " not found");

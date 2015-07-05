@@ -7,13 +7,13 @@ import javax.inject.Named;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import ch.rasc.mongodb.author.Author;
-
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import ch.rasc.mongodb.author.Author;
 
 @Named
 public class RawAuthor implements Author {

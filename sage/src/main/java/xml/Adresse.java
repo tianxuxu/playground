@@ -144,8 +144,8 @@ public class Adresse {
 				+ ", code=" + this.code + ", druckInfo=" + this.druckInfo + ", email="
 				+ this.email + ", firma=" + this.firma + ", id=" + this.id
 				+ ", istIntern=" + this.istIntern + ", land=" + this.land
-				+ ", mahnSperrCode=" + this.mahnSperrCode + ", plz=" + this.plz
-				+ ", ort=" + this.ort + "]";
+				+ ", mahnSperrCode=" + this.mahnSperrCode + ", plz=" + this.plz + ", ort="
+				+ this.ort + "]";
 	}
 
 }

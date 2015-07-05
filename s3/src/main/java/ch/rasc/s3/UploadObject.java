@@ -12,8 +12,8 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 
 public class UploadObject {
-	public static void main(String[] args) throws AmazonServiceException,
-			AmazonClientException {
+	public static void main(String[] args)
+			throws AmazonServiceException, AmazonClientException {
 		if (args.length == 4) {
 			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);

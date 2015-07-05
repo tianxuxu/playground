@@ -57,9 +57,9 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "Trade{" + "id=" + this.id + ", symbol='" + this.symbol + '\''
-				+ ", price=" + this.price + ", quantity=" + this.quantity + ", type="
-				+ this.type + '}';
+		return "Trade{" + "id=" + this.id + ", symbol='" + this.symbol + '\'' + ", price="
+				+ this.price + ", quantity=" + this.quantity + ", type=" + this.type
+				+ '}';
 	}
 
 }

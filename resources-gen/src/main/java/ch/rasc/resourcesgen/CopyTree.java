@@ -66,13 +66,14 @@ public class CopyTree implements FileVisitor<Path> {
 	}
 
 	@Override
-	public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+	public FileVisitResult visitFileFailed(Path file, IOException exc)
+			throws IOException {
 		if (exc instanceof FileSystemLoopException) {
 			System.err.println("Cycle was detected: " + file);
 		}
 		else {
-			System.err.println("Error occurred, unable to copy:" + file + " [" + exc
-					+ "]");
+			System.err
+					.println("Error occurred, unable to copy:" + file + " [" + exc + "]");
 		}
 		return FileVisitResult.CONTINUE;
 	}

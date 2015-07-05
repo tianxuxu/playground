@@ -53,8 +53,8 @@ public class CloudEncryptor {
 	}
 
 	private static void watch(WatchService watchService, Cipher cipher,
-			Path localDirectory, Path cloudDirectory) throws IOException,
-			InterruptedException {
+			Path localDirectory, Path cloudDirectory)
+					throws IOException, InterruptedException {
 		registerTree(watchService, localDirectory);
 		registerTree(watchService, cloudDirectory);
 
@@ -71,7 +71,8 @@ public class CloudEncryptor {
 						&& Files.isDirectory(child)) {
 					registerTree(watchService, child);
 				}
-				else if ((kind == StandardWatchEventKinds.ENTRY_MODIFY || kind == StandardWatchEventKinds.ENTRY_CREATE)
+				else if ((kind == StandardWatchEventKinds.ENTRY_MODIFY
+						|| kind == StandardWatchEventKinds.ENTRY_CREATE)
 						&& !Files.isDirectory(child)) {
 					if (child.toString().endsWith("_enc")
 							&& child.startsWith(cloudDirectory)) {
@@ -81,8 +82,8 @@ public class CloudEncryptor {
 							&& child.startsWith(localDirectory)) {
 
 						System.out.println("encrypt: " + child);
-						Path encryptedFile = child.resolveSibling(Paths.get(child
-								.getFileName().toString() + "_enc"));
+						Path encryptedFile = child.resolveSibling(
+								Paths.get(child.getFileName().toString() + "_enc"));
 
 						while (true) {
 							try (ByteChannel channel = Files.newByteChannel(child)) {
@@ -99,7 +100,8 @@ public class CloudEncryptor {
 								OutputStream out = Files.newOutputStream(encryptedFile);
 								CipherOutputStream cos = new CipherOutputStream(out,
 										cipher);
-								DeflaterOutputStream dos = new DeflaterOutputStream(cos)) {
+								DeflaterOutputStream dos = new DeflaterOutputStream(
+										cos)) {
 
 							final byte[] buffer = new byte[1024];
 							int n = 0;
@@ -108,9 +110,9 @@ public class CloudEncryptor {
 							}
 						}
 
-						Path cloudPath = cloudDirectory.resolve(encryptedFile.subpath(
-								localDirectory.getNameCount(),
-								encryptedFile.getNameCount()));
+						Path cloudPath = cloudDirectory.resolve(
+								encryptedFile.subpath(localDirectory.getNameCount(),
+										encryptedFile.getNameCount()));
 
 						Files.move(encryptedFile, cloudPath,
 								StandardCopyOption.REPLACE_EXISTING);
@@ -123,19 +125,19 @@ public class CloudEncryptor {
 					if (child.toString().endsWith("_enc")
 							&& child.startsWith(cloudDirectory)) {
 						String fileName = child.getFileName().toString();
-						Path plainFile = child.resolveSibling(Paths.get(fileName
-								.substring(0, fileName.length() - 4)));
+						Path plainFile = child.resolveSibling(
+								Paths.get(fileName.substring(0, fileName.length() - 4)));
 						Path localFile = localDirectory.resolve(plainFile.subpath(
 								cloudDirectory.getNameCount(), plainFile.getNameCount()));
 						Files.deleteIfExists(localFile);
 					}
 					else if (!child.toString().endsWith("_enc")
 							&& child.startsWith(localDirectory)) {
-						Path encryptedFile = child.resolveSibling(Paths.get(child
-								.getFileName().toString() + "_enc"));
-						Path cloudFile = cloudDirectory.resolve(encryptedFile.subpath(
-								localDirectory.getNameCount(),
-								encryptedFile.getNameCount()));
+						Path encryptedFile = child.resolveSibling(
+								Paths.get(child.getFileName().toString() + "_enc"));
+						Path cloudFile = cloudDirectory.resolve(
+								encryptedFile.subpath(localDirectory.getNameCount(),
+										encryptedFile.getNameCount()));
 						Files.deleteIfExists(cloudFile);
 					}
 				}
@@ -153,8 +155,8 @@ public class CloudEncryptor {
 
 	}
 
-	public static void main(String[] args) throws NoSuchAlgorithmException,
-			NoSuchPaddingException, InvalidKeyException {
+	public static void main(String[] args)
+			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
 
 		String key = "97SrFHfWqOlp3vfIOqw9xA==";
 

@@ -73,8 +73,8 @@ public class ModelGenerator {
 			private final Set<String> fields = new HashSet<>();
 
 			@Override
-			public void doWith(Field field) throws IllegalArgumentException,
-					IllegalAccessException {
+			public void doWith(Field field)
+					throws IllegalArgumentException, IllegalAccessException {
 				if (Modifier.isPublic(field.getModifiers())
 						|| hasReadMethod.contains(field.getName())) {
 					if (this.fields.contains(field.getName())) {
@@ -95,8 +95,8 @@ public class ModelGenerator {
 						}
 
 						if (mt != null) {
-							ModelFieldBean modelField = new ModelFieldBean(field
-									.getName(), mt);
+							ModelFieldBean modelField = new ModelFieldBean(
+									field.getName(), mt);
 
 							ModelField mf = field.getAnnotation(ModelField.class);
 							if (mf != null) {
@@ -106,16 +106,16 @@ public class ModelGenerator {
 
 								if (StringUtils.hasText(mf.defaultValue())) {
 									if (mt == ModelType.BOOLEAN) {
-										modelField.setDefaultValue(Boolean.valueOf(mf
-												.defaultValue()));
+										modelField.setDefaultValue(
+												Boolean.valueOf(mf.defaultValue()));
 									}
 									else if (mt == ModelType.INTEGER) {
-										modelField.setDefaultValue(Long.valueOf(mf
-												.defaultValue()));
+										modelField.setDefaultValue(
+												Long.valueOf(mf.defaultValue()));
 									}
 									else if (mt == ModelType.FLOAT) {
-										modelField.setDefaultValue(Double.valueOf(mf
-												.defaultValue()));
+										modelField.setDefaultValue(
+												Double.valueOf(mf.defaultValue()));
 									}
 									else {
 										modelField.setDefaultValue(mf.defaultValue());

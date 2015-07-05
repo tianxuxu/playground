@@ -21,13 +21,13 @@ public class DateController {
 	@RequestMapping(value = "/date", method = RequestMethod.GET,
 			produces = "text/event-stream")
 	@ResponseBody
-	public SSEvent getTime(
-			@RequestHeader(value = "Last-Event-ID", required = false) String lastEventId) {
+	public SSEvent getTime(@RequestHeader(value = "Last-Event-ID",
+			required = false) String lastEventId) {
 		System.out.println("Last Event Id: " + lastEventId);
 
 		SSEvent event = new SSEvent();
-		event.setData(LocalDateTime.now().format(
-				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS")));
+		event.setData(LocalDateTime.now()
+				.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS")));
 		event.setId(String.valueOf(counter.incrementAndGet()));
 		event.setRetry((ThreadLocalRandom.current().nextInt(10) + 3) * 1000);
 		return event;
@@ -37,8 +37,8 @@ public class DateController {
 			produces = "text/event-stream")
 	@ResponseBody
 	public String getTime() {
-		return LocalDateTime.now().format(
-				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS"));
+		return LocalDateTime.now()
+				.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS"));
 	}
 
 	// @RequestMapping(value = "/dateString", method = RequestMethod.GET,

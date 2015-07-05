@@ -25,13 +25,13 @@ import org.apache.lucene.store.RAMDirectory;
 
 public class Indexing {
 
-	public static void main(String[] args) throws CorruptIndexException,
-			LockObtainFailedException, IOException {
+	public static void main(String[] args)
+			throws CorruptIndexException, LockObtainFailedException, IOException {
 
 		try (Directory directory = new RAMDirectory();
 				WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
-				IndexWriter writer = new IndexWriter(directory, new IndexWriterConfig(
-						analyzer))) {
+				IndexWriter writer = new IndexWriter(directory,
+						new IndexWriterConfig(analyzer))) {
 
 			String[] ids = { "1", "2" };
 			String[] unindexed = { "Netherlands", "Italy" };

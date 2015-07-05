@@ -21,7 +21,8 @@ public class AddressService {
 	private final AddressRepository addressRepository;
 
 	@Autowired
-	public AddressService(LoginManager loginManager, AddressRepository addressRepository) {
+	public AddressService(LoginManager loginManager,
+			AddressRepository addressRepository) {
 		this.loginManager = loginManager;
 		this.addressRepository = addressRepository;
 	}

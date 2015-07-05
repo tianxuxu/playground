@@ -67,8 +67,7 @@ public class Exercise6Test extends CompanyDomainForKata {
 	@Test
 	public void supplierNamesAsTildeDelimitedString() {
 		String tildeSeparatedNames = null;
-		Assert.assertEquals(
-				"tilde separated names",
+		Assert.assertEquals("tilde separated names",
 				"Shedtastic~Splendid Crocks~Annoying Pets~Gnomes 'R' Us~Furniture Hamlet~SFD~Doxins",
 				tildeSeparatedNames);
 	}

@@ -2,10 +2,10 @@ package ch.rasc.forcastio.model;
 
 import java.util.List;
 
-import ch.rasc.forcastio.converter.FioIconDeserializer;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import ch.rasc.forcastio.converter.FioIconDeserializer;
 
 /**
  * A data block object represents the various weather phenomena occurring over a period of
@@ -63,8 +63,8 @@ public class FioDataBlock {
 
 	@Override
 	public String toString() {
-		return "FioDataBlock [summary=" + this.summary + ", icon=" + this.icon
-				+ ", data=" + this.data + "]";
+		return "FioDataBlock [summary=" + this.summary + ", icon=" + this.icon + ", data="
+				+ this.data + "]";
 	}
 
 }

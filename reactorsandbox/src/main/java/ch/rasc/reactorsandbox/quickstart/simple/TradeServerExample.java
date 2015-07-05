@@ -8,11 +8,11 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.rasc.reactorsandbox.quickstart.core.Trade;
+import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
-import ch.rasc.reactorsandbox.quickstart.core.Trade;
-import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 
 /**
  * @author Jon Brisbin
@@ -39,8 +39,8 @@ public class TradeServerExample {
 			server.execute(ev.getData());
 
 			// Since we're async, for this test, use a latch to tell when we're done
-				latch.countDown();
-			});
+			latch.countDown();
+		});
 
 		// Start a throughput timer
 		startTimer();

@@ -36,8 +36,8 @@ public class Decrypt {
 
 			String password = args[2];
 
-			SecretKey key = Encrypt.createSecretKey(password, inputFile.getFileName()
-					.toString());
+			SecretKey key = Encrypt.createSecretKey(password,
+					inputFile.getFileName().toString());
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 
@@ -63,8 +63,8 @@ public class Decrypt {
 			}
 		}
 		else {
-			System.out
-					.println("java ch.rasc.watch.Decrypt <encryptedZipInputFile> <outputFile> <password>");
+			System.out.println(
+					"java ch.rasc.watch.Decrypt <encryptedZipInputFile> <outputFile> <password>");
 		}
 
 	}

@@ -21,7 +21,8 @@ public class ObjectFactory {
 
 	private final static QName _SayHiResponse_QNAME = new QName("http://wsdemo.rasc.ch/",
 			"sayHiResponse");
-	private final static QName _SayHi_QNAME = new QName("http://wsdemo.rasc.ch/", "sayHi");
+	private final static QName _SayHi_QNAME = new QName("http://wsdemo.rasc.ch/",
+			"sayHi");
 
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of schema

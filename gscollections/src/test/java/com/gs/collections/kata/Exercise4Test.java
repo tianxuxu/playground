@@ -89,7 +89,9 @@ public class Exercise4Test extends CompanyDomainForKata {
 		 * greater than 2.0.
 		 */
 		MutableList<Order> filtered = null;
-		Assert.assertEquals(FastList.newListWith(Iterate.getFirst(this.company
-				.getMostRecentCustomer().getOrders())), filtered);
+		Assert.assertEquals(
+				FastList.newListWith(Iterate
+						.getFirst(this.company.getMostRecentCustomer().getOrders())),
+				filtered);
 	}
 }

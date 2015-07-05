@@ -8,10 +8,10 @@ import javax.json.stream.JsonGenerator;
 
 public class StreamWrite {
 	public static void main(String[] args) {
-		Map<String, Boolean> properties = Collections.singletonMap(
-				JsonGenerator.PRETTY_PRINTING, Boolean.FALSE);
-		try (JsonGenerator jg = Json.createGeneratorFactory(properties).createGenerator(
-				System.out)) {
+		Map<String, Boolean> properties = Collections
+				.singletonMap(JsonGenerator.PRETTY_PRINTING, Boolean.FALSE);
+		try (JsonGenerator jg = Json.createGeneratorFactory(properties)
+				.createGenerator(System.out)) {
 
 			// @formatter:off
 			jg.writeStartObject().write("name", "Jane Doe").writeStartObject("address")

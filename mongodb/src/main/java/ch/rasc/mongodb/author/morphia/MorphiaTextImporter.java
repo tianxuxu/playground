@@ -41,8 +41,8 @@ public class MorphiaTextImporter implements TextImporter {
 			Query<Word12> query = this.datastore.createQuery(Word12.class);
 			query.field("word1").equal(w1);
 			query.field("word2").equal(w2);
-			UpdateOperations<Word12> op = this.datastore.createUpdateOperations(
-					Word12.class).inc("count");
+			UpdateOperations<Word12> op = this.datastore
+					.createUpdateOperations(Word12.class).inc("count");
 			this.datastore.update(query, op, true);
 
 			// // update count in embedded document

@@ -52,8 +52,8 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 			for (int index = 0; index < 49; index++) {
 				byte[] imgBytes;
 				try {
-					ClassPathResource cp = new ClassPathResource("Video/" + index
-							+ ".jpg");
+					ClassPathResource cp = new ClassPathResource(
+							"Video/" + index + ".jpg");
 					imgBytes = StreamUtils.copyToByteArray(cp.getInputStream());
 					session.sendMessage(new BinaryMessage(imgBytes));
 					TimeUnit.MILLISECONDS.sleep(150);
@@ -80,14 +80,14 @@ public class Chat4Handler extends AbstractWebSocketHandler {
 					}
 					catch (IOException e) {
 						// sessions.remove(session.getId());
-				e.printStackTrace();
+						e.printStackTrace();
+					}
+				}
+				else {
+					this.sessions.remove(session.getId());
+				}
 			}
-		}
-		else {
-			this.sessions.remove(session.getId());
-		}
-	}
-})		;
+		});
 	}
 
 }

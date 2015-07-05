@@ -13,8 +13,8 @@ import com.amazonaws.services.glacier.transfer.ArchiveTransferManager;
 import com.amazonaws.services.glacier.transfer.UploadResult;
 
 public class Upload {
-	public static void main(String[] args) throws AmazonServiceException,
-			AmazonClientException, FileNotFoundException {
+	public static void main(String[] args)
+			throws AmazonServiceException, AmazonClientException, FileNotFoundException {
 		if (args.length == 2) {
 			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonGlacierClient client = new AmazonGlacierClient(credentials);

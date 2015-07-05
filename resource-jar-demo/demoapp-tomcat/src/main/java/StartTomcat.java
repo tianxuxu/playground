@@ -39,8 +39,8 @@ public class StartTomcat {
 
 		tomcat.setBaseDir(".");
 		File currentDir = new File(".");
-		Context ctx = tomcat.addWebapp("/", currentDir.getAbsolutePath()
-				+ "/src/main/webapp");
+		Context ctx = tomcat.addWebapp("/",
+				currentDir.getAbsolutePath() + "/src/main/webapp");
 		ctx.setResources(new FileDirContext());
 
 		List<Artifact> includeOnlyArtifact = new ArrayList<>();
@@ -54,8 +54,8 @@ public class StartTomcat {
 
 		tomcat.start();
 
-		System.out.println("Tomcat Startup Time: " + (System.currentTimeMillis() - start)
-				+ " ms");
+		System.out.println(
+				"Tomcat Startup Time: " + (System.currentTimeMillis() - start) + " ms");
 		System.out.println("Tomcat running on " + port);
 
 		tomcat.getServer().await();
@@ -126,8 +126,8 @@ public class StartTomcat {
 		return jars;
 	}
 
-	private static boolean isIncluded(List<Artifact> includeOnlyArtifacts,
-			String groupId, final String artifactId) {
+	private static boolean isIncluded(List<Artifact> includeOnlyArtifacts, String groupId,
+			final String artifactId) {
 		if (includeOnlyArtifacts != null) {
 			for (Artifact artifact : includeOnlyArtifacts) {
 				if (artifact.is(groupId, artifactId)) {

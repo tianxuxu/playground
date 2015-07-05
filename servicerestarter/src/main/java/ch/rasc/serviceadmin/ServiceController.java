@@ -40,7 +40,8 @@ public class ServiceController {
 	}
 
 	@RequestMapping("/restart")
-	String restart(HttpServletResponse response) throws IOException, InterruptedException {
+	String restart(HttpServletResponse response)
+			throws IOException, InterruptedException {
 
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");

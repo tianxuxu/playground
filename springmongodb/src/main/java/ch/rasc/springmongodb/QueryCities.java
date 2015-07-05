@@ -28,13 +28,14 @@ public class QueryCities {
 			final MongoTemplate mongoOps = ctx.getBean(MongoTemplate.class);
 
 			Point location = new Point(46.933333, 7.566667);
-			NearQuery query = NearQuery.near(location).maxDistance(
-					new Distance(3, Metrics.KILOMETERS));
+			NearQuery query = NearQuery.near(location)
+					.maxDistance(new Distance(3, Metrics.KILOMETERS));
 
 			GeoResults<City> geoResults = mongoOps.geoNear(query, City.class);
 			for (GeoResult<City> geoResult : geoResults) {
-				System.out.printf("%-20s   : %-10.8f\n", geoResult.getContent()
-						.getCityName(), geoResult.getDistance().getNormalizedValue());
+				System.out.printf("%-20s   : %-10.8f\n",
+						geoResult.getContent().getCityName(),
+						geoResult.getDistance().getNormalizedValue());
 			}
 
 			System.out.println("-------------------------");
@@ -42,8 +43,8 @@ public class QueryCities {
 			System.out.println("-------------------------");
 
 			Box box = new Box(new Point(46.933333, 7.566667), new Point(46.95, 7.616667));
-			List<City> cities = mongoOps.find(new Query(Criteria.where("location")
-					.within(box)), City.class);
+			List<City> cities = mongoOps
+					.find(new Query(Criteria.where("location").within(box)), City.class);
 			for (City city : cities) {
 				System.out.printf("%-20s\n", city.getCityName());
 			}

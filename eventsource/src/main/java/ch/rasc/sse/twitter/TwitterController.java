@@ -31,9 +31,9 @@ public class TwitterController {
 	@RequestMapping(value = "/twittersse", method = RequestMethod.GET,
 			produces = "text/event-stream")
 	@ResponseBody
-	public Object getTweets(
-			@RequestHeader(value = "Last-Event-ID", required = false) final String lastEventId)
-			throws JsonGenerationException, JsonMappingException, IOException {
+	public Object getTweets(@RequestHeader(value = "Last-Event-ID",
+			required = false) final String lastEventId)
+					throws JsonGenerationException, JsonMappingException, IOException {
 
 		if (this.i.incrementAndGet() % 2 == 0) {
 			System.out.println("RUNNING IN CALLABLE");
@@ -50,8 +50,8 @@ public class TwitterController {
 		return generateResult(lastEventId);
 	}
 
-	String generateResult(final String lastEventId) throws IOException,
-			JsonGenerationException, JsonMappingException {
+	String generateResult(final String lastEventId)
+			throws IOException, JsonGenerationException, JsonMappingException {
 
 		System.out.println("Last Event Id: " + lastEventId);
 		long lastId = 0;

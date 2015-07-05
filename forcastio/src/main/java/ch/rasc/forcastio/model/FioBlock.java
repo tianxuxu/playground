@@ -2,8 +2,8 @@ package ch.rasc.forcastio.model;
 
 public enum FioBlock {
 
-	CURRENTLY("currently"), MINUTELY("minutely"), HOURLY("hourly"), DAILY("daily"), ALERTS(
-			"alerts"), FLAGS("flags");
+	CURRENTLY("currently"), MINUTELY("minutely"), HOURLY("hourly"), DAILY(
+			"daily"), ALERTS("alerts"), FLAGS("flags");
 
 	private String jsonValue;
 

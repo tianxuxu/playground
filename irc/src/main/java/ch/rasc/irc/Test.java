@@ -16,8 +16,8 @@ import org.schwering.irc.lib.impl.DefaultIRCServerConfig;
 import org.schwering.irc.lib.util.IRCModeParser;
 
 public class Test {
-	public static void main(String[] args) throws IOException, KeyManagementException,
-			NoSuchAlgorithmException {
+	public static void main(String[] args)
+			throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		IRCServerConfig config = new DefaultIRCServerConfig("irc.wikimedia.org",
 				new int[] { 6667, 6669 }, "rcmon", "rcmon", "rcmon", "rcmon", "UTF-8");
 		IRCRuntimeConfig runtimeConfig = new DefaultIRCRuntimeConfig(2000, true, true,
@@ -62,19 +62,20 @@ public class Test {
 
 			@Override
 			public void onMode(IRCUser u, String nickPass, String mode) {
-				System.out.println("Mode: " + u.getNick() + " sets modes " + mode + " "
-						+ nickPass);
+				System.out.println(
+						"Mode: " + u.getNick() + " sets modes " + mode + " " + nickPass);
 			}
 
 			@Override
 			public void onMode(String chan, IRCUser u, IRCModeParser mp) {
-				System.out.println(chan + "> " + u.getNick() + " sets mode: "
-						+ mp.getLine());
+				System.out.println(
+						chan + "> " + u.getNick() + " sets mode: " + mp.getLine());
 			}
 
 			@Override
 			public void onNick(IRCUser u, String nickNew) {
-				System.out.println("Nick: " + u.getNick() + " is now known as " + nickNew);
+				System.out
+						.println("Nick: " + u.getNick() + " is now known as " + nickNew);
 			}
 
 			@Override
@@ -104,8 +105,8 @@ public class Test {
 
 			@Override
 			public void onTopic(String chan, IRCUser u, String topic) {
-				System.out.println(chan + "> " + u.getNick() + " changes topic into: "
-						+ topic);
+				System.out.println(
+						chan + "> " + u.getNick() + " changes topic into: " + topic);
 			}
 
 			@Override

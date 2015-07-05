@@ -50,8 +50,8 @@ public class CryptoUtil {
 		int length = string.length();
 		byte[] data = new byte[length / 2];
 		for (int i = 0; i < length; i += 2) {
-			data[i / 2] = (byte) ((Character.digit(string.charAt(i), 16) << 4) + Character
-					.digit(string.charAt(i + 1), 16));
+			data[i / 2] = (byte) ((Character.digit(string.charAt(i), 16) << 4)
+					+ Character.digit(string.charAt(i + 1), 16));
 		}
 		return data;
 	}
@@ -79,7 +79,7 @@ public class CryptoUtil {
 
 	public static SecretKey generateAESSecretKey(PrivateKey privateKey,
 			PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException,
-			IllegalStateException {
+					IllegalStateException {
 		KeyAgreement keyAgreement = KeyAgreement.getInstance("DiffieHellman");
 		keyAgreement.init(privateKey);
 		keyAgreement.doPhase(publicKey, true);

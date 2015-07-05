@@ -61,8 +61,8 @@ public class TwitterReader {
 	@Scheduled(fixedDelay = 10000)
 	public void readTwitterFeed() {
 
-		SearchResults results = this.twitterTemplate.searchOperations().search("java",
-				50, this.lastReceivedId, 0);
+		SearchResults results = this.twitterTemplate.searchOperations().search("java", 50,
+				this.lastReceivedId, 0);
 		List<Tweet> newTweets = new LinkedList<>();
 		long maxId = 0;
 		for (Tweet tweet : results.getTweets()) {

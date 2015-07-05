@@ -37,7 +37,7 @@ public class UploadController {
 			@RequestParam("resumableTotalSize") Long resumableTotalSize,
 			@RequestParam("resumableType") String resumableType,
 			@RequestParam("resumableRelativePath") String resumableRelativePath)
-			throws IOException {
+					throws IOException {
 
 		if (this.fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
 				resumableChunkSize)) {
@@ -52,8 +52,8 @@ public class UploadController {
 
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void processUpload(HttpServletResponse response, @RequestParam(
-			value = "resumableChunkNumber") Integer resumableChunkNumber,
+	public void processUpload(HttpServletResponse response,
+			@RequestParam(value = "resumableChunkNumber") Integer resumableChunkNumber,
 			@RequestParam("resumableTotalChunks") Integer resumableTotalChunks,
 			@RequestParam(value = "resumableChunkSize") Long resumableChunkSize,
 			@RequestParam("resumableCurrentChunkSize") Long resumableCurrentChunkSize,
@@ -85,8 +85,8 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/simpleUpload", method = RequestMethod.POST)
-	public String processUpload(HttpServletRequest request) throws IOException,
-			ServletException {
+	public String processUpload(HttpServletRequest request)
+			throws IOException, ServletException {
 
 		for (Part part : request.getParts()) {
 

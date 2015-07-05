@@ -41,8 +41,8 @@ public class TweetArchiver {
 			collection.insert(obj);
 		}
 
-		try (DBCursor cursor = collection.find(new BasicDBObject(), new BasicDBObject(
-				"text", 1))) {
+		try (DBCursor cursor = collection.find(new BasicDBObject(),
+				new BasicDBObject("text", 1))) {
 			while (cursor.hasNext()) {
 				DBObject obj = cursor.next();
 				System.out.println(obj.get("text"));

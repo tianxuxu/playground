@@ -12,8 +12,8 @@ import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 
 public class DownloadObject {
-	public static void main(String[] args) throws AmazonServiceException,
-			AmazonClientException {
+	public static void main(String[] args)
+			throws AmazonServiceException, AmazonClientException {
 		if (args.length == 5) {
 			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonS3Client client = new AmazonS3Client(credentials);
@@ -29,8 +29,8 @@ public class DownloadObject {
 				tm.shutdownNow();
 			}
 			catch (InterruptedException | AmazonClientException e) {
-				System.out.println("Unable to download file, download was aborted: "
-						+ file);
+				System.out.println(
+						"Unable to download file, download was aborted: " + file);
 				e.printStackTrace();
 			}
 

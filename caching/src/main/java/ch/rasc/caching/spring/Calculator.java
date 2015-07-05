@@ -29,8 +29,8 @@ public class Calculator {
 
 	@Cacheable(value = "calculator", key = "#p0")
 	public BigInteger factorial(long n, String user) {
-		System.out.println("calling factorial method with parameter: " + n
-				+ " and user: " + user);
+		System.out.println(
+				"calling factorial method with parameter: " + n + " and user: " + user);
 		return factorial(n);
 	}
 

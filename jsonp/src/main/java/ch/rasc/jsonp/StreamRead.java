@@ -17,8 +17,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class StreamRead {
-	public static void main(String[] args) throws ClientProtocolException, IOException,
-			ParseException {
+	public static void main(String[] args)
+			throws ClientProtocolException, IOException, ParseException {
 
 		String apiKey = args[0];
 		String latitude = "46.947922";
@@ -30,7 +30,8 @@ public class StreamRead {
 		HttpGet httpget = new HttpGet(url);
 		try (CloseableHttpClient client = HttpClientBuilder.create().build();
 				CloseableHttpResponse response = client.execute(httpget);
-				JsonParser parser = Json.createParser(response.getEntity().getContent())) {
+				JsonParser parser = Json
+						.createParser(response.getEntity().getContent())) {
 
 			boolean hourly = false;
 			boolean data = false;
@@ -68,8 +69,8 @@ public class StreamRead {
 						time.setTimeInMillis(parser.getLong() * 1000);
 					}
 					else if (time != null && "temperature".equals(keyName)) {
-						System.out.println(time.getTime() + " : "
-								+ parser.getBigDecimal());
+						System.out
+								.println(time.getTime() + " : " + parser.getBigDecimal());
 						time = null;
 					}
 					break;

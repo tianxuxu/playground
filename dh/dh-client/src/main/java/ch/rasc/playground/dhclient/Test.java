@@ -30,8 +30,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class Test {
 	public static byte[] iv = new SecureRandom().generateSeed(16);
 
-	public static void main(String[] args) throws NoSuchAlgorithmException,
-			InvalidKeySpecException {
+	public static void main(String[] args)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// removeCryptographyRestrictions();
 
 		String plainText = "Look mah, I'm a message!";
@@ -125,7 +125,8 @@ public class Test {
 		}
 		catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
 				| InvalidAlgorithmParameterException | UnsupportedEncodingException
-				| ShortBufferException | IllegalBlockSizeException | BadPaddingException e) {
+				| ShortBufferException | IllegalBlockSizeException
+				| BadPaddingException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -178,8 +179,8 @@ public class Test {
 		int length = string.length();
 		byte[] data = new byte[length / 2];
 		for (int i = 0; i < length; i += 2) {
-			data[i / 2] = (byte) ((Character.digit(string.charAt(i), 16) << 4) + Character
-					.digit(string.charAt(i + 1), 16));
+			data[i / 2] = (byte) ((Character.digit(string.charAt(i), 16) << 4)
+					+ Character.digit(string.charAt(i + 1), 16));
 		}
 		return data;
 	}

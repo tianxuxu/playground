@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
-
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
+
+import net.sf.uadetector.ReadableUserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 
 public class Main {
 
@@ -66,10 +66,11 @@ public class Main {
 						response = reader.city(InetAddress.getByName(ip));
 
 						if (response != null) {
-							System.out.printf("%s=%s:%s:%f:%f", ip, response.getCountry()
-									.getName(), response.getCity().getName(), response
-									.getLocation().getLatitude(), response.getLocation()
-									.getLongitude());
+							System.out.printf("%s=%s:%s:%f:%f", ip,
+									response.getCountry().getName(),
+									response.getCity().getName(),
+									response.getLocation().getLatitude(),
+									response.getLocation().getLongitude());
 						}
 						System.out.println();
 					}

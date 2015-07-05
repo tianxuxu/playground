@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import reactor.bus.Event;
-import reactor.bus.EventBus;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
 import ch.rasc.reactorsandbox.quickstart.spring.domain.Client;
 import ch.rasc.reactorsandbox.quickstart.spring.repository.ClientRepository;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
 
 /**
  * @author Jon Brisbin

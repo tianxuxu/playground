@@ -30,8 +30,8 @@ public interface Calculator {
 	@ResponseWrapper(localName = "addResponse",
 			targetNamespace = "http://wsdemo.rasc.ch/",
 			className = "ch.rasc.wsdemo.calculator.AddResponse")
-	public int add(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(
-			name = "arg1", targetNamespace = "") int arg1);
+	public int add(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 	/**
 	 *
@@ -46,8 +46,8 @@ public interface Calculator {
 	@ResponseWrapper(localName = "divideResponse",
 			targetNamespace = "http://wsdemo.rasc.ch/",
 			className = "ch.rasc.wsdemo.calculator.DivideResponse")
-	public int divide(@WebParam(name = "arg0", targetNamespace = "") int arg0, @WebParam(
-			name = "arg1", targetNamespace = "") int arg1);
+	public int divide(@WebParam(name = "arg0", targetNamespace = "") int arg0,
+			@WebParam(name = "arg1", targetNamespace = "") int arg1);
 
 	/**
 	 *

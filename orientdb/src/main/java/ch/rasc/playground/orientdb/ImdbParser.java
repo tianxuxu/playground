@@ -81,9 +81,9 @@ public class ImdbParser {
 	public void readImdbData(OrientGraphNoTx graphDb, String fileName)
 			throws FileNotFoundException, IOException {
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(
-				new GZIPInputStream(new FileInputStream(fileName)),
-				StandardCharsets.ISO_8859_1))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new GZIPInputStream(new FileInputStream(fileName)),
+						StandardCharsets.ISO_8859_1))) {
 
 			String line = br.readLine();
 			Vertex currentActorVertex = null;
@@ -101,8 +101,8 @@ public class ImdbParser {
 					if (!"".equals(actor)) {
 						currentActorVertex = graphDb.getVertexByKey("Actor.actor", actor);
 						if (currentActorVertex == null) {
-							currentActorVertex = graphDb.addVertex("class:Actor",
-									"actor", actor);
+							currentActorVertex = graphDb.addVertex("class:Actor", "actor",
+									actor);
 						}
 					}
 
@@ -148,8 +148,8 @@ public class ImdbParser {
 							// movieVertex = graphDb.addVertex("class:Movie");
 							// movieVertex.setProperty("title", title);
 
-							movieVertex = graphDb
-									.addVertex("class:Movie", "title", title);
+							movieVertex = graphDb.addVertex("class:Movie", "title",
+									title);
 						}
 
 						Edge edge = graphDb.addEdge("class:ActsIn", currentActorVertex,

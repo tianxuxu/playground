@@ -36,15 +36,15 @@ public class SimpleServlet extends HttpServlet {
 		// sb.append("\n");
 
 		// sb.append("data:{\n");
-		// sb.append("data:  \"fullName\":\"Philip Cervantes\",\n");
-		// sb.append("data:  \"firstName\":\"Philip\",\n");
-		// sb.append("data:  \"lastName\":\"Cervantes\",\n");
-		// sb.append("data:  \"id\":\"1\",\n");
-		// sb.append("data:  \"street\":\"P.O. Box 521, 7327 Vel Street\",\n");
-		// sb.append("data:  \"city\":\"Manhattan Beach\",\n");
-		// sb.append("data:  \"state\":\"MB\",\n");
-		// sb.append("data:  \"zip\":\"X2Z 3N5\",\n");
-		// sb.append("data:  \"country\":\"Gambia\"\n");
+		// sb.append("data: \"fullName\":\"Philip Cervantes\",\n");
+		// sb.append("data: \"firstName\":\"Philip\",\n");
+		// sb.append("data: \"lastName\":\"Cervantes\",\n");
+		// sb.append("data: \"id\":\"1\",\n");
+		// sb.append("data: \"street\":\"P.O. Box 521, 7327 Vel Street\",\n");
+		// sb.append("data: \"city\":\"Manhattan Beach\",\n");
+		// sb.append("data: \"state\":\"MB\",\n");
+		// sb.append("data: \"zip\":\"X2Z 3N5\",\n");
+		// sb.append("data: \"country\":\"Gambia\"\n");
 		// sb.append("data:}\n");
 		// sb.append("\n");
 

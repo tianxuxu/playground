@@ -32,8 +32,8 @@ class ByteBuddySecurityLibrary {
 		return superMethod.call();
 	}
 
-	public static void main(String[] args) throws InstantiationException,
-			IllegalAccessException {
+	public static void main(String[] args)
+			throws InstantiationException, IllegalAccessException {
 		ByteBuddySecurityLibrary l = new ByteBuddySecurityLibrary();
 		Class<? extends TestService> t = l.secure(TestService.class);
 		TestService ts = t.newInstance();

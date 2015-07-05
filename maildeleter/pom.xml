@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
-			<version>1.5.3</version>
+			<version>1.5.4</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>gimap</artifactId>
-			<version>1.5.3</version>
+			<version>1.5.4</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>dsn</artifactId>
-			<version>1.5.3</version>
+			<version>1.5.4</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>activation</artifactId>

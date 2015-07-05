@@ -59,8 +59,8 @@ public class Exercise1Test extends CompanyDomainForKata {
 		 * Which customers come from London? Get a collection of those which do.
 		 */
 		MutableList<Customer> customers = this.company.getCustomers();
-		MutableList<Customer> customersFromLondon = customers.select(Predicates
-				.attributeEqual(Customer::getCity, "London"));
+		MutableList<Customer> customersFromLondon = customers
+				.select(Predicates.attributeEqual(Customer::getCity, "London"));
 		Verify.assertSize("Should be 2 London customers", 2, customersFromLondon);
 	}
 }

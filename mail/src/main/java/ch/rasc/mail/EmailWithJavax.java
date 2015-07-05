@@ -20,8 +20,8 @@ public class EmailWithJavax {
 
 		MimeMessage message = new MimeMessage(mailSession);
 		message.setSender(new InternetAddress("boss@test.com"));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-				"test@test.com"));
+		message.addRecipient(Message.RecipientType.TO,
+				new InternetAddress("test@test.com"));
 		message.setSubject("The subject");
 		message.setText("The content");
 

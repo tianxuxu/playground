@@ -25,11 +25,9 @@ public class VaultInventory {
 			AmazonGlacierClient client = new AmazonGlacierClient(credentials);
 			client.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
-			InitiateJobRequest initJobRequest = new InitiateJobRequest().withVaultName(
-					"testvault")
-					.withJobParameters(
-							new JobParameters().withFormat("CSV").withType(
-									"inventory-retrieval"));
+			InitiateJobRequest initJobRequest = new InitiateJobRequest()
+					.withVaultName("testvault").withJobParameters(new JobParameters()
+							.withFormat("CSV").withType("inventory-retrieval"));
 
 			InitiateJobResult initJobResult = client.initiateJob(initJobRequest);
 			String jobId = initJobResult.getJobId();

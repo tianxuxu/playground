@@ -56,7 +56,8 @@ public class Backup {
 			if (config.getGithubUsers() != null) {
 				for (String githubUser : config.getGithubUsers()) {
 					for (Repository repo : service.getRepositories(githubUser)) {
-						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null, null);
+						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null,
+								null);
 					}
 				}
 			}
@@ -73,7 +74,7 @@ public class Backup {
 
 	private static void fetchRepo(Path backupDir, String name, String url,
 			String username, String password) throws IOException, GitAPIException,
-			InvalidRemoteException, TransportException {
+					InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
 
@@ -96,8 +97,8 @@ public class Backup {
 			if (username != null) {
 				UsernamePasswordCredentialsProvider cp = new UsernamePasswordCredentialsProvider(
 						username, password);
-				Git.cloneRepository().setCredentialsProvider(cp).setBare(true)
-						.setURI(url).setDirectory(repoDir.toFile()).call();
+				Git.cloneRepository().setCredentialsProvider(cp).setBare(true).setURI(url)
+						.setDirectory(repoDir.toFile()).call();
 			}
 			else {
 				Git.cloneRepository().setBare(true).setURI(url)

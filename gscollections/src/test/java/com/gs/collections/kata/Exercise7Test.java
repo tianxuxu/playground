@@ -39,9 +39,8 @@ public class Exercise7Test extends CompanyDomainForKata {
 
 		Assert.assertEquals(FastList.newListWith(this.company.getCustomerNamed("Mary")),
 				multimap.get("Liphook"));
-		Assert.assertEquals(
-				FastList.newListWith(this.company.getCustomerNamed("Fred"),
-						this.company.getCustomerNamed("Bill")), multimap.get("London"));
+		Assert.assertEquals(FastList.newListWith(this.company.getCustomerNamed("Fred"),
+				this.company.getCustomerNamed("Bill")), multimap.get("London"));
 	}
 
 	@Test
@@ -72,7 +71,8 @@ public class Exercise7Test extends CompanyDomainForKata {
 
 	@Test
 	public void reminder() {
-		Assert.fail("Refactor setUpCustomersAndOrders() in the super class to not have so much repetition.");
+		Assert.fail(
+				"Refactor setUpCustomersAndOrders() in the super class to not have so much repetition.");
 		// Delete this whole method when you're done. It's just a reminder.
 	}
 }

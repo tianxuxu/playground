@@ -111,9 +111,9 @@ public class Crypto {
 		return secret;
 	}
 
-	public static void main(String[] args) throws InvalidKeyException,
-			IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException,
-			NoSuchPaddingException, InvalidKeySpecException,
+	public static void main(String[] args)
+			throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
+			NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException,
 			InvalidParameterSpecException, IOException,
 			InvalidAlgorithmParameterException {
 

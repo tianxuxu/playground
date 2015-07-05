@@ -76,8 +76,8 @@ public class SSEventMessageConverter implements HttpMessageConverter<Object> {
 		}
 
 		sb.append("\n");
-		FileCopyUtils.copy(sb.toString(), new OutputStreamWriter(outputMessage.getBody(),
-				UTF8_CHARSET));
+		FileCopyUtils.copy(sb.toString(),
+				new OutputStreamWriter(outputMessage.getBody(), UTF8_CHARSET));
 	}
 
 }

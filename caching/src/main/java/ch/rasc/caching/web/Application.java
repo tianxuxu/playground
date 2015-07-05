@@ -35,8 +35,9 @@ public class Application extends WebMvcConfigurerAdapter {
 		Cache<Object, Object> maxSizeCache = CacheBuilder.newBuilder().maximumSize(10)
 				.build();
 
-		cacheManager.setCaches(Arrays.asList(new GuavaCache("tenMinutesCache",
-				tenMinutesCache), new GuavaCache("maxSizeCache", maxSizeCache)));
+		cacheManager.setCaches(
+				Arrays.asList(new GuavaCache("tenMinutesCache", tenMinutesCache),
+						new GuavaCache("maxSizeCache", maxSizeCache)));
 
 		return cacheManager;
 	}

@@ -41,14 +41,14 @@ public class MailDeleter extends TimerTask {
 
 			folder.open(Folder.READ_WRITE);
 
-			LocalDateTime aCoupleOfDaysAgo = LocalDateTime.now().minusDays(
-					this.config.getDays());
+			LocalDateTime aCoupleOfDaysAgo = LocalDateTime.now()
+					.minusDays(this.config.getDays());
 
 			Message[] messages = folder.getMessages();
 			for (Message msg : messages) {
 
-				LocalDateTime receivedDateTime = LocalDateTime.ofInstant(msg
-						.getReceivedDate().toInstant(), ZoneId.systemDefault());
+				LocalDateTime receivedDateTime = LocalDateTime.ofInstant(
+						msg.getReceivedDate().toInstant(), ZoneId.systemDefault());
 				if (receivedDateTime.isBefore(aCoupleOfDaysAgo)) {
 					logger.info("delete msg: {} ", msg.getMessageNumber());
 					msg.setFlag(Flags.Flag.DELETED, true);

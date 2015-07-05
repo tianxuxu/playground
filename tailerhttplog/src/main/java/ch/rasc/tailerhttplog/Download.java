@@ -20,8 +20,7 @@ public class Download {
 
 		if (!Files.exists(path)) {
 
-			try (CloseableHttpClient backend = HttpClientBuilder
-					.create()
+			try (CloseableHttpClient backend = HttpClientBuilder.create()
 					.setUserAgent(
 							"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.102 Safari/537.36")
 					.build()) {

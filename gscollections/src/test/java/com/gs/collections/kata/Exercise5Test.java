@@ -39,8 +39,8 @@ public class Exercise5Test extends CompanyDomainForKata {
 		MutableList<Double> orderValues = null;
 		MutableList<Double> filtered = orderValues.select(Predicates.greaterThan(1.5));
 		Assert.assertEquals(FastList.newListWith(372.5, 1.75), filtered);
-		Verify.assertInstanceOf(MutableList.class, this.company.getMostRecentCustomer()
-				.getOrders());
+		Verify.assertInstanceOf(MutableList.class,
+				this.company.getMostRecentCustomer().getOrders());
 		this.company.getMostRecentCustomer().getOrders().add(null);
 		Verify.assertContains(
 				"Don't return a copy from Customer.getOrders(). The field should be a MutableList.",
@@ -56,10 +56,12 @@ public class Exercise5Test extends CompanyDomainForKata {
 		 * values) where those orders have a value greater than 2.0.
 		 */
 		MutableList<Order> filtered = null;
-		Assert.assertEquals(FastList.newListWith(Iterate.getFirst(this.company
-				.getMostRecentCustomer().getOrders())), filtered);
-		Verify.assertInstanceOf(MutableList.class, this.company.getMostRecentCustomer()
-				.getOrders());
+		Assert.assertEquals(
+				FastList.newListWith(Iterate
+						.getFirst(this.company.getMostRecentCustomer().getOrders())),
+				filtered);
+		Verify.assertInstanceOf(MutableList.class,
+				this.company.getMostRecentCustomer().getOrders());
 		this.company.getMostRecentCustomer().getOrders().add(null);
 		Verify.assertContains(
 				"Don't return a copy from Customer.getOrders(). The field should be a MutableList.",

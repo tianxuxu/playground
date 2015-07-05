@@ -21,11 +21,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 
-import twitter4j.StallWarning;
-import twitter4j.Status;
-import twitter4j.StatusDeletionNotice;
-import twitter4j.StatusListener;
-
 import com.google.common.collect.ImmutableList;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Constants;
@@ -39,10 +34,15 @@ import com.twitter.hbc.twitter4j.handler.StatusStreamHandler;
 import com.twitter.hbc.twitter4j.message.DisconnectMessage;
 import com.twitter.hbc.twitter4j.message.StallWarningMessage;
 
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.StatusListener;
+
 public class Twitter4jSampleStreamExample {
 
-	private final static Pattern URL_PATTERN = Pattern
-			.compile("(((http[s]?:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)");
+	private final static Pattern URL_PATTERN = Pattern.compile(
+			"(((http[s]?:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)");
 
 	// A bare bones StatusStreamHandler, which extends listener and gives some
 	// extra functionality
@@ -117,8 +117,8 @@ public class Twitter4jSampleStreamExample {
 		BlockingQueue<String> queue = new LinkedBlockingQueue<>(100);
 
 		StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
-		endpoint.trackTerms(ImmutableList.of("ExtJS", "Sencha", "atmo_framework",
-				"#java", "java7", "java8", "websocket", "#portal", "html5", "javascript"));
+		endpoint.trackTerms(ImmutableList.of("ExtJS", "Sencha", "atmo_framework", "#java",
+				"java7", "java8", "websocket", "#portal", "html5", "javascript"));
 		endpoint.languages(ImmutableList.of("en", "de"));
 
 		Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);

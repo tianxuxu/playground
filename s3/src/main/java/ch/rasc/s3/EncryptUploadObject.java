@@ -30,8 +30,8 @@ public class EncryptUploadObject {
 			String fileToUpload = args[4];
 			Path file = Paths.get(fileToUpload);
 
-			SecretKey mySymmetricKey = createSecretKey(password, bucketName, file
-					.getFileName().toString());
+			SecretKey mySymmetricKey = createSecretKey(password, bucketName,
+					file.getFileName().toString());
 
 			EncryptionMaterials materials = new EncryptionMaterials(mySymmetricKey);
 
@@ -54,9 +54,9 @@ public class EncryptUploadObject {
 
 		}
 		else {
-			System.out.println("java -jar s3backup.jar "
-					+ EncryptUploadObject.class.getName()
-					+ " accessKey secretKey password bucketName pathToFile");
+			System.out.println(
+					"java -jar s3backup.jar " + EncryptUploadObject.class.getName()
+							+ " accessKey secretKey password bucketName pathToFile");
 		}
 
 	}

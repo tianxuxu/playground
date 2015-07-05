@@ -18,13 +18,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import ch.rasc.playground.util.CryptoUtil;
-
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import ch.rasc.playground.util.CryptoUtil;
 
 public class Client {
 
@@ -59,8 +59,8 @@ public class Client {
 				.convertX509ToDHPublicKey(serverDHPublicKeyX509);
 
 		// decrypt message
-		SecretKey aesSecretKey = CryptoUtil.generateAESSecretKey(
-				clientDHKeyPair.getPrivate(), serverDHPublicKey);
+		SecretKey aesSecretKey = CryptoUtil
+				.generateAESSecretKey(clientDHKeyPair.getPrivate(), serverDHPublicKey);
 		byte[] plainMessage = CryptoUtil.decrypt(iv, aesSecretKey, encryptedMessage);
 
 		System.out.println("ENCRYPTED MESSAGE: " + new String(plainMessage));

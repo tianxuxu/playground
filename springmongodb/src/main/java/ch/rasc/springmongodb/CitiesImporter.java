@@ -10,11 +10,11 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.util.StringUtils;
 
-import ch.rasc.springmongodb.domain.City;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
+
+import ch.rasc.springmongodb.domain.City;
 
 public class CitiesImporter {
 
@@ -34,8 +34,8 @@ public class CitiesImporter {
 				System.out.println("NO DROP");
 			}
 
-			File f = new File(CitiesImporter.class.getResource("/worldcitiespop.txt")
-					.toURI());
+			File f = new File(
+					CitiesImporter.class.getResource("/worldcitiespop.txt").toURI());
 
 			Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
 				@Override
@@ -67,9 +67,8 @@ public class CitiesImporter {
 								longitudeStr = "179.9999";
 							}
 
-							newCity.setLocation(new Point(
-									Double.parseDouble(latitudeStr), Double
-											.parseDouble(longitudeStr)));
+							newCity.setLocation(new Point(Double.parseDouble(latitudeStr),
+									Double.parseDouble(longitudeStr)));
 
 							mongoOps.save(newCity);
 						}

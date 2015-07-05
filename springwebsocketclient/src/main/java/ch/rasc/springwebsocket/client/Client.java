@@ -70,8 +70,8 @@ public class Client {
 
 	@Bean
 	public SockJsClient sockJsClient(WebSocketClient webSocketClient) {
-		return new SockJsClient(Collections.singletonList(new WebSocketTransport(
-				webSocketClient)));
+		return new SockJsClient(
+				Collections.singletonList(new WebSocketTransport(webSocketClient)));
 	}
 
 	@Bean

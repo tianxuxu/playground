@@ -47,8 +47,8 @@ public class Backup {
 						.make();
 				ConcurrentNavigableMap<Long, String> files = db.getTreeMap("glacier");
 
-				files.put(System.currentTimeMillis(), result.getArchiveId() + ";"
-						+ encryptedFileToBackup);
+				files.put(System.currentTimeMillis(),
+						result.getArchiveId() + ";" + encryptedFileToBackup);
 
 				db.commit();
 				db.close();

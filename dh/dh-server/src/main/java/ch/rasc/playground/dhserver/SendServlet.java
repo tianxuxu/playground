@@ -36,8 +36,9 @@ public class SendServlet extends HttpServlet {
 	public void init() throws ServletException {
 		// read dsa certificate
 		try {
-			String dsaPrivateKeyString = StreamUtils.copyToString(getClass()
-					.getResourceAsStream("/private_key"), StandardCharsets.UTF_8);
+			String dsaPrivateKeyString = StreamUtils.copyToString(
+					getClass().getResourceAsStream("/private_key"),
+					StandardCharsets.UTF_8);
 			byte[] dsaPrivateKeyPkcs8 = CryptoUtil.hexToBytes(dsaPrivateKeyString);
 			this.dsaPrivateKey = CryptoUtil
 					.convertPKCS8ToDSAPrivateKey(dsaPrivateKeyPkcs8);
@@ -55,8 +56,8 @@ public class SendServlet extends HttpServlet {
 
 		try {
 			// Convert incoming key into a public dh key
-			byte[] clientDHPublicKeyX509 = StreamUtils.copyToByteArray(request
-					.getInputStream());
+			byte[] clientDHPublicKeyX509 = StreamUtils
+					.copyToByteArray(request.getInputStream());
 			PublicKey clientDHPublicKey = CryptoUtil
 					.convertX509ToDHPublicKey(clientDHPublicKeyX509);
 

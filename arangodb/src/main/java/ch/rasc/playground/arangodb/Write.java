@@ -18,8 +18,8 @@ public class Write {
 			System.out.println("Database created: " + dbName);
 		}
 		catch (Exception e) {
-			System.out.println("Failed to create database " + dbName + "; "
-					+ e.getMessage());
+			System.out.println(
+					"Failed to create database " + dbName + "; " + e.getMessage());
 		}
 
 		arangoDriver.setDefaultDatabase(dbName);

@@ -16,11 +16,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ch.rasc.forcastio.model.FioBlock;
 import ch.rasc.forcastio.model.FioResponse;
 import ch.rasc.forcastio.model.FioUnit;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class FioRequest {
 
@@ -60,7 +60,8 @@ public class FioRequest {
 	}
 
 	public static FioRequest create(String apiKey, double latitude, double longitude) {
-		return new FioRequest(apiKey, String.valueOf(latitude), String.valueOf(longitude));
+		return new FioRequest(apiKey, String.valueOf(latitude),
+				String.valueOf(longitude));
 	}
 
 	/**
@@ -169,15 +170,13 @@ public class FioRequest {
 					// Everything excluded
 					return null;
 				}
-				queryParameters.put(
-						"exclude",
-						this.excludeBlocks.stream().map(FioBlock::getJsonValue)
-								.collect(Collectors.joining(",")));
+				queryParameters.put("exclude", this.excludeBlocks.stream()
+						.map(FioBlock::getJsonValue).collect(Collectors.joining(",")));
 			}
 
 			if (!queryParameters.isEmpty()) {
-				url.append("?").append(
-						queryParameters.entrySet().stream()
+				url.append("?")
+						.append(queryParameters.entrySet().stream()
 								.map((e) -> e.getKey() + "=" + e.getValue())
 								.collect(Collectors.joining("&")));
 			}

@@ -14,8 +14,8 @@ import com.amazonaws.services.sqs.AmazonSQSClient;
 
 public class Download {
 	@SuppressWarnings("unused")
-	public static void main(String[] args) throws AmazonServiceException,
-			AmazonClientException, FileNotFoundException {
+	public static void main(String[] args)
+			throws AmazonServiceException, AmazonClientException, FileNotFoundException {
 		if (args.length == 2) {
 			AWSCredentials credentials = new BasicAWSCredentials(args[0], args[1]);
 			AmazonGlacierClient glacierClient = new AmazonGlacierClient(credentials);

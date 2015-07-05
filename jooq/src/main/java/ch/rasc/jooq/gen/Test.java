@@ -33,7 +33,7 @@ public class Test extends org.jooq.impl.SchemaImpl {
 	}
 
 	private final java.util.List<org.jooq.Table<?>> getTables0() {
-		return java.util.Arrays
-				.<org.jooq.Table<?>> asList(ch.rasc.jooq.gen.tables.Address.ADDRESS);
+		return java.util.Arrays.<org.jooq
+				.Table<?>> asList(ch.rasc.jooq.gen.tables.Address.ADDRESS);
 	}
 }

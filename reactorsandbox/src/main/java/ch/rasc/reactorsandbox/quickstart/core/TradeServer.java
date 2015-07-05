@@ -31,22 +31,22 @@ public class TradeServer {
 		while (this.active.get()) {
 			try {
 				// Pull Orders off the queue and process them
-			this.buys.poll(100, TimeUnit.MILLISECONDS);
-			this.sells.poll(100, TimeUnit.MILLISECONDS);
+				this.buys.poll(100, TimeUnit.MILLISECONDS);
+				this.sells.poll(100, TimeUnit.MILLISECONDS);
+			}
+			catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
 		}
-		catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-	}
-}	);
+	});
 
 	public TradeServer() {
 		this.queueDrain.start();
 	}
 
 	public Order execute(Trade trade) {
-		Order o = new Order(this.counter.incrementAndGet()).setTrade(trade).setTimestamp(
-				System.currentTimeMillis());
+		Order o = new Order(this.counter.incrementAndGet()).setTrade(trade)
+				.setTimestamp(System.currentTimeMillis());
 
 		switch (trade.getType()) {
 		case BUY:

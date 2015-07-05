@@ -28,8 +28,8 @@ public class ObjectFactory {
 			"addResponse");
 	private final static QName _MultiplyResponse_QNAME = new QName(
 			"http://wsdemo.rasc.ch/", "multiplyResponse");
-	private final static QName _DivideResponse_QNAME = new QName(
-			"http://wsdemo.rasc.ch/", "divideResponse");
+	private final static QName _DivideResponse_QNAME = new QName("http://wsdemo.rasc.ch/",
+			"divideResponse");
 	private final static QName _Divide_QNAME = new QName("http://wsdemo.rasc.ch/",
 			"divide");
 	private final static QName _Multiply_QNAME = new QName("http://wsdemo.rasc.ch/",
@@ -126,7 +126,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link SubtractResponse }{@code >}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link SubtractResponse }
+	 * {@code >}
 	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "subtractResponse")
@@ -146,7 +147,8 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link MultiplyResponse }{@code >}
+	 * Create an instance of {@link JAXBElement }{@code <}{@link MultiplyResponse }
+	 * {@code >}
 	 *
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "multiplyResponse")

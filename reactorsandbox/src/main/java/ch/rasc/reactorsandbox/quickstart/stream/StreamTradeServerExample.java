@@ -6,10 +6,10 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.Environment;
-import reactor.rx.broadcast.Broadcaster;
 import ch.rasc.reactorsandbox.quickstart.core.Trade;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
+import reactor.Environment;
+import reactor.rx.broadcast.Broadcaster;
 
 /**
  * @author Jon Brisbin

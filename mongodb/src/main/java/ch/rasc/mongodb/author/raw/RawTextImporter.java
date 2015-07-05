@@ -6,12 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import ch.rasc.mongodb.author.TextExtractor;
-import ch.rasc.mongodb.author.TextImporter;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.WriteResult;
+
+import ch.rasc.mongodb.author.TextExtractor;
+import ch.rasc.mongodb.author.TextImporter;
 
 @Named
 public class RawTextImporter implements TextImporter {
@@ -70,8 +70,8 @@ public class RawTextImporter implements TextImporter {
 				word3.append("word", w3);
 				word3.append("count", 1);
 
-				this.collection.update(query, new BasicDBObject("$push",
-						new BasicDBObject("word3", word3)));
+				this.collection.update(query,
+						new BasicDBObject("$push", new BasicDBObject("word3", word3)));
 			}
 
 		}

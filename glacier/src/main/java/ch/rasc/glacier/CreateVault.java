@@ -15,8 +15,8 @@ public class CreateVault {
 			AmazonGlacierClient client = new AmazonGlacierClient(credentials);
 			client.setEndpoint("https://glacier.us-east-1.amazonaws.com/");
 
-			CreateVaultResult result = client.createVault(new CreateVaultRequest()
-					.withVaultName("myVault"));
+			CreateVaultResult result = client
+					.createVault(new CreateVaultRequest().withVaultName("myVault"));
 			System.out.println("Location: " + result.getLocation());
 		}
 	}

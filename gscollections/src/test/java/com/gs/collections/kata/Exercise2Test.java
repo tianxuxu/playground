@@ -35,7 +35,8 @@ public class Exercise2Test extends CompanyDomainForKata {
 		String predicateClass = CUSTOMER_FROM_LONDON.getClass().getSimpleName();
 		Assert.assertTrue(
 				"Solution should use Predicates.attributeEquals() or a lambda but used "
-						+ predicateClass, "AttributePredicate".equals(predicateClass)
+						+ predicateClass,
+				"AttributePredicate".equals(predicateClass)
 						|| predicateClass.startsWith("Exercise2Test$$Lambda"));
 
 		Customer customerFromLondon = new Customer("test customer", "London");
@@ -73,7 +74,8 @@ public class Exercise2Test extends CompanyDomainForKata {
 	@Test
 	public void howManyCustomersLiveInLondon() {
 		int numberOfCustomerFromLondon = 0;
-		Assert.assertEquals("Should be 2 London customers", 2, numberOfCustomerFromLondon);
+		Assert.assertEquals("Should be 2 London customers", 2,
+				numberOfCustomerFromLondon);
 	}
 
 	/**
