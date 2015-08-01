@@ -17,7 +17,6 @@ public class WorkingInitService {
 	private EntityManager entityManager;
 
 	@Autowired
-	// @Qualifier("readWriteTransactionTemplate")
 	private TransactionTemplate readWriteTransactionTemplate;
 
 	@PostConstruct
