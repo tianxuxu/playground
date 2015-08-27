@@ -26,6 +26,8 @@ public class Svg2PngServlet extends HttpServlet {
 
 		String type = request.getParameter("type");
 		String svg = request.getParameter("svg");
+		String filename = request.getParameter("filename");
+
 		if (request.getParameter("pdf") != null) {
 			type = "application/pdf";
 		}
@@ -44,8 +46,12 @@ public class Svg2PngServlet extends HttpServlet {
 			postfix = "png";
 		}
 
+		if (filename == null) {
+			filename = "chart";
+		}
+
 		response.setHeader("Content-Disposition",
-				"attachment; filename=\"mixedchart." + postfix + "\";");
+				"attachment; filename=\"" + filename + "." + postfix + "\";");
 
 		try (StringReader stringReader = new StringReader(svg);
 				OutputStream out = response.getOutputStream()) {

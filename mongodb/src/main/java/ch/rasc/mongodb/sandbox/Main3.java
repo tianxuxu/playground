@@ -1,7 +1,5 @@
 package ch.rasc.mongodb.sandbox;
 
-import java.io.IOException;
-
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
@@ -14,7 +12,7 @@ import com.mongodb.MongoException;
 
 public class Main3 {
 
-	public static void main(String[] args) throws MongoException, IOException {
+	public static void main(String[] args) throws MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 		DB db = mongo.getDB("tutorial");
 

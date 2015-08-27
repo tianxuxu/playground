@@ -1,6 +1,5 @@
 package ch.rasc.mongodb.capped;
 
-import java.net.UnknownHostException;
 import java.util.Date;
 
 import com.mongodb.BasicDBObject;
@@ -14,7 +13,7 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 public class Insert {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws MongoException {
 
 		MongoClient mongo = new MongoClient("localhost");
 

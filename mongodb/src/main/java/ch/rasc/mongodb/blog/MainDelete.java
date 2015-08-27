@@ -1,7 +1,5 @@
 package ch.rasc.mongodb.blog;
 
-import java.net.UnknownHostException;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -12,7 +10,7 @@ import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 public class MainDelete {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
+	public static void main(String[] args) throws MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");

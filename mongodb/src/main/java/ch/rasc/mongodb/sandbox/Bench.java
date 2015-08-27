@@ -15,7 +15,7 @@ public class Bench {
 		Bench.simpleFile();
 	}
 
-	private static void simpleFile() throws MongoException, IOException {
+	private static void simpleFile() throws MongoException {
 		MongoClient mongo = new MongoClient("localhost");
 
 		DB db = mongo.getDB("testdb");
