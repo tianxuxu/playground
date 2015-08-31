@@ -1,49 +1,39 @@
 package ch.rasc.mongodb.author;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
 
-import org.apache.tika.io.IOUtils;
-import org.apache.tika.parser.ParsingReader;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.LoggerFactory;
 
 @Named
 public class TextExtractor {
 
-	public List<String> extractWords(File file) {
-		String text = extractText(file);
+	public List<String> extractWords(Path file) {
 		List<String> words = new ArrayList<>();
 
-		if (text != null) {
-			for (String word : text.split("\\s")) {
-				word = word.replaceAll(";|:|,|\\.", "");
-				if (!word.trim().isEmpty()) {
-					words.add(word);
+		try {
+			String text = IOUtils.toString(Files.newBufferedReader(file));
+
+			if (text != null) {
+				for (String word : text.split("\\s")) {
+					word = word.replaceAll(";|:|,|\\.", "");
+					if (!word.trim().isEmpty()) {
+						words.add(word);
+					}
 				}
 			}
+		}
+		catch (IOException e) {
+			LoggerFactory.getLogger(TextExtractor.class).error("extract words", e);
 		}
 
 		return words;
 	}
 
-	private String extractText(File file) {
-		try (Reader reader = new ParsingReader(file)) {
-			String text = IOUtils.toString(reader);
-			return text;
-		}
-		catch (FileNotFoundException e) {
-			LoggerFactory.getLogger(getClass()).error("extractText", e);
-		}
-		catch (IOException e) {
-			LoggerFactory.getLogger(getClass()).error("extractText", e);
-		}
-
-		return null;
-	}
 }

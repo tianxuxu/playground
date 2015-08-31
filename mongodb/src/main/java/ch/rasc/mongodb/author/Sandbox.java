@@ -23,12 +23,12 @@ public class Sandbox {
 					.inc("word3.$.count");
 			datastore.update(query, op);
 
-			// query = new BasicDBObject();
+			// query = new Document();
 			// query.append("word1", w1);
 			// query.append("word2", w2);
 			// query.append("word3.word", w3);
-			// update = new BasicDBObject("$inc", new
-			// BasicDBObject("word3.$.count",
+			// update = new Document("$inc", new
+			// Document("word3.$.count",
 			// 1));
 			//
 

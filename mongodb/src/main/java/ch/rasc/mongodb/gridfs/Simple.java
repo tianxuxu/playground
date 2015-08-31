@@ -4,24 +4,25 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.bson.Document;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class Simple {
 
 	public static void main(String[] args) throws MongoException, IOException {
-		Simple.simpleFile();
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
 	}
 
-	private static void simpleFile() throws MongoException, IOException {
-		MongoClient mongo = new MongoClient("localhost");
-
-		DB db = mongo.getDB("testdb");
-		DBCollection collection = db.getCollection("files");
+	private static void doSomething(MongoClient mongo) throws IOException {
+		MongoDatabase db = mongo.getDatabase("testdb");
+		MongoCollection<Document> collection = db.getCollection("files");
+		collection.drop();
 
 		File currentDir = new File(".");
 		File[] files = currentDir.listFiles();
@@ -29,13 +30,12 @@ public class Simple {
 
 			if (file.isFile()) {
 				System.out.println(file.getName());
-				BasicDBObject fileObject = new BasicDBObject();
+				Document fileObject = new Document();
 				fileObject.append("fileName", file.getName());
 				fileObject.append("content", FileUtils.readFileToByteArray(file));
-				collection.insert(fileObject);
+				collection.insertOne(fileObject);
 			}
 		}
-
 	}
 
 }

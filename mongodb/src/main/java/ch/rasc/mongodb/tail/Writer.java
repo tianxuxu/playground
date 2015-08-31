@@ -1,32 +1,41 @@
 package ch.rasc.mongodb.tail;
 
-import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Random;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.CreateCollectionOptions;
 
 public class Writer {
 
-	public static void main(String[] args) throws UnknownHostException, MongoException {
-		MongoClient mongo = new MongoClient("localhost");
-
-		DB db = mongo.getDB("testdb");
-
-		DBCollection collection;
-		if (!db.collectionExists("log")) {
-			BasicDBObject createOptions = new BasicDBObject();
-			createOptions.append("capped", Boolean.TRUE);
-			createOptions.append("size", 100000);
-			collection = db.createCollection("log", createOptions);
+	public static void main(String[] args) throws MongoException {
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
 		}
-		else {
-			collection = db.getCollection("log");
+	}
+
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase dbMongoDatabase = mongo.getDatabase("testdb");
+
+		boolean dbexists = false;
+		for (String name : dbMongoDatabase.listCollectionNames()) {
+			if (name.equals("log")) {
+				dbexists = true;
+				break;
+			}
 		}
+
+		if (!dbexists) {
+			dbMongoDatabase.createCollection("log",
+					new CreateCollectionOptions().capped(true).sizeInBytes(100_000));
+		}
+
+		MongoCollection<Document> collection = dbMongoDatabase.getCollection("log");
 
 		Random rand = new Random();
 
@@ -34,9 +43,9 @@ public class Writer {
 		while (true) {
 			count++;
 			System.out.println("Write: " + count);
-			BasicDBObject dbObj = new BasicDBObject("date", new Date());
+			Document dbObj = new Document("date", new Date());
 			dbObj.append("msg", count);
-			collection.insert(dbObj);
+			collection.insertOne(dbObj);
 
 			int waitTime = rand.nextInt(30) + 1;
 			try {
@@ -47,7 +56,6 @@ public class Writer {
 			}
 
 		}
-
 	}
 
 }

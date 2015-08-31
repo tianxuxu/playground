@@ -1,16 +1,15 @@
 package ch.rasc.mongodb.author;
 
-import java.net.UnknownHostException;
-
+import org.bson.Document;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import ch.rasc.mongodb.author.morphia.Word12;
 import ch.rasc.mongodb.author.raw.RawAuthor;
@@ -19,31 +18,24 @@ import ch.rasc.mongodb.author.raw.RawTextImporter;
 @Configuration
 public class AppConfiguration {
 
-	// Documents: 258'552 43.9 MB
-
 	@Bean(destroyMethod = "close")
-	public MongoClient mongoClient() throws UnknownHostException, MongoException {
+	public MongoClient mongoClient() throws MongoException {
 		MongoClient mongo = new MongoClient("localhost");
-		// mongo.setWriteConcern(WriteConcern.NONE); //184 sec
-		// mongo.setWriteConcern(WriteConcern.NORMAL); //184 sec
-		// mongo.setWriteConcern(WriteConcern.SAFE); // 279 sec
-		// mongo.setWriteConcern(WriteConcern.FSYNC_SAFE);
-
 		return mongo;
 	}
 
 	@Bean
-	public DB db() throws UnknownHostException, MongoException {
-		return mongoClient().getDB("mydb");
+	public MongoDatabase db() throws MongoException {
+		return mongoClient().getDatabase("mydb");
 	}
 
 	@Bean
-	public DBCollection collection() throws UnknownHostException, MongoException {
+	public MongoCollection<Document> collection() throws MongoException {
 		return db().getCollection("text");
 	}
 
 	@Bean
-	public Datastore datastore() throws UnknownHostException, MongoException {
+	public Datastore datastore() throws MongoException {
 		Morphia morphia = new Morphia();
 		morphia.map(Word12.class);
 

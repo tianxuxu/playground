@@ -7,7 +7,7 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.utils.IndexDirection;
 
 @Entity(noClassnameStored = true)
-// @Indexes({ @Index("startIpNum,endIpNum") })
+// @Indexes({ @Index(fields= {@Field("startIpNum"), @Field("endIpNum")}) })
 public class Geolite {
 
 	@Id

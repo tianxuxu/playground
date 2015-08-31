@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.Indexes;
 
 @Entity(noClassnameStored = true)
-@Indexes({ @Index("word1,word2") })
+@Indexes({ @Index(fields = { @Field("word1"), @Field("word2") }) })
 public class Word12 {
 
 	@Id

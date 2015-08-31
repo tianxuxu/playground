@@ -1,41 +1,36 @@
 package ch.rasc.mongodb.blog;
 
-import java.net.UnknownHostException;
-import java.util.List;
+import org.bson.Document;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 public class MainIndex {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
-		MongoClient mongo = new MongoClient("localhost");
-
-		DB db = mongo.getDB("testdb");
-
-		DBCollection collection = db.getCollection("users");
-
-		BasicDBObject index = new BasicDBObject("username", 1);
-		collection.createIndex(index);
-		// collection.dropIndex(index);
-
-		BasicDBObject query = new BasicDBObject();
-		query.append("username", "johnd");
-		try (DBCursor cursor = collection.find(query)) {
-			DBObject explain = cursor.explain();
-			System.out.println(explain);
-
-			List<DBObject> indexes = collection.getIndexInfo();
-			for (DBObject ix : indexes) {
-				System.out.println(ix);
-			}
+	public static void main(String[] args) throws MongoException {
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
 		}
+	}
 
-		mongo.close();
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 
+		MongoCollection<Document> collection = db.getCollection("users");
+		// collection.dropIndexes();
+
+		Document index = new Document("username", 1);
+		collection.createIndex(index);
+
+		FindIterable<Document> result = collection.find(Filters.eq("username", "johnd"));
+		System.out.println(result.first());
+
+		System.out.println("Indices:");
+		for (Document ix : collection.listIndexes()) {
+			System.out.println(ix);
+		}
 	}
 }

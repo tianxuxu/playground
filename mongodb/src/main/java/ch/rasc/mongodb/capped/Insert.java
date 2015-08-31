@@ -1,75 +1,64 @@
 package ch.rasc.mongodb.capped;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.CommandResult;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.WriteResult;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.CreateCollectionOptions;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.result.DeleteResult;
 
 public class Insert {
 	public static void main(String[] args) throws MongoException {
 
-		MongoClient mongo = new MongoClient("localhost");
-
-		DB db = mongo.getDB("testdb");
-
-		DBCollection collection;
-		if (!db.collectionExists("log")) {
-			BasicDBObject createOptions = new BasicDBObject();
-			createOptions.append("capped", Boolean.TRUE);
-			createOptions.append("size", 1000);
-			collection = db.createCollection("log", createOptions);
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
 		}
-		else {
-			collection = db.getCollection("log");
-		}
+	}
 
-		CommandResult cr = collection.getStats();
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
+
+		Set<String> collectionNames = new HashSet<>();
+		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+
+		MongoCollection<Document> collection;
+		if (!collectionNames.contains("log")) {
+			db.createCollection("log",
+					new CreateCollectionOptions().capped(true).sizeInBytes(1000L));
+		}
+		collection = db.getCollection("log");
+
+		Document cr = db.runCommand(new BsonDocument("collStats", new BsonString("log")));
 		System.out.println("Capped: " + cr.getBoolean("capped", false));
 
 		for (int j = 0; j < 1000; j++) {
-			BasicDBObject logMessage = new BasicDBObject();
+			Document logMessage = new Document();
 			logMessage.append("index", j);
 			logMessage.append("message", "User sr");
 			logMessage.append("loggedIn", new Date());
 			logMessage.append("loggedOut", new Date());
-			collection.insert(logMessage);
+			collection.insertOne(logMessage);
 		}
 
-		try (DBCursor cursor = collection.find()) {
-			while (cursor.hasNext()) {
-				DBObject obj = cursor.next();
-				System.out.println(obj.get("index"));
-			}
-		}
+		collection.find().projection(Projections.include("index"))
+				.forEach((Document d) -> System.out.println(d.get("index")));
 
-		BasicDBObject order = new BasicDBObject();
-		order.append("$natural", -1);
-		try (DBCursor cursor = collection.find().sort(order)) {
-			while (cursor.hasNext()) {
-				DBObject obj = cursor.next();
-				System.out.println(obj.get("index"));
-			}
-		}
+		collection.find().sort(Sorts.orderBy(new Document("$natural", -1)))
+				.projection(Projections.include("index"))
+				.forEach((Document d) -> System.out.println(d.get("index")));
 
-		BasicDBObject query = new BasicDBObject();
-		query.append("index", new BasicDBObject("$gt", 990));
-
-		try {
-			WriteResult wr = collection.remove(query);
-			System.out.println(wr.getN());
-		}
-		catch (MongoException e) {
-			System.out.println(e.getCode());
-		}
-
-		// collection.drop();
-		mongo.close();
+		DeleteResult dr = collection.deleteMany(Filters.gt("index", 990));
+		System.out.println(dr);
 	}
 }

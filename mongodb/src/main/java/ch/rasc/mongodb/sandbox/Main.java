@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.bson.Document;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
-import com.mongodb.util.JSON;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 
 public class Main {
 
@@ -27,21 +28,29 @@ public class Main {
 
 		ObjectMapper mapper = new ObjectMapper();
 		List<Map<String, Object>> userData = mapper
-				.readValue(Main.class.getResourceAsStream("users.json"), List.class);
+				.readValue(Main.class.getResourceAsStream("/users.json"), List.class);
 
-		MongoClient mongo = new MongoClient("localhost");
-		mongo.setWriteConcern(WriteConcern.SAFE);
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(userData, mongo);
+		}
 
-		DB db = mongo.getDB("testdbs");
+	}
+
+	private static void doSomething(List<Map<String, Object>> userData,
+			MongoClient mongo) {
+		mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
+
+		MongoDatabase db = mongo.getDatabase("testdbs");
 		// db.setWriteConcern(WriteConcern.SAFE);
 
-		DBCollection collection = db.getCollection("testcollection");
+		MongoCollection<Document> collection = db.getCollection("testcollection");
 		// collection.setWriteConcern(WriteConcern.SAFE);
 
 		collection.drop();
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
+		List<Document> newDocuments = new ArrayList<>();
 		for (Map<String, Object> row : userData) {
 
 			// replace string with a date
@@ -54,32 +63,15 @@ public class Main {
 				e.printStackTrace();
 			}
 
-			BasicDBObject dbObject = new BasicDBObject(row);
-			collection.insert(dbObject);
+			newDocuments.add(new Document(row));
 		}
+		collection.insertMany(newDocuments);
 
-		try (DBCursor cursor = collection.find()) {
-			while (cursor.hasNext()) {
-				DBObject dbo = cursor.next();
-				System.out.println(dbo);
-			}
-		}
+		collection.find().forEach((Document d) -> System.out.println(d));
 
-		DBObject query = (DBObject) JSON.parse("{'username': 'johnd'}"); // new
-		// BasicDBObject("username",
-		// "johnd");
-		BasicDBObject keys = new BasicDBObject("username", 1);
-		keys.append("password", 1);
-		// 1 = nur diese keys zurückliefern
-		// 0 = alle keys bis auf diese zurückliefern
-
-		try (DBCursor cursor = collection.find(query, keys)) {
-			while (cursor.hasNext()) {
-				DBObject dbo = cursor.next();
-				System.out.println(dbo);
-			}
-		}
-
+		collection.find(Filters.eq("username", "johnd"))
+				.projection(Projections.include("username", "password"))
+				.forEach((Document d) -> System.out.println(d));
 	}
 
 }

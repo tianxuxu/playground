@@ -1,48 +1,33 @@
 package ch.rasc.mongodb.blog;
 
-import java.net.UnknownHostException;
 import java.util.Date;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 public class MainUpdate {
-	public static void main(String[] args) throws UnknownHostException, MongoException {
-		MongoClient mongo = new MongoClient("localhost");
+	public static void main(String[] args) throws MongoException {
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
-		DBCollection collection = db.getCollection("users");
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
+		MongoCollection<Document> collection = db.getCollection("users");
 
-		BasicDBObject updateQuery = new BasicDBObject();
-		updateQuery.append("username", "johnd");
+		collection.updateMany(Filters.eq("username", "johnd"),
+				new Document("$set", new Document("lastLogin", new Date())));
+		collection.updateMany(Filters.eq("username", "johnd"),
+				new Document("$inc", new Document("noOfLogins", -1)));
 
-		BasicDBObject update = new BasicDBObject();
-		update.append("$set", new BasicDBObject("lastLogin", new Date()));
-
-		// collection.update(updateQuery, update);
-		collection.update(updateQuery, update, false, true);
-
-		update = new BasicDBObject();
-		update.append("$inc", new BasicDBObject("noOfLogins", -1));
-
-		collection.update(updateQuery, update);
-
-		updateQuery = new BasicDBObject();
-		updateQuery.append("username", "johnd");
-
-		update = new BasicDBObject();
-		update.append("$set", new BasicDBObject("country", "US"));
-
-		// DBObject user = collection.findAndModify(updateQuery, update);
-		DBObject user = collection.findAndModify(updateQuery, null, null, false, update,
-				true, false);
+		Document user = collection.findOneAndUpdate(Filters.eq("username", "johnd"),
+				new Document("$set", new Document("country", "US")));
 		System.out.println(user);
-
-		mongo.close();
-
 	}
 }

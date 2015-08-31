@@ -2,13 +2,23 @@ package ch.rasc.mongodb.geolite;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.mongodb.morphia.Datastore;
+import org.zeroturnaround.zip.ZipUtil;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -19,13 +29,36 @@ public class GeoliteImporter {
 	private Datastore datastore;
 
 	public void importData() throws IOException {
-		// D:\_download\GeoLiteCity_20101101\GeoLiteCity-Blocks.csv
-		// D:\_download\GeoLiteCity_20101101\GeoLiteCity-Location.csv
+		Path locationPath = Paths.get("./testdata/GeoLiteCity-Location.csv");
+		Path blockPath = Paths.get("./testdata/GeoLiteCity-Blocks.csv");
+
+		try (CloseableHttpClient client = HttpClients.createDefault()) {
+			Path zipFile = Paths.get("./testdata/GeoLiteCity-latest.zip");
+			if (!Files.exists(locationPath)) {
+				try (CloseableHttpResponse response = client.execute(
+						new HttpGet("http://rasc.ch/testdata/GeoLiteCity-latest.zip"))) {
+					HttpEntity entity = response.getEntity();
+					if (entity != null) {
+						try (OutputStream outstream = Files.newOutputStream(zipFile)) {
+							entity.writeTo(outstream);
+						}
+					}
+				}
+
+				// unzip
+				ZipUtil.unpackEntry(zipFile.toFile(),
+						"GeoLiteCity_20150804/GeoLiteCity-Location.csv",
+						locationPath.toFile());
+				ZipUtil.unpackEntry(zipFile.toFile(),
+						"GeoLiteCity_20150804/GeoLiteCity-Blocks.csv",
+						blockPath.toFile());
+				Files.delete(zipFile);
+			}
+		}
 
 		Map<Integer, Geolite> locationMap = new HashMap<>();
 
-		try (CSVReader reader = new CSVReader(new FileReader(
-				"D:\\_download\\GeoLiteCity_20101101\\GeoLiteCity-Location.csv"))) {
+		try (CSVReader reader = new CSVReader(new FileReader(locationPath.toFile()))) {
 			reader.readNext();
 			reader.readNext();
 			String[] nextLine;
@@ -46,8 +79,7 @@ public class GeoliteImporter {
 			}
 		}
 
-		try (CSVReader reader = new CSVReader(new FileReader(
-				"D:\\_download\\GeoLiteCity_20101101\\GeoLiteCity-Blocks.csv"))) {
+		try (CSVReader reader = new CSVReader(new FileReader(blockPath.toFile()))) {
 			reader.readNext();
 			reader.readNext();
 			String[] nextLine;

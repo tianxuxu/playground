@@ -1,14 +1,16 @@
 package ch.rasc.mongodb.author.raw;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.WriteResult;
+import org.bson.Document;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 
 import ch.rasc.mongodb.author.TextExtractor;
 import ch.rasc.mongodb.author.TextImporter;
@@ -17,24 +19,17 @@ import ch.rasc.mongodb.author.TextImporter;
 public class RawTextImporter implements TextImporter {
 
 	@Inject
-	private DBCollection collection;
+	private MongoCollection<Document> collection;
 
 	@Inject
 	private TextExtractor extractor;
 
 	@Override
-	public void doImport(String fileName) {
-		doImport(new File(fileName));
-	}
-
-	@Override
-	public void doImport(File file) {
+	public void doImport(Path file) {
 
 		List<String> words = this.extractor.extractWords(file);
 
-		// ohne Index: 181217 ms
-		// mit Index: 8140 ms
-		BasicDBObject indexes = new BasicDBObject("word1", 1).append("word2", 1);
+		Document indexes = new Document("word1", 1).append("word2", 1);
 		this.collection.createIndex(indexes);
 
 		for (int i = 0; i < words.size() - 3; i++) {
@@ -44,34 +39,25 @@ public class RawTextImporter implements TextImporter {
 
 			// Upsert base document. If exists increment count, otherwise insert
 			// document
-			BasicDBObject query = new BasicDBObject();
-			query.append("word1", w1);
-			query.append("word2", w2);
-			BasicDBObject update = new BasicDBObject("$inc",
-					new BasicDBObject("count", 1));
-			this.collection.update(query, update, true, false);
+			this.collection.updateOne(
+					Filters.and(Filters.eq("word1", w1), Filters.eq("word2", w2)),
+					new Document("$inc", new Document("count", 1)),
+					new UpdateOptions().upsert(true));
 
 			// update count in embedded document
-			query = new BasicDBObject();
-			query.append("word1", w1);
-			query.append("word2", w2);
-			query.append("word3.word", w3);
-			update = new BasicDBObject("$inc", new BasicDBObject("word3.$.count", 1));
+			Document d = this.collection.findOneAndUpdate(
+					Filters.and(Filters.eq("word1", w1), Filters.eq("word2", w2),
+							Filters.eq("word3.word", w3)),
+					new Document("$inc", new Document("word3.$.count", 1)));
+			if (d == null) {
 
-			WriteResult result = this.collection.update(query, update, false, false);
-			if (result.getN() == 0) {
-
-				// add embedded word3 document to the array
-				query = new BasicDBObject();
-				query.append("word1", w1);
-				query.append("word2", w2);
-
-				BasicDBObject word3 = new BasicDBObject();
+				Document word3 = new Document();
 				word3.append("word", w3);
 				word3.append("count", 1);
 
-				this.collection.update(query,
-						new BasicDBObject("$push", new BasicDBObject("word3", word3)));
+				this.collection.updateOne(
+						Filters.and(Filters.eq("word1", w1), Filters.eq("word2", w2)),
+						new Document("$push", new Document("word3", word3)));
 			}
 
 		}

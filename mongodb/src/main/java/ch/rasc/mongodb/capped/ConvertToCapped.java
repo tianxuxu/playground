@@ -1,50 +1,54 @@
 package ch.rasc.mongodb.capped;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class ConvertToCapped {
 	public static void main(String[] args) throws MongoException {
 
-		MongoClient mongo = new MongoClient("localhost");
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 
-		DBCollection collection;
-		if (db.collectionExists("log")) {
+		Set<String> collectionNames = new HashSet<>();
+		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+
+		MongoCollection<Document> collection;
+		if (collectionNames.contains("log")) {
 			db.getCollection("log").drop();
 		}
-
-		// non capped
 		collection = db.getCollection("log");
 
 		for (int j = 0; j < 10000; j++) {
-			BasicDBObject logMessage = new BasicDBObject();
+			Document logMessage = new Document();
 			logMessage.append("index", j);
 			logMessage.append("message", "User sr");
 			logMessage.append("loggedIn", new Date());
 			logMessage.append("loggedOut", new Date());
-			collection.insert(logMessage);
+			collection.insertOne(logMessage);
 		}
 
+		Document cr = db.runCommand(new BsonDocument("collStats", new BsonString("log")));
 		System.out.println("Count : " + collection.count());
-		System.out
-				.println("Capped: " + collection.getStats().getBoolean("capped", false));
+		System.out.println("Capped: " + cr.getBoolean("capped", false));
 
-		BasicDBObject ctcCommand = new BasicDBObject();
-		ctcCommand.append("convertToCapped", "log");
-		ctcCommand.append("size", 1000);
-		db.command(ctcCommand);
-
+		db.runCommand(new Document("convertToCapped", "log").append("size", 1000));
+		cr = db.runCommand(new BsonDocument("collStats", new BsonString("log")));
 		System.out.println("Count : " + collection.count());
-		System.out
-				.println("Capped: " + collection.getStats().getBoolean("capped", false));
-
-		mongo.close();
+		System.out.println("Capped: " + cr.getBoolean("capped", false));
 	}
 }

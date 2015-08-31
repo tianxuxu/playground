@@ -1,118 +1,79 @@
 package ch.rasc.mongodb.blog;
 
-import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Sorts;
 
 public class MainSelect {
 
-	public static void main(String[] args) throws UnknownHostException, MongoException {
-		MongoClient mongo = new MongoClient("localhost");
-		// MongoClient mongo = new MongoClient("localhost", 10000);
+	public static void main(String[] args) throws MongoException {
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 
-		DBCollection collection = db.getCollection("users");
+		MongoCollection<Document> collection = db.getCollection("users");
 
-		try (DBCursor cursor = collection.find()) {
-			while (cursor.hasNext()) {
-				DBObject doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find()) {
+			System.out.println(d);
 		}
 
 		System.out.println();
 
-		BasicDBObject query = new BasicDBObject();
-		query.append("username", "johnd");
-		try (DBCursor cursor = collection.find(query)) {
-			while (cursor.hasNext()) {
-				DBObject doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find(Filters.eq("username", "johnd"))) {
+			System.out.println(d);
 		}
 
 		System.out.println();
 
-		query = new BasicDBObject();
-		query.append("username", "johnd");
-		DBObject doc = collection.findOne(query);
+		Document doc = collection.find(Filters.eq("username", "johnd")).first();
 		System.out.println(doc);
 
 		System.out.println();
 
-		query = new BasicDBObject();
-		query.append("username", "johnd");
-
-		BasicDBObject fields = new BasicDBObject();
-		fields.append("enabled", 0);
-		fields.append("_id", 0);
-		doc = collection.findOne(query, fields);
+		doc = collection.find(Filters.eq("username", "johnd"))
+				.projection(Projections.exclude("_id", "enabled")).first();
 		System.out.println(doc);
 
 		System.out.println();
 
-		query = new BasicDBObject();
-		query.append("username", "johnd");
-		query.append("name", "Doe");
-		try (DBCursor cursor = collection.find(query)) {
-			while (cursor.hasNext()) {
-				doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find(Filters.and(Filters.eq("username", "johnd"),
+				Filters.eq("name", "Doe")))) {
+			System.out.println(d);
 		}
 
 		System.out.println();
 
-		BasicDBObject u1 = new BasicDBObject("username", "francol");
-		BasicDBObject u2 = new BasicDBObject("username", "johnd");
-		query = new BasicDBObject();
-		query.append("$or", new DBObject[] { u1, u2 });
-
-		try (DBCursor cursor = collection.find(query)) {
-			while (cursor.hasNext()) {
-				doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find(Filters.or(Filters.eq("username", "francol"),
+				Filters.eq("username", "johnd")))) {
+			System.out.println(d);
 		}
 
 		System.out.println();
 
-		BasicDBObject inQuery = new BasicDBObject("$in", new String[] { "admin" });
-		query = new BasicDBObject("groups", inQuery);
-
-		try (DBCursor cursor = collection.find(query)) {
-			while (cursor.hasNext()) {
-				doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find(Filters.in("groups", "admin"))) {
+			System.out.println(d);
 		}
 
 		System.out.println();
 
 		Pattern pattern = Pattern.compile("^D.*", Pattern.CASE_INSENSITIVE);
-		query = new BasicDBObject("name", pattern);
 
-		try (DBCursor cursor = collection.find(query)) {
-
-			BasicDBObject sort = new BasicDBObject("username", 1);
-			cursor.limit(1).skip(10).sort(sort);
-
-			while (cursor.hasNext()) {
-				doc = cursor.next();
-				System.out.println(doc);
-			}
+		for (Document d : collection.find(Filters.regex("name", pattern)).limit(1)
+				.skip(10).sort(Sorts.ascending("username"))) {
+			System.out.println(d);
 		}
-
-		mongo.close();
-
 	}
 
 }

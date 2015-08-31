@@ -1,11 +1,9 @@
 package ch.rasc.mongodb.author;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public interface TextImporter {
 
-	void doImport(String fileName);
-
-	void doImport(File file);
+	void doImport(Path file);
 
 }

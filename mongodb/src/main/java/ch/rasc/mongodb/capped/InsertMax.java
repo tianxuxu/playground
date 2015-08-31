@@ -1,60 +1,58 @@
 package ch.rasc.mongodb.capped;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.CommandResult;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.CreateCollectionOptions;
+import com.mongodb.client.model.Projections;
 
 public class InsertMax {
 	public static void main(String[] args) throws MongoException {
 
-		MongoClient mongo = new MongoClient("localhost");
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 
-		DBCollection collection;
-		if (db.collectionExists("log")) {
+		Set<String> collectionNames = new HashSet<>();
+		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+
+		if (collectionNames.contains("log")) {
 			db.getCollection("log").drop();
 		}
 
-		BasicDBObject createOptions = new BasicDBObject();
-		createOptions.append("capped", Boolean.TRUE);
-		createOptions.append("size", 1000);
-		createOptions.append("max", 3);
-		collection = db.createCollection("log", createOptions);
+		db.createCollection("log", new CreateCollectionOptions().capped(true)
+				.sizeInBytes(1000L).maxDocuments(3));
+		MongoCollection<Document> collection = db.getCollection("log");
 
 		for (int j = 0; j < 10; j++) {
-			BasicDBObject logMessage = new BasicDBObject();
+			Document logMessage = new Document();
 			logMessage.append("index", j);
 			logMessage.append("message", "User sr");
 			logMessage.append("loggedIn", new Date());
 			logMessage.append("loggedOut", new Date());
-			collection.insert(logMessage);
+			collection.insertOne(logMessage);
 		}
 
-		try (DBCursor cursor = collection.find()) {
-			while (cursor.hasNext()) {
-				DBObject obj = cursor.next();
-				System.out.println(obj.get("index"));
-			}
-		}
+		collection.find().projection(Projections.include("index"))
+				.forEach((Document d) -> System.out.println(d.get("index")));
 
-		CommandResult stats = collection.getStats();
-		System.out.println("Anzahl Dokumente: " + stats.get("count"));
-		System.out.println("Anzahl Bytes: " + stats.get("size"));
-		System.out
-				.println("Durchschnitt Bytes pro Dokument : " + stats.get("avgObjSize"));
-
-		// for (String key : stats.keySet()) {
-		// System.out.printf("%s = %s\n", key, stats.get(key));
-		// }
-
-		mongo.close();
+		Document cr = db.runCommand(new BsonDocument("collStats", new BsonString("log")));
+		System.out.println(cr);
+		System.out.println("Number of documents:   " + cr.get("count"));
+		System.out.println("Total size in bytes:   " + cr.get("size"));
+		System.out.println("Average size in bytes: " + cr.get("avgObjSize"));
 	}
 }

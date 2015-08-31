@@ -14,7 +14,7 @@ public class FindIp {
 
 			// long myIp = 16777216l * 188 + 65536l * 61 + 256l * 140l + 26;
 			long firstIp = 16777217; // first document
-			long lastIp = 3758095359l; // last document
+			long lastIp = 3758096129L; // last document
 			long testIp = 1275328930;
 
 			// first document

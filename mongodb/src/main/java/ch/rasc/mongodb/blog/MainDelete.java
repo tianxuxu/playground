@@ -1,41 +1,34 @@
 package ch.rasc.mongodb.blog;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.WriteResult;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
 
 public class MainDelete {
 	public static void main(String[] args) throws MongoException {
-		MongoClient mongo = new MongoClient("localhost");
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
-		// db.setWriteConcern(WriteConcern.SAFE);
-
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 		// db.dropDatabase();
 
-		DBCollection collection = db.getCollection("users");
+		MongoCollection<Document> collection = db.getCollection("users");
 		// collection.drop();
 
-		BasicDBObject deleteCriteria = new BasicDBObject();
-		deleteCriteria.append("enabled", Boolean.FALSE);
-		deleteCriteria.append("noOfLogins", 0);
-		System.out.println(deleteCriteria);
-		WriteResult wr = collection.remove(deleteCriteria);
-		System.out.println(wr);
+		DeleteResult dr = collection.deleteMany(
+				Filters.and(Filters.eq("enabled", false), Filters.eq("noOfLogins", 0)));
+		System.out.println(dr);
 
-		try (DBCursor cursor = collection.find()) {
-			while (cursor.hasNext()) {
-				DBObject dbo = cursor.next();
-				System.out.println(dbo);
-			}
+		for (Document d : collection.find()) {
+			System.out.println(d);
 		}
-
-		mongo.close();
-
 	}
 }

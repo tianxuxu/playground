@@ -1,6 +1,6 @@
 package ch.rasc.mongodb.author.morphia;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,12 +23,7 @@ public class MorphiaTextImporter implements TextImporter {
 	private TextExtractor extractor;
 
 	@Override
-	public void doImport(String fileName) {
-		doImport(new File(fileName));
-	}
-
-	@Override
-	public void doImport(File file) {
+	public void doImport(Path file) {
 		List<String> words = this.extractor.extractWords(file);
 
 		for (int i = 0; i < words.size() - 3; i++) {
@@ -46,28 +41,28 @@ public class MorphiaTextImporter implements TextImporter {
 			this.datastore.update(query, op, true);
 
 			// // update count in embedded document
-			// query = new BasicDBObject();
+			// query = new Document();
 			// query.append("word1", w1);
 			// query.append("word2", w2);
 			// query.append("word3.word", w3);
-			// update = new BasicDBObject("$inc", new
-			// BasicDBObject("word3.$.count", 1));
+			// update = new Document("$inc", new
+			// Document("word3.$.count", 1));
 			//
 			// WriteResult result = collection.update(query, update, false,
 			// false);
 			// if (result.getN() == 0) {
 			//
 			// // add embedded word3 document to the array
-			// query = new BasicDBObject();
+			// query = new Document();
 			// query.append("word1", w1);
 			// query.append("word2", w2);
 			//
-			// BasicDBObject word3 = new BasicDBObject();
+			// Document word3 = new Document();
 			// word3.append("word", w3);
 			// word3.append("count", 1);
 			//
-			// collection.update(query, new BasicDBObject("$push", new
-			// BasicDBObject("word3", word3)));
+			// collection.update(query, new Document("$push", new
+			// Document("word3", word3)));
 			// }
 
 		}

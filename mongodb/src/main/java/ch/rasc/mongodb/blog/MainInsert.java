@@ -1,65 +1,48 @@
 package ch.rasc.mongodb.blog;
 
+import java.util.Arrays;
 import java.util.Date;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.WriteConcern;
-import com.mongodb.WriteResult;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class MainInsert {
 
 	public static void main(String[] args) throws MongoException {
-		MongoClient mongo = new MongoClient("localhost");
-		// Mongo mongo = new Mongo("localhost", 10000);
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo);
+		}
+	}
 
-		DB db = mongo.getDB("testdb");
-		db.setWriteConcern(WriteConcern.SAFE);
+	private static void doSomething(MongoClient mongo) {
+		MongoDatabase db = mongo.getDatabase("testdb");
 
-		DBCollection collection = db.getCollection("users");
-		collection.setWriteConcern(WriteConcern.SAFE);
+		MongoCollection<Document> collection = db.getCollection("users");
 
-		// Map<String,Object> userm = new HashMap<String,Object>();
-		// userm.put("username", "johnd");
-		// DBObject user = new BasicDBObject(userm);
-
-		BasicDBObject user = new BasicDBObject("username", "johnd");
+		Document user = new Document("username", "johnd");
 		user.append("_id", 1);
 		user.append("firstName", "John");
 		user.append("name", "Doe");
 		user.append("enabled", Boolean.FALSE);
 		user.append("noOfLogins", 0);
 		user.append("lastLogin", new Date());
-		user.append("groups", new String[] { "admin", "user" });
+		user.append("groups", Arrays.asList("admin", "user"));
 
 		System.out.println(user);
-		WriteResult wr;
-		try {
-			wr = collection.insert(user);
-			System.out.println(wr.getN());
-		}
-		catch (MongoException e) {
-			System.out.println(e.getMessage());
-		}
+		collection.insertOne(user);
 
-		// List<DBObject> users = new ArrayList<DBObject>();
-		// users.add(user);
-		// collection.insert(users);
-
-		user = new BasicDBObject("username", "francol");
+		user = new Document("username", "francol");
 		user.append("firstName", "Franco");
 		user.append("name", "Lawrence");
 		user.append("enabled", Boolean.TRUE);
 		user.append("noOfLogins", 0);
 		user.append("lastLogin", new Date());
-		user.append("groups", new String[] { "user" });
-		collection.insert(user);
-
-		mongo.close();
-
+		user.append("groups", Arrays.asList("user"));
+		collection.insertOne(user);
 	}
 
 }

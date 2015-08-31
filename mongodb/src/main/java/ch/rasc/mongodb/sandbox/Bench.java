@@ -1,45 +1,50 @@
 package ch.rasc.mongodb.sandbox;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.CommandResult;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import org.bson.Document;
+import org.springframework.util.StopWatch;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class Bench {
 
-	public static void main(String[] args) throws MongoException, IOException {
-		Bench.simpleFile();
+	public static void main(String[] args) throws MongoException {
+		try (MongoClient mongo = new MongoClient("localhost")) {
+			doSomething(mongo, WriteConcern.ACKNOWLEDGED);
+			doSomething(mongo, WriteConcern.UNACKNOWLEDGED);
+			doSomething(mongo, WriteConcern.FSYNC_SAFE);
+			doSomething(mongo, WriteConcern.JOURNALED);
+		}
 	}
 
-	private static void simpleFile() throws MongoException {
-		MongoClient mongo = new MongoClient("localhost");
+	private static void doSomething(MongoClient mongo, WriteConcern writeConcern) {
+		MongoDatabase db = mongo.getDatabase("testdb");
+		db.getCollection("files").drop();
+		MongoCollection<Document> collection = db.getCollection("files")
+				.withWriteConcern(writeConcern);
+		collection.insertOne(new Document("myKey", "0"));
 
-		DB db = mongo.getDB("testdb");
-		DBCollection collection = db.getCollection("files");
+		StopWatch watch = new StopWatch();
+		watch.start();
 
-		long start = System.currentTimeMillis();
-		for (int i = 0; i < 100000; i++) {
-			BasicDBObject dbObj = new BasicDBObject("myKey", "aValue");
-			collection.insert(dbObj);
+		for (int o = 0; o < 1_000; o++) {
+			List<Document> docs = new ArrayList<>();
+			for (int i = 0; i < 100; i++) {
+				docs.add(new Document("myKey", "aValue:" + o + "_" + i));
+			}
+			collection.insertMany(docs);
 		}
 
-		BasicDBObject sync = new BasicDBObject("fsync", 1);
-		CommandResult cr = mongo.getDB("admin").command(sync);
-		System.out.println(cr);
-		sync = new BasicDBObject("fsync", 1).append("async", Boolean.TRUE);
-		cr = mongo.getDB("admin").command(sync);
-		System.out.println(cr);
-		Double success = (Double) cr.get("ok");
-		System.out.println(success);
-
-		long duration = System.currentTimeMillis() - start;
-		System.out.println(duration + " ms");
-
-		mongo.close();
+		watch.stop();
+		System.out.print(writeConcern);
+		System.out.print(": ");
+		System.out.println(watch.getTotalTimeMillis());
 	}
 
 }
