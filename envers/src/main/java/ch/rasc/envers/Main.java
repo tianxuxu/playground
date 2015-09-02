@@ -20,10 +20,11 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.hibernate.service.ServiceRegistry;
 
-import com.mysema.query.jpa.hibernate.HibernateQuery;
+import com.querydsl.jpa.hibernate.HibernateQueryFactory;
 
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Configuration configuration = new Configuration();
 		configuration.setProperty(AvailableSettings.DRIVER, "org.h2.Driver");
@@ -156,8 +157,8 @@ public class Main {
 	}
 
 	private static Firma updateFirma(Session session) {
-		Firma firma = new HibernateQuery(session).from(QFirma.firma)
-				.where(QFirma.firma.name.eq("Company A")).singleResult(QFirma.firma);
+		Firma firma = new HibernateQueryFactory(session).selectFrom(QFirma.firma)
+				.where(QFirma.firma.name.eq("Company A")).fetchFirst();
 		firma.setStrasse("Neue Strasse");
 		return firma;
 	}
@@ -173,11 +174,11 @@ public class Main {
 	}
 
 	private static void updateMitarbeiter(Session session) {
-		Mitarbeiter mitarbeiter = new HibernateQuery(session)
-				.from(QMitarbeiter.mitarbeiter)
+		Mitarbeiter mitarbeiter = new HibernateQueryFactory(session)
+				.selectFrom(QMitarbeiter.mitarbeiter)
 				.where(QMitarbeiter.mitarbeiter.vorname.eq("Felix")
 						.and(QMitarbeiter.mitarbeiter.name.eq("Muster")))
-				.singleResult(QMitarbeiter.mitarbeiter);
+				.fetchFirst();
 
 		mitarbeiter.setStrasse("Hauptstrasse 10");
 		mitarbeiter.setOrt("Biel");
@@ -185,11 +186,11 @@ public class Main {
 
 	private static void deleteMitarbeiter(Session session) {
 
-		Mitarbeiter mitarbeiter = new HibernateQuery(session)
-				.from(QMitarbeiter.mitarbeiter)
+		Mitarbeiter mitarbeiter = new HibernateQueryFactory(session)
+				.selectFrom(QMitarbeiter.mitarbeiter)
 				.where(QMitarbeiter.mitarbeiter.vorname.eq("Jolanda")
 						.and(QMitarbeiter.mitarbeiter.name.eq("Meier")))
-				.singleResult(QMitarbeiter.mitarbeiter);
+				.fetchFirst();
 
 		mitarbeiter.getFirma().getMitarbeiter().remove(mitarbeiter);
 		session.delete(mitarbeiter);

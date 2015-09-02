@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import ch.rasc.jpa.model.Address;
 import ch.rasc.jpa.model.Employee;
@@ -26,9 +26,9 @@ public class EmployeeService {
 		Address a = this.entityManager.find(Address.class, 1L);
 
 		System.out.println("contains query");
-		List<Employee> employees = new JPAQuery(this.entityManager)
-				.from(QEmployee.employee).where(QEmployee.employee.address.contains(a))
-				.list(QEmployee.employee);
+		List<Employee> employees = new JPAQueryFactory(this.entityManager)
+				.selectFrom(QEmployee.employee)
+				.where(QEmployee.employee.address.contains(a)).fetch();
 		for (Employee employee : employees) {
 			System.out.println(employee);
 		}
