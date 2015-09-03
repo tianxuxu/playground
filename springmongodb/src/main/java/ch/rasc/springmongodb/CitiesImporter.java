@@ -1,8 +1,20 @@
 package ch.rasc.springmongodb;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.geo.Point;
@@ -11,14 +23,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.util.StringUtils;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-import com.google.common.io.LineProcessor;
 
 import ch.rasc.springmongodb.domain.City;
 
 public class CitiesImporter {
 
-	public static void main(String[] args) throws IOException, URISyntaxException {
+	public static void main(String[] args) throws IOException {
 
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()) {
 			ctx.register(AppConfig.class);
@@ -34,12 +44,25 @@ public class CitiesImporter {
 				System.out.println("NO DROP");
 			}
 
-			File f = new File(
-					CitiesImporter.class.getResource("/worldcitiespop.txt").toURI());
+			Path path = Paths.get("./worldcitiespop.txt.gz");
+			if (!java.nio.file.Files.exists(path)) {
+				URL website = new URL(
+						"http://www.maxmind.com/download/worldcities/worldcitiespop.txt.gz");
+				try (ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+						FileOutputStream fos = new FileOutputStream(path.toFile())) {
+					fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+				}
+			}
 
-			Files.readLines(f, Charsets.ISO_8859_1, new LineProcessor<String>() {
-				@Override
-				public boolean processLine(String line) throws IOException {
+			try (InputStream fileStream = new FileInputStream(path.toString());
+					InputStream gzipStream = new GZIPInputStream(fileStream);
+					Reader decoder = new InputStreamReader(gzipStream,
+							Charsets.ISO_8859_1);
+					BufferedReader buffered = new BufferedReader(decoder)) {
+
+				String line = null;
+				List<City> cities = new ArrayList<>();
+				while ((line = buffered.readLine()) != null) {
 					if (!line.startsWith("Country,City")) {
 						String[] splittedItems = StringUtils
 								.commaDelimitedListToStringArray(line);
@@ -70,18 +93,22 @@ public class CitiesImporter {
 							newCity.setLocation(new Point(Double.parseDouble(latitudeStr),
 									Double.parseDouble(longitudeStr)));
 
-							mongoOps.save(newCity);
+							cities.add(newCity);
+
+							if (cities.size() > 500) {
+								mongoOps.insert(cities, City.class);
+								cities.clear();
+							}
 						}
 					}
-
-					return true;
 				}
 
-				@Override
-				public String getResult() {
-					return null;
+				if (!cities.isEmpty()) {
+					mongoOps.insert(cities, City.class);
 				}
-			});
+
+			}
+
 		}
 
 	}

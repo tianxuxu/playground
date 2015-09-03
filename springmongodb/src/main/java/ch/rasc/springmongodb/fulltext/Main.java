@@ -53,7 +53,7 @@ public class Main extends AbstractMongoConfiguration {
 		MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
 		// PostRepository postRepo = ctx.getBean(PostRepository.class);
 
-		if (mongoTemplate.count(new Query(), Post.class) == 0) {
+		if (mongoTemplate.count(null, Post.class) == 0) {
 			readDataIntoMongoDb(mongoTemplate);
 		}
 
@@ -86,8 +86,6 @@ public class Main extends AbstractMongoConfiguration {
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			}
 		}
-
-		// Path path = Paths.get("./stackoverflow.com-Posts.7z");
 
 		try (SevenZFile sevenZFile = new SevenZFile(path.toFile())) {
 			SevenZArchiveEntry entry = null;
@@ -188,6 +186,10 @@ public class Main extends AbstractMongoConfiguration {
 				}
 			}
 
+		}
+
+		if (!posts.isEmpty()) {
+			mongoTemplate.insert(posts, Post.class);
 		}
 
 	}

@@ -29,7 +29,7 @@ public class QueryCities {
 
 			Point location = new Point(46.933333, 7.566667);
 			NearQuery query = NearQuery.near(location)
-					.maxDistance(new Distance(3, Metrics.KILOMETERS));
+					.maxDistance(new Distance(5, Metrics.KILOMETERS));
 
 			GeoResults<City> geoResults = mongoOps.geoNear(query, City.class);
 			for (GeoResult<City> geoResult : geoResults) {
@@ -72,11 +72,6 @@ public class QueryCities {
 				System.out.println(c.getCityName());
 			}
 
-			// GridFS gridFs = new GridFS(mongoOps.getDb(), "myBucket");
-			// GridFSInputFile input = gridFs.createFile(new
-			// File("D:/_download/spring-social-1.0.0.RELEASE.zip"));
-			// input.setFilename("theFile");
-			// input.save();
 		}
 	}
 
