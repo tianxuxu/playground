@@ -14,8 +14,8 @@
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.3</logback.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
-		<hibernatevalidator.version>5.2.1.Final</hibernatevalidator.version>
-		<querydsl.version>4.0.4</querydsl.version>
+		<hibernatevalidator.version>5.2.2.Final</hibernatevalidator.version>
+		<querydsl.version>4.0.5</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -127,7 +127,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.188</version>
+			<version>1.4.189</version>
 		</dependency>
 		
 		<dependency>

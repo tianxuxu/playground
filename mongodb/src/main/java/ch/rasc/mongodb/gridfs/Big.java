@@ -28,41 +28,41 @@ public class Big {
 		MongoDatabase db = mongo.getDatabase("testdb");
 
 		GridFSBucket gridFSBucket = GridFSBuckets.create(db);
-		
 
-//		byte[] data = "Data to upload into GridFS".getBytes(StandardCharsets.UTF_8);
-//		GridFSUploadStream uploadStream = gridFSBucket.openUploadStream("sampleData", options);
-//		uploadStream.write(data);
-//		uploadStream.close();
-//		System.out.println("The fileId of the uploaded file is: " + uploadStream.getFileId().toHexString());
-		
-		
+		// byte[] data = "Data to upload into GridFS".getBytes(StandardCharsets.UTF_8);
+		// GridFSUploadStream uploadStream = gridFSBucket.openUploadStream("sampleData",
+		// options);
+		// uploadStream.write(data);
+		// uploadStream.close();
+		// System.out.println("The fileId of the uploaded file is: " +
+		// uploadStream.getFileId().toHexString());
+
 		Path currentDir = Paths.get(".");
-		
-		Files.list(currentDir).filter(Files::isRegularFile).forEach(p->{
-			
+
+		Files.list(currentDir).filter(Files::isRegularFile).forEach(p -> {
+
 			try {
 				String contentType = Files.probeContentType(p);
-				
+
 				try (InputStream is = Files.newInputStream(p)) {
 
 					GridFSUploadOptions options = new GridFSUploadOptions()
-					                                    .chunkSizeBytes(1024)
-					                                    .metadata(new Document("contentType", contentType));
-	
-					ObjectId fileId = gridFSBucket.uploadFromStream(p.getFileName().toString(), is, options);
+							.chunkSizeBytes(1024)
+							.metadata(new Document("contentType", contentType));
+
+					ObjectId fileId = gridFSBucket
+							.uploadFromStream(p.getFileName().toString(), is, options);
 					System.out.println(p);
 					System.out.println(fileId);
 					System.out.println();
 				}
-				
+
 			}
-			catch (Exception e) {				
+			catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		});
-		
 
 	}
 

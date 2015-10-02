@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.6.1</version>
+			<version>2.6.2</version>
 		</dependency>
 
 		<dependency>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
-			<version>4.0.1.201506240215-r</version>
+			<version>4.1.0.201509280440-r</version>
 		</dependency>
 	</dependencies>
 

@@ -18,13 +18,9 @@ public class Serialize {
 		User user2 = new User("Ben", 7, "red");
 
 		// Construct via builder
-		User user3 = User.newBuilder()
-		             .setName("Charlie")
-		             .setFavoriteColor("blue")
-		             .setFavoriteNumber(null)
-		             .build();
-		
-		
+		User user3 = User.newBuilder().setName("Charlie").setFavoriteColor("blue")
+				.setFavoriteNumber(null).build();
+
 		// Serialize user1, user2 and user3 to disk
 		DatumWriter<User> userDatumWriter = new SpecificDatumWriter<>(User.class);
 		DataFileWriter<User> dataFileWriter = new DataFileWriter<>(userDatumWriter);

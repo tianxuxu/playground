@@ -20,6 +20,8 @@ public class TrackController {
 			throws IOException, InterruptedException {
 
 		response.setContentType("text/event-stream");
+
+		@SuppressWarnings("resource")
 		ServletOutputStream os = response.getOutputStream();
 
 		for (int i = 0; i < 10; i++) {

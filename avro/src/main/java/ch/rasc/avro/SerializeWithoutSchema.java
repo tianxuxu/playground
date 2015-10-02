@@ -23,8 +23,8 @@ public class SerializeWithoutSchema {
 		User user3 = User.newBuilder().setName("Charlie").setFavoriteColor("blue")
 				.setFavoriteNumber(null).build();
 
-		//write only date, no schema
-		
+		// write only date, no schema
+
 		File f = new File("users_without_schema.avro");
 		FileOutputStream fos = new FileOutputStream(f);
 		BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(fos, null);

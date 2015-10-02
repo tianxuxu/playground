@@ -14,8 +14,8 @@ public class SerializeWithoutCodeGen {
 
 	public static void main(String[] args) throws IOException {
 		Schema schema = new Schema.Parser().parse(new File("./src/main/avro/user.avsc"));
-        
-		//Using this schema, let's create some users.
+
+		// Using this schema, let's create some users.
 
 		GenericRecord user1 = new GenericData.Record(schema);
 		user1.put("name", "Alyssa");
