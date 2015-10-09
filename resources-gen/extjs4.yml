@@ -1,0 +1,26 @@
+sourceDir: D:\js\ext-4.2.5.1747
+version: 4.2.5.1747
+groupId: resources
+baseArtifactId: extjs
+destDir: ./res
+
+artifacts:
+  - artifactId: extjs
+    mappings:
+      - from: ext-all.js
+        to: ext-all.js
+
+      - from: locale
+        to: locale
+        parameter: locale
+
+  - artifactId: extjs-debug
+    mappings:      
+      - from: ext-all-debug-w-comments.js
+        to: ext-all-debug-w-comments.js
+      
+      - from: ext-all-debug.js
+        to: ext-all-debug.js
+
+      - from: ext-all-dev.js
+        to: ext-all-dev.js
