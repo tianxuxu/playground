@@ -1,5 +1,7 @@
 package ch.rasc.nosql.neo4j;
 
+import java.nio.file.Paths;
+
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
@@ -10,7 +12,7 @@ public class Simple {
 	public static void main(String[] args) {
 
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
-				.newEmbeddedDatabase("simple");
+				.newEmbeddedDatabase(Paths.get("simple").toFile());
 		try (Transaction tx = graphDb.beginTx()) {
 
 			Node john = graphDb.createNode();

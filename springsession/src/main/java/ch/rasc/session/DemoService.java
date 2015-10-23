@@ -34,7 +34,7 @@ public class DemoService {
 	}
 
 	@RequestMapping(value = "/bigger", method = RequestMethod.GET)
-	public Map<String, Object> bigger(HttpServletResponse response, HttpSession session) {
+	public Map<String, Object> bigger(HttpSession session) {
 		session.setAttribute("user", 1);
 		// response.setBufferSize(9000);
 		return Collections.singletonMap("large",

@@ -8,4 +8,5 @@ import ch.rasc.reactorsandbox.quickstart.spring.domain.Client;
  * @author Jon Brisbin
  */
 public interface ClientRepository extends CrudRepository<Client, Long> {
+	//nothing here
 }

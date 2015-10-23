@@ -14,7 +14,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.2.1.RELEASE</version>
+				<version>4.2.2.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -131,7 +131,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.189</version>
+			<version>1.4.190</version>
 		</dependency>
 
 	</dependencies>

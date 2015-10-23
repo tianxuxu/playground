@@ -1,5 +1,7 @@
 package ch.rasc.nosql.neo4j;
 
+import java.nio.file.Paths;
+
 import org.neo4j.graphalgo.GraphAlgoFactory;
 import org.neo4j.graphalgo.PathFinder;
 import org.neo4j.graphdb.Direction;
@@ -18,47 +20,48 @@ public class Find {
 
 	public static void main(String[] args) {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
-				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
-		Transaction tx = graphDb.beginTx();
-		Index<Node> index = graphDb.index().forNodes("myIndex");
+				.newEmbeddedDatabase(Paths.get("e:\\temp\\neo4j\\moviedb").toFile());
+		try (Transaction tx = graphDb.beginTx()) {
+			Index<Node> index = graphDb.index().forNodes("myIndex");
 
-		Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();
+			Node kevinBaconNode = index.get("actor", "Bacon, Kevin (I)").getSingle();
 
-		String actorName = "Craig, Daniel (I)";
+			String actorName = "Craig, Daniel (I)";
 
-		// String actorName = "McAvoy, James";
-		Node actorNode = index.get("actor", actorName).getSingle();
+			// String actorName = "McAvoy, James";
+			Node actorNode = index.get("actor", actorName).getSingle();
 
-		PathExpander<RelationshipType> expander = StandardExpander
-				.create(RelTypes.ACTS_IN, Direction.BOTH);
-		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
+			PathExpander<RelationshipType> expander = StandardExpander
+					.create(RelTypes.ACTS_IN, Direction.BOTH);
+			PathFinder<Path> finder = GraphAlgoFactory.shortestPath(expander, 10);
 
-		for (Path path : finder.findAllPaths(actorNode, kevinBaconNode)) {
+			for (Path path : finder.findAllPaths(actorNode, kevinBaconNode)) {
 
-			System.out.printf("%s's Bacon number is %d\n", actorName, path.length() / 2);
+				System.out.printf("%s's Bacon number is %d\n", actorName,
+						path.length() / 2);
 
-			String movieTitle = null;
-			String prevActor = null;
-			for (Relationship rel : path.relationships()) {
-				Node start = rel.getStartNode();
-				Node end = rel.getEndNode();
+				String movieTitle = null;
+				String prevActor = null;
+				for (Relationship rel : path.relationships()) {
+					Node start = rel.getStartNode();
+					Node end = rel.getEndNode();
 
-				if (movieTitle == null) {
-					movieTitle = (String) end.getProperty("title");
-					prevActor = (String) start.getProperty("actor");
+					if (movieTitle == null) {
+						movieTitle = (String) end.getProperty("title");
+						prevActor = (String) start.getProperty("actor");
+					}
+					else {
+						System.out.printf("%s and %s appeared in %s.\n", prevActor,
+								start.getProperty("actor"), movieTitle);
+						movieTitle = null;
+						prevActor = null;
+					}
+
 				}
-				else {
-					System.out.printf("%s and %s appeared in %s.\n", prevActor,
-							start.getProperty("actor"), movieTitle);
-					movieTitle = null;
-					prevActor = null;
-				}
-
+				System.out.println("============================");
 			}
-			System.out.println("============================");
+			tx.success();
 		}
-		tx.success();
-		tx.close();
 		graphDb.shutdown();
 
 	}

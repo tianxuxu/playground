@@ -35,7 +35,7 @@ public class Main {
 				System.out.println("Waiting 70 seconds");
 				TimeUnit.SECONDS.sleep(70);
 			}
-			catch (@SuppressWarnings("unused") InterruptedException e) {
+			catch (InterruptedException e) {
 				// do nothing
 			}
 			System.out.println("3rd call");

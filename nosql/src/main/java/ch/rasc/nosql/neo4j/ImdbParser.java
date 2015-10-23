@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.zip.GZIPInputStream;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -37,7 +38,7 @@ public class ImdbParser {
 
 	public static void main(String[] args) throws IOException {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory()
-				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
+				.newEmbeddedDatabase(Paths.get("e:\\temp\\neo4j\\moviedb").toFile());
 
 		long start = System.currentTimeMillis();
 
@@ -52,7 +53,7 @@ public class ImdbParser {
 		System.gc();
 
 		graphDb = new GraphDatabaseFactory()
-				.newEmbeddedDatabase("e:\\temp\\neo4j\\moviedb");
+				.newEmbeddedDatabase(Paths.get("e:\\temp\\neo4j\\moviedb").toFile());
 		try (Transaction tx = graphDb.beginTx()) {
 			index = graphDb.index().forNodes("myIndex");
 			tx.success();
