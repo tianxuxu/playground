@@ -21,6 +21,8 @@ class Employee {
 
 	private String name;
 
+	private String firstname;
+	
 	@Reference
 	private Employee manager;
 
@@ -77,6 +79,14 @@ class Employee {
 
 	public void setSalary(Double salary) {
 		this.salary = salary;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	@Override

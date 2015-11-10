@@ -20,6 +20,7 @@ public class Insert {
 			Employee elmer = new Employee("Elmer Fudd", 50000.0);
 
 			Employee daffy = new Employee("Daffy Duck", 40000.0);
+			daffy.setFirstname("ralph");
 			datastore.save(daffy);
 
 			Employee pepe = new Employee("Pepé Le Pew", 25000.0);

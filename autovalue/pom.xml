@@ -29,26 +29,6 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>com.mysema.maven</groupId>
-				<artifactId>apt-maven-plugin</artifactId>
-				<version>1.1.2</version>
-				<executions>
-					<execution>
-						<id>autovalue</id>
-						<goals>
-							<goal>process</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.basedir}/target/generated-sources/java</outputDirectory>
-							<processor>com.google.auto.value.processor.AutoValueProcessor</processor>
-						</configuration>
-					</execution>
-				</executions>
-
-			</plugin>
-
 		</plugins>
 	</build>
 

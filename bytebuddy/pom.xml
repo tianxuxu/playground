@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
-			<version>0.7-rc5</version>
+			<version>0.7-rc6</version>
 		</dependency>
 	</dependencies>
 
