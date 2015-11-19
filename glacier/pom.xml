@@ -6,7 +6,7 @@
 	<version>0.0.1</version>
 
 	<prerequisites>
-		<maven>3.0.0</maven>
+		<maven>3.3.9</maven>
 	</prerequisites>	
 	
 	<properties>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.10.32</version>
+			<version>1.10.34</version>
 		</dependency>
 		
 		<dependency>

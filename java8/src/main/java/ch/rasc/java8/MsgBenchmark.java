@@ -39,28 +39,28 @@ public class MsgBenchmark {
 	private final static Msg m70 = new Msg70();
 	private final static Msg m1 = new Msg1();
 
-	@State(Scope.Benchmark)
+	//@State(Scope.Benchmark)
 	public static class BenchmarkState {
 		public Msg m6 = new Msg6();
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean instanceOfOne(BenchmarkState bs) {
 		return bs.m6 instanceof Msg6;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean enumOne(BenchmarkState bs) {
 		return bs.m6.getType() == MsgType.SIX;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean instanceOfTest70() {
 
 		if (m70 instanceof Msg1) {
@@ -136,9 +136,9 @@ public class MsgBenchmark {
 		return false;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean instanceOfTest1() {
 
 		if (m1 instanceof Msg1) {
@@ -214,9 +214,9 @@ public class MsgBenchmark {
 		return false;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean enumTest1() {
 		MsgType type = m1.getType();
 		if (type == MsgType.ONE) {
@@ -292,9 +292,9 @@ public class MsgBenchmark {
 		return false;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean enumTest70() {
 		MsgType type = m70.getType();
 		if (type == MsgType.ONE) {
@@ -370,9 +370,9 @@ public class MsgBenchmark {
 		return false;
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean switchEnum70() {
 		switch (m70.getType()) {
 		case ONE:
@@ -428,9 +428,9 @@ public class MsgBenchmark {
 		}
 	}
 
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MICROSECONDS)
+	//@Benchmark
+	//@BenchmarkMode(Mode.Throughput)
+	//@OutputTimeUnit(TimeUnit.MICROSECONDS)
 	public boolean switchEnum1() {
 		switch (m1.getType()) {
 		case ONE:

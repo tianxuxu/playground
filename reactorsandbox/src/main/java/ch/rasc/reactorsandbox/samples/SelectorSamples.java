@@ -28,7 +28,7 @@ public class SelectorSamples {
 
 		EventBus r = EventBus.config().env(get()).synchronousDispatcher().get();
 
-		// Simple topic selection
+		// SimpleBus topic selection
 		r.on($("/some/topic"), ev -> LOG.info("Got event '{}'", ev.getData()));
 
 		// Topic selection based on regex

@@ -6,7 +6,7 @@
 	<version>0.0.1</version>
 
 	<prerequisites>
-		<maven>3.0.0</maven>
+		<maven>3.3.9</maven>
 	</prerequisites>	
 	
 	<dependencies>
@@ -21,13 +21,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.0.3.Final</version>
+			<version>5.0.4.Final</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
-			<version>5.0.3.Final</version>
+			<version>5.0.4.Final</version>
 		</dependency>
 
 		<dependency>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
+			<version>1.7.13</version>
 		</dependency>
 
 		<dependency>
