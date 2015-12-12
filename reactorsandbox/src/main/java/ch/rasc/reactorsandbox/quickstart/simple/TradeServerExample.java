@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.rasc.reactorsandbox.quickstart.core.Trade;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
-import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 
@@ -19,23 +18,22 @@ import reactor.bus.EventBus;
  */
 public class TradeServerExample {
 
-	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
-	private static int totalTrades = 10000000;
+	private static final Logger LOG         = LoggerFactory.getLogger(TradeServerExample.class);
+	private static       int    totalTrades = 10000000;
 
 	private static CountDownLatch latch;
-	private static long startTime;
+	private static long           startTime;
 
 	public static void main(String[] args) throws InterruptedException {
-		Environment env = new Environment();
 		final TradeServer server = new TradeServer();
 
 		// Use a Reactor to dispatch events using the default Dispatcher
-		EventBus bus = EventBus.create(env);
+		EventBus bus = EventBus.create();
 
 		String topic = "trade.execute";
 
 		// For each Trade event, execute that on the server
-		bus.<Event<Trade>> on($(topic), ev -> {
+		bus.<Event<Trade>>on($(topic), ev -> {
 			server.execute(ev.getData());
 
 			// Since we're async, for this test, use a latch to tell when we're done

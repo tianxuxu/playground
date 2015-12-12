@@ -1,11 +1,8 @@
 package ch.rasc.reactorsandbox.samples;
 
-import static reactor.Environment.get;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.Environment;
 import reactor.rx.Promise;
 import reactor.rx.broadcast.Broadcaster;
 
@@ -17,10 +14,6 @@ public class StreamSamples {
 
 	static final Logger LOG = LoggerFactory.getLogger(StreamSamples.class);
 
-	static {
-		Environment.initializeIfEmpty().assignErrorJournal();
-	}
-
 	public static void main(String... args) throws InterruptedException {
 
 		simpleStream();
@@ -29,12 +22,11 @@ public class StreamSamples {
 
 		filterValues();
 
-		get().shutdown();
 	}
 
 	private static void simpleStream() throws InterruptedException {
 		// A Stream is a data publisher
-		Broadcaster<String> stream = Broadcaster.create(get());
+		Broadcaster<String> stream = Broadcaster.create();
 
 		// Log values passing through the Stream and capture the first coming signal
 		Promise<String> promise = stream.observe(s -> LOG.info("Consumed String {}", s))
@@ -48,7 +40,7 @@ public class StreamSamples {
 
 	private static void transformValues() throws InterruptedException {
 		// A Stream is a data publisher
-		Broadcaster<String> stream = Broadcaster.create(get());
+		Broadcaster<String> stream = Broadcaster.create();
 
 		// Transform values passing through the Stream, observe and capture the result
 		// once.
@@ -63,7 +55,7 @@ public class StreamSamples {
 
 	private static void filterValues() throws InterruptedException {
 		// A Stream is a data publisher
-		Broadcaster<String> stream = Broadcaster.create(get());
+		Broadcaster<String> stream = Broadcaster.create();
 
 		// Filter values passing through the Stream, observe and capture the result once.
 		Promise<String> promise = stream.filter(s -> s.startsWith("Hello"))

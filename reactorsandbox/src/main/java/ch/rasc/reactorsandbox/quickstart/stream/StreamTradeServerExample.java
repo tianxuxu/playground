@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.rasc.reactorsandbox.quickstart.core.Trade;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
-import reactor.Environment;
 import reactor.rx.broadcast.Broadcaster;
 
 /**
@@ -17,24 +16,21 @@ import reactor.rx.broadcast.Broadcaster;
  */
 public class StreamTradeServerExample {
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(StreamTradeServerExample.class);
-	private static int totalTrades = 10000000;
+	private static final Logger LOG         = LoggerFactory.getLogger(StreamTradeServerExample.class);
+	private static       int    totalTrades = 10000000;
 
 	private static long startTime;
 
 	public static void main(String[] args) throws InterruptedException {
-		Environment.initialize();
-
 		final TradeServer server = new TradeServer();
 		final CountDownLatch latch = new CountDownLatch(totalTrades);
 
 		// Rather than handling Trades as events, each Trade is accessible via Stream.
-		Broadcaster<Trade> trades = Broadcaster.create(Environment.get());
+		Broadcaster<Trade> trades = Broadcaster.create();
 
-		// We compose an action to turn a Trade into an Order by calling
-		// server.execute(Trade).
-		trades.map(server::execute).consume(o -> latch.countDown());
+		// We compose an action to turn a Trade into an Order by calling server.execute(Trade).
+		trades.map(server::execute)
+		      .consume(o -> latch.countDown());
 
 		// Start a throughput timer.
 		startTimer();

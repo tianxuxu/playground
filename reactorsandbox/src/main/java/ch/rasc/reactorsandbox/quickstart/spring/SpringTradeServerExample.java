@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 
 import ch.rasc.reactorsandbox.quickstart.core.Trade;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
-import reactor.Environment;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 import reactor.spring.context.config.EnableReactor;
@@ -32,9 +31,9 @@ public class SpringTradeServerExample {
 	}
 
 	@Bean
-	public EventBus reactor(Environment env, TradeServer tradeServer) {
+	public EventBus reactor(TradeServer tradeServer) {
 		Logger log = LoggerFactory.getLogger("trade.server");
-		EventBus ev = EventBus.create(env);
+		EventBus ev = EventBus.create();
 
 		// Wire an event handler to execute trades
 		ev.on($("trade.execute"), (Event<Trade> e) -> {

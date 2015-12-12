@@ -2,7 +2,7 @@ package ch.rasc.reactorsandbox.samples;
 
 import static reactor.bus.selector.Selectors.$;
 
-import reactor.Environment;
+import reactor.Processors;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 
@@ -13,8 +13,7 @@ import reactor.bus.EventBus;
 public class EventBusSamples {
 
 	public static void main(String... args) {
-		Environment env = new Environment();
-		EventBus r = EventBus.config().env(env).dispatcher(Environment.SHARED).get();
+		EventBus r = EventBus.config().processor(Processors.topic()).get();
 
 		// Subscribe to topic "test"
 		r.<Event<String>> on($("test"), ev -> System.out.println("hi " + ev.getData()));
@@ -28,7 +27,7 @@ public class EventBusSamples {
 		// Notify topic "test2" and reply to topic "test"
 		r.send("test2", Event.wrap("test2").setReplyTo("test"));
 
-		env.shutdown();
+		r.getProcessor().onComplete();
 	}
 
 }

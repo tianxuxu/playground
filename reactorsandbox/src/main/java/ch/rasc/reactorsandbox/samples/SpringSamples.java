@@ -1,7 +1,5 @@
 package ch.rasc.reactorsandbox.samples;
 
-import static reactor.Environment.get;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
-import reactor.Environment;
+import reactor.Processors;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 import reactor.spring.context.annotation.Consumer;
@@ -22,22 +20,20 @@ import reactor.spring.context.config.EnableReactor;
 
 /**
  * @author Jon Brisbin
+ * @author Stephane Maldini
  */
 @EnableAutoConfiguration
 public class SpringSamples implements CommandLineRunner {
 
-	static {
-		Environment.initializeIfEmpty().assignErrorJournal();
-	}
-
 	@Autowired
 	private TestService service;
+
+	private EventBus eventBus;
 
 	@Override
 	public void run(String... args) throws Exception {
 		this.service.test();
-
-		get().shutdown();
+		this.eventBus.getProcessor().onComplete();
 	}
 
 	public static void main(String... args) {
@@ -51,7 +47,7 @@ public class SpringSamples implements CommandLineRunner {
 
 		@Bean
 		public EventBus eventBus() {
-			return EventBus.config().env(get()).dispatcher(Environment.SHARED).get();
+			return EventBus.config().processor(Processors.topic()).get();
 		}
 
 		@Bean

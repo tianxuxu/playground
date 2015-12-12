@@ -5,9 +5,9 @@ package ch.rasc.reactorsandbox.quickstart.core;
  */
 public class Order {
 
-	private final Long id;
+	private final Long  id;
 	private Trade trade;
-	private Long timestamp;
+	private Long  timestamp;
 
 	public Order(Long id) {
 		this.id = id;
@@ -37,8 +37,11 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order{" + "id=" + this.id + ", trade=" + this.trade + ", timestamp="
-				+ this.timestamp + '}';
+		return "Order{" +
+				"id=" + this.id +
+				", trade=" + this.trade +
+				", timestamp=" + this.timestamp +
+				'}';
 	}
 
 }

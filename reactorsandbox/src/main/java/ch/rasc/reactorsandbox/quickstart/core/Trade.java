@@ -5,11 +5,11 @@ package ch.rasc.reactorsandbox.quickstart.core;
  */
 public class Trade {
 
-	private final Long id;
-	private String symbol;
-	private Float price;
+	private final Long    id;
+	private String  symbol;
+	private Float   price;
 	private Integer quantity;
-	private Type type;
+	private Type    type;
 
 	public Trade(Long id) {
 		this.id = id;
@@ -57,9 +57,13 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "Trade{" + "id=" + this.id + ", symbol='" + this.symbol + '\'' + ", price="
-				+ this.price + ", quantity=" + this.quantity + ", type=" + this.type
-				+ '}';
+		return "Trade{" +
+				"id=" + this.id +
+				", symbol='" + this.symbol + '\'' +
+				", price=" + this.price +
+				", quantity=" + this.quantity +
+				", type=" + this.type +
+				'}';
 	}
 
 }

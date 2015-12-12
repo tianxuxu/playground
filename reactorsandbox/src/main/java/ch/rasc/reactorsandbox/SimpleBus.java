@@ -20,7 +20,7 @@ public class SimpleBus {
 		ExecutorProcessor<Event<?>, Event<?>> processor = Processors.queue("bus");
 		//ExecutorProcessor<Event<?>, Event<?>> processor = Processors.topic("bus");
 		//RingBufferProcessor<Event<?>> processor = RingBufferProcessor.create();
-		
+
 		EventBus eventBus = EventBus.create(processor);
 
 		Selector<String> selector = ObjectSelector.objectSelector("parse");
@@ -64,7 +64,7 @@ public class SimpleBus {
 		// that match the given Selector
 		eventBus.notify("parse", Event.wrap("Hello World!"));
 		eventBus.notify("parse", Event.wrap("A second Hello World!"));
-		
+
 		Event<String> testEvent = Event.wrap("test");
 		testEvent.getHeaders().set("mime-type", "me");
 		testEvent.setReplyTo("me");

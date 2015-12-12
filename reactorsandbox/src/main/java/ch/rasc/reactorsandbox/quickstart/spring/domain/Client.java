@@ -13,11 +13,11 @@ public class Client {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long   id;
 	@Column(nullable = false)
 	private String name;
 	@Column
-	private Long tradeCount;
+	private Long   tradeCount;
 
 	protected Client() {
 	}
@@ -45,8 +45,11 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client{" + "id=" + this.id + ", name='" + this.name + '\''
-				+ ", tradeCount=" + this.tradeCount + '}';
+		return "Client{" +
+				"id=" + this.id +
+				", name='" + this.name + '\'' +
+				", tradeCount=" + this.tradeCount +
+				'}';
 	}
 
 }
