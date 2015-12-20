@@ -60,25 +60,25 @@ public class Grow {
 
 	@Benchmark
 	public void selfBuiltArray(Blackhole bh) {
-		int capacity = 16;
-		int currentLocation = 0;
-		int[] array = new int[capacity];
+		int aCap = 16;
+		int aIx;
+		int[] aArray = new int[aCap];
 
 		int testSize = rand.nextInt(30);
 		// System.out.println(testSize);
 
-		for (int i = 0; i < testSize; i++) {
-			if (currentLocation == capacity) {
-				int[] newArray = new int[capacity*=2];
-				System.arraycopy(array, 0, newArray, 0, array.length);
-				array = newArray;
+		for (aIx = 0; aIx < testSize; aIx++) {
+			if (aIx == aCap) {
+				int[] newArray = new int[aCap*=2];
+				System.arraycopy(aArray, 0, newArray, 0, aArray.length);
+				aArray = newArray;
 			}
-			array[currentLocation++] = i;
+			aArray[aIx] = 1;
 		}
 
-		int[] finishedArray = new int[testSize];
-		System.arraycopy(array, 0, finishedArray, 0, testSize);
-		bh.consume(finishedArray);
+		int[] aFinalArray = new int[aIx];
+		System.arraycopy(aArray, 0, aFinalArray, 0, aIx);
+		bh.consume(aFinalArray);
 
 		// for (int i = 0; i < finishedArray.length; i++) {
 		// System.out.printf("[%2d]: %d\n", i, finishedArray[i]);

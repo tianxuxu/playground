@@ -2,6 +2,7 @@ package ch.rasc.mongodb.capped;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import org.bson.Document;
 
@@ -37,7 +38,7 @@ public class TTLCollectionTest {
 		}
 
 		System.out.println("LIST ALL");
-		collection.find().forEach((Document d) -> System.out.println(d));
+		collection.find().forEach((Consumer<Document>)(d -> System.out.println(d)));
 	}
 
 }

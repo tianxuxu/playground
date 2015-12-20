@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.bson.Document;
 
@@ -67,11 +68,11 @@ public class Main {
 		}
 		collection.insertMany(newDocuments);
 
-		collection.find().forEach((Document d) -> System.out.println(d));
+		collection.find().forEach((Consumer<Document>)(d -> System.out.println(d)));
 
 		collection.find(Filters.eq("username", "johnd"))
 				.projection(Projections.include("username", "password"))
-				.forEach((Document d) -> System.out.println(d));
+				.forEach((Consumer<Document>)(d -> System.out.println(d)));
 	}
 
 }

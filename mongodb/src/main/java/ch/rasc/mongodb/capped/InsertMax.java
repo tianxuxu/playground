@@ -3,6 +3,7 @@ package ch.rasc.mongodb.capped;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -27,7 +28,7 @@ public class InsertMax {
 		MongoDatabase db = mongo.getDatabase("testdb");
 
 		Set<String> collectionNames = new HashSet<>();
-		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+		db.listCollectionNames().forEach((Consumer<String>)(d-> collectionNames.add(d)));
 
 		if (collectionNames.contains("log")) {
 			db.getCollection("log").drop();
@@ -47,7 +48,7 @@ public class InsertMax {
 		}
 
 		collection.find().projection(Projections.include("index"))
-				.forEach((Document d) -> System.out.println(d.get("index")));
+				.forEach((Consumer<Document>)(d -> System.out.println(d.get("index"))));
 
 		Document cr = db.runCommand(new BsonDocument("collStats", new BsonString("log")));
 		System.out.println(cr);

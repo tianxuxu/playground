@@ -3,6 +3,7 @@ package ch.rasc.mongodb.capped;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -30,7 +31,7 @@ public class Insert {
 		MongoDatabase db = mongo.getDatabase("testdb");
 
 		Set<String> collectionNames = new HashSet<>();
-		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+		db.listCollectionNames().forEach((Consumer<String>)(d-> collectionNames.add(d)));
 
 		MongoCollection<Document> collection;
 		if (!collectionNames.contains("log")) {
@@ -52,11 +53,11 @@ public class Insert {
 		}
 
 		collection.find().projection(Projections.include("index"))
-				.forEach((Document d) -> System.out.println(d.get("index")));
+				.forEach((Consumer<Document>)(d -> System.out.println(d.get("index"))));
 
 		collection.find().sort(Sorts.orderBy(new Document("$natural", -1)))
 				.projection(Projections.include("index"))
-				.forEach((Document d) -> System.out.println(d.get("index")));
+				.forEach((Consumer<Document>)(d -> System.out.println(d.get("index"))));
 
 		DeleteResult dr = collection.deleteMany(Filters.gt("index", 990));
 		System.out.println(dr);

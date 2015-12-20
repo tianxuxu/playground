@@ -3,6 +3,7 @@ package ch.rasc.mongodb.capped;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -25,7 +26,7 @@ public class ConvertToCapped {
 		MongoDatabase db = mongo.getDatabase("testdb");
 
 		Set<String> collectionNames = new HashSet<>();
-		db.listCollectionNames().iterator().forEachRemaining(collectionNames::add);
+		db.listCollectionNames().forEach((Consumer<String>)(d-> collectionNames.add(d)));
 
 		MongoCollection<Document> collection;
 		if (collectionNames.contains("log")) {

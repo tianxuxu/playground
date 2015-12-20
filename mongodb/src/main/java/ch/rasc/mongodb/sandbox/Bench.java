@@ -18,7 +18,6 @@ public class Bench {
 		try (MongoClient mongo = new MongoClient("localhost")) {
 			doSomething(mongo, WriteConcern.ACKNOWLEDGED);
 			doSomething(mongo, WriteConcern.UNACKNOWLEDGED);
-			doSomething(mongo, WriteConcern.FSYNC_SAFE);
 			doSomething(mongo, WriteConcern.JOURNALED);
 		}
 	}

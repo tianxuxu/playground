@@ -1,5 +1,7 @@
 package ch.rasc.mongodb.tail;
 
+import java.util.function.Consumer;
+
 import org.bson.Document;
 
 import com.mongodb.CursorType;
@@ -36,7 +38,7 @@ public class Reader {
 		MongoCollection<Document> collection = dbMongoDatabase.getCollection("log");
 
 		collection.find().cursorType(CursorType.TailableAwait)
-				.forEach((Document d) -> System.out.println(d));
+				.forEach((Consumer<Document>)(d -> System.out.println(d)));
 		System.out.println("END");
 	}
 

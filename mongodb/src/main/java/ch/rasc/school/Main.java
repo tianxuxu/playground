@@ -1,21 +1,17 @@
 package ch.rasc.school;
 
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import org.bson.Document;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 
 public class Main {
