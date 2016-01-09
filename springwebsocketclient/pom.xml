@@ -47,12 +47,12 @@
 		</dependency> 
 -->		
 		
-<!-- Tomcat 8.0.28 -->		
+<!-- Tomcat 8.0.30 -->		
 <!--   		
         <dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-websocket</artifactId>
-			<version>8.0.28</version>
+			<version>8.0.30</version>
 		</dependency>
 --> 
 <!-- Tyrus (Glassfish) 1.10 --> 
