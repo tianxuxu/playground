@@ -19,7 +19,7 @@ public class Main {
 
 		// warm up
 		StopWatch sw = new StopWatch();
-
+		User u = null;
 		List<String> storage = new ArrayList<>();
 		sw.start("write");
 		for (int i = 0; i < 100000; i++) {
@@ -44,7 +44,7 @@ public class Main {
 		sw.stop();
 		sw.start("read");
 		for (int i = 0; i < 100000; i++) {
-			objectMapper.readValue(storage.get(i), User.class);
+			u = objectMapper.readValue(storage.get(i), User.class);
 		}
 		sw.stop();
 		storage.clear();
@@ -78,9 +78,10 @@ public class Main {
 				storage.add(value);
 			}
 			for (int i = 0; i < 10; i++) {
-				objectMapper.readValue(storage.get(i), User.class);
+				u = objectMapper.readValue(storage.get(i), User.class);
 			}
 		}
+		System.out.println(u);
 		sw.stop();
 		System.out.println(sw.shortSummary());
 

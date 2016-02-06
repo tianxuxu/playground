@@ -11,79 +11,82 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonObject
 public class User {
 
-	@JsonProperty("_id")
-	@JsonField(name = "_id")
-	public String id;
+    @SerializedName("_id") // Annotation needed for GSON
+    @JsonProperty("_id")
+    @JsonField(name = "_id")
+    public String id;
 
-	@JsonField
-	public int index;
+    @JsonField
+    public int index;
 
-	@JsonField
-	public String guid;
+    @JsonField
+    public String guid;
 
-	@JsonProperty("is_active") // Annotation needed for Jackson Databind
-	@JsonField(name = "is_active")
-	public boolean isActive;
+    @SerializedName("is_active") // Annotation needed for GSON
+    @JsonProperty("is_active") // Annotation needed for Jackson Databind
+    @JsonField(name = "is_active")
+    public boolean isActive;
 
-	@JsonField
-	public String balance;
+    @JsonField
+    public String balance;
 
-	@JsonProperty("picture") // Annotation needed for Jackson Databind
-	@JsonField(name = "picture")
-	public String pictureUrl;
+    @SerializedName("picture") // Annotation needed for GSON
+    @JsonProperty("picture") // Annotation needed for Jackson Databind
+    @JsonField(name = "picture")
+    public String pictureUrl;
 
-	@JsonField
-	public int age;
+    @JsonField
+    public int age;
 
-	@JsonField
-	public Name name;
+    @JsonField
+    public Name name;
 
-	@JsonField
-	public String company;
+    @JsonField
+    public String company;
 
-	@JsonField
-	public String email;
+    @JsonField
+    public String email;
 
-	@JsonField
-	public String address;
+    @JsonField
+    public String address;
 
-	@JsonField
-	public String about;
+    @JsonField
+    public String about;
 
-	@JsonField
-	public String registered;
+    @JsonField
+    public String registered;
 
-	@JsonField
-	public double latitude;
+    @JsonField
+    public double latitude;
 
-	@JsonField
-	public double longitude;
+    @JsonField
+    public double longitude;
 
-	@JsonField
-	public List<String> tags;
+    @JsonField
+    public List<String> tags;
 
-	@JsonField
-	public List<Integer> range;
+    @JsonField
+    public List<Integer> range;
 
-	@JsonField
-	public List<Friend> friends;
+    @JsonField
+    public List<Friend> friends;
 
-	@JsonField
-	public List<Image> images;
+    @JsonField
+    public List<Image> images;
 
-	@JsonField
-	public String greeting;
+    @JsonField
+    public String greeting;
 
-	@SerializedName("favorite_fruit") // Annotation needed for GSON
-	@JsonProperty("favorite_fruit") // Annotation needed for Jackson Databind
-	@JsonField(name = "favorite_fruit")
-	public String favoriteFruit;
+    @SerializedName("favorite_fruit") // Annotation needed for GSON
+    @JsonProperty("favorite_fruit") // Annotation needed for Jackson Databind
+    @JsonField(name = "favorite_fruit")
+    public String favoriteFruit;
 
-	@SerializedName("eye_color") // Annotation needed for GSON
-	@JsonProperty("eye_color") // Annotation needed for Jackson Databind
-	@JsonField(name = "eye_color")
-	public String eyeColor;
+    @SerializedName("eye_color") // Annotation needed for GSON
+    @JsonProperty("eye_color") // Annotation needed for Jackson Databind
+    @JsonField(name = "eye_color")
+    public String eyeColor;
 
-	@JsonField
-	public String phone;
+    @JsonField
+    public String phone;
 }

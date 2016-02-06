@@ -12,8 +12,8 @@ public class Main {
 		int foo = value.foo(); // 2
 
 		List<Integer> buz = value.buz(); // ImmutableList.of(1, 3, 4)
-System.out.println(buz);
-System.out.println(buz.getClass());
+		System.out.println(buz);
+		System.out.println(buz.getClass());
 	}
 
 }

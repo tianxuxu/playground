@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class LongPollingController {
 
-	private final ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
+	//private final ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
 
 	private List<DeferredResult<String>> results = new ArrayList<>();
 

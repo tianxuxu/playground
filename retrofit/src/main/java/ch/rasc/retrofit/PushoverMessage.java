@@ -1,11 +1,13 @@
 package ch.rasc.retrofit;
 
+import java.util.Optional;
+
 import javax.annotation.Nullable;
 
 import org.immutables.value.Value;
 
 @Value.Immutable
-abstract interface PushoverMessage {
+public interface PushoverMessage {
 
 	String token();
 
@@ -13,8 +15,7 @@ abstract interface PushoverMessage {
 
 	String message();
 
-	@Nullable
-	String device();
+	Optional<String> device();
 
 	@Nullable
 	String title();

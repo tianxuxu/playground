@@ -1,14 +1,11 @@
 package ch.rasc.retrofit;
 
-public class Ip {
-	private String origin;
+import org.immutables.value.Value;
 
-	public String getOrigin() {
-		return origin;
-	}
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-
+@Value.Immutable
+@JsonDeserialize(as = ImmutableIp.class)
+public interface Ip {
+	String origin();
 }

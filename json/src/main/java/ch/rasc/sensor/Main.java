@@ -3,8 +3,6 @@ package ch.rasc.sensor;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +25,10 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		long start = ZonedDateTime.now().toEpochSecond();
-		System.out.println(start);
-		System.out.println(Integer.MAX_VALUE);
-		System.out.println(ZonedDateTime
-				.ofInstant(Instant.ofEpochSecond(Integer.MAX_VALUE), ZoneOffset.UTC));
+		// System.out.println(start);
+		// System.out.println(Integer.MAX_VALUE);
+		// System.out.println(ZonedDateTime
+		// .ofInstant(Instant.ofEpochSecond(Integer.MAX_VALUE), ZoneOffset.UTC));
 
 		Random rand = new Random();
 
@@ -52,35 +50,34 @@ public class Main {
 		}
 
 		LZ4Factory factory = LZ4Factory.fastestInstance();
-		System.out.println(factory);
 		LZ4Compressor compressor = factory.fastCompressor();
 
 		ObjectMapper om = new ObjectMapper();
 		byte[] json = om.writeValueAsBytes(result);
 		// System.out.println(new String(json, StandardCharsets.UTF_8));
-		System.out.println(json.length + " bytes string");
+		System.out.println(json.length + " bytes JSON");
 
 		int maxCompressedLength = compressor.maxCompressedLength(json.length);
 		byte[] compressed = new byte[maxCompressedLength];
 		int compressedLength = compressor.compress(json, 0, json.length, compressed, 0,
 				maxCompressedLength);
-		System.out.println("compressed: " + compressedLength);
+		System.out.println("LZ4 compressed: " + compressedLength);
 
 		byte[] compressedSnappy = Snappy.compress(json);
-		System.out.println("snappy: " + compressedSnappy.length);
+		System.out.println("Snappy compressed: " + compressedSnappy.length);
 
 		om = new ObjectMapper(new CBORFactory());
 		json = om.writeValueAsBytes(result);
-		System.out.println(json.length + " bytes cbor");
+		System.out.println(json.length + " bytes CBOR");
 
 		long startms = System.currentTimeMillis();
 		byte[] compressedlz4 = compressor.compress(json);
 		System.out.println(System.currentTimeMillis() - startms + " ms");
-		System.out.println("compressed: " + compressedlz4.length);
+		System.out.println("LZ 4 compressed: " + compressedlz4.length);
 		startms = System.currentTimeMillis();
 		compressedSnappy = Snappy.compress(json);
 		System.out.println(System.currentTimeMillis() - startms + " ms");
-		System.out.println("snappy: " + compressedSnappy.length);
+		System.out.println("Snappy compressed: " + compressedSnappy.length);
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		LZ4BlockOutputStream los = new LZ4BlockOutputStream(bos);
