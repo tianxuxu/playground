@@ -5,22 +5,18 @@ import java.util.concurrent.TimeUnit;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import reactor.Processors;
 import reactor.bus.Event;
 import reactor.bus.EventBus;
 import reactor.bus.selector.ObjectSelector;
 import reactor.bus.selector.Selector;
 import reactor.bus.selector.Selectors;
-import reactor.core.processor.ExecutorProcessor;
+import reactor.core.publisher.WorkQueueProcessor;
 
 public class SimpleBus {
 
 	public static void main(String[] args) {
 
-		ExecutorProcessor<Event<?>, Event<?>> processor = Processors.queue("bus");
-		//ExecutorProcessor<Event<?>, Event<?>> processor = Processors.topic("bus");
-		//RingBufferProcessor<Event<?>> processor = RingBufferProcessor.create();
-
+		WorkQueueProcessor<Event<?>> processor = WorkQueueProcessor.create("bus");
 		EventBus eventBus = EventBus.create(processor);
 
 		Selector<String> selector = ObjectSelector.objectSelector("parse");

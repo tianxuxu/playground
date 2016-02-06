@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.rasc.reactorsandbox.quickstart.core.Trade;
 import ch.rasc.reactorsandbox.quickstart.core.TradeServer;
-import reactor.rx.broadcast.Broadcaster;
+import reactor.rx.Broadcaster;
 
 /**
  * @author Jon Brisbin
@@ -57,7 +57,7 @@ public class StreamTradeServerExample {
 		startTime = System.currentTimeMillis();
 	}
 
-	private static void endTimer() {
+	private static void endTimer() throws InterruptedException {
 		long endTime = System.currentTimeMillis();
 		double elapsed = endTime - startTime;
 		double throughput = totalTrades / (elapsed / 1000);

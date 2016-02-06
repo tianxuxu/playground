@@ -1,18 +1,17 @@
 package ch.rasc.reactorsandbox;
 
-import reactor.Processors;
-import reactor.rx.broadcast.Broadcaster;
+import reactor.core.publisher.SchedulerGroup;
+import reactor.rx.Broadcaster;
 
 public class ReactorHelloWorld {
 	public static void main(String... args) throws InterruptedException {
 
 		Broadcaster<String> sink = Broadcaster.create();
-		sink.dispatchOn(Processors.asyncGroup("flow")).map(f -> {
+		sink.dispatchOn(SchedulerGroup.async()).map(f -> {
 			f.toUpperCase();
 			System.out.println(Thread.currentThread());
 			return f;
 		})
-		.observe(s->{System.out.println(Thread.currentThread());})
 		.consume(s -> {
 			System.out.printf("s=%s%n", s);
 			System.out.println(Thread.currentThread());

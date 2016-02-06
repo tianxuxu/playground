@@ -35,22 +35,22 @@ public class TradeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Iterable<Client> listClients() {
-		return this.clients.findAll();
+		return clients.findAll();
 	}
 
 	@RequestMapping(value = "/{clientId}", method = RequestMethod.POST, produces = "text/plain")
 	@ResponseBody
 	public String trade(@PathVariable Long clientId) {
 		// Retrieve client by id
-		Client cl = this.clients.findOne(clientId);
+		Client cl = clients.findOne(clientId);
 		if (null == cl) {
 			throw new IllegalArgumentException("No Client found for id " + clientId);
 		}
 
-		this.eventBus.notify("trade.execute", Event.wrap(this.tradeServer.nextTrade()));
+		eventBus.notify("trade.execute", Event.wrap(tradeServer.nextTrade()));
 
 		// Update trade count
-		cl = this.clients.save(cl.setTradeCount(cl.getTradeCount() + 1));
+		cl = clients.save(cl.setTradeCount(cl.getTradeCount() + 1));
 
 		// Return result
 		return "Hello " + cl.getName() + "! You now have " + cl.getTradeCount() + " trades.";

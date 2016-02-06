@@ -27,15 +27,15 @@ public class Client {
 	}
 
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public Long getTradeCount() {
-		return this.tradeCount;
+		return tradeCount;
 	}
 
 	public Client setTradeCount(Long tradeCount) {
@@ -46,9 +46,9 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client{" +
-				"id=" + this.id +
-				", name='" + this.name + '\'' +
-				", tradeCount=" + this.tradeCount +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", tradeCount=" + tradeCount +
 				'}';
 	}
 
