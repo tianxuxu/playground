@@ -1,14 +1,15 @@
 package ch.rasc.reactorsandbox.samples.aeron;
 
 import org.reactivestreams.Subscription;
+
 import reactor.aeron.Context;
 import reactor.aeron.publisher.AeronPublisher;
 import reactor.core.subscriber.BaseSubscriber;
 import reactor.io.buffer.Buffer;
 
 /**
- * Sample of AeronPublisher usage on the client side.
- * See {@link BasicAeronSubscriberServer} for the server-side implementation.
+ * Sample of AeronPublisher usage on the client side. See
+ * {@link BasicAeronSubscriberServer} for the server-side implementation.
  *
  * @author Anatoly Kadyshev
  */
@@ -34,8 +35,8 @@ public class BasicAeronPublisherClient {
 		public void onSubscribe(Subscription s) {
 			super.onSubscribe(s);
 
-			subscription = s;
-			subscription.request(1);
+			this.subscription = s;
+			this.subscription.request(1);
 		}
 
 		@Override
@@ -44,10 +45,10 @@ public class BasicAeronPublisherClient {
 
 			System.out.println("onNext: " + value);
 
-			subscription.request(1);
+			this.subscription.request(1);
 
-			if(++counter == 10) {
-				subscription.cancel();
+			if (++this.counter == 10) {
+				this.subscription.cancel();
 			}
 		}
 
@@ -62,9 +63,7 @@ public class BasicAeronPublisherClient {
 	}
 
 	public static void main(String[] args) {
-		Context context = new Context()
-				.name("publisher")
-				.autoCancel(true)
+		Context context = new Context().name("publisher").autoCancel(true)
 				.senderChannel("udp://" + SENDER_HOST + ":12000")
 				.receiverChannel("udp://" + RECEIVER_HOST + ":12001");
 

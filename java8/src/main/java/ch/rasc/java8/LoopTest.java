@@ -5,16 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-
 //@State(Scope.Thread)
 public class LoopTest {
 	private final List<Shape> shapes = new ArrayList<>();
 
-	//@Setup(Level.Invocation)
+	// @Setup(Level.Invocation)
 	public void init() {
 		Color[] twoColors = new Color[] { Color.BLACK, Color.BLUE };
 		for (int i = 0; i < 1_000_000; i++) {

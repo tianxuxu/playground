@@ -38,7 +38,7 @@ public class TTLCollectionTest {
 		}
 
 		System.out.println("LIST ALL");
-		collection.find().forEach((Consumer<Document>)(d -> System.out.println(d)));
+		collection.find().forEach((Consumer<Document>) d -> System.out.println(d));
 	}
 
 }

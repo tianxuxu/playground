@@ -29,7 +29,7 @@ public class Main {
 				List<Document> scoreDoc = student.get("scores", List.class);
 				Optional<Document> lowestHomework = scoreDoc.stream()
 						.filter(s -> s.getString("type").equals("homework"))
-						.sorted(Comparator.comparingDouble(d->d.getDouble("score")))
+						.sorted(Comparator.comparingDouble(d -> d.getDouble("score")))
 						.findFirst();
 
 				if (lowestHomework.isPresent()) {

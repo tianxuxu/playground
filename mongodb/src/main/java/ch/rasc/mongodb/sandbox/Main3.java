@@ -33,7 +33,7 @@ public class Main3 {
 		dbObj.append("age", 40);
 		collection.insertOne(dbObj);
 
-		collection.find().forEach((Consumer<Document>)(d -> System.out.println(d)));
+		collection.find().forEach((Consumer<Document>) d -> System.out.println(d));
 
 		Document update = new Document("$set", new Document("city", "Chicago"));
 		collection.updateOne(Filters.eq("last_name", "smith"), update);

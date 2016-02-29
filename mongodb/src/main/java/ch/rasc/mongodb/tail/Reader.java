@@ -38,7 +38,7 @@ public class Reader {
 		MongoCollection<Document> collection = dbMongoDatabase.getCollection("log");
 
 		collection.find().cursorType(CursorType.TailableAwait)
-				.forEach((Consumer<Document>)(d -> System.out.println(d)));
+				.forEach((Consumer<Document>) d -> System.out.println(d));
 		System.out.println("END");
 	}
 

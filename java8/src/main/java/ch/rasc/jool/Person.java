@@ -17,30 +17,30 @@ public class Person {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public int getAge() {
-		return age;
+		return this.age;
 	}
 
 	public double getHeight() {
-		return height;
+		return this.height;
 	}
 
 	public double getWeight() {
-		return weight;
+		return this.weight;
 	}
 
 	@Override
 	public String toString() {
-		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age="
-				+ age + ", height=" + height + ", weight=" + weight + "]";
+		return "Person [firstName=" + this.firstName + ", lastName=" + this.lastName
+				+ ", age=" + this.age + ", height=" + this.height + ", weight="
+				+ this.weight + "]";
 	}
-
 
 }

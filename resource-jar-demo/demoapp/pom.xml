@@ -55,7 +55,7 @@
     <repositories>
       <repository>
         <id>rasc</id>
-        <url>https://repo.rasc.ch</url>
+        <url>http://repo.rasc.ch</url>
       </repository>
     </repositories>
 

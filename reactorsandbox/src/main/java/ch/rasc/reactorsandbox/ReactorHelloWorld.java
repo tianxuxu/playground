@@ -11,8 +11,7 @@ public class ReactorHelloWorld {
 			f.toUpperCase();
 			System.out.println(Thread.currentThread());
 			return f;
-		})
-		.consume(s -> {
+		}).consume(s -> {
 			System.out.printf("s=%s%n", s);
 			System.out.println(Thread.currentThread());
 		});

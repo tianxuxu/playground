@@ -68,11 +68,11 @@ public class Main {
 		}
 		collection.insertMany(newDocuments);
 
-		collection.find().forEach((Consumer<Document>)(d -> System.out.println(d)));
+		collection.find().forEach((Consumer<Document>) d -> System.out.println(d));
 
 		collection.find(Filters.eq("username", "johnd"))
 				.projection(Projections.include("username", "password"))
-				.forEach((Consumer<Document>)(d -> System.out.println(d)));
+				.forEach((Consumer<Document>) d -> System.out.println(d));
 	}
 
 }

@@ -1,54 +1,56 @@
 package org.immutables.samples.json.pojo;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
 
 public class PojoDocument {
 
-  public List<Item> items = ImmutableList.of();
+	public List<Item> items = ImmutableList.of();
 
-  public static class Item {
-    public int id;
+	public static class Item {
+		public int id;
 
-    public String name;
+		public String name;
 
-    @Nullable
-    public String description;
+		@Nullable
+		public String description;
 
-    public List<Evaluation> evaluation = ImmutableList.of();
+		public List<Evaluation> evaluation = ImmutableList.of();
 
-    public int foo;
+		public int foo;
 
-    public boolean bar;
+		public boolean bar;
 
-    public Optional<Integer> tid = Optional.absent();
+		public Optional<Integer> tid = Optional.absent();
 
-    public Optional<String> gname = Optional.absent();
+		public Optional<String> gname = Optional.absent();
 
-    @Nullable
-    public String bdescription;
+		@Nullable
+		public String bdescription;
 
-    public List<Evaluation> nevaluation = ImmutableList.of();
+		public List<Evaluation> nevaluation = ImmutableList.of();
 
-    public Optional<Integer> hfoo = Optional.absent();
+		public Optional<Integer> hfoo = Optional.absent();
 
-    public boolean ybar;
+		public boolean ybar;
 
-    public Set<Item> recitems = ImmutableSet.of();
-  }
+		public Set<Item> recitems = ImmutableSet.of();
+	}
 
-  public static class Evaluation {
+	public static class Evaluation {
 
-    public String comment;
+		public String comment;
 
-    public Stars stars = Stars.NONE;
+		public Stars stars = Stars.NONE;
 
-    public enum Stars {
-      NONE, ONE, TWO, THREE, FOUR, FIVE
-    }
-  }
+		public enum Stars {
+			NONE, ONE, TWO, THREE, FOUR, FIVE
+		}
+	}
 }

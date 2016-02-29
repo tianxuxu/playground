@@ -6,9 +6,9 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 @JsonObject
 public class Name {
 
-    @JsonField
-    public String first;
+	@JsonField
+	public String first;
 
-    @JsonField
-    public String last;
+	@JsonField
+	public String last;
 }

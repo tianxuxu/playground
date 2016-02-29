@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.JacksonConverterFactory;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class Main {
 
@@ -19,14 +19,13 @@ public class Main {
 		ip.enqueue(new Callback<Ip>() {
 
 			@Override
-			public void onFailure(Throwable t) {
-				t.printStackTrace();
+			public void onResponse(Call<Ip> call, Response<Ip> response) {
+				System.out.println(response.body().origin());
 			}
 
 			@Override
-			public void onResponse(Response<Ip> response) {
-				System.out.println(response.body().origin());
-
+			public void onFailure(Call<Ip> call, Throwable t) {
+				t.printStackTrace();
 			}
 		});
 

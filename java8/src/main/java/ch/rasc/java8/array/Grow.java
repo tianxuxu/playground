@@ -19,7 +19,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 public class Grow {
 
 	private final Random rand = new Random();
-	
+
 	public static void main(String... args) throws RunnerException {
 		Options opt = new OptionsBuilder().include(Grow.class.getSimpleName()).forks(1)
 				.build();
@@ -29,25 +29,25 @@ public class Grow {
 
 	@Benchmark
 	public void useArrayList(Blackhole bh) {
-		int testSize = rand.nextInt(30);
+		int testSize = this.rand.nextInt(30);
 		List<Integer> array = new ArrayList<>(16);
 		for (int i = 0; i < testSize; i++) {
 			array.add(Integer.valueOf(i));
 		}
 
-		Integer[] finishedArray =  array.toArray(new Integer[array.size()]);
-//		int[] finishedArray = new int[testSize];		
-//	    int i = 0;
-//	    for (Integer n : array) {
-//	    	finishedArray[i++] = n;
-//	    }
+		Integer[] finishedArray = array.toArray(new Integer[array.size()]);
+		// int[] finishedArray = new int[testSize];
+		// int i = 0;
+		// for (Integer n : array) {
+		// finishedArray[i++] = n;
+		// }
 
 		bh.consume(finishedArray);
 	}
-	
+
 	@Benchmark
 	public void useFastUtil(Blackhole bh) {
-		int testSize = rand.nextInt(30);
+		int testSize = this.rand.nextInt(30);
 		IntArrayList array = new IntArrayList(16);
 		for (int i = 0; i < testSize; i++) {
 			array.add(i);
@@ -56,7 +56,7 @@ public class Grow {
 		int[] finishedArray = array.toIntArray();
 
 		bh.consume(finishedArray);
-	}	
+	}
 
 	@Benchmark
 	public void selfBuiltArray(Blackhole bh) {
@@ -64,12 +64,12 @@ public class Grow {
 		int aIx;
 		int[] aArray = new int[aCap];
 
-		int testSize = rand.nextInt(30);
+		int testSize = this.rand.nextInt(30);
 		// System.out.println(testSize);
 
 		for (aIx = 0; aIx < testSize; aIx++) {
 			if (aIx == aCap) {
-				int[] newArray = new int[aCap*=2];
+				int[] newArray = new int[aCap *= 2];
 				System.arraycopy(aArray, 0, newArray, 0, aArray.length);
 				aArray = newArray;
 			}
@@ -84,19 +84,19 @@ public class Grow {
 		// System.out.printf("[%2d]: %d\n", i, finishedArray[i]);
 		// }
 	}
-	
+
 	@Benchmark
 	public void selfBuiltArrayInteger(Blackhole bh) {
 		int capacity = 16;
 		int currentLocation = 0;
 		Integer[] array = new Integer[capacity];
 
-		int testSize = rand.nextInt(30);
+		int testSize = this.rand.nextInt(30);
 		// System.out.println(testSize);
 
 		for (int i = 0; i < testSize; i++) {
 			if (currentLocation == capacity) {
-				Integer[] newArray = new Integer[capacity*=2];
+				Integer[] newArray = new Integer[capacity *= 2];
 				System.arraycopy(array, 0, newArray, 0, array.length);
 				array = newArray;
 			}
@@ -110,5 +110,5 @@ public class Grow {
 		// for (int i = 0; i < finishedArray.length; i++) {
 		// System.out.printf("[%2d]: %d\n", i, finishedArray[i]);
 		// }
-	}	
+	}
 }

@@ -1,18 +1,22 @@
 package ch.rasc.reactorsandbox.samples;
 
+import static reactor.bus.selector.Selectors.$;
+import static reactor.bus.selector.Selectors.R;
+import static reactor.bus.selector.Selectors.T;
+import static reactor.bus.selector.Selectors.U;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import reactor.bus.Event;
 import reactor.bus.EventBus;
-
-import static reactor.bus.selector.Selectors.*;
 
 /**
  * @author Jon Brisbin
  */
 public class SelectorSamples {
 
-	static final Logger      LOG = LoggerFactory.getLogger(SelectorSamples.class);
+	static final Logger LOG = LoggerFactory.getLogger(SelectorSamples.class);
 
 	public static void main(String... args) throws InterruptedException {
 
@@ -22,7 +26,7 @@ public class SelectorSamples {
 		r.on($("/some/topic"), ev -> LOG.info("Got event '{}'", ev.getData()));
 
 		// Topic selection based on regex
-		r.on(R("/some/(.+)"),ev -> {
+		r.on(R("/some/(.+)"), ev -> {
 			// RegexSelector puts capture groups into headers using convention 'group'
 			// + [capture group #]
 			String topic = ev.getHeaders().get("group1");

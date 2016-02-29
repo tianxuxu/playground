@@ -5,7 +5,7 @@ import java.util.Date;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 import com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy;
 
-@JsonObject(fieldDetectionPolicy=FieldDetectionPolicy.NONPRIVATE_FIELDS_AND_ACCESSORS)
+@JsonObject(fieldDetectionPolicy = FieldDetectionPolicy.NONPRIVATE_FIELDS_AND_ACCESSORS)
 public class User {
 
 	private Long id;

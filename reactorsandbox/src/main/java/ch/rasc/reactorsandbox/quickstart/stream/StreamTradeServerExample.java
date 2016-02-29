@@ -16,8 +16,9 @@ import reactor.rx.Broadcaster;
  */
 public class StreamTradeServerExample {
 
-	private static final Logger LOG         = LoggerFactory.getLogger(StreamTradeServerExample.class);
-	private static       int    totalTrades = 10000000;
+	private static final Logger LOG = LoggerFactory
+			.getLogger(StreamTradeServerExample.class);
+	private static int totalTrades = 10000000;
 
 	private static long startTime;
 
@@ -28,9 +29,9 @@ public class StreamTradeServerExample {
 		// Rather than handling Trades as events, each Trade is accessible via Stream.
 		Broadcaster<Trade> trades = Broadcaster.create();
 
-		// We compose an action to turn a Trade into an Order by calling server.execute(Trade).
-		trades.map(server::execute)
-		      .consume(o -> latch.countDown());
+		// We compose an action to turn a Trade into an Order by calling
+		// server.execute(Trade).
+		trades.map(server::execute).consume(o -> latch.countDown());
 
 		// Start a throughput timer.
 		startTimer();

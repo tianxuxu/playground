@@ -10,8 +10,9 @@ import okhttp3.Response;
 public class Client {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		OkHttpClient client = new OkHttpClient.Builder().connectTimeout(3, TimeUnit.SECONDS)
-				.writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();		
+		OkHttpClient client = new OkHttpClient.Builder()
+				.connectTimeout(3, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS)
+				.readTimeout(10, TimeUnit.SECONDS).build();
 
 		Request request = new Request.Builder().url("http://localhost:8080/event")
 				.build();

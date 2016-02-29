@@ -26,7 +26,7 @@ public class ConvertToCapped {
 		MongoDatabase db = mongo.getDatabase("testdb");
 
 		Set<String> collectionNames = new HashSet<>();
-		db.listCollectionNames().forEach((Consumer<String>)(d-> collectionNames.add(d)));
+		db.listCollectionNames().forEach((Consumer<String>) d -> collectionNames.add(d));
 
 		MongoCollection<Document> collection;
 		if (collectionNames.contains("log")) {

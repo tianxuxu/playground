@@ -25,7 +25,7 @@ public class SimpleBus {
 				TimeUnit.SECONDS.sleep(10);
 			}
 			catch (Exception e) {
-				//ignore this
+				// ignore this
 			}
 			System.out.println(ev);
 			System.out.println("selector: " + Thread.currentThread());

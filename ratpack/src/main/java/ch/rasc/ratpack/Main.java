@@ -15,10 +15,8 @@ public class Main {
 		Example e = new Example();
 		Action<Chain> handlers = chain -> {
 			chain.get(ctx -> ctx.render("Hello " + ctx.get(String.class)))
-					.get("example", ctx -> e.handle(ctx))
-			.get(":name",
-					ctx -> ctx.render(
-							"Hello " + ctx.getPathTokens().get("name") + "!"));
+					.get("example", ctx -> e.handle(ctx)).get(":name", ctx -> ctx
+							.render("Hello " + ctx.getPathTokens().get("name") + "!"));
 
 		};
 

@@ -20,40 +20,42 @@ import reactor.bus.EventBus;
 public class TradeController {
 
 	private final ClientRepository clients;
-	private final EventBus         eventBus;
-	private final TradeServer      tradeServer;
+	private final EventBus eventBus;
+	private final TradeServer tradeServer;
 
 	@Autowired
-	public TradeController(ClientRepository clients,
-	                       EventBus eventBus,
-	                       TradeServer tradeServer) {
+	public TradeController(ClientRepository clients, EventBus eventBus,
+			TradeServer tradeServer) {
 		this.clients = clients;
 		this.eventBus = eventBus;
 		this.tradeServer = tradeServer;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/", method = RequestMethod.GET,
+			produces = "application/json")
 	@ResponseBody
 	public Iterable<Client> listClients() {
-		return clients.findAll();
+		return this.clients.findAll();
 	}
 
-	@RequestMapping(value = "/{clientId}", method = RequestMethod.POST, produces = "text/plain")
+	@RequestMapping(value = "/{clientId}", method = RequestMethod.POST,
+			produces = "text/plain")
 	@ResponseBody
 	public String trade(@PathVariable Long clientId) {
 		// Retrieve client by id
-		Client cl = clients.findOne(clientId);
+		Client cl = this.clients.findOne(clientId);
 		if (null == cl) {
 			throw new IllegalArgumentException("No Client found for id " + clientId);
 		}
 
-		eventBus.notify("trade.execute", Event.wrap(tradeServer.nextTrade()));
+		this.eventBus.notify("trade.execute", Event.wrap(this.tradeServer.nextTrade()));
 
 		// Update trade count
-		cl = clients.save(cl.setTradeCount(cl.getTradeCount() + 1));
+		cl = this.clients.save(cl.setTradeCount(cl.getTradeCount() + 1));
 
 		// Return result
-		return "Hello " + cl.getName() + "! You now have " + cl.getTradeCount() + " trades.";
+		return "Hello " + cl.getName() + "! You now have " + cl.getTradeCount()
+				+ " trades.";
 	}
 
 }

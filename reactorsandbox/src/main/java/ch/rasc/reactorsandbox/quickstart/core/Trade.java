@@ -5,22 +5,22 @@ package ch.rasc.reactorsandbox.quickstart.core;
  */
 public class Trade {
 
-	private Long    id;
-	private String  symbol;
-	private Float   price;
+	private final Long id;
+	private String symbol;
+	private Float price;
 	private Integer quantity;
-	private Type    type;
+	private Type type;
 
 	public Trade(Long id) {
 		this.id = id;
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getSymbol() {
-		return symbol;
+		return this.symbol;
 	}
 
 	public Trade setSymbol(String symbol) {
@@ -29,7 +29,7 @@ public class Trade {
 	}
 
 	public Float getPrice() {
-		return price;
+		return this.price;
 	}
 
 	public Trade setPrice(Float price) {
@@ -38,7 +38,7 @@ public class Trade {
 	}
 
 	public Integer getQuantity() {
-		return quantity;
+		return this.quantity;
 	}
 
 	public Trade setQuantity(Integer quantity) {
@@ -47,7 +47,7 @@ public class Trade {
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public Trade setType(Type type) {
@@ -57,13 +57,9 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "Trade{" +
-				"id=" + id +
-				", symbol='" + symbol + '\'' +
-				", price=" + price +
-				", quantity=" + quantity +
-				", type=" + type +
-				'}';
+		return "Trade{" + "id=" + this.id + ", symbol='" + this.symbol + '\'' + ", price="
+				+ this.price + ", quantity=" + this.quantity + ", type=" + this.type
+				+ '}';
 	}
 
 }

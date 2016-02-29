@@ -6,16 +6,16 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 @JsonObject
 public class Image {
 
-    @JsonField
-    public String id;
+	@JsonField
+	public String id;
 
-    @JsonField
-    public String format;
+	@JsonField
+	public String format;
 
-    @JsonField
-    public String url;
+	@JsonField
+	public String url;
 
-    @JsonField
-    public String description;
+	@JsonField
+	public String description;
 
 }

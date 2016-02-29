@@ -5,7 +5,7 @@ public class PollEvent {
 	private String command;
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -13,7 +13,7 @@ public class PollEvent {
 	}
 
 	public String getCommand() {
-		return command;
+		return this.command;
 	}
 
 	public void setCommand(String command) {

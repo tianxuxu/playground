@@ -1,66 +1,69 @@
 package org.immutables.samples.json.immutables;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
+import org.immutables.value.Value;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Optional;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
-import org.immutables.value.Value;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutableImDocument.class)
 @JsonDeserialize(as = ImmutableImDocument.class)
-//@Json.Marshaled
+// @Json.Marshaled
 public interface ImDocument {
 
-  List<Item> items();
+	List<Item> items();
 
-  @Value.Immutable
-//  @Json.Marshaled
-  public interface Item {
-    int id();
+	@Value.Immutable
+	// @Json.Marshaled
+	public interface Item {
+		int id();
 
-    String name();
+		String name();
 
-    @Nullable
-    String description();
+		@Nullable
+		String description();
 
-    List<Evaluation> evaluation();
+		List<Evaluation> evaluation();
 
-    int foo();
+		int foo();
 
-    boolean bar();
+		boolean bar();
 
-    Optional<Integer> tid();
+		Optional<Integer> tid();
 
-    Optional<String> gname();
+		Optional<String> gname();
 
-    @Nullable
-    String bdescription();
+		@Nullable
+		String bdescription();
 
-    List<Evaluation> nevaluation();
+		List<Evaluation> nevaluation();
 
-    Optional<Integer> hfoo();
+		Optional<Integer> hfoo();
 
-    boolean ybar();
+		boolean ybar();
 
-    Set<Item> recitems();
-  }
+		Set<Item> recitems();
+	}
 
-  @Value.Immutable
-//  @Json.Marshaled
-  public static abstract class Evaluation {
+	@Value.Immutable
+	// @Json.Marshaled
+	public static abstract class Evaluation {
 
-    public abstract String comment();
+		public abstract String comment();
 
-    @Value.Default
-    public Stars stars() {
-      return Stars.NONE;
-    }
+		@Value.Default
+		public Stars stars() {
+			return Stars.NONE;
+		}
 
-    public enum Stars {
-      NONE, ONE, TWO, THREE, FOUR, FIVE
-    }
-  }
+		public enum Stars {
+			NONE, ONE, TWO, THREE, FOUR, FIVE
+		}
+	}
 }

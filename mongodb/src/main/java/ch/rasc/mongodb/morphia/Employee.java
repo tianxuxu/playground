@@ -22,7 +22,7 @@ class Employee {
 	private String name;
 
 	private String firstname;
-	
+
 	@Reference
 	private Employee manager;
 
@@ -82,7 +82,7 @@ class Employee {
 	}
 
 	public String getFirstname() {
-		return firstname;
+		return this.firstname;
 	}
 
 	public void setFirstname(String firstname) {

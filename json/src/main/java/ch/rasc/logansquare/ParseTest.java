@@ -44,7 +44,7 @@ public class ParseTest {
 
 			JsonParserFactory factory = new JsonParserFactory();
 			JsonParserAndMapper parser = factory.createFastParser();
-			
+
 			sw.start("boon");
 			for (int i = 0; i < 100_00; i++) {
 				response = parser.parse(Response.class, tiny);

@@ -18,11 +18,11 @@ import reactor.bus.EventBus;
  */
 public class TradeServerExample {
 
-	private static final Logger LOG         = LoggerFactory.getLogger(TradeServerExample.class);
-	private static       int    totalTrades = 10000000;
+	private static final Logger LOG = LoggerFactory.getLogger(TradeServerExample.class);
+	private static int totalTrades = 10000000;
 
 	private static CountDownLatch latch;
-	private static long           startTime;
+	private static long startTime;
 
 	public static void main(String[] args) throws InterruptedException {
 		final TradeServer server = new TradeServer();
@@ -33,7 +33,7 @@ public class TradeServerExample {
 		String topic = "trade.execute";
 
 		// For each Trade event, execute that on the server
-		bus.<Event<Trade>>on($(topic), ev -> {
+		bus.<Event<Trade>> on($(topic), ev -> {
 			server.execute(ev.getData());
 
 			// Since we're async, for this test, use a latch to tell when we're done

@@ -6,9 +6,9 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 @JsonObject
 public class Friend {
 
-    @JsonField
-    public int id;
+	@JsonField
+	public int id;
 
-    @JsonField
-    public String name;
+	@JsonField
+	public String name;
 }
