@@ -1,32 +1,31 @@
 package ch.rasc.reactorsandbox.samples;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reactor.rx.Promise;
+import reactor.core.publisher.Mono;
+import reactor.core.publisher.MonoProcessor;
 
 /**
- * @author Jon Brisbin
  * @author Stephane Maldini
  */
-public class PromiseSamples {
+public class MonoSamples {
 
-	static final Logger LOG = LoggerFactory.getLogger(PromiseSamples.class);
+	static final Logger LOG = LoggerFactory.getLogger(MonoSamples.class);
 
 	public static void main(String... args) throws Exception {
 		// Deferred is the publisher, Promise the consumer
-		Promise<String> promise = Promise.prepare();
+		MonoProcessor<String> promise = MonoProcessor.create();
 
-		promise.doOnSuccess(p -> LOG.info("Promise completed {}", p))
+		Mono<String> result = promise
+				.doOnSuccess(p -> LOG.info("Promise completed {}", p))
 				.doOnTerminate((s, e) -> LOG.info("Got value: {}", s))
-				.doOnError(t -> LOG.error(t.getMessage(), t));
+				.doOnError(t -> LOG.error(t.getMessage(), t)).subscribe();
 
 		promise.onNext("Hello World!");
 		// promise.onError(new IllegalArgumentException("Hello Shmello! :P"));
 
-		String s = promise.await(1, TimeUnit.SECONDS);
+		String s = result.get(1_000);
 		LOG.info("s={}", s);
 	}
 

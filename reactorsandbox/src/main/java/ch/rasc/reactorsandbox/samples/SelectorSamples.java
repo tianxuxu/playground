@@ -18,7 +18,7 @@ public class SelectorSamples {
 
 	static final Logger LOG = LoggerFactory.getLogger(SelectorSamples.class);
 
-	public static void main(String... args) throws InterruptedException {
+	public static void main(String... args) {
 
 		EventBus r = EventBus.create();
 

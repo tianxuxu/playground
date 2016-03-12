@@ -33,7 +33,7 @@ public class TradeServerExample {
 		String topic = "trade.execute";
 
 		// For each Trade event, execute that on the server
-		bus.<Event<Trade>> on($(topic), ev -> {
+		bus.<Event<Trade>>on($(topic), ev -> {
 			server.execute(ev.getData());
 
 			// Since we're async, for this test, use a latch to tell when we're done

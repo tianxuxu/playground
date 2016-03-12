@@ -16,7 +16,7 @@ public class EventBusSamples {
 		EventBus r = EventBus.config().processor(TopicProcessor.create()).get();
 
 		// Subscribe to topic "test"
-		r.<Event<String>> on($("test"), ev -> System.out.println("hi " + ev.getData()));
+		r.<Event<String>>on($("test"), ev -> System.out.println("hi " + ev.getData()));
 
 		// Notify topic "test"
 		r.notify("test", Event.wrap("Jon"));

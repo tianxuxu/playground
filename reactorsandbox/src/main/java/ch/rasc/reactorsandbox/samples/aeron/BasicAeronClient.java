@@ -3,17 +3,17 @@ package ch.rasc.reactorsandbox.samples.aeron;
 import org.reactivestreams.Subscription;
 
 import reactor.aeron.Context;
-import reactor.aeron.publisher.AeronPublisher;
+import reactor.aeron.publisher.AeronFlux;
 import reactor.core.subscriber.BaseSubscriber;
 import reactor.io.buffer.Buffer;
 
 /**
- * Sample of AeronPublisher usage on the client side. See
- * {@link BasicAeronSubscriberServer} for the server-side implementation.
+ * Sample of AeronFlux usage on the client side. See {@link BasicAeronServer} for the
+ * server-side implementation.
  *
  * @author Anatoly Kadyshev
  */
-public class BasicAeronPublisherClient {
+public class BasicAeronClient {
 
 	/**
 	 * Put in here IP of a host on which server is run
@@ -25,7 +25,7 @@ public class BasicAeronPublisherClient {
 	 */
 	private static final String RECEIVER_HOST = "127.0.0.1";
 
-	private static class AeronClientSubscriber extends BaseSubscriber<String> {
+	static final class ClientSubscriber implements BaseSubscriber<String> {
 
 		private Subscription subscription;
 
@@ -33,7 +33,7 @@ public class BasicAeronPublisherClient {
 
 		@Override
 		public void onSubscribe(Subscription s) {
-			super.onSubscribe(s);
+			BaseSubscriber.super.onSubscribe(s);
 
 			this.subscription = s;
 			this.subscription.request(1);
@@ -41,7 +41,7 @@ public class BasicAeronPublisherClient {
 
 		@Override
 		public void onNext(String value) {
-			super.onNext(value);
+			BaseSubscriber.super.onNext(value);
 
 			System.out.println("onNext: " + value);
 
@@ -54,6 +54,7 @@ public class BasicAeronPublisherClient {
 
 		@Override
 		public void onError(Throwable t) {
+			BaseSubscriber.super.onError(t);
 			t.printStackTrace();
 		}
 
@@ -63,12 +64,12 @@ public class BasicAeronPublisherClient {
 	}
 
 	public static void main(String[] args) {
-		Context context = new Context().name("publisher").autoCancel(true)
+		Context context = Context.create().name("publisher").autoCancel(true)
 				.senderChannel("udp://" + SENDER_HOST + ":12000")
 				.receiverChannel("udp://" + RECEIVER_HOST + ":12001");
 
-		AeronPublisher publisher = AeronPublisher.create(context);
-		Buffer.bufferToString(publisher).subscribe(new AeronClientSubscriber());
+		AeronFlux.listenOn(context).as(Buffer::bufferToString)
+				.subscribe(new ClientSubscriber());
 	}
 
 }
