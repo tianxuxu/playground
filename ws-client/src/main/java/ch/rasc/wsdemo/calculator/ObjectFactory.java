@@ -113,7 +113,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "add")
 	public JAXBElement<Add> createAdd(Add value) {
-		return new JAXBElement<Add>(_Add_QNAME, Add.class, null, value);
+		return new JAXBElement<>(_Add_QNAME, Add.class, null, value);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "subtract")
 	public JAXBElement<Subtract> createSubtract(Subtract value) {
-		return new JAXBElement<Subtract>(_Subtract_QNAME, Subtract.class, null, value);
+		return new JAXBElement<>(_Subtract_QNAME, Subtract.class, null, value);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "subtractResponse")
 	public JAXBElement<SubtractResponse> createSubtractResponse(SubtractResponse value) {
-		return new JAXBElement<SubtractResponse>(_SubtractResponse_QNAME,
+		return new JAXBElement<>(_SubtractResponse_QNAME,
 				SubtractResponse.class, null, value);
 	}
 
@@ -142,7 +142,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "addResponse")
 	public JAXBElement<AddResponse> createAddResponse(AddResponse value) {
-		return new JAXBElement<AddResponse>(_AddResponse_QNAME, AddResponse.class, null,
+		return new JAXBElement<>(_AddResponse_QNAME, AddResponse.class, null,
 				value);
 	}
 
@@ -153,7 +153,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "multiplyResponse")
 	public JAXBElement<MultiplyResponse> createMultiplyResponse(MultiplyResponse value) {
-		return new JAXBElement<MultiplyResponse>(_MultiplyResponse_QNAME,
+		return new JAXBElement<>(_MultiplyResponse_QNAME,
 				MultiplyResponse.class, null, value);
 	}
 
@@ -163,7 +163,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "divideResponse")
 	public JAXBElement<DivideResponse> createDivideResponse(DivideResponse value) {
-		return new JAXBElement<DivideResponse>(_DivideResponse_QNAME,
+		return new JAXBElement<>(_DivideResponse_QNAME,
 				DivideResponse.class, null, value);
 	}
 
@@ -173,7 +173,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "divide")
 	public JAXBElement<Divide> createDivide(Divide value) {
-		return new JAXBElement<Divide>(_Divide_QNAME, Divide.class, null, value);
+		return new JAXBElement<>(_Divide_QNAME, Divide.class, null, value);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "multiply")
 	public JAXBElement<Multiply> createMultiply(Multiply value) {
-		return new JAXBElement<Multiply>(_Multiply_QNAME, Multiply.class, null, value);
+		return new JAXBElement<>(_Multiply_QNAME, Multiply.class, null, value);
 	}
 
 }

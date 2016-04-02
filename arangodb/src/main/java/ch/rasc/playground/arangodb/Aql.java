@@ -6,8 +6,10 @@ import java.util.Map;
 import com.arangodb.ArangoConfigure;
 import com.arangodb.ArangoDriver;
 import com.arangodb.ArangoException;
-import com.arangodb.CursorResultSet;
+import com.arangodb.DocumentCursor;
 import com.arangodb.entity.BaseDocument;
+import com.arangodb.entity.DocumentEntity;
+import com.arangodb.util.AqlQueryOptions;
 import com.arangodb.util.MapBuilder;
 
 public class Aql {
@@ -36,12 +38,14 @@ public class Aql {
 		try {
 			String query = "FOR t IN firstCollection FILTER t.name == @name RETURN t";
 			Map<String, Object> bindVars = new MapBuilder().put("name", "Homer").get();
-			CursorResultSet<BaseDocument> rs = arangoDriver.executeQueryWithResultSet(
-					query, bindVars, BaseDocument.class, true, 20);
 
-			Iterator<BaseDocument> iterator = rs.iterator();
+			DocumentCursor<BaseDocument> rs = arangoDriver.executeDocumentQuery(query,
+					bindVars, new AqlQueryOptions().setBatchSize(20).setCount(true),
+					BaseDocument.class);
+
+			Iterator<DocumentEntity<BaseDocument>> iterator = rs.iterator();
 			while (iterator.hasNext()) {
-				BaseDocument aDocument = iterator.next();
+				DocumentEntity<BaseDocument> aDocument = iterator.next();
 				System.out.println("Key: " + aDocument.getDocumentKey());
 			}
 		}
@@ -53,12 +57,13 @@ public class Aql {
 			String query = "FOR t IN firstCollection FILTER t.name == @name "
 					+ "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
 			Map<String, Object> bindVars = new MapBuilder().put("name", "Homer").get();
-			CursorResultSet<BaseDocument> rs = arangoDriver.executeQueryWithResultSet(
-					query, bindVars, BaseDocument.class, true, 20);
+			DocumentCursor<BaseDocument> rs = arangoDriver.executeDocumentQuery(
+					query, bindVars, new AqlQueryOptions().setBatchSize(20).setCount(true),
+					BaseDocument.class);
 
-			Iterator<BaseDocument> iterator = rs.iterator();
+			Iterator<DocumentEntity<BaseDocument>> iterator = rs.iterator();
 			while (iterator.hasNext()) {
-				BaseDocument aDocument = iterator.next();
+				DocumentEntity<BaseDocument> aDocument = iterator.next();
 				System.out.println("Removed document: " + aDocument.getDocumentKey());
 			}
 

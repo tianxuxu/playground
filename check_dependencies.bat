@@ -6,6 +6,10 @@ cd D:\ws\playground\autovalue
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
+cd D:\ws\playground\avro
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\bytebuddy
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -46,6 +50,10 @@ cd D:\ws\playground\eventsource
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
+cd D:\ws\playground\eventsource2
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\forcastio
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -66,11 +74,11 @@ cd D:\ws\playground\googlemapsexamples
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\gscollections
+cd D:\ws\playground\hazelcast
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\hazelcast
+cd D:\ws\playground\immutable
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
@@ -102,6 +110,10 @@ cd D:\ws\playground\jsonp
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
+cd D:\ws\playground\longpolling
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\lucene
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -130,6 +142,14 @@ cd D:\ws\playground\orientdb
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
+cd D:\ws\playground\piwik
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\ratpack
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\reactorsandbox
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -143,6 +163,10 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
 cd D:\ws\playground\resources-gen
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\retrofit
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 

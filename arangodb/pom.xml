@@ -11,17 +11,17 @@
 
 	<dependencies>
 		<dependency>
-    <groupId>com.arangodb</groupId>
-    <artifactId>arangodb-java-driver</artifactId>
-    <version>2.7.2</version>
-  </dependency>
+			<groupId>com.arangodb</groupId>
+			<artifactId>arangodb-java-driver</artifactId>
+			<version>2.7.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.5.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
