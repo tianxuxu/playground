@@ -48,7 +48,7 @@ public class Indexing {
 				writer.addDocument(doc);
 			}
 
-			try (IndexReader reader = DirectoryReader.open(writer, true)) {
+			try (IndexReader reader = DirectoryReader.open(writer, true, true)) {
 				IndexSearcher searcher = new IndexSearcher(reader);
 				Term t = new Term("city", "Amsterdam");
 				Query query = new TermQuery(t);

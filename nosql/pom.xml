@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
-			<version>3.0.0-M05</version>
+			<version>3.0.0-RC1</version>
 		</dependency>
 
 		<dependency>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-compress</artifactId>
-			<version>1.10</version>
+			<version>1.11</version>
 		</dependency>
 
 		<dependency>

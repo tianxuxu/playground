@@ -26,7 +26,7 @@
   		<dependency> 
 			<groupId>org.eclipse.jetty.websocket</groupId> 
 			<artifactId>websocket-client</artifactId> 
-			<version>9.1.0.v2.1.1515</version> 
+			<version>9.1.0.v2.1.1615</version> 
 		</dependency>  
 -->
 		
@@ -34,7 +34,7 @@
 	 	<dependency> 
 			<groupId>org.eclipse.jetty.websocket</groupId> 
 			<artifactId>javax-websocket-client-impl</artifactId> 
-			<version>9.1.0.v2.1.1515</version> 
+			<version>9.1.0.v2.1.1615</version> 
 		</dependency> 
 -->
 		
@@ -101,7 +101,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.20</version>
+			<version>1.7.21</version>
 		</dependency>
 
 		<dependency>
@@ -113,7 +113,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.20</version>
+			<version>1.7.21</version>
 		</dependency>
 
 	</dependencies>
