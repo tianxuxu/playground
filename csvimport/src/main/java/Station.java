@@ -11,7 +11,7 @@ public class Station {
 	private String code;
 
 	@Parsed(field = "time")
-	@Convert(conversionClass=ZonedDateTimeConversion.class)
+	@Convert(conversionClass = ZonedDateTimeConversion.class)
 	private ZonedDateTime dateTime;
 
 	/**

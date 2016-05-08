@@ -19,7 +19,7 @@ public class ReadWithUnivocity {
 		parser.parse(new InputStreamReader(
 				ReadWithUnivocity.class.getResourceAsStream("/testHeader.csv"), "UTF-8"));
 
-		List<User> beans = rowProcessor.getBeans();		
+		List<User> beans = rowProcessor.getBeans();
 		beans.forEach(System.out::println);
 
 	}

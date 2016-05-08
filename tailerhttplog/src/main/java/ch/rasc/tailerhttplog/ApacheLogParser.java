@@ -103,7 +103,7 @@ public class ApacheLogParser {
 	 */
 	public void ApacheAccessLogParser(String accessFilePath, String urlsFilePath,
 			String startingDate, String endingDate, String dateFormat)
-					throws ParseException, IOException {
+			throws ParseException, IOException {
 
 		long startingEpoch = convertTimetoEpoch(dateFormat, startingDate);
 		long endingEpoch = convertTimetoEpoch(dateFormat, endingDate);

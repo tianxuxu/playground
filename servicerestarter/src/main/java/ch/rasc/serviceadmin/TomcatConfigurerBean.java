@@ -11,8 +11,7 @@ public class TomcatConfigurerBean implements EmbeddedServletContainerCustomizer 
 	public void customize(ConfigurableEmbeddedServletContainer container) {
 		container.setPort(12344);
 
-		container.setRegisterDefaultServlet(false);		
-		container.setRegisterJspServlet(false);
+		container.setRegisterDefaultServlet(false);
 		container.setContextPath("/service");
 	}
 

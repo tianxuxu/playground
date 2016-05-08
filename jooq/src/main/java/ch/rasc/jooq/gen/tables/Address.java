@@ -103,8 +103,8 @@ public class Address
 	 */
 	@Override
 	public java.util.List<org.jooq.UniqueKey<ch.rasc.jooq.gen.tables.records.AddressRecord>> getKeys() {
-		return java.util.Arrays.<org.jooq.UniqueKey<ch.rasc.jooq.gen.tables.records
-				.AddressRecord>> asList(ch.rasc.jooq.gen.Keys.KEY_ADDRESS_PRIMARY);
+		return java.util.Arrays.<org.jooq.UniqueKey<ch.rasc.jooq.gen.tables.records.AddressRecord>>asList(
+				ch.rasc.jooq.gen.Keys.KEY_ADDRESS_PRIMARY);
 	}
 
 	/**

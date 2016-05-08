@@ -6,10 +6,10 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import org.immutables.gson.Gson;
-import org.immutables.moshi.Json;
 import org.immutables.value.Value;
 
 import com.google.common.base.Optional;
+import com.squareup.moshi.Json;
 
 @Value.Immutable
 @Value.Enclosing

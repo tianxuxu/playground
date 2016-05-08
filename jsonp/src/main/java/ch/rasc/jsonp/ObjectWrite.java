@@ -18,8 +18,8 @@ public class ObjectWrite {
 						Json.createArrayBuilder()
 								.add(Json.createObjectBuilder().add("type", "mobile")
 										.add("number", "111-111-1111"))
-						.add(Json.createObjectBuilder().add("type", "home").add("number",
-								"222-222-2222")))
+								.add(Json.createObjectBuilder().add("type", "home")
+										.add("number", "222-222-2222")))
 				.build();
 
 		Map<String, Boolean> properties = Collections

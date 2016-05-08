@@ -73,7 +73,7 @@ public class ResourceGen {
 			return;
 		}
 
-		String configFile = ns.<String> getList("file").iterator().next();
+		String configFile = ns.<String>getList("file").iterator().next();
 
 		Config config = null;
 		try (FileReader fr = new FileReader(configFile)) {

@@ -49,7 +49,7 @@ public class Main {
 			return;
 		}
 
-		String configFile = ns.<String> getList("file").iterator().next();
+		String configFile = ns.<String>getList("file").iterator().next();
 
 		MustacheFactory mf = new DefaultMustacheFactory();
 		Mustache mustache = null;

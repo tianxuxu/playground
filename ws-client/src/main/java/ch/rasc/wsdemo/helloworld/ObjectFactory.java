@@ -54,8 +54,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = "http://wsdemo.rasc.ch/", name = "sayHiResponse")
 	public JAXBElement<SayHiResponse> createSayHiResponse(SayHiResponse value) {
-		return new JAXBElement<>(_SayHiResponse_QNAME, SayHiResponse.class,
-				null, value);
+		return new JAXBElement<>(_SayHiResponse_QNAME, SayHiResponse.class, null, value);
 	}
 
 	/**

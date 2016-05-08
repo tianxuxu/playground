@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity(noClassnameStored = true, value = "employees")
-@Indexes(@Index(fields = @Field("salary") ))
+@Indexes(@Index(fields = @Field("salary")))
 class Employee {
 
 	@Id

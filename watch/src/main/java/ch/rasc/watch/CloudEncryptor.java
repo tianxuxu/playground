@@ -54,7 +54,7 @@ public class CloudEncryptor {
 
 	private static void watch(WatchService watchService, Cipher cipher,
 			Path localDirectory, Path cloudDirectory)
-					throws IOException, InterruptedException {
+			throws IOException, InterruptedException {
 		registerTree(watchService, localDirectory);
 		registerTree(watchService, cloudDirectory);
 

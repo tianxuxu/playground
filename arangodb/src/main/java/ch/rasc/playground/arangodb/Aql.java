@@ -57,8 +57,8 @@ public class Aql {
 			String query = "FOR t IN firstCollection FILTER t.name == @name "
 					+ "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
 			Map<String, Object> bindVars = new MapBuilder().put("name", "Homer").get();
-			DocumentCursor<BaseDocument> rs = arangoDriver.executeDocumentQuery(
-					query, bindVars, new AqlQueryOptions().setBatchSize(20).setCount(true),
+			DocumentCursor<BaseDocument> rs = arangoDriver.executeDocumentQuery(query,
+					bindVars, new AqlQueryOptions().setBatchSize(20).setCount(true),
 					BaseDocument.class);
 
 			Iterator<DocumentEntity<BaseDocument>> iterator = rs.iterator();

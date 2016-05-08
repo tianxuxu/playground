@@ -37,7 +37,7 @@ public class UploadController {
 			@RequestParam("resumableTotalSize") Long resumableTotalSize,
 			@RequestParam("resumableType") String resumableType,
 			@RequestParam("resumableRelativePath") String resumableRelativePath)
-					throws IOException {
+			throws IOException {
 
 		if (this.fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
 				resumableChunkSize)) {

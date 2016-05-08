@@ -8,8 +8,6 @@ import org.immutables.gson.stream.JsonGeneratorWriter;
 import org.immutables.gson.stream.JsonParserReader;
 import org.immutables.samples.json.autojackson.AutoDocument;
 import org.immutables.samples.json.immutables.Gocument;
-import org.immutables.samples.json.immutables.GsonAdaptersGocument;
-import org.immutables.samples.json.immutables.JsonAdaptersGocument;
 import org.immutables.samples.json.pojo.OptionalJsonAdapterFactory;
 import org.immutables.samples.json.pojo.OptionalTypeAdapterFactory;
 import org.immutables.samples.json.pojo.PojoDocument;

@@ -74,7 +74,7 @@ public class Backup {
 
 	private static void fetchRepo(Path backupDir, String name, String url,
 			String username, String password) throws IOException, GitAPIException,
-					InvalidRemoteException, TransportException {
+			InvalidRemoteException, TransportException {
 		Path repoDir = backupDir.resolve(name);
 		Files.createDirectories(repoDir);
 

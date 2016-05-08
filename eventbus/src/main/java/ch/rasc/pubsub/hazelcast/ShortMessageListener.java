@@ -15,7 +15,7 @@ public class ShortMessageListener implements MessageListener<ShortMessageEvent> 
 		Config config = new Config();
 		config.setInstanceName("myHazelcastInstance");
 		HazelcastInstance hi = Hazelcast.newHazelcastInstance(config);
-		hi.<ShortMessageEvent> getTopic("my_topic").addMessageListener(this);
+		hi.<ShortMessageEvent>getTopic("my_topic").addMessageListener(this);
 	}
 
 	@Override

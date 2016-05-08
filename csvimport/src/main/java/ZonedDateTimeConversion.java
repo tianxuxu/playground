@@ -6,8 +6,8 @@ import com.univocity.parsers.conversions.ObjectConversion;
 
 public class ZonedDateTimeConversion extends ObjectConversion<ZonedDateTime> {
 
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
-			.withZone(ZoneOffset.UTC);
+	private final DateTimeFormatter formatter = DateTimeFormatter
+			.ofPattern("yyyyMMddHHmm").withZone(ZoneOffset.UTC);
 
 	public ZonedDateTimeConversion(@SuppressWarnings("unused") String[] dummy) {
 		super(null, null);

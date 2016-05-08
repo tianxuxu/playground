@@ -78,8 +78,8 @@ public class CryptoUtil {
 	}
 
 	public static SecretKey generateAESSecretKey(PrivateKey privateKey,
-			PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException,
-					IllegalStateException {
+			PublicKey publicKey)
+			throws NoSuchAlgorithmException, InvalidKeyException, IllegalStateException {
 		KeyAgreement keyAgreement = KeyAgreement.getInstance("DiffieHellman");
 		keyAgreement.init(privateKey);
 		keyAgreement.doPhase(publicKey, true);
