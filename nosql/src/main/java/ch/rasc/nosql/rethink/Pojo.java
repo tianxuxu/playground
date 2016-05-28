@@ -15,7 +15,7 @@ public class Pojo {
 		try (Connection conn = r.connection().hostname("localhost").port(28015)
 				.connect()) {
 
-			// r.db("test").tableCreate("users").run(conn);
+			r.db("test").tableCreate("users").run(conn);
 			InsertResponse o = r.table("users").insert(u).run(conn, InsertResponse.class);
 			System.out.println(o);
 
@@ -24,7 +24,7 @@ public class Pojo {
 				System.out.println(user);
 			}
 
-			r.table("users").delete().run(conn);
+			//r.table("users").delete().run(conn);
 		}
 	}
 

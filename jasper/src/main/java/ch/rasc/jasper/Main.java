@@ -25,9 +25,8 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		JasperPrint jasperPrint = null;
 
-		try {
-			// JasperCompileManager.compileReportToFile("report.jrxml");
-			InputStream is = Main.class.getResourceAsStream("/report.jasper");
+		// JasperCompileManager.compileReportToFile("report.jrxml");
+		try (InputStream is = Main.class.getResourceAsStream("/report.jasper")) {
 
 			jasperPrint = JasperFillManager.fillReport(is, new HashMap<>(),
 					new JRTableModelDataSource(tableModelData()));

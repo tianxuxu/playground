@@ -1,5 +1,7 @@
 package ch.rasc.nosql.rethink;
 
+import java.util.concurrent.TimeoutException;
+
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 import com.rethinkdb.net.Cursor;
@@ -8,7 +10,7 @@ public class Ten {
 
 	public static final RethinkDB r = RethinkDB.r;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws TimeoutException {
 		try (Connection conn = r.connection().hostname("localhost").port(28015)
 				.connect()) {
 
@@ -18,6 +20,14 @@ public class Ten {
 			readWithFilter(conn);
 			readWithPrimaryKey(conn);
 
+			Cursor cursor = r.table("authors").changes().run(conn);
+			while (cursor.hasNext()) {
+				System.out.println(cursor.next(1000));
+			}
+//			for (Object doc : cursor) {
+//			    System.out.println(doc);
+//			}
+			System.out.println("the end");
 		}
 	}
 

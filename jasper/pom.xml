@@ -14,11 +14,17 @@
 			<groupId>ar.com.fdvs</groupId>
 			<artifactId>DynamicJasper</artifactId>
 			<version>5.0.7</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.2.1</version>
+			<version>6.2.2</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>bcmail-jdk14</artifactId>
@@ -147,7 +153,7 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.14</version>
@@ -167,7 +173,7 @@
 					<groupId>xml-apis</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 
