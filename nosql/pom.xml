@@ -56,6 +56,33 @@
 			<version>2.3.1</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.rasc</groupId>
+			<artifactId>constgen</artifactId>
+			<version>1.0.3</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.rasc</groupId>
+			<artifactId>bsoncodec</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.rasc</groupId>
+			<artifactId>bsoncodec-apt</artifactId>
+			<version>1.0.2</version>
+			<optional>true</optional>
+		</dependency>		
+
 	</dependencies>
 
 	<build>
