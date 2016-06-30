@@ -9,14 +9,25 @@ public enum FioUnit {
 
 	/**
 	 * Returns results in SI units. In particular, properties now have the following
-	 * units: summary: Any summaries containing temperature or snow accumulation units
-	 * will have their values in degrees Celsius or in centimeters (respectively).
-	 * nearestStormDistance: Kilometers. precipIntensity: Millimeters per hour.
-	 * precipIntensityMax: Millimeters per hour. precipAccumulation: Centimeters.
-	 * temperature: Degrees Celsius. temperatureMin: Degrees Celsius. temperatureMax:
-	 * Degrees Celsius. apparentTemperature: Degrees Celsius. dewPoint: Degrees Celsius.
-	 * windSpeed: Meters per second. pressure: Hectopascals (which are, conveniently,
-	 * equivalent to the default millibars). visibility: Kilometers.
+	 * units:
+	 * <p>
+	 * <ul>
+	 * <li>summary: Any summaries containing temperature or snow accumulation units will
+	 * have their values in degrees Celsius or in centimeters (respectively).</li>
+	 * <li>nearestStormDistance: Kilometers.</li>
+	 * <li>precipIntensity: Millimeters per hour.</li>
+	 * <li>precipIntensityMax: Millimeters per hour.</li>
+	 * <li>precipAccumulation: Centimeters.</li>
+	 * <li>temperature: Degrees Celsius.</li>
+	 * <li>temperatureMin: Degrees Celsius.</li>
+	 * <li>temperatureMax: Degrees Celsius.</li>
+	 * <li>apparentTemperature: Degrees Celsius.</li>
+	 * <li>dewPoint: Degrees Celsius.</li>
+	 * <li>windSpeed: Meters per second.</li>
+	 * <li>pressure: Hectopascals (which are, conveniently, equivalent to the default
+	 * millibars).</li>
+	 * <li>visibility: Kilometers.</li>
+	 * </ul>
 	 */
 	SI("si"),
 
@@ -26,10 +37,11 @@ public enum FioUnit {
 	CA("ca"),
 
 	/**
-	 * Identical to si, except that windSpeed is in miles per hour, as in the US. (This
-	 * option is provided because adoption of SI in the UK has been inconsistent.)
+	 * Identical to si, except that windSpeed is in miles per hour, and
+	 * nearestStormDistance and visibility are in miles, as in the US. (This option is
+	 * provided because adoption of SI in the UK has been inconsistent.)
 	 */
-	UK("uk"),
+	UK2("uk2"),
 
 	/**
 	 * Selects the relevant units automatically, based on geographic location.
