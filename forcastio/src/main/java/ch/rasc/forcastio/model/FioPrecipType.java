@@ -1,7 +1,7 @@
 package ch.rasc.forcastio.model;
 
 public enum FioPrecipType {
-	RAIN("rain"), SNOW("snow"), SLEET("sleet"), HAIL("hail"), UNKNOWN(null);
+	RAIN("rain"), SNOW("snow"), SLEET("sleet"), UNKNOWN(null);
 
 	private String jsonValue;
 

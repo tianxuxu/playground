@@ -20,19 +20,37 @@ public class Main {
 				.language(FioLanguage.DE)
 				.addIncludeBlock(FioBlock.DAILY)
 				.build();
-		
+
 		FioClient client = new FioClient(args[0]);
 		FioResponse response = client.forecastCall(request);
 		System.out.println(response);
 		System.out.println("number of api calls: " + client.apiCalls());
 		System.out.println("response time: " + client.responseTime());
-				
-//		FioResponse response = FioRequest.create(args[0], "47.948915", "-100.1019949")
-//				.unit(FioUnit.SI).language(FioLanguage.DE).include(FioBlock.DAILY)
-//				// .exclude(FioBlock.ALERTS, FioBlock.FLAGS, FioBlock.CURRENTLY,
-//				// FioBlock.MINUTELY)
-//				.execute();
-//		System.out.println(response);
+
+
+		request = ImmutableFioRequest.builder()
+				.latitude("37.3861")
+				.longitude("122.0839")
+				.build();
+
+		response = client.forecastCall(request);
+		System.out.println(response);
+		System.out.println("number of api calls: " + client.apiCalls());
+		System.out.println("response time: " + client.responseTime());
+
+
+		request = ImmutableFioRequest.builder()
+				.latitude("42.7284")
+				.longitude("73.6918")
+				.extendHourly(true)
+				.build();
+
+		response = client.forecastCall(request);
+		System.out.println(response);
+		System.out.println("number of api calls: " + client.apiCalls());
+		System.out.println("response time: " + client.responseTime());
+		System.out.println(response.hourly().getAdditionalProperties());
+		System.out.println(response.daily().getAdditionalProperties());
 
 	}
 }

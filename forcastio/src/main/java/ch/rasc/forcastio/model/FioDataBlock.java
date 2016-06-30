@@ -2,6 +2,8 @@ package ch.rasc.forcastio.model;
 
 import java.util.List;
 
+import org.immutables.value.Value;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -17,54 +19,26 @@ import ch.rasc.forcastio.converter.FioIconDeserializer;
  * terminate early. Furthermore, if no data points for a time period are known, then the
  * data block will be omitted from the response in its entirety.
  */
-@SuppressWarnings("unused")
+@Value.Immutable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FioDataBlock {
-	private String summary;
-
-	@JsonDeserialize(using = FioIconDeserializer.class)
-	private FioIcon icon;
-
-	private List<FioDataPoint> data;
+@JsonDeserialize(as = ImmutableFioDataBlock.class)
+public interface FioDataBlock {
 
 	/**
 	 * A human-readable text summary of this data block.
 	 */
-	public String getSummary() {
-		return this.summary;
-	}
+	String summary();
 
 	/**
 	 * A machine-readable text summary of this data block
 	 */
-	public FioIcon getIcon() {
-		return this.icon;
-	}
+	@JsonDeserialize(using = FioIconDeserializer.class)
+	FioIcon icon();
 
 	/**
-	 * An array of data point objects, ordered by time, which together describe the
-	 * weather conditions at the requested location over time.
+	 * A collection of {@link FioDataPoint} instances, ordered by time, which together
+	 * describe the weather conditions at the requested location over time.
 	 */
-	public List<FioDataPoint> getData() {
-		return this.data;
-	}
-
-	private void setSummary(String summary) {
-		this.summary = summary;
-	}
-
-	private void setIcon(FioIcon icon) {
-		this.icon = icon;
-	}
-
-	private void setData(List<FioDataPoint> data) {
-		this.data = data;
-	}
-
-	@Override
-	public String toString() {
-		return "FioDataBlock [summary=" + this.summary + ", icon=" + this.icon + ", data="
-				+ this.data + "]";
-	}
+	List<FioDataPoint> data();
 
 }

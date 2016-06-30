@@ -9,11 +9,11 @@ import ch.rasc.forcastio.model.FioResponse;
 public class JacksonJsonConverter implements JsonConverter {
 
 	private final ObjectMapper objectMapper;
-	
+
 	public JacksonJsonConverter() {
 		this(new ObjectMapper());
 	}
-	
+
 	public JacksonJsonConverter(ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
 	}

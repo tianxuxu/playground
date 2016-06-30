@@ -63,7 +63,7 @@ public class FioClient {
 		}
 
 		Set<FioBlock> exclude = EnumSet.noneOf(FioBlock.class);
-		
+
 		Set<FioBlock> include = request.includeBlocks();
 		if (!include.isEmpty()) {
 			for (FioBlock block : FioBlock.values()) {
@@ -103,14 +103,14 @@ public class FioClient {
 	 * The number of API calls made for today. Value is only visible after a request
 	 */
 	public Integer apiCalls() {
-		return apiCalls;
+		return this.apiCalls;
 	}
 
 	/**
 	 * The server-side response time of the last request
 	 */
 	public String responseTime() {
-		return responseTime;
+		return this.responseTime;
 	}
 
 }

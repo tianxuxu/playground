@@ -46,24 +46,28 @@ public interface FioResponse {
 	 * An instance of {@link FioDataPoint} containing the current weather conditions at
 	 * the requested location.
 	 */
+	@Nullable
 	FioDataPoint currently();
 
 	/**
 	 * An instance of {@link FioDataPoint} containing the weather conditions
 	 * minute-by-minute for the next hour.
 	 */
+	@Nullable
 	FioDataPoint minutely();
 
 	/**
 	 * An instance of {@link FioDataPoint} containing the weather conditions hour-by-hour
 	 * for the next two days.
 	 */
+	@Nullable
 	FioDataPoint hourly();
 
 	/**
 	 * An instance of {@link FioDataPoint} containing the weather conditions day-by-day
 	 * for the next week.
 	 */
+	@Nullable
 	FioDataPoint daily();
 
 	/**
