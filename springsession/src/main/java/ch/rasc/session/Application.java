@@ -1,5 +1,7 @@
 package ch.rasc.session;
 
+import java.util.StringJoiner;
+
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -42,11 +44,11 @@ public class Application {
 							.getProtocolHandler();
 					httpProtocol.setCompression("on");
 					httpProtocol.setCompressionMinSize(512);
-					String mimeTypes = httpProtocol.getCompressableMimeTypes();
-					String additionalMimeTypes = mimeTypes + ","
+					String[] mimeTypes = httpProtocol.getCompressableMimeTypes();					
+					String additionalMimeTypes = String.join(",", mimeTypes)  + ","
 							+ MediaType.APPLICATION_JSON_VALUE;
 
-					httpProtocol.setCompressableMimeTypes(additionalMimeTypes);
+					httpProtocol.setCompressableMimeType(additionalMimeTypes);
 				});
 	}
 }

@@ -20,23 +20,25 @@ public class MetNet {
 				.url("http://data.geo.admin.ch/ch.meteoschweiz.swissmetnet/VQHA69.csv")
 				.build();
 
-		Response response = client.newCall(request).execute();
+		try (Response response = client.newCall(request).execute()) {
 
-		CsvParserSettings parserSettings = new CsvParserSettings();
-		parserSettings.getFormat().setLineSeparator("\n");
-		parserSettings.getFormat().setDelimiter('|');
+			CsvParserSettings parserSettings = new CsvParserSettings();
+			parserSettings.getFormat().setLineSeparator("\n");
+			parserSettings.getFormat().setDelimiter('|');
 
-		parserSettings.setNumberOfRowsToSkip(2);
-		parserSettings.setHeaderExtractionEnabled(true);
-		BeanListProcessor<Station> rowProcessor = new BeanListProcessor<>(Station.class);
-		parserSettings.setRowProcessor(rowProcessor);
+			parserSettings.setNumberOfRowsToSkip(2);
+			parserSettings.setHeaderExtractionEnabled(true);
+			BeanListProcessor<Station> rowProcessor = new BeanListProcessor<>(
+					Station.class);
+			parserSettings.setRowProcessor(rowProcessor);
 
-		CsvParser parser = new CsvParser(parserSettings);
-		try (ResponseBody body = response.body()) {
-			parser.parse(body.byteStream());
+			CsvParser parser = new CsvParser(parserSettings);
+			try (ResponseBody body = response.body()) {
+				parser.parse(body.byteStream());
+			}
+			List<Station> beans = rowProcessor.getBeans();
+			beans.forEach(System.out::println);
 		}
-		List<Station> beans = rowProcessor.getBeans();
-		beans.forEach(System.out::println);
 
 	}
 

@@ -15,33 +15,36 @@ import com.mongodb.client.MongoDatabase;
 
 public class BasicEntityDiffExample {
 	public static void main(String[] args) {
-		MongoDatabase mongoDb = new MongoClient("localhost").getDatabase("testjavers");
+		try (MongoClient mongoClient = new MongoClient("localhost")) {
+			MongoDatabase mongoDb = mongoClient.getDatabase("testjavers");
 
-		MongoRepository mongoRepo = new MongoRepository(mongoDb);
-		Javers javers = JaversBuilder.javers().registerJaversRepository(mongoRepo)
-				.build();
+			MongoRepository mongoRepo = new MongoRepository(mongoDb);
+			Javers javers = JaversBuilder.javers().registerJaversRepository(mongoRepo)
+					.build();
 
-		// init your data
-		Person robert = new Person("bob", "Robert Martin");
-		// and persist initial commit
-		javers.commit("sr", robert);
+			// init your data
+			Person robert = new Person("bob", "Robert Martin");
+			// and persist initial commit
+			javers.commit("sr", robert);
 
-		// do some changes
-		robert.setName("Robert C.");
-		// and persist another commit
-		javers.commit("sr", robert);
+			// do some changes
+			robert.setName("Robert C.");
+			// and persist another commit
+			javers.commit("sr", robert);
 
-		// when:
-		List<CdoSnapshot> snapshots = javers
-				.findSnapshots(QueryBuilder.byInstanceId("bob", Person.class).build());
+			// when:
+			List<CdoSnapshot> snapshots = javers.findSnapshots(
+					QueryBuilder.byInstanceId("bob", Person.class).build());
 
-		for (CdoSnapshot e : snapshots) {
-			System.out.println(e);
+			for (CdoSnapshot e : snapshots) {
+				System.out.println(e);
+			}
+
+			List<Change> changes = javers
+					.findChanges(QueryBuilder.byInstanceId("bob", Person.class).build());
+			String changeLog = javers.processChangeList(changes,
+					new SimpleTextChangeLog());
+			System.out.println(changeLog);
 		}
-
-		List<Change> changes = javers
-				.findChanges(QueryBuilder.byInstanceId("bob", Person.class).build());
-		String changeLog = javers.processChangeList(changes, new SimpleTextChangeLog());
-		System.out.println(changeLog);
 	}
 }
