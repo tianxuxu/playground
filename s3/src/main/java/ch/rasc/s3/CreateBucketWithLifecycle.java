@@ -1,6 +1,7 @@
 package ch.rasc.s3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -30,7 +31,7 @@ public class CreateBucketWithLifecycle {
 					.withStorageClass(StorageClass.Glacier);
 			BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
 					.withId("Archive and delete rule").withPrefix("")
-					.withTransition(transToArchive).withExpirationInDays(expirationDays)
+					.withTransitions(Collections.singletonList(transToArchive)).withExpirationInDays(expirationDays)
 					.withStatus(BucketLifecycleConfiguration.ENABLED.toString());
 
 			List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<>();
