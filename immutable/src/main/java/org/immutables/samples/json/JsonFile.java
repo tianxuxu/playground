@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.immutables.samples.json.immutables.Gocument.Evaluation.Stars;
+import org.immutables.samples.json.immutables.GsonAdaptersGocument;
+import org.immutables.samples.json.immutables.ImmutableGocument;
+import org.immutables.samples.json.pojo.PojoDocument.Item;
 
 import com.google.common.io.Files;
 import com.google.gson.GsonBuilder;

@@ -9,17 +9,17 @@
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-netty</artifactId>
-			<version>0.14.1</version>
+			<version>1.0.0-pre1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-protobuf</artifactId>
-			<version>0.14.1</version>
+			<version>1.0.0-pre1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-stub</artifactId>
-			<version>0.14.1</version>
+			<version>1.0.0-pre1</version>
 		</dependency>
 	</dependencies>
 

@@ -9,12 +9,10 @@ import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
 import com.google.common.base.Optional;
-import com.squareup.moshi.Json;
 
 @Value.Immutable
 @Value.Enclosing
 @Gson.TypeAdapters
-@Json.Adapters
 public interface Gocument {
 
 	List<Item> items();
@@ -23,7 +21,6 @@ public interface Gocument {
 	public interface Item {
 		int id();
 
-		@Json.Named("name")
 		String name();
 
 		@Nullable
