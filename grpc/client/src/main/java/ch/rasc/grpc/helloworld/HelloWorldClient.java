@@ -31,13 +31,13 @@
 
 package ch.rasc.grpc.helloworld;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 
 /**
  * A simple client that requests a greeting from the {@link HelloWorldServer}.
@@ -51,12 +51,12 @@ public class HelloWorldClient {
 
 	/** Construct client connecting to HelloWorld server at {@code host:port}. */
 	public HelloWorldClient(String host, int port) {
-		channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext(true).build();
-		blockingStub = GreeterGrpc.newBlockingStub(channel);
+		this.channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext(true).build();
+		this.blockingStub = GreeterGrpc.newBlockingStub(this.channel);
 	}
 
 	public void shutdown() throws InterruptedException {
-		channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+		this.channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 	}
 
 	/** Say hello to server. */
@@ -65,7 +65,7 @@ public class HelloWorldClient {
 		HelloRequest request = HelloRequest.newBuilder().setName(name).build();
 		HelloReply response;
 		try {
-			response = blockingStub.sayHello(request);
+			response = this.blockingStub.sayHello(request);
 		}
 		catch (StatusRuntimeException e) {
 			logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());

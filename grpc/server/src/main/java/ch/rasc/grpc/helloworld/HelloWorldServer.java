@@ -34,7 +34,6 @@ package ch.rasc.grpc.helloworld;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import ch.rasc.grpc.helloworld.GreeterGrpc.AbstractGreeter;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -47,25 +46,29 @@ public class HelloWorldServer {
 			.getLogger(HelloWorldServer.class.getName());
 
 	/* The port on which the server should run */
-	private int port = 50051;
+	private final int port = 50051;
 	private Server server;
 
 	private void start() throws IOException {
-		server = ServerBuilder.forPort(port).addService(new GreeterImpl().bindService())
-				.build().start();
-		logger.info("Server started, listening on " + port);
+		this.server = ServerBuilder.forPort(this.port).addService(new GreeterImpl()).build()
+				.start();
+		logger.info("Server started, listening on " + this.port);
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run() {
+				// Use stderr here since the logger may have been reset by its JVM
+				// shutdown hook.
+				System.err.println(
+						"*** shutting down gRPC server since JVM is shutting down");
 				HelloWorldServer.this.stop();
-				System.err.println("Shutdown");
+				System.err.println("*** server shut down");
 			}
 		});
 	}
 
 	private void stop() {
-		if (server != null) {
-			server.shutdown();
+		if (this.server != null) {
+			this.server.shutdown();
 		}
 	}
 
@@ -73,8 +76,8 @@ public class HelloWorldServer {
 	 * Await termination on the main thread since the grpc library uses daemon threads.
 	 */
 	private void blockUntilShutdown() throws InterruptedException {
-		if (server != null) {
-			server.awaitTermination();
+		if (this.server != null) {
+			this.server.awaitTermination();
 		}
 	}
 
@@ -87,7 +90,7 @@ public class HelloWorldServer {
 		server.blockUntilShutdown();
 	}
 
-	private class GreeterImpl extends AbstractGreeter {
+	private class GreeterImpl extends GreeterGrpc.GreeterImplBase {
 
 		@Override
 		public void sayHello(HelloRequest req,
