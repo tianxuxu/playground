@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import org.immutables.samples.json.immutables.Gocument.Evaluation;
 import org.immutables.samples.json.immutables.Gocument.Evaluation.Stars;
+import org.immutables.samples.json.immutables.Gocument.Item;
 import org.immutables.samples.json.immutables.GsonAdaptersGocument;
 import org.immutables.samples.json.immutables.ImmutableGocument;
-import org.immutables.samples.json.pojo.PojoDocument.Item;
+import org.immutables.samples.json.immutables.ImmutableGocument.Item.Builder;
 
 import com.google.common.io.Files;
 import com.google.gson.GsonBuilder;
@@ -36,8 +38,8 @@ public class JsonFile {
 				.create().toJson(document);
 	}
 
-	private static Item createItem(int iteration, boolean recurse) {
-		Item.Builder builder = Item.builder();
+	private static org.immutables.samples.json.immutables.Gocument.Item createItem(int iteration, boolean recurse) {
+		Builder builder = ImmutableGocument.Item.builder();
 
 		builder.id(iteration + 1000).name(textFor(iteration % 15, 10))
 				.description(textFor(iteration, 40)).foo(iteration * 31 * 17)
@@ -64,7 +66,7 @@ public class JsonFile {
 
 	private static Evaluation createEvaluation(int i, int j) {
 		Stars[] stars = Stars.values();
-		return Evaluation.builder().stars(stars[i * j % stars.length])
+		return ImmutableGocument.Evaluation.builder().stars(stars[i * j % stars.length])
 				.comment(textFor(i * j, 30)).build();
 	}
 

@@ -8,6 +8,7 @@ import org.immutables.gson.stream.JsonGeneratorWriter;
 import org.immutables.gson.stream.JsonParserReader;
 import org.immutables.samples.json.autojackson.AutoDocument;
 import org.immutables.samples.json.immutables.Gocument;
+import org.immutables.samples.json.immutables.GsonAdaptersGocument;
 import org.immutables.samples.json.pojo.OptionalJsonAdapterFactory;
 import org.immutables.samples.json.pojo.OptionalTypeAdapterFactory;
 import org.immutables.samples.json.pojo.PojoDocument;
@@ -48,7 +49,7 @@ public class JsonBenchmarks {
 	@Setup
 	public void setup() throws IOException {
 		this.moshi = new Moshi.Builder().add(new OptionalJsonAdapterFactory())
-				.add(new JsonAdaptersGocument()).build();
+				.build();
 		this.json = Resources.toString(JsonBenchmarks.class.getResource("sample.json"),
 				StandardCharsets.UTF_8);
 		this.objectMapper.registerModule(new GuavaModule());

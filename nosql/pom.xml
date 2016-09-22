@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
-			<version>3.1.0-M07</version>
+			<version>3.1.0-M09</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tukaani</groupId>
