@@ -2,7 +2,6 @@ package ch.rasc.protobuf;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.UUID;
 
 import ch.rasc.protobuf.SensorDataOuterClass.SensorData;
 import okhttp3.MediaType;
