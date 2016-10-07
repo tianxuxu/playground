@@ -9,10 +9,21 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class WorkQueue {
+
+	private final int processingDelayInSeconds;
+
 	private final Set<WorkJob> inbox = new HashSet<>();
 
-	public synchronized void add(Path p) {
-		this.inbox.add(new WorkJob(p));
+	public WorkQueue() {
+		this(10);
+	}
+
+	public WorkQueue(int processingDelayInSeconds) {
+		this.processingDelayInSeconds = processingDelayInSeconds;
+	}
+
+	public synchronized void add(Path baseDir, Path file) {
+		this.inbox.add(new WorkJob(baseDir, file));
 	}
 
 	public void add(Set<WorkJob> paths) {
@@ -26,17 +37,25 @@ public class WorkQueue {
 	// return all paths that have a modified date older than 10 seconds
 	public synchronized Set<WorkJob> getPaths() throws IOException {
 		Set<WorkJob> result = new HashSet<>();
+		Set<WorkJob> nonExistingPaths = new HashSet<>();
 		long now = System.currentTimeMillis() / 1000;
 
 		for (WorkJob job : this.inbox) {
 			Path path = job.getFile();
-			FileTime time = Files.getLastModifiedTime(path);
-			if (time.to(TimeUnit.SECONDS) + 10 <= now) {
-				result.add(job);
+			if (Files.exists(path)) {
+				FileTime time = Files.getLastModifiedTime(path);
+				if (time.to(TimeUnit.SECONDS) + this.processingDelayInSeconds <= now) {
+					result.add(job);
+				}
+			}
+			else {
+				nonExistingPaths.add(job);
 			}
 		}
 
 		this.inbox.removeAll(result);
+		this.inbox.removeAll(nonExistingPaths);
+
 		return result;
 	}
 

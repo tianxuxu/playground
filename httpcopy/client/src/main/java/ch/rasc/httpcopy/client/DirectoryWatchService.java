@@ -1,6 +1,7 @@
 package ch.rasc.httpcopy.client;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.darylteo.nio.DirectoryChangedSubscriber;
@@ -18,17 +19,18 @@ public class DirectoryWatchService {
 		this.queue = queue;
 	}
 
-	public void watch(Path path) throws IOException {
+	public void watch(Path basePath) throws IOException {
 		cleanupWatcher();
 
-		this.watcher = this.factory.newWatcher(path);
+		this.watcher = this.factory.newWatcher(basePath);
 		this.watcher.include("**");
 
-		// Subscribe
 		this.subscriber = new DirectoryChangedSubscriber() {
 			@Override
 			public void directoryChanged(DirectoryWatcher dw, Path p) {
-				DirectoryWatchService.this.queue.add(dw.getPath().resolve(p));
+				if (!Files.isDirectory(dw.getPath().resolve(p))) {
+					DirectoryWatchService.this.queue.add(dw.getPath(), p);
+				}
 			}
 		};
 		this.watcher.subscribe(this.subscriber);

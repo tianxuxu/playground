@@ -1,40 +1,31 @@
 package ch.rasc.httpcopy.client;
 
 import java.nio.file.Path;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class WorkJob {
-	private final String id;
+	private String filename;
 
 	private final Path file;
 
-	private String alternativeFilename;
+	public WorkJob(Path baseDir, Path file) {
+		this.filename = StreamSupport.stream(file.spliterator(), false)
+				.map(Path::toString).collect(Collectors.joining("/"));
 
-	public WorkJob(Path file) {
-		this.id = Config.getRandomId();
-		this.file = file;
-	}
-
-	public String getFilenameOrAlternative() {
-		if (this.alternativeFilename != null) {
-			return this.alternativeFilename;
-		}
-		return this.file.getFileName().toString();
-	}
-
-	public String getAlternativeFilename() {
-		return this.alternativeFilename;
-	}
-
-	public void setAlternativeFilename(String alternativeFilename) {
-		this.alternativeFilename = alternativeFilename;
+		this.file = baseDir.resolve(file);
 	}
 
 	public Path getFile() {
 		return this.file;
 	}
 
-	public String getId() {
-		return this.id;
+	public String getFilename() {
+		return this.filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 	@Override

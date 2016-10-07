@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.rasc.httpcopy.server.ChunkInfoOuterClass.ChunkInfo;
-import ch.rasc.httpcopy.server.ChunkOuterClass.Chunk;
-import ch.rasc.httpcopy.server.FilesInfoOuterClass.FileInfo;
-import ch.rasc.httpcopy.server.FilesInfoOuterClass.FilesInfo;
+import ch.rasc.httpcopy.ChunkInfoOuterClass.ChunkInfo;
+import ch.rasc.httpcopy.ChunkOuterClass.Chunk;
+import ch.rasc.httpcopy.FilesInfoOuterClass.FileInfo;
+import ch.rasc.httpcopy.FilesInfoOuterClass.FilesInfo;
 
 @RestController
 @RequestMapping("/upload")

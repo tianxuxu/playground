@@ -1,16 +1,15 @@
 syntax = "proto3";
 
-option java_package = "ch.rasc.httpcopy.server";
+option java_package = "ch.rasc.httpcopy";
 
 message FilesInfo {
   repeated FileInfo file = 1;
 }
 
 message FileInfo {
-  string id = 1;
-  string name = 2;
-  string hash = 3;
-  uint64 size = 4;
+  string name = 1;
+  string hash = 2;
+  uint64 size = 3;
     
   enum Status {
     FILE_EXISTS = 0;
@@ -18,5 +17,5 @@ message FileInfo {
     FILE_DOES_NOT_EXISTS = 2;
     FILETYPE_NOT_SUPPORTED = 3;
   }  
-  Status status = 5;
+  Status status = 4;
 }

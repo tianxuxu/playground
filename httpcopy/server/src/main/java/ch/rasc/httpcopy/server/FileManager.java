@@ -15,9 +15,9 @@ import java.util.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import ch.rasc.httpcopy.server.ChunkInfoOuterClass.ChunkInfo;
-import ch.rasc.httpcopy.server.ChunkOuterClass.Chunk;
-import ch.rasc.httpcopy.server.FilesInfoOuterClass.FileInfo;
+import ch.rasc.httpcopy.ChunkInfoOuterClass.ChunkInfo;
+import ch.rasc.httpcopy.ChunkOuterClass.Chunk;
+import ch.rasc.httpcopy.FilesInfoOuterClass.FileInfo;
 
 @Service
 public class FileManager {
@@ -80,6 +80,7 @@ public class FileManager {
 		long noOfChunks = noOfChunks(chunk.getSize(), chunk.getTotalSize());
 
 		Path newFilePath = this.uploadDirectory.resolve(chunk.getFilename());
+		Files.createDirectories(newFilePath.getParent());
 
 		try (OutputStream out = Files.newOutputStream(newFilePath)) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
@@ -110,7 +111,7 @@ public class FileManager {
 	}
 
 	public FileInfo checkFile(FileInfo fileInfo) throws IOException {
-		FileInfo.Builder builder = FileInfo.newBuilder().setId(fileInfo.getId());
+		FileInfo.Builder builder = FileInfo.newBuilder().setName(fileInfo.getName());
 
 		Path filePath = this.uploadDirectory.resolve(fileInfo.getName());
 		if (Files.exists(filePath)) {

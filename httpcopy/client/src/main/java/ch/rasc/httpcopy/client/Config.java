@@ -1,69 +1,110 @@
 package ch.rasc.httpcopy.client;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Properties;
 import java.util.UUID;
+
+import org.slf4j.LoggerFactory;
 
 public class Config {
 
-	private final String clientId;
+	private static final String CLIENT_ID_KEY = "client.id";
+	private static final String OVERWRITE_KEY = "overwrite";
+	private static final String SERVER_ENDPOINT_KEY = "server.endpoint";
+	private static final String WATCH_DIR_KEY = "watch.dir";
 
-	private final String serverEndpoint;
+	private Path appPropertiesPath;
+	private Properties appProperties;
 
-	private final Path watchDir;
-
-	// true: overwrite files on the server when they have the same filename (default)
-	// false: rename file when a file with the same name exists (e.g. test.txt ->
-	// test_1.txt)
-	private boolean overwrite;
-
-	public Config(String serverEndpoint, Path watchDir) throws IOException {
-		this.overwrite = true;
-		this.serverEndpoint = serverEndpoint;
-		this.watchDir = watchDir;
-
-		Path clientIdPath = Paths.get(System.getProperty("user.dir"), "client-id");
-		if (Files.exists(clientIdPath)) {
-			this.clientId = new String(Files.readAllBytes(clientIdPath),
-					StandardCharsets.ISO_8859_1);
+	public Config() {
+		try {
+			init();
 		}
-		else {
-			this.clientId = getRandomId();
-			Files.write(clientIdPath,
-					this.clientId.getBytes(StandardCharsets.ISO_8859_1));
+		catch (URISyntaxException | IOException e) {
+			LoggerFactory.getLogger(Config.class).error("construct config", e);
 		}
 	}
 
-	public static String getRandomId() {
+	private void init() throws URISyntaxException, IOException {
+		this.appProperties = new Properties();
+
+		Path jarPath = new File(Config.class.getProtectionDomain().getCodeSource()
+				.getLocation().toURI().getPath()).toPath();
+		this.appPropertiesPath = jarPath.resolveSibling("application.properties");
+
+		if (Files.exists(this.appPropertiesPath)) {
+			try (InputStream is = Files.newInputStream(this.appPropertiesPath)) {
+				this.appProperties.load(is);
+			}
+		}
+		else {
+			this.appProperties.put(CLIENT_ID_KEY, getRandomId());
+			this.appProperties.put(SERVER_ENDPOINT_KEY, "http://localhost:8080");
+			this.appProperties.put(OVERWRITE_KEY, "false");
+			store();
+		}
+	}
+
+	public void store() {
+		try {
+			try (OutputStream out = Files.newOutputStream(this.appPropertiesPath)) {
+				this.appProperties.store(out, "httpcopy");
+			}
+		}
+		catch (IOException e) {
+			LoggerFactory.getLogger(Config.class).error("store properties", e);
+		}
+	}
+
+	private static String getRandomId() {
 		UUID uuid = UUID.randomUUID();
 		byte[] idBytes = ByteBuffer.allocate(16).putLong(uuid.getLeastSignificantBits())
 				.putLong(uuid.getMostSignificantBits()).array();
 		return Base64.getUrlEncoder().encodeToString(idBytes);
 	}
 
+	// true: overwrite files on the server when they have the same filename (default)
+	// false: rename file when a file with the same name exists (e.g. test.txt ->
+	// test_1.txt)
 	public boolean isOverwrite() {
-		return this.overwrite;
+		return Boolean.parseBoolean(this.appProperties.getProperty(OVERWRITE_KEY));
 	}
 
 	public void setOverwrite(boolean overwrite) {
-		this.overwrite = overwrite;
+		this.appProperties.put(OVERWRITE_KEY, Boolean.toString(overwrite));
 	}
 
 	public String getClientId() {
-		return this.clientId;
+		return this.appProperties.getProperty(CLIENT_ID_KEY);
+	}
+
+	public void setServerEndpoint(String serverEndpoint) {
+		this.appProperties.put(SERVER_ENDPOINT_KEY, serverEndpoint);
 	}
 
 	public String getServerEndpoint() {
-		return this.serverEndpoint;
+		return this.appProperties.getProperty(SERVER_ENDPOINT_KEY);
+	}
+
+	public void setWatchDir(String path) {
+		this.appProperties.put(WATCH_DIR_KEY, path);
 	}
 
 	public Path getWatchDir() {
-		return this.watchDir;
+		String watchDirName = this.appProperties.getProperty(WATCH_DIR_KEY);
+		if (watchDirName != null) {
+			return Paths.get(watchDirName);
+		}
+		return null;
 	}
 
 }

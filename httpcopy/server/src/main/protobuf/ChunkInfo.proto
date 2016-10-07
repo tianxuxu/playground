@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "ch.rasc.httpcopy.server";
+option java_package = "ch.rasc.httpcopy";
 
 message ChunkInfo {
   

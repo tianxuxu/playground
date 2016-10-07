@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,6 +14,10 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,10 +25,10 @@ import org.slf4j.LoggerFactory;
 
 import com.google.protobuf.ByteString;
 
-import ch.rasc.httpcopy.server.ChunkInfoOuterClass.ChunkInfo;
-import ch.rasc.httpcopy.server.ChunkOuterClass.Chunk;
-import ch.rasc.httpcopy.server.FilesInfoOuterClass.FileInfo;
-import ch.rasc.httpcopy.server.FilesInfoOuterClass.FilesInfo;
+import ch.rasc.httpcopy.ChunkInfoOuterClass.ChunkInfo;
+import ch.rasc.httpcopy.ChunkOuterClass.Chunk;
+import ch.rasc.httpcopy.FilesInfoOuterClass.FileInfo;
+import ch.rasc.httpcopy.FilesInfoOuterClass.FilesInfo;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -33,18 +38,92 @@ import okhttp3.Response;
 
 public class Uploader {
 
+	private static final MediaType X_PROTOBUF_MEDIATYPE = MediaType
+			.parse("application/x-protobuf");
+
 	private final static int CHUNK_SIZE = 1 * 1024 * 1024;
+
+	private final ScheduledExecutorService scheduler = Executors
+			.newScheduledThreadPool(1);
+
+	private ScheduledFuture<?> watchTask;
 
 	private final OkHttpClient httpClient;
 
-	private final Config config;
+	private Config config;
 
-	private final WorkQueue workQueue;
+	private WorkQueue workQueue;
 
-	public Uploader(Config config, WorkQueue workQueue) {
+	private DirectoryWatchService watchService;
+
+	public Uploader() {
 		this.httpClient = new OkHttpClient();
-		this.config = config;
-		this.workQueue = workQueue;
+	}
+
+	public void start(Config cfg) {
+		try {
+			this.config = cfg;
+
+			stop();
+
+			this.workQueue = new WorkQueue();
+			this.watchService = new DirectoryWatchService(this.workQueue);
+
+			// list all files from the watched directory and add them to the working queue
+			addFilesToQueue(this.config.getWatchDir());
+
+			this.watchService.watch(this.config.getWatchDir());
+
+			this.watchTask = this.scheduler.scheduleWithFixedDelay(this::watch, 5, 5,
+					TimeUnit.SECONDS);
+		}
+		catch (IOException e) {
+			LoggerFactory.getLogger(Uploader.class).error("start", e);
+		}
+	}
+
+	private void addFilesToQueue(Path path) throws IOException {
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
+			for (Path entry : stream) {
+				if (Files.isDirectory(entry)) {
+					addFilesToQueue(entry);
+				}
+				else {
+					Path watchDir = this.config.getWatchDir();
+					Path subpath = entry.subpath(watchDir.getNameCount(),
+							entry.getNameCount());
+					this.workQueue.add(watchDir, subpath);
+				}
+			}
+		}
+	}
+
+	private void watch() {
+		try {
+			Set<WorkJob> paths = this.workQueue.getPaths();
+			if (!paths.isEmpty()) {
+				handlePaths(paths);
+			}
+		}
+		catch (IOException e) {
+			LoggerFactory.getLogger(Uploader.class).error("watch loop", e);
+		}
+	}
+
+	public void stop() {
+		if (this.watchTask != null) {
+			this.watchTask.cancel(false);
+			this.watchTask = null;
+		}
+
+		if (this.watchService != null) {
+			this.watchService.shutdown();
+			this.watchService = null;
+		}
+	}
+
+	public void shutdown() {
+		this.scheduler.shutdown();
 	}
 
 	public void handlePaths(Set<WorkJob> paths) {
@@ -52,11 +131,11 @@ public class Uploader {
 			FilesInfo filesInfoRequest = buildFilesInfo(paths);
 			FilesInfo filesInfoResponse = sendFilesInfo(filesInfoRequest);
 			if (filesInfoResponse != null) {
-				Map<String, WorkJob> jobs = paths.stream()
-						.collect(Collectors.toMap(WorkJob::getId, Function.identity()));
+				Map<String, WorkJob> jobs = paths.stream().collect(
+						Collectors.toMap(WorkJob::getFilename, Function.identity()));
 
 				for (FileInfo fileInfo : filesInfoResponse.getFileList()) {
-					WorkJob job = jobs.get(fileInfo.getId());
+					WorkJob job = jobs.get(fileInfo.getName());
 					if (fileInfo.getStatus() == FileInfo.Status.FILE_DOES_NOT_EXISTS) {
 						uploadFile(job);
 					}
@@ -65,8 +144,8 @@ public class Uploader {
 							uploadFile(job);
 						}
 						else {
-							job.setAlternativeFilename(generateUniqueFilename(
-									job.getFilenameOrAlternative()));
+							job.setFilename(generateUniqueFilename(job.getFilename()));
+							// todo check if this filename is unique in this set of paths
 							this.workQueue.add(job);
 						}
 					}
@@ -78,16 +157,15 @@ public class Uploader {
 			}
 		}
 		catch (IOException e) {
-			LoggerFactory.getLogger(Application.class).error("handleMessage", e);
+			LoggerFactory.getLogger(Uploader.class).error("handleMessage", e);
 			this.workQueue.add(paths);
 		}
 	}
 
 	private void uploadFile(WorkJob job) throws IOException {
 		ChunkInfo chunkInfo = ChunkInfo.newBuilder()
-				.setClientId(this.config.getClientId())
-				.setFilename(job.getFilenameOrAlternative()).setSize(CHUNK_SIZE)
-				.setTotalSize(Files.size(job.getFile())).build();
+				.setClientId(this.config.getClientId()).setFilename(job.getFilename())
+				.setSize(CHUNK_SIZE).setTotalSize(Files.size(job.getFile())).build();
 
 		ChunkInfo chunkInfoResponse = sendChunkInfo(chunkInfo);
 		if (chunkInfoResponse != null) {
@@ -108,8 +186,6 @@ public class Uploader {
 
 			int chunkNo = 1;
 			long totalSize = Files.size(job.getFile());
-			String filename = job.getFilenameOrAlternative();
-
 			while (channel.read(buffer) > 0) {
 				if (!existingChunks.contains(chunkNo)) {
 					buffer.flip();
@@ -117,8 +193,9 @@ public class Uploader {
 					buffer.get(payload);
 
 					Chunk chunk = Chunk.newBuilder()
-							.setClientId(this.config.getClientId()).setFilename(filename)
-							.setNo(chunkNo).setSize(CHUNK_SIZE).setTotalSize(totalSize)
+							.setClientId(this.config.getClientId())
+							.setFilename(job.getFilename()).setNo(chunkNo)
+							.setSize(CHUNK_SIZE).setTotalSize(totalSize)
 							.setPayload(ByteString.copyFrom(payload)).build();
 
 					if (!uploadChunk(chunk)) {
@@ -137,8 +214,7 @@ public class Uploader {
 	private boolean uploadChunk(Chunk chunk) throws IOException {
 		HttpUrl filesinfoUrl = HttpUrl.parse(this.config.getServerEndpoint() + "/chunk");
 
-		RequestBody body = RequestBody.create(MediaType.parse("application/x-protobuf"),
-				chunk.toByteArray());
+		RequestBody body = RequestBody.create(X_PROTOBUF_MEDIATYPE, chunk.toByteArray());
 		Request request = new Request.Builder().url(filesinfoUrl).post(body).build();
 		try (Response response = this.httpClient.newCall(request).execute()) {
 			return response.isSuccessful();
@@ -149,7 +225,7 @@ public class Uploader {
 		HttpUrl filesinfoUrl = HttpUrl
 				.parse(this.config.getServerEndpoint() + "/chunkinfo");
 
-		RequestBody body = RequestBody.create(MediaType.parse("application/x-protobuf"),
+		RequestBody body = RequestBody.create(X_PROTOBUF_MEDIATYPE,
 				chunkInfo.toByteArray());
 		Request request = new Request.Builder().url(filesinfoUrl).post(body).build();
 		try (Response response = this.httpClient.newCall(request).execute()) {
@@ -157,7 +233,7 @@ public class Uploader {
 				return ChunkInfo.parseFrom(response.body().bytes());
 			}
 
-			LoggerFactory.getLogger(Application.class).info("chunkinfo unsuccessful: {}",
+			LoggerFactory.getLogger(Uploader.class).info("chunkinfo unsuccessful: {}",
 					response.body().string());
 		}
 		return null;
@@ -167,7 +243,7 @@ public class Uploader {
 		HttpUrl filesinfoUrl = HttpUrl
 				.parse(this.config.getServerEndpoint() + "/filesinfo");
 
-		RequestBody body = RequestBody.create(MediaType.parse("application/x-protobuf"),
+		RequestBody body = RequestBody.create(X_PROTOBUF_MEDIATYPE,
 				filesInfo.toByteArray());
 		Request request = new Request.Builder().url(filesinfoUrl).post(body).build();
 		try (Response response = this.httpClient.newCall(request).execute()) {
@@ -175,7 +251,7 @@ public class Uploader {
 				return FilesInfo.parseFrom(response.body().bytes());
 			}
 
-			LoggerFactory.getLogger(Application.class).info("filesinfo unsuccessful: {}",
+			LoggerFactory.getLogger(Uploader.class).info("filesinfo unsuccessful: {}",
 					response.body().string());
 		}
 		return null;
@@ -186,9 +262,8 @@ public class Uploader {
 
 		for (WorkJob job : paths) {
 			Path path = job.getFile();
-			FileInfo fileInfo = FileInfo.newBuilder().setId(job.getId())
-					.setHash(calcMd5(path)).setName(job.getFilenameOrAlternative())
-					.setSize(Files.size(path)).build();
+			FileInfo fileInfo = FileInfo.newBuilder().setHash(calcMd5(path))
+					.setName(job.getFilename()).setSize(Files.size(path)).build();
 
 			builder.addFile(fileInfo);
 		}
