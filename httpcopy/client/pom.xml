@@ -111,6 +111,7 @@
 				<configuration>
 					<mainClass>ch.rasc.httpcopy.client.GUI</mainClass>
 					<generateDiskImageFile>true</generateDiskImageFile>
+					<jrePath>/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk</jrePath>
 				</configuration>
 				<executions>
 					<execution>
@@ -160,9 +161,9 @@
 							<headerType>gui</headerType>
 							<outfile>target/httpcopy.exe</outfile>
 							<jar>target/httpcopy.jar</jar>
-							<errTitle>enccg</errTitle>
+							<errTitle>httpcopy</errTitle>
 							<classPath>
-								<mainClass>ch.rasc.httpcopy.GUI</mainClass>
+								<mainClass>ch.rasc.httpcopy.client.GUI</mainClass>
 							</classPath>
 							<jre>
 								<minVersion>1.8.0</minVersion>
@@ -176,8 +177,26 @@
 								<txtProductVersion>txt product version</txtProductVersion>
 								<productName>E-N-C-C</productName>
 								<internalName>ccne</internalName>
-								<originalFilename>original.exe</originalFilename>
+								<originalFilename>httpcopy.exe</originalFilename>
 							</versionInfo>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>assembly.xml</descriptor>
+							</descriptors>
 						</configuration>
 					</execution>
 				</executions>
