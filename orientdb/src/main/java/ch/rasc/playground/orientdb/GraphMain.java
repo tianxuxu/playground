@@ -1,18 +1,18 @@
 package ch.rasc.playground.orientdb;
 
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
+import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 
 public class GraphMain {
 
 	public static void main(String[] args) throws Exception {
-		// OrientGraphFactory factory = new OrientGraphFactory("plocal:/E:/temp/graph");
-		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/testdb",
-				"root", "root");
+		OrientGraphFactory factory = new OrientGraphFactory("plocal:./test/graphdb");
+		// OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/testdb",
+		// "root", "root");
 
-		OrientGraph graph = factory.getTx();
-		// OrientGraphNoTx graph = factory.getNoTx();
+		// OrientGraph graph = factory.getTx();
+		OrientGraphNoTx graph = factory.getNoTx();
 		try {
 
 			// Create a vertex

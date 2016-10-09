@@ -8,8 +8,13 @@ public class DocumentMain {
 	public static void main(String[] args) {
 
 		try (ODatabaseDocumentTx db = new ODatabaseDocumentTx(
-				"remote:localhost/testdb");) {
-			db.open("root", "root");
+				"plocal:./test/db"/* "remote:localhost/testdb" */);) {
+			if (db.exists()) {
+				db.open("admin", "admin");
+			}
+			else {
+				db.create();
+			}
 
 			// CREATE A NEW DOCUMENT AND FILL IT
 			ODocument doc = new ODocument("Person");
@@ -20,6 +25,14 @@ public class DocumentMain {
 
 			// SAVE THE DOCUMENT
 			doc.save();
+			
+			
+			for (ODocument person : db.browseClass("Person")) {
+				String name = person.field("name");
+				System.out.println(person);
+				System.out.println(name);
+				System.out.println(person.getIdentity());
+			}
 		}
 
 	}

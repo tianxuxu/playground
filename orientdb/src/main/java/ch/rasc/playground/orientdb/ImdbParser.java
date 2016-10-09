@@ -43,7 +43,7 @@ public class ImdbParser {
 		System.setProperty("storage.wal.syncOnPageFlush", "false");
 
 		OrientGraphFactory factory = new OrientGraphFactory(
-				"plocal:/E:/temp/databases/moviedb");
+				"plocal:/E:/temp/db/moviedb");
 
 		// new OServerAdmin("remote:localhost").connect("root", "root")
 		// .createDatabase("moviedb", "graph", "plocal").close();
@@ -67,9 +67,9 @@ public class ImdbParser {
 		actsInEdgeType.createProperty("character", OType.STRING);
 
 		try {
-			new ImdbParser().readImdbData(graphDb, "E:\\temp\\actresses.list.gz");
+			new ImdbParser().readImdbData(graphDb, "E:/temp/actresses.list.gz");
 
-			new ImdbParser().readImdbData(graphDb, "E:\\temp\\actors.list.gz");
+			new ImdbParser().readImdbData(graphDb, "E:/temp/actors.list.gz");
 		}
 		finally {
 			graphDb.shutdown();

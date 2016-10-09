@@ -28,7 +28,7 @@ import com.tinkerpop.pipes.branch.LoopPipe.LoopBundle;
 public class FindBacon {
 	public static void main(String[] args) {
 		OrientGraphFactory factory = new OrientGraphFactory(
-				"plocal:/E:/temp/databases/moviedb");
+				"plocal:/E:/temp/db/moviedb");
 		// OrientGraphFactory factory = new
 		// OrientGraphFactory("remote:localhost/moviedb","admin", "admin");
 
