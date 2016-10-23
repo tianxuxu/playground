@@ -17,15 +17,16 @@ public class DeserializeWithoutCodeGen {
 		File file = new File("users.avro");
 		// Deserialize users from disk
 		DatumReader<GenericRecord> datumReader = new GenericDatumReader<>(schema);
-		DataFileReader<GenericRecord> dataFileReader = new DataFileReader<>(file,
-				datumReader);
-		GenericRecord user = null;
-		while (dataFileReader.hasNext()) {
-			// Reuse user object by passing it to next(). This saves us from
-			// allocating and garbage collecting many objects for files with
-			// many items.
-			user = dataFileReader.next(user);
-			System.out.println(user);
+		try (DataFileReader<GenericRecord> dataFileReader = new DataFileReader<>(file,
+				datumReader)) {
+			GenericRecord user = null;
+			while (dataFileReader.hasNext()) {
+				// Reuse user object by passing it to next(). This saves us from
+				// allocating and garbage collecting many objects for files with
+				// many items.
+				user = dataFileReader.next(user);
+				System.out.println(user);
+			}
 		}
 	}
 

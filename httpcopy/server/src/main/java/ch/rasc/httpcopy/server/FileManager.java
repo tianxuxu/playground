@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Base64;
 
@@ -79,10 +80,10 @@ public class FileManager {
 	public void mergeAndDeleteChunks(Chunk chunk) throws IOException {
 		long noOfChunks = noOfChunks(chunk.getSize(), chunk.getTotalSize());
 
-		Path newFilePath = this.uploadDirectory.resolve(chunk.getFilename());
-		Files.createDirectories(newFilePath.getParent());
+		Path mergeFilePath = this.uploadDirectory.resolve(chunk.getFilename()+"_merge");
+		Files.createDirectories(mergeFilePath.getParent());
 
-		try (OutputStream out = Files.newOutputStream(newFilePath)) {
+		try (OutputStream out = Files.newOutputStream(mergeFilePath)) {
 			for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
 				Files.copy(
 						getChunkPath(chunk.getClientId(), chunk.getFilename(), chunkNo),
@@ -90,6 +91,9 @@ public class FileManager {
 			}
 		}
 
+		Path newFilePath = this.uploadDirectory.resolve(chunk.getFilename());
+		Files.move(mergeFilePath, newFilePath, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+		
 		// cleanup
 		for (int chunkNo = 1; chunkNo <= noOfChunks; chunkNo++) {
 			Path chunkPath = getChunkPath(chunk.getClientId(), chunk.getFilename(),

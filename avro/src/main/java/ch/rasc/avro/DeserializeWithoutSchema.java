@@ -15,18 +15,18 @@ public class DeserializeWithoutSchema {
 		// Deserialize Users from disk
 		File f = new File("users_without_schema.avro");
 
-		FileInputStream fis = new FileInputStream(f);
-		Decoder decoder = DecoderFactory.get().binaryDecoder(fis, null);
+		try (FileInputStream fis = new FileInputStream(f)) {
+			Decoder decoder = DecoderFactory.get().binaryDecoder(fis, null);
 
-		DatumReader<User> reader = new SpecificDatumReader<>(User.class);
+			DatumReader<User> reader = new SpecificDatumReader<>(User.class);
 
-		User user = reader.read(null, decoder);
-		System.out.println(user);
-		user = reader.read(user, decoder);
-		System.out.println(user);
-		user = reader.read(user, decoder);
-		System.out.println(user);
-
+			User user = reader.read(null, decoder);
+			System.out.println(user);
+			user = reader.read(user, decoder);
+			System.out.println(user);
+			user = reader.read(user, decoder);
+			System.out.println(user);
+		}
 	}
 
 }

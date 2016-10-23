@@ -17,12 +17,13 @@ public class Client {
 		Request request = new Request.Builder().url("http://localhost:8080/event")
 				.build();
 
-		Response response = client.newCall(request).execute();
-		System.out.println(response.code());
-		System.out.println(response.body().string());
+		try (Response response = client.newCall(request).execute()) {
+			System.out.println(response.code());
+			System.out.println(response.body().string());
 
-		System.out.println();
-		System.out.println("THE END");
+			System.out.println();
+			System.out.println("THE END");
+		}
 
 	}
 

@@ -23,11 +23,12 @@ public class Serialize {
 
 		// Serialize user1, user2 and user3 to disk
 		DatumWriter<User> userDatumWriter = new SpecificDatumWriter<>(User.class);
-		DataFileWriter<User> dataFileWriter = new DataFileWriter<>(userDatumWriter);
-		dataFileWriter.create(user1.getSchema(), new File("users.avro"));
-		dataFileWriter.append(user1);
-		dataFileWriter.append(user2);
-		dataFileWriter.append(user3);
-		dataFileWriter.close();
+		try (DataFileWriter<User> dataFileWriter = new DataFileWriter<>(
+				userDatumWriter)) {
+			dataFileWriter.create(user1.getSchema(), new File("users.avro"));
+			dataFileWriter.append(user1);
+			dataFileWriter.append(user2);
+			dataFileWriter.append(user3);
+		}
 	}
 }

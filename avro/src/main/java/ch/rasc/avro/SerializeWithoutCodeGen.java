@@ -30,11 +30,12 @@ public class SerializeWithoutCodeGen {
 		// Serialize user1 and user2 to disk
 		File file = new File("users.avro");
 		DatumWriter<GenericRecord> datumWriter = new GenericDatumWriter<>(schema);
-		DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<>(datumWriter);
-		dataFileWriter.create(schema, file);
-		dataFileWriter.append(user1);
-		dataFileWriter.append(user2);
-		dataFileWriter.close();
+		try (DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<>(
+				datumWriter)) {
+			dataFileWriter.create(schema, file);
+			dataFileWriter.append(user1);
+			dataFileWriter.append(user2);
+		}
 	}
 
 }

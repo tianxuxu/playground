@@ -44,8 +44,11 @@ public class Client {
 		RequestBody body = RequestBody.create(MEDIA_TYPE_BINARY, clientDHPublicKeyX509);
 		Request request = new Request.Builder().url("http://localhost:3333/").post(body)
 				.build();
-		Response response = client.newCall(request).execute();
-		byte[] responseBody = response.body().bytes();
+		
+		byte[] responseBody;
+		try (Response response = client.newCall(request).execute()) {
+			responseBody = response.body().bytes();
+		}
 
 		// extract iv, public server dh key and encrypted message
 		byte[] iv = Arrays.copyOfRange(responseBody, 0, 16);

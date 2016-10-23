@@ -26,15 +26,15 @@ public class SerializeWithoutSchema {
 		// write only date, no schema
 
 		File f = new File("users_without_schema.avro");
-		FileOutputStream fos = new FileOutputStream(f);
-		BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(fos, null);
-		DatumWriter<User> writer = new SpecificDatumWriter<>(User.getClassSchema());
+		try (FileOutputStream fos = new FileOutputStream(f)) {
+			BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(fos, null);
+			DatumWriter<User> writer = new SpecificDatumWriter<>(User.getClassSchema());
 
-		writer.write(user1, encoder);
-		writer.write(user2, encoder);
-		writer.write(user3, encoder);
-		encoder.flush();
-		fos.close();
+			writer.write(user1, encoder);
+			writer.write(user2, encoder);
+			writer.write(user3, encoder);
+			encoder.flush();
+		}
 
 	}
 }
