@@ -55,7 +55,7 @@ public class Simple {
 
 		System.out.println("===============================");
 		Flux.just("red", "white", "blue").log().map(String::toUpperCase)
-				.subscribeOn(Schedulers.parallel()).useCapacity(2).subscribe();
+				.subscribeOn(Schedulers.parallel()).subscribe(null, 2);
 		TimeUnit.SECONDS.sleep(1);
 
 		System.out.println("===============================");

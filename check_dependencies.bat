@@ -54,10 +54,6 @@ cd D:\ws\playground\eventsource2
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\forcastio
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
 cd D:\ws\playground\github
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -70,7 +66,19 @@ cd D:\ws\playground\glacier
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\googlemapsexamples
+cd D:\ws\playground\grpc\client
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\grpc\server
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\httpcopy\client
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\httpcopy\server
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
@@ -83,6 +91,10 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
 cd D:\ws\playground\irc
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\jasper
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
@@ -142,7 +154,23 @@ cd D:\ws\playground\orientdb
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
+cd D:\ws\playground\paho
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\pdf
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
 cd D:\ws\playground\piwik
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\protobufclient
+call mvn versions:display-dependency-updates
+call mvn versions:display-plugin-updates
+
+cd D:\ws\playground\protobufserver
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
@@ -150,7 +178,7 @@ cd D:\ws\playground\ratpack
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\reactorsandbox
+cd D:\ws\playground\reactor
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 

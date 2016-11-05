@@ -1,51 +1,35 @@
 package ch.rasc.playground.arangodb;
 
-import com.arangodb.ArangoConfigure;
-import com.arangodb.ArangoDriver;
-import com.arangodb.ArangoException;
+import com.arangodb.ArangoCollection;
+import com.arangodb.ArangoDB;
+import com.arangodb.ArangoDBException;
+import com.arangodb.ArangoDatabase;
 import com.arangodb.entity.BaseDocument;
-import com.arangodb.entity.CollectionEntity;
 
 public class Write {
 	public static void main(String[] args) {
-		ArangoConfigure configure = new ArangoConfigure();
-		configure.init();
-		ArangoDriver arangoDriver = new ArangoDriver(configure);
-
-		String dbName = "mydb";
+		ArangoDB arangoDB = new ArangoDB.Builder().user("root").build();
+		
+		ArangoDatabase db = arangoDB.db("mydb");
 		try {
-			arangoDriver.createDatabase(dbName);
-			System.out.println("Database created: " + dbName);
+			db.drop();
 		}
-		catch (Exception e) {
-			System.out.println(
-					"Failed to create database " + dbName + "; " + e.getMessage());
+		catch (ArangoDBException e) {
+			System.err.println("Failed to drop database " + e.getMessage());
 		}
-
-		arangoDriver.setDefaultDatabase(dbName);
-
-		String collectionName = "firstCollection";
-		try {
-			CollectionEntity myArangoCollection = arangoDriver
-					.createCollection(collectionName);
-			System.out.println("Collection created: " + myArangoCollection.getName());
-		}
-		catch (Exception e) {
-			System.out.println("Failed to create colleciton " + collectionName + "; "
-					+ e.getMessage());
-		}
+		
+		arangoDB.createDatabase("mydb");
+		
+		db.createCollection("firstCollection");
+		ArangoCollection collection = db.collection("firstCollection");
 
 		BaseDocument myObject = new BaseDocument();
-		myObject.setDocumentKey("myKey");
+		myObject.setKey("myKey");
 		myObject.addAttribute("a", "Foo");
 		myObject.addAttribute("b", 42);
-		try {
-			arangoDriver.createDocument(collectionName, myObject);
-			System.out.println("Document created");
-		}
-		catch (ArangoException e) {
-			System.out.println("Failed to create document. " + e.getMessage());
-		}
+
+		collection.insertDocument(myObject);
+		System.out.println("Document created");
 	}
 
 }

@@ -1,37 +1,26 @@
 package ch.rasc.playground.arangodb;
 
-import com.arangodb.ArangoConfigure;
-import com.arangodb.ArangoDriver;
-import com.arangodb.ArangoException;
+import com.arangodb.ArangoCollection;
+import com.arangodb.ArangoDB;
+import com.arangodb.ArangoDatabase;
 import com.arangodb.entity.BaseDocument;
-import com.arangodb.entity.DocumentEntity;
 
 public class Read {
 	public static void main(String[] args) {
 
-		ArangoConfigure configure = new ArangoConfigure();
-		configure.init();
-		ArangoDriver arangoDriver = new ArangoDriver(configure);
+		ArangoDB arangoDB = new ArangoDB.Builder().user("root").build();
+		ArangoDatabase db = arangoDB.db("mydb");
+		ArangoCollection collection = db.collection("firstCollection");
 
-		String dbName = "mydb";
-		arangoDriver.setDefaultDatabase(dbName);
-
-		String collectionName = "firstCollection";
-
-		DocumentEntity<BaseDocument> myDocument = null;
-		BaseDocument myObject2 = null;
-		try {
-			myDocument = arangoDriver.getDocument(collectionName, "myKey",
-					BaseDocument.class);
-			myObject2 = myDocument.getEntity();
-			System.out.println("Key: " + myObject2.getDocumentKey());
-			System.out.println("Attribute 'a': " + myObject2.getProperties().get("a"));
-			System.out.println("Attribute 'b': " + myObject2.getProperties().get("b"));
-			System.out.println("Attribute 'c': " + myObject2.getProperties().get("c"));
+		BaseDocument doc = collection.getDocument("myKey", BaseDocument.class);
+		if (doc != null) {
+			System.out.println("Key: " + doc.getKey());
+			System.out.println("Attribute 'a': " + doc.getProperties().get("a"));
+			System.out.println("Attribute 'b': " + doc.getProperties().get("b"));
+			System.out.println("Attribute 'c': " + doc.getProperties().get("c"));
 		}
-		catch (ArangoException e) {
-			System.out.println("Failed to get document. " + e.getMessage());
+		else {
+			System.err.println("document not found");
 		}
-
 	}
 }
