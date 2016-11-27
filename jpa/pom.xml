@@ -10,11 +10,11 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.version>4.3.4.RELEASE</spring.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.1.7</logback.version>
-		<hibernate.version>5.2.4.Final</hibernate.version>
-		<hibernatevalidator.version>5.3.1.Final</hibernatevalidator.version>
+		<hibernate.version>5.2.5.Final</hibernate.version>
+		<hibernatevalidator.version>5.3.3.Final</hibernatevalidator.version>
 		<querydsl.version>4.1.4</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -131,7 +131,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
+				<version>3.5.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

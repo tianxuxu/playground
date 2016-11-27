@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
-			<version>3.1.0-M12-beta2</version>
+			<version>3.1.0-M13-beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tukaani</groupId>
@@ -82,7 +82,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
+				<version>3.5.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

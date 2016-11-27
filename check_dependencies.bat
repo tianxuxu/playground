@@ -162,10 +162,6 @@ cd D:\ws\playground\pdf
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\piwik
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
 cd D:\ws\playground\protobufclient
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -202,14 +198,6 @@ cd D:\ws\playground\s3
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
-cd D:\ws\playground\safebrowse
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
-cd D:\ws\playground\sage
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
 cd D:\ws\playground\servicerestarter
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
@@ -243,10 +231,6 @@ call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 
 cd D:\ws\playground\tailerhttplog
-call mvn versions:display-dependency-updates
-call mvn versions:display-plugin-updates
-
-cd D:\ws\playground\tomcatembed
 call mvn versions:display-dependency-updates
 call mvn versions:display-plugin-updates
 

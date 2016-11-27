@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.speedment.stream.MapStream;
+import com.speedment.common.mapstream.MapStream;
 
 public class MapStreamTest {
 
