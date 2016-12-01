@@ -2,12 +2,14 @@ package ch.rasc.githubbackup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.Iterator;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -15,6 +17,12 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.jgit.api.Git;
@@ -25,7 +33,11 @@ import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.yaml.snakeyaml.Yaml;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ch.rasc.githubbackup.Config.GitUrl;
+import ch.rasc.githubbackup.Config.GogsUrl;
 
 public class Backup {
 
@@ -43,18 +55,18 @@ public class Backup {
 				StandardCharsets.UTF_8)) {
 			Config config = new Yaml().loadAs(br, Config.class);
 
-			if (config.getKey() != null) {
+			if (config.key != null) {
 				CustomJschConfigSessionFactory jschConfigSessionFactory = new CustomJschConfigSessionFactory(
-						config.getKey(), config.getKnownHosts());
+						config.key, config.knownHosts);
 				SshSessionFactory.setInstance(jschConfigSessionFactory);
 			}
 
-			Path backupDir = Paths.get(config.getBackupDirectory());
+			Path backupDir = Paths.get(config.backupDirectory);
 			Files.createDirectories(backupDir);
 
 			RepositoryService service = new RepositoryService();
-			if (config.getGithubUsers() != null) {
-				for (String githubUser : config.getGithubUsers()) {
+			if (config.githubUsers != null) {
+				for (String githubUser : config.githubUsers) {
 					for (Repository repo : service.getRepositories(githubUser)) {
 						fetchRepo(backupDir, repo.getName(), repo.getGitUrl(), null,
 								null);
@@ -62,10 +74,39 @@ public class Backup {
 				}
 			}
 
-			if (config.getGitUrls() != null) {
-				for (GitUrl gitUrl : config.getGitUrls()) {
-					fetchRepo(backupDir, gitUrl.getName(), gitUrl.getUrl(),
-							gitUrl.getUsername(), gitUrl.getPassword());
+			if (config.gitUrls != null) {
+				for (GitUrl gitUrl : config.gitUrls) {
+					fetchRepo(backupDir, gitUrl.name, gitUrl.url, gitUrl.username,
+							gitUrl.password);
+				}
+			}
+
+			if (config.gogsUrls != null) {
+				ObjectMapper mapper = new ObjectMapper();
+				try (CloseableHttpClient client = HttpClients.custom().build()) {
+
+					for (GogsUrl gogsUrl : config.gogsUrls) {
+
+						HttpUriRequest request = RequestBuilder.get()
+								.setUri(gogsUrl.url + "/api/v1/user/repos")
+								.setHeader(HttpHeaders.AUTHORIZATION,
+										"token " + gogsUrl.token)
+								.build();
+
+						try (CloseableHttpResponse response = client.execute(request);
+								InputStream is = response.getEntity().getContent()) {
+							JsonNode root = mapper.readTree(is);
+							Iterator<JsonNode> it = root.iterator();
+							while (it.hasNext()) {
+								JsonNode repo = it.next();
+								String cloneUrl = repo.get("clone_url").asText();
+								String name = repo.get("full_name").asText();
+
+								fetchRepo(backupDir, gogsUrl.repositoryName + "/" + name,
+										cloneUrl, gogsUrl.username, gogsUrl.password);
+							}
+						}
+					}
 				}
 			}
 		}
