@@ -18,7 +18,7 @@
 		<logback.version>1.1.7</logback.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<querydsl.version>4.1.4</querydsl.version>
-		<mongo-java-driver.version>3.3.0</mongo-java-driver.version>
+		<mongo-java-driver.version>3.4.0</mongo-java-driver.version>
 	</properties>
 
 	<dependencies>
@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>org.tukaani</groupId>
 			<artifactId>xz</artifactId>
-			<version>1.5</version>
+			<version>1.6</version>
 		</dependency>
 
 	</dependencies>
