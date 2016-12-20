@@ -3,13 +3,13 @@ package ch.rasc.mongodb.morphia;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.Decimal128;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.Indexes;
-import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity(noClassnameStored = true, value = "employees")
@@ -28,15 +28,14 @@ class Employee {
 
 	@Reference
 	private List<Employee> directReports = new ArrayList<>();
-
-	@Property("wage")
-	private Double salary;
+	
+	private Decimal128 salary;
 
 	public Employee() {
 		// default constructor
 	}
 
-	public Employee(String name, Double salary) {
+	public Employee(String name, Decimal128 salary) {
 		this.name = name;
 		this.salary = salary;
 	}
@@ -73,11 +72,11 @@ class Employee {
 		this.directReports = directReports;
 	}
 
-	public Double getSalary() {
-		return this.salary;
+	public Decimal128 getSalary() {
+		return salary;
 	}
 
-	public void setSalary(Double salary) {
+	public void setSalary(Decimal128 salary) {
 		this.salary = salary;
 	}
 

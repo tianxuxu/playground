@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
-			<version>3.1.0-RC1</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tukaani</groupId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongodb-driver</artifactId>
-			<version>3.4.0</version>
+			<version>3.4.1</version>
 		</dependency>
 
 		<dependency>
@@ -53,7 +53,7 @@
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
-			<version>3.4.0</version>
+			<version>3.4.1</version>
 		</dependency>
 		
 		<dependency>
