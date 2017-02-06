@@ -9,17 +9,17 @@
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-protobuf</artifactId>
-			<version>1.0.3</version>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-stub</artifactId>
-			<version>1.0.3</version>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-okhttp</artifactId>
-			<version>1.0.3</version>
+			<version>1.1.1</version>
 		</dependency>
 		
 	</dependencies>
