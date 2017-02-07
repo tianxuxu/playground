@@ -24,7 +24,11 @@
 	</div>
 	<script>
 		var r = new Resumable({
-			target: 'upload'
+			target: 'upload',
+			totalChunksParameterName: null,
+			currentChunkSizeParameterName: null,
+			relativePathParameterName: null,
+			typeParameterName: null
 		});
 
 		/*

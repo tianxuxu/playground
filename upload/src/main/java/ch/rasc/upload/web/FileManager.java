@@ -9,18 +9,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import ch.rasc.upload.Application;
 
 @Service
 public class FileManager {
 
 	private final String uploadDirectory;
 
-	@Autowired
 	public FileManager(@Value("#{environment.uploadDirectory}") String uploadDirectory) {
-		System.out.println(uploadDirectory);
 		this.uploadDirectory = uploadDirectory;
 		Path dataDir = Paths.get(uploadDirectory);
 
@@ -28,7 +27,7 @@ public class FileManager {
 			Files.createDirectories(dataDir);
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			Application.logger.error("constructor", e);
 		}
 	}
 
@@ -55,7 +54,7 @@ public class FileManager {
 			Files.createDirectories(chunkFile);
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			Application.logger.error("store chunk", e);
 		}
 		Files.copy(inputStream, chunkFile, StandardCopyOption.REPLACE_EXISTING);
 	}

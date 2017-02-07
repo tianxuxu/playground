@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,23 +19,17 @@ public class UploadController {
 
 	private final FileManager fileManager;
 
-	@Autowired
 	UploadController(FileManager fileManager) {
 		this.fileManager = fileManager;
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public void chunkExists(HttpServletResponse response,
 			@RequestParam("resumableChunkNumber") Integer resumableChunkNumber,
-			@RequestParam("resumableTotalChunks") Integer resumableTotalChunks,
 			@RequestParam("resumableChunkSize") Long resumableChunkSize,
 			@RequestParam("resumableIdentifier") String resumableIdentifier,
 			@RequestParam("resumableFilename") String resumableFilename,
-			@RequestParam("resumableCurrentChunkSize") Long resumableCurrentChunkSize,
-			@RequestParam("resumableTotalSize") Long resumableTotalSize,
-			@RequestParam("resumableType") String resumableType,
-			@RequestParam("resumableRelativePath") String resumableRelativePath)
+			@RequestParam("resumableTotalSize") Long resumableTotalSize)
 			throws IOException {
 
 		if (this.fileManager.chunkExists(resumableIdentifier, resumableChunkNumber,
@@ -50,33 +43,28 @@ public class UploadController {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public void processUpload(HttpServletResponse response,
-			@RequestParam(value = "resumableChunkNumber") Integer resumableChunkNumber,
-			@RequestParam("resumableTotalChunks") Integer resumableTotalChunks,
-			@RequestParam(value = "resumableChunkSize") Long resumableChunkSize,
-			@RequestParam("resumableCurrentChunkSize") Long resumableCurrentChunkSize,
-			@RequestParam(value = "resumableTotalSize") Long resumableTotalSize,
-			@RequestParam(value = "resumableIdentifier") String resumableIdentifier,
-			@RequestParam(value = "resumableFilename") String resumableFilename,
-			@RequestParam("resumableType") String resumableType,
-			@RequestParam("resumableRelativePath") String resumableRelativePath,
-			@RequestParam(value = "file") MultipartFile file) throws IOException {
+			@RequestParam("resumableChunkNumber") Integer resumableChunkNumber,
+			@RequestParam("resumableChunkSize") Long resumableChunkSize,
+			@RequestParam("resumableTotalSize") Long resumableTotalSize,
+			@RequestParam("resumableIdentifier") String[] resumableIdentifier,
+			@RequestParam("resumableFilename") String[] resumableFilename,
+			@RequestParam("file") MultipartFile file) throws IOException {
 
-		if (!this.fileManager.isSupported(resumableFilename)) {
+		if (!this.fileManager.isSupported(resumableFilename[0])) {
 			// cancel the whole upload
 			response.setStatus(501);
 			return;
 		}
 
 		try (InputStream is = file.getInputStream()) {
-			this.fileManager.storeChunk(resumableIdentifier, resumableChunkNumber, is);
+			this.fileManager.storeChunk(resumableIdentifier[0], resumableChunkNumber, is);
 		}
 
-		if (this.fileManager.allChunksUploaded(resumableIdentifier, resumableChunkSize,
+		if (this.fileManager.allChunksUploaded(resumableIdentifier[0], resumableChunkSize,
 				resumableTotalSize)) {
-			this.fileManager.mergeAndDeleteChunks(resumableFilename, resumableIdentifier,
+			this.fileManager.mergeAndDeleteChunks(resumableFilename[0], resumableIdentifier[0],
 					resumableChunkSize, resumableTotalSize);
 		}
 
