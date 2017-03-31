@@ -121,7 +121,7 @@ public class Test {
 		});
 
 		conn.connect();
-		// conn.doList();
+		//conn.doList();
 		conn.doJoin("#en.wikipedia");
 		// conn.doNames();
 		try {
