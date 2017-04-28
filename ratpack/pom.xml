@@ -13,12 +13,12 @@
 		<dependency>
 			<groupId>io.ratpack</groupId>
 			<artifactId>ratpack-core</artifactId>
-			<version>1.4.5</version>
+			<version>1.4.6</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.2</version>
+			<version>1.2.3</version>
 		</dependency>
 	</dependencies>
 

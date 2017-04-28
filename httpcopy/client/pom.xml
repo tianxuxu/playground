@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>3.6.0</version>
+			<version>3.7.0</version>
 		</dependency>
 
 		<dependency>
@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.2</version>
+			<version>1.2.3</version>
 		</dependency>
 
 		<dependency>
@@ -149,7 +149,7 @@
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.7.12</version>
+				<version>1.7.15</version>
 				<executions>
 					<execution>
 						<id>httpcopy-gui</id>

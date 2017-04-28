@@ -10,9 +10,9 @@
 	</prerequisites>	
 	
 	<properties>
-		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring.version>4.3.8.RELEASE</spring.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<logback.version>1.2.2</logback.version>
+		<logback.version>1.2.3</logback.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
@@ -58,13 +58,13 @@
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
-			<version>3.7.4</version>
+			<version>3.8.1</version>
 		</dependency>		
 		
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast-client</artifactId>
-			<version>3.7.4</version>
+			<version>3.8.1</version>
 		</dependency>			
 		
 	</dependencies>

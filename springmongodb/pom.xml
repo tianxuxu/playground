@@ -14,8 +14,8 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.3.7.RELEASE</spring.version>
-		<logback.version>1.2.2</logback.version>
+		<spring.version>4.3.8.RELEASE</spring.version>
+		<logback.version>1.2.3</logback.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<querydsl.version>4.1.4</querydsl.version>
 		<mongo-java-driver.version>3.4.2</mongo-java-driver.version>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.10.1.RELEASE</version>
+			<version>1.10.3.RELEASE</version>
 		</dependency>
 
 		<dependency>

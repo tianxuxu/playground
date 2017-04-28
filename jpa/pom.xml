@@ -10,10 +10,10 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring.version>4.3.8.RELEASE</spring.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<logback.version>1.2.2</logback.version>
-		<hibernate.version>5.2.9.Final</hibernate.version>
+		<logback.version>1.2.3</logback.version>
+		<hibernate.version>5.2.10.Final</hibernate.version>
 		<hibernatevalidator.version>5.4.1.Final</hibernatevalidator.version>
 		<querydsl.version>4.1.4</querydsl.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.11.1.RELEASE</version>
+			<version>1.11.3.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.194</version>
+			<version>1.4.195</version>
 		</dependency>
 		
 		<dependency>
