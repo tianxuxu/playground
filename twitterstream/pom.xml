@@ -5,9 +5,6 @@
 	<artifactId>twitterstream</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<dependencies>
 		<dependency>

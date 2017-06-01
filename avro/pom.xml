@@ -5,15 +5,12 @@
 	<artifactId>avro</artifactId>
 	<version>0.0.1</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
-			<version>1.8.1</version>
+			<version>1.8.2</version>
 		</dependency>	
 	</dependencies>
 

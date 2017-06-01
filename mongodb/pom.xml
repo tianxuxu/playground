@@ -5,9 +5,6 @@
 	<artifactId>mongodb</artifactId>
 	<version>0.0.1</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +16,7 @@
 	<dependencies>
 
 		<!-- <dependency> <groupId>org.mongojack</groupId> <artifactId>mongojack</artifactId> 
-			<version>2.5.1</version> <exclusions> <exclusion> <artifactId>de.flapdoodle.embed.mongo</artifactId> 
+			<version>2.5.2</version> <exclusions> <exclusion> <artifactId>de.flapdoodle.embed.mongo</artifactId> 
 			<groupId>de.flapdoodle.embed</groupId> </exclusion> <exclusion> <artifactId>de.flapdoodle.embed.process</artifactId> 
 			<groupId>de.flapdoodle.embed</groupId> </exclusion> </exclusions> </dependency> -->
 
@@ -107,13 +104,13 @@
 		<dependency>
 			<groupId>org.javers</groupId>
 			<artifactId>javers-core</artifactId>
-			<version>3.1.0</version>
+			<version>3.2.0</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.javers</groupId>
 			<artifactId>javers-persistence-mongo</artifactId>
-			<version>3.1.0</version>
+			<version>3.2.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>mongo-java-driver</artifactId>

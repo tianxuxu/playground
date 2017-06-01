@@ -4,10 +4,7 @@
 	<groupId>ch.rasc</groupId>
 	<artifactId>maildeleter</artifactId>
 	<version>0.0.1</version>
-
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>	
+	
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,7 +64,7 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>1.18</version>
+			<version>1.19</version>
 		</dependency>
 
 	</dependencies>

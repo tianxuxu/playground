@@ -4,10 +4,7 @@
 	<groupId>ch.rasc</groupId>
 	<artifactId>reflection</artifactId>
 	<version>0.0.1</version>
-
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>	
+	
 	
 	<dependencies>
 		<dependency>

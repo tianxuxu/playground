@@ -4,10 +4,7 @@
 	<groupId>ch.rasc</groupId>
 	<artifactId>stats</artifactId>
 	<version>0.0.1</version>
-
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>	
+	
 	
 	<dependencies>
 		<dependency>
@@ -25,7 +22,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>21.0</version>
+			<version>22.0</version>
 		</dependency>
 
 		<dependency>

@@ -5,9 +5,6 @@
 	<artifactId>json</artifactId>
 	<version>0.0.1</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<properties>
 		<spring.version>4.3.8.RELEASE</spring.version>
@@ -64,7 +61,7 @@
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
-			<version>1.1.0-M2</version>
+			<version>1.1</version>
 		</dependency>
 
 		<dependency>
@@ -88,7 +85,7 @@
 		<dependency>
 			<groupId>org.xerial.snappy</groupId>
 			<artifactId>snappy-java</artifactId>
-			<version>1.1.4-M3</version>
+			<version>1.1.4</version>
 		</dependency>
 
 

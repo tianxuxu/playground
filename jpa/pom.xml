@@ -5,9 +5,6 @@
 	<artifactId>jpa</artifactId>
 	<version>0.0.1</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<properties>
 		<spring.version>4.3.8.RELEASE</spring.version>

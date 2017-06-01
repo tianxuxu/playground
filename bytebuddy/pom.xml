@@ -5,15 +5,12 @@
 	<artifactId>bytebuddy</artifactId>
 	<version>0.0.1</version>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
 
 	<dependencies>
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
-			<version>1.6.14</version>
+			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
 
